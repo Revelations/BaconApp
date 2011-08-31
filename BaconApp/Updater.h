@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 
 
-@interface Updater : NSObject {
+@interface Updater : NSObject
+{
     
 }
 

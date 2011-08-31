@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BaconAppAppDelegate : NSObject <UIApplicationDelegate> {
+@interface BaconAppAppDelegate : NSObject <UIApplicationDelegate>
+{
 
 }
 

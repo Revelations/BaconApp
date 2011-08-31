@@ -11,7 +11,8 @@
 #import <SenTestingKit/SenTestingKit.h>
 
 
-@interface ScannerTest : SenTestCase {
+@interface ScannerTest : SenTestCase
+{
     
 }
 

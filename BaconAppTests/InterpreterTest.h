@@ -9,10 +9,11 @@
 
 
 #import <SenTestingKit/SenTestingKit.h>
+#import "Interpreter.h"
 
 
-@interface InterpreterTest : SenTestCase {
-@private
+@interface InterpreterTest : SenTestCase
+{
     Interpreter * interpreter;
 }
 

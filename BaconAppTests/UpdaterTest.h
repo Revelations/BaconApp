@@ -11,8 +11,9 @@
 #import <SenTestingKit/SenTestingKit.h>
 
 
-@interface UpdaterTest : SenTestCase {
-@private
+@interface UpdaterTest : SenTestCase
+{
+
 }
 
 @end

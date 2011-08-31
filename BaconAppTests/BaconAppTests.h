@@ -9,8 +9,8 @@
 #import <SenTestingKit/SenTestingKit.h>
 
 
-@interface BaconAppTests : SenTestCase {
-@private
+@interface BaconAppTests : SenTestCase
+{
     
 }
 

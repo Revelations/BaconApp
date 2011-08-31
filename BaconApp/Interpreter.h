@@ -6,8 +6,6 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-// Testing commits with comments.
-
 #import <Foundation/Foundation.h>
 
 

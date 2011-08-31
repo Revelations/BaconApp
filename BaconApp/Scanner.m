@@ -11,7 +11,8 @@
 
 @implementation Scanner
 
--(void) scan {
+-(void) scan
+{
     
 }
 
