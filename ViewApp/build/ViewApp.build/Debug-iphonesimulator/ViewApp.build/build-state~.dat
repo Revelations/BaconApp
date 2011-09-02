@@ -1,0 +1,243 @@
+TViewApp
+v7
+r0
+t336533176.784398
+cCheck dependencies
+cProcessInfoPlistFile /Users/sk218/Desktop/ViewApp/build/Debug-iphonesimulator/ViewApp.app/Info.plist ViewApp-Info.plist
+cCompileXIB /Users/sk218/Desktop/ViewApp/MainWindow.xib
+cCompileXIB /Users/sk218/Desktop/ViewApp/ViewAppViewController.xib
+cProcessPCH /var/folders/53/533tvkULHp4VJqLivc6thVlFSSw/-Caches-/com.apple.Xcode.475101679/SharedPrecompiledHeaders/ViewApp_Prefix-fmkzasvrqjsdfbfmyhqfexoxbdty/ViewApp_Prefix.pch.gch ViewApp_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/Objects-normal/i386/main.o /Users/sk218/Desktop/ViewApp/main.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/Objects-normal/i386/ViewAppAppDelegate.o /Users/sk218/Desktop/ViewApp/Classes/ViewAppAppDelegate.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/Objects-normal/i386/ViewAppViewController.o /Users/sk218/Desktop/ViewApp/Classes/ViewAppViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk
+c000000004D5C9B4E0000000000000110
+t1297914702
+s272
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
+c000000004D54CFFA00000000002999B0
+t1297403898
+s2726320
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/Foundation.framework/Foundation
+c000000004D54CFE5000000000029DA70
+t1297403877
+s2742896
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
+c000000004D54CFB80000000000001466
+t1297403832
+s5222
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
+c000000004D5615B40000000000000AA1
+t1297487284
+s2721
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/UIKit.framework/UIKit
+c000000004D5616030000000000766870
+t1297487363
+s7759984
+
+N/Users/sk218/Desktop/ViewApp/Classes/ViewAppAppDelegate.h
+c000000004E5EDDF200000000000001DE
+t1314840050
+s478
+i<UIKit/UIKit.h>
+
+N/Users/sk218/Desktop/ViewApp/Classes/ViewAppAppDelegate.m
+c000000004E5EDDF20000000000000AA9
+t1314840050
+s2729
+i"ViewAppAppDelegate.h"
+i"ViewAppViewController.h"
+
+N/Users/sk218/Desktop/ViewApp/Classes/ViewAppViewController.h
+c000000004E5EDE4A000000000000016E
+t1314840138
+s366
+i<UIKit/UIKit.h>
+
+N/Users/sk218/Desktop/ViewApp/Classes/ViewAppViewController.m
+c000000004E5EDEFA0000000000000A3E
+t1314840314
+s2622
+i"ViewAppViewController.h"
+
+N/Users/sk218/Desktop/ViewApp/MainWindow.xib
+c000000004E5EDDF20000000000004E29
+t1314840050
+s20009
+
+N/Users/sk218/Desktop/ViewApp/ViewAppViewController.xib
+c000000004E5EDEBF000000000000489C
+t1314840255
+s18588
+
+N/Users/sk218/Desktop/ViewApp/ViewApp_Prefix.pch
+c000000004E5EDDF200000000000000B7
+t1314840050
+s183
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+
+N/Users/sk218/Desktop/ViewApp/build/Debug-iphonesimulator/ViewApp.app
+t2
+s0
+
+N/Users/sk218/Desktop/ViewApp/build/Debug-iphonesimulator/ViewApp.app.dSYM
+t2
+s0
+
+N/Users/sk218/Desktop/ViewApp/build/Debug-iphonesimulator/ViewApp.app/Info.plist
+t1314840373
+s591
+
+N/Users/sk218/Desktop/ViewApp/build/Debug-iphonesimulator/ViewApp.app/MainWindow.nib
+t1314840374
+s1681
+
+N/Users/sk218/Desktop/ViewApp/build/Debug-iphonesimulator/ViewApp.app/PkgInfo
+t1314840373
+s8
+
+N/Users/sk218/Desktop/ViewApp/build/Debug-iphonesimulator/ViewApp.app/ViewApp
+t2
+s0
+
+N/Users/sk218/Desktop/ViewApp/build/Debug-iphonesimulator/ViewApp.app/ViewAppViewController.nib
+t1314840374
+s2527
+
+N/Users/sk218/Desktop/ViewApp/build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/Objects-normal/i386/ViewApp.LinkFileList
+c000000004E5EDF35000000000000016F
+t1314840373
+s367
+
+N/Users/sk218/Desktop/ViewApp/build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/Objects-normal/i386/ViewAppAppDelegate.o
+t1314840376
+s54028
+
+N/Users/sk218/Desktop/ViewApp/build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/Objects-normal/i386/ViewAppViewController.o
+t2
+s0
+
+N/Users/sk218/Desktop/ViewApp/build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/Objects-normal/i386/main.o
+t1314840376
+s6292
+
+N/Users/sk218/Desktop/ViewApp/main.m
+c000000004E5EDDF20000000000000168
+t1314840050
+s360
+i<UIKit/UIKit.h>
+
+N/var/folders/53/533tvkULHp4VJqLivc6thVlFSSw/-Caches-/com.apple.Xcode.475101679/SharedPrecompiledHeaders/ViewApp_Prefix-fmkzasvrqjsdfbfmyhqfexoxbdty/ViewApp_Prefix.pch.gch
+t1314840376
+s10626972
+
+NViewApp-Info.plist
+c000000004E5EDDF2000000000000038D
+t1314840050
+s909
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies336533173#336533173#0(0"0(0#1#0"2464039568#0"0#
+
+CCompileC build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/Objects-normal/i386/ViewAppAppDelegate.o /Users/sk218/Desktop/ViewApp/Classes/ViewAppAppDelegate.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s336533176.606893
+e336533176.710902
+r1
+xCompileC
+xbuild/ViewApp.build/Debug-iphonesimulator/ViewApp.build/Objects-normal/i386/ViewAppAppDelegate.o
+x/Users/sk218/Desktop/ViewApp/Classes/ViewAppAppDelegate.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@65"Compile /Users/sk218/Desktop/ViewApp/Classes/ViewAppAppDelegate.m336533176#336533176#0(0"0(0#0#57"/Users/sk218/Desktop/ViewApp/Classes/ViewAppAppDelegate.m2464039568#1846"    cd /Users/sk218/Desktop/ViewApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40300 -iquote /Users/sk218/Desktop/ViewApp/build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/ViewApp-generated-files.hmap -I/Users/sk218/Desktop/ViewApp/build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/ViewApp-own-target-headers.hmap -I/Users/sk218/Desktop/ViewApp/build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/ViewApp-all-target-headers.hmap -iquote /Users/sk218/Desktop/ViewApp/build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/ViewApp-project-headers.hmap -F/Users/sk218/Desktop/ViewApp/build/Debug-iphonesimulator -I/Users/sk218/Desktop/ViewApp/build/Debug-iphonesimulator/include -I/Users/sk218/Desktop/ViewApp/build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/DerivedSources/i386 -I/Users/sk218/Desktop/ViewApp/build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/DerivedSources -include /var/folders/53/533tvkULHp4VJqLivc6thVlFSSw/-Caches-/com.apple.Xcode.475101679/SharedPrecompiledHeaders/ViewApp_Prefix-fmkzasvrqjsdfbfmyhqfexoxbdty/ViewApp_Prefix.pch -c /Users/sk218/Desktop/ViewApp/Classes/ViewAppAppDelegate.m -o /Users/sk218/Desktop/ViewApp/build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/Objects-normal/i386/ViewAppAppDelegate.o0#
+
+CCompileC build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/Objects-normal/i386/ViewAppViewController.o /Users/sk218/Desktop/ViewApp/Classes/ViewAppViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s336533176.711061
+e336533176.784293
+r0
+xCompileC
+xbuild/ViewApp.build/Debug-iphonesimulator/ViewApp.build/Objects-normal/i386/ViewAppViewController.o
+x/Users/sk218/Desktop/ViewApp/Classes/ViewAppViewController.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+o/Users/sk218/Desktop/ViewApp/Classes/ViewAppViewController.m:10: error: @synthesize property must be in implementation context
+o/Users/sk218/Desktop/ViewApp/Classes/ViewAppViewController.m:90: warning: property 'tbc' requires method '-tbc' to be defined - use @synthesize, @dynamic or provide a method implementation
+o/Users/sk218/Desktop/ViewApp/Classes/ViewAppViewController.m:90: warning: property 'tbc' requires the method 'setTbc:' to be defined - use @synthesize, @dynamic or provide a method implementation
+o/Users/sk218/Desktop/ViewApp/Classes/ViewAppViewController.m:90: warning: incomplete implementation of class 'ViewAppViewController'
+o/Users/sk218/Desktop/ViewApp/Classes/ViewAppViewController.m:90: warning: method definition for '-dismisTabBar' not found
+o/Users/sk218/Desktop/ViewApp/Classes/ViewAppViewController.m:90: warning: method definition for '-showModalTabBar' not found
+lSLF07#2@68"Compile /Users/sk218/Desktop/ViewApp/Classes/ViewAppViewController.m336533176#336533176#0(892"/Users/sk218/Desktop/ViewApp/Classes/ViewAppViewController.m:10: error: @synthesize property must be in implementation context/Users/sk218/Desktop/ViewApp/Classes/ViewAppViewController.m:90: warning: property 'tbc' requires method '-tbc' to be defined - use @synthesize, @dynamic or provide a method implementation/Users/sk218/Desktop/ViewApp/Classes/ViewAppViewController.m:90: warning: property 'tbc' requires the method 'setTbc:' to be defined - use @synthesize, @dynamic or provide a method implementation/Users/sk218/Desktop/ViewApp/Classes/ViewAppViewController.m:90: warning: incomplete implementation of class 'ViewAppViewController'/Users/sk218/Desktop/ViewApp/Classes/ViewAppViewController.m:90: warning: method definition for '-dismisTabBar' not found/Users/sk218/Desktop/ViewApp/Classes/ViewAppViewController.m:90: warning: method definition for '-showModalTabBar' not found6(4@54"@synthesize property must be in implementation context336533176#0#127#0(6@60"/Users/sk218/Desktop/ViewApp/Classes/ViewAppViewController.m336533114#10#0#10#0#0"0(22@114"Property 'tbc' requires method '-tbc' to be defined - use @synthesize, @dynamic or provide a method implementation336533176#127#189#0(6@60"/Users/sk218/Desktop/ViewApp/Classes/ViewAppViewController.m336533114#90#0#90#0#0"0(22@121"Property 'tbc' requires the method 'setTbc:' to be defined - use @synthesize, @dynamic or provide a method implementation336533176#316#196#0(6@60"/Users/sk218/Desktop/ViewApp/Classes/ViewAppViewController.m336533114#90#0#90#0#0"0(22@58"Incomplete implementation of class 'ViewAppViewController'336533176#512#133#0(6@60"/Users/sk218/Desktop/ViewApp/Classes/ViewAppViewController.m336533114#90#0#90#0#38"incomplete implementation of class '*'0(22@47"Method definition for '-dismisTabBar' not found336533176#645#122#0(6@60"/Users/sk218/Desktop/ViewApp/Classes/ViewAppViewController.m336533114#90#0#90#0#35"method definition for '*' not found0(22@50"Method definition for '-showModalTabBar' not found336533176#767#125#0(6@60"/Users/sk218/Desktop/ViewApp/Classes/ViewAppViewController.m336533114#90#0#90#0#35"method definition for '*' not found0(0#0#60"/Users/sk218/Desktop/ViewApp/Classes/ViewAppViewController.m2464039568#1852"    cd /Users/sk218/Desktop/ViewApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40300 -iquote /Users/sk218/Desktop/ViewApp/build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/ViewApp-generated-files.hmap -I/Users/sk218/Desktop/ViewApp/build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/ViewApp-own-target-headers.hmap -I/Users/sk218/Desktop/ViewApp/build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/ViewApp-all-target-headers.hmap -iquote /Users/sk218/Desktop/ViewApp/build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/ViewApp-project-headers.hmap -F/Users/sk218/Desktop/ViewApp/build/Debug-iphonesimulator -I/Users/sk218/Desktop/ViewApp/build/Debug-iphonesimulator/include -I/Users/sk218/Desktop/ViewApp/build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/DerivedSources/i386 -I/Users/sk218/Desktop/ViewApp/build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/DerivedSources -include /var/folders/53/533tvkULHp4VJqLivc6thVlFSSw/-Caches-/com.apple.Xcode.475101679/SharedPrecompiledHeaders/ViewApp_Prefix-fmkzasvrqjsdfbfmyhqfexoxbdty/ViewApp_Prefix.pch -c /Users/sk218/Desktop/ViewApp/Classes/ViewAppViewController.m -o /Users/sk218/Desktop/ViewApp/build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/Objects-normal/i386/ViewAppViewController.o1#
+
+CCompileC build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/Objects-normal/i386/main.o /Users/sk218/Desktop/ViewApp/main.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s336533176.491772
+e336533176.606740
+r1
+xCompileC
+xbuild/ViewApp.build/Debug-iphonesimulator/ViewApp.build/Objects-normal/i386/main.o
+x/Users/sk218/Desktop/ViewApp/main.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@43"Compile /Users/sk218/Desktop/ViewApp/main.m336533176#336533176#0(0"0(0#0#35"/Users/sk218/Desktop/ViewApp/main.m2464039568#1810"    cd /Users/sk218/Desktop/ViewApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40300 -iquote /Users/sk218/Desktop/ViewApp/build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/ViewApp-generated-files.hmap -I/Users/sk218/Desktop/ViewApp/build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/ViewApp-own-target-headers.hmap -I/Users/sk218/Desktop/ViewApp/build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/ViewApp-all-target-headers.hmap -iquote /Users/sk218/Desktop/ViewApp/build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/ViewApp-project-headers.hmap -F/Users/sk218/Desktop/ViewApp/build/Debug-iphonesimulator -I/Users/sk218/Desktop/ViewApp/build/Debug-iphonesimulator/include -I/Users/sk218/Desktop/ViewApp/build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/DerivedSources/i386 -I/Users/sk218/Desktop/ViewApp/build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/DerivedSources -include /var/folders/53/533tvkULHp4VJqLivc6thVlFSSw/-Caches-/com.apple.Xcode.475101679/SharedPrecompiledHeaders/ViewApp_Prefix-fmkzasvrqjsdfbfmyhqfexoxbdty/ViewApp_Prefix.pch -c /Users/sk218/Desktop/ViewApp/main.m -o /Users/sk218/Desktop/ViewApp/build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/Objects-normal/i386/main.o0#
+
+CCompileXIB /Users/sk218/Desktop/ViewApp/MainWindow.xib
+s336533173.572325
+e336533174.624376
+r1
+xCompileXIB
+x/Users/sk218/Desktop/ViewApp/MainWindow.xib
+o2011-09-01 13:26:14.365 Interface Builder Cocoa Touch Tool[32891:903] CFPreferences: user home directory at file://localhost/Users/sk218/Library/Application%20Support/iPhone%20Simulator/User/ is unavailable. User domains will be volatile.
+lSLF07#2@25"CompileXIB MainWindow.xib336533173#336533174#0(239"2011-09-01 13:26:14.365 Interface Builder Cocoa Touch Tool[32891:903] CFPreferences: user home directory at file://localhost/Users/sk218/Library/Application%20Support/iPhone%20Simulator/User/ is unavailable. User domains will be volatile.0(0#0#43"/Users/sk218/Desktop/ViewApp/MainWindow.xib2464039568#540"    cd /Users/sk218/Desktop/ViewApp    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 4.3    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/sk218/Desktop/ViewApp/build/Debug-iphonesimulator/ViewApp.app/MainWindow.nib /Users/sk218/Desktop/ViewApp/MainWindow.xib --sdk /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk0#
+
+CCompileXIB /Users/sk218/Desktop/ViewApp/ViewAppViewController.xib
+s336533173.574284
+e336533174.645136
+r1
+xCompileXIB
+x/Users/sk218/Desktop/ViewApp/ViewAppViewController.xib
+o2011-09-01 13:26:14.364 Interface Builder Cocoa Touch Tool[32890:903] CFPreferences: user home directory at file://localhost/Users/sk218/Library/Application%20Support/iPhone%20Simulator/User/ is unavailable. User domains will be volatile.
+lSLF07#2@36"CompileXIB ViewAppViewController.xib336533173#336533174#0(239"2011-09-01 13:26:14.364 Interface Builder Cocoa Touch Tool[32890:903] CFPreferences: user home directory at file://localhost/Users/sk218/Library/Application%20Support/iPhone%20Simulator/User/ is unavailable. User domains will be volatile.0(0#0#54"/Users/sk218/Desktop/ViewApp/ViewAppViewController.xib2464039568#562"    cd /Users/sk218/Desktop/ViewApp    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 4.3    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/sk218/Desktop/ViewApp/build/Debug-iphonesimulator/ViewApp.app/ViewAppViewController.nib /Users/sk218/Desktop/ViewApp/ViewAppViewController.xib --sdk /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk0#
+
+CGenerateDSYMFile /Users/sk218/Desktop/ViewApp/build/Debug-iphonesimulator/ViewApp.app.dSYM /Users/sk218/Desktop/ViewApp/build/Debug-iphonesimulator/ViewApp.app/ViewApp
+r0
+
+CLd /Users/sk218/Desktop/ViewApp/build/Debug-iphonesimulator/ViewApp.app/ViewApp normal i386
+r0
+
+CProcessInfoPlistFile /Users/sk218/Desktop/ViewApp/build/Debug-iphonesimulator/ViewApp.app/Info.plist ViewApp-Info.plist
+s336533173.544451
+e336533173.572162
+r1
+xProcessInfoPlistFile
+x/Users/sk218/Desktop/ViewApp/build/Debug-iphonesimulator/ViewApp.app/Info.plist
+xViewApp-Info.plist
+lSLF07#2@26"Process ViewApp-Info.plist336533173#336533173#0(0"0(0#0#47"/Users/sk218/Desktop/ViewApp/ViewApp-Info.plist2464039568#449"    cd /Users/sk218/Desktop/ViewApp    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-infoPlistUtility ViewApp-Info.plist -genpkginfo /Users/sk218/Desktop/ViewApp/build/Debug-iphonesimulator/ViewApp.app/PkgInfo -expandbuildsettings -format binary -platform iphonesimulator -o /Users/sk218/Desktop/ViewApp/build/Debug-iphonesimulator/ViewApp.app/Info.plist0#
+
+CProcessPCH /var/folders/53/533tvkULHp4VJqLivc6thVlFSSw/-Caches-/com.apple.Xcode.475101679/SharedPrecompiledHeaders/ViewApp_Prefix-fmkzasvrqjsdfbfmyhqfexoxbdty/ViewApp_Prefix.pch.gch ViewApp_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
+s336533174.645320
+e336533176.491468
+r1
+xProcessPCH
+x/var/folders/53/533tvkULHp4VJqLivc6thVlFSSw/-Caches-/com.apple.Xcode.475101679/SharedPrecompiledHeaders/ViewApp_Prefix-fmkzasvrqjsdfbfmyhqfexoxbdty/ViewApp_Prefix.pch.gch
+xViewApp_Prefix.pch
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@29"Precompile ViewApp_Prefix.pch336533174#336533176#0(0"0(0#0#47"/Users/sk218/Desktop/ViewApp/ViewApp_Prefix.pch2464039568#1712"    cd /Users/sk218/Desktop/ViewApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40300 -iquote /Users/sk218/Desktop/ViewApp/build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/ViewApp-generated-files.hmap -I/Users/sk218/Desktop/ViewApp/build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/ViewApp-own-target-headers.hmap -I/Users/sk218/Desktop/ViewApp/build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/ViewApp-all-target-headers.hmap -iquote /Users/sk218/Desktop/ViewApp/build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/ViewApp-project-headers.hmap -F/Users/sk218/Desktop/ViewApp/build/Debug-iphonesimulator -I/Users/sk218/Desktop/ViewApp/build/Debug-iphonesimulator/include -I/Users/sk218/Desktop/ViewApp/build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/DerivedSources/i386 -I/Users/sk218/Desktop/ViewApp/build/ViewApp.build/Debug-iphonesimulator/ViewApp.build/DerivedSources -c /Users/sk218/Desktop/ViewApp/ViewApp_Prefix.pch -o /var/folders/53/533tvkULHp4VJqLivc6thVlFSSw/-Caches-/com.apple.Xcode.475101679/SharedPrecompiledHeaders/ViewApp_Prefix-fmkzasvrqjsdfbfmyhqfexoxbdty/ViewApp_Prefix.pch.gch0#
+
+CTouch /Users/sk218/Desktop/ViewApp/build/Debug-iphonesimulator/ViewApp.app
+r0
+
