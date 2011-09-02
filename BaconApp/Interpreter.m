@@ -11,24 +11,29 @@
 
 @implementation Interpreter
 
--(NSString *) input {
-    return input;
+-(int) xCoord:(NSString *)inputString
+{
+    return [self substringToInt:inputString withRange:NSMakeRange(0, 3)];
 }
 
--(void) setInput: (NSString *) i {
-    input = i;
+-(int) yCoord:(NSString *)inputString
+{
+    return [self substringToInt:inputString withRange:NSMakeRange(3, 3)];
 }
 
--(Point) getCoordinatesFromInput {
+-(int) substringToInt:(NSString *) inputString withRange:(NSRange) range
+{
+    NSString * substring = [inputString substringWithRange:range];
+    int result = [substring intValue];
     
+    return result;
 }
 
--(NSString *) getFileFromInput {
-    
+-(NSString *) htmlPath:(NSString *)inputString
+{
+    return [inputString substringFromIndex:6];
 }
 
--(void) isValidFile: (NSString *) s {
-    
-}
+
 
 @end

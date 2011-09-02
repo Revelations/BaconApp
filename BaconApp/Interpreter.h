@@ -9,18 +9,17 @@
 #import <Foundation/Foundation.h>
 
 
-@interface Interpreter : NSObject {
-    NSString * input;
+@interface Interpreter : NSObject
+{
+
 }
 
--(NSString *) input;
+-(int) xCoord:(NSString *) inputString;
 
--(void) setInput: (NSString *) i;
+-(int) yCoord:(NSString *) inputString;
 
--(Point) getCoordinatesFromInput;
+-(int) substringToInt:(NSString *) inputString withRange:(NSRange) range;
 
--(NSString *) getFileFromInput;
-
--(void) isValidFile: (NSString *) s;
+-(NSString *) htmlPath:(NSString *) inputString;
 
 @end

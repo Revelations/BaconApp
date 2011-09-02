@@ -1,24 +1,25 @@
 //
-//  MainViewController.h
+//  BaconAppAppDelegate.h
 //  BaconApp
 //
 //  Created by Jordan on 31/08/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-
-@interface MainViewController : UIViewController<UIWebViewDelegate>
+@interface MainViewController : UIViewController <ZBarReaderDelegate>
 {
     IBOutlet UIWebView * webview;
     IBOutlet UIBarButtonItem * scanButton;
     IBOutlet UIBarButtonItem * mapButton;
     IBOutlet NSString * menuPath;
+    IBOutlet UITextField * resultText;
 }
 
-// Hard coded main menu html path. Sets the initial page to load on app start.
-extern NSString * const MENU_FILE_PATH;
+extern NSString * const MENU_HTML_PATH;
+
+@property (nonatomic, retain) IBOutlet UIWindow *window;
 
 // Main browser control used to display information.
 @property(nonatomic, retain) UIWebView * webView;
@@ -29,13 +30,13 @@ extern NSString * const MENU_FILE_PATH;
 // Toggle button for switching between map/browser.
 @property(nonatomic, retain) UIBarButtonItem * mapButton;
 
-//
--(IBAction) loadFile:(NSString *)filePath WithSender:(id) sender;
+@property(nonatomic, retain) IBOutlet UITextField * resultText;
 
-//
--(IBAction) back;
 
-//
--(IBAction) forward;
+-(IBAction) scanButtonPressed;
+-(IBAction) mapButtonPressed;
+
+
+
 
 @end

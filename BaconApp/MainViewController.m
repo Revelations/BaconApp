@@ -1,5 +1,5 @@
 //
-//  MainViewController.m
+//  BaconAppAppDelegate.m
 //  BaconApp
 //
 //  Created by Jordan on 31/08/11.
@@ -8,44 +8,78 @@
 
 #import "MainViewController.h"
 
-
-
 @implementation MainViewController
 
-@synthesize webView, scanButton, mapButton;
+NSString * const MENU_HTML_FILE = @"menu.html";
 
-// Define the menu path.
-NSString * const MENU_FILE_PATH = @"Menu.html";
+@synthesize webView, scanButton, mapButton, resultText;
+@synthesize window=_window;
 
-// Called when the UIWebview is initialized.
-// Loads the main menu html file in the browser.
--(void) viewDidLoad
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [super viewDidLoad];
+    // Override point for customization after application launch.
     
-    NSString * stringFilePath = MENU_FILE_PATH;
     
-    [self loadFile:MENU_FILE_PATH WithSender:nil];
+    [self.window makeKeyAndVisible];
+    return YES;
 }
 
-
-// Loads a file in the browser from a file path string.
--(IBAction) loadFile:(NSString *)filePath WithSender:(id)sender
+-(IBAction) scanButtonPressed 
 {
-    NSURL * url = [NSURL fileURLWithPath:filePath];
-    NSURLRequest * request = [NSURLRequest requestWithURL:url];
+    ZBarReaderViewController * reader = [ZBarReaderViewController new];
+    reader.readerDelegate = self;
+    reader.supportedOrientationsMask = ZBarOrientationMaskAll;
     
-    [webview loadRequest:request];
+    [self presentModalViewController:reader animated:YES];
+    [reader release];
 }
 
--(IBAction) back
+-(void) imagePickerController:(UIImagePickerController *)reader didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    [webview goBack];
+    id<NSFastEnumeration> results = [info objectForKey:ZBarReaderControllerResults];
+    ZBarSymbol * symbol = nil;
+    for(symbol in results)
+        break;
+    resultText.text = symbol.data;
+    
+    [reader dismissModalViewControllerAnimated:YES];
 }
 
--(IBAction) forward
+-(IBAction) mapButtonPressed
 {
-    [webview goForward];
+    
+}
+
+- (void)applicationWillResignActive:(UIApplication *)application
+{
+
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+   
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+   
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application
+{
+
+}
+
+- (void)dealloc
+{
+    [_window release];
+    [super dealloc];
 }
 
 @end

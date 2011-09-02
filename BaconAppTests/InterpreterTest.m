@@ -9,37 +9,48 @@
 #import "InterpreterTest.h"
 #import "Interpreter.h"
 
+
 @implementation InterpreterTest
 
-- (void) setUp
+-(void) setUp
 {
-    [super setUp];
-    
-    // Instantiate a new Interpreter for each test.
     interpreter = [Interpreter new];
-    
 }
 
-- (void) tearDown
+-(void) tearDown
 {
-    // Release the Interpreter from memory.
     [interpreter release];
+}
+
+-(void) testXCoord
+{
+    int result1 = [interpreter xCoord:@"12345"];
+    int result2 = [interpreter xCoord:@"685Hello"];
+    int result3 = [interpreter xCoord:@"Houston, we have a problem"];
     
-    [super tearDown];
+    STAssertEquals(result1, 123, @"");
+    STAssertEquals(result2, 685, @"");
+    STAssertEquals(result3, 0, @"");
 }
 
--(void) testInput
+-(void) testYCoord
 {
-    STfail(@"Not yet implemented.");
+    int result1 = [interpreter yCoord:@"123456"];
+    int result2 = [interpreter yCoord:@"685927Hello"];
+    int result3 = [interpreter yCoord:@"Houston, we have a problem"];
+
+    STAssertEquals(result1, 456, @"");
+    STAssertEquals(result2, 927, @"");
+    STAssertEquals(result3, 0, @"");
 }
 
--(void) testCoordinates
+-(void) testPath
 {
-    STFail(@"Not yet implemented.");
+    NSString * result1 = [interpreter htmlPath:@"123456Hello"];
+    NSString * result2 = [interpreter htmlPath:@"345678World"];
+    
+    STAssertEqualObjects(result1, @"Hello", result1);
+    STAssertEqualObjects(result2, @"World", result2);
 }
 
--(void) testFileString
-{
-    STFail(@"Not yet implemented.");
-}
 @end
