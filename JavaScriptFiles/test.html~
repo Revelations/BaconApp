@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <script type="text/javascript" src="audio.js">
+    </script>
+  </head>
+
+    <script>playSound("../test.mp3")</script>
+  <body>
+    
+    <h1>
+      My First Web Page
+    </h1>
+      <p id="demo"></p>
+
+<button type="button" onclick="displayDate()">Display Date</button>
+
+</body>
+</html>
+
+
