@@ -16,6 +16,8 @@
 		7F3274131411D170003BCB40 /* Bacon.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F3274121411D170003BCB40 /* Bacon.m */; };
 		7F32741C1411D19D003BCB40 /* Bacon.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F3274121411D170003BCB40 /* Bacon.m */; };
 		7F81383A1411A9620096229E /* BaconTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F8138391411A9620096229E /* BaconTest.m */; };
+		C8FE180814120848009F79B8 /* TriButtonContoller.m in Sources */ = {isa = PBXBuildFile; fileRef = C8FE180714120848009F79B8 /* TriButtonContoller.m */; };
+		C8FE181214120CE8009F79B8 /* TriButtonController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8FE181114120CE8009F79B8 /* TriButtonController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +47,9 @@
 		7F8138381411A9620096229E /* BaconTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaconTest.h; sourceTree = "<group>"; };
 		7F8138391411A9620096229E /* BaconTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaconTest.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* ViewApp-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ViewApp-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		C8FE180614120847009F79B8 /* TriButtonContoller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriButtonContoller.h; sourceTree = "<group>"; };
+		C8FE180714120848009F79B8 /* TriButtonContoller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TriButtonContoller.m; sourceTree = "<group>"; };
+		C8FE181114120CE8009F79B8 /* TriButtonController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TriButtonController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +80,8 @@
 				1D3623250D0F684500981E51 /* ViewAppAppDelegate.m */,
 				7F3274111411D170003BCB40 /* Bacon.h */,
 				7F3274121411D170003BCB40 /* Bacon.m */,
+				C8FE180614120847009F79B8 /* TriButtonContoller.h */,
+				C8FE180714120848009F79B8 /* TriButtonContoller.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -114,6 +121,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C8FE181114120CE8009F79B8 /* TriButtonController.xib */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* ViewApp-Info.plist */,
 			);
@@ -209,6 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
+				C8FE181214120CE8009F79B8 /* TriButtonController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,6 +254,7 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* ViewAppAppDelegate.m in Sources */,
 				7F3274131411D170003BCB40 /* Bacon.m in Sources */,
+				C8FE180814120848009F79B8 /* TriButtonContoller.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
