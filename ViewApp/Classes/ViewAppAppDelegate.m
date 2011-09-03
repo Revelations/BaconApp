@@ -7,10 +7,12 @@
 //
 
 #import "ViewAppAppDelegate.h"
+#import "TriButtonContoller.h"
 
 @implementation ViewAppAppDelegate
 
 @synthesize window;
+@synthesize viewController;
 
 
 #pragma mark -
@@ -19,7 +21,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     
     // Override point for customization after application launch.
-    
+    self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     
     return YES;
@@ -75,6 +77,7 @@
 
 
 - (void)dealloc {
+	[viewController release];
     [window release];
     [super dealloc];
 }
