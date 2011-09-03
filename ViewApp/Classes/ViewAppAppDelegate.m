@@ -2,12 +2,12 @@
 //  ViewAppAppDelegate.m
 //  ViewApp
 //
-//  Created by Shii Kayano on 1/09/11.
+//  Created by Shii Kayano on 3/09/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
 #import "ViewAppAppDelegate.h"
-#import "ViewAppViewController.h"
+#import "TriButtonContoller.h"
 
 @implementation ViewAppAppDelegate
 
@@ -21,11 +21,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     
     // Override point for customization after application launch.
-
-	// Set the view controller as the window's root view controller and display.
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
-
+    
     return YES;
 }
 
@@ -79,7 +77,7 @@
 
 
 - (void)dealloc {
-    [viewController release];
+	[viewController release];
     [window release];
     [super dealloc];
 }
