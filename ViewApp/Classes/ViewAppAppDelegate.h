@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class TriButtonContoller;
+
 @interface ViewAppAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
+	TriButtonContoller *viewController;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-
+@property (nonatomic, retain) IBOutlet TriButtonContoller *viewController;
 @end
 
