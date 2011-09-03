@@ -11,9 +11,21 @@
 
 @implementation Interpreter
 
+@synthesize storedInputString;
+
+-(int) xCoord
+{
+    return [self xCoord:storedInputString];
+}
+
 -(int) xCoord:(NSString *)inputString
 {
     return [self substringToInt:inputString withRange:NSMakeRange(0, 3)];
+}
+
+-(int) yCoord
+{
+    return [self yCoord:storedInputString];
 }
 
 -(int) yCoord:(NSString *)inputString
@@ -27,6 +39,11 @@
     int result = [substring intValue];
     
     return result;
+}
+
+-(NSString *) htmlPath
+{
+    return [self htmlPath:storedInputString];
 }
 
 -(NSString *) htmlPath:(NSString *)inputString

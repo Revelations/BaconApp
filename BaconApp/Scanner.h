@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 
 
-@interface Scanner : NSObject {
-    
+@interface Scanner : NSObject <ZBarReaderDelegate>
+{
+    NSString * outputString;
 }
 
--(void) scan;
+@property(nonatomic, retain) NSString * ouputString;
+
+-(void) scan:(UIViewController *) view;
 
 @end

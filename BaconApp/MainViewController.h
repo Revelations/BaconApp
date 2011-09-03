@@ -7,36 +7,60 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Scanner.h"
+#import "Interpreter.h"
+#import "HistoryItem.h"
 
-@interface MainViewController : UIViewController <ZBarReaderDelegate>
+@interface MainViewController : UIViewController
 {
     IBOutlet UIWebView * webview;
     IBOutlet UIBarButtonItem * scanButton;
     IBOutlet UIBarButtonItem * mapButton;
     IBOutlet NSString * menuPath;
     IBOutlet UITextField * resultText;
+    
+    NSMutableArray * history;
+    HistoryItem * current;
+    
+    Scanner * scanner;
+    Interpreter * interpreter;
 }
 
-extern NSString * const MENU_HTML_PATH;
-
-@property (nonatomic, retain) IBOutlet UIWindow *window;
+// Main app window.
+@property (nonatomic, retain) IBOutlet UIWindow * window;
 
 // Main browser control used to display information.
-@property(nonatomic, retain) UIWebView * webView;
+@property(nonatomic, retain) IBOutlet UIWebView * webView;
 
 // Button to initiate barcode scan.
-@property(nonatomic, retain) UIBarButtonItem * scanButton;
+@property(nonatomic, retain) IBOutlet UIBarButtonItem * scanButton;
 
 // Toggle button for switching between map/browser.
-@property(nonatomic, retain) UIBarButtonItem * mapButton;
+@property(nonatomic, retain) IBOutlet UIBarButtonItem * mapButton;
 
+// Text field for testing ZBar lib output.
 @property(nonatomic, retain) IBOutlet UITextField * resultText;
 
+// ZBar reader delegate.
+@property(nonatomic, retain) Scanner * scanner;
 
+// Interpreter for making sense of scanner data.
+@property(nonatomic, retain) Interpreter * interpreter;
+
+@property(nonatomic, retain) NSMutableArray * history;
+
+@property(nonatomic, retain) HistoryItem * current;
+
+
+// Occurs when user taps scan button.
 -(IBAction) scanButtonPressed;
+
+// Occurs when user taps map button.
 -(IBAction) mapButtonPressed;
 
 
+// Loads a given html file into the UIWebView.
+-(void) webViewLoadPage:(NSString *) inputString;
 
 
 @end
