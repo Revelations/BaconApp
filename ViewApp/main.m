@@ -2,7 +2,7 @@
 //  main.m
 //  ViewApp
 //
-//  Created by Shii Kayano on 1/09/11.
+//  Created by Shii Kayano on 3/09/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
