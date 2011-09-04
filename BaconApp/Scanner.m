@@ -40,7 +40,7 @@
 
 -(void) dealloc
 {
-    [outputString release];
+    [super dealloc];
 }
 
 @end

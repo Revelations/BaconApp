@@ -11,19 +11,24 @@
 #import "Interpreter.h"
 #import "HistoryItem.h"
 
-@interface MainViewController : UIViewController
+@interface MainViewController : UIViewController <UIWebViewDelegate>
 {
     IBOutlet UIWebView * webview;
     IBOutlet UIBarButtonItem * scanButton;
     IBOutlet UIBarButtonItem * mapButton;
     IBOutlet NSString * menuPath;
     IBOutlet UITextField * resultText;
+    IBOutlet UIActivityIndicatorView * activityIndicator;
     
     NSMutableArray * history;
     HistoryItem * current;
     
     Scanner * scanner;
     Interpreter * interpreter;
+    
+    bool loadingMapScreen;
+    
+    NSString * jScript;
 }
 
 // Main app window.
@@ -51,6 +56,7 @@
 
 @property(nonatomic, retain) HistoryItem * current;
 
+-(void) initJavaScriptLibrary;
 
 // Occurs when user taps scan button.
 -(IBAction) scanButtonPressed;

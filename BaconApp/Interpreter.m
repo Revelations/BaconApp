@@ -13,22 +13,22 @@
 
 @synthesize storedInputString;
 
--(int) xCoord
+-(int) x
 {
-    return [self xCoord:storedInputString];
+    return [self x:storedInputString];
 }
 
--(int) xCoord:(NSString *)inputString
+-(int) x:(NSString *)inputString
 {
     return [self substringToInt:inputString withRange:NSMakeRange(0, 3)];
 }
 
--(int) yCoord
+-(int) y
 {
-    return [self yCoord:storedInputString];
+    return [self y:storedInputString];
 }
 
--(int) yCoord:(NSString *)inputString
+-(int) y:(NSString *)inputString
 {
     return [self substringToInt:inputString withRange:NSMakeRange(3, 3)];
 }

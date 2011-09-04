@@ -16,11 +16,11 @@
 
 @property(nonatomic, retain) NSString * storedInputString;
 
--(int) xCoord;
--(int) xCoord:(NSString *) inputString;
+-(int) x;
+-(int) x:(NSString *) inputString;
 
--(int) yCoord;
--(int) yCoord:(NSString *) inputString;
+-(int) y;
+-(int) y:(NSString *) inputString;
 
 -(int) substringToInt:(NSString *) inputString withRange:(NSRange) range;
 
