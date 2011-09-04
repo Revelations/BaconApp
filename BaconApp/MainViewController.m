@@ -27,22 +27,19 @@ NSString * const MAP_HTML_FILE = @"Map";
     scanner = [Scanner new];
     interpreter = [Interpreter new];
     
-    current = [HistoryItem new];
-    current.htmlFile = MENU_HTML_FILE;
-    current.x = 0;
-    current.y = 0;
+	current = [[[HistoryItem alloc] initWithHtmlFile:MENU_HTML_FILE x:0 y:0] autorelease];
     
     loadingMapScreen = false;
     
     [history addObject:current];
     
+    [self initJavaScriptLibrary];
+    
     [self webViewLoadPage:current.htmlFile];
     
     self.webView.delegate = self;
-    
+
     [self.window makeKeyAndVisible];
-    
-    [self initJavaScriptLibrary];
     
     return YES;
 }
@@ -61,10 +58,12 @@ NSString * const MAP_HTML_FILE = @"Map";
 
 // Called when a user presses the scan button.
 //
-// Calls the scanner to initiate a scan, the interpreter to break up it's results,
+// Calls the scanner to initiate a scan, the interpreter to break up its results,
 // creates a history node to store results, and finally brings up the associated page.
--(IBAction) scanButtonPressed 
+-(IBAction) scanButtonPressed
 {
+	NSLog(@"Scan button has been pressed");
+	
     // Animate activity indicator.
     [activityIndicator startAnimating];
     
@@ -75,7 +74,7 @@ NSString * const MAP_HTML_FILE = @"Map";
     interpreter.storedInputString = scanner.ouputString;    
     
     // Set the current history item to interpreted scanner data.
-    current = [[HistoryItem alloc] initHtmlFile:[interpreter htmlPath] x:interpreter.x y:interpreter.y];
+    current = [[HistoryItem alloc] initWithHtmlFile:[interpreter htmlPath] x:interpreter.x y:interpreter.y];
 
     // Add the current history item to the list.
     [history addObject:current];
@@ -116,7 +115,12 @@ NSString * const MAP_HTML_FILE = @"Map";
     
     // Create and load the request.
     NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePath]];
+	
     [self.webView loadRequest:request];
+	
+	// Draw the map and marker by evaluating the js function.
+	[self.webView stringByEvaluatingJavaScriptFromString:@"addCSS();"];
+	
 }
 
 

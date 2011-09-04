@@ -37,6 +37,7 @@
 		17A5A806140E01EE009BB46E /* ScannerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5A7FB140DF1FA009BB46E /* ScannerTest.m */; };
 		17A5A807140E01F7009BB46E /* InterpreterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5A7FE140DF20F009BB46E /* InterpreterTest.m */; };
 		17BBA94F1412FF2C00D0BE9D /* Web in Resources */ = {isa = PBXBuildFile; fileRef = 17BBA94E1412FF2C00D0BE9D /* Web */; };
+		7FB432DF1413EF1A00927C8B /* ScanView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7FB432DE1413EF1A00927C8B /* ScanView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +111,8 @@
 		17A5A7FD140DF20F009BB46E /* InterpreterTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterpreterTest.h; sourceTree = "<group>"; };
 		17A5A7FE140DF20F009BB46E /* InterpreterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterpreterTest.m; sourceTree = "<group>"; };
 		17BBA94E1412FF2C00D0BE9D /* Web */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Web; sourceTree = "<group>"; };
+		7F48B9791413CE120001546A /* UnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTests-Info.plist"; sourceTree = "<group>"; };
+		7FB432DE1413EF1A00927C8B /* ScanView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScanView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,16 +213,12 @@
 		17A5A7B2140DEEB4009BB46E = {
 			isa = PBXGroup;
 			children = (
-				1726B73A140F4E9B0000EC72 /* CoreMedia.framework */,
-				1726B73B140F4E9B0000EC72 /* CoreVideo.framework */,
-				1726B73C140F4E9B0000EC72 /* libiconv.dylib */,
-				1726B73D140F4E9B0000EC72 /* QuartzCore.framework */,
-				1726B738140F4E6C0000EC72 /* AVFoundation.framework */,
 				1726B715140F4C580000EC72 /* ZBarSDK */,
 				17A5A7C7140DEEB4009BB46E /* BaconApp */,
 				17A5A7E1140DEEB4009BB46E /* BaconAppTests */,
 				17A5A7C0140DEEB4009BB46E /* Frameworks */,
 				17A5A7BE140DEEB4009BB46E /* Products */,
+				7F48B9791413CE120001546A /* UnitTests-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -235,6 +234,11 @@
 		17A5A7C0140DEEB4009BB46E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1726B73C140F4E9B0000EC72 /* libiconv.dylib */,
+				1726B73A140F4E9B0000EC72 /* CoreMedia.framework */,
+				1726B73B140F4E9B0000EC72 /* CoreVideo.framework */,
+				1726B73D140F4E9B0000EC72 /* QuartzCore.framework */,
+				1726B738140F4E6C0000EC72 /* AVFoundation.framework */,
 				17A5A7C1140DEEB4009BB46E /* UIKit.framework */,
 				17A5A7C3140DEEB4009BB46E /* Foundation.framework */,
 				17A5A7C5140DEEB4009BB46E /* CoreGraphics.framework */,
@@ -245,16 +249,10 @@
 		17A5A7C7140DEEB4009BB46E /* BaconApp */ = {
 			isa = PBXGroup;
 			children = (
+				7F48B9331413C9010001546A /* Controllers */,
+				7F48B9321413C8F20001546A /* Model */,
+				7F48B9191413C3370001546A /* Resources */,
 				17BBA94E1412FF2C00D0BE9D /* Web */,
-				17A5A7D0140DEEB4009BB46E /* MainViewController.h */,
-				17A5A7D1140DEEB4009BB46E /* MainViewController.m */,
-				17A5A7D3140DEEB4009BB46E /* MainWindow.xib */,
-				17A5A7F4140DF183009BB46E /* Interpreter.h */,
-				17A5A7F5140DF183009BB46E /* Interpreter.m */,
-				17A14BBE14123A9000D4192C /* HistoryItem.h */,
-				17A14BBF14123A9000D4192C /* HistoryItem.m */,
-				17A5A7F7140DF199009BB46E /* Scanner.h */,
-				17A5A7F8140DF199009BB46E /* Scanner.m */,
 				17A5A7C8140DEEB4009BB46E /* Supporting Files */,
 			);
 			path = BaconApp;
@@ -280,9 +278,9 @@
 				17A5A7FB140DF1FA009BB46E /* ScannerTest.m */,
 				17A5A7FD140DF20F009BB46E /* InterpreterTest.h */,
 				17A5A7FE140DF20F009BB46E /* InterpreterTest.m */,
-				17A5A7E2140DEEB4009BB46E /* Supporting Files */,
 				1798168B14106DF900AB1A15 /* HistoryItemTest.h */,
 				1798168C14106DF900AB1A15 /* HistoryItemTest.m */,
+				17A5A7E2140DEEB4009BB46E /* Supporting Files */,
 			);
 			path = BaconAppTests;
 			sourceTree = "<group>";
@@ -295,6 +293,37 @@
 				17A5A7E7140DEEB4009BB46E /* BaconAppTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7F48B9191413C3370001546A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				17A5A7D3140DEEB4009BB46E /* MainWindow.xib */,
+				7FB432DE1413EF1A00927C8B /* ScanView.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		7F48B9321413C8F20001546A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				17A5A7F4140DF183009BB46E /* Interpreter.h */,
+				17A5A7F5140DF183009BB46E /* Interpreter.m */,
+				17A14BBE14123A9000D4192C /* HistoryItem.h */,
+				17A14BBF14123A9000D4192C /* HistoryItem.m */,
+				17A5A7F7140DF199009BB46E /* Scanner.h */,
+				17A5A7F8140DF199009BB46E /* Scanner.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		7F48B9331413C9010001546A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				17A5A7D0140DEEB4009BB46E /* MainViewController.h */,
+				17A5A7D1140DEEB4009BB46E /* MainViewController.m */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -371,6 +400,7 @@
 				1726B736140F4C580000EC72 /* zbar-helpicons.png in Resources */,
 				1726B737140F4C580000EC72 /* zbar-samples.png in Resources */,
 				17BBA94F1412FF2C00D0BE9D /* Web in Resources */,
+				7FB432DF1413EF1A00927C8B /* ScanView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -28,9 +28,9 @@
     int result2 = [interpreter x:@"685Hello"];
     int result3 = [interpreter x:@"Houston, we have a problem"];
     
-    STAssertEquals(result1, 123, @"");
-    STAssertEquals(result2, 685, @"");
-    STAssertEquals(result3, 0, @"");
+    STAssertEquals(123, result1, @"");
+    STAssertEquals(685, result2, @"");
+    STAssertEquals(0,   result3, @"");
 }
 
 -(void) testYCoord
@@ -39,18 +39,21 @@
     int result2 = [interpreter y:@"685927Hello"];
     int result3 = [interpreter y:@"Houston, we have a problem"];
 
-    STAssertEquals(result1, 456, @"");
-    STAssertEquals(result2, 927, @"");
-    STAssertEquals(result3, 0, @"");
+    STAssertEquals(457,	result1, @"");
+    STAssertEquals(927,	result2, @"");
+    STAssertEquals(0,	result3, @"");
+	STAssertEquals(0,	[interpreter y:@"12345"], @"");
 }
 
 -(void) testPath
 {
     NSString * result1 = [interpreter htmlPath:@"123456Hello"];
     NSString * result2 = [interpreter htmlPath:@"345678World"];
+	NSString * result3 = [interpreter htmlPath:@"424242"];
     
     STAssertEqualObjects(result1, @"Hello", result1);
     STAssertEqualObjects(result2, @"World", result2);
+	STAssertEqualObjects(result3, @"", result3);
 }
 
 @end

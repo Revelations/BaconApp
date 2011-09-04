@@ -20,6 +20,6 @@
 
 @property(nonatomic) int x, y;
 
--(HistoryItem *) initHtmlFile:(NSString *)htmlFile x:(int)x y:(int)y;
+-(HistoryItem *) initWithHtmlFile:(NSString *)htmlFile x:(int)x y:(int)y;
 
 @end

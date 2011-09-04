@@ -24,15 +24,15 @@
     y = coordinates.y;
 }
 
--(HistoryItem *) initHtmlFile:(NSString *)HtmlFile x:(int)X y:(int)Y
+-(HistoryItem *) initWithHtmlFile:(NSString *)HtmlFile x:(int)xCoord y:(int)yCoord
 {
     self = [super init];
     
     if(self)
     {
         self.htmlFile = HtmlFile;
-        self.x = X;
-        self.y = Y;
+        self.x = xCoord;
+        self.y = yCoord;
     }
     
     return self;

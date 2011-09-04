@@ -22,8 +22,6 @@
 -(int) y;
 -(int) y:(NSString *) inputString;
 
--(int) substringToInt:(NSString *) inputString withRange:(NSRange) range;
-
 -(NSString *) htmlPath;
 -(NSString *) htmlPath:(NSString *) inputString;
 

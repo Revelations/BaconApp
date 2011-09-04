@@ -5,8 +5,7 @@ function drawMapAndLocation(x,y)
     canvas.height = "360";
     canvas.width = "300";
     
-    
-    
+	
     var cxt = canvas.getContext("2d");
     var map=new Image();
     var marker = new Image();
@@ -16,7 +15,7 @@ function drawMapAndLocation(x,y)
         cxt.drawImage(marker, x + 6, y - 7);
         cxt.fillStyle = "rgba(255, 0, 0, 0.8)";  
         cxt.beginPath();
-        cxt.arc(x,y,5,0,Math.PI*2,true);//x,y,radius,startingAngle,EndingAngle,anti-clockwise
+        cxt.arc(x,y,5,0,Math.PI*2,true);//x,y,radius,startingAngle,endingAngle,anti-clockwise
         cxt.closePath();
         cxt.fill();
     }
@@ -31,4 +30,13 @@ function playSound(path)
     document.write("<audio id=audioPlayer controls=controls> Your browser does not support the audio element.</audio>");
     document.getElementById('audioPlayer').src = path;
     document.getElementById('audioPlayer').play();
+}
+
+function addCSS()
+{
+	var _link = document.createElement('link');
+	_link.type = 'text/css';
+	_link.rel = 'stylesheet';
+	_link.href = 'style.css';
+	document.getElementsByTagName("head")[0].appendChild(_link);
 }
