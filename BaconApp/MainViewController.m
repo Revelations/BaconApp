@@ -32,21 +32,42 @@ NSString * const MAP_HTML_FILE = @"Map";
     current.x = 0;
     current.y = 0;
     
+    loadingMapScreen = false;
+    
     [history addObject:current];
     
     [self webViewLoadPage:current.htmlFile];
     
+    self.webView.delegate = self;
+    
     [self.window makeKeyAndVisible];
+    
+    [self initJavaScriptLibrary];
+    
     return YES;
 }
 
+-(void) initJavaScriptLibrary
+{
+    // Get JS library path.
+    NSString * filePath = [[NSBundle mainBundle] pathForResource:@"library" ofType:@"js" inDirectory:@"web"];
+    
+    // Get a string containing the library.
+    NSData * fileData = [NSData dataWithContentsOfFile:filePath];
+    jScript = [[NSMutableString alloc] initWithData:fileData encoding:NSUTF8StringEncoding];
+    
+
+}
 
 // Called when a user presses the scan button.
 //
-//
-//
+// Calls the scanner to initiate a scan, the interpreter to break up it's results,
+// creates a history node to store results, and finally brings up the associated page.
 -(IBAction) scanButtonPressed 
 {
+    // Animate activity indicator.
+    [activityIndicator startAnimating];
+    
     // Initiate a scan.
     [scanner scan:self];
     
@@ -54,14 +75,13 @@ NSString * const MAP_HTML_FILE = @"Map";
     interpreter.storedInputString = scanner.ouputString;    
     
     // Set the current history item to interpreted scanner data.
-    current = [[HistoryItem alloc] initHtmlFile:[interpreter htmlPath] x:[interpreter xCoord] y:[interpreter yCoord]];
+    current = [[HistoryItem alloc] initHtmlFile:[interpreter htmlPath] x:interpreter.x y:interpreter.y];
 
     // Add the current history item to the list.
     [history addObject:current];
     
+    // Load the html file associated with the scanned item.
     [self webViewLoadPage:current.htmlFile];
-    
-    
 }
 
 // Called when a user presses the map button.
@@ -70,32 +90,60 @@ NSString * const MAP_HTML_FILE = @"Map";
 // smaller 'you are here' image over the main image using a JS script.
 -(IBAction) mapButtonPressed
 {
-    NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:MAP_HTML_FILE ofType:@"html"]]];
+    // Load the (mostly blank) map page.
+    [self webViewLoadPage:@"Map"];
     
-    
+    // Flag to run js once page has loaded.
+    loadingMapScreen = true;
 }
+
 
 // Changes the page of the UIWebview to a given string.
 //
-//
-//
+// Builds a string with the given input, checks if that file exists, and loads it
+// into the WebView if so.
 -(void) webViewLoadPage:(NSString *) inputString
 {
+    // Animate activity indicator.
+    [activityIndicator startAnimating];
+    
+    // Get the file path of the requested html file.
     NSString * filePath = [[NSBundle mainBundle] pathForResource:inputString ofType:@"html" inDirectory:@"Web"];
 
+    // If that file doesn't exist then break prematurely.
     if(![[NSFileManager defaultManager] fileExistsAtPath:filePath])
         return;
     
+    // Create and load the request.
     NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePath]];
-    
     [self.webView loadRequest:request];
+}
+
+
+// Called once the UIWebView is finished loading a page.
+//
+// Checks if the page loaded is the map page.
+// If so, loads the js library into the webview and calls the map drawing function.
+-(void) webViewDidFinishLoad:(UIWebView *)webView
+{
+    // Make sure the page finished loading is a the map page.
+    if(loadingMapScreen)
+    {
+        // Load the library into the webview page.
+        [self.webView stringByEvaluatingJavaScriptFromString:jScript];
+        
+        // Build a string to call js function with a given x, y.
+        NSString * jScriptCall = [NSString stringWithFormat:@"drawMapAndLocation(%d, %d);", interpreter.x, interpreter.y];
+        
+        // Draw the map and marker by evaluating the js function.
+        [self.webView stringByEvaluatingJavaScriptFromString:jScriptCall];
+        
+        // Finished load of map screen.
+        loadingMapScreen = false;
+    }
     
-    
-    /*
-     *  TODO: Implement JS handler here.
-     *
-     *  Also check validity of a file path before displaying it.
-     */
+    // Stop animating activity indicator.
+    [activityIndicator stopAnimating];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

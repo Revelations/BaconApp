@@ -24,9 +24,9 @@
 
 -(void) testXCoord
 {
-    int result1 = [interpreter xCoord:@"12345"];
-    int result2 = [interpreter xCoord:@"685Hello"];
-    int result3 = [interpreter xCoord:@"Houston, we have a problem"];
+    int result1 = [interpreter x:@"12345"];
+    int result2 = [interpreter x:@"685Hello"];
+    int result3 = [interpreter x:@"Houston, we have a problem"];
     
     STAssertEquals(result1, 123, @"");
     STAssertEquals(result2, 685, @"");
@@ -35,9 +35,9 @@
 
 -(void) testYCoord
 {
-    int result1 = [interpreter yCoord:@"123456"];
-    int result2 = [interpreter yCoord:@"685927Hello"];
-    int result3 = [interpreter yCoord:@"Houston, we have a problem"];
+    int result1 = [interpreter y:@"123456"];
+    int result2 = [interpreter y:@"685927Hello"];
+    int result3 = [interpreter y:@"Houston, we have a problem"];
 
     STAssertEquals(result1, 456, @"");
     STAssertEquals(result2, 927, @"");
