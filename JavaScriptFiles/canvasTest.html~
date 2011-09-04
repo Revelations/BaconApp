@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+
+<canvas id="myCanvas" width="800" height="800" style="border:1px solid #c3c3c3;">
+Your browser does not support the canvas element.
+</canvas>
+
+<script type="application/javascript">
+var c=document.getElementById("myCanvas");
+var cxt=c.getContext("2d");
+var img=new Image();
+img.onload = function(){
+  cxt.drawImage(img, 0, 0);
+ cxt.fillStyle = "rgb(200,0,0)";  
+ cxt.fillRect (10, 10, 55, 50);  
+  
+ cxt.fillStyle = "rgba(0, 0, 200, 0.5)";  
+ cxt.fillRect (30, 30, 55, 50);
+}
+img.src="./small.png";
+
+</script>
+
+</body>
+</html>
+
+  <!--<script type="application/javascript">  
+function draw() {  
+ var canvas = document.getElementById("canvas");  
+ var ctx = canvas.getContext("2d");  
+  
+ ctx.fillStyle = "rgb(200,0,0)";  
+ ctx.fillRect (10, 10, 55, 50);  
+  
+ ctx.fillStyle = "rgba(0, 0, 200, 0.5)";  
+ ctx.fillRect (30, 30, 55, 50);  
+}  
+  </script>  
+ </head>  
+ <body onload="draw()">  
+   <canvas id="canvas" width="300" height="300"></canvas>  
+ </body>  
+</html>--> 
