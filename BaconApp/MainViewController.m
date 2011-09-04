@@ -10,7 +10,11 @@
 
 @implementation MainViewController
 
+// Name (without extension) of the main menu html page, loaded on app start.
 NSString * const MENU_HTML_FILE = @"Menu";
+
+// Name (without extension) of the map html page.
+NSString * const MAP_HTML_FILE = @"Map";
 
 @synthesize scanButton, mapButton, resultText, scanner, interpreter, history, current;
 @synthesize window=_window;
@@ -47,15 +51,17 @@ NSString * const MENU_HTML_FILE = @"Menu";
     [scanner scan:self];
     
     // Retrieve scanner results.
-    interpreter.storedInputString = scanner.ouputString;
+    interpreter.storedInputString = scanner.ouputString;    
     
     // Set the current history item to interpreted scanner data.
     current = [[HistoryItem alloc] initHtmlFile:[interpreter htmlPath] x:[interpreter xCoord] y:[interpreter yCoord]];
-    
+
     // Add the current history item to the list.
     [history addObject:current];
     
     [self webViewLoadPage:current.htmlFile];
+    
+    
 }
 
 // Called when a user presses the map button.
@@ -64,6 +70,8 @@ NSString * const MENU_HTML_FILE = @"Menu";
 // smaller 'you are here' image over the main image using a JS script.
 -(IBAction) mapButtonPressed
 {
+    NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:MAP_HTML_FILE ofType:@"html"]]];
+    
     
 }
 
@@ -73,7 +81,12 @@ NSString * const MENU_HTML_FILE = @"Menu";
 //
 -(void) webViewLoadPage:(NSString *) inputString
 {
-    NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:inputString ofType:@"html"]]];
+    NSString * filePath = [[NSBundle mainBundle] pathForResource:inputString ofType:@"html" inDirectory:@"Web"];
+
+    if(![[NSFileManager defaultManager] fileExistsAtPath:filePath])
+        return;
+    
+    NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePath]];
     
     [self.webView loadRequest:request];
     

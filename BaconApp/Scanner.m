@@ -38,4 +38,9 @@
     [reader dismissModalViewControllerAnimated:YES];
 }
 
+-(void) dealloc
+{
+    [outputString release];
+}
+
 @end
