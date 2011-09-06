@@ -1,0 +1,833 @@
+TBaconApp
+v7
+r0
+t336974472.779556
+cCheck dependencies
+cCpResource build/Debug-iphoneos/BaconApp.app/ResourceRules.plist /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/ResourceRules.plist
+cProcessInfoPlistFile /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/Info.plist BaconApp/BaconApp-Info.plist
+cProcessPCH /var/folders/rb/rbFYfapcHh4gGakT1FhpUZtoN8s/-Caches-/com.apple.Xcode.1584686254/SharedPrecompiledHeaders/BaconApp-Prefix-dqsuqhsjgzqptlbppclgrobpjjxh/BaconApp-Prefix.pch.gch BaconApp/BaconApp-Prefix.pch normal armv6 objective-c com.apple.compilers.llvmgcc42
+cProcessPCH /var/folders/rb/rbFYfapcHh4gGakT1FhpUZtoN8s/-Caches-/com.apple.Xcode.1584686254/SharedPrecompiledHeaders/BaconApp-Prefix-duubzydqwqjiajeruvizwpmzifuv/BaconApp-Prefix.pch.gch BaconApp/BaconApp-Prefix.pch normal armv7 objective-c com.apple.compilers.llvmgcc42
+cCompileC build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/main.o /Users/dsh8/BaconApp/BaconApp/BaconApp/main.m normal armv6 objective-c com.apple.compilers.llvmgcc42
+cCompileC build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/MainViewController.o /Users/dsh8/BaconApp/BaconApp/BaconApp/MainViewController.m normal armv6 objective-c com.apple.compilers.llvmgcc42
+cCompileC build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/Interpreter.o /Users/dsh8/BaconApp/BaconApp/BaconApp/Interpreter.m normal armv6 objective-c com.apple.compilers.llvmgcc42
+cCompileC build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/Scanner.o /Users/dsh8/BaconApp/BaconApp/BaconApp/Scanner.m normal armv6 objective-c com.apple.compilers.llvmgcc42
+cCompileC build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/HistoryItem.o /Users/dsh8/BaconApp/BaconApp/BaconApp/HistoryItem.m normal armv6 objective-c com.apple.compilers.llvmgcc42
+cLd /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/BaconApp normal armv6
+cCompileC build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/main.o /Users/dsh8/BaconApp/BaconApp/BaconApp/main.m normal armv7 objective-c com.apple.compilers.llvmgcc42
+cCompileC build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/MainViewController.o /Users/dsh8/BaconApp/BaconApp/BaconApp/MainViewController.m normal armv7 objective-c com.apple.compilers.llvmgcc42
+cCompileC build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/Interpreter.o /Users/dsh8/BaconApp/BaconApp/BaconApp/Interpreter.m normal armv7 objective-c com.apple.compilers.llvmgcc42
+cCompileC build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/Scanner.o /Users/dsh8/BaconApp/BaconApp/BaconApp/Scanner.m normal armv7 objective-c com.apple.compilers.llvmgcc42
+cCompileC build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/HistoryItem.o /Users/dsh8/BaconApp/BaconApp/BaconApp/HistoryItem.m normal armv7 objective-c com.apple.compilers.llvmgcc42
+cLd /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/BaconApp normal armv7
+cCreateUniversalBinary /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/BaconApp normal "armv6 armv7"
+cGenerateDSYMFile /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app.dSYM /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/BaconApp
+cCopyStringsFile /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/en.lproj/InfoPlist.strings BaconApp/en.lproj/InfoPlist.strings
+cCompileXIB /Users/dsh8/BaconApp/BaconApp/BaconApp/en.lproj/MainWindow.xib
+cCopyPNGFile /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/zbar-back.png BaconApp/ZBarSDK/Resources/zbar-back.png
+cCpResource build/Debug-iphoneos/BaconApp.app/zbar-help.html BaconApp/ZBarSDK/Resources/zbar-help.html
+cCopyPNGFile /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/zbar-helpicons.png BaconApp/ZBarSDK/Resources/zbar-helpicons.png
+cCopyPNGFile /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/zbar-samples.png BaconApp/ZBarSDK/Resources/zbar-samples.png
+cCpResource build/Debug-iphoneos/BaconApp.app/Web BaconApp/Web
+cCompileXIB /Users/dsh8/BaconApp/BaconApp/BaconApp/ScanView.xib
+cProcessProductPackaging "/Users/dsh8/Library/MobileDevice/Provisioning Profiles/TeamBacon.mobileprovision" /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/embedded.mobileprovision
+cTouch /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app
+cProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/Entitlements.plist /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp.xcent
+cCodeSign /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk
+c000000004D7401890000000000000110
+t1299448201
+s272
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/Entitlements.plist
+c000000004D4F6A4700000000000001A7
+t1297050183
+s423
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/ResourceRules.plist
+c000000004D4F6A4700000000000001E5
+t1297050183
+s485
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/AVFoundation.framework/AVFoundation
+c000000004D5EBED1000000000022E2B0
+t1298054865
+s2286256
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
+c000000004D54D18C00000000003532A0
+t1297404300
+s3486368
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.h
+c000000004D54D02E00000000000004FE
+t1297403950
+s1278
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/CoreMedia.framework/CoreMedia
+c000000004D5C99E400000000000EBFA0
+t1297914340
+s966560
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/CoreVideo.framework/CoreVideo
+c000000004D54D2D00000000000030F30
+t1297404624
+s200496
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/Foundation.framework/Foundation
+c000000004D54D1F500000000003E22F0
+t1297404405
+s4072176
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
+c000000004D54D1DD0000000000001466
+t1297404381
+s5222
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/QuartzCore.framework/QuartzCore
+c000000004D54D608000000000026CB10
+t1297405448
+s2542352
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
+c000000004D5A28AB0000000000000AA1
+t1297754283
+s2721
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/UIKit.framework/UIKit
+c000000004D5A292A0000000000CA2AE0
+t1297754410
+s13249248
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/Availability.h
+c000000004D4F74C20000000000001B19
+t1297052866
+s6937
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/assert.h
+c000000004D4F6E900000000000000F6E
+t1297051280
+s3950
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/stdio.h
+c000000004D4F6E910000000000004763
+t1297051281
+s18275
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/stdlib.h
+c000000004D4F6E9100000000000030A7
+t1297051281
+s12455
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/lib/libiconv.dylib
+c000000004D54C66E00000000001FB0E0
+t1297401454
+s2076896
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/BaconApp-Prefix.pch
+c000000004E65918F0000000000000156
+t1315279247
+s342
+i<Availability.h>
+i<UIKit/UIKit.h>
+i<Foundation/Foundation.h>
+i"ZBarSDK.h"
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/HistoryItem.h
+c000000004E65918F00000000000001B1
+t1315279247
+s433
+i<Foundation/Foundation.h>
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/HistoryItem.m
+c000000004E65918F000000000000026A
+t1315279247
+s618
+i"HistoryItem.h"
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/Interpreter.h
+c000000004E65918F00000000000001D4
+t1315279247
+s468
+i<Foundation/Foundation.h>
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/Interpreter.m
+c000000004E65918F0000000000000453
+t1315279247
+s1107
+i"Interpreter.h"
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/MainViewController.h
+c000000004E65918F0000000000000700
+t1315279247
+s1792
+i<UIKit/UIKit.h>
+i"Scanner.h"
+i"Interpreter.h"
+i"HistoryItem.h"
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/MainViewController.m
+c000000004E65918F00000000000010A4
+t1315279247
+s4260
+i"MainViewController.h"
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/ScanView.xib
+c000000004E65918F000000000000411F
+t1315279247
+s16671
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/Scanner.h
+c000000004E65918F0000000000000159
+t1315279247
+s345
+i<Foundation/Foundation.h>
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/Scanner.m
+c000000004E65918F00000000000003A4
+t1315279247
+s932
+i"Scanner.h"
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/Web
+c000000004E65918F0000000000000176
+t1315279247
+s374
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/Headers/ZBarSDK/ZBarCameraSimulator.h
+c000000004E65918F000000000000066A
+t1315279247
+s1642
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/Headers/ZBarSDK/ZBarCaptureReader.h
+c000000004E65918F0000000000000EA0
+t1315279247
+s3744
+i<CoreGraphics/CoreGraphics.h>
+i"ZBarImageScanner.h"
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/Headers/ZBarSDK/ZBarHelpController.h
+c000000004E65918F00000000000007B2
+t1315279247
+s1970
+i<UIKit/UIKit.h>
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/Headers/ZBarSDK/ZBarImage.h
+c000000004E65918F0000000000000905
+t1315279247
+s2309
+i<UIKit/UIKit.h>
+i"zbar.h"
+i"ZBarSymbol.h"
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/Headers/ZBarSDK/ZBarImageScanner.h
+c000000004E65918F00000000000006AB
+t1315279247
+s1707
+i<Foundation/Foundation.h>
+i"zbar.h"
+i"ZBarImage.h"
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/Headers/ZBarSDK/ZBarReaderController.h
+c000000004E65918F000000000000145B
+t1315279247
+s5211
+i<UIKit/UIKit.h>
+i"ZBarImageScanner.h"
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/Headers/ZBarSDK/ZBarReaderView.h
+c000000004E65918F00000000000011E1
+t1315279247
+s4577
+i<UIKit/UIKit.h>
+i"ZBarImageScanner.h"
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/Headers/ZBarSDK/ZBarReaderViewController.h
+c000000004E65918F00000000000015ED
+t1315279247
+s5613
+i<UIKit/UIKit.h>
+i"ZBarReaderController.h"
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/Headers/ZBarSDK/ZBarSDK.h
+c000000004E65918F0000000000000555
+t1315279247
+s1365
+i"zbar.h"
+i"ZBarSymbol.h"
+i"ZBarImage.h"
+i"ZBarImageScanner.h"
+i"ZBarReaderView.h"
+i"ZBarReaderViewController.h"
+i"ZBarReaderController.h"
+i"ZBarCaptureReader.h"
+i"ZBarHelpController.h"
+i"ZBarCameraSimulator.h"
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/Headers/ZBarSDK/ZBarSymbol.h
+c000000004E65918F0000000000000957
+t1315279247
+s2391
+i<Foundation/Foundation.h>
+i<CoreGraphics/CoreGraphics.h>
+i"zbar.h"
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/Headers/ZBarSDK/zbar.h
+c000000004E65918F000000000000D1C6
+t1315279247
+s53702
+i"zbar/Exception.h"
+i"zbar/Decoder.h"
+i"zbar/Scanner.h"
+i"zbar/Symbol.h"
+i"zbar/Image.h"
+i"zbar/ImageScanner.h"
+i"zbar/Video.h"
+i"zbar/Window.h"
+i"zbar/Processor.h"
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/Headers/ZBarSDK/zbar/Decoder.h
+c000000004E65918F0000000000001630
+t1315279247
+s5680
+i<string>
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/Headers/ZBarSDK/zbar/Exception.h
+c000000004E65918F0000000000001210
+t1315279247
+s4624
+i<exception>
+i<new>
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/Headers/ZBarSDK/zbar/Image.h
+c000000004E65918F00000000000021B5
+t1315279247
+s8629
+i<assert.h>
+i<iterator>
+i"Symbol.h"
+i"Exception.h"
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/Headers/ZBarSDK/zbar/ImageScanner.h
+c000000004E65918F0000000000000EAB
+t1315279247
+s3755
+i"Image.h"
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/Headers/ZBarSDK/zbar/Processor.h
+c000000004E65918F0000000000001B3B
+t1315279247
+s6971
+i"Exception.h"
+i"Image.h"
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/Headers/ZBarSDK/zbar/Scanner.h
+c000000004E65918F0000000000001065
+t1315279247
+s4197
+i<stdio.h>
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/Headers/ZBarSDK/zbar/Symbol.h
+c000000004E65918F000000000000307A
+t1315279247
+s12410
+i<stdlib.h>
+i<string>
+i<ostream>
+i<assert.h>
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/Headers/ZBarSDK/zbar/Video.h
+c000000004E65918F000000000000115D
+t1315279247
+s4445
+i"Image.h"
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/Headers/ZBarSDK/zbar/Window.h
+c000000004E65918F0000000000000E9D
+t1315279247
+s3741
+i"Image.h"
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/Resources/zbar-back.png
+c000000004E65918F000000000000013F
+t1315279247
+s319
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/Resources/zbar-help.html
+c000000004E65918F0000000000000D37
+t1315279247
+s3383
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/Resources/zbar-helpicons.png
+c000000004E65918F00000000000047AE
+t1315279247
+s18350
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/Resources/zbar-samples.png
+c000000004E65918F000000000000049D
+t1315279247
+s1181
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/libzbar.a
+c000000004E65918F00000000002E5F0C
+t1315279247
+s3038988
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/en.lproj/InfoPlist.strings
+c000000004E65918F000000000000002D
+t1315279247
+s45
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/en.lproj/MainWindow.xib
+c000000004E65918F000000000000890B
+t1315279247
+s35083
+
+N/Users/dsh8/BaconApp/BaconApp/BaconApp/main.m
+c000000004E65918F0000000000000158
+t1315279247
+s344
+i<UIKit/UIKit.h>
+
+N/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp.xcent
+t1315281672
+s655
+
+N/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/BaconApp
+t1315281669
+s254444
+
+N/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/BaconApp.LinkFileList
+c000000004E659B040000000000000240
+t1315281668
+s576
+
+N/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/HistoryItem.o
+t1315281669
+s9840
+
+N/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/Interpreter.o
+t1315281669
+s9328
+
+N/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/MainViewController.o
+t1315281669
+s60772
+
+N/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/Scanner.o
+t1315281669
+s49080
+
+N/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/main.o
+t1315281668
+s3888
+
+N/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/BaconApp
+t1315281670
+s248808
+
+N/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/BaconApp.LinkFileList
+c000000004E659B040000000000000240
+t1315281668
+s576
+
+N/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/HistoryItem.o
+t1315281670
+s9668
+
+N/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/Interpreter.o
+t1315281670
+s9296
+
+N/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/MainViewController.o
+t1315281669
+s60676
+
+N/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/Scanner.o
+t1315281670
+s49212
+
+N/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/main.o
+t1315281669
+s3900
+
+N/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app
+t1315281672
+s544
+
+N/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app.dSYM
+t1315281670
+s102
+
+N/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/BaconApp
+t1315281670
+s510952
+
+N/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/Info.plist
+t1315281668
+s1074
+
+N/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/PkgInfo
+t1315281668
+s8
+
+N/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/ResourceRules.plist
+t1315281668
+s485
+
+N/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/ScanView.nib
+t1315281672
+s1501
+
+N/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/Web
+t1315281671
+s374
+
+N/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/embedded.mobileprovision
+t1315281672
+s7478
+
+N/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/en.lproj/InfoPlist.strings
+t1315281670
+s42
+
+N/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/en.lproj/MainWindow.nib
+t1315281671
+s1945
+
+N/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/zbar-back.png
+t1315281671
+s319
+
+N/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/zbar-help.html
+t1315281671
+s3383
+
+N/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/zbar-helpicons.png
+t1315281671
+s23139
+
+N/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/zbar-samples.png
+t1315281671
+s1468
+
+N/Users/dsh8/Library/MobileDevice/Provisioning Profiles/TeamBacon.mobileprovision
+c000000004E6593CA0000000000001D36
+t1315279818
+s7478
+
+N/var/folders/rb/rbFYfapcHh4gGakT1FhpUZtoN8s/-Caches-/com.apple.Xcode.1584686254/SharedPrecompiledHeaders/BaconApp-Prefix-dqsuqhsjgzqptlbppclgrobpjjxh/BaconApp-Prefix.pch.gch
+t1315281500
+s8255696
+
+N/var/folders/rb/rbFYfapcHh4gGakT1FhpUZtoN8s/-Caches-/com.apple.Xcode.1584686254/SharedPrecompiledHeaders/BaconApp-Prefix-duubzydqwqjiajeruvizwpmzifuv/BaconApp-Prefix.pch.gch
+t1315281502
+s8755408
+
+NBaconApp/BaconApp-Info.plist
+c000000004E65992800000000000004BC
+t1315281192
+s1212
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies336974468#336974468#0(0"0(0#1#0"4261848#0"0#
+
+CCodeSign /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app
+s336974472.162373
+e336974472.779482
+r1
+xCodeSign
+x/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app
+lSLF07#2@42"CodeSign build/Debug-iphoneos/BaconApp.app336974472#336974472#0(0"0(0#0#63"/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app2547753616#621"    cd /Users/dsh8/BaconApp/BaconApp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    setenv _CODESIGN_ALLOCATE_ /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate    /usr/bin/codesign -f -s "iPhone Developer: Jordan McFarlane (27M3Z8KEX4)" --resource-rules=/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/ResourceRules.plist --entitlements /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp.xcent /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app0#
+
+CCompileC build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/HistoryItem.o /Users/dsh8/BaconApp/BaconApp/BaconApp/HistoryItem.m normal armv6 objective-c com.apple.compilers.llvmgcc42
+s336974469.420878
+e336974469.533376
+r1
+xCompileC
+xbuild/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/HistoryItem.o
+x/Users/dsh8/BaconApp/BaconApp/BaconApp/HistoryItem.m
+xnormal
+xarmv6
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF07#2@60"Compile /Users/dsh8/BaconApp/BaconApp/BaconApp/HistoryItem.m336974469#336974469#0(0"0(0#0#52"/Users/dsh8/BaconApp/BaconApp/BaconApp/HistoryItem.m2547753616#1670"    cd /Users/dsh8/BaconApp/BaconApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-generated-files.hmap -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-own-target-headers.hmap -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-all-target-headers.hmap -iquote /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-project-headers.hmap -F/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos -I/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/include -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/DerivedSources/armv6 -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/DerivedSources -include /var/folders/rb/rbFYfapcHh4gGakT1FhpUZtoN8s/-Caches-/com.apple.Xcode.1584686254/SharedPrecompiledHeaders/BaconApp-Prefix-dqsuqhsjgzqptlbppclgrobpjjxh/BaconApp-Prefix.pch -c /Users/dsh8/BaconApp/BaconApp/BaconApp/HistoryItem.m -o /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/HistoryItem.o0#
+
+CCompileC build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/Interpreter.o /Users/dsh8/BaconApp/BaconApp/BaconApp/Interpreter.m normal armv6 objective-c com.apple.compilers.llvmgcc42
+s336974469.183972
+e336974469.277372
+r1
+xCompileC
+xbuild/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/Interpreter.o
+x/Users/dsh8/BaconApp/BaconApp/BaconApp/Interpreter.m
+xnormal
+xarmv6
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF07#2@60"Compile /Users/dsh8/BaconApp/BaconApp/BaconApp/Interpreter.m336974469#336974469#0(0"0(0#0#52"/Users/dsh8/BaconApp/BaconApp/BaconApp/Interpreter.m2547753616#1670"    cd /Users/dsh8/BaconApp/BaconApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-generated-files.hmap -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-own-target-headers.hmap -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-all-target-headers.hmap -iquote /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-project-headers.hmap -F/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos -I/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/include -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/DerivedSources/armv6 -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/DerivedSources -include /var/folders/rb/rbFYfapcHh4gGakT1FhpUZtoN8s/-Caches-/com.apple.Xcode.1584686254/SharedPrecompiledHeaders/BaconApp-Prefix-dqsuqhsjgzqptlbppclgrobpjjxh/BaconApp-Prefix.pch -c /Users/dsh8/BaconApp/BaconApp/BaconApp/Interpreter.m -o /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/Interpreter.o0#
+
+CCompileC build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/MainViewController.o /Users/dsh8/BaconApp/BaconApp/BaconApp/MainViewController.m normal armv6 objective-c com.apple.compilers.llvmgcc42
+s336974468.996544
+e336974469.183821
+r1
+xCompileC
+xbuild/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/MainViewController.o
+x/Users/dsh8/BaconApp/BaconApp/BaconApp/MainViewController.m
+xnormal
+xarmv6
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF07#2@67"Compile /Users/dsh8/BaconApp/BaconApp/BaconApp/MainViewController.m336974468#336974469#0(0"0(0#0#59"/Users/dsh8/BaconApp/BaconApp/BaconApp/MainViewController.m2547753616#1684"    cd /Users/dsh8/BaconApp/BaconApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-generated-files.hmap -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-own-target-headers.hmap -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-all-target-headers.hmap -iquote /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-project-headers.hmap -F/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos -I/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/include -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/DerivedSources/armv6 -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/DerivedSources -include /var/folders/rb/rbFYfapcHh4gGakT1FhpUZtoN8s/-Caches-/com.apple.Xcode.1584686254/SharedPrecompiledHeaders/BaconApp-Prefix-dqsuqhsjgzqptlbppclgrobpjjxh/BaconApp-Prefix.pch -c /Users/dsh8/BaconApp/BaconApp/BaconApp/MainViewController.m -o /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/MainViewController.o0#
+
+CCompileC build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/Scanner.o /Users/dsh8/BaconApp/BaconApp/BaconApp/Scanner.m normal armv6 objective-c com.apple.compilers.llvmgcc42
+s336974469.277522
+e336974469.420725
+r1
+xCompileC
+xbuild/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/Scanner.o
+x/Users/dsh8/BaconApp/BaconApp/BaconApp/Scanner.m
+xnormal
+xarmv6
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF07#2@56"Compile /Users/dsh8/BaconApp/BaconApp/BaconApp/Scanner.m336974469#336974469#0(0"0(0#0#48"/Users/dsh8/BaconApp/BaconApp/BaconApp/Scanner.m2547753616#1662"    cd /Users/dsh8/BaconApp/BaconApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-generated-files.hmap -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-own-target-headers.hmap -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-all-target-headers.hmap -iquote /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-project-headers.hmap -F/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos -I/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/include -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/DerivedSources/armv6 -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/DerivedSources -include /var/folders/rb/rbFYfapcHh4gGakT1FhpUZtoN8s/-Caches-/com.apple.Xcode.1584686254/SharedPrecompiledHeaders/BaconApp-Prefix-dqsuqhsjgzqptlbppclgrobpjjxh/BaconApp-Prefix.pch -c /Users/dsh8/BaconApp/BaconApp/BaconApp/Scanner.m -o /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/Scanner.o0#
+
+CCompileC build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/main.o /Users/dsh8/BaconApp/BaconApp/BaconApp/main.m normal armv6 objective-c com.apple.compilers.llvmgcc42
+s336974468.920176
+e336974468.996392
+r1
+xCompileC
+xbuild/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/main.o
+x/Users/dsh8/BaconApp/BaconApp/BaconApp/main.m
+xnormal
+xarmv6
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF07#2@53"Compile /Users/dsh8/BaconApp/BaconApp/BaconApp/main.m336974468#336974468#0(0"0(0#0#45"/Users/dsh8/BaconApp/BaconApp/BaconApp/main.m4750400#1656"    cd /Users/dsh8/BaconApp/BaconApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-generated-files.hmap -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-own-target-headers.hmap -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-all-target-headers.hmap -iquote /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-project-headers.hmap -F/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos -I/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/include -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/DerivedSources/armv6 -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/DerivedSources -include /var/folders/rb/rbFYfapcHh4gGakT1FhpUZtoN8s/-Caches-/com.apple.Xcode.1584686254/SharedPrecompiledHeaders/BaconApp-Prefix-dqsuqhsjgzqptlbppclgrobpjjxh/BaconApp-Prefix.pch -c /Users/dsh8/BaconApp/BaconApp/BaconApp/main.m -o /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/main.o0#
+
+CCompileC build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/HistoryItem.o /Users/dsh8/BaconApp/BaconApp/BaconApp/HistoryItem.m normal armv7 objective-c com.apple.compilers.llvmgcc42
+s336974470.194669
+e336974470.292470
+r1
+xCompileC
+xbuild/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/HistoryItem.o
+x/Users/dsh8/BaconApp/BaconApp/BaconApp/HistoryItem.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF07#2@60"Compile /Users/dsh8/BaconApp/BaconApp/BaconApp/HistoryItem.m336974470#336974470#0(0"0(0#0#52"/Users/dsh8/BaconApp/BaconApp/BaconApp/HistoryItem.m2547753616#1670"    cd /Users/dsh8/BaconApp/BaconApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-generated-files.hmap -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-own-target-headers.hmap -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-all-target-headers.hmap -iquote /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-project-headers.hmap -F/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos -I/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/include -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/DerivedSources/armv7 -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/DerivedSources -include /var/folders/rb/rbFYfapcHh4gGakT1FhpUZtoN8s/-Caches-/com.apple.Xcode.1584686254/SharedPrecompiledHeaders/BaconApp-Prefix-duubzydqwqjiajeruvizwpmzifuv/BaconApp-Prefix.pch -c /Users/dsh8/BaconApp/BaconApp/BaconApp/HistoryItem.m -o /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/HistoryItem.o0#
+
+CCompileC build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/Interpreter.o /Users/dsh8/BaconApp/BaconApp/BaconApp/Interpreter.m normal armv7 objective-c com.apple.compilers.llvmgcc42
+s336974469.947687
+e336974470.047214
+r1
+xCompileC
+xbuild/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/Interpreter.o
+x/Users/dsh8/BaconApp/BaconApp/BaconApp/Interpreter.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF07#2@60"Compile /Users/dsh8/BaconApp/BaconApp/BaconApp/Interpreter.m336974469#336974470#0(0"0(0#0#52"/Users/dsh8/BaconApp/BaconApp/BaconApp/Interpreter.m2547753616#1670"    cd /Users/dsh8/BaconApp/BaconApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-generated-files.hmap -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-own-target-headers.hmap -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-all-target-headers.hmap -iquote /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-project-headers.hmap -F/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos -I/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/include -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/DerivedSources/armv7 -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/DerivedSources -include /var/folders/rb/rbFYfapcHh4gGakT1FhpUZtoN8s/-Caches-/com.apple.Xcode.1584686254/SharedPrecompiledHeaders/BaconApp-Prefix-duubzydqwqjiajeruvizwpmzifuv/BaconApp-Prefix.pch -c /Users/dsh8/BaconApp/BaconApp/BaconApp/Interpreter.m -o /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/Interpreter.o0#
+
+CCompileC build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/MainViewController.o /Users/dsh8/BaconApp/BaconApp/BaconApp/MainViewController.m normal armv7 objective-c com.apple.compilers.llvmgcc42
+s336974469.760844
+e336974469.947533
+r1
+xCompileC
+xbuild/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/MainViewController.o
+x/Users/dsh8/BaconApp/BaconApp/BaconApp/MainViewController.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF07#2@67"Compile /Users/dsh8/BaconApp/BaconApp/BaconApp/MainViewController.m336974469#336974469#0(0"0(0#0#59"/Users/dsh8/BaconApp/BaconApp/BaconApp/MainViewController.m2547753616#1684"    cd /Users/dsh8/BaconApp/BaconApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-generated-files.hmap -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-own-target-headers.hmap -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-all-target-headers.hmap -iquote /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-project-headers.hmap -F/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos -I/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/include -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/DerivedSources/armv7 -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/DerivedSources -include /var/folders/rb/rbFYfapcHh4gGakT1FhpUZtoN8s/-Caches-/com.apple.Xcode.1584686254/SharedPrecompiledHeaders/BaconApp-Prefix-duubzydqwqjiajeruvizwpmzifuv/BaconApp-Prefix.pch -c /Users/dsh8/BaconApp/BaconApp/BaconApp/MainViewController.m -o /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/MainViewController.o0#
+
+CCompileC build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/Scanner.o /Users/dsh8/BaconApp/BaconApp/BaconApp/Scanner.m normal armv7 objective-c com.apple.compilers.llvmgcc42
+s336974470.047365
+e336974470.194515
+r1
+xCompileC
+xbuild/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/Scanner.o
+x/Users/dsh8/BaconApp/BaconApp/BaconApp/Scanner.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF07#2@56"Compile /Users/dsh8/BaconApp/BaconApp/BaconApp/Scanner.m336974470#336974470#0(0"0(0#0#48"/Users/dsh8/BaconApp/BaconApp/BaconApp/Scanner.m2547753616#1662"    cd /Users/dsh8/BaconApp/BaconApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-generated-files.hmap -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-own-target-headers.hmap -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-all-target-headers.hmap -iquote /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-project-headers.hmap -F/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos -I/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/include -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/DerivedSources/armv7 -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/DerivedSources -include /var/folders/rb/rbFYfapcHh4gGakT1FhpUZtoN8s/-Caches-/com.apple.Xcode.1584686254/SharedPrecompiledHeaders/BaconApp-Prefix-duubzydqwqjiajeruvizwpmzifuv/BaconApp-Prefix.pch -c /Users/dsh8/BaconApp/BaconApp/BaconApp/Scanner.m -o /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/Scanner.o0#
+
+CCompileC build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/main.o /Users/dsh8/BaconApp/BaconApp/BaconApp/main.m normal armv7 objective-c com.apple.compilers.llvmgcc42
+s336974469.671139
+e336974469.760688
+r1
+xCompileC
+xbuild/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/main.o
+x/Users/dsh8/BaconApp/BaconApp/BaconApp/main.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF07#2@53"Compile /Users/dsh8/BaconApp/BaconApp/BaconApp/main.m336974469#336974469#0(0"0(0#0#45"/Users/dsh8/BaconApp/BaconApp/BaconApp/main.m2547753616#1656"    cd /Users/dsh8/BaconApp/BaconApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-generated-files.hmap -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-own-target-headers.hmap -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-all-target-headers.hmap -iquote /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp-project-headers.hmap -F/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos -I/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/include -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/DerivedSources/armv7 -I/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/DerivedSources -include /var/folders/rb/rbFYfapcHh4gGakT1FhpUZtoN8s/-Caches-/com.apple.Xcode.1584686254/SharedPrecompiledHeaders/BaconApp-Prefix-duubzydqwqjiajeruvizwpmzifuv/BaconApp-Prefix.pch -c /Users/dsh8/BaconApp/BaconApp/BaconApp/main.m -o /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/main.o0#
+
+CCompileXIB /Users/dsh8/BaconApp/BaconApp/BaconApp/ScanView.xib
+s336974471.423431
+e336974472.129652
+r1
+xCompileXIB
+x/Users/dsh8/BaconApp/BaconApp/BaconApp/ScanView.xib
+lSLF07#2@32"CompileXIB BaconApp/ScanView.xib336974471#336974472#0(0"0(0#0#51"/Users/dsh8/BaconApp/BaconApp/BaconApp/ScanView.xib2547753616#521"    cd /Users/dsh8/BaconApp/BaconApp    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 4.0    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/ScanView.nib /Users/dsh8/BaconApp/BaconApp/BaconApp/ScanView.xib --sdk /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk0#
+
+CCompileXIB /Users/dsh8/BaconApp/BaconApp/BaconApp/en.lproj/MainWindow.xib
+s336974470.683374
+e336974471.490377
+r1
+xCompileXIB
+x/Users/dsh8/BaconApp/BaconApp/BaconApp/en.lproj/MainWindow.xib
+lSLF07#2@43"CompileXIB BaconApp/en.lproj/MainWindow.xib336974470#336974471#0(0"0(0#0#62"/Users/dsh8/BaconApp/BaconApp/BaconApp/en.lproj/MainWindow.xib2547753616#543"    cd /Users/dsh8/BaconApp/BaconApp    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 4.0    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/en.lproj/MainWindow.nib /Users/dsh8/BaconApp/BaconApp/BaconApp/en.lproj/MainWindow.xib --sdk /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk0#
+
+CCopyPNGFile /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/zbar-back.png BaconApp/ZBarSDK/Resources/zbar-back.png
+s336974470.922331
+e336974471.272870
+r1
+xCopyPNGFile
+x/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/zbar-back.png
+xBaconApp/ZBarSDK/Resources/zbar-back.png
+olibpng warning: Warning: Input PNG does not have an 8 bit input depth.  Please convert your PNG to 8-bit for optimal performance on iPhone OS.
+lSLF07#2@100"CopyPNGFile build/Debug-iphoneos/BaconApp.app/zbar-back.png BaconApp/ZBarSDK/Resources/zbar-back.png336974470#336974471#0(143"libpng warning: Warning: Input PNG does not have an 8 bit input depth.  Please convert your PNG to 8-bit for optimal performance on iPhone OS.0(0#0#70"/Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/Resources/zbar-back.png2547753616#467"    cd /Users/dsh8/BaconApp/BaconApp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    "/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/Plug-ins/iPhoneOS Build System Support.xcplugin/Contents/Resources/copypng" -compress "" /Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/Resources/zbar-back.png /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/zbar-back.png0#
+
+CCopyPNGFile /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/zbar-helpicons.png BaconApp/ZBarSDK/Resources/zbar-helpicons.png
+s336974471.274646
+e336974471.367047
+r1
+xCopyPNGFile
+x/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/zbar-helpicons.png
+xBaconApp/ZBarSDK/Resources/zbar-helpicons.png
+lSLF07#2@110"CopyPNGFile build/Debug-iphoneos/BaconApp.app/zbar-helpicons.png BaconApp/ZBarSDK/Resources/zbar-helpicons.png336974471#336974471#0(0"0(0#0#75"/Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/Resources/zbar-helpicons.png2547753616#477"    cd /Users/dsh8/BaconApp/BaconApp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    "/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/Plug-ins/iPhoneOS Build System Support.xcplugin/Contents/Resources/copypng" -compress "" /Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/Resources/zbar-helpicons.png /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/zbar-helpicons.png0#
+
+CCopyPNGFile /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/zbar-samples.png BaconApp/ZBarSDK/Resources/zbar-samples.png
+s336974471.367184
+e336974471.421861
+r1
+xCopyPNGFile
+x/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/zbar-samples.png
+xBaconApp/ZBarSDK/Resources/zbar-samples.png
+lSLF07#2@106"CopyPNGFile build/Debug-iphoneos/BaconApp.app/zbar-samples.png BaconApp/ZBarSDK/Resources/zbar-samples.png336974471#336974471#0(0"0(0#0#73"/Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/Resources/zbar-samples.png4261848#473"    cd /Users/dsh8/BaconApp/BaconApp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    "/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/Plug-ins/iPhoneOS Build System Support.xcplugin/Contents/Resources/copypng" -compress "" /Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/Resources/zbar-samples.png /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/zbar-samples.png0#
+
+CCopyStringsFile /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/en.lproj/InfoPlist.strings BaconApp/en.lproj/InfoPlist.strings
+s336974470.682075
+e336974470.922190
+r1
+xCopyStringsFile
+x/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/en.lproj/InfoPlist.strings
+xBaconApp/en.lproj/InfoPlist.strings
+lSLF07#2@40"Copy BaconApp/en.lproj/InfoPlist.strings336974470#336974470#0(0"0(0#0#65"/Users/dsh8/BaconApp/BaconApp/BaconApp/en.lproj/InfoPlist.strings2547753616#461"    cd /Users/dsh8/BaconApp/BaconApp    setenv ICONV /usr/bin/iconv    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-8 --outputencoding binary BaconApp/en.lproj/InfoPlist.strings --outdir /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/en.lproj0#
+
+CCpResource build/Debug-iphoneos/BaconApp.app/ResourceRules.plist /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/ResourceRules.plist
+s336974468.884732
+e336974468.919753
+r1
+xCpResource
+xbuild/Debug-iphoneos/BaconApp.app/ResourceRules.plist
+x/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/ResourceRules.plist
+lSLF07#2@94"Copy /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/ResourceRules.plist336974468#336974468#0(0"0(0#0#89"/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/ResourceRules.plist4261848#477"    cd /Users/dsh8/BaconApp/BaconApp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/ResourceRules.plist /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app0#
+
+CCpResource build/Debug-iphoneos/BaconApp.app/Web BaconApp/Web
+s336974471.421987
+e336974471.479303
+r1
+xCpResource
+xbuild/Debug-iphoneos/BaconApp.app/Web
+xBaconApp/Web
+lSLF07#2@17"Copy BaconApp/Web336974471#336974471#0(0"0(0#0#42"/Users/dsh8/BaconApp/BaconApp/BaconApp/Web2547753616#430"    cd /Users/dsh8/BaconApp/BaconApp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Users/dsh8/BaconApp/BaconApp/BaconApp/Web /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app0#
+
+CCpResource build/Debug-iphoneos/BaconApp.app/zbar-help.html BaconApp/ZBarSDK/Resources/zbar-help.html
+s336974471.272999
+e336974471.283378
+r1
+xCpResource
+xbuild/Debug-iphoneos/BaconApp.app/zbar-help.html
+xBaconApp/ZBarSDK/Resources/zbar-help.html
+lSLF07#2@46"Copy BaconApp/ZBarSDK/Resources/zbar-help.html336974471#336974471#0(0"0(0#0#71"/Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/Resources/zbar-help.html4261848#459"    cd /Users/dsh8/BaconApp/BaconApp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK/Resources/zbar-help.html /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app0#
+
+CCreateUniversalBinary /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/BaconApp normal "armv6 armv7"
+s336974470.381166
+e336974470.387692
+r1
+xCreateUniversalBinary
+x/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/BaconApp
+xnormal
+xarmv6 armv7
+lSLF07#2@85"CreateUniversalBinary build/Debug-iphoneos/BaconApp.app/BaconApp normal "armv6 armv7"336974470#336974470#0(0"0(0#0#41"/Users/dsh8/BaconApp/BaconApp/armv6 armv72547753616#490"    cd /Users/dsh8/BaconApp/BaconApp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/lipo -create /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/BaconApp /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/BaconApp -output /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/BaconApp0#
+
+CGenerateDSYMFile /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app.dSYM /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/BaconApp
+s336974470.387939
+e336974470.681935
+r1
+xGenerateDSYMFile
+x/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app.dSYM
+x/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/BaconApp
+lSLF07#2@98"GenerateDSYMFile build/Debug-iphoneos/BaconApp.app.dSYM build/Debug-iphoneos/BaconApp.app/BaconApp336974470#336974470#0(0"0(0#0#72"/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/BaconApp2547753616#338"    cd /Users/dsh8/BaconApp/BaconApp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/dsymutil /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/BaconApp -o /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app.dSYM0#
+
+CLd /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/BaconApp normal armv6
+s336974469.533510
+e336974469.670979
+r1
+xLd
+x/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/BaconApp
+xnormal
+xarmv6
+lSLF07#2@115"Link /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/BaconApp336974469#336974469#0(0"0(0#0#0"2547753616#986"    cd /Users/dsh8/BaconApp/BaconApp    setenv IPHONEOS_DEPLOYMENT_TARGET 4.0    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -arch armv6 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -L/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos -L/Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK -F/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos -filelist /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/BaconApp.LinkFileList -dead_strip -miphoneos-version-min=4.0 -framework CoreMedia -framework CoreVideo -liconv -framework QuartzCore -framework AVFoundation -framework UIKit -framework Foundation -framework CoreGraphics -lzbar -prebind -o /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv6/BaconApp0#
+
+CLd /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/BaconApp normal armv7
+s336974470.292602
+e336974470.381016
+r1
+xLd
+x/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/BaconApp
+xnormal
+xarmv7
+lSLF07#2@115"Link /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/BaconApp336974470#336974470#0(0"0(0#0#0"2547753616#986"    cd /Users/dsh8/BaconApp/BaconApp    setenv IPHONEOS_DEPLOYMENT_TARGET 4.0    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -arch armv7 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -L/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos -L/Users/dsh8/BaconApp/BaconApp/BaconApp/ZBarSDK -F/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos -filelist /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/BaconApp.LinkFileList -dead_strip -miphoneos-version-min=4.0 -framework CoreMedia -framework CoreVideo -liconv -framework QuartzCore -framework AVFoundation -framework UIKit -framework Foundation -framework CoreGraphics -lzbar -prebind -o /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/Objects-normal/armv7/BaconApp0#
+
+CProcessInfoPlistFile /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/Info.plist BaconApp/BaconApp-Info.plist
+s336974468.909959
+e336974468.915376
+r1
+xProcessInfoPlistFile
+x/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/Info.plist
+xBaconApp/BaconApp-Info.plist
+lSLF07#2@36"Process BaconApp/BaconApp-Info.plist336974468#336974468#0(0"0(0#0#58"/Users/dsh8/BaconApp/BaconApp/BaconApp/BaconApp-Info.plist2547753616#539"    cd /Users/dsh8/BaconApp/BaconApp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-infoPlistUtility BaconApp/BaconApp-Info.plist -genpkginfo /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/PkgInfo -expandbuildsettings -format binary -platform iphoneos -resourcerulesfile /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/ResourceRules.plist -o /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/Info.plist0#
+
+CProcessPCH /var/folders/rb/rbFYfapcHh4gGakT1FhpUZtoN8s/-Caches-/com.apple.Xcode.1584686254/SharedPrecompiledHeaders/BaconApp-Prefix-dqsuqhsjgzqptlbppclgrobpjjxh/BaconApp-Prefix.pch.gch BaconApp/BaconApp-Prefix.pch normal armv6 objective-c com.apple.compilers.llvmgcc42
+r0
+
+CProcessPCH /var/folders/rb/rbFYfapcHh4gGakT1FhpUZtoN8s/-Caches-/com.apple.Xcode.1584686254/SharedPrecompiledHeaders/BaconApp-Prefix-duubzydqwqjiajeruvizwpmzifuv/BaconApp-Prefix.pch.gch BaconApp/BaconApp-Prefix.pch normal armv7 objective-c com.apple.compilers.llvmgcc42
+r0
+
+CProcessProductPackaging "/Users/dsh8/Library/MobileDevice/Provisioning Profiles/TeamBacon.mobileprovision" /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/embedded.mobileprovision
+s336974472.129887
+e336974472.132199
+r1
+xProcessProductPackaging
+x/Users/dsh8/Library/MobileDevice/Provisioning Profiles/TeamBacon.mobileprovision
+x/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/embedded.mobileprovision
+lSLF07#2@165"ProcessProductPackaging "/Users/dsh8/Library/MobileDevice/Provisioning Profiles/TeamBacon.mobileprovision" build/Debug-iphoneos/BaconApp.app/embedded.mobileprovision336974472#336974472#0(0"0(0#0#88"/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/embedded.mobileprovision2547753616#378"    cd /Users/dsh8/BaconApp/BaconApp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    <com.apple.tools.product-pkg-utility> "/Users/dsh8/Library/MobileDevice/Provisioning Profiles/TeamBacon.mobileprovision" -o /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app/embedded.mobileprovision0#
+
+CProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/Entitlements.plist /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp.xcent
+s336974472.137564
+e336974472.162232
+r1
+xProcessProductPackaging
+x/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/Entitlements.plist
+x/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp.xcent
+lSLF07#2@178"ProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/Entitlements.plist build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp.xcent336974472#336974472#0(0"0(0#0#95"/Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp.xcent2547753616#417"    cd /Users/dsh8/BaconApp/BaconApp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    <com.apple.tools.product-pkg-utility> /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/Entitlements.plist -entitlements -format xml -o /Users/dsh8/BaconApp/BaconApp/build/BaconApp.build/Debug-iphoneos/BaconApp.build/BaconApp.xcent0#
+
+CTouch /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app
+s336974472.132294
+e336974472.137412
+r1
+xTouch
+x/Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app
+lSLF07#2@69"Touch /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app336974472#336974472#0(0"0(0#0#0"2547753616#247"    cd /Users/dsh8/BaconApp/BaconApp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/touch -c /Users/dsh8/BaconApp/BaconApp/build/Debug-iphoneos/BaconApp.app0#
+
