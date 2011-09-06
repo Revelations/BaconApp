@@ -13,32 +13,37 @@
 
 @synthesize storedInputString;
 
--(int) x
-{
-    return [self x:storedInputString];
-}
 
--(int) x:(NSString *)inputString
-{
-    return [self substringToInt:inputString withRange:NSMakeRange(0, 3)];
-}
-
--(int) y
-{
-    return [self y:storedInputString];
-}
-
--(int) y:(NSString *)inputString
-{
-    return [self substringToInt:inputString withRange:NSMakeRange(3, 3)];
-}
-
--(int) substringToInt:(NSString *) inputString withRange:(NSRange) range
+-(int) substringToInt:(NSString *)inputString withRange:(NSRange)range
 {
     NSString * substring = [inputString substringWithRange:range];
     int result = [substring intValue];
     
     return result;
+}
+
+// Gets the last known x coordinate.
+-(int) x
+{
+    return [self x:storedInputString];
+}
+
+// Extract the x coordinate from the input string.
+-(int) x:(NSString *)inputString
+{
+    return [self substringToInt:inputString withRange:NSMakeRange(0, 3)];
+}
+
+// Gets the last known y-coordinate
+-(int) y
+{
+    return [self y:storedInputString];
+}
+
+// Extract the y coordinate from the input string.
+-(int) y:(NSString *)inputString
+{
+    return [self substringToInt:inputString withRange:NSMakeRange(3, 3)];
 }
 
 -(NSString *) htmlPath

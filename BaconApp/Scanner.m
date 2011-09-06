@@ -15,6 +15,7 @@
 
 -(void) scan:(UIViewController *) view
 {
+	NSLog(@"Scanning");
     ZBarReaderViewController * reader = [ZBarReaderViewController new];
     reader.readerDelegate = self;
     reader.supportedOrientationsMask = ZBarOrientationMaskAll;

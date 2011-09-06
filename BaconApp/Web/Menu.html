@@ -1,10 +1,19 @@
 <html>
     <head>
-        
-    </head>
+	<script type="text/javascript">
+		function addCSS() {
+			var _link = document.createElement('link');
+			_link.type = 'text/css';
+			_link.rel = 'stylesheet';
+			_link.href = 'style.css';
+			document.getElementsByTagName("head")[0].appendChild(_link);
+		}
+		window.onload = function () { addCSS(); };
+	</script>
+	</head>
     
     <body>
-        <p>Welcome to BaconApp!</p>
+        <h1>Welcome to BaconApp!</h1>
         <p>To scan a barcode, point the rear camera at it and press the scan button in the lower left.</p>
     </body>
 </html>
