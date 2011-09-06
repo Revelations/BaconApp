@@ -111,7 +111,6 @@
 		17A5A7FD140DF20F009BB46E /* InterpreterTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterpreterTest.h; sourceTree = "<group>"; };
 		17A5A7FE140DF20F009BB46E /* InterpreterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterpreterTest.m; sourceTree = "<group>"; };
 		17BBA94E1412FF2C00D0BE9D /* Web */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Web; sourceTree = "<group>"; };
-		7F48B9791413CE120001546A /* UnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTests-Info.plist"; sourceTree = "<group>"; };
 		7FB432DE1413EF1A00927C8B /* ScanView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScanView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -218,7 +217,6 @@
 				17A5A7E1140DEEB4009BB46E /* BaconAppTests */,
 				17A5A7C0140DEEB4009BB46E /* Frameworks */,
 				17A5A7BE140DEEB4009BB46E /* Products */,
-				7F48B9791413CE120001546A /* UnitTests-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};

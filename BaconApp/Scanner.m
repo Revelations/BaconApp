@@ -3,7 +3,7 @@
 //  BaconApp
 //
 //  Created by Jordan on 31/08/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 Team Bacon. All rights reserved.
 //
 
 #import "Scanner.h"
@@ -15,7 +15,6 @@
 
 -(void) scan:(UIViewController *) view
 {
-	NSLog(@"Scanning");
     ZBarReaderViewController * reader = [ZBarReaderViewController new];
     reader.readerDelegate = self;
     reader.supportedOrientationsMask = ZBarOrientationMaskAll;

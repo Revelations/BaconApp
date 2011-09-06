@@ -1,9 +1,11 @@
-body, p, td {
+body, p, td
+{
 	font-size: 0.95em;
 	font-family:sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6
+{
 	font-size: 1.5em;
 	font-family: "Verdana";
 }

@@ -3,7 +3,7 @@
 //  BaconApp
 //
 //  Created by Jordan on 2/09/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 Team Bacon. All rights reserved.
 //
 
 #import "HistoryItemTest.h"
@@ -58,7 +58,7 @@
 
 -(void) testInit
 {
-    historyItem = [[HistoryItem alloc] initHtmlFile:@"Menu" x:10 y:14];
+    historyItem = [[HistoryItem alloc] initWithHtmlFile:@"Menu" x:10 y:14];
     
     STAssertEqualObjects(historyItem.htmlFile, @"Menu", nil);
     STAssertEquals(historyItem.coordinates, CGPointMake(10, 14), nil);

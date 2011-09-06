@@ -3,7 +3,7 @@
 //  BaconApp
 //
 //  Created by Jordan on 31/08/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 Team Bacon. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -55,8 +55,6 @@
 @property(nonatomic, retain) NSMutableArray * history;
 
 @property(nonatomic, retain) HistoryItem * current;
-
--(void) initJavaScriptLibrary;
 
 // Occurs when user taps scan button.
 -(IBAction) scanButtonPressed;

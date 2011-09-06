@@ -3,7 +3,7 @@
 //  BaconApp
 //
 //  Created by Jordan on 3/09/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 Team Bacon. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

@@ -3,7 +3,7 @@
 //  BaconApp
 //
 //  Created by Jordan on 31/08/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 Team Bacon. All rights reserved.
 //
 
 #import "MainViewController.h"
@@ -33,8 +33,6 @@ NSString * const MAP_HTML_FILE = @"Map";
     
     [history addObject:current];
     
-    [self initJavaScriptLibrary];
-    
     [self webViewLoadPage:current.htmlFile];
     
     self.webView.delegate = self;
@@ -44,26 +42,13 @@ NSString * const MAP_HTML_FILE = @"Map";
     return YES;
 }
 
--(void) initJavaScriptLibrary
-{
-    // Get JS library path.
-    NSString * filePath = [[NSBundle mainBundle] pathForResource:@"library" ofType:@"js" inDirectory:@"web"];
-    
-    // Get a string containing the library.
-    NSData * fileData = [NSData dataWithContentsOfFile:filePath];
-    jScript = [[NSMutableString alloc] initWithData:fileData encoding:NSUTF8StringEncoding];
-    
-
-}
 
 // Called when a user presses the scan button.
 //
-// Calls the scanner to initiate a scan, the interpreter to break up its results,
+// Calls the scanner to initiate a scan, the interpreter to break up it's results,
 // creates a history node to store results, and finally brings up the associated page.
 -(IBAction) scanButtonPressed
 {
-	NSLog(@"Scan button has been pressed");
-	
     // Animate activity indicator.
     [activityIndicator startAnimating];
     
@@ -83,10 +68,11 @@ NSString * const MAP_HTML_FILE = @"Map";
     [self webViewLoadPage:current.htmlFile];
 }
 
+
 // Called when a user presses the map button.
 //
-// Loads a local html map file containing a map image. Superimposes a
-// smaller 'you are here' image over the main image using a JS script.
+// Loads a local html map file containing a map image. Superimposes a smaller
+// 'you are here' image over the main image using a JS script.
 -(IBAction) mapButtonPressed
 {
     // Load the (mostly blank) map page.
@@ -133,9 +119,6 @@ NSString * const MAP_HTML_FILE = @"Map";
     // Make sure the page finished loading is a the map page.
     if(loadingMapScreen)
     {
-        // Load the library into the webview page.
-        [self.webView stringByEvaluatingJavaScriptFromString:jScript];
-        
         // Build a string to call js function with a given x, y.
         NSString * jScriptCall = [NSString stringWithFormat:@"drawMapAndLocation(%d, %d);", interpreter.x, interpreter.y];
         
@@ -150,31 +133,8 @@ NSString * const MAP_HTML_FILE = @"Map";
     [activityIndicator stopAnimating];
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application
-{
 
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-   
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-   
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-
-}
-
+//
 - (void)dealloc
 {
     [scanner release];
