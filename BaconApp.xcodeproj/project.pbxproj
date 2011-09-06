@@ -495,7 +495,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jordan McFarlane (27M3Z8KEX4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jordan McFarlane (27M3Z8KEX4)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
@@ -504,6 +505,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				PROVISIONING_PROFILE = "DBB6ED2B-6ACF-467B-9168-89EEC910AE9A";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DBB6ED2B-6ACF-467B-9168-89EEC910AE9A";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -532,6 +535,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BaconApp/BaconApp-Prefix.pch";
 				INFOPLIST_FILE = "BaconApp/BaconApp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/BaconApp/ZBarSDK\"",

@@ -1,0 +1,183 @@
+// !$*UTF8*$!
+{
+	17A5A7B4140DEEB4009BB46E /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = D38D68F51415C91E00A20E54 /* BaconApp */;
+		activeSDKPreference = iphoneos4.3;
+		activeTarget = 17A5A7BC140DEEB4009BB46E /* BaconApp */;
+		codeSenseManager = D38D69191415C93D00A20E54 /* Code sense */;
+		executables = (
+			D38D68F51415C91E00A20E54 /* BaconApp */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXExecutablesDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXExecutablesDataSource_NameID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					22,
+					300,
+					229,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXExecutablesDataSource_ActiveFlagID,
+					PBXExecutablesDataSource_NameID,
+					PBXExecutablesDataSource_CommentsID,
+				);
+			};
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					341,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXConfiguration.PBXTargetDataSource.PBXTargetDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					301,
+					60,
+					20,
+					48,
+					43,
+					43,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXTargetDataSource_PrimaryAttribute,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 336974464;
+			PBXWorkspaceStateSaveDate = 336974464;
+		};
+		perUserProjectItems = {
+			D370B8651415D1E5004F4EDD = D370B8651415D1E5004F4EDD /* PBXTextBookmark */;
+			D370B8661415D1E5004F4EDD = D370B8661415D1E5004F4EDD /* PlistBookmark */;
+			D370B86C1415D220004F4EDD = D370B86C1415D220004F4EDD /* PlistBookmark */;
+		};
+		sourceControlManager = D38D69181415C93D00A20E54 /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	17A5A7BC140DEEB4009BB46E /* BaconApp */ = {
+		activeExec = 0;
+		executables = (
+			D38D68F51415C91E00A20E54 /* BaconApp */,
+		);
+	};
+	17A5A7C9140DEEB4009BB46E /* BaconApp-Info.plist */ = {
+		uiCtxt = {
+			sepNavWindowFrame = "{{38, 444}, {750, 558}}";
+		};
+	};
+	17A5A7CB140DEEB4009BB46E /* en */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {519, 214}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 45}";
+			sepNavWindowFrame = "{{15, 465}, {750, 558}}";
+		};
+	};
+	17A5A7DA140DEEB4009BB46E /* BaconAppTests */ = {
+		activeExec = 0;
+	};
+	D370B8651415D1E5004F4EDD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 17A5A7CB140DEEB4009BB46E /* en */;
+		name = "InfoPlist.strings: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 45;
+		vrLoc = 0;
+	};
+	D370B8661415D1E5004F4EDD /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 17A5A7C9140DEEB4009BB46E /* BaconApp-Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+			CFBundleIdentifier,
+		);
+		name = "/Users/dsh8/BaconApp/BaconApp/BaconApp/BaconApp-Info.plist";
+		rLen = 71;
+		rLoc = 0;
+	};
+	D370B86C1415D220004F4EDD /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 17A5A7C9140DEEB4009BB46E /* BaconApp-Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+			CFBundleIdentifier,
+		);
+		name = "/Users/dsh8/BaconApp/BaconApp/BaconApp/BaconApp-Info.plist";
+		rLen = 0;
+		rLoc = 2147483647;
+	};
+	D38D68F51415C91E00A20E54 /* BaconApp */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = BaconApp;
+		savedGlobals = {
+		};
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+	};
+	D38D69181415C93D00A20E54 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	D38D69191415C93D00A20E54 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+}
