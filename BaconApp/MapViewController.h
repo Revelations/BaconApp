@@ -11,12 +11,9 @@
 #import "Interpreter.h"
 #import "HistoryItem.h"
 
-@interface MapViewController : UIViewController {
-    IBOutlet UIWebView * webview;
-    IBOutlet UIBarButtonItem * scanButton;
-    IBOutlet UIBarButtonItem * mapButton;
+@interface MapViewController : UIViewController <UIWebViewDelegate> {
+    IBOutlet UIWebView * webView;
     IBOutlet NSString * menuPath;
-    IBOutlet UITextField * resultText;
     IBOutlet UIActivityIndicatorView * activityIndicator;
     
     NSMutableArray * history;
@@ -29,5 +26,7 @@
     
     NSString * jScript;
 }
+
+@property (nonatomic, retain) IBOutlet UIWebView *webView;
 
 @end

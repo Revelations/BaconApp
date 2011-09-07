@@ -12,7 +12,7 @@
 
 @implementation ScannerViewController
 
-@synthesize resultImage, resultText;
+@synthesize resultImage, resultText, interpreter, current;
 
 -(IBAction) scanButtonPressed
 {
@@ -36,6 +36,8 @@
 	
 }
 
+// TODO: See if we can refactor the output from scanner to DataModel.
+
 - (void) imagePickerController: (UIImagePickerController*) reader
  didFinishPickingMediaWithInfo: (NSDictionary*) info
 {
@@ -58,57 +60,19 @@
     [reader dismissModalViewControllerAnimated: YES];
 	
 	
-	
-	//////////
-	
     // Retrieve scanner results.
-	Interpreter *interpreter = [Interpreter new];
+	interpreter = [Interpreter new];
     interpreter.storedInputString = symbol.data;
     
-	// To BaconTeam: Currently, it says that page string is null. 
-	// So, somehow, it's not passing in the string to the datamodel
-	// TODO: Get passing data to and getting data from data model working
-	// ~~~~ Shii
-	
-	
-    // Set the current history item to interpreted scanner data.
-	BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
-	appDelegate.model.current = [[HistoryItem alloc] initWithHtmlFile:[interpreter htmlPath] x:interpreter.x y:interpreter.y];
-	
-    // Add the current history item to the list.
-    [appDelegate.model.history addObject:appDelegate.model.current];
-    
-    // Load the html file associated with the scanned item.
-    [self webViewLoadPage:@"Hello"];
-	
-	NSLog(@"ScannerView says, Model page is: %@", appDelegate.model.current.htmlFile);
+    current = [[HistoryItem alloc] initWithHtmlFile:[interpreter htmlPath] x:interpreter.x y:interpreter.y];
+
+	// TODO: We could try use history here, that is, go to last page.
+	// OR, we could let the user choose.
+    self.tabBarController.selectedIndex = 1;
 	
 	//model.current = current;
 	
 }
-
-- (void) webViewLoadPage:(NSString *)path {
-	NSLog(@"%d", [self.tabBarController selectedIndex]);
-	self.tabBarController.selectedIndex = 1;
-//	// Animate activity indicator.
-//    [activityIndicator startAnimating];
-//    
-//    // Get the file path of the requested html file.
-//    NSString * filePath = [[NSBundle mainBundle] pathForResource:inputString ofType:@"html" inDirectory:@"Web"];
-//	
-//    // If that file doesn't exist then break prematurely.
-//    if(![[NSFileManager defaultManager] fileExistsAtPath:filePath])
-//        return;
-//    
-//    // Create and load the request.
-//    NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePath]];
-//	
-//    [self.webView loadRequest:request];
-//	
-//	// Draw the map and marker by evaluating the js function.
-//	[self.webView stringByEvaluatingJavaScriptFromString:@"addCSS();"];	
-}
-
 
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 /*
@@ -147,6 +111,24 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+
+// Called when the view disappears.
+
+-(void)viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+	// Set the current history item to interpreted scanner data.
+	BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
+	
+	appDelegate.x = interpreter.x;
+	appDelegate.y = interpreter.y;
+	appDelegate.html = interpreter.htmlPath;
+	
+	//appDelegate.model.current = [[HistoryItem alloc] initWithHtmlFile:[interpreter htmlPath] x:interpreter.x y:interpreter.y];
+	// Add the current history item to the list.
+	//[appDelegate.model.history addObject:appDelegate.model.current];
+	
+	
 }
 
 - (void) dealloc

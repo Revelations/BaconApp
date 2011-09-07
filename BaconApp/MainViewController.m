@@ -7,14 +7,9 @@
 //
 
 #import "MainViewController.h"
+#import "BaconAppDelegate.h"
 
 @implementation MainViewController
-
-// Name (without extension) of the main menu html page, loaded on app start.
-NSString * const MENU_HTML_FILE = @"Menu";
-
-// Name (without extension) of the map html page.
-NSString * const MAP_HTML_FILE = @"Map";
 
 @synthesize scanButton, mapButton, resultText, scanner, interpreter, history, current;
 @synthesize window=_window;
@@ -76,7 +71,7 @@ NSString * const MAP_HTML_FILE = @"Map";
 -(IBAction) mapButtonPressed
 {
     // Load the (mostly blank) map page.
-    [self webViewLoadPage:@"Map"];
+    [self webViewLoadPage: MAP_HTML_FILE];
     
     // Flag to run js once page has loaded.
     loadingMapScreen = true;
@@ -93,7 +88,7 @@ NSString * const MAP_HTML_FILE = @"Map";
     [activityIndicator startAnimating];
     
     // Get the file path of the requested html file.
-    NSString * filePath = [[NSBundle mainBundle] pathForResource:inputString ofType:@"html" inDirectory:@"Web"];
+    NSString * filePath = [[NSBundle mainBundle] pathForResource:inputString ofType:@"html" inDirectory:WEB_DIRECTORY];
 
     // If that file doesn't exist then break prematurely.
     if(![[NSFileManager defaultManager] fileExistsAtPath:filePath])
@@ -105,7 +100,8 @@ NSString * const MAP_HTML_FILE = @"Map";
     [self.webView loadRequest:request];
 	
 	// Draw the map and marker by evaluating the js function.
-	[self.webView stringByEvaluatingJavaScriptFromString:@"addCSS();"];
+	// addCSS() becomes obsolete IF webpage authors link CSS to each page.
+	[self.webView stringByEvaluatingJavaScriptFromString:@"addCSS();"]; 
 	
 }
 

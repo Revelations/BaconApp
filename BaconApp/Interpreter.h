@@ -12,8 +12,8 @@
 @interface Interpreter : NSObject
 {
     NSString * storedInputString;
-	int _x, _y;
-	NSString *_html;
+	//int _x, _y;
+	//NSString *_html;
 }
 
 @property(nonatomic, retain) NSString * storedInputString;

@@ -25,7 +25,8 @@
 // Gets the last known x coordinate.
 -(int) x
 {
-	return _x;
+	//return _x;
+	return [self x:storedInputString];
 }
 
 // Extract the x coordinate from the input string.
@@ -37,26 +38,27 @@
 // Gets the last known y-coordinate
 -(int) y
 {
-	return _y;
+	//return _y;
+	return [self y:storedInputString];
 }
 
 // Extract the y coordinate from the input string.
 -(int) y:(NSString *)inputString
 {
-	_y = [self substringToInt:inputString withRange:NSMakeRange(3, 3)];
-    return _y;
+	return [self substringToInt:inputString withRange:NSMakeRange(3, 3)];
+//    return _y;
 }
 
 -(NSString *) htmlPath
 {
-	return _html;
-//    return [self htmlPath:storedInputString];
+//	return _html;
+    return [self htmlPath:storedInputString];
 }
 
 -(NSString *) htmlPath:(NSString *)inputString
 {
-	_html = [inputString substringFromIndex:6];
-    return _html;
+	return [inputString substringFromIndex:6];
+    //return _html;
 }
 
 @end

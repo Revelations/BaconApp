@@ -10,16 +10,15 @@
 #import "DataModel.h"
 
 
-@interface InfoViewController : UIViewController {
+@interface InfoViewController : UIViewController <UIWebViewDelegate> {
 	UIWebView *webView;
 //	DataModel *model;
 	UIActivityIndicatorView *activityIndicator;
-	bool loadingMapScreen;
+	bool loadingInformation;
 }
 
-@property (nonatomic, retain) UIWebView *webView;
+@property (nonatomic, retain) IBOutlet UIWebView *webView;
 //@property (nonatomic, retain) DataModel *model;
 @property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
-@property (nonatomic) bool loadingInformation;
 
 @end

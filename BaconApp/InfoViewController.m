@@ -13,7 +13,7 @@
 @implementation InfoViewController
 
 @synthesize webView;
-@synthesize activityIndicator, loadingInformation;;
+@synthesize activityIndicator;
 
 // Changes the page of the UIWebview to a given string.
 //
@@ -25,7 +25,7 @@
     [activityIndicator startAnimating];
     
     // Get the file path of the requested html file.
-    NSString * filePath = [[NSBundle mainBundle] pathForResource:inputString ofType:@"html" inDirectory:@"Web"];
+    NSString * filePath = [[NSBundle mainBundle] pathForResource:inputString ofType:@"html" inDirectory:WEB_DIRECTORY];
 	
     // If that file doesn't exist then break prematurely.
     if(![[NSFileManager defaultManager] fileExistsAtPath:filePath])
@@ -48,6 +48,8 @@
 // If so, loads the js library into the webview and calls the map drawing function.
 -(void) webViewDidFinishLoad:(UIWebView *)webView
 {
+	NSLog(@"InfoView web did finish load!");
+	
     // Make sure the page finished loading is a the map page.
     if(loadingInformation)
     {
@@ -107,10 +109,16 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:(BOOL)animated];
-	BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
-	[self webViewLoadPage: appDelegate.model.current.htmlFile];
-	NSLog(@"Page to load is: %@", appDelegate.model.current.htmlFile);
+	
+	//BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
+	
+	//[self webViewLoadPage: appDelegate.model.current.htmlFile];
+	BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
+
+	NSLog(@"Page to load is: %@", appDelegate.html);
+	
+	[self webViewLoadPage:appDelegate.html];
 }
 	 
 
