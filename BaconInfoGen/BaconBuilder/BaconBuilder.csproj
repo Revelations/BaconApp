@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\FileHandler.cs" />
+    <Compile Include="Model\HtmlDegen.cs" />
     <Compile Include="Model\HtmlGenerator.cs" />
     <Compile Include="Model\Node.cs" />
     <Compile Include="Program.cs" />

@@ -1,7 +1,6 @@
 ﻿<NUnitProject>
-  <Settings activeconfig="Debug" />
-  <Config name="Debug" binpathtype="Auto">
-    <assembly path="BaconInfoGen.Test\bin\Debug\BaconInfoGen.Test.dll" />
+  <Settings activeconfig="Default" />
+  <Config name="Default" binpathtype="Auto">
+    <assembly path="BaconBuilder.Tests\bin\Release\BaconBuilder.Test.dll" />
   </Config>
-  <Config name="Release" binpathtype="Auto" />
 </NUnitProject>

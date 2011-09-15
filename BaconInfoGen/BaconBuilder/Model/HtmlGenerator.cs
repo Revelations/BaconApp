@@ -44,16 +44,22 @@ namespace BaconBuilder.Model
                 writer.RenderBeginTag(HtmlTextWriterTag.Head); // <head>
 
                 writer.AddAttribute(HtmlTextWriterAttribute.Href, "style.css"); // Adds attribute to link
+				writer.AddAttribute(HtmlTextWriterAttribute.Type, "text/css");
                 writer.RenderBeginTag(HtmlTextWriterTag.Link); // <link>
                 writer.RenderEndTag(); // </link>
-                writer.RenderEndTag(); // </head>
-                writer.RenderBeginTag(HtmlTextWriterTag.Body); // <head>
 
+				writer.RenderBeginTag(HtmlTextWriterTag.Title);
+				writer.Write(_pageName);
+				writer.RenderEndTag(); // </title>
+                
                 writer.RenderEndTag(); // </head>
+                writer.RenderBeginTag(HtmlTextWriterTag.Body); // <body>
+
+                writer.RenderEndTag(); // </body>
                 writer.RenderEndTag(); // </html>
             }
 
-		    return stringWriter.ToString().Replace(System.Environment.NewLine, "");
+		    return "<!DOCTYPE HTML>" + stringWriter.ToString().Replace(System.Environment.NewLine, "");
 
 //		    var builder = new StringBuilder();
 //			foreach (var child in _doc.Children)
