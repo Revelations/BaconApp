@@ -1,0 +1,8 @@
+C:\Users\Noriko\Documents\Visual Studio 2010\Projects\BaconInfoGen\BaconInfoGen.Test\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Noriko\Documents\Visual Studio 2010\Projects\BaconInfoGen\BaconInfoGen.Test\bin\Release\BaconInfoGen.Test.dll
+C:\Users\Noriko\Documents\Visual Studio 2010\Projects\BaconInfoGen\BaconInfoGen.Test\bin\Release\BaconInfoGen.Test.pdb
+C:\Users\Noriko\Documents\Visual Studio 2010\Projects\BaconInfoGen\BaconInfoGen.Test\bin\Release\nunit.framework.dll
+C:\Users\Noriko\Documents\Visual Studio 2010\Projects\BaconInfoGen\BaconInfoGen.Test\obj\Release\BaconInfoGen.Test.dll
+C:\Users\Noriko\Documents\Visual Studio 2010\Projects\BaconInfoGen\BaconInfoGen.Test\obj\Release\BaconInfoGen.Test.pdb
+C:\Users\Noriko\Documents\Visual Studio 2010\Projects\BaconInfoGen\BaconInfoGen.Test\bin\Release\BaconInfoGen.Model.exe
+C:\Users\Noriko\Documents\Visual Studio 2010\Projects\BaconInfoGen\BaconInfoGen.Test\bin\Release\BaconInfoGen.Model.pdb
