@@ -1,0 +1,16 @@
+*~
+
+# Mac OS files #
+################
+.DS_Store?
+
+# ReSharper files #
+###################
+_ReSharper*/
+*ReSharper.user
+data/
+
+# Binary files #
+################
+bin/
+obj/
