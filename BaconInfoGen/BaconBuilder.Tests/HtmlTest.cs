@@ -14,8 +14,7 @@ namespace BaconBuilder
 		public void SetUp()
 		{
 			_kiwiBuilder = new HtmlGenerator("kiwi");
-			_tuiBuilder = new HtmlGenerator("tui");
-			
+		    _tuiBuilder = new HtmlGenerator("tui");
 		}
 
 		[Test]
@@ -25,13 +24,13 @@ namespace BaconBuilder
 			Assert.AreEqual("<!DOCTYPE HTML><html><head><title>tui</title></head><body></body></html>", _tuiBuilder.ToHtml());
 		}
 
-		[Test]
-		public void TestBody()
-		{
-			_kiwiBuilder.Display();
-			Assert.IsNotNull(_kiwiBuilder.GetTag("html"));
-			Assert.AreEqual("<body></body>", _kiwiBuilder.GetTag("body").ToString());
-		}
+//		[Test]
+//		public void TestBody()
+//		{
+//			_kiwiBuilder.Display();
+//			Assert.IsNotNull(_kiwiBuilder.GetTag("html"));
+//			Assert.AreEqual("<body></body>", _kiwiBuilder.GetTag("body").ToString());
+//		}
 
 //		[Test]
 //		public void TestAddingContent()

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Web.UI;
 
 namespace BaconBuilder.Model
 {
@@ -35,12 +37,30 @@ namespace BaconBuilder.Model
 
 		public string ToHtml()
 		{
-			var builder = new StringBuilder();
-			foreach (var child in _doc.Children)
-			{
-				builder.Append(child.ToString());
-			}
-			return builder.ToString();
+		    var stringWriter = new StringWriter();
+            using (var writer = new HtmlTextWriter(stringWriter, ""))
+            {
+                writer.RenderBeginTag(HtmlTextWriterTag.Html); // <html>
+                writer.RenderBeginTag(HtmlTextWriterTag.Head); // <head>
+
+                writer.AddAttribute(HtmlTextWriterAttribute.Href, "style.css"); // Adds attribute to link
+                writer.RenderBeginTag(HtmlTextWriterTag.Link); // <link>
+                writer.RenderEndTag(); // </link>
+                writer.RenderEndTag(); // </head>
+                writer.RenderBeginTag(HtmlTextWriterTag.Body); // <head>
+
+                writer.RenderEndTag(); // </head>
+                writer.RenderEndTag(); // </html>
+            }
+
+		    return stringWriter.ToString().Replace(System.Environment.NewLine, "");
+
+//		    var builder = new StringBuilder();
+//			foreach (var child in _doc.Children)
+//			{
+//				builder.Append(child.ToString());
+//			}
+//			return builder.ToString();
 		}
 
 		private IEnumerable<Node> ListComp(Func<object, bool> predicate)

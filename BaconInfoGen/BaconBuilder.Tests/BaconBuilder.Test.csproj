@@ -40,7 +40,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileHandlerTest.cs" />
-    <Compile Include="XmlBuilderTest.cs" />
     <Compile Include="HtmlTest.cs" />
   </ItemGroup>
   <ItemGroup>
