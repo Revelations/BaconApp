@@ -1,8 +1,0 @@
-C:\Users\sk218\BaconApp\BaconInfoGen\BaconBuilder.Tests\bin\Debug\BaconBuilder.exe
-C:\Users\sk218\BaconApp\BaconInfoGen\BaconBuilder.Tests\bin\Debug\nunit.framework.dll
-C:\Users\sk218\BaconApp\BaconInfoGen\BaconBuilder.Tests\bin\Debug\BaconBuilder.pdb
-C:\Users\sk218\BaconApp\BaconInfoGen\BaconBuilder.Tests\obj\Debug\ResolveAssemblyReference.cache
-C:\Users\sk218\BaconApp\BaconInfoGen\BaconBuilder.Tests\bin\Debug\BaconBuilder.Test.dll
-C:\Users\sk218\BaconApp\BaconInfoGen\BaconBuilder.Tests\bin\Debug\BaconBuilder.Test.pdb
-C:\Users\sk218\BaconApp\BaconInfoGen\BaconBuilder.Tests\obj\Debug\BaconBuilder.Test.dll
-C:\Users\sk218\BaconApp\BaconInfoGen\BaconBuilder.Tests\obj\Debug\BaconBuilder.Test.pdb
