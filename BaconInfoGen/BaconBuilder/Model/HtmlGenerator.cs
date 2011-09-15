@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BaconApp
+namespace BaconBuilder.Model
 {
 	public class HtmlGenerator
 	{
@@ -16,7 +16,7 @@ namespace BaconApp
 		{
 			_pageName = pageName;
 
-			_doc = new Node(null,
+            _doc = new Node(null,
 			                new object[]
 			                	{
 									"<!DOCTYPE HTML>",

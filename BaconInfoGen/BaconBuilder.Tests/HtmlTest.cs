@@ -1,7 +1,8 @@
 ﻿
+using BaconBuilder.Model;
 using NUnit.Framework;
 
-namespace BaconApp
+namespace BaconBuilder
 {
 	[TestFixture]
 	public class HtmlTest

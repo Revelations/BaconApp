@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using BaconBuilder.Model;
 using NUnit.Framework;
 
-namespace BaconApp
+namespace BaconBuilder
 {
 	[TestFixture]
 	public class FileHandlerTest
@@ -31,7 +32,7 @@ namespace BaconApp
 		                                                		"Push me",
 		                                                		"And then just touch me",
 		                                                		"Till I can get my satisfaction",
-		                                                		"PathForTesting, satisfaction, satisfaction, satisfaction"
+		                                                		"Satisfaction, satisfaction, satisfaction, satisfaction"
 		                                                	};
 
 		[Test]

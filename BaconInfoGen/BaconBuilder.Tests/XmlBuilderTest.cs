@@ -1,6 +1,9 @@
-﻿using NUnit.Framework;
+﻿
+using BaconBuilder.Model;
+using NUnit.Framework;
 
-namespace BaconApp
+namespace BaconBuilder
+
 {
 	[TestFixture]
 	public class XmlBuilderTest

@@ -1,4 +1,8 @@
-namespace BaconApp
+
+using System.IO;
+using System.Web.UI;
+
+namespace BaconBuilder.Model 
 {
 	public class XmlBuilder
 	{
@@ -19,5 +23,10 @@ namespace BaconApp
 			_node.AddValue(value);
 			
 		}
+
+        public void SomeMethod()
+        {
+            HtmlTextWriter writer = new HtmlTextWriter(new StringWriter());
+        }
 	}
 }

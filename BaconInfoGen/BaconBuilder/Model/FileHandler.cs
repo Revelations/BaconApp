@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace BaconApp
+namespace BaconBuilder.Model
 {
 	public class FileHandler
 	{
@@ -10,9 +10,14 @@ namespace BaconApp
 		/// The safe limit for files. If the HTML files are this large, consider splitting it up into smaller files.
 		/// </summary>
 		private const int MaximumSafeFileSize = 1000000;
-
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly string _ext;
+        /// <summary>
+        /// A collection of file contents.
+        /// </summary>
 		private readonly Dictionary<string, IEnumerable<string>> _contents;
-		private readonly string _ext;
 		private readonly Dictionary<string, DateTime> _files;
 
 		public FileHandler(string ext)
@@ -22,6 +27,11 @@ namespace BaconApp
 			_contents = new Dictionary<string, IEnumerable<string>>();
 		}
 
+        /// <summary>
+        /// Gets a usable key to use for retrieving contents from memory.
+        /// </summary>
+        /// <param name="fileInfo"></param>
+        /// <returns></returns>
 		private static string GetKey(FileSystemInfo fileInfo)
 		{
 			if (fileInfo == null) throw new ArgumentNullException("fileInfo");

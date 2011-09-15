@@ -8,3 +8,4 @@ C:\Users\sk218\BaconApp\BaconInfoGen\BaconBuilder\obj\x86\Debug\GenerateResource
 C:\Users\sk218\BaconApp\BaconInfoGen\BaconBuilder\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Users\sk218\BaconApp\BaconInfoGen\BaconBuilder\obj\x86\Debug\BaconBuilder.exe
 C:\Users\sk218\BaconApp\BaconInfoGen\BaconBuilder\obj\x86\Debug\BaconBuilder.pdb
+C:\Users\sk218\BaconApp\BaconInfoGen\BaconBuilder\bin\Debug\BaconBuilder.exe.config
