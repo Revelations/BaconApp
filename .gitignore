@@ -7,8 +7,11 @@
 # ReSharper files #
 ###################
 _ReSharper*/
-*ReSharper.user
 data/
+
+# User specific settings #
+##########################
+*.user
 
 # Binary files #
 ################
