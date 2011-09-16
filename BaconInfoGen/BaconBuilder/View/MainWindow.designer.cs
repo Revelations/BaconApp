@@ -41,32 +41,47 @@ namespace BaconBuilder.View
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.treeDirectory = new System.Windows.Forms.TreeView();
             this.pnlDirectories = new System.Windows.Forms.Panel();
+            this.flpDirectory = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnAddFile = new System.Windows.Forms.Button();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.pnlContentEditor = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.pnlTextEditor = new System.Windows.Forms.Panel();
+            this.rtbContents = new System.Windows.Forms.RichTextBox();
+            this.flpPreview = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnPreview = new System.Windows.Forms.Button();
+            this.btnPrintPreview = new System.Windows.Forms.Button();
+            this.toolContents = new System.Windows.Forms.ToolStrip();
             this.splitter3 = new System.Windows.Forms.Splitter();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.tlpDataFields = new System.Windows.Forms.TableLayoutPanel();
+            this.lblTitle = new System.Windows.Forms.Label();
+            this.txtY = new System.Windows.Forms.TextBox();
+            this.lblX = new System.Windows.Forms.Label();
+            this.lblY = new System.Windows.Forms.Label();
+            this.txtX = new System.Windows.Forms.TextBox();
+            this.txtTitle = new System.Windows.Forms.TextBox();
+            this.btnMapPreview = new System.Windows.Forms.Button();
             this.splitter1 = new System.Windows.Forms.Splitter();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbImage = new System.Windows.Forms.ToolStripButton();
+            this.tsbBold = new System.Windows.Forms.ToolStripButton();
+            this.tsbItalics = new System.Windows.Forms.ToolStripButton();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.pnlDirectories.SuspendLayout();
+            this.flpDirectory.SuspendLayout();
+            this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.pnlContentEditor.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.pnlTextEditor.SuspendLayout();
+            this.flpPreview.SuspendLayout();
+            this.toolContents.SuspendLayout();
+            this.tlpDataFields.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -87,9 +102,12 @@ namespace BaconBuilder.View
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openDatabaseToolStripMenuItem,
+            this.toolStripSeparator1,
             this.printToolStripMenuItem,
             this.printAllModifiedToolStripMenuItem,
-            this.printAllToolStripMenuItem});
+            this.printAllToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
@@ -141,38 +159,63 @@ namespace BaconBuilder.View
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
-            this.optionsToolStripMenuItem.Text = "&Options";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.optionsToolStripMenuItem.Text = "&Options...";
             // 
-            // listView1
+            // treeDirectory
             // 
-            this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.Location = new System.Drawing.Point(0, 0);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(160, 549);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.treeDirectory.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.treeDirectory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeDirectory.Location = new System.Drawing.Point(0, 0);
+            this.treeDirectory.Name = "treeDirectory";
+            this.treeDirectory.Size = new System.Drawing.Size(160, 496);
+            this.treeDirectory.TabIndex = 0;
             // 
             // pnlDirectories
             // 
-            this.pnlDirectories.BackColor = System.Drawing.Color.Green;
-            this.pnlDirectories.Controls.Add(this.listView1);
+            this.pnlDirectories.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlDirectories.Controls.Add(this.treeDirectory);
+            this.pnlDirectories.Controls.Add(this.flpDirectory);
             this.pnlDirectories.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlDirectories.Location = new System.Drawing.Point(0, 0);
             this.pnlDirectories.Name = "pnlDirectories";
-            this.pnlDirectories.Size = new System.Drawing.Size(160, 549);
+            this.pnlDirectories.Size = new System.Drawing.Size(160, 525);
             this.pnlDirectories.TabIndex = 8;
+            // 
+            // flpDirectory
+            // 
+            this.flpDirectory.AutoSize = true;
+            this.flpDirectory.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flpDirectory.Controls.Add(this.btnAddFile);
+            this.flpDirectory.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flpDirectory.Location = new System.Drawing.Point(0, 496);
+            this.flpDirectory.Name = "flpDirectory";
+            this.flpDirectory.Size = new System.Drawing.Size(160, 29);
+            this.flpDirectory.TabIndex = 2;
+            // 
+            // btnAddFile
+            // 
+            this.btnAddFile.Location = new System.Drawing.Point(3, 3);
+            this.btnAddFile.Name = "btnAddFile";
+            this.btnAddFile.Size = new System.Drawing.Size(150, 23);
+            this.btnAddFile.TabIndex = 1;
+            this.btnAddFile.Text = "Add Files";
+            this.btnAddFile.UseVisualStyleBackColor = true;
             // 
             // toolStripContainer1
             // 
             // 
+            // toolStripContainer1.BottomToolStripPanel
+            // 
+            this.toolStripContainer1.BottomToolStripPanel.Controls.Add(this.statusStrip1);
+            // 
             // toolStripContainer1.ContentPanel
             // 
+            this.toolStripContainer1.ContentPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.toolStripContainer1.ContentPanel.Controls.Add(this.pnlContentEditor);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.splitter1);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.pnlDirectories);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(792, 549);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(792, 527);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
             this.toolStripContainer1.Name = "toolStripContainer1";
@@ -188,158 +231,241 @@ namespace BaconBuilder.View
             // 
             this.pnlContentEditor.AutoSize = true;
             this.pnlContentEditor.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlContentEditor.Controls.Add(this.panel2);
+            this.pnlContentEditor.Controls.Add(this.pnlTextEditor);
             this.pnlContentEditor.Controls.Add(this.splitter3);
-            this.pnlContentEditor.Controls.Add(this.tableLayoutPanel1);
+            this.pnlContentEditor.Controls.Add(this.tlpDataFields);
             this.pnlContentEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContentEditor.Location = new System.Drawing.Point(168, 0);
             this.pnlContentEditor.Name = "pnlContentEditor";
-            this.pnlContentEditor.Size = new System.Drawing.Size(624, 549);
+            this.pnlContentEditor.Size = new System.Drawing.Size(622, 525);
             this.pnlContentEditor.TabIndex = 9;
             // 
-            // panel2
+            // pnlTextEditor
             // 
-            this.panel2.Controls.Add(this.toolStrip1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 60);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(624, 489);
-            this.panel2.TabIndex = 12;
+            this.pnlTextEditor.Controls.Add(this.rtbContents);
+            this.pnlTextEditor.Controls.Add(this.flpPreview);
+            this.pnlTextEditor.Controls.Add(this.toolContents);
+            this.pnlTextEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlTextEditor.Location = new System.Drawing.Point(0, 66);
+            this.pnlTextEditor.Name = "pnlTextEditor";
+            this.pnlTextEditor.Size = new System.Drawing.Size(622, 459);
+            this.pnlTextEditor.TabIndex = 12;
             // 
-            // toolStrip1
+            // rtbContents
             // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(624, 25);
-            this.toolStrip1.TabIndex = 8;
-            this.toolStrip1.Text = "toolStrip1";
+            this.rtbContents.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbContents.Location = new System.Drawing.Point(0, 25);
+            this.rtbContents.Name = "rtbContents";
+            this.rtbContents.Size = new System.Drawing.Size(622, 405);
+            this.rtbContents.TabIndex = 9;
+            this.rtbContents.Text = "";
             // 
-            // toolStripButton1
+            // flpPreview
             // 
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(60, 22);
-            this.toolStripButton1.Text = "Image";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            this.flpPreview.AutoSize = true;
+            this.flpPreview.Controls.Add(this.btnPreview);
+            this.flpPreview.Controls.Add(this.btnPrintPreview);
+            this.flpPreview.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flpPreview.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flpPreview.Location = new System.Drawing.Point(0, 430);
+            this.flpPreview.Name = "flpPreview";
+            this.flpPreview.Size = new System.Drawing.Size(622, 29);
+            this.flpPreview.TabIndex = 11;
+            // 
+            // btnPreview
+            // 
+            this.btnPreview.Location = new System.Drawing.Point(469, 3);
+            this.btnPreview.Name = "btnPreview";
+            this.btnPreview.Size = new System.Drawing.Size(150, 23);
+            this.btnPreview.TabIndex = 10;
+            this.btnPreview.Text = "Preview";
+            this.btnPreview.UseVisualStyleBackColor = true;
+            // 
+            // btnPrintPreview
+            // 
+            this.btnPrintPreview.Location = new System.Drawing.Point(313, 3);
+            this.btnPrintPreview.Name = "btnPrintPreview";
+            this.btnPrintPreview.Size = new System.Drawing.Size(150, 23);
+            this.btnPrintPreview.TabIndex = 11;
+            this.btnPrintPreview.Text = "Print Preview";
+            this.btnPrintPreview.UseVisualStyleBackColor = true;
+            // 
+            // toolContents
+            // 
+            this.toolContents.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbImage,
+            this.tsbBold,
+            this.tsbItalics});
+            this.toolContents.Location = new System.Drawing.Point(0, 0);
+            this.toolContents.Name = "toolContents";
+            this.toolContents.Size = new System.Drawing.Size(622, 25);
+            this.toolContents.TabIndex = 8;
+            this.toolContents.Text = "toolStrip1";
             // 
             // splitter3
             // 
             this.splitter3.BackColor = System.Drawing.SystemColors.ControlDark;
             this.splitter3.Dock = System.Windows.Forms.DockStyle.Top;
             this.splitter3.Enabled = false;
-            this.splitter3.Location = new System.Drawing.Point(0, 52);
+            this.splitter3.Location = new System.Drawing.Point(0, 58);
             this.splitter3.Name = "splitter3";
-            this.splitter3.Size = new System.Drawing.Size(624, 8);
+            this.splitter3.Size = new System.Drawing.Size(622, 8);
             this.splitter3.TabIndex = 13;
             this.splitter3.TabStop = false;
             // 
-            // tableLayoutPanel1
+            // tlpDataFields
             // 
-            this.tableLayoutPanel1.AutoSize = true;
-            this.tableLayoutPanel1.ColumnCount = 5;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.textBox3, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.textBox2, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.textBox1, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button1, 4, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(624, 52);
-            this.tableLayoutPanel1.TabIndex = 9;
+            this.tlpDataFields.AutoSize = true;
+            this.tlpDataFields.ColumnCount = 5;
+            this.tlpDataFields.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tlpDataFields.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpDataFields.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tlpDataFields.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpDataFields.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tlpDataFields.Controls.Add(this.btnMapPreview, 4, 1);
+            this.tlpDataFields.Controls.Add(this.txtY, 3, 1);
+            this.tlpDataFields.Controls.Add(this.lblY, 2, 1);
+            this.tlpDataFields.Controls.Add(this.txtX, 1, 1);
+            this.tlpDataFields.Controls.Add(this.lblX, 0, 1);
+            this.tlpDataFields.Controls.Add(this.txtTitle, 1, 0);
+            this.tlpDataFields.Controls.Add(this.lblTitle, 0, 0);
+            this.tlpDataFields.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tlpDataFields.Location = new System.Drawing.Point(0, 0);
+            this.tlpDataFields.Name = "tlpDataFields";
+            this.tlpDataFields.RowCount = 2;
+            this.tlpDataFields.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpDataFields.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpDataFields.Size = new System.Drawing.Size(622, 58);
+            this.tlpDataFields.TabIndex = 9;
             // 
-            // label1
+            // lblTitle
             // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(3, 3);
-            this.label1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Title:";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblTitle.Location = new System.Drawing.Point(3, 3);
+            this.lblTitle.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(44, 16);
+            this.lblTitle.TabIndex = 0;
+            this.lblTitle.Text = "Title:";
+            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // textBox3
+            // txtY
             // 
-            this.textBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox3.Location = new System.Drawing.Point(309, 29);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(200, 20);
-            this.textBox3.TabIndex = 5;
+            this.txtY.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtY.Location = new System.Drawing.Point(281, 32);
+            this.txtY.Name = "txtY";
+            this.txtY.Size = new System.Drawing.Size(172, 20);
+            this.txtY.TabIndex = 5;
             // 
-            // label2
+            // lblX
             // 
-            this.label2.AutoSize = true;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(3, 29);
-            this.label2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "X:";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.lblX.AutoSize = true;
+            this.lblX.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblX.Location = new System.Drawing.Point(3, 32);
+            this.lblX.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            this.lblX.Name = "lblX";
+            this.lblX.Size = new System.Drawing.Size(44, 16);
+            this.lblX.TabIndex = 1;
+            this.lblX.Text = "X:";
+            this.lblX.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // label3
+            // lblY
             // 
-            this.label3.AutoSize = true;
-            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Location = new System.Drawing.Point(259, 29);
-            this.label3.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Y:";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.lblY.AutoSize = true;
+            this.lblY.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblY.Location = new System.Drawing.Point(231, 32);
+            this.lblY.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            this.lblY.Name = "lblY";
+            this.lblY.Size = new System.Drawing.Size(44, 16);
+            this.lblY.TabIndex = 2;
+            this.lblY.Text = "Y:";
+            this.lblY.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // textBox2
+            // txtX
             // 
-            this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox2.Location = new System.Drawing.Point(53, 29);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(200, 20);
-            this.textBox2.TabIndex = 4;
+            this.txtX.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtX.Location = new System.Drawing.Point(53, 32);
+            this.txtX.Name = "txtX";
+            this.txtX.Size = new System.Drawing.Size(172, 20);
+            this.txtX.TabIndex = 4;
             // 
-            // textBox1
+            // txtTitle
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.textBox1, 3);
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(53, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(456, 20);
-            this.textBox1.TabIndex = 3;
+            this.tlpDataFields.SetColumnSpan(this.txtTitle, 3);
+            this.txtTitle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtTitle.Location = new System.Drawing.Point(53, 3);
+            this.txtTitle.Name = "txtTitle";
+            this.txtTitle.Size = new System.Drawing.Size(400, 20);
+            this.txtTitle.TabIndex = 3;
             // 
-            // button1
+            // btnMapPreview
             // 
-            this.button1.Location = new System.Drawing.Point(520, 29);
-            this.button1.Margin = new System.Windows.Forms.Padding(8, 3, 8, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(95, 20);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Map Preview";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnMapPreview.Location = new System.Drawing.Point(464, 32);
+            this.btnMapPreview.Margin = new System.Windows.Forms.Padding(8, 3, 8, 3);
+            this.btnMapPreview.Name = "btnMapPreview";
+            this.btnMapPreview.Size = new System.Drawing.Size(150, 23);
+            this.btnMapPreview.TabIndex = 6;
+            this.btnMapPreview.Text = "Map Preview";
+            this.btnMapPreview.UseVisualStyleBackColor = true;
             // 
             // splitter1
             // 
             this.splitter1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.splitter1.Location = new System.Drawing.Point(160, 0);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(8, 549);
+            this.splitter1.Size = new System.Drawing.Size(8, 525);
             this.splitter1.TabIndex = 9;
             this.splitter1.TabStop = false;
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.exitToolStripMenuItem.Text = "E&xit";
+            // 
+            // tsbImage
+            // 
+            this.tsbImage.Image = ((System.Drawing.Image)(resources.GetObject("tsbImage.Image")));
+            this.tsbImage.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbImage.Name = "tsbImage";
+            this.tsbImage.Size = new System.Drawing.Size(60, 22);
+            this.tsbImage.Text = "Image";
+            // 
+            // tsbBold
+            // 
+            this.tsbBold.Image = ((System.Drawing.Image)(resources.GetObject("tsbBold.Image")));
+            this.tsbBold.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbBold.Name = "tsbBold";
+            this.tsbBold.Size = new System.Drawing.Size(51, 22);
+            this.tsbBold.Text = "Bold";
+            // 
+            // tsbItalics
+            // 
+            this.tsbItalics.Image = ((System.Drawing.Image)(resources.GetObject("tsbItalics.Image")));
+            this.tsbItalics.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbItalics.Name = "tsbItalics";
+            this.tsbItalics.Size = new System.Drawing.Size(57, 22);
+            this.tsbItalics.Text = "Italics";
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.statusStrip1.Location = new System.Drawing.Point(0, 0);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(792, 22);
+            this.statusStrip1.TabIndex = 0;
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(173, 6);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(173, 6);
             // 
             // MainWindow
             // 
@@ -355,6 +481,10 @@ namespace BaconBuilder.View
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.pnlDirectories.ResumeLayout(false);
+            this.pnlDirectories.PerformLayout();
+            this.flpDirectory.ResumeLayout(false);
+            this.toolStripContainer1.BottomToolStripPanel.ResumeLayout(false);
+            this.toolStripContainer1.BottomToolStripPanel.PerformLayout();
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
             this.toolStripContainer1.ContentPanel.PerformLayout();
             this.toolStripContainer1.TopToolStripPanel.ResumeLayout(false);
@@ -363,12 +493,13 @@ namespace BaconBuilder.View
             this.toolStripContainer1.PerformLayout();
             this.pnlContentEditor.ResumeLayout(false);
             this.pnlContentEditor.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.pnlTextEditor.ResumeLayout(false);
+            this.pnlTextEditor.PerformLayout();
+            this.flpPreview.ResumeLayout(false);
+            this.toolContents.ResumeLayout(false);
+            this.toolContents.PerformLayout();
+            this.tlpDataFields.ResumeLayout(false);
+            this.tlpDataFields.PerformLayout();
             this.ResumeLayout(false);
 
 		}
@@ -378,30 +509,42 @@ namespace BaconBuilder.View
 		private MenuStrip menuStrip1;
 		private ToolStripMenuItem fileToolStripMenuItem;
 		private ToolStripMenuItem openDatabaseToolStripMenuItem;
-		private ListView listView1;
+		private TreeView treeDirectory;
 		private Panel pnlDirectories;
 		private ToolStripContainer toolStripContainer1;
 		private Panel pnlContentEditor;
 		private Splitter splitter1;
 		private Splitter splitter3;
-		private Panel panel2;
-		private ToolStrip toolStrip1;
-		private ToolStripButton toolStripButton1;
+		private Panel pnlTextEditor;
+        private ToolStrip toolContents;
 		private ToolStripMenuItem printToolStripMenuItem;
 		private ToolStripMenuItem printAllModifiedToolStripMenuItem;
 		private ToolStripMenuItem printAllToolStripMenuItem;
-		private TableLayoutPanel tableLayoutPanel1;
-		private Label label1;
-		private TextBox textBox3;
-		private Label label2;
-		private Label label3;
-		private TextBox textBox2;
-		private TextBox textBox1;
-		private Button button1;
+		private TableLayoutPanel tlpDataFields;
+		private Label lblTitle;
+		private TextBox txtY;
+		private Label lblX;
+		private Label lblY;
+		private TextBox txtX;
+		private TextBox txtTitle;
+		private Button btnMapPreview;
 		private ToolStripMenuItem editToolStripMenuItem;
 		private ToolStripMenuItem viewToolStripMenuItem;
 		private ToolStripMenuItem toolsToolStripMenuItem;
 		private ToolStripMenuItem optionsToolStripMenuItem;
+        private RichTextBox rtbContents;
+        private Button btnAddFile;
+        private Button btnPreview;
+        private FlowLayoutPanel flpPreview;
+        private FlowLayoutPanel flpDirectory;
+        private Button btnPrintPreview;
+        private ToolStripMenuItem exitToolStripMenuItem;
+        private ToolStripButton tsbImage;
+        private ToolStripButton tsbBold;
+        private ToolStripButton tsbItalics;
+        private StatusStrip statusStrip1;
+        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripSeparator toolStripSeparator1;
 
 	}
 }

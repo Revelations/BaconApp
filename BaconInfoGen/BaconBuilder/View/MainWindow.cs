@@ -14,14 +14,7 @@ namespace BaconBuilder.View
         private void toolStripButton1_Click(object sender, System.EventArgs e)
         {
 
-            StringWriter stringWriter = new StringWriter();
-
-            using (HtmlTextWriter htmlWriter = new HtmlTextWriter(stringWriter))
-            {
-                htmlWriter.RenderBeginTag(HtmlTextWriterTag.Html);
-
-                htmlWriter.RenderEndTag();
-            }
+            
         }
 	}
 }
