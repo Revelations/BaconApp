@@ -48,6 +48,7 @@
     <Compile Include="HtmlDegenTest.cs" />
     <Compile Include="FileHandlerTest.cs" />
     <Compile Include="HtmlTest.cs" />
+    <Compile Include="MainWindowTest.cs" />
     <Compile Include="NodeTest.cs" />
   </ItemGroup>
   <ItemGroup>
