@@ -115,6 +115,19 @@ namespace BaconBuilder.Model
 			}
 		}
 
+        public IEnumerable<string> LoadDirectory(DirectoryInfo dI)
+        {
+            List<string> content = new List<string>();
+
+            foreach (FileInfo fileInfo in dI.GetFiles())
+            {
+                    LoadFile(fileInfo);
+                    content.Add(fileInfo.Name);
+            }
+
+            return content;
+        }
+
 		/// <summary>
 		/// Saves the contents in memory to disk and updates the last write time (UTC).
 		/// </summary>
