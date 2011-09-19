@@ -1,6 +1,7 @@
 ﻿
 using BaconBuilder.Model;
 using NUnit.Framework;
+using System.Xml;
 
 namespace BaconBuilder
 {
@@ -20,8 +21,29 @@ namespace BaconBuilder
 		[Test]
 		public void TestTags()
 		{
-			Assert.AreEqual("<!DOCTYPE HTML><html><head><link href=\"style.css\" type=\"text/css\" /><title>kiwi</title></head><body></body></html>", _kiwiBuilder.ToHtml());
-			Assert.AreEqual("<!DOCTYPE HTML><html><head><link href=\"style.css\" type=\"text/css\" /><title>tui</title></head><body></body></html>", _tuiBuilder.ToHtml());
+			Assert.AreEqual(
+@"<!DOCTYPE HTML>
+<html>
+<head>
+<link href=""style.css"" type=""text/css"" /><title>
+kiwi
+</title>
+</head><body>
+
+</body>
+</html>", _kiwiBuilder.ToHtml());
+			Assert.AreEqual(
+@"<!DOCTYPE HTML>
+<html>
+<head>
+<link href=""style.css"" type=""text/css"" /><title>
+tui
+</title>
+</head><body>
+
+</body>
+</html>", _tuiBuilder.ToHtml());
+
 		}
 
 //		[Test]

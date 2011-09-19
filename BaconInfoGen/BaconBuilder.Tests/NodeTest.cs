@@ -17,19 +17,15 @@ namespace BaconBuilder
 			HtmlNode<string> temp, p;
 
 			temp = root.Children.Add("head");
-			temp.Children.Add("link");
+			temp.Children.Add("link").IsEmpty = true;
 
 			temp = root.Children.Add("body");
-			temp.Children.Add("p");
-
-			temp = temp.Children.Add("text");
-			temp.Value = "Hello World";
-
-			temp = temp.Parent;
+			p = temp.Children.Add("p").Children.Add("text");
+			p.Value = "Hello World";
+			p.Children.Add("span");
+			temp.Children.Add("img").IsEmpty = true;
 
 			Console.WriteLine(root.ToString());
-
-
 		}
 	}
 }
