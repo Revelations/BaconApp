@@ -115,7 +115,7 @@ namespace BaconBuilder.Model
 			}
 		}
 
-        public IEnumerable<string> LoadDirectory(DirectoryInfo dI)
+        public List<string> LoadDirectory(DirectoryInfo dI)
         {
             List<string> content = new List<string>();
 

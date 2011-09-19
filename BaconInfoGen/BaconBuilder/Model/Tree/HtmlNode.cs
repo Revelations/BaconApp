@@ -23,8 +23,44 @@ namespace BaconBuilder
 		{
 			//return string.Format("Name:{0} Value:{1} Children:{2}",
 			//	Name, Value, Children.ToString());
-			string openTag = string.Format("<{0}>", Name);
-			return openTag;
+			StringBuilder builder = new StringBuilder();
+			if (Name.ToString() == "text")
+			{
+				if (Value != null)
+				{
+					builder.Append(Value).AppendLine();
+				}
+				foreach (HtmlNode<T> node in Children)
+				{
+					builder.Append(node.ToString());
+				}
+			}
+			else
+			{
+				builder.Append("<").Append(Name);
+				//Attributes here.
+
+				if (IsEmpty)
+				{
+					builder.Append(" />").AppendLine();
+				}
+				else
+				{
+					builder.Append(">").AppendLine();
+					if (Value != null)
+					{
+						builder.Append(Value).AppendLine();
+					}
+					foreach (HtmlNode<T> node in Children)
+					{
+						builder.Append(node.ToString());
+					}
+
+					builder.Append("</").Append(Name).Append(">").AppendLine();
+				}
+			}
+
+			return builder.ToString();
 		}
 	}
 }
