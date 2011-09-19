@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using BaconBuilder.View;
+using BaconBuilder.Model;
 
 namespace BaconBuilder
 {
@@ -16,7 +17,7 @@ namespace BaconBuilder
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainWindow());
+            Application.Run(new MainWindow(new BaconModel()));
         }
     }
 }
