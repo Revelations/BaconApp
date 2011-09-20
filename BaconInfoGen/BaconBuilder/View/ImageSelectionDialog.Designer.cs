@@ -28,91 +28,120 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.panel1 = new System.Windows.Forms.Panel();
-			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+			this.pnlContainer = new System.Windows.Forms.Panel();
+			this.tlp = new System.Windows.Forms.TableLayoutPanel();
 			this.lblImageLocation = new System.Windows.Forms.Label();
 			this.txtImageURL = new System.Windows.Forms.TextBox();
+			this.comboBox1 = new System.Windows.Forms.ComboBox();
 			this.btnBrowse = new System.Windows.Forms.Button();
-			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+			this.label1 = new System.Windows.Forms.Label();
+			this.flp = new System.Windows.Forms.FlowLayoutPanel();
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.btnOK = new System.Windows.Forms.Button();
-			this.panel1.SuspendLayout();
-			this.tableLayoutPanel1.SuspendLayout();
-			this.flowLayoutPanel1.SuspendLayout();
+			this.pnlContainer.SuspendLayout();
+			this.tlp.SuspendLayout();
+			this.flp.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// panel1
+			// pnlContainer
 			// 
-			this.panel1.Controls.Add(this.tableLayoutPanel1);
-			this.panel1.Controls.Add(this.flowLayoutPanel1);
-			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel1.Location = new System.Drawing.Point(0, 0);
-			this.panel1.Name = "panel1";
-			this.panel1.Padding = new System.Windows.Forms.Padding(20);
-			this.panel1.Size = new System.Drawing.Size(594, 150);
-			this.panel1.TabIndex = 3;
+			this.pnlContainer.Controls.Add(this.tlp);
+			this.pnlContainer.Controls.Add(this.flp);
+			this.pnlContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.pnlContainer.Location = new System.Drawing.Point(0, 0);
+			this.pnlContainer.Name = "pnlContainer";
+			this.pnlContainer.Padding = new System.Windows.Forms.Padding(20);
+			this.pnlContainer.Size = new System.Drawing.Size(594, 175);
+			this.pnlContainer.TabIndex = 0;
 			// 
-			// tableLayoutPanel1
+			// tlp
 			// 
-			this.tableLayoutPanel1.ColumnCount = 2;
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.tableLayoutPanel1.Controls.Add(this.lblImageLocation, 0, 0);
-			this.tableLayoutPanel1.Controls.Add(this.txtImageURL, 0, 1);
-			this.tableLayoutPanel1.Controls.Add(this.btnBrowse, 1, 1);
-			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel1.Location = new System.Drawing.Point(20, 20);
-			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			this.tableLayoutPanel1.RowCount = 2;
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(554, 81);
-			this.tableLayoutPanel1.TabIndex = 6;
+			this.tlp.ColumnCount = 3;
+			this.tlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			this.tlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			this.tlp.Controls.Add(this.lblImageLocation, 0, 0);
+			this.tlp.Controls.Add(this.txtImageURL, 1, 0);
+			this.tlp.Controls.Add(this.comboBox1, 1, 1);
+			this.tlp.Controls.Add(this.btnBrowse, 2, 0);
+			this.tlp.Controls.Add(this.label1, 0, 1);
+			this.tlp.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tlp.Location = new System.Drawing.Point(20, 20);
+			this.tlp.Name = "tlp";
+			this.tlp.RowCount = 3;
+			this.tlp.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.tlp.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.tlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tlp.Size = new System.Drawing.Size(554, 106);
+			this.tlp.TabIndex = 0;
 			// 
 			// lblImageLocation
 			// 
 			this.lblImageLocation.AutoSize = true;
+			this.lblImageLocation.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.lblImageLocation.Location = new System.Drawing.Point(3, 0);
 			this.lblImageLocation.Name = "lblImageLocation";
-			this.lblImageLocation.Size = new System.Drawing.Size(83, 13);
+			this.lblImageLocation.Size = new System.Drawing.Size(83, 29);
 			this.lblImageLocation.TabIndex = 0;
 			this.lblImageLocation.Text = "Image Location:";
+			this.lblImageLocation.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// txtImageURL
 			// 
 			this.txtImageURL.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.txtImageURL.Location = new System.Drawing.Point(3, 16);
+			this.txtImageURL.Location = new System.Drawing.Point(92, 3);
 			this.txtImageURL.Name = "txtImageURL";
-			this.txtImageURL.Size = new System.Drawing.Size(467, 20);
-			this.txtImageURL.TabIndex = 1;
+			this.txtImageURL.Size = new System.Drawing.Size(378, 20);
+			this.txtImageURL.TabIndex = 0;
+			// 
+			// comboBox1
+			// 
+			this.comboBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.comboBox1.FormattingEnabled = true;
+			this.comboBox1.Location = new System.Drawing.Point(92, 32);
+			this.comboBox1.Name = "comboBox1";
+			this.comboBox1.Size = new System.Drawing.Size(378, 21);
+			this.comboBox1.TabIndex = 2;
 			// 
 			// btnBrowse
 			// 
-			this.btnBrowse.Location = new System.Drawing.Point(476, 16);
+			this.btnBrowse.Location = new System.Drawing.Point(476, 3);
 			this.btnBrowse.Name = "btnBrowse";
 			this.btnBrowse.Size = new System.Drawing.Size(75, 23);
-			this.btnBrowse.TabIndex = 2;
+			this.btnBrowse.TabIndex = 1;
 			this.btnBrowse.Text = "Browse...";
 			this.btnBrowse.UseVisualStyleBackColor = true;
 			// 
-			// flowLayoutPanel1
+			// label1
 			// 
-			this.flowLayoutPanel1.AutoSize = true;
-			this.flowLayoutPanel1.Controls.Add(this.btnCancel);
-			this.flowLayoutPanel1.Controls.Add(this.btnOK);
-			this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-			this.flowLayoutPanel1.Location = new System.Drawing.Point(20, 101);
-			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-			this.flowLayoutPanel1.Size = new System.Drawing.Size(554, 29);
-			this.flowLayoutPanel1.TabIndex = 5;
+			this.label1.AutoSize = true;
+			this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.label1.Location = new System.Drawing.Point(3, 29);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(83, 27);
+			this.label1.TabIndex = 0;
+			this.label1.Text = "Options:";
+			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// flp
+			// 
+			this.flp.AutoSize = true;
+			this.flp.Controls.Add(this.btnCancel);
+			this.flp.Controls.Add(this.btnOK);
+			this.flp.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.flp.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+			this.flp.Location = new System.Drawing.Point(20, 126);
+			this.flp.Name = "flp";
+			this.flp.Size = new System.Drawing.Size(554, 29);
+			this.flp.TabIndex = 1;
 			// 
 			// btnCancel
 			// 
+			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.btnCancel.Location = new System.Drawing.Point(476, 3);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(75, 23);
-			this.btnCancel.TabIndex = 6;
+			this.btnCancel.TabIndex = 1;
 			this.btnCancel.Text = "Cancel";
 			this.btnCancel.UseVisualStyleBackColor = true;
 			// 
@@ -121,39 +150,43 @@
 			this.btnOK.Location = new System.Drawing.Point(395, 3);
 			this.btnOK.Name = "btnOK";
 			this.btnOK.Size = new System.Drawing.Size(75, 23);
-			this.btnOK.TabIndex = 5;
+			this.btnOK.TabIndex = 0;
 			this.btnOK.Text = "OK";
 			this.btnOK.UseVisualStyleBackColor = true;
 			// 
 			// ImageSelectionDialog
 			// 
+			this.AcceptButton = this.btnOK;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(594, 150);
-			this.Controls.Add(this.panel1);
+			this.CancelButton = this.btnCancel;
+			this.ClientSize = new System.Drawing.Size(594, 175);
+			this.Controls.Add(this.pnlContainer);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Name = "ImageSelectionDialog";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Select Image";
-			this.panel1.ResumeLayout(false);
-			this.panel1.PerformLayout();
-			this.tableLayoutPanel1.ResumeLayout(false);
-			this.tableLayoutPanel1.PerformLayout();
-			this.flowLayoutPanel1.ResumeLayout(false);
+			this.pnlContainer.ResumeLayout(false);
+			this.pnlContainer.PerformLayout();
+			this.tlp.ResumeLayout(false);
+			this.tlp.PerformLayout();
+			this.flp.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
 
-		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+		private System.Windows.Forms.Panel pnlContainer;
+		private System.Windows.Forms.TableLayoutPanel tlp;
 		private System.Windows.Forms.Label lblImageLocation;
 		private System.Windows.Forms.TextBox txtImageURL;
 		private System.Windows.Forms.Button btnBrowse;
-		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+		private System.Windows.Forms.FlowLayoutPanel flp;
 		private System.Windows.Forms.Button btnCancel;
 		private System.Windows.Forms.Button btnOK;
+		private System.Windows.Forms.ComboBox comboBox1;
+		private System.Windows.Forms.Label label1;
 
 	}
 }

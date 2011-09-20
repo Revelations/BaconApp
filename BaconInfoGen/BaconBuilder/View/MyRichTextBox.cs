@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using System.Windows.Forms;
 
 namespace BaconBuilder.View
 {
-	class MyRichTextBox : RichTextBox
+	class MyRichTextBox : System.Windows.Forms.RichTextBox
 	{
 		public void BeginUpdate()
 		{

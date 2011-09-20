@@ -15,6 +15,7 @@ namespace BaconBuilder.View
 		public MainWindow(BaconModel model)
 		{
 			InitializeComponent();
+
 			this.model = model;
 
 			myRTB.Rtf = @"{\rtf1\ansi{\fonttbl\f0\fswiss Helvetica;}\f0\pard
@@ -37,23 +38,23 @@ This is some {\i italic} {\b bold} text.\par
 			btnMapPreview.Click += new EventHandler(btnMapPreview_Click);
 		}
 
-        private void MainWindow_Load(object sender, System.EventArgs e)
-        {
-            if (!Directory.Exists("./bin/dataFiles")) 
-            {
-                Directory.CreateDirectory("./bin/dataFiles");
-            }
+		private void MainWindow_Load(object sender, System.EventArgs e)
+		{
+			if (!Directory.Exists("./bin/dataFiles")) 
+			{
+				Directory.CreateDirectory("./bin/dataFiles");
+			}
 
 			//var directory = new DirectoryInfo("./html");
 			var directory = new DirectoryInfo("./bin/dataFiles");
-            FileHandler fh = new FileHandler(".html");
+			FileHandler fh = new FileHandler(".html");
 			List<string> dirPaths = fh.LoadDirectory(directory);
 
-            foreach (string path in dirPaths)
-            {
-                treeDirectory.Nodes.Add(path);
-            }
-        }
+			foreach (string path in dirPaths)
+			{
+				treeDirectory.Nodes.Add(path);
+			}
+		}
 
 		private void btnMapPreview_Click(object sender, EventArgs e)
 		{
@@ -75,13 +76,15 @@ This is some {\i italic} {\b bold} text.\par
 			int caretPos = myRTB.SelectionStart;
 			int selectionLength = myRTB.SelectionLength;
 
-			//TODO: Get image tag insertion working.
-			ImageSelectionDialog dialog = new ImageSelectionDialog();
+			model.SelectedRtf = myRTB.SelectedRtf;
+
+			ImageSelectionDialog dialog = new ImageSelectionDialog(model);
 			if (dialog.ShowDialog() != DialogResult.Cancel)
 			{
 				myRTB.SelectionStart = caretPos;
-				myRTB.SelectedText = @"<img src=" + dialog.Tag + " />";
+				myRTB.SelectedText = string.Format(@"<img src=""{0}"" />", model.ImageUrl);
 			}
+				
 		}
 
 		private void tsbBold_Click(object sender, EventArgs e)
