@@ -35,7 +35,7 @@ namespace BaconBuilder
         public void TearDown() 
         {
             currentTreeDir = null;
-            Directory.Delete(testPath, true);
+            if (testPath != null) Directory.Delete(testPath, true);
             testPath = "";
         }
         #endregion
