@@ -1,115 +1,167 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace BaconBuilder.View
 {
 	public partial class ImageSelectionDialog : Form
 	{
-		OpenFileDialog openFileDialog;
-		private static string filterInnerDelimiter = "; ";
-		private static string filterOuterDelimiter = " | ";
-		string[][] filters = new string[][] {
+		#region Fields, properties and constants
+		private Model.BaconModel model;
+		private OpenFileDialog openImageDialog;
+
+		private const string FILTER_INNER_DELIMITER = ";";
+		private const string FILTER_OUTER_DELIMITER = "|";
+
+		private const string ALL_FILES_TAG = "All Image Files";
+		private const string BMP_FILES_TAG = "Bitmap";
+		private const string GIF_FILES_TAG = "GIF";
+		private const string JPG_FILES_TAG = "JPEG";
+		private const string PNG_FILES_TAG = "PNG";
+
+		private const int BMP_INDEX = 0;
+		private const int GIF_INDEX = 1;
+		private const int JPG_INDEX = 2;
+		private const int PNG_INDEX = 3;
+
+		private static string[][] filters = new string[][] {
 			new [] {"*.bmp"},
 			new [] {"*.gif"},
-			new [] {"*.jpg","*.jpe","*.jpg"},
+			new [] {"*.jpe", "*.jpeg", "*.jpg"},
 			new [] {"*.png"}
 		};
+		#endregion
 
-		public ImageSelectionDialog()
+		/// <summary>
+		/// Constructor that accepts a model.
+		/// </summary>
+		/// <param name="model"></param>
+		public ImageSelectionDialog(BaconBuilder.Model.BaconModel model)
 		{
 			InitializeComponent();
 
-			openFileDialog = new OpenFileDialog();
-		
-			string allFilters = AllFilters("All Image Files");
-			string bmpFilters = BitmapFilters("Bitmap Files", 0);
-			string gifFilters = GifFilters("GIF Files", 1);
-			string jpgFilters = JPEGFilters("JPEG Files", 2);
-			string pngFilters = PNGFilters("PNG Files", 3);
+			this.model = model;
 
-			string[] f = new[] { allFilters, bmpFilters, gifFilters, jpgFilters, pngFilters };
+			BuildOpenImageDialog();
 
-			openFileDialog.Filter = String.Join(filterOuterDelimiter, f.Select(p => p.ToString()).ToArray());
+			BuildBrowseButton();
+			BuildImageUrlTextbox();
+			BuildOptions();
+			BuildOKButton();
+			BuildCancelButton();
+		}
 
-			this.CancelButton = btnCancel;
-			this.AcceptButton = btnOK;
+		private void BuildOptions()
+		{
+			comboBox1.Items.AddRange(new [] {
+				"Insert image before selction",
+				"Insert image after selction",
+				"Wrap selection",
+				"Replace selection with image"
+			});
+		}
 
+		/// <summary>
+		/// Builds the OpenImageDialog
+		/// </summary>
+		private void BuildOpenImageDialog()
+		{
+			openImageDialog = new OpenFileDialog();
+
+			string[] f = new[] {
+				Filters(ALL_FILES_TAG),
+				Filters(BMP_FILES_TAG, BMP_INDEX),
+				Filters(GIF_FILES_TAG, GIF_INDEX),
+				Filters(JPG_FILES_TAG, JPG_INDEX),
+				Filters(PNG_FILES_TAG, PNG_INDEX)
+			};
+
+			openImageDialog.Filter = String.Join(FILTER_OUTER_DELIMITER, f.Select(p => p.ToString()).ToArray());
+		}
+
+		#region Filter parsing
+		private string Filters(string filterTags)
+		{
+			string[] concatFilters = filters.SelectMany(secondLevel => secondLevel).Select(firstLevel => firstLevel).ToArray();
+
+			return filterTags + FILTER_OUTER_DELIMITER + String.Join(FILTER_INNER_DELIMITER, concatFilters);
+		}
+
+		private string Filters(string filterTags, int index)
+		{
+			string[] concatFilters = filters[index].Select(firstLevel => firstLevel).ToArray();
+
+			return filterTags + FILTER_OUTER_DELIMITER + String.Join(FILTER_INNER_DELIMITER, concatFilters);
+		}
+
+		#endregion
+
+
+		/// <summary>
+		/// Builds the ImageURL textbox.
+		/// </summary>
+		private void BuildImageUrlTextbox()
+		{
+			txtImageURL.TextChanged += new EventHandler(txtImageURL_TextChanged);
+			txtImageURL.Select();
+		}
+
+		/// <summary>
+		/// Builds the Browse button.
+		/// </summary>
+		private void BuildBrowseButton()
+		{
 			this.btnBrowse.Click += new System.EventHandler(this.btnBrowser_Click);
-			this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+		}
+
+		/// <summary>
+		/// Builds the Cancel button
+		/// </summary>
+		private void BuildCancelButton()
+		{
+			this.CancelButton = btnCancel;
+			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+
 			this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
 		}
 
-		private string PNGFilters(string filterTags, int index)
+		/// <summary>
+		/// Builds the OK button.
+		/// </summary>
+		private void BuildOKButton()
 		{
-			StringBuilder builder = new StringBuilder();
-			foreach (string str in filters[3])
-				builder.Append(str).Append(filterInnerDelimiter);
-			builder.Remove(builder.Length - filterInnerDelimiter.Length, filterInnerDelimiter.Length);
-
-			return filterTags + filterOuterDelimiter + builder.ToString();
+			this.AcceptButton = btnOK;
+			this.btnOK.Enabled = (!string.IsNullOrEmpty(txtImageURL.Text));
+			this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
+			
+			this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
 		}
 
-		private string JPEGFilters(string filterTags, int index)
+		#region Event handlers
+		private void txtImageURL_TextChanged(object sender, EventArgs e)
 		{
-			StringBuilder builder = new StringBuilder();
-			foreach (string str in filters[2])
-				builder.Append(str).Append(filterInnerDelimiter);
-			builder.Remove(builder.Length - filterInnerDelimiter.Length, filterInnerDelimiter.Length);
-
-			return filterTags + filterOuterDelimiter + builder.ToString();
-		}
-
-		private string GifFilters(string filterTags, int index)
-		{
-			StringBuilder builder = new StringBuilder();
-			foreach (string str in filters[index])
-				builder.Append(str).Append(filterInnerDelimiter);
-			builder.Remove(builder.Length - filterInnerDelimiter.Length, filterInnerDelimiter.Length);
-
-			return filterTags + filterOuterDelimiter + builder.ToString();
-		}
-
-		private string AllFilters(string filterTags)
-		{
-			StringBuilder builder = new StringBuilder();
-			foreach (string[] arr in filters)
-				foreach (string str in arr)
-					builder.Append(str).Append(filterInnerDelimiter);
-			builder.Remove(builder.Length - filterInnerDelimiter.Length, filterInnerDelimiter.Length);
-
-			return filterTags + filterOuterDelimiter + builder.ToString();
-		}
-
-		private string BitmapFilters(string filterTags, int index)
-		{
-			StringBuilder builder = new StringBuilder();
-			foreach (string str in filters[0])
-				builder.Append(str).Append(filterInnerDelimiter);
-			builder.Remove(builder.Length - filterInnerDelimiter.Length, filterInnerDelimiter.Length);
-
-			return filterTags + filterOuterDelimiter + builder.ToString();
+			this.btnOK.Enabled = (!string.IsNullOrEmpty(txtImageURL.Text));
 		}
 
 		private void btnBrowser_Click(object sender, EventArgs e)
 		{
-			openFileDialog.ShowDialog();
+			if (openImageDialog.ShowDialog() != System.Windows.Forms.DialogResult.Cancel)
+			{
+				txtImageURL.Text = openImageDialog.FileName;
+			}
 		}
 
 		private void btnOK_Click(object sender, EventArgs e)
 		{
-			this.Tag = txtImageURL.Text;
-			this.Close();
+			model.ImageUrl = txtImageURL.Text;
 		}
 
 		private void btnCancel_Click(object sender, EventArgs e)
 		{
-			this.Close();
+			
 		}
+		#endregion
 	}
 }
