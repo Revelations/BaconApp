@@ -50,6 +50,7 @@
     <Compile Include="HtmlTest.cs" />
     <Compile Include="MainWindowTest.cs" />
     <Compile Include="NodeTest.cs" />
+    <Compile Include="TextToHtmlParserTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
@@ -58,6 +59,8 @@
     <ProjectReference Include="..\BaconBuilder\BaconBuilder.csproj">
       <Project>{B3668BD4-4001-4EE7-8F6F-E1DA776E98BB}</Project>
       <Name>BaconBuilder</Name>
+      <Private>True</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
