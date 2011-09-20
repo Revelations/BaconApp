@@ -35,6 +35,10 @@ namespace BaconBuilder.Model
         /// </summary>
         public Dictionary<string, string> RegexDict { get; set; }
 
+        /// <summary>
+        /// Does nothing in the parent class. Overridden in child classes to populate the dictionary
+        /// with a ruleset appropriate to the type of parsing.
+        /// </summary>
         protected virtual void InitialiseDictionary() { }
 
         /// <summary>
