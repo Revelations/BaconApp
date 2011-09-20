@@ -86,6 +86,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\HtmlToTextParser.cs" />
     <Compile Include="Model\FileHandler.cs" />
     <Compile Include="Model\HtmlDegen.cs" />
     <Compile Include="Model\HtmlGenerator.cs" />
