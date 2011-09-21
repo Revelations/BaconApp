@@ -14,6 +14,8 @@ namespace BaconBuilder.Model
         /// <summary>
         /// Populates the dictionary with a set of find/replace key value pairs appropriate
         /// for converting html tags to plain text content and 'bacon psuedo tags'.
+        /// 
+        /// Rules are parsed in the order they are added here.
         /// </summary>
         protected override sealed void InitialiseDictionary()
         {

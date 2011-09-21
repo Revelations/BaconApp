@@ -12,24 +12,12 @@ namespace BaconBuilder.Model
 		FileHandler fh = new FileHandler(".html");
 		HtmlDegen degen = new HtmlDegen();
 
-		private string contents;
+	    public string Contents { get; set; }
 		
 		internal string GetPageCode()
 		{
 			builder.AddContent(Contents);
 			return builder.ToHtml();
-		}
-
-		public string Contents
-		{
-			get
-			{
-				return contents;
-			}
-			set
-			{
-				contents = value;
-			}
 		}
 
 		internal IEnumerable<string> OpenFile(string p)

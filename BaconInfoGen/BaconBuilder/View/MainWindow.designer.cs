@@ -210,12 +210,14 @@ namespace BaconBuilder.View
             // 
             this.listViewContents.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewContents.Location = new System.Drawing.Point(0, 0);
+            this.listViewContents.MultiSelect = false;
             this.listViewContents.Name = "listViewContents";
             this.listViewContents.Size = new System.Drawing.Size(160, 480);
             this.listViewContents.SmallImageList = this.imageList;
             this.listViewContents.TabIndex = 3;
             this.listViewContents.UseCompatibleStateImageBehavior = false;
             this.listViewContents.View = System.Windows.Forms.View.List;
+            this.listViewContents.SelectedIndexChanged += new System.EventHandler(this.listViewContents_SelectedIndexChanged);
             // 
             // imageList
             // 
@@ -546,6 +548,7 @@ namespace BaconBuilder.View
             this.Name = "MainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.MainWindow_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.pnlDirectories.ResumeLayout(false);
