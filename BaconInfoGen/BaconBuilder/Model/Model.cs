@@ -49,10 +49,5 @@ namespace BaconBuilder.Model
 		/// Get or set the image url, obtained from an image selection dialog.
 		/// </summary>
 		public string ImageUrl { get; set; }
-
-		/// <summary>
-		/// Selected RTF in the content editor.
-		/// </summary>
-		public string SelectedRtf { get; set; }
 	}
 }

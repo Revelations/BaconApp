@@ -86,6 +86,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\MainViewController.cs" />
     <Compile Include="Model\HtmlToTextParser.cs" />
     <Compile Include="Model\FileHandler.cs" />
     <Compile Include="Model\HtmlDegen.cs" />
@@ -108,9 +109,6 @@
     </Compile>
     <Compile Include="View\MainWindow.designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\MyRichTextBox.cs">
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="View\Preview.cs">
       <SubType>Form</SubType>

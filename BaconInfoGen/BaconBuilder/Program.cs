@@ -17,7 +17,7 @@ namespace BaconBuilder
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainWindow(new BaconModel()));
+            Application.Run(new MainWindow());
         }
     }
 }
