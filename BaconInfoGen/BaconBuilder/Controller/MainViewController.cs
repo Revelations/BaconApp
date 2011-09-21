@@ -12,8 +12,10 @@ namespace BaconBuilder.Controller
 {
     class MainViewController
     {
-        private const string HtmlPath = "C:\\Users/jlm47/test";
+        private const string HtmlPath = "C:\\Users/jlm47/test/";
         //private const string HtmlPath = "./bin/DataFiles";
+
+        private static HtmlToTextParser _parser = new HtmlToTextParser();
 
         public static void InitialiseListView(ListView listView)
         {
@@ -29,6 +31,17 @@ namespace BaconBuilder.Controller
                 if (f.Extension.Equals(".html"))
                     listView.Items.Add(f.Name, 0);
             }
+        }
+
+        public static string GetFileText(ListView listView)
+        {
+            if (listView.SelectedItems.Count > 0)
+            {
+                string htmlContent = File.ReadAllText(HtmlPath + listView.SelectedItems[0].Text);
+                return _parser.Parse(htmlContent);
+            }
+            else
+                return string.Empty;
         }
     }
 }

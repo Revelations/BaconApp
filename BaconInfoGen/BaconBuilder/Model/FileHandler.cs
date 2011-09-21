@@ -10,10 +10,12 @@ namespace BaconBuilder.Model
 		/// The safe limit for files. If the HTML files are this large, consider splitting it up into smaller files.
 		/// </summary>
 		private const int MaximumSafeFileSize = 1000000;
-        /// <summary>
-        /// 
-        /// </summary>
-        private readonly string _ext;
+
+	    /// <summary>
+	    /// 
+	    /// </summary>
+	    public string Extension { get; set; }
+
         /// <summary>
         /// A collection of file contents.
         /// </summary>
@@ -22,7 +24,7 @@ namespace BaconBuilder.Model
 
 		public FileHandler(string ext)
 		{
-			_ext = ext;
+			Extension = ext;
 			_files = new Dictionary<string, DateTime>();
 			_contents = new Dictionary<string, IEnumerable<string>>();
 		}
@@ -86,7 +88,7 @@ namespace BaconBuilder.Model
 		/// <returns></returns>
 		public void LoadFile(FileInfo info)
 		{
-			if (info.Extension.Equals(_ext))
+			if (info.Extension.Equals(Extension))
 			{
 				var path = GetKey(info);
 				var bytes = info.Length;

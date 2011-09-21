@@ -22,23 +22,12 @@ namespace BaconBuilder.View
 
 
 			// Event binding
-			this.Load += new EventHandler(MainWindow_Load);
 			openFileToolStripMenuItem.Click += new EventHandler(openFileToolStripMenuItem_Click);
 			btnPreview.Click += new System.EventHandler(btnPreview_Click);
 			tsbImage.Click += new EventHandler(tsbImage_Click);
-
 			btnMapPreview.Click += new EventHandler(btnMapPreview_Click);
 		}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-		private void MainWindow_Load(object sender, System.EventArgs e)
-		{
-            MainViewController.InitialiseListView(listViewContents);
-		}
 
         /// <summary>
         /// 
@@ -88,9 +77,24 @@ namespace BaconBuilder.View
 		{
 			model.Contents = textBoxMain.Text;
 			
-			Preview preview = new Preview(model);
+			Preview preview = new Preview(null, 0, 0);
 			preview.ShowDialog();
 		}
+
+        private void listViewContents_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            textBoxMain.Text = MainViewController.GetFileText(listViewContents);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainWindow_Load(object sender, System.EventArgs e)
+        {
+            MainViewController.InitialiseListView(listViewContents);
+        }
 	}
 }
 
