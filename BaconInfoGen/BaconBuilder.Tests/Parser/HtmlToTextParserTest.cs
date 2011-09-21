@@ -34,10 +34,30 @@ namespace BaconBuilder
         [Test]
         public void TestAudioReplace()
         {
-            const string input = "<audio src=\"example.mp3\" controls=\"controls\" style=\"float:left;\"></audio>";
-            const string expected = "<audio>example.mp3</audio>";
+            var inputs = new string[]
+                {
+                    @"<audio></audio>",
+                    @"<audio src=""example.mp3"" controls=""controls"" style=""float:left;""></audio>",
+                    @"<audio src=""example.mp3"" controls=""controls"" style=""float:left;"">Your browser does not support audio tags</audio>",
+                    @"<audio controls=""controls"" src=""example.mp3"" style=""float:left;"">Your browser does not support audio tags. I think someone might alter this externally....</audio>",
+                    @"<audio controls src=""example.mp3"" style=""float:left;"">Your browser does not support audio tags</audio>"
+                };
+            var outputs = new string[]
+                {
+                    "<audio></audio>",
+                    "<audio>example.mp3</audio>",
+                    "<audio>example.mp3</audio>",
+                    "<audio>example.mp3</audio>",
+                    "<audio>example.mp3</audio>"
+                };
 
-            Assert.AreEqual(expected, _parser.Parse(input));
+            for (var i = 0; i < inputs.Length; i++)
+            {
+                var expected = outputs[i];
+                var actual = _parser.Parse(inputs[i]);
+
+                Assert.AreEqual(expected, actual, "Expected {0} but was {1}, index {2}", expected, actual, i);
+            }
         }
 
         [Test]

@@ -22,8 +22,9 @@ namespace BaconBuilder.Model
             // Replace html img tag with pseudo tag equivalent.
             RegexDict.Add(@"<\s*img\s+src\s*=\s*""([^""\s]*)""\s*/>", "<img>$1</img>");
 
-            // Replace html audio tag with pseudo tag equivalent. NEEDS A BIT MORE WORK.
-            RegexDict.Add(@"<\s*audio\s*src\s*=\s*\""([^""\s]*)"".*<\s*/\s*audio\s*>", "<audio>$1</audio>");
+            // Replace html audio tag with pseudo tag equivalent. NEEDS A BIT MORE WORK. SEEMS TO WORK!
+            RegexDict.Add(@"<audio (?:.*\s+)*src=""([^""]*)""(?:\s+.*\s*)*>[^<]*</audio>", "<audio>$1</audio>");
+            //RegexDict.Add(@"<\s*audio\s+(?:[\w]+=""[^""]*""\s+)*src\s*=\s*""([^""\s]*)"">[^<]*<\s*/\s*audio\s*>", "<audio>$1</audio>");
 
             // TODO: Complete set of regex rules here.
         }
