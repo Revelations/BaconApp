@@ -14,6 +14,8 @@ namespace BaconBuilder.View
 	{
 		private BaconModel model;
 
+	    private string _currentFile;
+
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -83,8 +85,20 @@ namespace BaconBuilder.View
 
         private void listViewContents_SelectedIndexChanged(object sender, EventArgs e)
         {
-            textBoxMain.Text = MainViewController.GetFileText(listViewContents);
+            if (listViewContents.SelectedItems.Count > 0)
+            {
+                if (_currentFile != null)
+                    // Save the old file.
+                    MainViewController.SaveFileHtml(_currentFile, textBoxMain.Text);
+
+                // Get the name of the new file.
+                _currentFile = listViewContents.SelectedItems[0].Text;
+
+                // Load the new file.
+                textBoxMain.Text = MainViewController.GetFileText(_currentFile);
+            }
         }
+
 
         /// <summary>
         /// 
