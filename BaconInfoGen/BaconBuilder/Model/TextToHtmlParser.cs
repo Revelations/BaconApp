@@ -19,13 +19,11 @@ namespace BaconBuilder.Model
         /// </summary>
         protected override sealed void InitialiseDictionary()
         {
-            // Replace img psuedo tags with html equivalent.
-            RegexDict.Add("<\\s*img\\s*>\\s*", "<img src=\"");
-            RegexDict.Add("\\s*<\\s*/\\s*img\\s*>", "\" />");
+            // Replace image pseudo tag with html equivalent.
+            RegexDict.Add(@"<\s*img\s*>\s*([^""\s]*)\s*<\s*/\s*img\s*>", @"<img src=""$1"" />");
 
-            // Replace audio psuedo tags with html equivalent.
-            RegexDict.Add("<\\s*audio\\s*>\\s*", "<audio src=\"");
-            RegexDict.Add("\\s*<\\s*/\\s*audio\\s*>", "\" controls=\"controls\" style=\"float:left;\"></audio>");
+            // Replace audio pseudo tag with html equivalent.
+            RegexDict.Add(@"<\s*audio\s*>\s*([^""\s]*)\s*<\s*/\s*audio\s*>", @"<audio src=""$1"" controls=""controls"" style=""float:left;""></audio>");
 
             // TODO: Complete set of regex rules here.
         }

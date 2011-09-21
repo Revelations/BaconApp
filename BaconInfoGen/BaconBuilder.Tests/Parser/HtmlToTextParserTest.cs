@@ -45,22 +45,22 @@ namespace BaconBuilder
         {
             var inputs = new string[]
                              {
-                                 @"<img src=""hello world.jpg""/>",
-                                 @"   < img     src = ""hello world.jpg""/> ",
-                                 @"<   img src = ""hello world.jpg""/>",
-                                 @" <imgsrc = ""hello world.jpg""/> "
+                                 @"<img src=""example.jpg""/>",
+                                 @"   < img     src = ""example.jpg""/> ",
+                                 @"<   img src = ""example.jpg""/>",
+                                 @" <imgsrc = ""example.jpg""/> "
                              };
             var outputs = new string[]
                               {
-                                  @"<img>hello world.jpg</img>",
-                                  @"   <img>hello world.jpg</img> ",
-                                  @"<img>hello world.jpg</img>",
-                                  @" <imgsrc = ""hello world.jpg""/> "
+                                  @"<img>example.jpg</img>",
+                                  @"   <img>example.jpg</img> ",
+                                  @"<img>example.jpg</img>",
+                                  @" <imgsrc = ""example.jpg""/> "
                               };
             for (var i = 0; i < inputs.Length; i++)
             {
                 var expected = outputs[i];
-                var actual = _parser.Parse2(inputs[i]);
+                var actual = _parser.Parse(inputs[i]);
 
                 Assert.AreEqual(expected, actual, "Expected {0} but was {1}, index {2}", expected, actual, i);
             }

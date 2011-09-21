@@ -71,5 +71,15 @@ namespace BaconBuilder.Controller
 
             File.WriteAllText(HtmlDirectory + filename, htmlContent);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static string GetHtmlContent(string input)
+        {
+            return HtmlToText.Parse(input);
+        }
     }
 }

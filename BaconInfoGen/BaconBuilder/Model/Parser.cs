@@ -52,29 +52,7 @@ namespace BaconBuilder.Model
 
             foreach (KeyValuePair<string, string> kvp in RegexDict)
                 foreach (Match m in Regex.Matches(input, kvp.Key))
-                    output = output.Replace(m.Value, kvp.Value);
-
-            return output;
-        }
-
-        /// <summary>
-        /// Parses HTML tags to simplified pseudo-tags.
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        public string Parse2(string input)
-        {
-            //TODO: Handle other tags.
-            var output = input;
-            const string pattern = @"<\s*img\s+src\s*=\s*""([ \S]*)""\s*/>";
-            // Here we call Regex.Match.
-            var match = Regex.Match(input, pattern);
-
-            // Here we check the Match instance.
-            if (match.Success)
-            {
-                output = Regex.Replace(input, pattern, "<img>$1</img>");
-            }
+                    output = Regex.Replace(input, kvp.Key, kvp.Value);
 
             return output;
         }
