@@ -39,5 +39,31 @@ namespace BaconBuilder
 
             Assert.AreEqual(expected, _parser.Parse(input));
         }
+
+        [Test]
+        public void TestParseImage()
+        {
+            var inputs = new string[]
+                             {
+                                 @"<img src=""hello world.jpg""/>",
+                                 @"   < img     src = ""hello world.jpg""/> ",
+                                 @"<   img src = ""hello world.jpg""/>",
+                                 @" <imgsrc = ""hello world.jpg""/> "
+                             };
+            var outputs = new string[]
+                              {
+                                  @"<img>hello world.jpg</img>",
+                                  @"   <img>hello world.jpg</img> ",
+                                  @"<img>hello world.jpg</img>",
+                                  @" <imgsrc = ""hello world.jpg""/> "
+                              };
+            for (var i = 0; i < inputs.Length; i++)
+            {
+                var expected = outputs[i];
+                var actual = _parser.Parse2(inputs[i]);
+
+                Assert.AreEqual(expected, actual, "Expected {0} but was {1}, index {2}", expected, actual, i);
+            }
+        }
     }
 }
