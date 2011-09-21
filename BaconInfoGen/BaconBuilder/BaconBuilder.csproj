@@ -84,6 +84,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="ThoughtWorks.QRCode">
+      <HintPath>..\lib\ThoughtWorks.QRCode.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\MainViewController.cs" />
@@ -92,6 +95,7 @@
     <Compile Include="Model\HtmlDegen.cs" />
     <Compile Include="Model\HtmlGenerator.cs" />
     <Compile Include="Model\Model.cs" />
+    <Compile Include="Model\QrCodeGenerator.cs" />
     <Compile Include="Model\TextToHtmlParser.cs" />
     <Compile Include="Model\Tree\HtmlTree.cs" />
     <Compile Include="Model\Tree\HtmlNode.cs" />
