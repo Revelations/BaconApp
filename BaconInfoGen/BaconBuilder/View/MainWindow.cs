@@ -191,8 +191,6 @@ namespace BaconBuilder.View
 		{
 			_currentTitle = txtTitle.Text;
 		}
-
-	    
 	}
 }
 
