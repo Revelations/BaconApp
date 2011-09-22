@@ -20,11 +20,7 @@ namespace BaconBuilder.Controller
         private static readonly string NewHtmlFileName = "New File";
 
         // Directory for local html content.
-<<<<<<< Updated upstream
-        private const string HtmlDirectory = "./DataFiles";
-=======
         //private const string HtmlDirectory = "./DataFiles";
->>>>>>> Stashed changes
 
         // Parser object to handle html to text conversion.
         private static readonly HtmlToTextParser HtmlToText = new HtmlToTextParser();
