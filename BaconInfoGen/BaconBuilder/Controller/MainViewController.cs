@@ -13,10 +13,10 @@ namespace BaconBuilder.Controller
     class MainViewController
     {
         // Test directory. Needs to be removed at some point.
-        private const string HtmlDirectory = "C:\\Users/jlm47/test/";
+        //private static readonly string HtmlDirectory = "C:\\Users/"+System.Environment.UserName+"/test/";
 
         // Directory for local html content.
-        //private const string HtmlPath = "./bin/DataFiles";
+        private const string HtmlDirectory = "./bin/DataFiles";
 
         // Parser object to handle html to text conversion.
         private static readonly HtmlToTextParser HtmlToText = new HtmlToTextParser();
@@ -44,16 +44,15 @@ namespace BaconBuilder.Controller
         }
 
         /// <summary>
-        /// Gets the text content of an html file.
+        /// Gets the text content of an HTML file.
         /// 
-        /// Gets the selected file in a listview and usess an HtmlToTextParser to parse it's content to
-        /// plain text.
+        /// Uses an HtmlToTextParser to parse its content to plain text.
         /// </summary>
-        /// <param name="listView">List view to get file data from.</param>
+        /// <param name="filename">Name of file to get data from.</param>
         /// <returns>String content (plain text) of the file.</returns>
         public static string GetFileText(string filename)
         {
-                // Read the selected html file and store it.
+                // Read the selected HTML file and store it.
                 string htmlContent = File.ReadAllText(HtmlDirectory + filename);
 
                 // Return plain text version of the above.

@@ -19,7 +19,12 @@ namespace BaconBuilder.Model
         /// </summary>
         protected override sealed void InitialiseDictionary()
         {
-            // Replace html img tag with pseudo tag equivalent.
+            RegexDict.Add(@"</p>\s*<p>", "\n\n");
+
+            // <body><p> should match, </p><p> shouldn't match
+            RegexDict.Add(@"(?!</p>)\s*<p>", "");
+
+            //// Replace html image tag with pseudo tag equivalent.
             RegexDict.Add(@"<\s*img\s+src\s*=\s*""([^""\s]*)""\s*/>", "<img>$1</img>");
 
             // Replace html audio tag with pseudo tag equivalent. NEEDS A BIT MORE WORK. SEEMS TO WORK!
