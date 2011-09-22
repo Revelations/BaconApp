@@ -94,6 +94,7 @@
     <Compile Include="Model\FileHandler.cs" />
     <Compile Include="Model\HtmlDegen.cs" />
     <Compile Include="Model\HtmlGenerator.cs" />
+    <Compile Include="Model\ImageManipulator.cs" />
     <Compile Include="Model\Model.cs" />
     <Compile Include="Model\QrCodeGenerator.cs" />
     <Compile Include="Model\TextToHtmlParser.cs" />
@@ -120,12 +121,6 @@
     <Compile Include="View\Preview.designer.cs">
       <DependentUpon>Preview.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\SplashScreen.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\SplashScreen.Designer.cs">
-      <DependentUpon>SplashScreen.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -144,9 +139,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Preview.resx">
       <DependentUpon>Preview.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\SplashScreen.resx">
-      <DependentUpon>SplashScreen.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
