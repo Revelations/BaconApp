@@ -123,5 +123,15 @@ namespace BaconBuilder.Controller
                     return fileName;
             }
         }
+
+        public static void RemoveFile(string fileName)
+        {
+            FileInfo f = new FileInfo(HtmlDirectory + fileName);
+
+            if(f.Exists)
+            {
+                f.Delete();
+            }
+        }
     }
 }

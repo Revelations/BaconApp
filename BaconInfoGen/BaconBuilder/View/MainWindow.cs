@@ -121,9 +121,21 @@ namespace BaconBuilder.View
             MainViewController.InitialiseListView(listViewContents);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnRemoveFile_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("Are you sure you wish to delete the file " + _currentFile + "?", "Confirm", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                MainViewController.RemoveFile(_currentFile);
 
+                _currentFile = null;
+
+                MainViewController.InitialiseListView(listViewContents);
+            }
         }
 	}
 }
