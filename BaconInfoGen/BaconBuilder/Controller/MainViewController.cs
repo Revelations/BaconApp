@@ -10,7 +10,7 @@ using BaconBuilder.View;
 
 namespace BaconBuilder.Controller
 {
-    class MainViewController
+	public class MainViewController
     {
         // Test directory. Needs to be removed at some point.
         private static readonly string HtmlDirectory = "C:/Users/"+System.Environment.UserName+"/test/";
@@ -106,22 +106,18 @@ namespace BaconBuilder.Controller
         /// <returns>Unused filname with the lowest possible appended integer.</returns>
         public static string GetLowestUnusedNewFileName()
         {
-            // If the new file name doesn't exist, then use it.
-            string fileName = HtmlDirectory + NewHtmlFileName + ".html";
-            if (!File.Exists(fileName))
-                return fileName;
-
-            // Otherwise iterate to find the lowest number available to append.
-            for (int i = 2; ; )
-            {
-                fileName = HtmlDirectory + NewHtmlFileName + i.ToString(" 0#") + ".html";
-
-                // Try next if file exists, use the name if not.
-                if (File.Exists(fileName))
-                    i++;
-                else
-                    return fileName;
-            }
+			var name = HtmlDirectory + NewHtmlFileName;
+			// If the new file name doesn't exist, then use it.
+			var fileName = name + ".html";
+			if (File.Exists(fileName))
+			{
+				// Otherwise iterate to find the lowest number available to append.
+				for (int i = 2; File.Exists(fileName); i++)
+				{
+					fileName = name + i.ToString(" 0#") + ".html";
+				}
+			}
+			return fileName;
         }
 
         public static void RemoveFile(string fileName)

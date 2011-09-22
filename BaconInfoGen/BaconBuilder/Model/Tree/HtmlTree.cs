@@ -9,8 +9,7 @@ namespace BaconBuilder
 	public class HtmlTree<T> : IEnumerable
 	{
 		public HtmlNode<T> Owner { get; private set;  }
-		private List<HtmlNode<T>> nodes;
-		private HtmlNode<T> node;
+		private readonly List<HtmlNode<T>> nodes;
 
 		public HtmlTree(HtmlNode<T> node)
 		{
@@ -20,7 +19,7 @@ namespace BaconBuilder
 
 		public HtmlNode<T> Add(T node)
 		{
-			HtmlNode<T> n = new HtmlNode<T>(node);
+			var n = new HtmlNode<T>(node);
 			n.Parent = Owner;
 			nodes.Add(n);
 			return n;

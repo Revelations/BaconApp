@@ -14,6 +14,7 @@ namespace BaconBuilder.View
 	{
 		private BaconModel model;
 
+		private string _currentTitle;
 	    private string _currentFile;
 
         private string _renamedFile = string.Empty;
@@ -157,7 +158,7 @@ namespace BaconBuilder.View
         {
             if(listViewContents.SelectedItems.Count == 1)
             {
-                if (MainViewController.FileExists(txtTitle.Text))
+                if (MainViewController.FileExists(txtTitle.Text) && !_currentTitle.Equals(txtTitle.Text))
                 {
                     Console.WriteLine(_renamedFile);
                     Console.WriteLine(MainViewController.HtmlFileName(_currentFile));
@@ -185,6 +186,11 @@ namespace BaconBuilder.View
             if (e.KeyCode == Keys.Enter)
                 txtTitle_FocusLeft(null, e);
         }
+
+		private void txtTitle_Enter(object sender, EventArgs e)
+		{
+			_currentTitle = txtTitle.Text;
+		}
 
 	    
 	}

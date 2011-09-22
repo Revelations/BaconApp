@@ -19,6 +19,8 @@ namespace BaconBuilder.Model
         /// </summary>
         protected override sealed void InitialiseDictionary()
         {
+            RegexDict.Add(@"\s*<!DOCTPYE\s+html>\s*", "");
+            
             RegexDict.Add(@"\s*</*body>\s*", "");
             // Replace </p><p> with \n\n
             RegexDict.Add(@"</p>\s*<p>", @"\n\n");
