@@ -50,8 +50,6 @@ namespace BaconBuilder.View
             this.pnlDirectories = new System.Windows.Forms.Panel();
             this.listViewContents = new System.Windows.Forms.ListView();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
-            this.flpDirectory = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnAddFile = new System.Windows.Forms.Button();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.pnlContentEditor = new System.Windows.Forms.Panel();
@@ -79,9 +77,11 @@ namespace BaconBuilder.View
             this.splitter5 = new System.Windows.Forms.Splitter();
             this.splitter6 = new System.Windows.Forms.Splitter();
             this.splitter4 = new System.Windows.Forms.Splitter();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnAddFile = new System.Windows.Forms.Button();
+            this.btnRemoveFile = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.pnlDirectories.SuspendLayout();
-            this.flpDirectory.SuspendLayout();
             this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -91,6 +91,7 @@ namespace BaconBuilder.View
             this.flpPreview.SuspendLayout();
             this.toolContents.SuspendLayout();
             this.tlpDataFields.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -199,7 +200,7 @@ namespace BaconBuilder.View
             // 
             this.pnlDirectories.BackColor = System.Drawing.SystemColors.Control;
             this.pnlDirectories.Controls.Add(this.listViewContents);
-            this.pnlDirectories.Controls.Add(this.flpDirectory);
+            this.pnlDirectories.Controls.Add(this.tableLayoutPanel1);
             this.pnlDirectories.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlDirectories.Location = new System.Drawing.Point(8, 8);
             this.pnlDirectories.Name = "pnlDirectories";
@@ -212,7 +213,7 @@ namespace BaconBuilder.View
             this.listViewContents.Location = new System.Drawing.Point(0, 0);
             this.listViewContents.MultiSelect = false;
             this.listViewContents.Name = "listViewContents";
-            this.listViewContents.Size = new System.Drawing.Size(160, 480);
+            this.listViewContents.Size = new System.Drawing.Size(160, 443);
             this.listViewContents.SmallImageList = this.imageList;
             this.listViewContents.TabIndex = 3;
             this.listViewContents.UseCompatibleStateImageBehavior = false;
@@ -224,26 +225,6 @@ namespace BaconBuilder.View
             this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
             this.imageList.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList.Images.SetKeyName(0, "html_icon.png");
-            // 
-            // flpDirectory
-            // 
-            this.flpDirectory.AutoSize = true;
-            this.flpDirectory.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flpDirectory.Controls.Add(this.btnAddFile);
-            this.flpDirectory.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flpDirectory.Location = new System.Drawing.Point(0, 480);
-            this.flpDirectory.Name = "flpDirectory";
-            this.flpDirectory.Size = new System.Drawing.Size(160, 29);
-            this.flpDirectory.TabIndex = 2;
-            // 
-            // btnAddFile
-            // 
-            this.btnAddFile.Location = new System.Drawing.Point(3, 3);
-            this.btnAddFile.Name = "btnAddFile";
-            this.btnAddFile.Size = new System.Drawing.Size(150, 23);
-            this.btnAddFile.TabIndex = 1;
-            this.btnAddFile.Text = "Add Files";
-            this.btnAddFile.UseVisualStyleBackColor = true;
             // 
             // toolStripContainer1
             // 
@@ -537,6 +518,41 @@ namespace BaconBuilder.View
             this.splitter4.TabIndex = 10;
             this.splitter4.TabStop = false;
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.btnRemoveFile, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnAddFile, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 443);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(160, 66);
+            this.tableLayoutPanel1.TabIndex = 4;
+            // 
+            // btnAddFile
+            // 
+            this.btnAddFile.Location = new System.Drawing.Point(3, 3);
+            this.btnAddFile.Name = "btnAddFile";
+            this.btnAddFile.Size = new System.Drawing.Size(154, 27);
+            this.btnAddFile.TabIndex = 2;
+            this.btnAddFile.Text = "Add File";
+            this.btnAddFile.UseVisualStyleBackColor = true;
+            this.btnAddFile.Click += new System.EventHandler(this.btnAddFile_Click);
+            // 
+            // btnRemoveFile
+            // 
+            this.btnRemoveFile.Location = new System.Drawing.Point(3, 36);
+            this.btnRemoveFile.Name = "btnRemoveFile";
+            this.btnRemoveFile.Size = new System.Drawing.Size(154, 27);
+            this.btnRemoveFile.TabIndex = 3;
+            this.btnRemoveFile.Text = "Remove File";
+            this.btnRemoveFile.UseVisualStyleBackColor = true;
+            this.btnRemoveFile.Click += new System.EventHandler(this.btnRemoveFile_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -552,8 +568,6 @@ namespace BaconBuilder.View
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.pnlDirectories.ResumeLayout(false);
-            this.pnlDirectories.PerformLayout();
-            this.flpDirectory.ResumeLayout(false);
             this.toolStripContainer1.BottomToolStripPanel.ResumeLayout(false);
             this.toolStripContainer1.BottomToolStripPanel.PerformLayout();
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
@@ -571,6 +585,7 @@ namespace BaconBuilder.View
             this.toolContents.PerformLayout();
             this.tlpDataFields.ResumeLayout(false);
             this.tlpDataFields.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
 		}
@@ -601,11 +616,9 @@ namespace BaconBuilder.View
 		private ToolStripMenuItem editToolStripMenuItem;
 		private ToolStripMenuItem viewToolStripMenuItem;
 		private ToolStripMenuItem toolsToolStripMenuItem;
-		private ToolStripMenuItem optionsToolStripMenuItem;
-        private Button btnAddFile;
+        private ToolStripMenuItem optionsToolStripMenuItem;
         private Button btnPreview;
         private FlowLayoutPanel flpPreview;
-        private FlowLayoutPanel flpDirectory;
         private Button btnPrintPreview;
         private ToolStripMenuItem exitToolStripMenuItem;
         private ToolStripButton tsbImage;
@@ -623,6 +636,9 @@ namespace BaconBuilder.View
         private TextBox textBoxMain;
         private ListView listViewContents;
         private ImageList imageList;
+        private TableLayoutPanel tableLayoutPanel1;
+        private Button btnRemoveFile;
+        private Button btnAddFile;
 
 	}
 }

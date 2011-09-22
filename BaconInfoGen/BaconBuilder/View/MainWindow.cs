@@ -114,6 +114,17 @@ namespace BaconBuilder.View
         {
             MainViewController.InitialiseListView(listViewContents);
         }
+
+        private void btnAddFile_Click(object sender, EventArgs e)
+        {
+            MainViewController.CreateNewHtmlFile();
+            MainViewController.InitialiseListView(listViewContents);
+        }
+
+        private void btnRemoveFile_Click(object sender, EventArgs e)
+        {
+
+        }
 	}
 }
 
