@@ -35,7 +35,7 @@ namespace BaconBuilder
         public void TestParagraphParse()
         {
             //Assert.AreEqual(@"Hello World", _parser.Parse(@"<body><p>Hello World</p></body>"));
-            Assert.AreEqual(@"<body>Hello World\n\nI like bacon</body>", _parser.Parse(@"<body><p>Hello World</p><p>I like bacon</p></body>"));
+            Assert.AreEqual(@"Hello World\n\nI like bacon", _parser.Parse(@"<body><p>Hello World</p><p>I like bacon</p></body>"));
         }
 
         [Test]

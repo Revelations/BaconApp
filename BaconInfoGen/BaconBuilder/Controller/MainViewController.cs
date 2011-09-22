@@ -16,7 +16,7 @@ namespace BaconBuilder.Controller
         //private static readonly string HtmlDirectory = "C:\\Users/"+System.Environment.UserName+"/test/";
 
         // Directory for local html content.
-        private const string HtmlDirectory = "./bin/DataFiles";
+        private const string HtmlDirectory = "./DataFiles";
 
         // Parser object to handle html to text conversion.
         private static readonly HtmlToTextParser HtmlToText = new HtmlToTextParser();

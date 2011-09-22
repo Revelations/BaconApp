@@ -52,7 +52,7 @@ namespace BaconBuilder.Model
 
             foreach (KeyValuePair<string, string> kvp in RegexDict)
                 foreach (Match m in Regex.Matches(input, kvp.Key))
-                    output = Regex.Replace(input, kvp.Key, kvp.Value);
+                    output = Regex.Replace(output, kvp.Key, kvp.Value);
 
             return output;
         }

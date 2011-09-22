@@ -19,18 +19,20 @@ namespace BaconBuilder.Model
         /// </summary>
         protected override sealed void InitialiseDictionary()
         {
-            RegexDict.Add(@"</p>\s*<p>", "\n\n");
+            RegexDict.Add(@"\s*</*body>\s*", "");
+            // Replace </p><p> with \n\n
+            RegexDict.Add(@"</p>\s*<p>", @"\n\n");
 
-            // <body><p> should match, </p><p> shouldn't match
             RegexDict.Add(@"(?!</p>)\s*<p>", "");
-
-            //// Replace html image tag with pseudo tag equivalent.
+            RegexDict.Add(@"</p>\s*(?!<p>)", "");
+            
+            // Replace html image tag with pseudo tag equivalent.
             RegexDict.Add(@"<\s*img\s+src\s*=\s*""([^""\s]*)""\s*/>", "<img>$1</img>");
 
             // Replace html audio tag with pseudo tag equivalent. NEEDS A BIT MORE WORK. SEEMS TO WORK!
             RegexDict.Add(@"<audio (?:.*\s+)*src=""([^""]*)""(?:\s+.*\s*)*>[^<]*</audio>", "<audio>$1</audio>");
             //RegexDict.Add(@"<\s*audio\s+(?:[\w]+=""[^""]*""\s+)*src\s*=\s*""([^""\s]*)"">[^<]*<\s*/\s*audio\s*>", "<audio>$1</audio>");
-
+            
             // TODO: Complete set of regex rules here.
         }
 
