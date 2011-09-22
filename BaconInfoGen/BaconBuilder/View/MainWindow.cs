@@ -16,7 +16,7 @@ namespace BaconBuilder.View
 
 	    private string _currentFile;
 
-
+        private string _renamedFile = string.Empty;
         #region Constructors
 
         public MainWindow()
@@ -90,20 +90,30 @@ namespace BaconBuilder.View
         private void listViewContents_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Make sure that something is selected.
-            if (listViewContents.SelectedItems.Count > 0)
+            if (listViewContents.SelectedItems.Count == 1)
             {
+                // Make sure a file has been selected.
                 if (_currentFile != null)
                     // Save the old file.
                     MainViewController.SaveFileHtml(_currentFile, textBoxMain.Text);
 
+                // If the file needs renaming, then do it.
+                if (!string.IsNullOrWhiteSpace(_renamedFile))
+                {
+                    MainViewController.RenameFile(_currentFile, _renamedFile);
+                    _renamedFile = string.Empty;
+                }
+
                 // Get the name of the new file.
                 _currentFile = listViewContents.SelectedItems[0].Text;
+
+                // Get the title of the new file and store it in the title textbox.
+                txtTitle.Text = MainViewController.HtmlFileName(_currentFile);
 
                 // Load the new file.
                 textBoxMain.Text = MainViewController.GetFileText(_currentFile);
             }
         }
-
 
         /// <summary>
         /// Called when the form is first loaded.
@@ -137,6 +147,46 @@ namespace BaconBuilder.View
                 MainViewController.InitialiseListView(listViewContents);
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtTitle_FocusLeft(object sender, EventArgs e)
+        {
+            if(listViewContents.SelectedItems.Count == 1)
+            {
+                if (MainViewController.FileExists(txtTitle.Text))
+                {
+                    Console.WriteLine(_renamedFile);
+                    Console.WriteLine(MainViewController.HtmlFileName(_currentFile));
+
+                    MessageBox.Show("A file already exists with that name!", "Error!");
+                    txtTitle.Text = MainViewController.HtmlFileName(_currentFile);
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(txtTitle.Text))
+                {
+                    MessageBox.Show("Invalid name specified!", "Error!");
+                    txtTitle.Text = MainViewController.HtmlFileName(_currentFile);
+                    return;
+                }
+
+                _renamedFile = txtTitle.Text;
+
+                listViewContents.SelectedItems[0].Text = txtTitle.Text + ".html";
+            }
+        }
+
+	    private void txtTitle_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                txtTitle_FocusLeft(null, e);
+        }
+
+	    
 	}
 }
 

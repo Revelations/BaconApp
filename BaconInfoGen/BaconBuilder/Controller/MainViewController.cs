@@ -133,5 +133,28 @@ namespace BaconBuilder.Controller
                 f.Delete();
             }
         }
+
+        public static string HtmlFileName(string input)
+        {
+            string[] split = input.Split('.');
+
+            string output = string.Empty;
+
+            for (int i = 0; i < split.Length - 1; i++)
+                output += split[i];
+
+            return output;
+        }
+
+        public static void RenameFile(string input, string ouput)
+        {
+            FileInfo f = new FileInfo(HtmlDirectory + input);
+            f.MoveTo(HtmlDirectory + ouput + ".html");
+        }
+
+        public static bool FileExists(string input)
+        {
+            return File.Exists(HtmlDirectory + input + ".html");
+        }
     }
 }
