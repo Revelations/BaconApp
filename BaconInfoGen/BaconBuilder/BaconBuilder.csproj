@@ -97,6 +97,7 @@
     <Compile Include="Model\HtmlGenerator.cs" />
     <Compile Include="Model\ImageManipulator.cs" />
     <Compile Include="Model\Model.cs" />
+    <Compile Include="Model\Point.cs" />
     <Compile Include="Model\QrCodeGenerator.cs" />
     <Compile Include="Model\TextToHtmlParser.cs" />
     <Compile Include="Model\Tree\HtmlTree.cs" />
