@@ -10,16 +10,26 @@ using BaconBuilder.View;
 
 namespace BaconBuilder.Controller
 {
-	public class MainViewController
+	public class MainViewController : IMainViewController
     {
-        // Test directory. Needs to be removed at some point.
+		private readonly BaconModel _model;
+		private readonly MainWindow _view;
+
+		public MainViewController(BaconModel model, MainWindow view)
+		{
+			_model = model;
+			_view = view;
+		}
+
+		// Test directory. Needs to be removed at some point.
+		private const string HtmlExtension = ".html";
         private static readonly string HtmlDirectory = "C:/Users/"+System.Environment.UserName+"/test/";
 
-        private static readonly string BlankHtmlFileName = "Blank.html";
+		private const string BlankHtmlFileName = "Blank";
 
-        private static readonly string NewHtmlFileName = "New File";
+		private const string NewHtmlFileName = "New File";
 
-        // Directory for local html content.
+		// Directory for local html content.
         //private const string HtmlDirectory = "./DataFiles";
 
         // Parser object to handle html to text conversion.
@@ -30,7 +40,7 @@ namespace BaconBuilder.Controller
         /// Initialises and populates a listview with the html files in a directory.
         /// </summary>
         /// <param name="listView">The listview to initialise.</param>
-        public static void InitialiseListView(ListView listView)
+        public void InitialiseListView(ListView listView)
         {
             listView.Items.Clear();
 
@@ -45,57 +55,11 @@ namespace BaconBuilder.Controller
             foreach (FileInfo f in directory.GetFiles())
             {
                 // Get only html files, and not the blank one for initialising new files.
-                if (f.Extension.Equals(".html") && f.Name != BlankHtmlFileName)
+                if (f.Extension.Equals(HtmlExtension) && f.Name != BlankHtmlFileName + HtmlExtension)
                     listView.Items.Add(f.Name, 0);
             }
         }
 
-        /// <summary>
-        /// Gets the text content of an HTML file.
-        /// 
-        /// Uses an HtmlToTextParser to parse its content to plain text.
-        /// </summary>
-        /// <param name="filename">Name of file to get data from.</param>
-        /// <returns>String content (plain text) of the file.</returns>
-        public static string GetFileText(string filename)
-        {
-                // Read the selected HTML file and store it.
-                string htmlContent = File.ReadAllText(HtmlDirectory + filename);
-
-                // Return plain text version of the above.
-                return HtmlToText.Parse(htmlContent);
-        }
-
-        /// <summary>
-        /// Gets the html parsed verision of plain text content and saves it to a file.
-        /// </summary>
-        /// <param name="filename">The filename of the file to save to.</param>
-        /// <param name="input">The input string to parse and write to file.</param>
-        public static void SaveFileHtml(string filename, string input)
-        {
-            string htmlContent = TextToHtml.Parse(input);
-
-            File.WriteAllText(HtmlDirectory + filename, htmlContent);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        public static string GetHtmlContent(string input)
-        {
-            return HtmlToText.Parse(input);
-        }
-
-        /// <summary>
-        /// Creates a new Html file by cloning the existing blank one.
-        /// </summary>
-        public static void CreateNewHtmlFile()
-        {
-            FileInfo newFile = new FileInfo(HtmlDirectory + BlankHtmlFileName);
-            newFile.CopyTo(GetLowestUnusedNewFileName());
-        }
 
         /// <summary>
         /// Gets a new file name not already present in the Html directory.
@@ -107,50 +71,79 @@ namespace BaconBuilder.Controller
         public static string GetLowestUnusedNewFileName()
         {
 			var name = HtmlDirectory + NewHtmlFileName;
-			// If the new file name doesn't exist, then use it.
-			var fileName = name + ".html";
-			if (File.Exists(fileName))
+			var fileName = name + HtmlExtension;
+			// Otherwise iterate to find the lowest number available to append.
+			for (int i = 2; File.Exists(fileName); i++)
 			{
-				// Otherwise iterate to find the lowest number available to append.
-				for (int i = 2; File.Exists(fileName); i++)
-				{
-					fileName = name + i.ToString(" 0#") + ".html";
-				}
+				fileName = name + i.ToString(" 0#") + HtmlExtension;
 			}
 			return fileName;
         }
 
-        public static void RemoveFile(string fileName)
-        {
-            FileInfo f = new FileInfo(HtmlDirectory + fileName);
+		/// <summary>
+		/// Gets the text content of an HTML file.
+		/// 
+		/// Uses an HtmlToTextParser to parse its content to plain text.
+		/// </summary>
+		/// <param name="fileName">Name of file to get data from.</param>
+		/// <returns>String content (plain text) of the file.</returns>
+		public string LoadHtmlToText(string fileName)
+		{
+			Console.WriteLine("Loading from HTML");
 
-            if(f.Exists)
-            {
-                f.Delete();
-            }
-        }
+			// Read the selected HTML file and store it.
+			string htmlContent = File.ReadAllText(HtmlDirectory + fileName);
 
-        public static string HtmlFileName(string input)
-        {
-            string[] split = input.Split('.');
+			// Return plain text version of the above.
+			return HtmlToText.Parse(htmlContent);
+		}
 
-            string output = string.Empty;
+		/// <summary>
+		/// Gets the html parsed verision of plain text content and saves it to a file.
+		/// </summary>
+		/// <param name="filename">The filename of the file to save to.</param>
+		/// <param name="text">The input string to parse and write to file.</param>
+		public void SaveTextToHtml(string filename, string text)
+		{
+			Console.WriteLine("Saving to {0}", filename + HtmlExtension);
 
-            for (int i = 0; i < split.Length - 1; i++)
-                output += split[i];
+			string htmlContent = TextToHtml.Parse(text);
+			File.WriteAllText(HtmlDirectory + filename + HtmlExtension, htmlContent);
+		}
 
-            return output;
-        }
+		/// <summary>
+		/// Creates a new blank file.
+		/// </summary>
+		public void CreateNewFile()
+		{
+			Console.WriteLine("Creating new file");
+			new FileInfo(HtmlDirectory + BlankHtmlFileName + HtmlExtension).CopyTo(GetLowestUnusedNewFileName());
+		}
 
-        public static void RenameFile(string input, string ouput)
-        {
-            FileInfo f = new FileInfo(HtmlDirectory + input);
-            f.MoveTo(HtmlDirectory + ouput + ".html");
-        }
+		/// <summary>
+		/// Rename the old file name to the new file name.
+		/// </summary>
+		/// <param name="oldName"></param>
+		/// <param name="newName"></param>
+		public void RenameFile(string oldName, string newName)
+		{
+			Console.WriteLine("Renaming file " + oldName + " to " + newName);
+			var oldInfo = new FileInfo(HtmlDirectory + oldName + HtmlExtension);
+			var newInfo = new FileInfo(HtmlDirectory + newName + HtmlExtension);
+			if (File.Exists(newInfo.FullName))
+			{
+				throw new IOException("File already exists");
+			}
+			oldInfo.MoveTo(newInfo.FullName);
+		}
 
-        public static bool FileExists(string input)
-        {
-            return File.Exists(HtmlDirectory + input + ".html");
-        }
-    }
+		public void RemoveFile(string fileName)
+		{
+			var f = new FileInfo(HtmlDirectory + fileName);
+			Console.WriteLine("Removing file " + f.Name);
+
+			if (f.Exists)
+				f.Delete();
+		}
+	}
 }

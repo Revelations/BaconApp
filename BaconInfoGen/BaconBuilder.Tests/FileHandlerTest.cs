@@ -133,12 +133,5 @@ namespace BaconBuilder
 			Assert.IsTrue(_handler.IsFileInMemory(_info), "_info should be in memory");
 			Assert.IsFalse(_handler.HasFileBeenModified(_info), "File should not have been modified");
 		}
-
-		[Test]
-		public void TestGetNewFileName()
-		{
-			string s1 = MainViewController.GetLowestUnusedNewFileName();
-			Assert.AreEqual(s1, "C:/Users/sk218/test/New File 02.html");
-		}
 	}
 }

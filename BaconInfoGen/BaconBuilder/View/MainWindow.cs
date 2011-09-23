@@ -12,20 +12,25 @@ namespace BaconBuilder.View
 {
 	public partial class MainWindow : Form
 	{
-		private BaconModel model;
+		private readonly BaconModel _model;
+		private readonly IMainViewController _controller;
 
-		private string _currentTitle;
-	    private string _currentFile;
+		// Title before modification
+		private string _cleanTitle = null;
+		// Contents before modification
+		private string _cleanContents = null;
 
-        private string _renamedFile = string.Empty;
-        #region Constructors
+
+		private string _currentFile = null;
+
+		#region Constructors
 
         public MainWindow()
         {
             InitializeComponent();
 
-            this.model = new BaconModel();
-
+            this._model = new BaconModel();
+        	this._controller = new MainViewController(_model, this);
 
             // Event binding
             btnPreview.Click += new System.EventHandler(btnPreview_Click);
@@ -44,7 +49,7 @@ namespace BaconBuilder.View
         /// <param name="e"></param>
         private void btnPreview_Click(object sender, System.EventArgs e)
         {
-            model.Contents = textBoxMain.Text;
+            _model.Contents = textBoxMain.Text;
 
             Preview preview = new Preview(null, 0, 0);
             preview.ShowDialog();
@@ -61,11 +66,11 @@ namespace BaconBuilder.View
             int caretPos = textBoxMain.SelectionStart;
             int selectionLength = textBoxMain.SelectionLength;
 
-            ImageSelectionDialog dialog = new ImageSelectionDialog(model);
+            ImageSelectionDialog dialog = new ImageSelectionDialog(_model);
             if (dialog.ShowDialog() != DialogResult.Cancel)
             {
                 textBoxMain.SelectionStart = caretPos;
-                textBoxMain.SelectedText = string.Format("<img>{0}</img>", model.ImageUrl);
+                textBoxMain.SelectedText = string.Format("<img>{0}</img>", _model.ImageUrl);
             }
 
         }
@@ -83,38 +88,6 @@ namespace BaconBuilder.View
         #endregion
         
 
-        /// <summary>
-        /// Called when the user selects a new item in the list view.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void listViewContents_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // Make sure that something is selected.
-            if (listViewContents.SelectedItems.Count == 1)
-            {
-                // Make sure a file has been selected.
-                if (_currentFile != null)
-                    // Save the old file.
-                    MainViewController.SaveFileHtml(_currentFile, textBoxMain.Text);
-
-                // If the file needs renaming, then do it.
-                if (!string.IsNullOrWhiteSpace(_renamedFile))
-                {
-                    MainViewController.RenameFile(_currentFile, _renamedFile);
-                    _renamedFile = string.Empty;
-                }
-
-                // Get the name of the new file.
-                _currentFile = listViewContents.SelectedItems[0].Text;
-
-                // Get the title of the new file and store it in the title textbox.
-                txtTitle.Text = MainViewController.HtmlFileName(_currentFile);
-
-                // Load the new file.
-                textBoxMain.Text = MainViewController.GetFileText(_currentFile);
-            }
-        }
 
         /// <summary>
         /// Called when the form is first loaded.
@@ -123,13 +96,13 @@ namespace BaconBuilder.View
         /// <param name="e"></param>
         private void MainWindow_Load(object sender, System.EventArgs e)
         {
-            MainViewController.InitialiseListView(listViewContents);
+            _controller.InitialiseListView(listViewContents);
         }
 
         private void btnAddFile_Click(object sender, EventArgs e)
         {
-            MainViewController.CreateNewHtmlFile();
-            MainViewController.InitialiseListView(listViewContents);
+			_controller.CreateNewFile();
+            _controller.InitialiseListView(listViewContents);
         }
 
         /// <summary>
@@ -139,45 +112,13 @@ namespace BaconBuilder.View
         /// <param name="e"></param>
         private void btnRemoveFile_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure you wish to delete the file " + _currentFile + "?", "Confirm", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            if (MessageBox.Show("Are you sure you wish to delete the file \"" + _currentFile + "\"?", "Confirm", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
-                MainViewController.RemoveFile(_currentFile);
+				_controller.RemoveFile(_currentFile);
 
                 _currentFile = null;
 
-                MainViewController.InitialiseListView(listViewContents);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void txtTitle_FocusLeft(object sender, EventArgs e)
-        {
-            if(listViewContents.SelectedItems.Count == 1)
-            {
-                if (MainViewController.FileExists(txtTitle.Text) && !_currentTitle.Equals(txtTitle.Text))
-                {
-                    Console.WriteLine(_renamedFile);
-                    Console.WriteLine(MainViewController.HtmlFileName(_currentFile));
-
-                    MessageBox.Show("A file already exists with that name!", "Error!");
-                    txtTitle.Text = MainViewController.HtmlFileName(_currentFile);
-                    return;
-                }
-
-                if (string.IsNullOrWhiteSpace(txtTitle.Text))
-                {
-                    MessageBox.Show("Invalid name specified!", "Error!");
-                    txtTitle.Text = MainViewController.HtmlFileName(_currentFile);
-                    return;
-                }
-
-                _renamedFile = txtTitle.Text;
-
-                listViewContents.SelectedItems[0].Text = txtTitle.Text + ".html";
+                _controller.InitialiseListView(listViewContents);
             }
         }
 
@@ -185,12 +126,182 @@ namespace BaconBuilder.View
         {
             if (e.KeyCode == Keys.Enter)
                 txtTitle_FocusLeft(null, e);
+			else if (e.KeyCode == Keys.Escape)
+			{
+				txtTitle.Text = _cleanTitle;
+				textBoxMain.Focus();
+			}
         }
 
+		/// <summary>
+		/// When user enters the title textbox, save the current name.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void txtTitle_Enter(object sender, EventArgs e)
 		{
-			_currentTitle = txtTitle.Text;
+			_cleanTitle = txtTitle.Text;
 		}
+
+        /// <summary>
+        /// When the user leaves the title textbox, handle any name changes.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtTitle_FocusLeft(object sender, EventArgs e)
+        {
+			if (_currentFile == null) return;
+			//Check if the new title is invalid (e.g. blank, only spaces)
+			if (txtTitle.Text.Trim().Length == 0)
+			{
+				MessageBox.Show("Title cannot be blank or just spaces.");
+				txtTitle.Text = _cleanTitle;
+				return;
+			}
+        	//Check if the text has changed.
+			if (txtTitle.Text.Equals(_cleanTitle))
+			{
+				return;
+			}
+
+
+			// Since the title is valid and changed, we rename it.
+        	//Console.WriteLine("Index of "+cleanTitle+ " is " + listViewContents.Items.IndexOfKey(cleanTitle));
+			
+        	int index = FindItem(_cleanTitle + ".html");
+
+			Console.WriteLine("Clean title = " + _cleanTitle);
+			try
+			{
+				_controller.RenameFile(_cleanTitle, txtTitle.Text);
+			}
+			catch (IOException ex)
+			{
+				System.Console.WriteLine(ex.Message);
+				MessageBox.Show(ex.Message, "Error");
+				txtTitle.Text = _cleanTitle;
+				return;
+			}
+			listViewContents.Items[index].Text = txtTitle.Text + ".html";
+
+
+#region
+////			if (listViewContents.SelectedItems.Count == 1)
+////			{
+////				string oldName = listViewContents.SelectedItems[0].Text;
+////				string newName = txtTitle.Text;
+////				_controller.RenameFile(oldName, newName);
+////			}
+//
+//        	if (listViewContents.SelectedItems.Count == 1)
+//            {
+//                if (MainViewController.FileExists(txtTitle.Text) && !_currentTitle.Equals(txtTitle.Text))
+//                {
+//                    Console.WriteLine(_renamedFile);
+//                    Console.WriteLine(BaconModel.HtmlFileName(_currentlyOpenedFile));
+//
+//                    MessageBox.Show("A file already exists with that name!", "Error!");
+//                    txtTitle.Text = BaconModel.HtmlFileName(_currentlyOpenedFile);
+//                    return;
+//                }
+//
+//                if (string.IsNullOrWhiteSpace(txtTitle.Text))
+//                {
+//                    MessageBox.Show("Invalid name specified!", "Error!");
+//                    txtTitle.Text = BaconModel.HtmlFileName(_currentlyOpenedFile);
+//                    return;
+//                }
+//
+//                _renamedFile = txtTitle.Text;
+//
+//                listViewContents.SelectedItems[0].Text = txtTitle.Text + ".html";
+			//            }
+#endregion
+		}
+		private int FindItem(string text)
+		{
+			ListView.ListViewItemCollection items = listViewContents.Items;
+
+			for(int i = 0; i < items.Count;i++)
+			{
+				Console.WriteLine("Finding: Comparing {0} with {1}", text, items[i].Text);
+				if (items[i].Text.Equals(text))
+				{
+					Console.WriteLine("Found!");
+					return i;
+				}
+			}
+
+			return -1;
+		}
+
+		private void listViewContents_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+		{
+			if (e.IsSelected)
+			{
+				_cleanTitle = e.Item.Text;
+				_cleanContents = _controller.LoadHtmlToText(e.Item.Text);
+				txtTitle.Text = BaconModel.HtmlFileName(_cleanTitle);
+				textBoxMain.Text = _cleanContents;
+				_currentFile = _cleanTitle;
+			}
+			else
+			{
+				// If contents have changed
+				if (!_cleanContents.Equals(textBoxMain.Text))
+				{
+					_controller.SaveTextToHtml(BaconModel.HtmlFileName(e.Item.Text), textBoxMain.Text);
+				}
+			}
+		}
+		
+		/// <summary>
+        /// Called when the user changes selection in the list view.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void listViewContents_SelectedIndexChanged(object sender, EventArgs e)
+        {
+//			//Deselected
+//			if (listViewContents.SelectedItems.Count == 0)
+//			{
+//			}
+//			// Make sure that something is selected.
+//			if (listViewContents.SelectedItems.Count == 1)
+//			{
+//				//_controller.ChangeSelection(listViewContents);
+//                
+//				// Make sure a file has been selected.
+//				if (_currentlyOpenedFile != null)
+//				{
+//					// Save the old file.
+//					_controller.SaveTextToHtml(_currentlyOpenedFile, textBoxMain.Text);
+//				}
+//				else
+//				{
+//					Console.WriteLine("WTF!");
+//				}
+//
+//				// If the file needs renaming, then do it.
+//                if (!string.IsNullOrWhiteSpace(_renamedFile))
+//                {
+//                    _controller.RenameFile(_currentlyOpenedFile, _renamedFile);
+//                    _renamedFile = string.Empty;
+//                }
+//
+//                // Get the name of the new file.
+//                _currentlyOpenedFile = listViewContents.SelectedItems[0].Text;
+//
+//                // Get the title of the new file and store it in the title textbox.
+//                txtTitle.Text = BaconModel.HtmlFileName(_currentlyOpenedFile);
+//
+//                // Load the new file.
+//                textBoxMain.Text = _controller.LoadHtmlToTextContents(_currentlyOpenedFile);
+//
+//				startingContents = textBoxMain.Text;
+//			}
+        }
+
 	}
 }
 

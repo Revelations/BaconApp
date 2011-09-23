@@ -37,5 +37,17 @@ namespace BaconBuilder.Model
 		/// Get or set the image url, obtained from an image selection dialog.
 		/// </summary>
 		public string ImageUrl { get; set; }
+
+		public static string HtmlFileName(string input)
+		{
+			string[] split = input.Split('.');
+
+			string output = String.Empty;
+
+			for (int i = 0; i < split.Length - 1; i++)
+				output += split[i];
+
+			return output;
+		}
 	}
 }
