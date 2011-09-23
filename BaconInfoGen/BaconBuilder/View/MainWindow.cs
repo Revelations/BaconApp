@@ -4,6 +4,7 @@ using System.Windows.Forms;
 
 using BaconBuilder.Controller;
 using BaconBuilder.Model;
+using System.Drawing;
 
 namespace BaconBuilder.View
 {
@@ -266,6 +267,49 @@ namespace BaconBuilder.View
 			//				startingContents = textBoxMain.Text;
 			//			}
 		}
+        private void btnPrintPreview_Click(object sender, EventArgs e)
+        {
+
+            printPreviewDialog1.Document = printDocument1;
+            printPreviewDialog1.ShowDialog();
+
+        }
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            QrCodeGenerator qr = new QrCodeGenerator();
+            string text;
+            Image code; //= qr.GenerateCode("Newcode");
+            //e.Graphics.DrawImage(i, 50, 50);
+            Font font = new System.Drawing.Font(Font.FontFamily, 20);
+            SolidBrush brush = new SolidBrush(Color.Black);
+            Rectangle layoutRectangle;// = new Rectangle(500, 100, 500, 100);
+            //e.Graphics.DrawString("Newcode",font,brush,layoutRectangle);
+
+            int j = 1;
+
+            for (int i = 0; i < listViewContents.Items.Count; i++)
+            {
+                text = listViewContents.Items[i].Text;
+                //code per page counter
+                if (j > 4) { j = 1;/*create new page*/ break; }
+                code = qr.GenerateCode(text);
+                if (j % 2 == 1)//every second on on left
+                {
+                    layoutRectangle = new Rectangle(400, 180 * j, 500, 100);
+                    e.Graphics.DrawImage(code, 100, 150 * j);
+                }
+                else
+                {//others on right
+                    layoutRectangle = new Rectangle(200, 180 * j, 500, 100);
+                    e.Graphics.DrawImage(code, 500, 150 * j);
+                }
+                e.Graphics.DrawString(text, font, brush, layoutRectangle);
+
+                // e.Graphics.DrawImage(code, (j/2) * 300, 100*j);
+                j++;
+            }
+        }
 
 	}
 }

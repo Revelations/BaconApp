@@ -80,6 +80,8 @@ namespace BaconBuilder.View
             this.splitter5 = new System.Windows.Forms.Splitter();
             this.splitter6 = new System.Windows.Forms.Splitter();
             this.splitter4 = new System.Windows.Forms.Splitter();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
+            this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.menuStrip1.SuspendLayout();
             this.pnlDirectories.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -362,6 +364,7 @@ namespace BaconBuilder.View
             this.btnPrintPreview.TabIndex = 11;
             this.btnPrintPreview.Text = "Print Preview";
             this.btnPrintPreview.UseVisualStyleBackColor = true;
+            this.btnPrintPreview.Click += new System.EventHandler(this.btnPrintPreview_Click);
             // 
             // toolContents
             // 
@@ -558,6 +561,20 @@ namespace BaconBuilder.View
             this.splitter4.TabIndex = 10;
             this.splitter4.TabStop = false;
             // 
+            // printDocument1
+            // 
+            this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
+            // 
+            // printPreviewDialog1
+            // 
+            this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog1.Enabled = true;
+            this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
+            this.printPreviewDialog1.Name = "printPreviewDialog1";
+            this.printPreviewDialog1.Visible = false;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -644,6 +661,8 @@ namespace BaconBuilder.View
         private TableLayoutPanel tableLayoutPanel1;
         private Button btnRemoveFile;
         private Button btnAddFile;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private PrintPreviewDialog printPreviewDialog1;
 
 	}
 }
