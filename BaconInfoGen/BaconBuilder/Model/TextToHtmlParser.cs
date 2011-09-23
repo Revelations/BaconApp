@@ -1,4 +1,7 @@
 ﻿
+using System.Drawing;
+using System.Text;
+
 namespace BaconBuilder.Model
 {
 	/// <summary>
@@ -28,12 +31,23 @@ namespace BaconBuilder.Model
 			// TODO: End document with </body></html>
 		}
 
-		/// <summary>
-		/// Constructor for this class. Populates the dictionary.
-		/// </summary>
-		public TextToHtmlParser()
-		{
-			InitialiseDictionary();
-		}
-	}
+        /// <summary>
+        /// Constructor for this class. Populates the dictionary.
+        /// </summary>
+        public TextToHtmlParser()
+        {
+            InitialiseDictionary();
+        }
+
+        /// <summary>
+        /// TODO: Jordan is working on this.
+        /// </summary>
+        /// <param name="p"></param>
+        public void InsertXY(Point p)
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.Append(string.Format("<!-- x = {0} -->", p.X));
+            builder.Append(string.Format("<!-- y = {0} -->", p.Y));
+        }
+    }
 }

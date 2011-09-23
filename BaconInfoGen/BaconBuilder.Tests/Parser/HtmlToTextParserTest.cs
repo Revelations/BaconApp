@@ -8,7 +8,7 @@ namespace BaconBuilder
     [TestFixture]
     public class HtmlToTextParserTest
     {
-        private Parser _parser;
+        private HtmlToTextParser _parser;
 
         [SetUp]
         public void SetUp()
@@ -91,6 +91,15 @@ namespace BaconBuilder
 
                 Assert.AreEqual(expected, actual, "Expected {0} but was {1}, index {2}", expected, actual, i);
             }
+        }
+
+        [Test]
+        public void TestExtractXY()
+        {
+            string input = "<!--x =  600 --><!-- y = 300 -->";
+            Point expected = new Point(600, 300);
+
+            Assert.AreEqual(expected, _parser.ExtractXY(input));
         }
     }
 }

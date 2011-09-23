@@ -45,5 +45,21 @@ namespace BaconBuilder.Model
         {
             InitialiseDictionary();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public Point ExtractXY(string input)
+        {
+            Match m = Regex.Match(input, @"<!--\s*[xX]\s*=\s*([0-9]+)\s*-->");
+
+            int x = Convert.ToInt32(m.Groups[1].Value);
+
+            m = Regex.Match(input, @"<!--\s*[yY]\s*=\s*([0-9]+)\s*-->");
+            int y = Convert.ToInt32(m.Groups[1].Value);
+
+            return new Point(x, y);
+        }
     }
 }

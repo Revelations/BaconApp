@@ -91,18 +91,21 @@
   <ItemGroup>
     <Compile Include="Controller\IMainViewController.cs" />
     <Compile Include="Controller\MainViewController.cs" />
+    <Compile Include="Model\FtpHelper.cs" />
     <Compile Include="Model\HtmlToTextParser.cs" />
     <Compile Include="Model\FileHandler.cs" />
     <Compile Include="Model\HtmlDegen.cs" />
     <Compile Include="Model\HtmlGenerator.cs" />
     <Compile Include="Model\ImageManipulator.cs" />
     <Compile Include="Model\Model.cs" />
+    <Compile Include="Model\Point.cs" />
     <Compile Include="Model\QrCodeGenerator.cs" />
     <Compile Include="Model\TextToHtmlParser.cs" />
     <Compile Include="Model\Tree\HtmlTree.cs" />
     <Compile Include="Model\Tree\HtmlNode.cs" />
     <Compile Include="Model\Parser.cs" />
-    <Compile Include="Model\Updater.cs" />
+    <Compile Include="Model\Downloader.cs" />
+    <Compile Include="Model\Uploader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\ImageSelectionDialog.cs">
