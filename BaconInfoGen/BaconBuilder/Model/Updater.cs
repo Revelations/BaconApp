@@ -49,6 +49,8 @@ namespace BaconBuilder.Model
                 line = reader.ReadLine();
             }
 
+            response.Close();
+
             return result;
         }
 
@@ -59,7 +61,8 @@ namespace BaconBuilder.Model
         {
             foreach(string fileName in ConnectAndGetList())
             {
-                DownloadSingleFile(fileName);
+                if(FileNeedsDownload(fileName))
+                    DownloadSingleFile(fileName);
             }
         }
 
@@ -98,6 +101,61 @@ namespace BaconBuilder.Model
             // Close streams once file transfer is complete.
             writer.Close();
             response.Close();
+        }
+
+        /// <summary>
+        /// Checks if a copy of the file with the given name exists on the local filesystem.
+        /// </summary>
+        /// <param name="fileName">The file name to check for.</param>
+        /// <returns>True if the file can be found in the html directory. False otherwise.</returns>
+        public bool CheckIfLocalCopyExists(string fileName)
+        {
+            return (File.Exists(_htmlDirectory + fileName));
+        }
+
+        /// <summary>
+        /// Gets the size of a named file on the local filesystem.
+        /// </summary>
+        /// <param name="fileName">The file name to check for.</param>
+        /// <returns>The size of the local file in bytes.</returns>
+        public long LocalVersionSize(string fileName)
+        {
+            FileInfo info = new FileInfo(_htmlDirectory + fileName);
+            return info.Length;
+        }
+
+        /// <summary>
+        /// Gets the size of a named file on the ftp server.
+        /// </summary>
+        /// <param name="fileName">The file name to check for.</param>
+        /// <returns>The size of the remote file in bytes.</returns>
+        public long RemoteVersionSize(string fileName)
+        {
+            // Init request.
+            FtpWebRequest ftp = (FtpWebRequest)WebRequest.Create(_serverAddress + fileName);
+
+            ftp.Method = WebRequestMethods.Ftp.GetFileSize;
+
+            FtpWebResponse response = (FtpWebResponse) ftp.GetResponse();
+
+            long result = response.ContentLength;
+
+            response.Close();
+
+            return result;
+        }
+
+        /// <summary>
+        /// Asserts whether or not a file needs to be downloaded.
+        /// 
+        /// If it does not exists locally or it's remote version is a different size to the local one,
+        /// then will return true.
+        /// </summary>
+        /// <param name="fileName">The name of the file to check.</param>
+        /// <returns>Whether or not the file needs downloading.</returns>
+        public bool FileNeedsDownload(string fileName)
+        {
+            return (!CheckIfLocalCopyExists(fileName) || LocalVersionSize(fileName) != RemoteVersionSize(fileName));
         }
     }
 }
