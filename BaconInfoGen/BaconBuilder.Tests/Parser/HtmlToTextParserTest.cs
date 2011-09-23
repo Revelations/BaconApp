@@ -2,6 +2,7 @@
 using System.IO;
 using BaconBuilder.Model;
 using NUnit.Framework;
+using System.Drawing;
 
 namespace BaconBuilder
 {
