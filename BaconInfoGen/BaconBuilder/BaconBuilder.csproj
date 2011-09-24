@@ -95,8 +95,6 @@
     <Compile Include="Model\IModel.cs" />
     <Compile Include="Model\Parser\HtmlToTextParser.cs" />
     <Compile Include="Model\FileHandler.cs" />
-    <Compile Include="Model\HtmlDegen.cs" />
-    <Compile Include="Model\HtmlGenerator.cs" />
     <Compile Include="Model\ImageManipulator.cs" />
     <Compile Include="Model\Model.cs" />
     <Compile Include="Model\QrCodeGenerator.cs" />

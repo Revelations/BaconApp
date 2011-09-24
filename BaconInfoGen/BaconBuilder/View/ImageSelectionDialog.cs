@@ -9,8 +9,8 @@ namespace BaconBuilder.View
 	public partial class ImageSelectionDialog : Form
 	{
 		#region Fields, properties and constants
-		private Model.BaconModel model;
-		private OpenFileDialog openImageDialog;
+		private readonly Model.BaconModel _model;
+		private OpenFileDialog _openImageDialog;
 
 		private const string FILTER_INNER_DELIMITER = ";";
 		private const string FILTER_OUTER_DELIMITER = "|";
@@ -26,7 +26,7 @@ namespace BaconBuilder.View
 		private const int JPG_INDEX = 2;
 		private const int PNG_INDEX = 3;
 
-		private static string[][] filters = new string[][] {
+		private static readonly string[][] filters = new [] {
 			new [] {"*.bmp"},
 			new [] {"*.gif"},
 			new [] {"*.jpe", "*.jpeg", "*.jpg"},
@@ -38,11 +38,11 @@ namespace BaconBuilder.View
 		/// Constructor that accepts a model.
 		/// </summary>
 		/// <param name="model"></param>
-		public ImageSelectionDialog(BaconBuilder.Model.BaconModel model)
+		public ImageSelectionDialog(Model.BaconModel model)
 		{
 			InitializeComponent();
 
-			this.model = model;
+			_model = model;
 
 			BuildOpenImageDialog();
 
@@ -58,9 +58,9 @@ namespace BaconBuilder.View
 			comboBox1.Items.AddRange(new [] {
 				"Insert image before selction",
 				"Insert image after selction",
-				"Wrap selection",
 				"Replace selection with image"
 			});
+			comboBox1.SelectedIndex = 2;
 		}
 
 		/// <summary>
@@ -68,9 +68,9 @@ namespace BaconBuilder.View
 		/// </summary>
 		private void BuildOpenImageDialog()
 		{
-			openImageDialog = new OpenFileDialog();
+			_openImageDialog = new OpenFileDialog();
 
-			string[] f = new[] {
+			var f = new[] {
 				Filters(ALL_FILES_TAG),
 				Filters(BMP_FILES_TAG, BMP_INDEX),
 				Filters(GIF_FILES_TAG, GIF_INDEX),
@@ -78,20 +78,20 @@ namespace BaconBuilder.View
 				Filters(PNG_FILES_TAG, PNG_INDEX)
 			};
 
-			openImageDialog.Filter = String.Join(FILTER_OUTER_DELIMITER, f.Select(p => p.ToString()).ToArray());
+			_openImageDialog.Filter = String.Join(FILTER_OUTER_DELIMITER, f.Select(p => p.ToString()).ToArray());
 		}
 
 		#region Filter parsing
-		private string Filters(string filterTags)
+		private static string Filters(string filterTags)
 		{
-			string[] concatFilters = filters.SelectMany(secondLevel => secondLevel).Select(firstLevel => firstLevel).ToArray();
+			var concatFilters = filters.SelectMany(secondLevel => secondLevel).Select(firstLevel => firstLevel).ToArray();
 
 			return filterTags + FILTER_OUTER_DELIMITER + String.Join(FILTER_INNER_DELIMITER, concatFilters);
 		}
 
-		private string Filters(string filterTags, int index)
+		private static string Filters(string filterTags, int index)
 		{
-			string[] concatFilters = filters[index].Select(firstLevel => firstLevel).ToArray();
+			var concatFilters = filters[index].Select(firstLevel => firstLevel).ToArray();
 
 			return filterTags + FILTER_OUTER_DELIMITER + String.Join(FILTER_INNER_DELIMITER, concatFilters);
 		}
@@ -104,7 +104,7 @@ namespace BaconBuilder.View
 		/// </summary>
 		private void BuildImageUrlTextbox()
 		{
-			txtImageURL.TextChanged += new EventHandler(txtImageURL_TextChanged);
+			txtImageURL.TextChanged += txtImageURL_TextChanged;
 			txtImageURL.Select();
 		}
 
@@ -113,7 +113,7 @@ namespace BaconBuilder.View
 		/// </summary>
 		private void BuildBrowseButton()
 		{
-			this.btnBrowse.Click += new System.EventHandler(this.btnBrowser_Click);
+			btnBrowse.Click += btnBrowser_Click;
 		}
 
 		/// <summary>
@@ -121,10 +121,10 @@ namespace BaconBuilder.View
 		/// </summary>
 		private void BuildCancelButton()
 		{
-			this.CancelButton = btnCancel;
-			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			CancelButton = btnCancel;
+			btnCancel.DialogResult = DialogResult.Cancel;
 
-			this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+			btnCancel.Click += btnCancel_Click;
 		}
 
 		/// <summary>
@@ -132,30 +132,30 @@ namespace BaconBuilder.View
 		/// </summary>
 		private void BuildOKButton()
 		{
-			this.AcceptButton = btnOK;
-			this.btnOK.Enabled = (!string.IsNullOrEmpty(txtImageURL.Text));
-			this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
+			AcceptButton = btnOK;
+			btnOK.Enabled = (!string.IsNullOrEmpty(txtImageURL.Text));
+			btnOK.DialogResult = DialogResult.OK;
 			
-			this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+			btnOK.Click += btnOK_Click;
 		}
 
 		#region Event handlers
 		private void txtImageURL_TextChanged(object sender, EventArgs e)
 		{
-			this.btnOK.Enabled = (!string.IsNullOrEmpty(txtImageURL.Text));
+			btnOK.Enabled = (!string.IsNullOrEmpty(txtImageURL.Text));
 		}
 
 		private void btnBrowser_Click(object sender, EventArgs e)
 		{
-			if (openImageDialog.ShowDialog() != System.Windows.Forms.DialogResult.Cancel)
+			if (_openImageDialog.ShowDialog() != DialogResult.Cancel)
 			{
-				txtImageURL.Text = openImageDialog.FileName;
+				txtImageURL.Text = _openImageDialog.FileName;
 			}
 		}
 
 		private void btnOK_Click(object sender, EventArgs e)
 		{
-			model.ImageUrl = txtImageURL.Text;
+			_model.ImageUrl = txtImageURL.Text;
 		}
 
 		private void btnCancel_Click(object sender, EventArgs e)

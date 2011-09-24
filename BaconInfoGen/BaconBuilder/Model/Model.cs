@@ -22,33 +22,19 @@ namespace BaconBuilder.Model
 </html>";
 
 		private const string NewHtmlFileName = "New File";
-		readonly HtmlGenerator _builder = new HtmlGenerator("example");
 		readonly FileHandler _fh = new FileHandler(".html");
-		readonly HtmlDegen _degen = new HtmlDegen();
 
 /*
 		private DirectoryInfo _directory = new DirectoryInfo(HtmlDirectory);
 */
 
 	    public string Contents { get; set; }
-		
-		internal string GetPageCode()
-		{
-			_builder.AddContent(Contents);
-			return _builder.ToHtml();
-		}
 
 		internal IEnumerable<string> OpenFile(string p)
 		{
 			var info = new FileInfo(p);
 			_fh.LoadFile(info);
 			return _fh.GetFileFromMemory(info);
-		}
-
-		internal List<string> GetBody(string url)
-		{
-			_degen.ReadHtml(url);
-			return _degen.Body;
 		}
 
 		/// <summary>

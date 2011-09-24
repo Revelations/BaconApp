@@ -82,6 +82,7 @@ namespace BaconBuilder.View
 			this.splitter4 = new System.Windows.Forms.Splitter();
 			this.printDocument = new System.Drawing.Printing.PrintDocument();
 			this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
+			this.tsbAudio = new System.Windows.Forms.ToolStripButton();
 			this.menuStrip.SuspendLayout();
 			this.pnlDirectories.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -145,6 +146,7 @@ namespace BaconBuilder.View
 			// printToolStripMenuItem
 			// 
 			this.printToolStripMenuItem.Name = "printToolStripMenuItem";
+			this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
 			this.printToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
 			this.printToolStripMenuItem.Text = "Print...";
 			// 
@@ -369,6 +371,7 @@ namespace BaconBuilder.View
 			// 
 			this.toolContents.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbImage,
+            this.tsbAudio,
             this.toolStripSeparator3,
             this.tsbBold,
             this.tsbItalics});
@@ -574,6 +577,14 @@ namespace BaconBuilder.View
 			this.printPreviewDialog.Name = "printPreviewDialog";
 			this.printPreviewDialog.Visible = false;
 			// 
+			// tsbAudio
+			// 
+			this.tsbAudio.Image = ((System.Drawing.Image)(resources.GetObject("tsbAudio.Image")));
+			this.tsbAudio.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.tsbAudio.Name = "tsbAudio";
+			this.tsbAudio.Size = new System.Drawing.Size(54, 22);
+			this.tsbAudio.Text = "Audio";
+			// 
 			// MainWindow
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -584,7 +595,7 @@ namespace BaconBuilder.View
 			this.MinimumSize = new System.Drawing.Size(800, 600);
 			this.Name = "MainWindow";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "Form1";
+			this.Text = "HTML Content Generator";
 			this.Load += new System.EventHandler(this.MainWindow_Load);
 			this.menuStrip.ResumeLayout(false);
 			this.menuStrip.PerformLayout();
@@ -662,6 +673,7 @@ namespace BaconBuilder.View
 		private Button btnAddFile;
 		private System.Drawing.Printing.PrintDocument printDocument;
 		private PrintPreviewDialog printPreviewDialog;
+		private ToolStripButton tsbAudio;
 
 	}
 }

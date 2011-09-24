@@ -9,76 +9,78 @@ using BaconBuilder.Model;
 
 namespace BaconBuilder
 {
-    [TestFixture]
-    public class ImageManipulatorTest
-    {
-        private ImageManipulator manipulator;
+	[TestFixture]
+	public class ImageManipulatorTest
+	{
+		private static readonly string HtmlDirectory = "C:/Users/" + Environment.UserName + "/test/";
+		private ImageManipulator manipulator;
 
-        [SetUp]
-        public void SetUp()
-        {
-            manipulator = new ImageManipulator(new Bitmap(1024, 768));
-        }
+		[SetUp]
+		public void SetUp()
+		{
+			manipulator = new ImageManipulator(new Bitmap(1024, 768));
+		}
 
-        [TearDown]
-        public void TearDown()
-        {
-            manipulator = null;
-        }
+		[TearDown]
+		public void TearDown()
+		{
+			manipulator = null;
+		}
 
-        [Test]
-        public void TestImage()
-        {
-            Bitmap expected = new Bitmap(256, 256);
+		[Test]
+		public void TestImage()
+		{
+			Bitmap expected = new Bitmap(256, 256);
 
-            manipulator = new ImageManipulator(expected);
+			manipulator = new ImageManipulator(expected);
 
-            Assert.AreEqual(expected, manipulator.Image);
-        }
+			Assert.AreEqual(expected, manipulator.Image);
+		}
 
-        [Test]
-        public void TestResize()
-        {
-            Size expected = new Size(340, 300);
-            manipulator.ScaleImage(expected);
+		[Test]
+		public void TestResize()
+		{
+			Size expected = new Size(340, 300);
+			manipulator.ScaleImage(expected);
 
-            Assert.AreEqual(expected, manipulator.Image.Size);
+			Assert.AreEqual(expected, manipulator.Image.Size);
 
-            manipulator = new ImageManipulator(new Bitmap(1024, 768));
-            manipulator.ScaleImage(expected.Width, expected.Height);
+			manipulator = new ImageManipulator(new Bitmap(1024, 768));
+			manipulator.ScaleImage(expected.Width, expected.Height);
 
-            Assert.AreEqual(expected, manipulator.Image.Size);
+			Assert.AreEqual(expected, manipulator.Image.Size);
 
-            manipulator = new ImageManipulator(new Bitmap(768, 1024));
-            manipulator.ScaleImage(expected);
+			manipulator = new ImageManipulator(new Bitmap(768, 1024));
+			manipulator.ScaleImage(expected);
 
-            Assert.AreEqual(expected, manipulator.Image.Size);
-        }
+			Assert.AreEqual(expected, manipulator.Image.Size);
+		}
 
-        [Test]
-        public void TestCropResize()
-        {
-            Size expected = new Size(340, 300);
-            manipulator.ScaleImage(expected, true);
+		[Test]
+		public void TestCropResize()
+		{
+			Size expected = new Size(340, 300);
+			manipulator.ScaleImage(expected, true);
 
-            Assert.AreEqual(expected, manipulator.Image.Size);
+			Assert.AreEqual(expected, manipulator.Image.Size);
 
-            manipulator = new ImageManipulator(new Bitmap(1024, 768));
-            manipulator.ScaleImage(expected.Width, expected.Height, true);
+			manipulator = new ImageManipulator(new Bitmap(1024, 768));
+			manipulator.ScaleImage(expected.Width, expected.Height, true);
 
-            Assert.AreEqual(expected, manipulator.Image.Size);
-        }
+			Assert.AreEqual(expected, manipulator.Image.Size);
+		}
 
-        [Test]
-        public void TestSave()
-        {
-            manipulator.SaveImage("C:/", "Test");
-            Assert.IsTrue(File.Exists("C:/Test.png"));
-            File.Delete("C:/Test.png");
+		[Test]
+		public void TestSave()
+		{
 
-            manipulator.SaveImage("C:/", "Test", ImageType.Jpg);
-            Assert.IsTrue(File.Exists("C:/Test.jpg"));
-            File.Delete("C:/Test.jpg");
-        }
-    }
+			manipulator.SaveImage(HtmlDirectory, "TestImage");
+			Assert.IsTrue(File.Exists(HtmlDirectory + "TestImage.png"));
+			File.Delete(HtmlDirectory +"Test.png");
+
+			manipulator.SaveImage(HtmlDirectory, "TestImage", ImageType.Jpg);
+			Assert.IsTrue(File.Exists(HtmlDirectory + "TestImage.jpg"));
+			File.Delete(HtmlDirectory + "TestImage.jpg");
+		}
+	}
 }

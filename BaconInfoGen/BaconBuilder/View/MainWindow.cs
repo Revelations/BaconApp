@@ -27,13 +27,15 @@ namespace BaconBuilder.View
 		{
 			InitializeComponent();
 
-			this._model = new BaconModel();
-			this._controller = new MainViewController(_model, this);
+			_model = new BaconModel();
+			_controller = new MainViewController(_model, this);
 
 			// Event binding
-			btnPreview.Click += new System.EventHandler(btnPreview_Click);
-			tsbImage.Click += new EventHandler(tsbImage_Click);
-			btnMapPreview.Click += new EventHandler(btnMapPreview_Click);
+			printToolStripMenuItem.Click += btnPrintPreview_Click;
+			btnPreview.Click += btnPreview_Click;
+			tsbImage.Click += tsbImage_Click;
+			this.tsbAudio.Click += btnAudio_Click;
+			btnMapPreview.Click += btnMapPreview_Click;
 		}
 
 		#endregion
@@ -53,6 +55,13 @@ namespace BaconBuilder.View
 			preview.ShowDialog();
 		}
 
+		private void btnAudio_Click(object sender, EventArgs e)
+		{
+			
+		}
+
+
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -61,8 +70,8 @@ namespace BaconBuilder.View
 		private void tsbImage_Click(object sender, EventArgs e)
 		{
 			// Stores the current caret position and length of selection.
-			int caretPos = textBoxMain.SelectionStart;
-			int selectionLength = textBoxMain.SelectionLength;
+			var caretPos = textBoxMain.SelectionStart;
+			//int selectionLength = textBoxMain.SelectionLength;
 
 			ImageSelectionDialog dialog = new ImageSelectionDialog(_model);
 			if (dialog.ShowDialog() != DialogResult.Cancel)
@@ -70,7 +79,6 @@ namespace BaconBuilder.View
 				textBoxMain.SelectionStart = caretPos;
 				textBoxMain.SelectedText = string.Format("<img>{0}</img>", _model.ImageUrl);
 			}
-
 		}
 
 		/// <summary>
