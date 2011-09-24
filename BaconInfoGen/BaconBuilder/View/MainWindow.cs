@@ -14,10 +14,12 @@ namespace BaconBuilder.View
 		private readonly IMainViewController _controller;
 
 		// Title before modification
-		private string _cleanTitle;
+		private string _cleanTitle = null;
 		// Contents before modification
-		private string _cleanContents;
-		private string _currentFile;
+		private string _cleanContents = null;
+
+
+		private string _currentFile = null;
 
 		#region Constructors
 
@@ -106,11 +108,7 @@ namespace BaconBuilder.View
 		/// <param name="e"></param>
 		private void btnRemoveFile_Click(object sender, EventArgs e)
 		{
-			string message = string.Format(@"Are you sure you wish to delete the file ""{0}""?", _currentFile);
-			const string title = @"Confirm";
-			DialogResult result = MessageBox.Show(message, title, MessageBoxButtons.OKCancel);
-
-			if (result == DialogResult.OK)
+			if (MessageBox.Show("Are you sure you wish to delete the file \"" + _currentFile + "\"?", "Confirm", MessageBoxButtons.OKCancel) == DialogResult.OK)
 			{
 				_controller.RemoveFile(_currentFile);
 
@@ -148,21 +146,24 @@ namespace BaconBuilder.View
 		/// <param name="e"></param>
 		private void txtTitle_FocusLeft(object sender, EventArgs e)
 		{
-			// No file loaded
 			if (_currentFile == null) return;
-			// Text hasn't changed.
-			if (TitleText.Equals(_cleanTitle)) return;
-
-			// The new title is invalid (e.g. blank, only spaces)
+			//Check if the new title is invalid (e.g. blank, only spaces)
 			if (TitleText.Trim().Length == 0)
 			{
-				MessageBox.Show(@"Title cannot be blank or only spaces.");
+				MessageBox.Show("Title cannot be blank or just spaces.");
 				TitleText = _cleanTitle;
 				return;
 			}
+			//Check if the text has changed.
+			if (TitleText.Equals(_cleanTitle))
+			{
+				return;
+			}
+
 
 			// Since the title is valid and changed, we rename it.
 			int index = FindItem(_cleanTitle + ".html");
+			Console.WriteLine("Clean title = " + _cleanTitle);
 			try
 			{
 				_controller.RenameFile(_cleanTitle, TitleText);
@@ -170,12 +171,11 @@ namespace BaconBuilder.View
 			catch (IOException ex)
 			{
 				System.Console.WriteLine(ex.Message);
-				MessageBox.Show(ex.Message, @"Error");
+				MessageBox.Show(ex.Message, "Error");
 				TitleText = _cleanTitle;
 				return;
 			}
-
-			Files[index].Text = TitleText + @".html";
+			Files[index].Text = TitleText + ".html";
 
 		}
 
@@ -186,12 +186,14 @@ namespace BaconBuilder.View
 		/// <returns></returns>
 		private int FindItem(string text)
 		{
-			for (int i = 0; i < Files.Count; i++)
+			ListView.ListViewItemCollection items = listViewContents.Items;
+
+			for (int i = 0; i < items.Count; i++)
 			{
-				Console.WriteLine(@"Finding: Comparing {0} with {1}", text, Files[i].Text);
-				if (Files[i].Text.Equals(text))
+				Console.WriteLine("Finding: Comparing {0} with {1}", text, items[i].Text);
+				if (items[i].Text.Equals(text))
 				{
-					Console.WriteLine(@"Found!");
+					Console.WriteLine("Found!");
 					return i;
 				}
 			}
@@ -205,7 +207,6 @@ namespace BaconBuilder.View
 			{
 				_cleanTitle = e.Item.Text;
 				_cleanContents = _controller.LoadHtmlToText(e.Item.Text);
-
 				TitleText = Path.GetFileNameWithoutExtension(_cleanTitle);
 				Contents = _cleanContents;
 				_currentFile = _cleanTitle;
@@ -222,47 +223,47 @@ namespace BaconBuilder.View
 
 		private void btnPrintPreview_Click(object sender, EventArgs e)
 		{
-			printPreviewDialog1.Document = printDocument1;
-			printPreviewDialog1.ShowDialog();
+
+			printPreviewDialog.Document = printDocument;
+			printPreviewDialog.ShowDialog();
 
 		}
 
 		private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
 		{
-			QrCodeGenerator qrCodeGenerator = new QrCodeGenerator();
-			Image code;
+			QrCodeGenerator qr = new QrCodeGenerator();
 			string text;
+			Image code; //= qr.GenerateCode("Newcode");
+			//e.Graphics.DrawImage(i, 50, 50);
 			Font font = new System.Drawing.Font(Font.FontFamily, 20);
-			Brush brush = Brushes.Black;
-			
-			Rectangle layoutRectangle;
+			SolidBrush brush = new SolidBrush(Color.Black);
+			Rectangle layoutRectangle;// = new Rectangle(500, 100, 500, 100);
+			//e.Graphics.DrawString("Newcode",font,brush,layoutRectangle);
 
-			int currentCodeOnPage = 1;
-			const int codePerPage = 4;
+			int j = 1;
 
-			for (int i = 0; i < Files.Count; i++)
+			for (int i = 0; i < listViewContents.Items.Count; i++)
 			{
-				text = Files[i].Text;
-				// code per page counter
-				if (currentCodeOnPage > codePerPage) { currentCodeOnPage = 1;/*create new page*/ break; }
-				code = qrCodeGenerator.GenerateCode(text);
-				if (currentCodeOnPage % 2 == 0)
+				text = listViewContents.Items[i].Text;
+				//code per page counter
+				if (j > 4) { j = 1;/*create new page*/ break; }
+				code = qr.GenerateCode(text);
+				if (j % 2 == 1)//every second on on left
 				{
-					//others on right
-					layoutRectangle = new Rectangle(200, 180*currentCodeOnPage, 500, 100);
-					e.Graphics.DrawImage(code, 500, 150*currentCodeOnPage);
+					layoutRectangle = new Rectangle(400, 180 * j, 500, 100);
+					e.Graphics.DrawImage(code, 100, 150 * j);
 				}
 				else
-				{
-					layoutRectangle = new Rectangle(400, 180*currentCodeOnPage, 500, 100);
-					e.Graphics.DrawImage(code, 100, 150*currentCodeOnPage);
+				{//others on right
+					layoutRectangle = new Rectangle(200, 180 * j, 500, 100);
+					e.Graphics.DrawImage(code, 500, 150 * j);
 				}
 				e.Graphics.DrawString(text, font, brush, layoutRectangle);
 
-				currentCodeOnPage++;
+				// e.Graphics.DrawImage(code, (j/2) * 300, 100*j);
+				j++;
 			}
 		}
-
 
 		public string TitleText
 		{

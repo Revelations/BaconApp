@@ -33,7 +33,7 @@ namespace BaconBuilder.View
 		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
-			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+			this.menuStrip = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.openFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.openDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,7 +54,7 @@ namespace BaconBuilder.View
 			this.btnRemoveFile = new System.Windows.Forms.Button();
 			this.btnAddFile = new System.Windows.Forms.Button();
 			this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+			this.statusStrip = new System.Windows.Forms.StatusStrip();
 			this.pnlContentEditor = new System.Windows.Forms.Panel();
 			this.pnlTextEditor = new System.Windows.Forms.Panel();
 			this.textBoxMain = new System.Windows.Forms.TextBox();
@@ -80,9 +80,9 @@ namespace BaconBuilder.View
 			this.splitter5 = new System.Windows.Forms.Splitter();
 			this.splitter6 = new System.Windows.Forms.Splitter();
 			this.splitter4 = new System.Windows.Forms.Splitter();
-			this.printDocument1 = new System.Drawing.Printing.PrintDocument();
-			this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
-			this.menuStrip1.SuspendLayout();
+			this.printDocument = new System.Drawing.Printing.PrintDocument();
+			this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
+			this.menuStrip.SuspendLayout();
 			this.pnlDirectories.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
@@ -96,19 +96,19 @@ namespace BaconBuilder.View
 			this.tlpDataFields.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// menuStrip1
+			// menuStrip
 			// 
-			this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
-			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.menuStrip.Dock = System.Windows.Forms.DockStyle.None;
+			this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
             this.viewToolStripMenuItem,
             this.toolsToolStripMenuItem});
-			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(792, 24);
-			this.menuStrip1.TabIndex = 3;
-			this.menuStrip1.Text = "menuStrip1";
+			this.menuStrip.Location = new System.Drawing.Point(0, 0);
+			this.menuStrip.Name = "menuStrip";
+			this.menuStrip.Size = new System.Drawing.Size(792, 24);
+			this.menuStrip.TabIndex = 3;
+			this.menuStrip.Text = "menuStrip1";
 			// 
 			// fileToolStripMenuItem
 			// 
@@ -222,6 +222,7 @@ namespace BaconBuilder.View
 			this.listViewContents.UseCompatibleStateImageBehavior = false;
 			this.listViewContents.View = System.Windows.Forms.View.List;
 			this.listViewContents.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewContents_ItemSelectionChanged);
+			this.listViewContents.SelectedIndexChanged += new System.EventHandler(this.listViewContents_SelectedIndexChanged);
 			// 
 			// imageList
 			// 
@@ -269,7 +270,7 @@ namespace BaconBuilder.View
 			// 
 			// toolStripContainer1.BottomToolStripPanel
 			// 
-			this.toolStripContainer1.BottomToolStripPanel.Controls.Add(this.statusStrip1);
+			this.toolStripContainer1.BottomToolStripPanel.Controls.Add(this.statusStrip);
 			// 
 			// toolStripContainer1.ContentPanel
 			// 
@@ -291,15 +292,15 @@ namespace BaconBuilder.View
 			// 
 			// toolStripContainer1.TopToolStripPanel
 			// 
-			this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.menuStrip1);
+			this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.menuStrip);
 			// 
-			// statusStrip1
+			// statusStrip
 			// 
-			this.statusStrip1.Dock = System.Windows.Forms.DockStyle.None;
-			this.statusStrip1.Location = new System.Drawing.Point(0, 0);
-			this.statusStrip1.Name = "statusStrip1";
-			this.statusStrip1.Size = new System.Drawing.Size(792, 22);
-			this.statusStrip1.TabIndex = 0;
+			this.statusStrip.Dock = System.Windows.Forms.DockStyle.None;
+			this.statusStrip.Location = new System.Drawing.Point(0, 0);
+			this.statusStrip.Name = "statusStrip";
+			this.statusStrip.Size = new System.Drawing.Size(792, 22);
+			this.statusStrip.TabIndex = 0;
 			// 
 			// pnlContentEditor
 			// 
@@ -560,19 +561,19 @@ namespace BaconBuilder.View
 			this.splitter4.TabIndex = 10;
 			this.splitter4.TabStop = false;
 			// 
-			// printDocument1
+			// printDocument
 			// 
-			this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
+			this.printDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
 			// 
-			// printPreviewDialog1
+			// printPreviewDialog
 			// 
-			this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
-			this.printPreviewDialog1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-			this.printPreviewDialog1.ClientSize = new System.Drawing.Size(400, 300);
-			this.printPreviewDialog1.Enabled = true;
-			this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
-			this.printPreviewDialog1.Name = "printPreviewDialog1";
-			this.printPreviewDialog1.Visible = false;
+			this.printPreviewDialog.AutoScrollMargin = new System.Drawing.Size(0, 0);
+			this.printPreviewDialog.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+			this.printPreviewDialog.ClientSize = new System.Drawing.Size(400, 300);
+			this.printPreviewDialog.Enabled = true;
+			this.printPreviewDialog.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog.Icon")));
+			this.printPreviewDialog.Name = "printPreviewDialog";
+			this.printPreviewDialog.Visible = false;
 			// 
 			// MainWindow
 			// 
@@ -586,8 +587,8 @@ namespace BaconBuilder.View
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Form1";
 			this.Load += new System.EventHandler(this.MainWindow_Load);
-			this.menuStrip1.ResumeLayout(false);
-			this.menuStrip1.PerformLayout();
+			this.menuStrip.ResumeLayout(false);
+			this.menuStrip.PerformLayout();
 			this.pnlDirectories.ResumeLayout(false);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.toolStripContainer1.BottomToolStripPanel.ResumeLayout(false);
@@ -613,7 +614,7 @@ namespace BaconBuilder.View
 
 		#endregion
 
-		private MenuStrip menuStrip1;
+		private MenuStrip menuStrip;
 		private ToolStripMenuItem fileToolStripMenuItem;
 		private ToolStripMenuItem openDatabaseToolStripMenuItem;
 		private Panel pnlDirectories;
@@ -645,7 +646,7 @@ namespace BaconBuilder.View
 		private ToolStripButton tsbImage;
 		private ToolStripButton tsbBold;
 		private ToolStripButton tsbItalics;
-		private StatusStrip statusStrip1;
+		private StatusStrip statusStrip;
 		private ToolStripSeparator toolStripSeparator2;
 		private ToolStripSeparator toolStripSeparator1;
 		private ToolStripMenuItem openFileToolStripMenuItem;
@@ -660,8 +661,8 @@ namespace BaconBuilder.View
 		private TableLayoutPanel tableLayoutPanel1;
 		private Button btnRemoveFile;
 		private Button btnAddFile;
-		private System.Drawing.Printing.PrintDocument printDocument1;
-		private PrintPreviewDialog printPreviewDialog1;
+		private System.Drawing.Printing.PrintDocument printDocument;
+		private PrintPreviewDialog printPreviewDialog;
 
 	}
 }
