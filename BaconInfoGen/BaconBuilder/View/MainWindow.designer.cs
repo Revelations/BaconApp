@@ -222,7 +222,6 @@ namespace BaconBuilder.View
 			this.listViewContents.UseCompatibleStateImageBehavior = false;
 			this.listViewContents.View = System.Windows.Forms.View.List;
 			this.listViewContents.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewContents_ItemSelectionChanged);
-			this.listViewContents.SelectedIndexChanged += new System.EventHandler(this.listViewContents_SelectedIndexChanged);
 			// 
 			// imageList
 			// 
