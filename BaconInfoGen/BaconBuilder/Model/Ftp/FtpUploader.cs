@@ -10,7 +10,7 @@ namespace BaconBuilder.Model
     /// <summary>
     /// Class that handles connection to an FTP server to upload necessary files.
     /// </summary>
-    public class Uploader : FtpHelper
+    public class FtpUploader : FtpHelper
     {
         /// <summary>
         /// A list of all the remote files present on the server.
@@ -88,7 +88,7 @@ namespace BaconBuilder.Model
         /// <summary>
         /// 
         /// </summary>
-        public Uploader()
+        public FtpUploader()
         {
             _remoteFiles = ConnectAndGetFileList();
         }

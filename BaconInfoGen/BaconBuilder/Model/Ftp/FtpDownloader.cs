@@ -10,7 +10,7 @@ namespace BaconBuilder.Model
     /// <summary>
     /// Class that handles connection to an FTP server to download necessary files.
     /// </summary>
-    public class Downloader : FtpHelper
+    public class FtpDownloader : FtpHelper
     {
         /// <summary>
         /// Helper method that connects to a server and downloads every file present in the main directory that needs to be downloaded.
