@@ -13,14 +13,6 @@ namespace BaconBuilder.View
 		private readonly BaconModel _model;
 		private readonly IMainViewController _controller;
 
-		// Title before modification
-		private string _cleanTitle = null;
-		// Contents before modification
-		private string _cleanContents = null;
-
-
-		private string _currentFile = null;
-
 		#region Constructors
 
 		public MainWindow()
@@ -34,7 +26,7 @@ namespace BaconBuilder.View
 			printToolStripMenuItem.Click += btnPrintPreview_Click;
 			btnPreview.Click += btnPreview_Click;
 			tsbImage.Click += tsbImage_Click;
-			this.tsbAudio.Click += btnAudio_Click;
+			tsbAudio.Click += btnAudio_Click;
 			btnMapPreview.Click += btnMapPreview_Click;
 		}
 
@@ -49,9 +41,10 @@ namespace BaconBuilder.View
 		/// <param name="e"></param>
 		private void btnPreview_Click(object sender, System.EventArgs e)
 		{
+			MessageBox.Show(_model.CurrentFile);
 			_model.Contents = textBoxMain.Text;
+			Preview preview = new Preview(_model);
 
-			Preview preview = new Preview(null, 0, 0);
 			preview.ShowDialog();
 		}
 
@@ -116,11 +109,9 @@ namespace BaconBuilder.View
 		/// <param name="e"></param>
 		private void btnRemoveFile_Click(object sender, EventArgs e)
 		{
-			if (MessageBox.Show("Are you sure you wish to delete the file \"" + _currentFile + "\"?", "Confirm", MessageBoxButtons.OKCancel) == DialogResult.OK)
+			if (MessageBox.Show(@"Are you sure you wish to delete the file """ + _model.CurrentFile + @"""?", @"Confirm", MessageBoxButtons.OKCancel) == DialogResult.OK)
 			{
-				_controller.RemoveFile(_currentFile);
-
-				_currentFile = null;
+				_controller.RemoveCurrentFile();
 
 				_controller.InitialiseListView();
 			}
@@ -132,19 +123,9 @@ namespace BaconBuilder.View
 				txtTitle_FocusLeft(null, e);
 			else if (e.KeyCode == Keys.Escape)
 			{
-				TitleText = _cleanTitle;
+				TitleText = _model.CurrentFile;
 				textBoxMain.Focus();
 			}
-		}
-
-		/// <summary>
-		/// When user enters the title textbox, save the current name.
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void txtTitle_Enter(object sender, EventArgs e)
-		{
-			_cleanTitle = TitleText;
 		}
 
 		/// <summary>
@@ -154,75 +135,18 @@ namespace BaconBuilder.View
 		/// <param name="e"></param>
 		private void txtTitle_FocusLeft(object sender, EventArgs e)
 		{
-			if (_currentFile == null) return;
-			//Check if the new title is invalid (e.g. blank, only spaces)
-			if (TitleText.Trim().Length == 0)
-			{
-				MessageBox.Show("Title cannot be blank or just spaces.");
-				TitleText = _cleanTitle;
-				return;
-			}
-			//Check if the text has changed.
-			if (TitleText.Equals(_cleanTitle))
-			{
-				return;
-			}
-
-
-			// Since the title is valid and changed, we rename it.
-			int index = FindItem(_cleanTitle + ".html");
-			Console.WriteLine("Clean title = " + _cleanTitle);
-			try
-			{
-				_controller.RenameFile(_cleanTitle, TitleText);
-			}
-			catch (IOException ex)
-			{
-				System.Console.WriteLine(ex.Message);
-				MessageBox.Show(ex.Message, "Error");
-				TitleText = _cleanTitle;
-				return;
-			}
-			Files[index].Text = TitleText + ".html";
-
-		}
-
-		/// <summary>
-		/// Returns the index of the listview item
-		/// </summary>
-		/// <param name="text"></param>
-		/// <returns></returns>
-		private int FindItem(string text)
-		{
-			ListView.ListViewItemCollection items = listViewContents.Items;
-
-			for (int i = 0; i < items.Count; i++)
-			{
-				Console.WriteLine("Finding: Comparing {0} with {1}", text, items[i].Text);
-				if (items[i].Text.Equals(text))
-				{
-					Console.WriteLine("Found!");
-					return i;
-				}
-			}
-
-			return -1;
+			_controller.ValidateTitle();
 		}
 
 		private void listViewContents_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
 		{
 			if (e.IsSelected)
 			{
-				_cleanTitle = e.Item.Text;
-				_cleanContents = _controller.LoadHtmlToText(e.Item.Text);
-				TitleText = Path.GetFileNameWithoutExtension(_cleanTitle);
-				Contents = _cleanContents;
-				_currentFile = _cleanTitle;
+				_controller.SelectFile(e.Item.Text);
 			}
 			else
 			{
-				// If contents have changed
-				if (!_cleanContents.Equals(Contents))
+				if (_controller.ContentsHaveChanged())
 				{
 					_controller.SaveTextToHtml(e.Item.Text, Contents);
 				}

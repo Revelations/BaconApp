@@ -1,56 +1,65 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using System.Windows.Forms;
-using BaconBuilder.View;
+using BaconBuilder.Controller;
 using BaconBuilder.Model;
-using System.IO;
+using BaconBuilder.View;
 using NUnit.Framework;
 
 namespace BaconBuilder
 {
-    [TestFixture]
-    class MainWindowTest
-    {
-        TreeView currentTreeDir;
-        string testPath;
-        FileHandler fH;
-        #region Setup/Teardown
-        [SetUp]
-        public void SetUp()
-        {
+	[TestFixture]
+	class MainWindowTest
+	{
+		private MainWindow _view;
+		private BaconModel _model;
+		private MainViewController _controller;
+		TreeNodeCollection _currentDirNodes;
+		private const string TestPath = @"./testFiles/";
+		private const string TestFile = @"satisfaction.html";
 
-            
-            currentTreeDir = new TreeView();
-            testPath = @"./testFiles/";
-            Directory.CreateDirectory(testPath);
-            FileInfo tp = new FileInfo(testPath + "satisfaction.html");
-            string test = "Push me" + System.Environment.NewLine + "And then just touch me" + System.Environment.NewLine + "Till I can get my satisfaction" + System.Environment.NewLine + "Satisfaction, satisfaction, satisfaction,satifaction";
-            System.IO.File.WriteAllText(tp.FullName, test);
-            fH = new FileHandler(".html");
-        }
+		#region Setup/Teardown
+		[SetUp]
+		public void SetUp()
+		{
+			_view = new MainWindow();
+			_model = new BaconModel();
+			_controller = new MainViewController(_model, _view);
+			_currentDirNodes = new TreeView().Nodes;
+			Directory.CreateDirectory(TestPath);
+			_model.ChangeDirectory(TestPath);
+			var tp = new FileInfo(TestPath + TestFile);
+			string test = "Push me" + System.Environment.NewLine + "And then just touch me" + System.Environment.NewLine + "Till I can get my satisfaction" + System.Environment.NewLine + "Satisfaction, satisfaction, satisfaction, satifaction";
+			File.WriteAllText(tp.FullName, test);
+		}
 
-        [TearDown]
-        public void TearDown() 
-        {
-            currentTreeDir = null;
-            if (testPath != null) Directory.Delete(testPath, true);
-            testPath = "";
-        }
-        #endregion
+		[TearDown]
+		public void TearDown()
+		{
+			_view = null;
+			_model = null;
+			_controller = null;
+			_currentDirNodes = null;
+			Directory.Delete(TestPath, true);
+		}
+		#endregion
 
-        [Test]
-        public void TestTreeDirHasLoaded()
-        {
-            Assert.IsEmpty(currentTreeDir.Nodes, "current dir is not empty");
-            List<string> content = fH.LoadDirectory(new DirectoryInfo(testPath));
-            Assert.That(content.Count == 1,"Content Count:" + content.Count + " does not equal 1");
-            foreach (string s in content)
-                currentTreeDir.Nodes.Add(s);
-            Assert.That(currentTreeDir.Nodes.Count == 1, "TreeNodes Count:" + currentTreeDir.Nodes.Count + " does not equal 1");
-            Assert.That(currentTreeDir.Nodes[0].Text == "satisfaction.html", "Current Contents[0]:" + currentTreeDir.Nodes[0].Text + " does not equal satisfaction.html");
-        }
-    
-    }
+		[Test]
+		public void TestTreeDirHasLoaded()
+		{
+			Assert.IsEmpty(_currentDirNodes, "Current dir is not empty");
+
+			_controller.InitialiseListView();
+			
+			Assert.That(_view.Files.Count == 1, "Content Count:" + _view.Files.Count + " does not equal 1");
+			foreach (ListViewItem s in _view.Files)
+				_currentDirNodes.Add(s.Text);
+
+			int expectedCount = _currentDirNodes.Count;
+			Assert.That(expectedCount == 1, "TreeNodes Count:{0} does not equal 1", expectedCount);
+
+			var expected = _currentDirNodes[0].Text;
+			Assert.That(expected == TestFile, "Current Contents[0]:{0} does not equal satisfaction.html", expected);
+		}
+	
+	}
 }

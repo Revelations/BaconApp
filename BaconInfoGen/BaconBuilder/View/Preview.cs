@@ -1,26 +1,54 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
+using BaconBuilder.Controller;
 using BaconBuilder.Model;
 
 namespace BaconBuilder.View
 {
-	public partial class Preview : Form
+	public partial class Preview : Form, IPreviewView
 	{
-		public Preview(string html, int x, int y)
-		{
-			InitializeComponent();
+		private readonly IModel _model;
+		private readonly QrCodeGenerator _qrGen;
 
-			browser.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(browser_DocumentCompleted);
+		private Image _qrCode;
+
+		private HtmlDocument _browser;
+
+		public Preview(IModel model)
+		{
+			_model = model;
+			InitializeComponent();
+			_qrGen = new QrCodeGenerator();
+			QrCode = _qrGen.GenerateCode(_model.CurrentFile);
+
+			browser.DocumentCompleted += browser_DocumentCompleted;
 		}
 
 		private void browser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
 		{
-			browser.Document.OpenNew(true);
-			browser.Document.Write("<html><body><p>Hello</p></body></html>");
 
-			((WebBrowser)sender).DocumentCompleted -= browser_DocumentCompleted;
+			PreviewController previewController = new PreviewController(_model, this);
+			previewController.PreviewDocument();
+
+			browser.DocumentCompleted -= browser_DocumentCompleted;
 		}
 
+		public Image QrCode
+		{
+			get { return picboxQRCode.Image; }
+			set { picboxQRCode.Image = value; }
+		}
 
+		//public WebBrowser Browser { get { return browser; } }
+
+		public void BrowserText(string text)
+		{
+			if (browser.Document != null)
+			{
+				browser.Document.OpenNew(true);
+				browser.Document.Write(text);
+			}
+		}
 	}
 }

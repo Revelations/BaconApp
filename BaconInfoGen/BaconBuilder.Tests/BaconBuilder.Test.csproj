@@ -49,9 +49,7 @@
     <Compile Include="ImageManipulatorTest.cs" />
     <Compile Include="Parser\ParserTest.cs" />
     <Compile Include="Parser\HtmlToTextParserTest.cs" />
-    <Compile Include="FileHandlerTest.cs" />
     <Compile Include="MainWindowTest.cs" />
-    <Compile Include="NodeTest.cs" />
     <Compile Include="Parser\TextToHtmlParserTest.cs" />
   </ItemGroup>
   <ItemGroup>

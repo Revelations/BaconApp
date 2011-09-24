@@ -63,6 +63,7 @@ namespace BaconBuilder.View
 			this.btnPrintPreview = new System.Windows.Forms.Button();
 			this.toolContents = new System.Windows.Forms.ToolStrip();
 			this.tsbImage = new System.Windows.Forms.ToolStripButton();
+			this.tsbAudio = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
 			this.tsbBold = new System.Windows.Forms.ToolStripButton();
 			this.tsbItalics = new System.Windows.Forms.ToolStripButton();
@@ -82,7 +83,6 @@ namespace BaconBuilder.View
 			this.splitter4 = new System.Windows.Forms.Splitter();
 			this.printDocument = new System.Drawing.Printing.PrintDocument();
 			this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
-			this.tsbAudio = new System.Windows.Forms.ToolStripButton();
 			this.menuStrip.SuspendLayout();
 			this.pnlDirectories.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -100,11 +100,6 @@ namespace BaconBuilder.View
 			// menuStrip
 			// 
 			this.menuStrip.Dock = System.Windows.Forms.DockStyle.None;
-			this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.editToolStripMenuItem,
-            this.viewToolStripMenuItem,
-            this.toolsToolStripMenuItem});
 			this.menuStrip.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip.Name = "menuStrip";
 			this.menuStrip.Size = new System.Drawing.Size(792, 24);
@@ -369,12 +364,6 @@ namespace BaconBuilder.View
 			// 
 			// toolContents
 			// 
-			this.toolContents.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsbImage,
-            this.tsbAudio,
-            this.toolStripSeparator3,
-            this.tsbBold,
-            this.tsbItalics});
 			this.toolContents.Location = new System.Drawing.Point(0, 0);
 			this.toolContents.Name = "toolContents";
 			this.toolContents.Size = new System.Drawing.Size(606, 25);
@@ -388,6 +377,14 @@ namespace BaconBuilder.View
 			this.tsbImage.Name = "tsbImage";
 			this.tsbImage.Size = new System.Drawing.Size(57, 22);
 			this.tsbImage.Text = "Image";
+			// 
+			// tsbAudio
+			// 
+			this.tsbAudio.Image = ((System.Drawing.Image)(resources.GetObject("tsbAudio.Image")));
+			this.tsbAudio.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.tsbAudio.Name = "tsbAudio";
+			this.tsbAudio.Size = new System.Drawing.Size(54, 22);
+			this.tsbAudio.Text = "Audio";
 			// 
 			// toolStripSeparator3
 			// 
@@ -502,7 +499,6 @@ namespace BaconBuilder.View
 			this.txtTitle.Name = "txtTitle";
 			this.txtTitle.Size = new System.Drawing.Size(384, 20);
 			this.txtTitle.TabIndex = 3;
-			this.txtTitle.Enter += new System.EventHandler(this.txtTitle_Enter);
 			this.txtTitle.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTitle_KeyDown);
 			this.txtTitle.Leave += new System.EventHandler(this.txtTitle_FocusLeft);
 			// 
@@ -576,14 +572,6 @@ namespace BaconBuilder.View
 			this.printPreviewDialog.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog.Icon")));
 			this.printPreviewDialog.Name = "printPreviewDialog";
 			this.printPreviewDialog.Visible = false;
-			// 
-			// tsbAudio
-			// 
-			this.tsbAudio.Image = ((System.Drawing.Image)(resources.GetObject("tsbAudio.Image")));
-			this.tsbAudio.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.tsbAudio.Name = "tsbAudio";
-			this.tsbAudio.Size = new System.Drawing.Size(54, 22);
-			this.tsbAudio.Text = "Audio";
 			// 
 			// MainWindow
 			// 

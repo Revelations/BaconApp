@@ -7,9 +7,8 @@ namespace BaconBuilder.Controller
 		/// 
 		/// Uses an HtmlToTextParser to parse its content to plain text.
 		/// </summary>
-		/// <param name="fileName">Name of file to get data from.</param>
 		/// <returns>String content (plain text) of the file.</returns>
-		string LoadHtmlToText(string fileName);
+		string LoadHtmlToText();
 
 		/// <summary>
 		/// Gets the html parsed verision of plain text content and saves it to a file.
@@ -24,10 +23,14 @@ namespace BaconBuilder.Controller
 		void CreateNewFile();
 
 		/// <summary>
+		/// Removes the current file.
+		/// </summary>
+		void RemoveCurrentFile();
+
+		/// <summary>
 		/// Remove the file
 		/// </summary>
 		/// <param name="fileName"></param>
-
 		void RemoveFile(string fileName);
 		/// <summary>
 		/// Rename the old file name to the new file name.
@@ -39,8 +42,11 @@ namespace BaconBuilder.Controller
 		/// <summary>
 		/// Initialises and populates a listview with the html files in a directory.
 		/// </summary>
-		/// <param name="listView">The listview to initialise.</param>
-
 		void InitialiseListView();
+
+		void SelectFile(string file);
+
+		void ValidateTitle();
+		bool ContentsHaveChanged();
 	}
 }

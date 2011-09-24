@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.Text;
-using BaconBuilder.Model;
 
 namespace BaconBuilder
 {
@@ -21,8 +18,6 @@ namespace BaconBuilder
 
 		public override string ToString()
 		{
-			//return string.Format("Name:{0} Value:{1} Children:{2}",
-			//	Name, Value, Children.ToString());
 			StringBuilder builder = new StringBuilder();
 			if (Name.ToString() == "text")
 			{

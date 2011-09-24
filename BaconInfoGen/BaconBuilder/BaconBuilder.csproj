@@ -94,13 +94,10 @@
     <Compile Include="Model\Ftp\FtpHelper.cs" />
     <Compile Include="Model\IModel.cs" />
     <Compile Include="Model\Parser\HtmlToTextParser.cs" />
-    <Compile Include="Model\FileHandler.cs" />
     <Compile Include="Model\ImageManipulator.cs" />
-    <Compile Include="Model\Model.cs" />
+    <Compile Include="Model\BaconModel.cs" />
     <Compile Include="Model\QrCodeGenerator.cs" />
     <Compile Include="Model\Parser\TextToHtmlParser.cs" />
-    <Compile Include="Model\Tree\HtmlTree.cs" />
-    <Compile Include="Model\Tree\HtmlNode.cs" />
     <Compile Include="Model\Parser\Parser.cs" />
     <Compile Include="Model\Ftp\FtpDownloader.cs" />
     <Compile Include="Model\Ftp\FtpUploader.cs" />
@@ -119,6 +116,7 @@
       <DependentUpon>ImageSelectionDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="View\IMainView.cs" />
+    <Compile Include="View\IPreviewView.cs" />
     <Compile Include="View\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -131,6 +129,7 @@
     <Compile Include="View\Preview.designer.cs">
       <DependentUpon>Preview.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controller\PreviewController.cs" />
     <Compile Include="View\SplashScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -197,6 +196,9 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Blank.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
