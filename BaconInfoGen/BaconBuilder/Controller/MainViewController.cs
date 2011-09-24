@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Windows.Forms;
 
 using BaconBuilder.Model;
 using BaconBuilder.View;
@@ -8,11 +7,11 @@ using BaconBuilder.View;
 namespace BaconBuilder.Controller
 {
 	public class MainViewController : IMainViewController
-    {
+	{
 		private readonly BaconModel _model;
-		private readonly MainWindow _view;
+		private readonly IMainView _view;
 
-		public MainViewController(BaconModel model, MainWindow view)
+		public MainViewController(BaconModel model, IMainView view)
 		{
 			_model = model;
 			_view = view;
@@ -20,62 +19,39 @@ namespace BaconBuilder.Controller
 
 		// Test directory. Needs to be removed at some point.
 		private const string HtmlExtension = ".html";
-        private static readonly string HtmlDirectory = "C:/Users/"+System.Environment.UserName+"/test/";
+		private static readonly string HtmlDirectory = string.Format("C:/Users/{0}/test/", Environment.UserName);
 
 		private const string BlankHtmlFileName = "Blank";
 
-		private const string NewHtmlFileName = "New File";
-
 		// Directory for local html content.
-        //private const string HtmlDirectory = "./DataFiles";
+		//private const string HtmlDirectory = "./DataFiles";
 
-        // Parser object to handle html to text conversion.
-        private static readonly HtmlToTextParser HtmlToText = new HtmlToTextParser();
-        private static readonly TextToHtmlParser TextToHtml = new TextToHtmlParser();
+		// Parser object to handle html to text conversion.
+		private static readonly HtmlToTextParser HtmlToText = new HtmlToTextParser();
+		private static readonly TextToHtmlParser TextToHtml = new TextToHtmlParser();
 
-        /// <summary>
-        /// Initialises and populates a listview with the html files in a directory.
-        /// </summary>
-        /// <param name="listView">The listview to initialise.</param>
-        public void InitialiseListView(ListView listView)
-        {
-            listView.Items.Clear();
+		/// <summary>
+		/// Initialises and populates a listview with the html files in a directory.
+		/// </summary>
+		public void InitialiseListView()
+		{
+			_view.Files.Clear();
 
-            // Create the directory if it doesn't exist.
-            if (!Directory.Exists(HtmlDirectory))
-                Directory.CreateDirectory(HtmlDirectory);
+			// Create the directory if it doesn't exist.
+			if (!Directory.Exists(HtmlDirectory))
+				Directory.CreateDirectory(HtmlDirectory);
 
-            // Get a directory info object for the directory.
-            var directory = new DirectoryInfo(HtmlDirectory);
+			// Get a directory info object for the directory.
+			var directory = new DirectoryInfo(HtmlDirectory);
 
-            // Add each item to the list view.
-            foreach (FileInfo f in directory.GetFiles())
-            {
-                // Get only html files, and not the blank one for initialising new files.
-                if (f.Extension.Equals(HtmlExtension) && f.Name != BlankHtmlFileName + HtmlExtension)
-                    listView.Items.Add(f.Name, 0);
-            }
-        }
-
-
-        /// <summary>
-        /// Gets a new file name not already present in the Html directory.
-        /// 
-        /// Checks for existing files present in the Html directory with the new file name. Iterates and
-        /// appends integer values to the filename until it finds on that is unused.
-        /// </summary>
-        /// <returns>Unused filname with the lowest possible appended integer.</returns>
-        public static string GetLowestUnusedNewFileName()
-        {
-			var name = HtmlDirectory + NewHtmlFileName;
-			var fileName = name + HtmlExtension;
-			// Otherwise iterate to find the lowest number available to append.
-			for (int i = 2; File.Exists(fileName); i++)
+			// Add each item to the list view.
+			foreach (FileInfo f in directory.GetFiles())
 			{
-				fileName = name + i.ToString(" 0#") + HtmlExtension;
+				// Get only html files, and not the blank one for initialising new files.
+				if (f.Extension.Equals(HtmlExtension) && f.Name != BlankHtmlFileName + HtmlExtension)
+					_view.Files.Add(f.Name, 0);
 			}
-			return fileName;
-        }
+		}
 
 		/// <summary>
 		/// Gets the text content of an HTML file.
@@ -86,7 +62,7 @@ namespace BaconBuilder.Controller
 		/// <returns>String content (plain text) of the file.</returns>
 		public string LoadHtmlToText(string fileName)
 		{
-			Console.WriteLine("Loading from HTML");
+			Console.WriteLine(@"Loading from HTML");
 
 			// Read the selected HTML file and store it.
 			string htmlContent = File.ReadAllText(HtmlDirectory + fileName);
@@ -102,10 +78,10 @@ namespace BaconBuilder.Controller
 		/// <param name="text">The input string to parse and write to file.</param>
 		public void SaveTextToHtml(string filename, string text)
 		{
-			Console.WriteLine("Saving to {0}", filename + HtmlExtension);
+			Console.WriteLine(@"Saving to {0}", filename);
 
 			string htmlContent = TextToHtml.Parse(text);
-			File.WriteAllText(HtmlDirectory + filename + HtmlExtension, htmlContent);
+			File.WriteAllText(HtmlDirectory + filename, htmlContent);
 		}
 
 		/// <summary>
@@ -113,8 +89,19 @@ namespace BaconBuilder.Controller
 		/// </summary>
 		public void CreateNewFile()
 		{
-			Console.WriteLine("Creating new file");
-			new FileInfo(HtmlDirectory + BlankHtmlFileName + HtmlExtension).CopyTo(GetLowestUnusedNewFileName());
+			Console.WriteLine(@"Creating new file");
+			const string content = 
+@"<!DOCTYPE HTML>
+<html>
+<head>
+<link href=""style.css"" />
+<title></title>
+</head>
+<body>
+</body>
+</html>";
+			File.WriteAllText(HtmlDirectory + BlankHtmlFileName + HtmlExtension, content);
+			new FileInfo(HtmlDirectory + BlankHtmlFileName + HtmlExtension).CopyTo(BaconModel.GetLowestUnusedNewFileName());
 		}
 
 		/// <summary>
@@ -124,7 +111,7 @@ namespace BaconBuilder.Controller
 		/// <param name="newName"></param>
 		public void RenameFile(string oldName, string newName)
 		{
-			Console.WriteLine("Renaming file " + oldName + " to " + newName);
+			Console.WriteLine(@"Renaming file {0} to {1}", oldName, newName);
 			var oldInfo = new FileInfo(HtmlDirectory + oldName + HtmlExtension);
 			var newInfo = new FileInfo(HtmlDirectory + newName + HtmlExtension);
 			if (File.Exists(newInfo.FullName))
@@ -137,7 +124,7 @@ namespace BaconBuilder.Controller
 		public void RemoveFile(string fileName)
 		{
 			var f = new FileInfo(HtmlDirectory + fileName);
-			Console.WriteLine("Removing file " + f.Name);
+			Console.WriteLine(@"Removing file " + f.Name);
 
 			if (f.Exists)
 				f.Delete();

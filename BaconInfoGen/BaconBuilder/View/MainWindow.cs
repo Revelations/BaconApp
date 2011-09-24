@@ -8,18 +8,16 @@ using System.Drawing;
 
 namespace BaconBuilder.View
 {
-	public partial class MainWindow : Form
+	public partial class MainWindow : Form, IMainView
 	{
 		private readonly BaconModel _model;
 		private readonly IMainViewController _controller;
 
 		// Title before modification
-		private string _cleanTitle = null;
+		private string _cleanTitle;
 		// Contents before modification
-		private string _cleanContents = null;
-
-
-		private string _currentFile = null;
+		private string _cleanContents;
+		private string _currentFile;
 
 		#region Constructors
 
@@ -92,13 +90,13 @@ namespace BaconBuilder.View
 		/// <param name="e"></param>
 		private void MainWindow_Load(object sender, System.EventArgs e)
 		{
-			_controller.InitialiseListView(listViewContents);
+			_controller.InitialiseListView();
 		}
 
 		private void btnAddFile_Click(object sender, EventArgs e)
 		{
 			_controller.CreateNewFile();
-			_controller.InitialiseListView(listViewContents);
+			_controller.InitialiseListView();
 		}
 
 		/// <summary>
@@ -108,13 +106,17 @@ namespace BaconBuilder.View
 		/// <param name="e"></param>
 		private void btnRemoveFile_Click(object sender, EventArgs e)
 		{
-			if (MessageBox.Show("Are you sure you wish to delete the file \"" + _currentFile + "\"?", "Confirm", MessageBoxButtons.OKCancel) == DialogResult.OK)
+			string message = string.Format(@"Are you sure you wish to delete the file ""{0}""?", _currentFile);
+			const string title = @"Confirm";
+			DialogResult result = MessageBox.Show(message, title, MessageBoxButtons.OKCancel);
+
+			if (result == DialogResult.OK)
 			{
 				_controller.RemoveFile(_currentFile);
 
 				_currentFile = null;
 
-				_controller.InitialiseListView(listViewContents);
+				_controller.InitialiseListView();
 			}
 		}
 
@@ -124,7 +126,7 @@ namespace BaconBuilder.View
 				txtTitle_FocusLeft(null, e);
 			else if (e.KeyCode == Keys.Escape)
 			{
-				txtTitle.Text = _cleanTitle;
+				TitleText = _cleanTitle;
 				textBoxMain.Focus();
 			}
 		}
@@ -136,7 +138,7 @@ namespace BaconBuilder.View
 		/// <param name="e"></param>
 		private void txtTitle_Enter(object sender, EventArgs e)
 		{
-			_cleanTitle = txtTitle.Text;
+			_cleanTitle = TitleText;
 		}
 
 		/// <summary>
@@ -146,36 +148,34 @@ namespace BaconBuilder.View
 		/// <param name="e"></param>
 		private void txtTitle_FocusLeft(object sender, EventArgs e)
 		{
+			// No file loaded
 			if (_currentFile == null) return;
-			//Check if the new title is invalid (e.g. blank, only spaces)
-			if (txtTitle.Text.Trim().Length == 0)
-			{
-				MessageBox.Show("Title cannot be blank or just spaces.");
-				txtTitle.Text = _cleanTitle;
-				return;
-			}
-			//Check if the text has changed.
-			if (txtTitle.Text.Equals(_cleanTitle))
-			{
-				return;
-			}
+			// Text hasn't changed.
+			if (TitleText.Equals(_cleanTitle)) return;
 
+			// The new title is invalid (e.g. blank, only spaces)
+			if (TitleText.Trim().Length == 0)
+			{
+				MessageBox.Show(@"Title cannot be blank or only spaces.");
+				TitleText = _cleanTitle;
+				return;
+			}
 
 			// Since the title is valid and changed, we rename it.
 			int index = FindItem(_cleanTitle + ".html");
-			Console.WriteLine("Clean title = " + _cleanTitle);
 			try
 			{
-				_controller.RenameFile(_cleanTitle, txtTitle.Text);
+				_controller.RenameFile(_cleanTitle, TitleText);
 			}
 			catch (IOException ex)
 			{
 				System.Console.WriteLine(ex.Message);
-				MessageBox.Show(ex.Message, "Error");
-				txtTitle.Text = _cleanTitle;
+				MessageBox.Show(ex.Message, @"Error");
+				TitleText = _cleanTitle;
 				return;
 			}
-			listViewContents.Items[index].Text = txtTitle.Text + ".html";
+
+			Files[index].Text = TitleText + @".html";
 
 		}
 
@@ -186,14 +186,12 @@ namespace BaconBuilder.View
 		/// <returns></returns>
 		private int FindItem(string text)
 		{
-			ListView.ListViewItemCollection items = listViewContents.Items;
-
-			for (int i = 0; i < items.Count; i++)
+			for (int i = 0; i < Files.Count; i++)
 			{
-				Console.WriteLine("Finding: Comparing {0} with {1}", text, items[i].Text);
-				if (items[i].Text.Equals(text))
+				Console.WriteLine(@"Finding: Comparing {0} with {1}", text, Files[i].Text);
+				if (Files[i].Text.Equals(text))
 				{
-					Console.WriteLine("Found!");
+					Console.WriteLine(@"Found!");
 					return i;
 				}
 			}
@@ -207,110 +205,93 @@ namespace BaconBuilder.View
 			{
 				_cleanTitle = e.Item.Text;
 				_cleanContents = _controller.LoadHtmlToText(e.Item.Text);
-				txtTitle.Text = BaconModel.HtmlFileName(_cleanTitle);
-				textBoxMain.Text = _cleanContents;
+
+				TitleText = Path.GetFileNameWithoutExtension(_cleanTitle);
+				Contents = _cleanContents;
 				_currentFile = _cleanTitle;
 			}
 			else
 			{
 				// If contents have changed
-				if (!_cleanContents.Equals(textBoxMain.Text))
+				if (!_cleanContents.Equals(Contents))
 				{
-					_controller.SaveTextToHtml(BaconModel.HtmlFileName(e.Item.Text), textBoxMain.Text);
+					_controller.SaveTextToHtml(e.Item.Text, Contents);
 				}
 			}
 		}
 
-		/// <summary>
-		/// Called when the user changes selection in the list view.
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void listViewContents_SelectedIndexChanged(object sender, EventArgs e)
+		private void btnPrintPreview_Click(object sender, EventArgs e)
 		{
-			//			//Deselected
-			//			if (listViewContents.SelectedItems.Count == 0)
-			//			{
-			//			}
-			//			// Make sure that something is selected.
-			//			if (listViewContents.SelectedItems.Count == 1)
-			//			{
-			//				//_controller.ChangeSelection(listViewContents);
-			//                
-			//				// Make sure a file has been selected.
-			//				if (_currentlyOpenedFile != null)
-			//				{
-			//					// Save the old file.
-			//					_controller.SaveTextToHtml(_currentlyOpenedFile, textBoxMain.Text);
-			//				}
-			//				else
-			//				{
-			//					Console.WriteLine("WTF!");
-			//				}
-			//
-			//				// If the file needs renaming, then do it.
-			//                if (!string.IsNullOrWhiteSpace(_renamedFile))
-			//                {
-			//                    _controller.RenameFile(_currentlyOpenedFile, _renamedFile);
-			//                    _renamedFile = string.Empty;
-			//                }
-			//
-			//                // Get the name of the new file.
-			//                _currentlyOpenedFile = listViewContents.SelectedItems[0].Text;
-			//
-			//                // Get the title of the new file and store it in the title textbox.
-			//                txtTitle.Text = BaconModel.HtmlFileName(_currentlyOpenedFile);
-			//
-			//                // Load the new file.
-			//                textBoxMain.Text = _controller.LoadHtmlToTextContents(_currentlyOpenedFile);
-			//
-			//				startingContents = textBoxMain.Text;
-			//			}
+			printPreviewDialog1.Document = printDocument1;
+			printPreviewDialog1.ShowDialog();
+
 		}
-        private void btnPrintPreview_Click(object sender, EventArgs e)
-        {
 
-            printPreviewDialog1.Document = printDocument1;
-            printPreviewDialog1.ShowDialog();
+		private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+		{
+			QrCodeGenerator qrCodeGenerator = new QrCodeGenerator();
+			Image code;
+			string text;
+			Font font = new System.Drawing.Font(Font.FontFamily, 20);
+			Brush brush = Brushes.Black;
+			
+			Rectangle layoutRectangle;
 
-        }
+			int currentCodeOnPage = 1;
+			const int codePerPage = 4;
 
-        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
-        {
-            QrCodeGenerator qr = new QrCodeGenerator();
-            string text;
-            Image code; //= qr.GenerateCode("Newcode");
-            //e.Graphics.DrawImage(i, 50, 50);
-            Font font = new System.Drawing.Font(Font.FontFamily, 20);
-            SolidBrush brush = new SolidBrush(Color.Black);
-            Rectangle layoutRectangle;// = new Rectangle(500, 100, 500, 100);
-            //e.Graphics.DrawString("Newcode",font,brush,layoutRectangle);
+			for (int i = 0; i < Files.Count; i++)
+			{
+				text = Files[i].Text;
+				// code per page counter
+				if (currentCodeOnPage > codePerPage) { currentCodeOnPage = 1;/*create new page*/ break; }
+				code = qrCodeGenerator.GenerateCode(text);
+				if (currentCodeOnPage % 2 == 0)
+				{
+					//others on right
+					layoutRectangle = new Rectangle(200, 180*currentCodeOnPage, 500, 100);
+					e.Graphics.DrawImage(code, 500, 150*currentCodeOnPage);
+				}
+				else
+				{
+					layoutRectangle = new Rectangle(400, 180*currentCodeOnPage, 500, 100);
+					e.Graphics.DrawImage(code, 100, 150*currentCodeOnPage);
+				}
+				e.Graphics.DrawString(text, font, brush, layoutRectangle);
 
-            int j = 1;
+				currentCodeOnPage++;
+			}
+		}
 
-            for (int i = 0; i < listViewContents.Items.Count; i++)
-            {
-                text = listViewContents.Items[i].Text;
-                //code per page counter
-                if (j > 4) { j = 1;/*create new page*/ break; }
-                code = qr.GenerateCode(text);
-                if (j % 2 == 1)//every second on on left
-                {
-                    layoutRectangle = new Rectangle(400, 180 * j, 500, 100);
-                    e.Graphics.DrawImage(code, 100, 150 * j);
-                }
-                else
-                {//others on right
-                    layoutRectangle = new Rectangle(200, 180 * j, 500, 100);
-                    e.Graphics.DrawImage(code, 500, 150 * j);
-                }
-                e.Graphics.DrawString(text, font, brush, layoutRectangle);
 
-                // e.Graphics.DrawImage(code, (j/2) * 300, 100*j);
-                j++;
-            }
-        }
+		public string TitleText
+		{
+			get { return txtTitle.Text; }
+			set { txtTitle.Text = value; }
+		}
 
+		public string XCoord
+		{
+			get { return txtX.Text; }
+			set { txtX.Text = value; }
+		}
+
+		public string YCoord
+		{
+			get { return txtY.Text; }
+			set { txtY.Text = value; }
+		}
+
+		public string Contents
+		{
+			get { return textBoxMain.Text; }
+			set { textBoxMain.Text = value; }
+		}
+
+		public ListView.ListViewItemCollection Files
+		{
+			get { return listViewContents.Items; }
+		}
 	}
 }
 

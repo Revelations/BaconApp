@@ -41,6 +41,6 @@ namespace BaconBuilder.Controller
 		/// </summary>
 		/// <param name="listView">The listview to initialise.</param>
 
-		void InitialiseListView(System.Windows.Forms.ListView listView);
+		void InitialiseListView();
 	}
 }

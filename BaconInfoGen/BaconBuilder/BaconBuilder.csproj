@@ -92,6 +92,7 @@
     <Compile Include="Controller\IMainViewController.cs" />
     <Compile Include="Controller\MainViewController.cs" />
     <Compile Include="Model\Ftp\FtpHelper.cs" />
+    <Compile Include="Model\IModel.cs" />
     <Compile Include="Model\Parser\HtmlToTextParser.cs" />
     <Compile Include="Model\FileHandler.cs" />
     <Compile Include="Model\HtmlDegen.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="View\ImageSelectionDialog.Designer.cs">
       <DependentUpon>ImageSelectionDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\IMainView.cs" />
     <Compile Include="View\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
