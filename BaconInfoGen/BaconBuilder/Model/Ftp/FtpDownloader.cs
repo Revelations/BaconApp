@@ -23,23 +23,6 @@ namespace BaconBuilder.Model
                     DownloadSingleFile(fileName);
         }
 
-        public void ConnectAndDownloadAll(Label label, ProgressBar progress)
-        {
-            List<string> fileList = ConnectAndGetFileList();
-            List<string> neededFiles = new List<string>();
-
-            for(int i = 0; i < fileList.Count; i++)
-            {
-                if(FileNeedsDownload(fileList[i]))
-                    neededFiles.Add(fileList[i]);
-            }
-
-            for(int i = 0; i < neededFiles.Count; i++)
-            {
-                DownloadSingleFile(neededFiles[i]);
-            }
-        }
-
         /// <summary>
         /// Method that downloads a single file from an FTP server.
         /// </summary>

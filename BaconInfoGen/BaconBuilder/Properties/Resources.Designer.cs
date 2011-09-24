@@ -60,15 +60,6 @@ namespace BaconBuilder.Properties {
             }
         }
         
-        /// <summary>
-        ///   Looks up a localized string similar to C:/Users/&quot;+System.Environment.UserName+&quot;/test/.
-        /// </summary>
-        internal static string HtmlDirectory {
-            get {
-                return ResourceManager.GetString("HtmlDirectory", resourceCulture);
-            }
-        }
-        
         internal static System.Drawing.Bitmap map {
             get {
                 object obj = ResourceManager.GetObject("map", resourceCulture);
