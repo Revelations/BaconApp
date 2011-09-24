@@ -51,7 +51,7 @@
             this.pnlContainer.Location = new System.Drawing.Point(0, 0);
             this.pnlContainer.Name = "pnlContainer";
             this.pnlContainer.Padding = new System.Windows.Forms.Padding(20);
-            this.pnlContainer.Size = new System.Drawing.Size(594, 175);
+            this.pnlContainer.Size = new System.Drawing.Size(494, 172);
             this.pnlContainer.TabIndex = 0;
             // 
             // tlp
@@ -72,7 +72,7 @@
             this.tlp.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlp.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlp.Size = new System.Drawing.Size(554, 106);
+            this.tlp.Size = new System.Drawing.Size(454, 103);
             this.tlp.TabIndex = 0;
             // 
             // lblImageLocation
@@ -91,7 +91,7 @@
             this.txtImageURL.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtImageURL.Location = new System.Drawing.Point(92, 3);
             this.txtImageURL.Name = "txtImageURL";
-            this.txtImageURL.Size = new System.Drawing.Size(378, 20);
+            this.txtImageURL.Size = new System.Drawing.Size(278, 20);
             this.txtImageURL.TabIndex = 0;
             // 
             // comboBox1
@@ -100,12 +100,12 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(92, 32);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(378, 21);
+            this.comboBox1.Size = new System.Drawing.Size(278, 21);
             this.comboBox1.TabIndex = 2;
             // 
             // btnBrowse
             // 
-            this.btnBrowse.Location = new System.Drawing.Point(476, 3);
+            this.btnBrowse.Location = new System.Drawing.Point(376, 3);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(75, 23);
             this.btnBrowse.TabIndex = 1;
@@ -130,15 +130,15 @@
             this.flp.Controls.Add(this.btnOK);
             this.flp.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flp.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flp.Location = new System.Drawing.Point(20, 126);
+            this.flp.Location = new System.Drawing.Point(20, 123);
             this.flp.Name = "flp";
-            this.flp.Size = new System.Drawing.Size(554, 29);
+            this.flp.Size = new System.Drawing.Size(454, 29);
             this.flp.TabIndex = 1;
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(476, 3);
+            this.btnCancel.Location = new System.Drawing.Point(376, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
@@ -147,7 +147,7 @@
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(395, 3);
+            this.btnOK.Location = new System.Drawing.Point(295, 3);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 0;
@@ -160,7 +160,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(594, 175);
+            this.ClientSize = new System.Drawing.Size(494, 172);
             this.Controls.Add(this.pnlContainer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "ImageSelectionDialog";
