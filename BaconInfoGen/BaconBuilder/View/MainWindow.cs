@@ -74,6 +74,7 @@ namespace BaconBuilder.View
 		{
 			btnRemoveFile.Enabled = listViewContents.SelectedItems.Count != 0;
 			btnPreview.Enabled = _model.CurrentFileName != null;
+			toolContents.Enabled = _model.CurrentFileName != null;
 		}
 
 		#endregion
