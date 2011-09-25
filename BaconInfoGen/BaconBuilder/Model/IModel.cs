@@ -5,7 +5,7 @@ namespace BaconBuilder.Model
 {
 	public interface IModel
 	{
-		Dictionary<string, string> LoadFiles();
+		void LoadFiles();
 		void RemoveFile(string fileName);
 		void CreateNewFile(string fileName);
 		void RenameFile(string oldName, string newName);
@@ -17,8 +17,5 @@ namespace BaconBuilder.Model
 		string CurrentContents { get; set; }
 
 		Image QrCode(string file);
-
-		//void Connect();
-
 	}
 }

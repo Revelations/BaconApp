@@ -41,52 +41,99 @@ namespace BaconBuilder.Model
             InitialiseDictionary();
         }
 
+		public string GenerateContent(string bodyContent)
+		{
+			System.Console.WriteLine("Creating full HTML");
+			var builder = new StringBuilder();
+
+			builder.Append(@"<!DOCTYPE HTML>").Append(@"<html>")
+				.Append(@"<head>")
+				.Append(@"<link href=""style.css"" rel=""stylesheet"" />")
+				.Append(@"<title>")
+				// Insert title here if need be.
+				.Append(@"</title>")
+				.AppendFormat(@"<!-- x = {0} -->", Location.X)
+				.AppendFormat(@"<!-- y = {0} -->", Location.Y)
+				.Append(@"</head>")
+				.Append(@"<body>")
+				.Append(base.Parse(bodyContent))
+				.Append(@"</body>")
+				.Append(@"</html>");
+
+			return builder.ToString();
+			
+		}
+
         public override string Parse(string bodyContent)
         {
-            string result = Resources.Blank;
+        	System.Console.WriteLine("Creating full HTML");
+			var builder = new StringBuilder();
 
-            result = InsertXY(result, Location);
-
-            result = InsertBody(result, base.Parse(bodyContent));
-
-            return result;
-        }
-
-	    /// <summary>
-	    /// TODO: Jordan is working on this.
-	    /// </summary>
-	    /// <param name="input"></param>
-	    /// <param name="p"></param>
-	    public string InsertXY(string input, Point p)
-        {
-            StringBuilder builder = new StringBuilder();
-
-            int i = input.IndexOf("</title>") + "</title>".Length;
-
-            builder.Append(input.Substring(0, i));
-
-            builder.Append(string.Format(@"<!-- x = {0} -->", p.X));
-
-            builder.Append(string.Format(@"<!-- y = {0} -->", p.Y));
-
-            builder.Append(input.Substring(i, input.Length - i));
+			builder.Append(@"<!DOCTYPE HTML>").Append(@"<html>")
+				.Append(@"<head>")
+				.Append(@"<link href=""style.css"" rel=""stylesheet"" />")
+				.Append(@"<title>")
+				// Insert title here if need be.
+				.Append(@"</title>")
+				.AppendFormat(@"<!-- x = {0} -->", Location.X)
+				.AppendFormat(@"<!-- y = {0} -->", Location.Y)
+				.Append(@"</head>")
+				.Append(@"<body>")
+				.Append(base.Parse(bodyContent))
+				.Append(@"</body>")
+				.Append(@"</html>");
 
             return builder.ToString();
         }
-
-        public string InsertBody(string input, string bodyContent)
-        {
-            StringBuilder builder = new StringBuilder();
-
-            int i = input.IndexOf("<body>") + "<body>".Length;
-
-            builder.Append(input.Substring(0, i));
-
-            builder.Append(bodyContent);
-
-            builder.Append(input.Substring(i, input.Length - i));
-
-            return builder.ToString();
-        }
+//
+//	    /// <summary>
+//	    /// TODO: Jordan is working on this.
+//	    /// </summary>
+//	    /// <param name="input"></param>
+//	    /// <param name="p"></param>
+//	    public string InsertXY(string input, Point p)
+//        {
+//            StringBuilder builder = new StringBuilder();
+//
+//	    	builder.Append(@"<!DOCTYPE HTML>").Append(@"<html>")
+//				.Append(@"<head>")
+//				.Append(@"<link href=""style.css"" rel=""stylesheet"" />")
+//				.Append(@"<title>")
+//				// Insert title here if need be.
+//				.Append(@"</title>")
+//				.AppendFormat(@"<!-- x = {0} -->", p.X)
+//				.AppendFormat(@"<!-- y = {0} -->", p.Y)
+//				.Append(@"</head>")
+//				.Append(@"<body>")
+//				.Append(@"</body>")
+//				.Append(@"</html>");
+//
+//            int i = input.IndexOf("</title>") + "</title>".Length;
+//
+//            builder.Append(input.Substring(0, i));
+//
+//            builder.Append(string.Format(@"<!-- x = {0} -->", p.X));
+//
+//            builder.Append(string.Format(@"<!-- y = {0} -->", p.Y));
+//
+//            builder.Append(input.Substring(i, input.Length - i));
+//
+//            return builder.ToString();
+//        }
+//
+//        public string InsertBody(string input, string bodyContent)
+//        {
+//            StringBuilder builder = new StringBuilder();
+//
+//            int i = input.IndexOf("<body>") + "<body>".Length;
+//
+//            builder.Append(input.Substring(0, i));
+//
+//            builder.Append(bodyContent);
+//
+//            builder.Append(input.Substring(i, input.Length - i));
+//
+//            return builder.ToString();
+//        }
     }
 }

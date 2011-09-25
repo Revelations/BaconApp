@@ -13,15 +13,18 @@ namespace BaconBuilder.Model
     /// </summary>
     public class FtpDownloader : FtpHelper
     {
+    	private readonly IModel _model;
+
     	public FtpDownloader(IModel model)
     	{
+    		_model = model;
     	}
 
     	/// <summary>
         /// Helper method that connects to a server and downloads every file present in the main directory that needs to be downloaded.
         /// </summary>
         public void ConnectAndDownloadAll()
-        {
+    	{
             foreach(string fileName in ConnectAndGetFileList())
                 if(FileNeedsDownload(fileName))
                     DownloadSingleFile(fileName);

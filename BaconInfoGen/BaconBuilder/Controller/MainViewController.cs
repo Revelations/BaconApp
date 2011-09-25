@@ -36,10 +36,10 @@ namespace BaconBuilder.Controller
 			// Load files into the model.
 			_model.LoadFiles();
 			// Load the filenames to view.
-			ReloadDirectory();
+			RefreshDirectory();
 		}
 
-		public void ReloadDirectory()
+		public void RefreshDirectory()
 		{
 			_view.Files.Clear();
 
@@ -106,12 +106,11 @@ namespace BaconBuilder.Controller
 			}
 			catch (IOException ex)
 			{
-				Console.WriteLine(ex.Message);
-				MessageBox.Show(ex.Message, @"Error");
+				Console.WriteLine(ex.Message); MessageBox.Show(ex.Message, @"Error");
 				_view.TitleText = _model.CurrentFile;
 				return;
 			}
-			ReloadDirectory();
+			RefreshDirectory();
 			_view.Files[index].Selected = true;
 		}
 
@@ -146,8 +145,11 @@ namespace BaconBuilder.Controller
 		    TextToHtml.X = Convert.ToInt32(_view.XCoord);
             TextToHtml.Y = Convert.ToInt32(_view.YCoord);
 
-			string htmlContent = TextToHtml.Parse(_view.Contents);
+			string htmlContent = TextToHtml.GenerateContent(_view.Contents);
+			Console.WriteLine("saving htmlContents " + htmlContent);
+			//_model.CurrentContents = htmlContent;
 			File.WriteAllText(HtmlDirectory + filename, htmlContent);
+			_model.LoadFiles();
 		}
 
 		/// <summary>
@@ -171,7 +173,7 @@ namespace BaconBuilder.Controller
 		public void RemoveCurrentFile()
 		{
 			_model.RemoveFile(_model.CurrentFileWithExtension);
-			ReloadDirectory();
+			RefreshDirectory();
 		}
 
 		public void RemoveFile(string fileName)
@@ -182,5 +184,16 @@ namespace BaconBuilder.Controller
 			if (f.Exists)
 				f.Delete();
 		}
+
+//		public void FetchFromServer()
+//		{
+//
+//			//FtpDialog ftpDialog = new FtpDialog(new FtpDownloader(_model));
+//			//ftpDialog.ShowDialog();
+//			//_controller.InitialiseListView();
+//			_model.FetchFromServer();
+//			_model.LoadFiles();
+//			Console.WriteLine("Fetched from server. {0} files loaded into memory", _model.FileNames.Count);
+//		}
 	}
 }

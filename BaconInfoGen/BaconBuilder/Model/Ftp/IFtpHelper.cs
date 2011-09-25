@@ -8,8 +8,7 @@ namespace BaconBuilder.Model.Ftp
 {
 	interface IFtpHelper
 	{
-		void ConnectToServer();
-
+		void Fetch();
 
 	}
 }

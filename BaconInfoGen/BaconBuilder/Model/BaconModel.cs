@@ -15,10 +15,8 @@ namespace BaconBuilder.Model
 		private readonly Dictionary<string, string> _fileContents = new Dictionary<string, string>();
 		private string _currentFileWithExtensionName;
 
-		private FtpHelper _ftpDownloader;
-		private FtpHelper _ftpUploader;
-
-		public string Contents { get; set; }
+//		private FtpDownloader _ftpDownloader;
+//		private FtpUploader _ftpUploader;
 
 		/// <summary>
 		/// Get or set the image url, obtained from an image selection dialog.
@@ -87,7 +85,11 @@ namespace BaconBuilder.Model
 			get { return StripExtension(_currentFileWithExtensionName); }
 		}
 
-		public Dictionary<string, string> LoadFiles()
+		/// <summary>
+		/// Reloads the files into memory.
+		/// </summary>
+		/// <returns></returns>
+		public void LoadFiles()
 		{
 			if (!_directory.Exists) _directory.Create();
 
@@ -97,7 +99,6 @@ namespace BaconBuilder.Model
 			{
 				_fileContents.Add(file.Name, File.ReadAllText(file.FullName));
 			}
-			return _fileContents;
 		}
 
 		public Dictionary<string, string>.KeyCollection FileNames

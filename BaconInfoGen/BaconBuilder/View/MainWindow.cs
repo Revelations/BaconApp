@@ -52,7 +52,6 @@ namespace BaconBuilder.View
 
 		#endregion
 
-		#region Dialog Handling
 
 		/// <summary>
 		/// 
@@ -61,8 +60,7 @@ namespace BaconBuilder.View
 		/// <param name="e"></param>
 		private void btnPreview_Click(object sender, System.EventArgs e)
 		{
-			MessageBox.Show(_model.CurrentFile);
-			_model.Contents = textBoxMain.Text;
+			_model.CurrentContents = textBoxMain.Text;
 			Preview preview = new Preview(_model);
 
 			preview.ShowDialog();
@@ -70,10 +68,8 @@ namespace BaconBuilder.View
 
 		private void btnAudio_Click(object sender, EventArgs e)
 		{
-			
+
 		}
-
-
 
 		/// <summary>
 		/// 
@@ -104,8 +100,6 @@ namespace BaconBuilder.View
 			throw new NotImplementedException("btnMapPreview_Click");
 		}
 
-		#endregion
-
 		/// <summary>
 		/// Called when the form is first loaded.
 		/// </summary>
@@ -134,7 +128,7 @@ namespace BaconBuilder.View
 			{
 				_controller.RemoveCurrentFile();
 
-				_controller.ReloadDirectory();
+				_controller.RefreshDirectory();
 			}
 		}
 
@@ -162,7 +156,7 @@ namespace BaconBuilder.View
 
 		void listViewContents_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			btnRemoveFile.Enabled = ((ListView) sender).SelectedIndices.Count != 0;
+			btnRemoveFile.Enabled = ((ListView)sender).SelectedIndices.Count != 0;
 		}
 
 		private void listViewContents_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
@@ -259,34 +253,34 @@ namespace BaconBuilder.View
 			set { btnRemoveFile.Enabled = value; }
 		}
 
-        private void toolStripSync_Click(object sender, EventArgs e)
-        {
-            FtpDialog ftpDialog = new FtpDialog(new FtpUploader());
-            ftpDialog.ShowDialog();
-        }
+		private void toolStripSync_Click(object sender, EventArgs e)
+		{
+			FtpDialog ftpDialog = new FtpDialog(new FtpUploader());
+			ftpDialog.ShowDialog();
+		}
 
-        private void MainWindow_Shown(object sender, EventArgs e)
-        {
-            FtpDialog ftpDialog = new FtpDialog(new FtpDownloader(_model));
-            ftpDialog.ShowDialog();
-            _controller.InitialiseListView();
-        }
+		private void MainWindow_Shown(object sender, EventArgs e)
+		{
+			FtpDialog ftpDialog = new FtpDialog(new FtpDownloader(_model));
+			ftpDialog.ShowDialog();
+			_controller.InitialiseListView();
+		}
 
-        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            DialogResult result =
-                MessageBox.Show(
-                    @"Would you like to synchronise your content with the distribution server before exiting?",
-                    @"Confirm", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3);
+		private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			DialogResult result =
+				MessageBox.Show(
+					@"Would you like to synchronise your content with the distribution server before exiting?",
+					@"Confirm", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3);
 
-            if (result == DialogResult.Yes)
-            {
-                FtpDialog ftpDialog = new FtpDialog((new FtpUploader()));
-                ftpDialog.ShowDialog();
-            }
-            if (result == DialogResult.Cancel)
-                e.Cancel = true;
-        }
+			if (result == DialogResult.Yes)
+			{
+				FtpDialog ftpDialog = new FtpDialog((new FtpUploader()));
+				ftpDialog.ShowDialog();
+			}
+			if (result == DialogResult.Cancel)
+				e.Cancel = true;
+		}
 	}
 }
 

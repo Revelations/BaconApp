@@ -14,7 +14,7 @@ namespace BaconBuilder.Model
     /// </summary>
     public abstract class FtpHelper
     {
-    	private readonly IModel _model;
+    	//private readonly IModel _model;
     	// Address of the ftp server to connect to.
         protected const string _serverAddress = "ftp://revelations.webhop.org/";
 
