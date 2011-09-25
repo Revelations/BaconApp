@@ -150,9 +150,11 @@ namespace BaconBuilder.Controller
 		/// <param name="freezer">The freezer to save the bacon to.</param>
 		public void SaveTextToHtml(string freezer)
 		{
+			_model.X = Convert.ToInt32(_view.XCoord); ;
+			_model.Y = Convert.ToInt32(_view.YCoord); ;
 			TextToHtml.X = Convert.ToInt32(_view.XCoord);
 			TextToHtml.Y = Convert.ToInt32(_view.YCoord);
-			string cooked = TextToHtml.GenerateContent(_view.Contents);
+			string cooked = TextToHtml.Parse(_view.Contents);
 
 			Console.WriteLine(
 @"Saving bacon to ""{0}""

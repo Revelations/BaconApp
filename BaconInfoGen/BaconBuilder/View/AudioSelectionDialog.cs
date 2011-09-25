@@ -113,9 +113,9 @@ namespace BaconBuilder.View
 
 		private void btnOK_Click(object sender, EventArgs e)
 		{
-            FileInfo f = new FileInfo(ItemFileName);
-		    f.CopyTo("C:/Users/" + Environment.UserName + "/test/" + f.Name);
-
+			FileInfo f = new FileInfo(ItemFileName);
+			string dest = "C:/Users/" + Environment.UserName + "/test/" + f.Name;
+			f.CopyTo("C:/Users/" + Environment.UserName + "/test/" + f.Name, true);
 			//_controller.
 			_model.AudioUrl = f.Name;
 		}
