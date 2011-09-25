@@ -1,4 +1,5 @@
-﻿namespace BaconBuilder.View
+﻿
+namespace BaconBuilder.View
 {
 	partial class Preview
 	{
@@ -26,6 +27,8 @@
 		/// Required method for Designer support - do not modify
 		/// the contents of this method with the code editor.
 		/// </summary>
+		[System.Diagnostics.DebuggerNonUserCode]
+		[System.CodeDom.Compiler.GeneratedCode("Winform Designer", "VS2010 SP1")]
 		private void InitializeComponent()
 		{
 			this.panel1 = new System.Windows.Forms.Panel();

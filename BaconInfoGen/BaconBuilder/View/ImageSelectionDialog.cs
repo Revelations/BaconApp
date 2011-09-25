@@ -81,22 +81,21 @@ namespace BaconBuilder.View
 			_openImageDialog.Filter = String.Join(FILTER_OUTER_DELIMITER, f.Select(p => p.ToString()).ToArray());
 		}
 
-		#region Filter parsing
 		private static string Filters(string filterTags)
 		{
-			var concatFilters = filters.SelectMany(secondLevel => secondLevel).Select(firstLevel => firstLevel).ToArray();
-
-			return filterTags + FILTER_OUTER_DELIMITER + String.Join(FILTER_INNER_DELIMITER, concatFilters);
+			return filterTags + FILTER_OUTER_DELIMITER + String.Join(FILTER_INNER_DELIMITER, filters.SelectMany(secondLevel => secondLevel).Select(firstLevel => firstLevel).ToArray());
 		}
 
+		/// <summary>
+		/// Creates a filter based on the filter index and the tag
+		/// </summary>
+		/// <param name="filterTags">Summary of the filter tag e.g. "All Files"</param>
+		/// <param name="index">The index of the filer</param>
+		/// <returns></returns>
 		private static string Filters(string filterTags, int index)
 		{
-			var concatFilters = filters[index].Select(firstLevel => firstLevel).ToArray();
-
-			return filterTags + FILTER_OUTER_DELIMITER + String.Join(FILTER_INNER_DELIMITER, concatFilters);
+			return filterTags + FILTER_OUTER_DELIMITER + String.Join(FILTER_INNER_DELIMITER, filters[index].Select(firstLevel => firstLevel).ToArray());
 		}
-
-		#endregion
 
 
 		/// <summary>

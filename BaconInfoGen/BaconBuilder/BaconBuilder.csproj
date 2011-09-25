@@ -89,7 +89,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\IMainViewController.cs" />
     <Compile Include="Controller\MainViewController.cs" />
     <Compile Include="Model\Ftp\FtpHelper.cs" />
     <Compile Include="Model\IModel.cs" />

@@ -11,10 +11,6 @@ namespace BaconBuilder.View
 		private readonly IModel _model;
 		private readonly QrCodeGenerator _qrGen;
 
-		private Image _qrCode;
-
-		private HtmlDocument _browser;
-
 		public Preview(IModel model)
 		{
 			_model = model;

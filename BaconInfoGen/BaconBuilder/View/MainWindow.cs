@@ -11,7 +11,7 @@ namespace BaconBuilder.View
 	public partial class MainWindow : Form, IMainView
 	{
 		private readonly BaconModel _model;
-		private readonly IMainViewController _controller;
+		private readonly MainViewController _controller;
 
 		#region Constructors
 
@@ -28,6 +28,7 @@ namespace BaconBuilder.View
 			tsbImage.Click += tsbImage_Click;
 			tsbAudio.Click += btnAudio_Click;
 			btnMapPreview.Click += btnMapPreview_Click;
+			listViewContents.SelectedIndexChanged += listViewContents_SelectedIndexChanged;
 		}
 
 		#endregion
@@ -109,11 +110,12 @@ namespace BaconBuilder.View
 		/// <param name="e"></param>
 		private void btnRemoveFile_Click(object sender, EventArgs e)
 		{
-			if (MessageBox.Show(@"Are you sure you wish to delete the file """ + _model.CurrentFile + @"""?", @"Confirm", MessageBoxButtons.OKCancel) == DialogResult.OK)
+			string message = string.Format(@"Are you sure you wish to delete the file ""{0}""?", _model.CurrentFile);
+			if (MessageBox.Show(message, @"Confirm", MessageBoxButtons.OKCancel) == DialogResult.OK)
 			{
 				_controller.RemoveCurrentFile();
 
-				_controller.InitialiseListView();
+				_controller.ReloadDirectory();
 			}
 		}
 
@@ -136,6 +138,12 @@ namespace BaconBuilder.View
 		private void txtTitle_FocusLeft(object sender, EventArgs e)
 		{
 			_controller.ValidateTitle();
+		}
+
+
+		void listViewContents_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			btnRemoveFile.Enabled = ((ListView) sender).SelectedIndices.Count != 0;
 		}
 
 		private void listViewContents_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
@@ -224,6 +232,12 @@ namespace BaconBuilder.View
 		public ListView.ListViewItemCollection Files
 		{
 			get { return listViewContents.Items; }
+		}
+
+		public bool IsRemoveButtonEnabled
+		{
+			get { return btnRemoveFile.Enabled; }
+			set { btnRemoveFile.Enabled = value; }
 		}
 	}
 }

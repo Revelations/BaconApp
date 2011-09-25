@@ -6,7 +6,7 @@ using BaconBuilder.View;
 
 namespace BaconBuilder.Controller
 {
-	public class MainViewController : IMainViewController
+	public class MainViewController
 	{
 		private readonly IModel _model;
 		private readonly IMainView _view;
@@ -47,6 +47,7 @@ namespace BaconBuilder.Controller
 			{
 				_view.Files.Add(fileName, 0);
 			}
+			_view.IsRemoveButtonEnabled = false;
 		}
 
 		public void SelectFile(string value)

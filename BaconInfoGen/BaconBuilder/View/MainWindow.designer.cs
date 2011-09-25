@@ -1,3 +1,4 @@
+
 using System.Windows.Forms;
 
 namespace BaconBuilder.View
@@ -29,6 +30,8 @@ namespace BaconBuilder.View
 		/// Required method for Designer support - do not modify
 		/// the contents of this method with the code editor.
 		/// </summary>
+		[System.Diagnostics.DebuggerNonUserCode]
+		[System.CodeDom.Compiler.GeneratedCode("Winform Designer", "VS2010 SP1")]
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
@@ -62,11 +65,6 @@ namespace BaconBuilder.View
 			this.btnPreview = new System.Windows.Forms.Button();
 			this.btnPrintPreview = new System.Windows.Forms.Button();
 			this.toolContents = new System.Windows.Forms.ToolStrip();
-			this.tsbImage = new System.Windows.Forms.ToolStripButton();
-			this.tsbAudio = new System.Windows.Forms.ToolStripButton();
-			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-			this.tsbBold = new System.Windows.Forms.ToolStripButton();
-			this.tsbItalics = new System.Windows.Forms.ToolStripButton();
 			this.splitter3 = new System.Windows.Forms.Splitter();
 			this.tlpDataFields = new System.Windows.Forms.TableLayoutPanel();
 			this.btnMapPreview = new System.Windows.Forms.Button();
@@ -81,9 +79,14 @@ namespace BaconBuilder.View
 			this.splitter5 = new System.Windows.Forms.Splitter();
 			this.splitter6 = new System.Windows.Forms.Splitter();
 			this.splitter4 = new System.Windows.Forms.Splitter();
+			this.tsbImage = new System.Windows.Forms.ToolStripButton();
+			this.tsbAudio = new System.Windows.Forms.ToolStripButton();
+			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+			this.tsbBold = new System.Windows.Forms.ToolStripButton();
+			this.tsbItalics = new System.Windows.Forms.ToolStripButton();
 			this.printDocument = new System.Drawing.Printing.PrintDocument();
 			this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
-			this.menuStrip.SuspendLayout();
+			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.pnlDirectories.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
@@ -93,7 +96,6 @@ namespace BaconBuilder.View
 			this.pnlContentEditor.SuspendLayout();
 			this.pnlTextEditor.SuspendLayout();
 			this.flpPreview.SuspendLayout();
-			this.toolContents.SuspendLayout();
 			this.tlpDataFields.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -124,49 +126,49 @@ namespace BaconBuilder.View
 			// openFileToolStripMenuItem
 			// 
 			this.openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
-			this.openFileToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+			this.openFileToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
 			this.openFileToolStripMenuItem.Text = "Open File....";
 			// 
 			// openDatabaseToolStripMenuItem
 			// 
 			this.openDatabaseToolStripMenuItem.Name = "openDatabaseToolStripMenuItem";
-			this.openDatabaseToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+			this.openDatabaseToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
 			this.openDatabaseToolStripMenuItem.Text = "Open Database...";
 			// 
 			// toolStripSeparator1
 			// 
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(162, 6);
+			this.toolStripSeparator1.Size = new System.Drawing.Size(173, 6);
 			// 
 			// printToolStripMenuItem
 			// 
 			this.printToolStripMenuItem.Name = "printToolStripMenuItem";
 			this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-			this.printToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+			this.printToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
 			this.printToolStripMenuItem.Text = "Print...";
 			// 
 			// printAllModifiedToolStripMenuItem
 			// 
 			this.printAllModifiedToolStripMenuItem.Name = "printAllModifiedToolStripMenuItem";
-			this.printAllModifiedToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+			this.printAllModifiedToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
 			this.printAllModifiedToolStripMenuItem.Text = "Print All Modified...";
 			// 
 			// printAllToolStripMenuItem
 			// 
 			this.printAllToolStripMenuItem.Name = "printAllToolStripMenuItem";
-			this.printAllToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+			this.printAllToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
 			this.printAllToolStripMenuItem.Text = "Print All...";
 			// 
 			// toolStripSeparator2
 			// 
 			this.toolStripSeparator2.Name = "toolStripSeparator2";
-			this.toolStripSeparator2.Size = new System.Drawing.Size(162, 6);
+			this.toolStripSeparator2.Size = new System.Drawing.Size(173, 6);
 			// 
 			// exitToolStripMenuItem
 			// 
 			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
 			this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
 			this.exitToolStripMenuItem.Text = "E&xit";
 			// 
 			// editToolStripMenuItem
@@ -192,7 +194,7 @@ namespace BaconBuilder.View
 			// optionsToolStripMenuItem
 			// 
 			this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-			this.optionsToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+			this.optionsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
 			this.optionsToolStripMenuItem.Text = "&Options...";
 			// 
 			// pnlDirectories
@@ -208,6 +210,8 @@ namespace BaconBuilder.View
 			// 
 			// listViewContents
 			// 
+			this.listViewContents.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1});
 			this.listViewContents.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.listViewContents.HideSelection = false;
 			this.listViewContents.Location = new System.Drawing.Point(0, 0);
@@ -217,7 +221,7 @@ namespace BaconBuilder.View
 			this.listViewContents.SmallImageList = this.imageList;
 			this.listViewContents.TabIndex = 3;
 			this.listViewContents.UseCompatibleStateImageBehavior = false;
-			this.listViewContents.View = System.Windows.Forms.View.List;
+			this.listViewContents.View = System.Windows.Forms.View.Details;
 			this.listViewContents.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewContents_ItemSelectionChanged);
 			// 
 			// imageList
@@ -369,41 +373,6 @@ namespace BaconBuilder.View
 			this.toolContents.Size = new System.Drawing.Size(606, 25);
 			this.toolContents.TabIndex = 8;
 			this.toolContents.Text = "toolStrip1";
-			// 
-			// tsbImage
-			// 
-			this.tsbImage.Image = ((System.Drawing.Image)(resources.GetObject("tsbImage.Image")));
-			this.tsbImage.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.tsbImage.Name = "tsbImage";
-			this.tsbImage.Size = new System.Drawing.Size(57, 22);
-			this.tsbImage.Text = "Image";
-			// 
-			// tsbAudio
-			// 
-			this.tsbAudio.Image = ((System.Drawing.Image)(resources.GetObject("tsbAudio.Image")));
-			this.tsbAudio.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.tsbAudio.Name = "tsbAudio";
-			this.tsbAudio.Size = new System.Drawing.Size(54, 22);
-			this.tsbAudio.Text = "Audio";
-			// 
-			// toolStripSeparator3
-			// 
-			this.toolStripSeparator3.Name = "toolStripSeparator3";
-			this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-			// 
-			// tsbBold
-			// 
-			this.tsbBold.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.tsbBold.Name = "tsbBold";
-			this.tsbBold.Size = new System.Drawing.Size(31, 22);
-			this.tsbBold.Text = "Bold";
-			// 
-			// tsbItalics
-			// 
-			this.tsbItalics.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.tsbItalics.Name = "tsbItalics";
-			this.tsbItalics.Size = new System.Drawing.Size(39, 22);
-			this.tsbItalics.Text = "Italics";
 			// 
 			// splitter3
 			// 
@@ -559,6 +528,41 @@ namespace BaconBuilder.View
 			this.splitter4.TabIndex = 10;
 			this.splitter4.TabStop = false;
 			// 
+			// tsbImage
+			// 
+			this.tsbImage.Image = ((System.Drawing.Image)(resources.GetObject("tsbImage.Image")));
+			this.tsbImage.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.tsbImage.Name = "tsbImage";
+			this.tsbImage.Size = new System.Drawing.Size(57, 22);
+			this.tsbImage.Text = "Image";
+			// 
+			// tsbAudio
+			// 
+			this.tsbAudio.Image = ((System.Drawing.Image)(resources.GetObject("tsbAudio.Image")));
+			this.tsbAudio.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.tsbAudio.Name = "tsbAudio";
+			this.tsbAudio.Size = new System.Drawing.Size(54, 22);
+			this.tsbAudio.Text = "Audio";
+			// 
+			// toolStripSeparator3
+			// 
+			this.toolStripSeparator3.Name = "toolStripSeparator3";
+			this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+			// 
+			// tsbBold
+			// 
+			this.tsbBold.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.tsbBold.Name = "tsbBold";
+			this.tsbBold.Size = new System.Drawing.Size(31, 22);
+			this.tsbBold.Text = "Bold";
+			// 
+			// tsbItalics
+			// 
+			this.tsbItalics.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.tsbItalics.Name = "tsbItalics";
+			this.tsbItalics.Size = new System.Drawing.Size(39, 22);
+			this.tsbItalics.Text = "Italics";
+			// 
 			// printDocument
 			// 
 			this.printDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
@@ -585,8 +589,6 @@ namespace BaconBuilder.View
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "HTML Content Generator";
 			this.Load += new System.EventHandler(this.MainWindow_Load);
-			this.menuStrip.ResumeLayout(false);
-			this.menuStrip.PerformLayout();
 			this.pnlDirectories.ResumeLayout(false);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.toolStripContainer1.BottomToolStripPanel.ResumeLayout(false);
@@ -602,8 +604,6 @@ namespace BaconBuilder.View
 			this.pnlTextEditor.ResumeLayout(false);
 			this.pnlTextEditor.PerformLayout();
 			this.flpPreview.ResumeLayout(false);
-			this.toolContents.ResumeLayout(false);
-			this.toolContents.PerformLayout();
 			this.tlpDataFields.ResumeLayout(false);
 			this.tlpDataFields.PerformLayout();
 			this.ResumeLayout(false);
@@ -662,6 +662,7 @@ namespace BaconBuilder.View
 		private System.Drawing.Printing.PrintDocument printDocument;
 		private PrintPreviewDialog printPreviewDialog;
 		private ToolStripButton tsbAudio;
+		private ColumnHeader columnHeader1;
 
 	}
 }

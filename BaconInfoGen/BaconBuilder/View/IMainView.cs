@@ -9,5 +9,6 @@ namespace BaconBuilder.View
 		string YCoord { get; set; }
 		string Contents { get; set; }
 		ListView.ListViewItemCollection Files { get; }
+		bool IsRemoveButtonEnabled { get; set; }
 	}
 }
