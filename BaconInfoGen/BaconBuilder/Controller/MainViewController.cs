@@ -133,7 +133,12 @@ namespace BaconBuilder.Controller
 			string cooked = HtmlToText.Parse(_model.CurrentContents);
 			string raw = _model.CurrentContents;
 
-			Console.WriteLine(@"Loading bacon ""{0}""\n\raw bacon: {1}\n\tcooked bacon:{2}", bacon, raw, cooked);
+			Console.WriteLine(
+@"Loading bacon ""{0}""
+== raw bacon ==
+{1}
+== cooked bacon ==
+{2}", bacon, raw, cooked);
 			// Return plain text version of the current contents.
 
 			return cooked;
@@ -149,7 +154,10 @@ namespace BaconBuilder.Controller
 			TextToHtml.Y = Convert.ToInt32(_view.YCoord);
 			string cooked = TextToHtml.GenerateContent(_view.Contents);
 
-			Console.WriteLine(@"Saving bacon to ""{0}""\n\t cooked: {1}", freezer, cooked);
+			Console.WriteLine(
+@"Saving bacon to ""{0}""
+== cooked ==
+{1}", freezer, cooked);
 
 			_model.CurrentContents = cooked;
 			_model.SaveFile(freezer);
