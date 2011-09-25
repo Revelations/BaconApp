@@ -26,6 +26,8 @@ namespace BaconBuilder.Model
 			RegexDict.Add(@"\s*<head>\s*", "");
 			RegexDict.Add(@"\s*<link\s+href=""style.css""\s+/>\s*", "");
 			RegexDict.Add(@"\s*<title></title>\s*", "");
+			RegexDict.Add(@"\s*<!--\s*[xX]\s*=\s*(?:[0-9]+)\s*-->\s*", "");
+			RegexDict.Add(@"\s*<!--\s*[yY]\s*=\s*(?:[0-9]+)\s*-->\s*", "");
 			RegexDict.Add(@"\s*</head>\s*", "");
 			
 			RegexDict.Add(@"\s*</*body>\s*", "");

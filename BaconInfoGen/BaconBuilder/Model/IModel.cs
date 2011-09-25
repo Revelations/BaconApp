@@ -17,5 +17,8 @@ namespace BaconBuilder.Model
 		string CurrentContents { get; set; }
 
 		Image QrCode(string file);
+
+		//void Connect();
+
 	}
 }

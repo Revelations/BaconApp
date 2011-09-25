@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using BaconBuilder.Model;
@@ -55,6 +56,19 @@ namespace BaconBuilder.Controller
 			_model.CurrentFileWithExtension = value;
 			_view.TitleText = _model.CurrentFile;
 			_view.Contents = LoadHtmlToText();
+
+			Point coord;
+			try
+			{
+				coord = HtmlToText.ExtractXY(_model.CurrentContents);
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+				coord = new Point(0, 0);
+			}
+			_view.XCoord = coord.X;
+			_view.YCoord = coord.Y;
 		}
 
 
@@ -116,6 +130,8 @@ namespace BaconBuilder.Controller
 		{
 			Console.WriteLine(@"Loading from {0}", _model.CurrentFileWithExtension);
 			// Return plain text version of the current contents.
+			MessageBox.Show(_model.CurrentContents);
+			//MessageBox.Show(HtmlToText.Parse(_model.CurrentContents));
 			return HtmlToText.Parse(_model.CurrentContents);
 		}
 

@@ -230,16 +230,16 @@ namespace BaconBuilder.View
 			set { txtTitle.Text = value; }
 		}
 
-		public string XCoord
+		public decimal XCoord
 		{
-			get { return txtX.Text; }
-			set { txtX.Text = value; }
+			get { return txtX.Value; }
+			set { txtX.Value = value; }
 		}
 
-		public string YCoord
+		public decimal YCoord
 		{
-			get { return txtY.Text; }
-			set { txtY.Text = value; }
+			get { return txtY.Value; }
+			set { txtY.Value = value; }
 		}
 
 		public string Contents
@@ -267,7 +267,7 @@ namespace BaconBuilder.View
 
         private void MainWindow_Shown(object sender, EventArgs e)
         {
-            FtpDialog ftpDialog = new FtpDialog(new FtpDownloader());
+            FtpDialog ftpDialog = new FtpDialog(new FtpDownloader(_model));
             ftpDialog.ShowDialog();
             _controller.InitialiseListView();
         }

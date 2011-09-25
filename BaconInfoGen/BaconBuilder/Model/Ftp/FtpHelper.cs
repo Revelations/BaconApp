@@ -12,15 +12,16 @@ namespace BaconBuilder.Model
     /// <summary>
     /// Class that handles connection to an FTP server aid in upload/download of necessary files.
     /// </summary>
-    public class FtpHelper
+    public abstract class FtpHelper
     {
-        // Address of the ftp server to connect to.
+    	private readonly IModel _model;
+    	// Address of the ftp server to connect to.
         protected const string _serverAddress = "ftp://revelations.webhop.org/";
 
         // Hard coded Html file directory. Obviously this is to be changed eventually.
         protected readonly string _htmlDirectory = "C:/Users/" + System.Environment.UserName + "/test/";
 
-        /// <summary>
+    	/// <summary>
         /// Connects to an ftp server and gets a listing of all files in the main directory.
         /// </summary>
         /// <returns>String list of all files present on the server.</returns>

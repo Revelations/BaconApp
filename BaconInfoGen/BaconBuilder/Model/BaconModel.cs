@@ -15,6 +15,9 @@ namespace BaconBuilder.Model
 		private readonly Dictionary<string, string> _fileContents = new Dictionary<string, string>();
 		private string _currentFileWithExtensionName;
 
+		private FtpHelper _ftpDownloader;
+		private FtpHelper _ftpUploader;
+
 		public string Contents { get; set; }
 
 		/// <summary>
