@@ -22,7 +22,7 @@ namespace BaconBuilder.View
 			_controller = new MainViewController(_model, this);
 
 			// Event binding
-			tsbImage.Click += tsbImage_Click;
+			tsbImage.Click += btnImage_Click;
 			tsbAudio.Click += btnAudio_Click;
 			btnMapPreview.Click += btnMapPreview_Click;
 			btnPreview.Click += btnPreview_Click;
@@ -100,8 +100,16 @@ namespace BaconBuilder.View
 		private void btnAudio_Click(object sender, EventArgs e)
 		{
 			_model.CurrentContents = Contents;
-			var ctrlAudio = new AudioSelectionController(_model, new AudioSelectionDialog());
-			ctrlAudio.InsertAudio();
+			// Stores the current caret position and length of selection.
+			int caretPos = textBoxMain.SelectionStart;
+			//int selectionLength = textBoxMain.SelectionLength;
+
+			var dialog = new AudioSelectionDialog(_model);
+			if (dialog.ShowDialog() != DialogResult.Cancel)
+			{
+				textBoxMain.SelectionStart = caretPos;
+				textBoxMain.SelectedText = string.Format("<audio>{0}</audio>", _model.AudioUrl);
+			}
 		}
 
 		/// <summary>
@@ -109,7 +117,7 @@ namespace BaconBuilder.View
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void tsbImage_Click(object sender, EventArgs e)
+		private void btnImage_Click(object sender, EventArgs e)
 		{
 			// Stores the current caret position and length of selection.
 			int caretPos = textBoxMain.SelectionStart;
@@ -216,24 +224,22 @@ namespace BaconBuilder.View
 		{
 			var qr = new QrCodeGenerator();
 
-			string text;
-			Image code;
 			var font = new Font(Font.FontFamily, 20);
 			var fontColor = new SolidBrush(Color.Black); // For text
-			Rectangle layoutRectangle;
 
 			int j = 1;
 			for (int i = 0; i < Files.Count; i++)
 			{
-				text = Files[i].Text;
+				string text = Files[i].Text;
 				//code per page counter
 				if (j > 4)
 				{
 					j = 1; /*create new page*/
 					break;
 				}
-				code = qr.GenerateCode(text);
+				Image code = qr.GenerateCode(text);
 				//Even on left. Odd on right
+				Rectangle layoutRectangle;
 				if (j%2 == 1)
 				{
 					layoutRectangle = new Rectangle(400, 180*j, 500, 100);

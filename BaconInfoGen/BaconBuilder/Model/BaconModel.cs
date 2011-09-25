@@ -123,6 +123,8 @@ namespace BaconBuilder.Model
 			set { _fileContents[CurrentFileNameWithExtension] = value; }
 		}
 
+		public string AudioUrl { get; set; }
+
 		public Image QrCode(string file)
 		{
 			return new QrCodeGenerator().GenerateCode(file);

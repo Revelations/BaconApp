@@ -15,6 +15,7 @@ namespace BaconBuilder.View
 
 		public void InsertAudio()
 		{
+			_view.ShowOpenItemDialog();
 			//Take selection tex and do stuff to it.
 			//string selectedtext = _model.SelectedText;
 			//int start = _view.SelectionStart()

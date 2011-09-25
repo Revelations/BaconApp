@@ -9,7 +9,9 @@ namespace BaconBuilder.View
 	{
 		#region Fields, properties and constants
 
-		private readonly BaconModel _model;
+		private IModel _model;
+		private AudioSelectionController _controller;
+
 		private OpenFileDialog _openFileDialog;
 		private const string Filter = "All Audio Files|*.mp3;*.ogg|MP3|*.mp3|Ogg|*.ogg";
 
@@ -19,12 +21,11 @@ namespace BaconBuilder.View
 		/// Constructor that accepts a model.
 		/// </summary>
 		/// <param name="model"></param>
-		public AudioSelectionDialog(BaconModel model)
+		public AudioSelectionDialog(IModel model)
 		{
 			InitializeComponent();
-
 			_model = model;
-
+			_controller = new AudioSelectionController(_model, this);
 			BuildOpenImageDialog();
 
 			BuildBrowseButton();
@@ -32,11 +33,6 @@ namespace BaconBuilder.View
 			BuildOptions();
 			BuildOkButton();
 			BuildCancelButton();
-		}
-
-		public AudioSelectionDialog()
-		{
-			InitializeComponent();
 		}
 
 		private void BuildOptions()
@@ -116,7 +112,8 @@ namespace BaconBuilder.View
 
 		private void btnOK_Click(object sender, EventArgs e)
 		{
-			_model.ImageUrl = ItemFileName;
+			//_controller.
+			_model.AudioUrl = ItemFileName;
 		}
 
 		private void btnCancel_Click(object sender, EventArgs e)

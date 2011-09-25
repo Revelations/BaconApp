@@ -25,6 +25,8 @@ namespace BaconBuilder.Model
 		/// </summary>
 		string CurrentContents { get; set; }
 
+		string AudioUrl { get; set; }
+
 		/// <summary>
 		/// Change the working directory.
 		/// </summary>
