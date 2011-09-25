@@ -17,6 +17,8 @@ namespace BaconBuilder.Model
         /// </summary>
         private List<string> _remoteFiles;
 
+        public List<string> RemoteFiles { get { return _remoteFiles; } } 
+
         /// <summary>
         /// Connects to the server and uploads all files necessary.
         /// </summary>
