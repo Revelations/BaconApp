@@ -91,7 +91,6 @@
   <ItemGroup>
     <Compile Include="Controller\MainViewController.cs" />
     <Compile Include="Model\Ftp\FtpHelper.cs" />
-    <Compile Include="Model\Ftp\IFtpHelper.cs" />
     <Compile Include="Model\IModel.cs" />
     <Compile Include="Model\Parser\HtmlToTextParser.cs" />
     <Compile Include="Model\ImageManipulator.cs" />

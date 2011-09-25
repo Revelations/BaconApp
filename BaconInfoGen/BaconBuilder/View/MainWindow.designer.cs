@@ -65,6 +65,10 @@ namespace BaconBuilder.View
 			this.btnPreview = new System.Windows.Forms.Button();
 			this.btnPrintPreview = new System.Windows.Forms.Button();
 			this.toolContents = new System.Windows.Forms.ToolStrip();
+			this.tsbImage = new System.Windows.Forms.ToolStripButton();
+			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+			this.tsbBold = new System.Windows.Forms.ToolStripButton();
+			this.tsbItalics = new System.Windows.Forms.ToolStripButton();
 			this.splitter3 = new System.Windows.Forms.Splitter();
 			this.tlpDataFields = new System.Windows.Forms.TableLayoutPanel();
 			this.btnMapPreview = new System.Windows.Forms.Button();
@@ -79,11 +83,7 @@ namespace BaconBuilder.View
 			this.splitter5 = new System.Windows.Forms.Splitter();
 			this.splitter6 = new System.Windows.Forms.Splitter();
 			this.splitter4 = new System.Windows.Forms.Splitter();
-			this.tsbImage = new System.Windows.Forms.ToolStripButton();
 			this.tsbAudio = new System.Windows.Forms.ToolStripButton();
-			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-			this.tsbBold = new System.Windows.Forms.ToolStripButton();
-			this.tsbItalics = new System.Windows.Forms.ToolStripButton();
 			this.printDocument = new System.Drawing.Printing.PrintDocument();
 			this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
 			this.menuStrip.SuspendLayout();
@@ -96,6 +96,7 @@ namespace BaconBuilder.View
 			this.pnlContentEditor.SuspendLayout();
 			this.pnlTextEditor.SuspendLayout();
 			this.flpPreview.SuspendLayout();
+			this.toolContents.SuspendLayout();
 			this.tlpDataFields.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.txtY)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.txtX)).BeginInit();
@@ -230,7 +231,7 @@ namespace BaconBuilder.View
 			// columnHeader1
 			// 
 			this.columnHeader1.Text = "Files";
-			this.columnHeader1.Width = 126;
+			this.columnHeader1.Width = 138;
 			// 
 			// imageList
 			// 
@@ -376,11 +377,43 @@ namespace BaconBuilder.View
 			// 
 			// toolContents
 			// 
+			this.toolContents.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbImage,
+            this.toolStripSeparator3,
+            this.tsbBold,
+            this.tsbItalics});
 			this.toolContents.Location = new System.Drawing.Point(0, 0);
 			this.toolContents.Name = "toolContents";
 			this.toolContents.Size = new System.Drawing.Size(606, 25);
 			this.toolContents.TabIndex = 8;
 			this.toolContents.Text = "toolStrip1";
+			// 
+			// tsbImage
+			// 
+			this.tsbImage.Image = ((System.Drawing.Image)(resources.GetObject("tsbImage.Image")));
+			this.tsbImage.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.tsbImage.Name = "tsbImage";
+			this.tsbImage.Size = new System.Drawing.Size(60, 22);
+			this.tsbImage.Text = "Image";
+			// 
+			// toolStripSeparator3
+			// 
+			this.toolStripSeparator3.Name = "toolStripSeparator3";
+			this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+			// 
+			// tsbBold
+			// 
+			this.tsbBold.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.tsbBold.Name = "tsbBold";
+			this.tsbBold.Size = new System.Drawing.Size(35, 22);
+			this.tsbBold.Text = "Bold";
+			// 
+			// tsbItalics
+			// 
+			this.tsbItalics.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.tsbItalics.Name = "tsbItalics";
+			this.tsbItalics.Size = new System.Drawing.Size(41, 22);
+			this.tsbItalics.Text = "Italics";
 			// 
 			// splitter3
 			// 
@@ -420,6 +453,7 @@ namespace BaconBuilder.View
 			// 
 			// btnMapPreview
 			// 
+			this.btnMapPreview.Enabled = false;
 			this.btnMapPreview.Location = new System.Drawing.Point(448, 32);
 			this.btnMapPreview.Margin = new System.Windows.Forms.Padding(8, 3, 8, 3);
 			this.btnMapPreview.Name = "btnMapPreview";
@@ -427,11 +461,22 @@ namespace BaconBuilder.View
 			this.btnMapPreview.TabIndex = 6;
 			this.btnMapPreview.Text = "Map Preview";
 			this.btnMapPreview.UseVisualStyleBackColor = true;
+			this.btnMapPreview.Visible = false;
 			// 
 			// txtY
 			// 
 			this.txtY.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.txtY.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
 			this.txtY.Location = new System.Drawing.Point(273, 32);
+			this.txtY.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
 			this.txtY.Name = "txtY";
 			this.txtY.Size = new System.Drawing.Size(164, 20);
 			this.txtY.TabIndex = 5;
@@ -451,7 +496,17 @@ namespace BaconBuilder.View
 			// txtX
 			// 
 			this.txtX.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.txtX.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
 			this.txtX.Location = new System.Drawing.Point(53, 32);
+			this.txtX.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
 			this.txtX.Name = "txtX";
 			this.txtX.Size = new System.Drawing.Size(164, 20);
 			this.txtX.TabIndex = 4;
@@ -503,6 +558,7 @@ namespace BaconBuilder.View
 			// 
 			// splitter2
 			// 
+			this.splitter2.Enabled = false;
 			this.splitter2.Location = new System.Drawing.Point(0, 8);
 			this.splitter2.Name = "splitter2";
 			this.splitter2.Size = new System.Drawing.Size(8, 509);
@@ -512,6 +568,7 @@ namespace BaconBuilder.View
 			// splitter5
 			// 
 			this.splitter5.Dock = System.Windows.Forms.DockStyle.Right;
+			this.splitter5.Enabled = false;
 			this.splitter5.Location = new System.Drawing.Point(782, 8);
 			this.splitter5.Name = "splitter5";
 			this.splitter5.Size = new System.Drawing.Size(8, 509);
@@ -521,6 +578,7 @@ namespace BaconBuilder.View
 			// splitter6
 			// 
 			this.splitter6.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.splitter6.Enabled = false;
 			this.splitter6.Location = new System.Drawing.Point(0, 517);
 			this.splitter6.Name = "splitter6";
 			this.splitter6.Size = new System.Drawing.Size(790, 8);
@@ -530,19 +588,12 @@ namespace BaconBuilder.View
 			// splitter4
 			// 
 			this.splitter4.Dock = System.Windows.Forms.DockStyle.Top;
+			this.splitter4.Enabled = false;
 			this.splitter4.Location = new System.Drawing.Point(0, 0);
 			this.splitter4.Name = "splitter4";
 			this.splitter4.Size = new System.Drawing.Size(790, 8);
 			this.splitter4.TabIndex = 10;
 			this.splitter4.TabStop = false;
-			// 
-			// tsbImage
-			// 
-			this.tsbImage.Image = ((System.Drawing.Image)(resources.GetObject("tsbImage.Image")));
-			this.tsbImage.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.tsbImage.Name = "tsbImage";
-			this.tsbImage.Size = new System.Drawing.Size(57, 22);
-			this.tsbImage.Text = "Image";
 			// 
 			// tsbAudio
 			// 
@@ -551,25 +602,6 @@ namespace BaconBuilder.View
 			this.tsbAudio.Name = "tsbAudio";
 			this.tsbAudio.Size = new System.Drawing.Size(54, 22);
 			this.tsbAudio.Text = "Audio";
-			// 
-			// toolStripSeparator3
-			// 
-			this.toolStripSeparator3.Name = "toolStripSeparator3";
-			this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-			// 
-			// tsbBold
-			// 
-			this.tsbBold.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.tsbBold.Name = "tsbBold";
-			this.tsbBold.Size = new System.Drawing.Size(31, 22);
-			this.tsbBold.Text = "Bold";
-			// 
-			// tsbItalics
-			// 
-			this.tsbItalics.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.tsbItalics.Name = "tsbItalics";
-			this.tsbItalics.Size = new System.Drawing.Size(39, 22);
-			this.tsbItalics.Text = "Italics";
 			// 
 			// printDocument
 			// 
@@ -616,6 +648,8 @@ namespace BaconBuilder.View
 			this.pnlTextEditor.ResumeLayout(false);
 			this.pnlTextEditor.PerformLayout();
 			this.flpPreview.ResumeLayout(false);
+			this.toolContents.ResumeLayout(false);
+			this.toolContents.PerformLayout();
 			this.tlpDataFields.ResumeLayout(false);
 			this.tlpDataFields.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.txtY)).EndInit();
@@ -659,7 +693,7 @@ namespace BaconBuilder.View
 		private ToolStripButton tsbBold;
 		private ToolStripButton tsbItalics;
 		private StatusStrip statusStrip;
-        private ToolStripSeparator toolStripSeparator2;
+		private ToolStripSeparator toolStripSeparator2;
 		private Splitter splitter2;
 		private Splitter splitter4;
 		private Splitter splitter6;

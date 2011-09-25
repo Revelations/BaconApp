@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using BaconBuilder.Properties;
 
 namespace BaconBuilder.Model
 {
 	public class BaconModel : IModel
 	{
 		private const string HtmlExtension = ".html";
-		private static readonly string HtmlDirectory = "C:/Users/" + Environment.UserName + "/test/";
 
 		private const string NewHtmlFileName = "New File";
-		private DirectoryInfo _directory = new DirectoryInfo(HtmlDirectory);
+		private static readonly string HtmlDirectory = "C:/Users/" + Environment.UserName + "/test/";
 		private readonly Dictionary<string, string> _fileContents = new Dictionary<string, string>();
-		private string _currentFileWithExtensionName;
+		private string _currentFileNameWithExtensionName;
+		private DirectoryInfo _directory = new DirectoryInfo(HtmlDirectory);
 
 //		private FtpDownloader _ftpDownloader;
 //		private FtpUploader _ftpUploader;
@@ -23,47 +24,30 @@ namespace BaconBuilder.Model
 		/// </summary>
 		public string ImageUrl { get; set; }
 
-		/// <summary>
-		/// Gets a new file name not already present in the Html directory.
-		/// 
-		/// Checks for existing files present in the Html directory with the new file name. Iterates and
-		/// appends integer values to the filename until it finds on that is unused.
-		/// </summary>
-		/// <returns>Unused filname with the lowest possible appended integer.</returns>
-		public static string GetLowestUnusedNewFileName()
-		{
-			var name = HtmlDirectory + NewHtmlFileName;
-			var fileName = name + HtmlExtension;
-			// Otherwise iterate to find the lowest number available to append.
-			for (int i = 2; File.Exists(fileName); i++)
-			{
-				fileName = name + i.ToString(" 0#") + HtmlExtension;
-			}
-			return fileName;
-		}
+		#region IModel Members
 
 		public void RemoveFile(string fileName)
 		{
 			_fileContents.Remove(fileName);
 			File.Delete(HtmlDirectory + fileName);
-			_currentFileWithExtensionName = null;
+			_currentFileNameWithExtensionName = null;
 		}
 
 		public void CreateNewFile(string fileName)
 		{
 			Console.WriteLine(@"Creating new file");
-			File.WriteAllText(GetLowestUnusedNewFileName(), Properties.Resources.Blank);
+			File.WriteAllText(GetLowestUnusedNewFileName(), Resources.Blank);
 		}
 
 		public void RenameFile(string oldName, string newName)
 		{
-			var oldHtmlName = oldName + HtmlExtension;
-			var newHtmlName = newName + HtmlExtension;
+			string oldHtmlName = oldName + HtmlExtension;
+			string newHtmlName = newName + HtmlExtension;
 
 			var oldInfo = new FileInfo(HtmlDirectory + oldHtmlName);
 			var newInfo = new FileInfo(HtmlDirectory + newHtmlName);
 			Console.WriteLine(@"Renaming file {0} to {1}", oldHtmlName, newHtmlName);
-			
+
 			if (newInfo.Exists)
 			{
 				throw new IOException(string.Format("Cannot rename {0} to {1}: File already exists", oldHtmlName, newHtmlName));
@@ -71,18 +55,27 @@ namespace BaconBuilder.Model
 			oldInfo.MoveTo(newInfo.FullName);
 			_fileContents.Add(newHtmlName, _fileContents[oldHtmlName]);
 			_fileContents.Remove(oldHtmlName);
-			_currentFileWithExtensionName = null;
+			_currentFileNameWithExtensionName = null;
 		}
 
-		public string CurrentFileWithExtension
+		public void SaveFile(string fileName)
 		{
-			get { return _currentFileWithExtensionName; }
-			set { _currentFileWithExtensionName = value; }
+			File.WriteAllText(HtmlDirectory + fileName, CurrentContents);
 		}
 
-		public string CurrentFile
+		public string CurrentFileNameWithExtension
 		{
-			get { return StripExtension(_currentFileWithExtensionName); }
+			get { return _currentFileNameWithExtensionName; }
+			set { _currentFileNameWithExtensionName = value; }
+		}
+
+		/// <summary>
+		/// Gets or sets the current filename without extension.
+		/// </summary>
+		public string CurrentFileName
+		{
+			get { return StripExtension(_currentFileNameWithExtensionName); }
+			set { _currentFileNameWithExtensionName = value + HtmlExtension; }
 		}
 
 		/// <summary>
@@ -93,28 +86,29 @@ namespace BaconBuilder.Model
 		{
 			if (!_directory.Exists) _directory.Create();
 
-			var f = _directory.GetFiles("*.html");
+			FileInfo[] f = _directory.GetFiles("*.html");
 			_fileContents.Clear();
-			foreach (var file in f)
+			foreach (FileInfo file in f)
 			{
 				_fileContents.Add(file.Name, File.ReadAllText(file.FullName));
 			}
 		}
 
+		/// <summary>
+		/// Returns a collection of the filenames opened in memory.
+		/// </summary>
 		public Dictionary<string, string>.KeyCollection FileNames
 		{
 			get { return _fileContents.Keys; }
 		}
 
-		public string ReadFile(string p)
-		{
-			return _fileContents[p];
-		}
-
+		/// <summary>
+		/// Gets or sets the contents of the currently opened file.
+		/// </summary>
 		public string CurrentContents
 		{
-			get { return _fileContents[_currentFileWithExtensionName]; }
-			set { _fileContents[_currentFileWithExtensionName] = value; }
+			get { return _fileContents[_currentFileNameWithExtensionName]; }
+			set { _fileContents[_currentFileNameWithExtensionName] = value; }
 		}
 
 		public Image QrCode(string file)
@@ -122,18 +116,44 @@ namespace BaconBuilder.Model
 			throw new NotImplementedException();
 		}
 
+		#endregion
+
+		/// <summary>
+		/// Gets a new file fileName not already present in the Html directory.
+		/// 
+		/// Checks for existing files present in the Html directory with the new file fileName. Iterates and
+		/// appends integer values to the filename until it finds on that is unused.
+		/// </summary>
+		/// <returns>Unused filname with the lowest possible appended integer.</returns>
+		public static string GetLowestUnusedNewFileName()
+		{
+			string name = HtmlDirectory + NewHtmlFileName;
+			string result = name + HtmlExtension;
+			// Otherwise iterate to find the lowest number available to append.
+			for (int i = 2; File.Exists(result); i++)
+			{
+				result = name + i.ToString(" 0#") + HtmlExtension;
+			}
+			return result;
+		}
+
 		public void ChangeDirectory(string newDir)
 		{
 			_directory = new DirectoryInfo(newDir);
 		}
 
-		public static string StripExtension(string name)
+		/// <summary>
+		/// Removes a defined extension from filename and returns it. Does not affect null strings or other filenames.
+		/// </summary>
+		/// <param name="fileName">The filename to strip the extension from.</param>
+		/// <returns>The filename without the predefined extension</returns>
+		public static string StripExtension(string fileName)
 		{
-			if (name != null && name.EndsWith(HtmlExtension, StringComparison.Ordinal))
+			if (fileName != null && fileName.EndsWith(HtmlExtension, StringComparison.Ordinal))
 			{
-				return name.Remove(name.LastIndexOf(HtmlExtension));
+				return fileName.Remove(fileName.LastIndexOf(HtmlExtension));
 			}
-			return name;
+			return fileName;
 		}
 	}
 }

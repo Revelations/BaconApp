@@ -9,15 +9,6 @@ namespace BaconBuilder.Controller
 {
 	public class MainViewController
 	{
-		private readonly IModel _model;
-		private readonly IMainView _view;
-
-		public MainViewController(IModel model, IMainView view)
-		{
-			_model = model;
-			_view = view;
-		}
-
 		// Test directory. Needs to be removed at some point.
 		private static readonly string HtmlDirectory = string.Format("C:/Users/{0}/test/", Environment.UserName);
 
@@ -27,6 +18,15 @@ namespace BaconBuilder.Controller
 		// Parser object to handle html to text conversion.
 		private static readonly HtmlToTextParser HtmlToText = new HtmlToTextParser();
 		private static readonly TextToHtmlParser TextToHtml = new TextToHtmlParser();
+		private readonly IModel _model;
+		private readonly IMainView _view;
+
+		public MainViewController(IModel model, IMainView view)
+		{
+			_model = model;
+			_view = view;
+			_view.EnableRequiredControls();
+		}
 
 		/// <summary>
 		/// Initialises and populates a listview with the html files in a directory.
@@ -39,22 +39,25 @@ namespace BaconBuilder.Controller
 			RefreshDirectory();
 		}
 
+		/// <summary>
+		/// Reloads the directory in the view.
+		/// </summary>
 		public void RefreshDirectory()
 		{
 			_view.Files.Clear();
-
 			// Add each item to the list view.
-			foreach (var fileName in _model.FileNames)
+			foreach (string fileName in _model.FileNames)
 			{
 				_view.Files.Add(fileName, 0);
 			}
-			_view.IsRemoveButtonEnabled = false;
+			// Enabled controls if need be.
+			_view.EnableRequiredControls();
 		}
 
 		public void SelectFile(string value)
 		{
-			_model.CurrentFileWithExtension = value;
-			_view.TitleText = _model.CurrentFile;
+			_model.CurrentFileNameWithExtension = value;
+			_view.TitleText = _model.CurrentFileName;
 			_view.Contents = LoadHtmlToText();
 
 			Point coord;
@@ -69,6 +72,7 @@ namespace BaconBuilder.Controller
 			}
 			_view.XCoord = coord.X;
 			_view.YCoord = coord.Y;
+			_view.EnableRequiredControls();
 		}
 
 
@@ -79,7 +83,7 @@ namespace BaconBuilder.Controller
 		/// <returns></returns>
 		private int FindItem(string text)
 		{
-			for (var i = 0; i < _view.Files.Count; i++)
+			for (int i = 0; i < _view.Files.Count; i++)
 				if (_view.Files[i].Text.Equals(text)) return i;
 
 			return -1;
@@ -87,27 +91,28 @@ namespace BaconBuilder.Controller
 
 		public void ValidateTitle()
 		{
-			if (_model.CurrentFileWithExtension == null) return;
+			if (_model.CurrentFileNameWithExtension == null) return;
 			// If the new title is invalid (e.g. blank, only spaces)
 			if (_view.TitleText.Trim().Length == 0)
 			{
 				MessageBox.Show(@"Title cannot be blank or just spaces.");
-				_view.TitleText = _model.CurrentFile;
+				_view.TitleText = _model.CurrentFileName;
 				return;
 			}
 			// If the text has changed.
-			if (_view.TitleText.Equals(_model.CurrentFile)) return;
+			if (_view.TitleText.Equals(_model.CurrentFileName)) return;
 
 			// Since the title is valid and changed, we rename it.
-			var index = FindItem(_model.CurrentFileWithExtension);
+			int index = FindItem(_model.CurrentFileNameWithExtension);
 			try
 			{
-				RenameFile(_model.CurrentFile, _view.TitleText);
+				RenameFile(_model.CurrentFileName, _view.TitleText);
 			}
 			catch (IOException ex)
 			{
-				Console.WriteLine(ex.Message); MessageBox.Show(ex.Message, @"Error");
-				_view.TitleText = _model.CurrentFile;
+				Console.WriteLine(ex.Message);
+				MessageBox.Show(ex.Message, @"Error");
+				_view.TitleText = _model.CurrentFileName;
 				return;
 			}
 			RefreshDirectory();
@@ -127,28 +132,25 @@ namespace BaconBuilder.Controller
 		/// <returns>String content (plain text) of the file.</returns>
 		public string LoadHtmlToText()
 		{
-			Console.WriteLine(@"Loading from {0}", _model.CurrentFileWithExtension);
+			Console.WriteLine(@"Loading from {0}", _model.CurrentFileNameWithExtension);
 			// Return plain text version of the current contents.
-			MessageBox.Show(_model.CurrentContents);
-			//MessageBox.Show(HtmlToText.Parse(_model.CurrentContents));
 			return HtmlToText.Parse(_model.CurrentContents);
 		}
 
-	    /// <summary>
-	    /// Gets the html parsed verision of plain text content and saves it to a file.
-	    /// </summary>
-	    /// <param name="filename">The filename of the file to save to.</param>
-	    public void SaveTextToHtml(string filename)
+		/// <summary>
+		/// Gets the html parsed verision of plain text content and saves it to a file.
+		/// </summary>
+		/// <param name="filename">The filename of the file to save to.</param>
+		public void SaveTextToHtml(string filename)
 		{
-			Console.WriteLine(@"Saving to {0}", filename);
+			TextToHtml.X = Convert.ToInt32(_view.XCoord);
+			TextToHtml.Y = Convert.ToInt32(_view.YCoord);
+			string newContents = TextToHtml.GenerateContent(_view.Contents);
 
-		    TextToHtml.X = Convert.ToInt32(_view.XCoord);
-            TextToHtml.Y = Convert.ToInt32(_view.YCoord);
+			Console.WriteLine(@"Saving to file {0} the following content: {1}", filename, newContents);
 
-			string htmlContent = TextToHtml.GenerateContent(_view.Contents);
-			Console.WriteLine("saving htmlContents " + htmlContent);
-			//_model.CurrentContents = htmlContent;
-			File.WriteAllText(HtmlDirectory + filename, htmlContent);
+			_model.CurrentContents = newContents;
+			_model.SaveFile(filename);
 			_model.LoadFiles();
 		}
 
@@ -170,30 +172,13 @@ namespace BaconBuilder.Controller
 			_model.RenameFile(oldName, newName);
 		}
 
+		/// <summary>
+		/// Removes the currently loaded file from the file system.
+		/// </summary>
 		public void RemoveCurrentFile()
 		{
-			_model.RemoveFile(_model.CurrentFileWithExtension);
+			_model.RemoveFile(_model.CurrentFileNameWithExtension);
 			RefreshDirectory();
 		}
-
-		public void RemoveFile(string fileName)
-		{
-			var f = new FileInfo(HtmlDirectory + fileName);
-			Console.WriteLine(@"Removing file " + f.Name);
-
-			if (f.Exists)
-				f.Delete();
-		}
-
-//		public void FetchFromServer()
-//		{
-//
-//			//FtpDialog ftpDialog = new FtpDialog(new FtpDownloader(_model));
-//			//ftpDialog.ShowDialog();
-//			//_controller.InitialiseListView();
-//			_model.FetchFromServer();
-//			_model.LoadFiles();
-//			Console.WriteLine("Fetched from server. {0} files loaded into memory", _model.FileNames.Count);
-//		}
 	}
 }
