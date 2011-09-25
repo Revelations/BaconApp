@@ -15,10 +15,7 @@ namespace BaconBuilder.Model
 		private readonly Dictionary<string, string> _fileContents = new Dictionary<string, string>();
 		private DirectoryInfo _directory = new DirectoryInfo(HtmlDirectory);
 
-		private HtmlToTextParser htmltextparser = new HtmlToTextParser();
-		private TextToHtmlParser texthtmlparser = new TextToHtmlParser();
-
-	    private string _imageUrl;
+		private readonly TextToHtmlParser _texthtmlparser = new TextToHtmlParser();
 
 	    /// <summary>
 	    /// Get or set the image url, obtained from an image selection dialog.
@@ -132,9 +129,9 @@ namespace BaconBuilder.Model
 		{
 			get
 			{
-				texthtmlparser.X = X;
-				texthtmlparser.Y = Y;
-				string html = texthtmlparser.Parse(CurrentContents);
+				_texthtmlparser.X = X;
+				_texthtmlparser.Y = Y;
+				string html = _texthtmlparser.Parse(CurrentContents);
 				return html;
 			}
 		}

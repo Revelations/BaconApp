@@ -120,9 +120,9 @@ namespace BaconBuilder.View
 
 		    string fileName = f.Name.Replace(f.Extension, "");
 
-            i.SaveImage("C:/Users/" + Environment.UserName + "/test/", fileName, ImageType.Png);
+            i.SaveImage("C:/Users/" + Environment.UserName + "/test/", fileName, ImageType.Jpg);
 
-			_model.ImageUrl = fileName + ".png";
+			_model.ImageUrl = fileName + ".jpg";
 		}
 
 		private void btnCancel_Click(object sender, EventArgs e)

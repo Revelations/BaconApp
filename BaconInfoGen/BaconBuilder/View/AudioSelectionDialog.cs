@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using BaconBuilder.Model;
@@ -112,8 +113,11 @@ namespace BaconBuilder.View
 
 		private void btnOK_Click(object sender, EventArgs e)
 		{
+            FileInfo f = new FileInfo(ItemFileName);
+		    f.CopyTo("C:/Users/" + Environment.UserName + "/test/" + f.Name);
+
 			//_controller.
-			_model.AudioUrl = ItemFileName;
+			_model.AudioUrl = f.Name;
 		}
 
 		private void btnCancel_Click(object sender, EventArgs e)
