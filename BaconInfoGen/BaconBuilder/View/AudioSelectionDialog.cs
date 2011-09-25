@@ -5,14 +5,13 @@ using BaconBuilder.Model;
 
 namespace BaconBuilder.View
 {
-	public partial class ImageSelectionDialog : Form, IMediaSelectionDialog
+	public partial class AudioSelectionDialog : Form, IMediaSelectionDialog
 	{
 		#region Fields, properties and constants
 
-		private const string Filter = "All Image Files|*.bmp;*.gif;*.jpe;*.jpeg;*.jpg;*.png|Bitmap|*.bmp|GIF|*.gif|JPEG|*.jpe;*.jpeg;*.jpg|PNG|*.png";
-
 		private readonly BaconModel _model;
-		private OpenFileDialog _openImageDialog;
+		private OpenFileDialog _openFileDialog;
+		private const string Filter = "All Audio Files|*.mp3;*.ogg|MP3|*.mp3|Ogg|*.ogg";
 
 		#endregion
 
@@ -20,7 +19,7 @@ namespace BaconBuilder.View
 		/// Constructor that accepts a model.
 		/// </summary>
 		/// <param name="model"></param>
-		public ImageSelectionDialog(BaconModel model)
+		public AudioSelectionDialog(BaconModel model)
 		{
 			InitializeComponent();
 
@@ -35,14 +34,18 @@ namespace BaconBuilder.View
 			BuildCancelButton();
 		}
 
+		public AudioSelectionDialog()
+		{
+			InitializeComponent();
+		}
+
 		private void BuildOptions()
 		{
-			comboBox1.Items.AddRange(new[]
-			                         	{
-			                         		"Insert image before selction",
-			                         		"Insert image after selction",
-			                         		"Replace selection with image"
-			                         	});
+			comboBox1.Items.AddRange(new[] {
+			        "Insert audio before selction",
+			        "Insert audio after selction",
+			        "Replace selection with audio"
+			    });
 			comboBox1.SelectedIndex = 2;
 		}
 
@@ -51,8 +54,9 @@ namespace BaconBuilder.View
 		/// </summary>
 		private void BuildOpenImageDialog()
 		{
-			_openImageDialog = new OpenFileDialog();
-			_openImageDialog.Filter = Filter;
+			_openFileDialog = new OpenFileDialog();
+
+			_openFileDialog.Filter = Filter;
 		}
 
 		/// <summary>
@@ -60,8 +64,8 @@ namespace BaconBuilder.View
 		/// </summary>
 		private void BuildImageUrlTextbox()
 		{
-			txtImageURL.TextChanged += txtImageURL_TextChanged;
-			txtImageURL.Select();
+			txtFileURL.TextChanged += TxtFileUrlTextChanged;
+			txtFileURL.Select();
 		}
 
 		/// <summary>
@@ -97,16 +101,16 @@ namespace BaconBuilder.View
 
 		#region Event handlers
 
-		private void txtImageURL_TextChanged(object sender, EventArgs e)
+		private void TxtFileUrlTextChanged(object sender, EventArgs e)
 		{
-			btnOK.Enabled = (!string.IsNullOrEmpty(ItemFileName));
+			btnOK.Enabled = (!string.IsNullOrEmpty(txtFileURL.Text));
 		}
 
 		private void btnBrowser_Click(object sender, EventArgs e)
 		{
-			if (_openImageDialog.ShowDialog() != DialogResult.Cancel)
+			if (_openFileDialog.ShowDialog() != DialogResult.Cancel)
 			{
-				ItemFileName = _openImageDialog.FileName;
+				txtFileURL.Text = _openFileDialog.FileName;
 			}
 		}
 
@@ -124,13 +128,13 @@ namespace BaconBuilder.View
 
 		public string ItemFileName
 		{
-			get { return txtImageURL.Text; }
-			set { txtImageURL.Text = value; }
+			get { return txtFileURL.Text; }
+			set { txtFileURL.Text = value; }
 		}
 
 		public void ShowOpenItemDialog()
 		{
-			 
+			_openFileDialog.ShowDialog();
 		}
 	}
 }

@@ -90,7 +90,7 @@ namespace BaconBuilder.View
 		/// <param name="e"></param>
 		private void btnPreview_Click(object sender, EventArgs e)
 		{
-			_model.CurrentContents = textBoxMain.Text;
+			_model.CurrentContents = Contents;
 			var preview = new Preview(_model);
 
 			preview.ShowDialog();
@@ -98,6 +98,9 @@ namespace BaconBuilder.View
 
 		private void btnAudio_Click(object sender, EventArgs e)
 		{
+			_model.CurrentContents = Contents;
+			var ctrlAudio = new AudioSelectionController(_model, new AudioSelectionDialog());
+			ctrlAudio.InsertAudio();
 		}
 
 		/// <summary>

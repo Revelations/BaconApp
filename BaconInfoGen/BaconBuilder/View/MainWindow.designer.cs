@@ -69,6 +69,7 @@ namespace BaconBuilder.View
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
 			this.tsbBold = new System.Windows.Forms.ToolStripButton();
 			this.tsbItalics = new System.Windows.Forms.ToolStripButton();
+			this.tsbAudio = new System.Windows.Forms.ToolStripButton();
 			this.splitter3 = new System.Windows.Forms.Splitter();
 			this.tlpDataFields = new System.Windows.Forms.TableLayoutPanel();
 			this.btnMapPreview = new System.Windows.Forms.Button();
@@ -83,7 +84,6 @@ namespace BaconBuilder.View
 			this.splitter5 = new System.Windows.Forms.Splitter();
 			this.splitter6 = new System.Windows.Forms.Splitter();
 			this.splitter4 = new System.Windows.Forms.Splitter();
-			this.tsbAudio = new System.Windows.Forms.ToolStripButton();
 			this.printDocument = new System.Drawing.Printing.PrintDocument();
 			this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
 			this.menuStrip.SuspendLayout();
@@ -379,6 +379,7 @@ namespace BaconBuilder.View
 			// 
 			this.toolContents.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbImage,
+            this.tsbAudio,
             this.toolStripSeparator3,
             this.tsbBold,
             this.tsbItalics});
@@ -414,6 +415,14 @@ namespace BaconBuilder.View
 			this.tsbItalics.Name = "tsbItalics";
 			this.tsbItalics.Size = new System.Drawing.Size(41, 22);
 			this.tsbItalics.Text = "Italics";
+			// 
+			// tsbAudio
+			// 
+			this.tsbAudio.Image = ((System.Drawing.Image)(resources.GetObject("tsbAudio.Image")));
+			this.tsbAudio.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.tsbAudio.Name = "tsbAudio";
+			this.tsbAudio.Size = new System.Drawing.Size(59, 22);
+			this.tsbAudio.Text = "Audio";
 			// 
 			// splitter3
 			// 
@@ -594,14 +603,6 @@ namespace BaconBuilder.View
 			this.splitter4.Size = new System.Drawing.Size(790, 8);
 			this.splitter4.TabIndex = 10;
 			this.splitter4.TabStop = false;
-			// 
-			// tsbAudio
-			// 
-			this.tsbAudio.Image = ((System.Drawing.Image)(resources.GetObject("tsbAudio.Image")));
-			this.tsbAudio.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.tsbAudio.Name = "tsbAudio";
-			this.tsbAudio.Size = new System.Drawing.Size(54, 22);
-			this.tsbAudio.Text = "Audio";
 			// 
 			// printDocument
 			// 

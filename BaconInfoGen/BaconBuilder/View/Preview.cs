@@ -9,21 +9,21 @@ namespace BaconBuilder.View
 	public partial class Preview : Form, IPreviewView
 	{
 		private readonly IModel _model;
-		private readonly QrCodeGenerator _qrGen;
-
+		private readonly PreviewController _controller;
 		public Preview(IModel model)
 		{
-			_model = model;
 			InitializeComponent();
-			_qrGen = new QrCodeGenerator();
-			QrCode = _qrGen.GenerateCode(_model.CurrentFileName);
+
+			_model = model;
+			_controller = new PreviewController(_model, this);
+			_controller.QrCode();
 
 			browser.DocumentCompleted += browser_DocumentCompleted;
 		}
 
 		#region IPreviewView Members
 
-		public Image QrCode
+		public Image QrCodeImage
 		{
 			get { return picboxQRCode.Image; }
 			set { picboxQRCode.Image = value; }
@@ -42,10 +42,7 @@ namespace BaconBuilder.View
 
 		private void browser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
 		{
-			var previewController = new PreviewController(_model, this);
-			previewController.PreviewDocument();
-
-			browser.DocumentCompleted -= browser_DocumentCompleted;
+			_controller.PreviewDocument();
 		}
 
 		private void btnClose_Click(object sender, EventArgs e)

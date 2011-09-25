@@ -102,6 +102,13 @@
     <Compile Include="Model\Ftp\FtpUploader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\AudioSelectionController.cs" />
+    <Compile Include="View\AudioSelectionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\AudioSelectionDialog.Designer.cs">
+      <DependentUpon>AudioSelectionDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\FtpDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +123,7 @@
     </Compile>
     <Compile Include="View\IMainView.cs" />
     <Compile Include="View\IPreviewView.cs" />
+    <Compile Include="View\IMediaSelectionDialog.cs" />
     <Compile Include="View\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,6 +153,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="View\AudioSelectionDialog.resx">
+      <DependentUpon>AudioSelectionDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\FtpDialog.resx">
       <DependentUpon>FtpDialog.cs</DependentUpon>
     </EmbeddedResource>
