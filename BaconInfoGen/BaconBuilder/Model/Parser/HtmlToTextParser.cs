@@ -29,7 +29,7 @@ namespace BaconBuilder.Model
 			
 			RegexDict.Add(@"\s*</*body>\s*", "");
 			// Replace </p><p> with \n\n
-			RegexDict.Add(@"</p>\s*<p>", "\n\n");
+			RegexDict.Add(@"</p>\s*<p>", "\r\n\r\n");
 			// Remove lone <p> and </p> tags
 			RegexDict.Add(@"(?!</p>)\s*<p>", "");
 			RegexDict.Add(@"</p>\s*(?!<p>)", "");

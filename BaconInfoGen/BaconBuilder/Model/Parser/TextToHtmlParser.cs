@@ -23,7 +23,10 @@ namespace BaconBuilder.Model
 			// TODO: Complete set of regex rules here.
 
 			// TODO: \n\n ==> </p><p>
+            RegexDict.Add("\r\n", "</p><p>");
 			// TODO: First paragraph starts with <p>, last ends with </p>
+            RegexDict.Add("^", "<p>");
+            RegexDict.Add("$", "</p>");
 			// TODO: Begin document with <!DOCTYPE HTML><html>......<body>
 			// TODO: End document with </body></html>
 		}
