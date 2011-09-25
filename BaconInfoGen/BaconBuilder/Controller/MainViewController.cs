@@ -9,9 +9,6 @@ namespace BaconBuilder.Controller
 {
 	public class MainViewController
 	{
-		// Test directory. Needs to be removed at some point.
-		private static readonly string HtmlDirectory = string.Format("C:/Users/{0}/test/", Environment.UserName);
-
 		// Directory for local html content.
 		//private const string HtmlDirectory = "./DataFiles";
 

@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Net;
+using BaconBuilder.Properties;
 
 namespace BaconBuilder.Model
 {
@@ -32,7 +33,7 @@ namespace BaconBuilder.Model
         public void DownloadSingleFile(string fileName)
         {
             // Init request.
-            FtpWebRequest ftp = (FtpWebRequest)WebRequest.Create(_serverAddress + fileName);
+            FtpWebRequest ftp = (FtpWebRequest)WebRequest.Create(Resources.ServerLocation + fileName);
 
             // Request type is download.
             ftp.Method = WebRequestMethods.Ftp.DownloadFile;
@@ -42,7 +43,7 @@ namespace BaconBuilder.Model
             Stream responseStream = response.GetResponseStream();
 
             // Initialise filestream to write to file.
-            FileStream writer = new FileStream(_htmlDirectory + fileName, FileMode.Create);
+            FileStream writer = new FileStream("%HOMEDRIVE%%HOMEPATH%/test" + fileName, FileMode.Create);
 
             // Create a read/write buffer.
             const int bufferLength = 2048;

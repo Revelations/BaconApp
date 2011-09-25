@@ -123,8 +123,13 @@
   </data>
   <data name="ServerLocation" xml:space="preserve">
     <value>ftp://Revelations.webhop.org/</value>
+    <comment>URL of the server</comment>
   </data>
   <data name="Blank" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\blank.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;shift_jis</value>
+  </data>
+  <data name="HtmlDirectory" xml:space="preserve">
+    <value>%HOMEDRIVE%%HOMEPATH%/test</value>
+    <comment>Test directory for working directory.</comment>
   </data>
 </root>

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net;
 using System.Text;
+using BaconBuilder.Properties;
 
 namespace BaconBuilder.Model
 {
@@ -22,7 +23,7 @@ namespace BaconBuilder.Model
         /// </summary>
         public void ConnectAndUploadAll()
         {
-            DirectoryInfo info = new DirectoryInfo(_htmlDirectory);
+            DirectoryInfo info = new DirectoryInfo("%HOMEDRIVE%%HOMEPATH%/test");
 
             foreach (FileInfo f in info.GetFiles())
                 if(FileNeedsUpload(f.Name))
@@ -36,13 +37,13 @@ namespace BaconBuilder.Model
         public void UploadSingleFile(string fileName)
         {
             // Init request.
-            FtpWebRequest ftp = (FtpWebRequest)WebRequest.Create(_serverAddress + fileName);
+            FtpWebRequest ftp = (FtpWebRequest)WebRequest.Create(Resources.ServerLocation + fileName);
             
             // Set request type to upload.
             ftp.Method = WebRequestMethods.Ftp.UploadFile;
 
             // Create a streamreader to read the file.
-            StreamReader reader = new StreamReader(_htmlDirectory + fileName);
+            StreamReader reader = new StreamReader("%HOMEDRIVE%%HOMEPATH%/test" + fileName);
 
             // Create a byte array and store file data.
             byte[] contents = Encoding.UTF8.GetBytes(reader.ReadToEnd());
