@@ -14,6 +14,8 @@ namespace BaconBuilder.View
 	/// </summary>
 	public partial class FtpDialog : Form
 	{
+
+		private static readonly string HtmlDirectory = "C:/Users/" + Environment.UserName + "/test/";
 		#region Properties and Attributes
 
 		// Hard coded html directory. Obviously this is to soon be removed.
@@ -102,7 +104,7 @@ namespace BaconBuilder.View
 			// Get a list of all files on the server, and instantiate a list to store names of those needing download.
 			List<string> fileList = helper.ConnectAndGetFileList();
 
-			var d = new DirectoryInfo(Resources.HtmlDirectory);
+			var d = new DirectoryInfo(HtmlDirectory);
 			foreach (FileInfo f in d.GetFiles())
 			{
 				if (!fileList.Contains(f.Name))
@@ -152,7 +154,7 @@ namespace BaconBuilder.View
 
 			// Get a list of all files in the html directory.
 			// TODO: Embed html directory into the resources file.
-			var info = new DirectoryInfo(Resources.HtmlDirectory);
+			var info = new DirectoryInfo(HtmlDirectory);
 			FileInfo[] files = info.GetFiles();
 
 			foreach (string s in helper.RemoteFiles)

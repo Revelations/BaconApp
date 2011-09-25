@@ -10,6 +10,8 @@ namespace BaconBuilder
 	[TestFixture]
 	public class ImageManipulatorTest
 	{
+
+		private static readonly string HtmlDirectory = "C:/Users/" + Environment.UserName + "/test/";
 		private ImageManipulator _manipulator;
 
 		[SetUp]
@@ -70,13 +72,13 @@ namespace BaconBuilder
 		[Test]
 		public void TestSave()
 		{
-			_manipulator.SaveImage(Resources.HtmlDirectory, "TestImage");
-			Assert.IsTrue(File.Exists(Resources.HtmlDirectory + "TestImage.png"));
-			File.Delete(Resources.HtmlDirectory +"Test.png");
+			_manipulator.SaveImage(HtmlDirectory, "TestImage");
+			Assert.IsTrue(File.Exists(HtmlDirectory + "TestImage.png"));
+			File.Delete(HtmlDirectory +"Test.png");
 
-			_manipulator.SaveImage(Resources.HtmlDirectory, "TestImage", ImageType.Jpg);
-			Assert.IsTrue(File.Exists(Resources.HtmlDirectory + "TestImage.jpg"));
-			File.Delete(Resources.HtmlDirectory + "TestImage.jpg");
+			_manipulator.SaveImage(HtmlDirectory, "TestImage", ImageType.Jpg);
+			Assert.IsTrue(File.Exists(HtmlDirectory + "TestImage.jpg"));
+			File.Delete(HtmlDirectory + "TestImage.jpg");
 		}
 	}
 }

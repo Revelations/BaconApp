@@ -77,15 +77,6 @@ namespace BaconBuilder.Properties {
             }
         }
         
-        /// <summary>
-        ///   Looks up a localized string similar to %HOMEDRIVE%%HOMEPATH%/test.
-        /// </summary>
-        public static string HtmlDirectory {
-            get {
-                return ResourceManager.GetString("HtmlDirectory", resourceCulture);
-            }
-        }
-        
         public static System.Drawing.Bitmap map {
             get {
                 object obj = ResourceManager.GetObject("map", resourceCulture);

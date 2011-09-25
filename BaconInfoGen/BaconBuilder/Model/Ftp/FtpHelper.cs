@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using BaconBuilder.Properties;
@@ -13,6 +14,7 @@ namespace BaconBuilder.Model
     public abstract class FtpHelper
     {
     	//private readonly IModel _model;
+		private static readonly string HtmlDirectory = "C:/Users/" + Environment.UserName + "/test/";
 
     	/// <summary>
         /// Connects to an ftp server and gets a listing of all files in the main directory.
@@ -55,7 +57,7 @@ namespace BaconBuilder.Model
         /// <returns>True if the file can be found in the html directory. False otherwise.</returns>
         public bool CheckIfLocalCopyExists(string fileName)
         {
-            return (File.Exists(Resources.HtmlDirectory + fileName));
+            return (File.Exists(HtmlDirectory + fileName));
         }
 
         /// <summary>
@@ -65,7 +67,7 @@ namespace BaconBuilder.Model
         /// <returns>The size of the local file in bytes.</returns>
         public long LocalVersionSize(string fileName)
         {
-            FileInfo info = new FileInfo(Resources.HtmlDirectory + fileName);
+            FileInfo info = new FileInfo(HtmlDirectory + fileName);
             return info.Length;
         }
 

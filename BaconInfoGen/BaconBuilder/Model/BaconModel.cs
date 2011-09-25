@@ -9,12 +9,12 @@ namespace BaconBuilder.Model
 	public class BaconModel : IModel
 	{
 		private const string HtmlExtension = ".html";
-
+		private static readonly string HtmlDirectory = "C:/Users/" + Environment.UserName + "/test/";
 		private const string NewHtmlFileName = "New File";
 
 		private readonly Dictionary<string, string> _fileContents = new Dictionary<string, string>();
 		private string _currentFileNameWithExtensionName;
-		private DirectoryInfo _directory = new DirectoryInfo(Resources.HtmlDirectory);
+		private DirectoryInfo _directory = new DirectoryInfo(HtmlDirectory);
 
 //		private FtpDownloader _ftpDownloader;
 //		private FtpUploader _ftpUploader;
@@ -29,7 +29,7 @@ namespace BaconBuilder.Model
 		public void RemoveFile(string fileName)
 		{
 			_fileContents.Remove(fileName);
-			File.Delete(Resources.HtmlDirectory + fileName);
+			File.Delete(HtmlDirectory + fileName);
 			_currentFileNameWithExtensionName = null;
 		}
 
@@ -44,8 +44,8 @@ namespace BaconBuilder.Model
 			string oldHtmlName = oldName + HtmlExtension;
 			string newHtmlName = newName + HtmlExtension;
 
-			var oldInfo = new FileInfo(Resources.HtmlDirectory + oldHtmlName);
-			var newInfo = new FileInfo(Resources.HtmlDirectory + newHtmlName);
+			var oldInfo = new FileInfo(HtmlDirectory + oldHtmlName);
+			var newInfo = new FileInfo(HtmlDirectory + newHtmlName);
 			Console.WriteLine(@"Renaming file {0} to {1}", oldHtmlName, newHtmlName);
 
 			if (newInfo.Exists)
@@ -60,7 +60,7 @@ namespace BaconBuilder.Model
 
 		public void SaveFile(string fileName)
 		{
-			File.WriteAllText(Resources.HtmlDirectory + fileName, CurrentContents);
+			File.WriteAllText(HtmlDirectory + fileName, CurrentContents);
 		}
 
 		public string CurrentFileNameWithExtension
@@ -127,7 +127,7 @@ namespace BaconBuilder.Model
 		/// <returns>Unused filname with the lowest possible appended integer.</returns>
 		public static string GetLowestUnusedNewFileName()
 		{
-			string name = Resources.HtmlDirectory + NewHtmlFileName;
+			string name = HtmlDirectory + NewHtmlFileName;
 			string result = name + HtmlExtension;
 			// Otherwise iterate to find the lowest number available to append.
 			for (int i = 2; File.Exists(result); i++)
