@@ -49,12 +49,20 @@ namespace BaconBuilder.View
             {
                 worker.DoWork += downloadWorker_DoWork;
                 labelText.Text = @"Synchronising local directory with server.";
+                Text = @"Retrieving Files.";
             }
             else if (helper is FtpUploader)
             {
                 worker.DoWork += uploadWorker_DoWork;
                 labelText.Text = @"Synchronising server with local directory.";
+                Text = @"Sending Files.";
             }
+        }
+
+        public override sealed string Text
+        {
+            get { return base.Text; }
+            set { base.Text = value; }
         }
 
         #endregion
@@ -100,6 +108,14 @@ namespace BaconBuilder.View
 
             // Get a list of all files on the server, and instantiate a list to store names of those needing download.
             List<string> fileList = helper.ConnectAndGetFileList();
+
+            DirectoryInfo d = new DirectoryInfo(_htmlDirectory);
+            foreach (FileInfo f in d.GetFiles())
+            {
+                if(!fileList.Contains(f.Name))
+                    f.Delete();
+            }
+
             List<string> neededFiles = new List<string>();
 
             SetLabelText(@"Checking file versions.");
@@ -145,6 +161,27 @@ namespace BaconBuilder.View
             // TODO: Embed html directory into the resources file.
             DirectoryInfo info = new DirectoryInfo(_htmlDirectory);
             FileInfo[] files = info.GetFiles();
+
+            foreach (string s in helper.RemoteFiles)
+            {
+                bool presentLocal = false;
+
+                foreach (FileInfo f in files)
+                {
+                    if (f.Name.Equals(s))
+                    {
+                        presentLocal = true;
+                        break;
+                    }
+                }
+
+                if (!presentLocal)
+                {
+                    helper.DeleteRemoteFile(s);
+
+                }
+                   
+            }
 
             SetLabelText(@"Checking file versions.");
 

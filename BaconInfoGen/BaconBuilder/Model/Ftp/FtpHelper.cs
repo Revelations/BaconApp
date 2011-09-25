@@ -96,5 +96,21 @@ namespace BaconBuilder.Model
             response.Close();
             return result;
         }
+
+        /// <summary>
+        /// Deletes a given file from the ftp server.
+        /// </summary>
+        /// <param name="fileName">Name of the file to delete.</param>
+        public void DeleteRemoteFile(string fileName)
+        {
+            // Init request.
+            FtpWebRequest ftp = (FtpWebRequest) WebRequest.Create(_serverAddress + fileName);
+
+            // Request type is delete file.
+            ftp.Method = WebRequestMethods.Ftp.DeleteFile;
+
+            // TODO: Store this value for error checking in future.
+            ftp.GetResponse();
+        }
     }
 }

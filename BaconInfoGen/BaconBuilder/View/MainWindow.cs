@@ -28,8 +28,6 @@ namespace BaconBuilder.View
 			btnMapPreview.Click += btnMapPreview_Click;
 			btnPreview.Click += btnPreview_Click;
 
-			openFileToolStripMenuItem.Click += openFileToolStripMenuItem_Click;
-			synchWithIPhoneToolStripMenuItem.Click += synchWithIPhoneToolStripMenuItem_Click;
 			printToolStripMenuItem.Click += btnPrintPreview_Click;
 
 			exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
@@ -261,7 +259,34 @@ namespace BaconBuilder.View
 			set { btnRemoveFile.Enabled = value; }
 		}
 
-		public EventHandler synchWithIPhoneToolStripMenuItem_Click { get; set; }
+        private void toolStripSync_Click(object sender, EventArgs e)
+        {
+            FtpDialog ftpDialog = new FtpDialog(new FtpUploader());
+            ftpDialog.ShowDialog();
+        }
+
+        private void MainWindow_Shown(object sender, EventArgs e)
+        {
+            FtpDialog ftpDialog = new FtpDialog(new FtpDownloader());
+            ftpDialog.ShowDialog();
+            _controller.InitialiseListView();
+        }
+
+        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult result =
+                MessageBox.Show(
+                    @"Would you like to synchronise your content with the distribution server before exiting?",
+                    @"Confirm", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3);
+
+            if (result == DialogResult.Yes)
+            {
+                FtpDialog ftpDialog = new FtpDialog((new FtpUploader()));
+                ftpDialog.ShowDialog();
+            }
+            if (result == DialogResult.Cancel)
+                e.Cancel = true;
+        }
 	}
 }
 
