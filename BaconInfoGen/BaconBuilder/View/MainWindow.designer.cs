@@ -60,7 +60,7 @@ namespace BaconBuilder.View
 			this.statusStrip = new System.Windows.Forms.StatusStrip();
 			this.pnlContentEditor = new System.Windows.Forms.Panel();
 			this.pnlTextEditor = new System.Windows.Forms.Panel();
-			this.textBoxMain = new System.Windows.Forms.TextBox();
+			this.txtBoxMain = new System.Windows.Forms.TextBox();
 			this.flpPreview = new System.Windows.Forms.FlowLayoutPanel();
 			this.btnPreview = new System.Windows.Forms.Button();
 			this.btnPrintPreview = new System.Windows.Forms.Button();
@@ -326,7 +326,7 @@ namespace BaconBuilder.View
 			// 
 			// pnlTextEditor
 			// 
-			this.pnlTextEditor.Controls.Add(this.textBoxMain);
+			this.pnlTextEditor.Controls.Add(this.txtBoxMain);
 			this.pnlTextEditor.Controls.Add(this.flpPreview);
 			this.pnlTextEditor.Controls.Add(this.toolContents);
 			this.pnlTextEditor.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -335,14 +335,14 @@ namespace BaconBuilder.View
 			this.pnlTextEditor.Size = new System.Drawing.Size(606, 443);
 			this.pnlTextEditor.TabIndex = 12;
 			// 
-			// textBoxMain
+			// txtBoxMain
 			// 
-			this.textBoxMain.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.textBoxMain.Location = new System.Drawing.Point(0, 25);
-			this.textBoxMain.Multiline = true;
-			this.textBoxMain.Name = "textBoxMain";
-			this.textBoxMain.Size = new System.Drawing.Size(606, 389);
-			this.textBoxMain.TabIndex = 12;
+			this.txtBoxMain.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.txtBoxMain.Location = new System.Drawing.Point(0, 25);
+			this.txtBoxMain.Multiline = true;
+			this.txtBoxMain.Name = "txtBoxMain";
+			this.txtBoxMain.Size = new System.Drawing.Size(606, 389);
+			this.txtBoxMain.TabIndex = 12;
 			// 
 			// flpPreview
 			// 
@@ -700,7 +700,7 @@ namespace BaconBuilder.View
 		private Splitter splitter6;
 		private Splitter splitter5;
 		private ToolStripSeparator toolStripSeparator3;
-		private TextBox textBoxMain;
+		private TextBox txtBoxMain;
 		private ListView listViewContents;
 		private ImageList imageList;
 		private TableLayoutPanel tableLayoutPanel1;

@@ -24,6 +24,8 @@ namespace BaconBuilder.View
 			// Event binding
 			tsbImage.Click += btnImage_Click;
 			tsbAudio.Click += btnAudio_Click;
+			tsbBold.Click += tsbBold_Click;
+			tsbItalics.Click += tsbItalics_Click;
 			btnMapPreview.Click += btnMapPreview_Click;
 			btnPreview.Click += btnPreview_Click;
 
@@ -34,34 +36,69 @@ namespace BaconBuilder.View
 			listViewContents.SelectedIndexChanged += listViewContents_SelectedIndexChanged;
 		}
 
+		/// <summary>
+		/// Wrap the selected text in bold tags.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void tsbBold_Click(object sender, EventArgs e)
+		{
+			txtBoxMain.SelectedText = "<b>" + txtBoxMain.SelectedText + "</b>";
+		}
+
+		/// <summary>
+		/// Wrap the selected text in italics.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void tsbItalics_Click(object sender, EventArgs e)
+		{
+			txtBoxMain.SelectedText = "<i>" + txtBoxMain.SelectedText + "</i`>";
+		}
+
 		#endregion
 
 		#region IMainView Members
 
+		/// <summary>
+		/// Get or set the title text.
+		/// </summary>
 		public string TitleText
 		{
 			get { return txtTitle.Text; }
 			set { txtTitle.Text = value; }
 		}
 
+		/// <summary>
+		/// Get or set the X-coordinates.
+		/// </summary>
 		public decimal XCoord
 		{
 			get { return txtX.Value; }
 			set { txtX.Value = value; }
 		}
 
+		/// <summary>
+		/// Get or set the Y-coordinates.
+		/// </summary>
 		public decimal YCoord
 		{
 			get { return txtY.Value; }
 			set { txtY.Value = value; }
 		}
 
+		/// <summary>
+		/// get or set the contents of the textbox;
+		/// </summary>
 		public string Contents
 		{
-			get { return textBoxMain.Text; }
-			set { textBoxMain.Text = value; }
+			get { return txtBoxMain.Text; }
+			set { txtBoxMain.Text = value; }
 		}
 
+		/// <summary>
+		/// Returns the items in the listview control.
+		/// </summary>
 		public ListView.ListViewItemCollection Files
 		{
 			get { return listViewContents.Items; }
@@ -69,23 +106,30 @@ namespace BaconBuilder.View
 
 		/// <summary>
 		/// Enable controls if need be. For example, if no files are selected in the list view, disable the remove file button.
+		/// Call this as often as needed!
 		/// </summary>
 		public void EnableRequiredControls()
 		{
 			btnRemoveFile.Enabled = listViewContents.SelectedItems.Count != 0;
 			btnPreview.Enabled = _model.CurrentFileName != null;
 			toolContents.Enabled = _model.CurrentFileName != null;
+			txtBoxMain.Enabled = _model.CurrentFileName != null;
 		}
 
 		#endregion
 
+		/// <summary>
+		/// Exit the program.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void exitToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			Close();
 		}
 
 		/// <summary>
-		/// 
+		/// Preview the contents as HTML. TODO: Draw "you are here" marker.
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
@@ -97,37 +141,42 @@ namespace BaconBuilder.View
 			preview.ShowDialog();
 		}
 
+		/// <summary>
+		/// Inserts an audio wrapped in tags. TODO: Implement importing of foreign images.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void btnAudio_Click(object sender, EventArgs e)
 		{
 			_model.CurrentContents = Contents;
 			// Stores the current caret position and length of selection.
-			int caretPos = textBoxMain.SelectionStart;
-			//int selectionLength = textBoxMain.SelectionLength;
+			int caretPos = txtBoxMain.SelectionStart;
+			//int selectionLength = txtBoxMain.SelectionLength;
 
 			var dialog = new AudioSelectionDialog(_model);
 			if (dialog.ShowDialog() != DialogResult.Cancel)
 			{
-				textBoxMain.SelectionStart = caretPos;
-				textBoxMain.SelectedText = string.Format("<audio>{0}</audio>", _model.AudioUrl);
+				txtBoxMain.SelectionStart = caretPos;
+				txtBoxMain.SelectedText = string.Format("<audio>{0}</audio>", _model.AudioUrl);
 			}
 		}
 
 		/// <summary>
-		/// 
+		/// Inserts an image wrapped in tags. TODO: Implement importing of foreign images.
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		private void btnImage_Click(object sender, EventArgs e)
 		{
 			// Stores the current caret position and length of selection.
-			int caretPos = textBoxMain.SelectionStart;
-			//int selectionLength = textBoxMain.SelectionLength;
+			int caretPos = txtBoxMain.SelectionStart;
+			//int selectionLength = txtBoxMain.SelectionLength;
 
 			var dialog = new ImageSelectionDialog(_model);
 			if (dialog.ShowDialog() != DialogResult.Cancel)
 			{
-				textBoxMain.SelectionStart = caretPos;
-				textBoxMain.SelectedText = string.Format("<img>{0}</img>", _model.ImageUrl);
+				txtBoxMain.SelectionStart = caretPos;
+				txtBoxMain.SelectedText = string.Format("<img>{0}</img>", _model.ImageUrl);
 			}
 		}
 
@@ -151,6 +200,11 @@ namespace BaconBuilder.View
 			_controller.InitialiseListView();
 		}
 
+		/// <summary>
+		/// Create and add a new bacon to freezer.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void btnAddFile_Click(object sender, EventArgs e)
 		{
 			_controller.CreateNewFile();
@@ -158,7 +212,7 @@ namespace BaconBuilder.View
 		}
 
 		/// <summary>
-		/// 
+		/// Dispose of unwanted bacon from freezer with confirmation of disposal.
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
@@ -180,7 +234,7 @@ namespace BaconBuilder.View
 			else if (e.KeyCode == Keys.Escape)
 			{
 				TitleText = _model.CurrentFileName;
-				textBoxMain.Focus();
+				txtBoxMain.Focus();
 			}
 		}
 
@@ -194,11 +248,21 @@ namespace BaconBuilder.View
 			_controller.ValidateTitle();
 		}
 
+		/// <summary>
+		/// Selecting a different bacon. 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void listViewContents_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			btnRemoveFile.Enabled = ((ListView) sender).SelectedIndices.Count != 0;
+			EnableRequiredControls();
 		}
 
+		/// <summary>
+		/// Gets called for each bacon that was selected and deselected.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void listViewContents_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
 		{
 			if (e.IsSelected)
@@ -214,12 +278,22 @@ namespace BaconBuilder.View
 			}
 		}
 
+		/// <summary>
+		/// Shows a print preview.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void btnPrintPreview_Click(object sender, EventArgs e)
 		{
 			printPreviewDialog.Document = printDocument;
 			printPreviewDialog.ShowDialog();
 		}
 
+		/// <summary>
+		/// Print pages. TODO: Handle multipage
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void printDocument1_PrintPage(object sender, PrintPageEventArgs e)
 		{
 			var qr = new QrCodeGenerator();
@@ -256,12 +330,22 @@ namespace BaconBuilder.View
 			}
 		}
 
+		/// <summary>
+		/// Synchronise bacon in freezer with the bacon in the butchery.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void toolStripSync_Click(object sender, EventArgs e)
 		{
 			var ftpDialog = new FtpDialog(new FtpUploader());
 			ftpDialog.ShowDialog();
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void MainWindow_Shown(object sender, EventArgs e)
 		{
 			var ftpDialog = new FtpDialog(new FtpDownloader(_model));
@@ -269,6 +353,11 @@ namespace BaconBuilder.View
 			_controller.InitialiseListView();
 		}
 
+		/// <summary>
+		/// Called when the form is closing. Synchronise with butchery if need be.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
 		{
 			DialogResult result =

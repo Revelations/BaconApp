@@ -62,7 +62,7 @@ namespace BaconBuilder
 			string input = "<!--x =  600 --><!-- y = 300 -->";
 			var expected = new Point(600, 300);
 
-			Assert.AreEqual(expected, _parser.ExtractXY(input));
+			Assert.AreEqual(expected, _parser.ExtractCoords(input));
 		}
 
 		[Test]
