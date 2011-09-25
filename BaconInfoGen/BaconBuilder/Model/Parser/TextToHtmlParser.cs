@@ -21,7 +21,7 @@ namespace BaconBuilder.Model
 			RegexDict.Add(@"<\s*audio\s*>\s*([^""\s]*)\s*<\s*/\s*audio\s*>", @"<p><audio src=""$1"" controls=""controls"" style=""float:left;""></audio></p>");
 
 			// TODO: Complete set of regex rules here.
-
+            RegexDict.Add("\r\n\r\n", "</p><p>");
 			// TODO: \n\n ==> </p><p>
             RegexDict.Add("\r\n", "</p><p>");
 			// TODO: First paragraph starts with <p>, last ends with </p>

@@ -116,7 +116,7 @@ namespace BaconBuilder.View
             FileInfo f = new FileInfo(ItemFileName);
             ImageManipulator i = new ImageManipulator(ItemFileName);
 
-            i.ScaleImage(320, 300, true);
+            i.ScaleImage(270, 200, true);
 
 		    string fileName = f.Name.Replace(f.Extension, "");
 
