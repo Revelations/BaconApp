@@ -15,10 +15,12 @@ namespace BaconBuilder.Model
 		private readonly Dictionary<string, string> _fileContents = new Dictionary<string, string>();
 		private DirectoryInfo _directory = new DirectoryInfo(HtmlDirectory);
 
-		/// <summary>
-		/// Get or set the image url, obtained from an image selection dialog.
-		/// </summary>
-		public string ImageUrl { get; set; }
+	    private string _imageUrl;
+
+	    /// <summary>
+	    /// Get or set the image url, obtained from an image selection dialog.
+	    /// </summary>
+        public string ImageUrl { get; set; }
 
 		#region IModel Members
 

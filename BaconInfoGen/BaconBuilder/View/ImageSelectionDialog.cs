@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using BaconBuilder.Model;
@@ -112,7 +113,16 @@ namespace BaconBuilder.View
 
 		private void btnOK_Click(object sender, EventArgs e)
 		{
-			_model.ImageUrl = ItemFileName;
+            FileInfo f = new FileInfo(ItemFileName);
+            ImageManipulator i = new ImageManipulator(ItemFileName);
+
+            i.ScaleImage(320, 300, true);
+
+		    string fileName = f.Name.Replace(f.Extension, "");
+
+            i.SaveImage("C:/Users/" + Environment.UserName + "/test/", fileName, ImageType.Png);
+
+			_model.ImageUrl = fileName + ".png";
 		}
 
 		private void btnCancel_Click(object sender, EventArgs e)
