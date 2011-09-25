@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -11,6 +12,7 @@ namespace BaconBuilder.Model
     /// </summary>
     public class FtpUploader : FtpHelper
     {
+		private static readonly string HtmlDirectory = "C:/Users/" + Environment.UserName + "/test/";
         /// <summary>
         /// A list of all the remote files present on the server.
         /// </summary>
@@ -23,7 +25,7 @@ namespace BaconBuilder.Model
         /// </summary>
         public void ConnectAndUploadAll()
         {
-            DirectoryInfo info = new DirectoryInfo("%HOMEDRIVE%%HOMEPATH%/test");
+            DirectoryInfo info = new DirectoryInfo(HtmlDirectory);
 
             foreach (FileInfo f in info.GetFiles())
                 if(FileNeedsUpload(f.Name))
@@ -43,7 +45,7 @@ namespace BaconBuilder.Model
             ftp.Method = WebRequestMethods.Ftp.UploadFile;
 
             // Create a streamreader to read the file.
-            StreamReader reader = new StreamReader("%HOMEDRIVE%%HOMEPATH%/test" + fileName);
+            StreamReader reader = new StreamReader(HtmlDirectory + fileName);
 
             // Create a byte array and store file data.
             byte[] contents = Encoding.UTF8.GetBytes(reader.ReadToEnd());

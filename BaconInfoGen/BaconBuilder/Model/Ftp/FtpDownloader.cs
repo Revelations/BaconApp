@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
 using BaconBuilder.Properties;
 
@@ -10,7 +11,7 @@ namespace BaconBuilder.Model
     public class FtpDownloader : FtpHelper
     {
     	private readonly IModel _model;
-
+		private static readonly string HtmlDirectory = "C:/Users/" + Environment.UserName + "/test/";
     	public FtpDownloader(IModel model)
     	{
     		_model = model;
@@ -43,7 +44,7 @@ namespace BaconBuilder.Model
             Stream responseStream = response.GetResponseStream();
 
             // Initialise filestream to write to file.
-            FileStream writer = new FileStream("%HOMEDRIVE%%HOMEPATH%/test" + fileName, FileMode.Create);
+            FileStream writer = new FileStream(HtmlDirectory + fileName, FileMode.Create);
 
             // Create a read/write buffer.
             const int bufferLength = 2048;
