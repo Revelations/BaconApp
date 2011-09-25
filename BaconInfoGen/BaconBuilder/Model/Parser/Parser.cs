@@ -43,7 +43,7 @@ namespace BaconBuilder.Model
 		/// </summary>
 		/// <param name="input">String to perform substitutions on.</param>
 		/// <returns>Output, with all regex substitutions completed.</returns>
-		public string Parse(string input)
+		public virtual string Parse(string input)
 		{
 			string output = input;
 

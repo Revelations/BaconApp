@@ -53,5 +53,28 @@ namespace BaconBuilder
             foreach (string s in input)
                 Assert.AreEqual(expected, _parser.Parse(s));
         }
+
+        [Test]
+        public void TestParse()
+        {
+            _parser.X = 100;
+            _parser.Y = 200;
+
+            string expected = @"<!DOCTYPE HTML>
+<html>
+<head>
+<link href=""style.css"" />
+<title></title>
+<!-- x = 100 -->
+<!-- y = 200 -->
+</head>
+<body>
+</body>
+</html>".Replace(System.Environment.NewLine, "");
+
+            string actual = ((TextToHtmlParser)_parser).Parse2("").Replace(System.Environment.NewLine, "");
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

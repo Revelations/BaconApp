@@ -1,6 +1,8 @@
 ﻿
 using System.Drawing;
 using System.Text;
+using System.Windows.Forms;
+using BaconBuilder.Properties;
 
 namespace BaconBuilder.Model
 {
@@ -39,15 +41,36 @@ namespace BaconBuilder.Model
             InitialiseDictionary();
         }
 
-        /// <summary>
-        /// TODO: Jordan is working on this.
-        /// </summary>
-        /// <param name="p"></param>
-        public void InsertXY(Point p)
+        public string Parse2(string input)
+        {
+            string doc = Resources.Blank;
+
+            doc = InsertXY(Location, doc);
+
+            return base.Parse(doc);
+        }
+
+	    /// <summary>
+	    /// TODO: Jordan is working on this.
+	    /// </summary>
+	    /// <param name="p"></param>
+	    /// <param name="input"></param>
+	    public string InsertXY(Point p, string input)
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append(string.Format("<!-- x = {0} -->", p.X));
-            builder.Append(string.Format("<!-- y = {0} -->", p.Y));
+
+            int i = input.IndexOf("</title>") + "</title>".Length;
+
+            builder.Append(input.Substring(0, i));
+            //builder.AppendLine();
+            builder.Append(string.Format(@"<!-- x = {0} -->", p.X));
+            //builder.AppendLine();
+            builder.Append(string.Format(@"<!-- y = {0} -->", p.Y));
+            //builder.AppendLine();
+
+            builder.Append(input.Substring(i, input.Length - i));
+
+            return builder.ToString();
         }
     }
 }
