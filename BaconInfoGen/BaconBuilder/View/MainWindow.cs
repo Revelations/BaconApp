@@ -23,12 +23,33 @@ namespace BaconBuilder.View
 			_controller = new MainViewController(_model, this);
 
 			// Event binding
-			printToolStripMenuItem.Click += btnPrintPreview_Click;
-			btnPreview.Click += btnPreview_Click;
 			tsbImage.Click += tsbImage_Click;
 			tsbAudio.Click += btnAudio_Click;
 			btnMapPreview.Click += btnMapPreview_Click;
+			btnPreview.Click += btnPreview_Click;
+
+			openFileToolStripMenuItem.Click += openFileToolStripMenuItem_Click;
+			synchWithIPhoneToolStripMenuItem.Click += synchWithIPhoneToolStripMenuItem_Click;
+			printToolStripMenuItem.Click += btnPrintPreview_Click;
+
+			exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
+
 			listViewContents.SelectedIndexChanged += listViewContents_SelectedIndexChanged;
+		}
+
+		void openDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			throw new NotImplementedException();
+		}
+
+		void openFileToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			throw new NotImplementedException();
+		}
+
+		void exitToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Close();
 		}
 
 		#endregion
@@ -239,6 +260,8 @@ namespace BaconBuilder.View
 			get { return btnRemoveFile.Enabled; }
 			set { btnRemoveFile.Enabled = value; }
 		}
+
+		public EventHandler synchWithIPhoneToolStripMenuItem_Click { get; set; }
 	}
 }
 

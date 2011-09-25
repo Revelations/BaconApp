@@ -39,12 +39,13 @@ namespace BaconBuilder.View
 			this.menuStrip = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.openFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.openDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+			this.synchWithIPhoneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.printAllModifiedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.printAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,6 +53,7 @@ namespace BaconBuilder.View
 			this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.pnlDirectories = new System.Windows.Forms.Panel();
 			this.listViewContents = new System.Windows.Forms.ListView();
+			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.imageList = new System.Windows.Forms.ImageList(this.components);
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.btnRemoveFile = new System.Windows.Forms.Button();
@@ -86,7 +88,7 @@ namespace BaconBuilder.View
 			this.tsbItalics = new System.Windows.Forms.ToolStripButton();
 			this.printDocument = new System.Drawing.Printing.PrintDocument();
 			this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
-			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.menuStrip.SuspendLayout();
 			this.pnlDirectories.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
@@ -102,6 +104,11 @@ namespace BaconBuilder.View
 			// menuStrip
 			// 
 			this.menuStrip.Dock = System.Windows.Forms.DockStyle.None;
+			this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.editToolStripMenuItem,
+            this.viewToolStripMenuItem,
+            this.toolsToolStripMenuItem});
 			this.menuStrip.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip.Name = "menuStrip";
 			this.menuStrip.Size = new System.Drawing.Size(792, 24);
@@ -112,75 +119,81 @@ namespace BaconBuilder.View
 			// 
 			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openFileToolStripMenuItem,
-            this.openDatabaseToolStripMenuItem,
             this.toolStripSeparator1,
+            this.synchWithIPhoneToolStripMenuItem,
+            this.toolStripSeparator2,
             this.printToolStripMenuItem,
             this.printAllModifiedToolStripMenuItem,
             this.printAllToolStripMenuItem,
-            this.toolStripSeparator2,
+            this.toolStripSeparator4,
             this.exitToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-			this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
+			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
 			this.fileToolStripMenuItem.Text = "&File";
 			// 
 			// openFileToolStripMenuItem
 			// 
 			this.openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
-			this.openFileToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+			this.openFileToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
 			this.openFileToolStripMenuItem.Text = "Open File....";
-			// 
-			// openDatabaseToolStripMenuItem
-			// 
-			this.openDatabaseToolStripMenuItem.Name = "openDatabaseToolStripMenuItem";
-			this.openDatabaseToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-			this.openDatabaseToolStripMenuItem.Text = "Open Database...";
 			// 
 			// toolStripSeparator1
 			// 
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(173, 6);
+			this.toolStripSeparator1.Size = new System.Drawing.Size(180, 6);
+			// 
+			// synchWithIPhoneToolStripMenuItem
+			// 
+			this.synchWithIPhoneToolStripMenuItem.Name = "synchWithIPhoneToolStripMenuItem";
+			this.synchWithIPhoneToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+			this.synchWithIPhoneToolStripMenuItem.Text = "Synch With iPhone...";
+			// 
+			// toolStripSeparator2
+			// 
+			this.toolStripSeparator2.Name = "toolStripSeparator2";
+			this.toolStripSeparator2.Size = new System.Drawing.Size(180, 6);
 			// 
 			// printToolStripMenuItem
 			// 
 			this.printToolStripMenuItem.Name = "printToolStripMenuItem";
 			this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-			this.printToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+			this.printToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
 			this.printToolStripMenuItem.Text = "Print...";
 			// 
 			// printAllModifiedToolStripMenuItem
 			// 
 			this.printAllModifiedToolStripMenuItem.Name = "printAllModifiedToolStripMenuItem";
-			this.printAllModifiedToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+			this.printAllModifiedToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
 			this.printAllModifiedToolStripMenuItem.Text = "Print All Modified...";
 			// 
 			// printAllToolStripMenuItem
 			// 
 			this.printAllToolStripMenuItem.Name = "printAllToolStripMenuItem";
-			this.printAllToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+			this.printAllToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
 			this.printAllToolStripMenuItem.Text = "Print All...";
 			// 
-			// toolStripSeparator2
+			// toolStripSeparator4
 			// 
-			this.toolStripSeparator2.Name = "toolStripSeparator2";
-			this.toolStripSeparator2.Size = new System.Drawing.Size(173, 6);
+			this.toolStripSeparator4.Name = "toolStripSeparator4";
+			this.toolStripSeparator4.Size = new System.Drawing.Size(180, 6);
 			// 
 			// exitToolStripMenuItem
 			// 
 			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
 			this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
 			this.exitToolStripMenuItem.Text = "E&xit";
 			// 
 			// editToolStripMenuItem
 			// 
 			this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-			this.editToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+			this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
 			this.editToolStripMenuItem.Text = "&Edit";
 			// 
 			// viewToolStripMenuItem
 			// 
 			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-			this.viewToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
+			this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
 			this.viewToolStripMenuItem.Text = "&View";
 			// 
 			// toolsToolStripMenuItem
@@ -188,7 +201,7 @@ namespace BaconBuilder.View
 			this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.optionsToolStripMenuItem});
 			this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-			this.toolsToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+			this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
 			this.toolsToolStripMenuItem.Text = "&Tools";
 			// 
 			// optionsToolStripMenuItem
@@ -213,6 +226,8 @@ namespace BaconBuilder.View
 			this.listViewContents.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
 			this.listViewContents.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.listViewContents.FullRowSelect = true;
+			this.listViewContents.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
 			this.listViewContents.HideSelection = false;
 			this.listViewContents.Location = new System.Drawing.Point(0, 0);
 			this.listViewContents.MultiSelect = false;
@@ -223,6 +238,11 @@ namespace BaconBuilder.View
 			this.listViewContents.UseCompatibleStateImageBehavior = false;
 			this.listViewContents.View = System.Windows.Forms.View.Details;
 			this.listViewContents.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewContents_ItemSelectionChanged);
+			// 
+			// columnHeader1
+			// 
+			this.columnHeader1.Text = "Files";
+			this.columnHeader1.Width = 126;
 			// 
 			// imageList
 			// 
@@ -589,6 +609,8 @@ namespace BaconBuilder.View
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "HTML Content Generator";
 			this.Load += new System.EventHandler(this.MainWindow_Load);
+			this.menuStrip.ResumeLayout(false);
+			this.menuStrip.PerformLayout();
 			this.pnlDirectories.ResumeLayout(false);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.toolStripContainer1.BottomToolStripPanel.ResumeLayout(false);
@@ -614,7 +636,7 @@ namespace BaconBuilder.View
 
 		private MenuStrip menuStrip;
 		private ToolStripMenuItem fileToolStripMenuItem;
-		private ToolStripMenuItem openDatabaseToolStripMenuItem;
+		private ToolStripMenuItem synchWithIPhoneToolStripMenuItem;
 		private Panel pnlDirectories;
 		private ToolStripContainer toolStripContainer1;
 		private Panel pnlContentEditor;
@@ -663,6 +685,7 @@ namespace BaconBuilder.View
 		private PrintPreviewDialog printPreviewDialog;
 		private ToolStripButton tsbAudio;
 		private ColumnHeader columnHeader1;
+		private ToolStripSeparator toolStripSeparator4;
 
 	}
 }
