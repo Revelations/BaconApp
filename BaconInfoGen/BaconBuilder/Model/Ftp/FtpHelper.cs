@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
+using BaconBuilder.Properties;
 
 namespace BaconBuilder.Model
 {
@@ -12,22 +11,19 @@ namespace BaconBuilder.Model
     /// <summary>
     /// Class that handles connection to an FTP server aid in upload/download of necessary files.
     /// </summary>
-    public class FtpHelper
+    public abstract class FtpHelper
     {
-        // Address of the ftp server to connect to.
-        protected const string _serverAddress = "ftp://revelations.webhop.org/";
+    	//private readonly IModel _model;
+		private static readonly string HtmlDirectory = "C:/Users/" + Environment.UserName + "/test/";
 
-        // Hard coded Html file directory. Obviously this is to be changed eventually.
-        protected readonly string _htmlDirectory = "C:/Users/" + System.Environment.UserName + "/test/";
-
-        /// <summary>
+    	/// <summary>
         /// Connects to an ftp server and gets a listing of all files in the main directory.
         /// </summary>
         /// <returns>String list of all files present on the server.</returns>
         public List<string> ConnectAndGetFileList()
         {
             // Init request.
-            FtpWebRequest ftp = (FtpWebRequest)WebRequest.Create(_serverAddress);
+            FtpWebRequest ftp = (FtpWebRequest)WebRequest.Create(Resources.ServerLocation);
 
             // Request type is directory listing.
             ftp.Method = WebRequestMethods.Ftp.ListDirectory;
@@ -61,7 +57,7 @@ namespace BaconBuilder.Model
         /// <returns>True if the file can be found in the html directory. False otherwise.</returns>
         public bool CheckIfLocalCopyExists(string fileName)
         {
-            return (File.Exists(_htmlDirectory + fileName));
+            return (File.Exists(HtmlDirectory + fileName));
         }
 
         /// <summary>
@@ -71,7 +67,7 @@ namespace BaconBuilder.Model
         /// <returns>The size of the local file in bytes.</returns>
         public long LocalVersionSize(string fileName)
         {
-            FileInfo info = new FileInfo(_htmlDirectory + fileName);
+            FileInfo info = new FileInfo(HtmlDirectory + fileName);
             return info.Length;
         }
 
@@ -83,7 +79,7 @@ namespace BaconBuilder.Model
         public long RemoteVersionSize(string fileName)
         {
             // Init request.
-            FtpWebRequest ftp = (FtpWebRequest)WebRequest.Create(_serverAddress + fileName);
+            FtpWebRequest ftp = (FtpWebRequest)WebRequest.Create(Resources.ServerLocation + fileName);
 
             // Set request type to request file size.
             ftp.Method = WebRequestMethods.Ftp.GetFileSize;
@@ -104,7 +100,7 @@ namespace BaconBuilder.Model
         public void DeleteRemoteFile(string fileName)
         {
             // Init request.
-            FtpWebRequest ftp = (FtpWebRequest) WebRequest.Create(_serverAddress + fileName);
+            FtpWebRequest ftp = (FtpWebRequest) WebRequest.Create(Resources.ServerLocation + fileName);
 
             // Request type is delete file.
             ftp.Method = WebRequestMethods.Ftp.DeleteFile;

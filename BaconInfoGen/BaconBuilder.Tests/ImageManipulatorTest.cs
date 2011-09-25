@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.IO;
 using BaconBuilder.Model;
+using BaconBuilder.Properties;
 using NUnit.Framework;
 
 namespace BaconBuilder
@@ -9,6 +10,7 @@ namespace BaconBuilder
 	[TestFixture]
 	public class ImageManipulatorTest
 	{
+
 		private static readonly string HtmlDirectory = "C:/Users/" + Environment.UserName + "/test/";
 		private ImageManipulator _manipulator;
 
@@ -70,7 +72,6 @@ namespace BaconBuilder
 		[Test]
 		public void TestSave()
 		{
-
 			_manipulator.SaveImage(HtmlDirectory, "TestImage");
 			Assert.IsTrue(File.Exists(HtmlDirectory + "TestImage.png"));
 			File.Delete(HtmlDirectory +"Test.png");

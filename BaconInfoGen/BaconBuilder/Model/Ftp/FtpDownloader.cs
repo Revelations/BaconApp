@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Windows.Forms;
+using BaconBuilder.Properties;
 
 namespace BaconBuilder.Model
 {
@@ -13,11 +10,18 @@ namespace BaconBuilder.Model
     /// </summary>
     public class FtpDownloader : FtpHelper
     {
-        /// <summary>
+    	private readonly IModel _model;
+		private static readonly string HtmlDirectory = "C:/Users/" + Environment.UserName + "/test/";
+    	public FtpDownloader(IModel model)
+    	{
+    		_model = model;
+    	}
+
+    	/// <summary>
         /// Helper method that connects to a server and downloads every file present in the main directory that needs to be downloaded.
         /// </summary>
         public void ConnectAndDownloadAll()
-        {
+    	{
             foreach(string fileName in ConnectAndGetFileList())
                 if(FileNeedsDownload(fileName))
                     DownloadSingleFile(fileName);
@@ -30,7 +34,7 @@ namespace BaconBuilder.Model
         public void DownloadSingleFile(string fileName)
         {
             // Init request.
-            FtpWebRequest ftp = (FtpWebRequest)WebRequest.Create(_serverAddress + fileName);
+            FtpWebRequest ftp = (FtpWebRequest)WebRequest.Create(Resources.ServerLocation + fileName);
 
             // Request type is download.
             ftp.Method = WebRequestMethods.Ftp.DownloadFile;
@@ -40,7 +44,7 @@ namespace BaconBuilder.Model
             Stream responseStream = response.GetResponseStream();
 
             // Initialise filestream to write to file.
-            FileStream writer = new FileStream(_htmlDirectory + fileName, FileMode.Create);
+            FileStream writer = new FileStream(HtmlDirectory + fileName, FileMode.Create);
 
             // Create a read/write buffer.
             const int bufferLength = 2048;

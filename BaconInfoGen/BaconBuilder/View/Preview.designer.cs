@@ -33,6 +33,7 @@ namespace BaconBuilder.View
 		{
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.panel3 = new System.Windows.Forms.Panel();
+			this.btnClose = new System.Windows.Forms.Button();
 			this.picboxQRCode = new System.Windows.Forms.PictureBox();
 			this.splitter4 = new System.Windows.Forms.Splitter();
 			this.picboxMap = new System.Windows.Forms.PictureBox();
@@ -56,17 +57,28 @@ namespace BaconBuilder.View
 			this.panel1.Location = new System.Drawing.Point(0, 0);
 			this.panel1.MinimumSize = new System.Drawing.Size(608, 360);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(831, 376);
+			this.panel1.Size = new System.Drawing.Size(822, 365);
 			this.panel1.TabIndex = 12;
 			// 
 			// panel3
 			// 
+			this.panel3.Controls.Add(this.btnClose);
 			this.panel3.Controls.Add(this.picboxQRCode);
 			this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
 			this.panel3.Location = new System.Drawing.Point(616, 0);
 			this.panel3.Name = "panel3";
-			this.panel3.Size = new System.Drawing.Size(200, 376);
+			this.panel3.Size = new System.Drawing.Size(200, 365);
 			this.panel3.TabIndex = 12;
+			// 
+			// btnClose
+			// 
+			this.btnClose.Location = new System.Drawing.Point(62, 267);
+			this.btnClose.Name = "btnClose";
+			this.btnClose.Size = new System.Drawing.Size(75, 23);
+			this.btnClose.TabIndex = 11;
+			this.btnClose.Text = "Close";
+			this.btnClose.UseVisualStyleBackColor = true;
+			this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
 			// 
 			// picboxQRCode
 			// 
@@ -75,6 +87,7 @@ namespace BaconBuilder.View
 			this.picboxQRCode.Margin = new System.Windows.Forms.Padding(3, 3, 3, 13);
 			this.picboxQRCode.Name = "picboxQRCode";
 			this.picboxQRCode.Size = new System.Drawing.Size(200, 200);
+			this.picboxQRCode.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
 			this.picboxQRCode.TabIndex = 10;
 			this.picboxQRCode.TabStop = false;
 			// 
@@ -84,7 +97,7 @@ namespace BaconBuilder.View
 			this.splitter4.Enabled = false;
 			this.splitter4.Location = new System.Drawing.Point(608, 0);
 			this.splitter4.Name = "splitter4";
-			this.splitter4.Size = new System.Drawing.Size(8, 376);
+			this.splitter4.Size = new System.Drawing.Size(8, 365);
 			this.splitter4.TabIndex = 11;
 			this.splitter4.TabStop = false;
 			// 
@@ -108,7 +121,7 @@ namespace BaconBuilder.View
 			this.splitter2.Enabled = false;
 			this.splitter2.Location = new System.Drawing.Point(300, 0);
 			this.splitter2.Name = "splitter2";
-			this.splitter2.Size = new System.Drawing.Size(8, 376);
+			this.splitter2.Size = new System.Drawing.Size(8, 365);
 			this.splitter2.TabIndex = 10;
 			this.splitter2.TabStop = false;
 			// 
@@ -129,7 +142,7 @@ namespace BaconBuilder.View
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
-			this.ClientSize = new System.Drawing.Size(831, 376);
+			this.ClientSize = new System.Drawing.Size(822, 365);
 			this.Controls.Add(this.panel1);
 			this.Name = "Preview";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -152,5 +165,6 @@ namespace BaconBuilder.View
 		private System.Windows.Forms.PictureBox picboxMap;
 		private System.Windows.Forms.Splitter splitter2;
 		private System.Windows.Forms.WebBrowser browser;
+		private System.Windows.Forms.Button btnClose;
 	}
 }

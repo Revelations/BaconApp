@@ -1,17 +1,16 @@
 using System;
-using System.IO;
+using System.Drawing;
+using System.Drawing.Printing;
 using System.Windows.Forms;
-
 using BaconBuilder.Controller;
 using BaconBuilder.Model;
-using System.Drawing;
 
 namespace BaconBuilder.View
 {
 	public partial class MainWindow : Form, IMainView
 	{
-		private readonly BaconModel _model;
 		private readonly MainViewController _controller;
+		private readonly BaconModel _model;
 
 		#region Constructors
 
@@ -35,45 +34,71 @@ namespace BaconBuilder.View
 			listViewContents.SelectedIndexChanged += listViewContents_SelectedIndexChanged;
 		}
 
-		void openDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
+		#endregion
+
+		#region IMainView Members
+
+		public string TitleText
 		{
-			throw new NotImplementedException();
+			get { return txtTitle.Text; }
+			set { txtTitle.Text = value; }
 		}
 
-		void openFileToolStripMenuItem_Click(object sender, EventArgs e)
+		public decimal XCoord
 		{
-			throw new NotImplementedException();
+			get { return txtX.Value; }
+			set { txtX.Value = value; }
 		}
 
-		void exitToolStripMenuItem_Click(object sender, EventArgs e)
+		public decimal YCoord
 		{
-			Close();
+			get { return txtY.Value; }
+			set { txtY.Value = value; }
+		}
+
+		public string Contents
+		{
+			get { return textBoxMain.Text; }
+			set { textBoxMain.Text = value; }
+		}
+
+		public ListView.ListViewItemCollection Files
+		{
+			get { return listViewContents.Items; }
+		}
+
+		/// <summary>
+		/// Enable controls if need be. For example, if no files are selected in the list view, disable the remove file button.
+		/// </summary>
+		public void EnableRequiredControls()
+		{
+			btnRemoveFile.Enabled = listViewContents.SelectedItems.Count != 0;
+			btnPreview.Enabled = _model.CurrentFileName != null;
 		}
 
 		#endregion
 
-		#region Dialog Handling
+		private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Close();
+		}
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void btnPreview_Click(object sender, System.EventArgs e)
+		private void btnPreview_Click(object sender, EventArgs e)
 		{
-			MessageBox.Show(_model.CurrentFile);
-			_model.Contents = textBoxMain.Text;
-			Preview preview = new Preview(_model);
+			_model.CurrentContents = textBoxMain.Text;
+			var preview = new Preview(_model);
 
 			preview.ShowDialog();
 		}
 
 		private void btnAudio_Click(object sender, EventArgs e)
 		{
-			
 		}
-
-
 
 		/// <summary>
 		/// 
@@ -83,10 +108,10 @@ namespace BaconBuilder.View
 		private void tsbImage_Click(object sender, EventArgs e)
 		{
 			// Stores the current caret position and length of selection.
-			var caretPos = textBoxMain.SelectionStart;
+			int caretPos = textBoxMain.SelectionStart;
 			//int selectionLength = textBoxMain.SelectionLength;
 
-			ImageSelectionDialog dialog = new ImageSelectionDialog(_model);
+			var dialog = new ImageSelectionDialog(_model);
 			if (dialog.ShowDialog() != DialogResult.Cancel)
 			{
 				textBoxMain.SelectionStart = caretPos;
@@ -101,17 +126,15 @@ namespace BaconBuilder.View
 		/// <param name="e"></param>
 		private void btnMapPreview_Click(object sender, EventArgs e)
 		{
-			throw new NotImplementedException("btnMapPreview_Click");
+			//throw new NotImplementedException("btnMapPreview_Click");
 		}
-
-		#endregion
 
 		/// <summary>
 		/// Called when the form is first loaded.
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void MainWindow_Load(object sender, System.EventArgs e)
+		private void MainWindow_Load(object sender, EventArgs e)
 		{
 			_controller.InitialiseListView();
 		}
@@ -129,12 +152,12 @@ namespace BaconBuilder.View
 		/// <param name="e"></param>
 		private void btnRemoveFile_Click(object sender, EventArgs e)
 		{
-			string message = string.Format(@"Are you sure you wish to delete the file ""{0}""?", _model.CurrentFile);
+			string message = string.Format(@"Are you sure you wish to delete the file ""{0}""?", _model.CurrentFileName);
 			if (MessageBox.Show(message, @"Confirm", MessageBoxButtons.OKCancel) == DialogResult.OK)
 			{
 				_controller.RemoveCurrentFile();
 
-				_controller.ReloadDirectory();
+				_controller.RefreshDirectory();
 			}
 		}
 
@@ -144,7 +167,7 @@ namespace BaconBuilder.View
 				txtTitle_FocusLeft(null, e);
 			else if (e.KeyCode == Keys.Escape)
 			{
-				TitleText = _model.CurrentFile;
+				TitleText = _model.CurrentFileName;
 				textBoxMain.Focus();
 			}
 		}
@@ -159,8 +182,7 @@ namespace BaconBuilder.View
 			_controller.ValidateTitle();
 		}
 
-
-		void listViewContents_SelectedIndexChanged(object sender, EventArgs e)
+		private void listViewContents_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			btnRemoveFile.Enabled = ((ListView) sender).SelectedIndices.Count != 0;
 		}
@@ -175,119 +197,82 @@ namespace BaconBuilder.View
 			{
 				if (_controller.ContentsHaveChanged())
 				{
-					_controller.SaveTextToHtml(e.Item.Text, Contents);
+					_controller.SaveTextToHtml(e.Item.Text);
 				}
 			}
 		}
 
 		private void btnPrintPreview_Click(object sender, EventArgs e)
 		{
-
 			printPreviewDialog.Document = printDocument;
 			printPreviewDialog.ShowDialog();
-
 		}
 
-		private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+		private void printDocument1_PrintPage(object sender, PrintPageEventArgs e)
 		{
-			QrCodeGenerator qr = new QrCodeGenerator();
+			var qr = new QrCodeGenerator();
+
 			string text;
-			Image code; //= qr.GenerateCode("Newcode");
-			//e.Graphics.DrawImage(i, 50, 50);
-			Font font = new System.Drawing.Font(Font.FontFamily, 20);
-			SolidBrush brush = new SolidBrush(Color.Black);
-			Rectangle layoutRectangle;// = new Rectangle(500, 100, 500, 100);
-			//e.Graphics.DrawString("Newcode",font,brush,layoutRectangle);
+			Image code;
+			var font = new Font(Font.FontFamily, 20);
+			var fontColor = new SolidBrush(Color.Black); // For text
+			Rectangle layoutRectangle;
 
 			int j = 1;
-
-			for (int i = 0; i < listViewContents.Items.Count; i++)
+			for (int i = 0; i < Files.Count; i++)
 			{
-				text = listViewContents.Items[i].Text;
+				text = Files[i].Text;
 				//code per page counter
-				if (j > 4) { j = 1;/*create new page*/ break; }
-				code = qr.GenerateCode(text);
-				if (j % 2 == 1)//every second on on left
+				if (j > 4)
 				{
-					layoutRectangle = new Rectangle(400, 180 * j, 500, 100);
-					e.Graphics.DrawImage(code, 100, 150 * j);
+					j = 1; /*create new page*/
+					break;
+				}
+				code = qr.GenerateCode(text);
+				//Even on left. Odd on right
+				if (j%2 == 1)
+				{
+					layoutRectangle = new Rectangle(400, 180*j, 500, 100);
+					e.Graphics.DrawImage(code, 100, 150*j);
 				}
 				else
-				{//others on right
-					layoutRectangle = new Rectangle(200, 180 * j, 500, 100);
-					e.Graphics.DrawImage(code, 500, 150 * j);
+				{
+					layoutRectangle = new Rectangle(200, 180*j, 500, 100);
+					e.Graphics.DrawImage(code, 500, 150*j);
 				}
-				e.Graphics.DrawString(text, font, brush, layoutRectangle);
+				e.Graphics.DrawString(text, font, fontColor, layoutRectangle);
 
-				// e.Graphics.DrawImage(code, (j/2) * 300, 100*j);
 				j++;
 			}
 		}
 
-		public string TitleText
+		private void toolStripSync_Click(object sender, EventArgs e)
 		{
-			get { return txtTitle.Text; }
-			set { txtTitle.Text = value; }
+			var ftpDialog = new FtpDialog(new FtpUploader());
+			ftpDialog.ShowDialog();
 		}
 
-		public string XCoord
+		private void MainWindow_Shown(object sender, EventArgs e)
 		{
-			get { return txtX.Text; }
-			set { txtX.Text = value; }
+			var ftpDialog = new FtpDialog(new FtpDownloader(_model));
+			ftpDialog.ShowDialog();
+			_controller.InitialiseListView();
 		}
 
-		public string YCoord
+		private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			get { return txtY.Text; }
-			set { txtY.Text = value; }
+			DialogResult result =
+				MessageBox.Show(
+					@"Would you like to synchronise your content with the distribution server before exiting?",
+					@"Confirm", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3);
+
+			if (result == DialogResult.Yes)
+			{
+				var ftpDialog = new FtpDialog((new FtpUploader()));
+				ftpDialog.ShowDialog();
+			}
+			if (result == DialogResult.Cancel)
+				e.Cancel = true;
 		}
-
-		public string Contents
-		{
-			get { return textBoxMain.Text; }
-			set { textBoxMain.Text = value; }
-		}
-
-		public ListView.ListViewItemCollection Files
-		{
-			get { return listViewContents.Items; }
-		}
-
-		public bool IsRemoveButtonEnabled
-		{
-			get { return btnRemoveFile.Enabled; }
-			set { btnRemoveFile.Enabled = value; }
-		}
-
-        private void toolStripSync_Click(object sender, EventArgs e)
-        {
-            FtpDialog ftpDialog = new FtpDialog(new FtpUploader());
-            ftpDialog.ShowDialog();
-        }
-
-        private void MainWindow_Shown(object sender, EventArgs e)
-        {
-            FtpDialog ftpDialog = new FtpDialog(new FtpDownloader());
-            ftpDialog.ShowDialog();
-            _controller.InitialiseListView();
-        }
-
-        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            DialogResult result =
-                MessageBox.Show(
-                    @"Would you like to synchronise your content with the distribution server before exiting?",
-                    @"Confirm", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3);
-
-            if (result == DialogResult.Yes)
-            {
-                FtpDialog ftpDialog = new FtpDialog((new FtpUploader()));
-                ftpDialog.ShowDialog();
-            }
-            if (result == DialogResult.Cancel)
-                e.Cancel = true;
-        }
 	}
 }
-
-

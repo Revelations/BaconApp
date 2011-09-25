@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using BaconBuilder.Model;
+﻿using BaconBuilder.Model;
 using BaconBuilder.View;
 
 namespace BaconBuilder.Controller
@@ -20,12 +16,12 @@ namespace BaconBuilder.Controller
 
 		public void PreviewPage(string text)
 		{
-			_view.BrowserText(text);
+			_view.SetBrowserText(text);
 		}
 
 		public void PreviewDocument()
 		{
-			_view.BrowserText(_model.CurrentContents);
+			_view.SetBrowserText(_model.CurrentContents);
 		}
 	}
 }

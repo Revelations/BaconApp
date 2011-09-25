@@ -1,6 +1,4 @@
-﻿
-using System.Drawing;
-using System.Text;
+﻿using System.Text;
 
 namespace BaconBuilder.Model
 {
@@ -39,15 +37,49 @@ namespace BaconBuilder.Model
             InitialiseDictionary();
         }
 
-        /// <summary>
-        /// TODO: Jordan is working on this.
-        /// </summary>
-        /// <param name="p"></param>
-        public void InsertXY(Point p)
+		public string GenerateContent(string bodyContent)
+		{
+			System.Console.WriteLine(@"Creating full HTML");
+			var builder = new StringBuilder();
+
+			builder.Append(@"<!DOCTYPE HTML>").Append(@"<html>")
+				.Append(@"<head>")
+				.Append(@"<link href=""style.css"" rel=""stylesheet"" />")
+				.Append(@"<title>")
+				// Insert title here if need be.
+				.Append(@"</title>")
+				.AppendFormat(@"<!-- x = {0} -->", Location.X)
+				.AppendFormat(@"<!-- y = {0} -->", Location.Y)
+				.Append(@"</head>")
+				.Append(@"<body>")
+				.Append(base.Parse(bodyContent))
+				.Append(@"</body>")
+				.Append(@"</html>");
+
+			return builder.ToString();
+			
+		}
+
+        public override string Parse(string bodyContent)
         {
-            StringBuilder builder = new StringBuilder();
-            builder.Append(string.Format("<!-- x = {0} -->", p.X));
-            builder.Append(string.Format("<!-- y = {0} -->", p.Y));
+        	System.Console.WriteLine(@"Creating full HTML");
+			var builder = new StringBuilder();
+
+			builder.Append(@"<!DOCTYPE HTML>").Append(@"<html>")
+				.Append(@"<head>")
+				.Append(@"<link href=""style.css"" rel=""stylesheet"" />")
+				.Append(@"<title>")
+				// Insert title here if need be.
+				.Append(@"</title>")
+				.AppendFormat(@"<!-- x = {0} -->", Location.X)
+				.AppendFormat(@"<!-- y = {0} -->", Location.Y)
+				.Append(@"</head>")
+				.Append(@"<body>")
+				.Append(base.Parse(bodyContent))
+				.Append(@"</body>")
+				.Append(@"</html>");
+
+            return builder.ToString();
         }
     }
 }
