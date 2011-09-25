@@ -119,16 +119,18 @@ namespace BaconBuilder.Controller
 			return HtmlToText.Parse(_model.CurrentContents);
 		}
 
-		/// <summary>
-		/// Gets the html parsed verision of plain text content and saves it to a file.
-		/// </summary>
-		/// <param name="filename">The filename of the file to save to.</param>
-		/// <param name="text">The input string to parse and write to file.</param>
-		public void SaveTextToHtml(string filename, string text)
+	    /// <summary>
+	    /// Gets the html parsed verision of plain text content and saves it to a file.
+	    /// </summary>
+	    /// <param name="filename">The filename of the file to save to.</param>
+	    public void SaveTextToHtml(string filename)
 		{
 			Console.WriteLine(@"Saving to {0}", filename);
 
-			string htmlContent = TextToHtml.Parse(text);
+		    TextToHtml.X = Convert.ToInt32(_view.XCoord);
+            TextToHtml.Y = Convert.ToInt32(_view.YCoord);
+
+			string htmlContent = TextToHtml.Parse(_view.Contents);
 			File.WriteAllText(HtmlDirectory + filename, htmlContent);
 		}
 

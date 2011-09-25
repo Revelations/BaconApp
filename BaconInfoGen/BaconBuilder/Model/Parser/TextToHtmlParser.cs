@@ -41,32 +41,48 @@ namespace BaconBuilder.Model
             InitialiseDictionary();
         }
 
-        public string Parse2(string input)
+        public override string Parse(string bodyContent)
         {
-            string doc = Resources.Blank;
+            string result = Resources.Blank;
 
-            doc = InsertXY(Location, doc);
+            result = InsertXY(result, Location);
 
-            return base.Parse(doc);
+            result = InsertBody(result, base.Parse(bodyContent));
+
+            return result;
         }
 
 	    /// <summary>
 	    /// TODO: Jordan is working on this.
 	    /// </summary>
-	    /// <param name="p"></param>
 	    /// <param name="input"></param>
-	    public string InsertXY(Point p, string input)
+	    /// <param name="p"></param>
+	    public string InsertXY(string input, Point p)
         {
             StringBuilder builder = new StringBuilder();
 
             int i = input.IndexOf("</title>") + "</title>".Length;
 
             builder.Append(input.Substring(0, i));
-            //builder.AppendLine();
+
             builder.Append(string.Format(@"<!-- x = {0} -->", p.X));
-            //builder.AppendLine();
+
             builder.Append(string.Format(@"<!-- y = {0} -->", p.Y));
-            //builder.AppendLine();
+
+            builder.Append(input.Substring(i, input.Length - i));
+
+            return builder.ToString();
+        }
+
+        public string InsertBody(string input, string bodyContent)
+        {
+            StringBuilder builder = new StringBuilder();
+
+            int i = input.IndexOf("<body>") + "<body>".Length;
+
+            builder.Append(input.Substring(0, i));
+
+            builder.Append(bodyContent);
 
             builder.Append(input.Substring(i, input.Length - i));
 

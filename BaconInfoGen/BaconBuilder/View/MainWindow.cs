@@ -175,7 +175,7 @@ namespace BaconBuilder.View
 			{
 				if (_controller.ContentsHaveChanged())
 				{
-					_controller.SaveTextToHtml(e.Item.Text, Contents);
+					_controller.SaveTextToHtml(e.Item.Text);
 				}
 			}
 		}
