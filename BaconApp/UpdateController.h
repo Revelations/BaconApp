@@ -10,10 +10,11 @@
 
 
 @interface UpdateController : UIViewController {
-    
+    IBOutlet UILabel *firstLabel;
+    IBOutlet UILabel *secondLabel;
 }
 
--(IBAction)Update;
--(IBAction)NoUpdate;
+-(IBAction)Update:(id)sender;
+-(IBAction)NoUpdate:(id)sender;
 
 @end

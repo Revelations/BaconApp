@@ -38,6 +38,8 @@
 		17A5A807140E01F7009BB46E /* InterpreterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5A7FE140DF20F009BB46E /* InterpreterTest.m */; };
 		17BBA94F1412FF2C00D0BE9D /* Web in Resources */ = {isa = PBXBuildFile; fileRef = 17BBA94E1412FF2C00D0BE9D /* Web */; };
 		7D166857142EBD8700D5666C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D166856142EBD8700D5666C /* CFNetwork.framework */; };
+		7D1668A0142F46AD00D5666C /* FTPDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D16689E142F46AD00D5666C /* FTPDirectory.m */; };
+		7D1668A1142F46AD00D5666C /* FTPFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D16689F142F46AD00D5666C /* FTPFile.m */; };
 		7DB80438142CEEC6002A23AA /* EntryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DB80437142CEEC6002A23AA /* EntryView.xib */; };
 		7DCB6CB7142E1649002DA807 /* UpdateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DCB6CB5142E1649002DA807 /* UpdateController.m */; };
 		7DCB6CB8142E1649002DA807 /* UpdateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DCB6CB6142E1649002DA807 /* UpdateView.xib */; };
@@ -123,6 +125,10 @@
 		17A5A7FE140DF20F009BB46E /* InterpreterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterpreterTest.m; sourceTree = "<group>"; };
 		17BBA94E1412FF2C00D0BE9D /* Web */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Web; sourceTree = "<group>"; };
 		7D166856142EBD8700D5666C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		7D16689C142F46AD00D5666C /* FTPDirectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPDirectory.h; sourceTree = "<group>"; };
+		7D16689D142F46AD00D5666C /* FTPFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPFile.h; sourceTree = "<group>"; };
+		7D16689E142F46AD00D5666C /* FTPDirectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPDirectory.m; sourceTree = "<group>"; };
+		7D16689F142F46AD00D5666C /* FTPFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPFile.m; sourceTree = "<group>"; };
 		7DB80437142CEEC6002A23AA /* EntryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EntryView.xib; sourceTree = "<group>"; };
 		7DCB6CB4142E1649002DA807 /* UpdateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateController.h; sourceTree = "<group>"; };
 		7DCB6CB5142E1649002DA807 /* UpdateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateController.m; sourceTree = "<group>"; };
@@ -341,6 +347,10 @@
 		7F48B9321413C8F20001546A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7D16689C142F46AD00D5666C /* FTPDirectory.h */,
+				7D16689D142F46AD00D5666C /* FTPFile.h */,
+				7D16689E142F46AD00D5666C /* FTPDirectory.m */,
+				7D16689F142F46AD00D5666C /* FTPFile.m */,
 				17A5A7F4140DF183009BB46E /* Interpreter.h */,
 				17A5A7F5140DF183009BB46E /* Interpreter.m */,
 				17A14BBE14123A9000D4192C /* HistoryItem.h */,
@@ -495,6 +505,8 @@
 				D340E51B1415F88F00A2370F /* BaconAppDelegate.m in Sources */,
 				D340519E14164082008A82D7 /* DataModel.m in Sources */,
 				7DCB6CB7142E1649002DA807 /* UpdateController.m in Sources */,
+				7D1668A0142F46AD00D5666C /* FTPDirectory.m in Sources */,
+				7D1668A1142F46AD00D5666C /* FTPFile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

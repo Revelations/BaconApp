@@ -9,6 +9,7 @@
 #import "ScannerViewController.h"
 #import "Interpreter.h"
 #import "BaconAppDelegate.h"
+#import "UpdateController.h"
 
 @implementation ScannerViewController
 
@@ -85,12 +86,20 @@
 }
 */
 
-/*
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
+    BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
+    if(!appDelegate.update){
+        UpdateController *update = [[UpdateController alloc] initWithNibName:nil bundle:nil];
+        update.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentModalViewController:update animated:YES];
+        [update release];
+    }
     [super viewDidLoad];
+    
 }
-*/
+
 
 /*
 // Override to allow orientations other than the default portrait orientation.

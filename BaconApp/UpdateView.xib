@@ -46,7 +46,7 @@
 					<object class="IBUIButton" id="402563168">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{19, 354}, {115.531, 44.0898}}</string>
+						<string key="NSFrame">{{0, 20}, {116, 44}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView" ref="454152943"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -76,7 +76,7 @@
 					<object class="IBUIButton" id="454152943">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{153, 354}, {101.422, 43.2383}}</string>
+						<string key="NSFrameSize">{101.422, 43.2383}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -96,7 +96,7 @@
 					<object class="IBUILabel" id="346004259">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{12, 9.00001}, {306.703, 88.0547}}</string>
+						<string key="NSFrameSize">{306.703, 88.0547}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView" ref="685469341"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -163,6 +163,40 @@
 					</object>
 					<int key="connectionID">3</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">firstLabel</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="346004259"/>
+					</object>
+					<int key="connectionID">8</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">secondLabel</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="685469341"/>
+					</object>
+					<int key="connectionID">9</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">NoUpdate:</string>
+						<reference key="source" ref="454152943"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">10</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">Update:</string>
+						<reference key="source" ref="402563168"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">11</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -197,24 +231,28 @@
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">4</int>
-						<reference key="object" ref="402563168"/>
+						<int key="objectID">7</int>
+						<reference key="object" ref="685469341"/>
 						<reference key="parent" ref="191373211"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">5</int>
-						<reference key="object" ref="454152943"/>
-						<reference key="parent" ref="191373211"/>
+						<string key="objectName">secondLabel</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">6</int>
 						<reference key="object" ref="346004259"/>
 						<reference key="parent" ref="191373211"/>
+						<string key="objectName">firstLabel</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">7</int>
-						<reference key="object" ref="685469341"/>
+						<int key="objectID">5</int>
+						<reference key="object" ref="454152943"/>
 						<reference key="parent" ref="191373211"/>
+						<string key="objectName">noButton</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">4</int>
+						<reference key="object" ref="402563168"/>
+						<reference key="parent" ref="191373211"/>
+						<string key="objectName">yesButton</string>
 					</object>
 				</object>
 			</object>
@@ -255,7 +293,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">7</int>
+			<int key="maxID">12</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>

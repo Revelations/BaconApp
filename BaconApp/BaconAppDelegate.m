@@ -27,12 +27,13 @@ NSString * const WEB_DIRECTORY = @"Web";
 @synthesize tabBarController;
 @synthesize model;
 @synthesize x, y, html;
+@synthesize update;
 
 #pragma mark -
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
-    
+    update = NO;
     // Override point for customization after application launch.
     self.window.rootViewController = self.tabBarController;
 	
