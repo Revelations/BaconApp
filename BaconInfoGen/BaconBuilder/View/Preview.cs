@@ -38,11 +38,17 @@ namespace BaconBuilder.View
 			}
 		}
 
+		public void SetBrowserUrl(Uri uri)
+		{
+			browser.Url = uri;
+		}
+
 		#endregion
 
 		private void browser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
 		{
 			_controller.PreviewDocument();
+			browser.DocumentCompleted -= browser_DocumentCompleted;
 		}
 
 		private void btnClose_Click(object sender, EventArgs e)

@@ -15,6 +15,9 @@ namespace BaconBuilder.Model
 		private readonly Dictionary<string, string> _fileContents = new Dictionary<string, string>();
 		private DirectoryInfo _directory = new DirectoryInfo(HtmlDirectory);
 
+		private HtmlToTextParser htmltextparser = new HtmlToTextParser();
+		private TextToHtmlParser texthtmlparser = new TextToHtmlParser();
+
 	    private string _imageUrl;
 
 	    /// <summary>
@@ -75,7 +78,7 @@ namespace BaconBuilder.Model
 		/// <param name="fileName">The filename of the file to save.</param>
 		public void SaveFile(string fileName)
 		{
-			File.WriteAllText(HtmlDirectory + fileName, CurrentContents);
+			File.WriteAllText(HtmlDirectory + fileName, CurrentParsedContents);
 		}
 
 		/// <summary>
@@ -124,6 +127,25 @@ namespace BaconBuilder.Model
 			get { return _fileContents[CurrentFileNameWithExtension]; }
 			set { _fileContents[CurrentFileNameWithExtension] = value; }
 		}
+
+		public string CurrentParsedContents
+		{
+			get
+			{
+				texthtmlparser.X = X;
+				texthtmlparser.Y = Y;
+				string html = texthtmlparser.Parse(CurrentContents);
+				return html;
+			}
+		}
+
+		public Uri GetCurrentFileUri()
+		{
+			return new Uri(HtmlDirectory + CurrentFileNameWithExtension);
+		}
+
+		public int X { get; set; }
+		public int Y { get; set; }
 
 		public string AudioUrl { get; set; }
 

@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace BaconBuilder.View
 {
@@ -6,5 +7,7 @@ namespace BaconBuilder.View
 	{
 		Image QrCodeImage { get; set; }
 		void SetBrowserText(string text);
+
+		void SetBrowserUrl(Uri p);
 	}
 }

@@ -66,10 +66,10 @@ namespace BaconBuilder.View
 			this.btnPrintPreview = new System.Windows.Forms.Button();
 			this.toolContents = new System.Windows.Forms.ToolStrip();
 			this.tsbImage = new System.Windows.Forms.ToolStripButton();
+			this.tsbAudio = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
 			this.tsbBold = new System.Windows.Forms.ToolStripButton();
 			this.tsbItalics = new System.Windows.Forms.ToolStripButton();
-			this.tsbAudio = new System.Windows.Forms.ToolStripButton();
 			this.splitter3 = new System.Windows.Forms.Splitter();
 			this.tlpDataFields = new System.Windows.Forms.TableLayoutPanel();
 			this.btnMapPreview = new System.Windows.Forms.Button();
@@ -397,6 +397,14 @@ namespace BaconBuilder.View
 			this.tsbImage.Size = new System.Drawing.Size(60, 22);
 			this.tsbImage.Text = "Image";
 			// 
+			// tsbAudio
+			// 
+			this.tsbAudio.Image = ((System.Drawing.Image)(resources.GetObject("tsbAudio.Image")));
+			this.tsbAudio.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.tsbAudio.Name = "tsbAudio";
+			this.tsbAudio.Size = new System.Drawing.Size(59, 22);
+			this.tsbAudio.Text = "Audio";
+			// 
 			// toolStripSeparator3
 			// 
 			this.toolStripSeparator3.Name = "toolStripSeparator3";
@@ -415,14 +423,6 @@ namespace BaconBuilder.View
 			this.tsbItalics.Name = "tsbItalics";
 			this.tsbItalics.Size = new System.Drawing.Size(41, 22);
 			this.tsbItalics.Text = "Italics";
-			// 
-			// tsbAudio
-			// 
-			this.tsbAudio.Image = ((System.Drawing.Image)(resources.GetObject("tsbAudio.Image")));
-			this.tsbAudio.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.tsbAudio.Name = "tsbAudio";
-			this.tsbAudio.Size = new System.Drawing.Size(59, 22);
-			this.tsbAudio.Text = "Audio";
 			// 
 			// splitter3
 			// 
