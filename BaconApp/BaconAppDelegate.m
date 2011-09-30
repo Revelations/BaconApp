@@ -30,6 +30,7 @@ NSString * const WEB_DIRECTORY = @"Web";
 @synthesize model;
 @synthesize x, y, html;
 @synthesize update;
+@synthesize currentView = _currentView;
 
 #pragma mark -
 #pragma mark Application lifecycle

@@ -1,33 +1,31 @@
+//
+//  UpdateController.m
+//  BaconApp
+//
+//  Created by Donovan Hoffman on 1/10/11.
+//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//
+
 #import "UpdateController.h"
-#import <CFNetwork/CFNetwork.h>
-#import "BaconAppDelegate.h"
-#import "FTPUpdater.h"
-#import "FTPDirectory.h"
-#import "FTPFile.h"
+#import "Update.h"
 
 @implementation UpdateController
-@synthesize textInfo;
 
-NSOutputStream * _networkStreamO;
-NSInputStream * _networkStreamI;
-NSOutputStream *  fileStream;
 
 -(IBAction)Update:(id)sender{
-	FTPDirectory *ftpDir = [[FTPDirectory alloc] init];//alloca(sizeof(FTPDirectory));
+    Update *currentFileRequest = [[Update alloc] init];
+    [currentFileRequest getFile:@"http://revelations.webhop.org:81/kiwi.html"];
+	/*FTPDirectory *ftpDir = [[FTPDirectory alloc] init];//alloca(sizeof(FTPDirectory));
 	FTPFile *ftpFile = [[FTPFile alloc] init];
 	NSLog(@"hello jello");
-
+    
 	[ftpDir startReceive:@"ftp://revelations.webhop.org"];
 	//[ftpFile DownloadFile:@"ftp://reveleations.webhop.org/New File.html" :@"~test.txt"];	
 	NSLog(@"file at 0 is : %@ " ,ftpDir.listData[0]);
 	NSLog(@"hello jello");
 	
-	textInfo.text = @"Updating..........";
-}
--(IBAction)NoUpdate:(id)sender{
-	BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
-    appDelegate.update = YES;
-    [self dismissModalViewControllerAnimated:YES];
+	textInfo.text = @"Updating..........";*/
+    
 }
 
 
@@ -36,15 +34,12 @@ NSOutputStream *  fileStream;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-		NSLog(@"Programmatic is the way to go? Will I ever be called?");
     }
     return self;
 }
 
 - (void)dealloc
 {
-    [_networkStreamI release];
-    [_networkStreamO release];
     [super dealloc];
 }
 
@@ -56,13 +51,11 @@ NSOutputStream *  fileStream;
     // Release any cached data, images, etc that aren't in use.
 }
 
+#pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
-	NSLog(@"Update view did load2");
-	
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -78,12 +71,5 @@ NSOutputStream *  fileStream;
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
-
-
-
-
-
-
-
 
 @end

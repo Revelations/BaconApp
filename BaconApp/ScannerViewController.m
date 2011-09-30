@@ -93,15 +93,19 @@
     [super viewDidLoad];
 	
 	BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
+    UpdateController *updateController = [[UpdateController alloc] initWithNibName:nil bundle:nil];
+    [[UIApplication sharedApplication].keyWindow.rootViewController
+     presentModalViewController:updateController animated:YES];
+    [updateController release];
     // /*
-	if(!appDelegate.update){
+	/*if(!appDelegate.update){
 		NSLog(@"if(!appDelegate.update)");
 		        UpdateController *updateController = [[UpdateController alloc] initWithNibName:nil bundle:nil];
 		 //updateController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 		 //[self.tabBarController presentModalViewController:update1 animated:YES];
 		 [[UIApplication sharedApplication].keyWindow.rootViewController
 		  presentModalViewController:updateController animated:YES];
-		 [updateController release];
+		 [updateController release];*/
 		
         //UpdateController *updateController = [[UpdateController alloc] initWithNibNamed:nil bundle:nil];
 		//[self.tabBarController presentModalViewController:updateController animated:YES];
@@ -115,7 +119,7 @@
 	[myView view]
 	[[self.view addSubview:[myView view]];
 	[myView release];
-*/}
+}*/
 
 
 /*

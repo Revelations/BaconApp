@@ -31,13 +31,14 @@ extern NSString * const WEB_DIRECTORY;
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
+@property (nonatomic, retain) IBOutlet UIView *currentView;
+//@property (nonatomic, retain) IBOutlet UpdateController *tempTestView;
 
 @property (nonatomic, retain) DataModel *model;
 @property (readwrite) int x;
 @property (readwrite) int y;
 @property (nonatomic, retain) NSString * html;
 @property (readwrite) BOOL update;// a property to test if the app has already asked to update
-
 
 
 @end
