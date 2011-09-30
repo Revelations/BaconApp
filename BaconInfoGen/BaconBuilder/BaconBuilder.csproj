@@ -102,7 +102,6 @@
     <Compile Include="Model\Ftp\FtpUploader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\AudioSelectionController.cs" />
     <Compile Include="View\FtpDialog.cs">
       <SubType>Form</SubType>
     </Compile>

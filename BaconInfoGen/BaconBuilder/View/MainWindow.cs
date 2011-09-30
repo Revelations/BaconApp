@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
@@ -117,6 +118,7 @@ namespace BaconBuilder.View
 		}
 
 		#endregion
+        
 
 		/// <summary>
 		/// Exit the program.
@@ -280,6 +282,7 @@ namespace BaconBuilder.View
 
 		/// <summary>
 		/// Shows a print preview.
+		/// Russell
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
@@ -290,47 +293,101 @@ namespace BaconBuilder.View
 		}
 
 		/// <summary>
-		/// Print pages. TODO: Handle multipage
+		/// Print pages. TODO: Handle multi-page
+		/// Russell
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		private void printDocument1_PrintPage(object sender, PrintPageEventArgs e)
 		{
-			var qr = new QrCodeGenerator();
-
-			var font = new Font(Font.FontFamily, 20);
-			var fontColor = new SolidBrush(Color.Black); // For text
-
-			int j = 1;
-			for (int i = 0; i < Files.Count; i++)
-			{
-				string text = Files[i].Text;
-				//code per page counter
-				if (j > 4)
-				{
-					j = 1; /*create new page*/
-					break;
-				}
-				Image code = qr.GenerateCode(text);
-				//Even on left. Odd on right
-				Rectangle layoutRectangle;
-				if (j%2 == 1)
-				{
-					layoutRectangle = new Rectangle(400, 180*j, 500, 100);
-					e.Graphics.DrawImage(code, 100, 150*j);
-				}
-				else
-				{
-					layoutRectangle = new Rectangle(200, 180*j, 500, 100);
-					e.Graphics.DrawImage(code, 500, 150*j);
-				}
-				e.Graphics.DrawString(text, font, fontColor, layoutRectangle);
-
-				j++;
-			}
+			 // For text
+           
+            /*[PageSettings: Color=True,
+             * Landscape=False,
+             * Margins=[Margins Left=100 Right=100 Top=100 Bottom=100],
+             * PaperSize=[PaperSize A4 Kind=A4 Height=1169 Width=827],
+             * PaperSource=[PaperSource Default tray Kind=Upper],
+             * PrinterResolution=[PrinterResolution X=300 Y=300]]
+             */
+			
+            ArrangeQrCode(e,100,100);
 		}
+        /// <summary>
+        /// Arranges the qr codes on the page
+        /// Russell
+        /// </summary>
+        /// <param name="e">printeventargs from the print document</param>
+        /// <param name="mx">X margin size</param>
+        /// <param name="my">Y margin size</param>
+	    private void ArrangeQrCode(PrintPageEventArgs e, int mx, int my)
+	    {
+            var qr = new QrCodeGenerator();
+			var font = new Font(Font.FontFamily, 20);
+			var fontColor = new SolidBrush(Color.Black);
 
-		/// <summary>
+	        int j = 1;
+	        //drawing lines for now
+            int pageheight = 1169 - my*2,
+                pagewidth = 827 - mx*2, 
+	            x1 = mx, 
+	            x2 = pagewidth + mx,
+	            
+                y1 = my,
+	            y2 = pageheight + my,
+                y3 = (pageheight / 2) + my,
+                y4 = pageheight / 4 + my,
+                y5 = pageheight - (pageheight / 4) + my;
+            //makes and arraylist for my variables cos i can
+            ArrayList ys = new ArrayList(5);
+            ys.Add(0);
+            ys.Add(y1);
+            ys.Add(y4);
+            ys.Add(y3);
+            ys.Add(y5);
+            //lines drawn
+            e.Graphics.DrawLines(Pens.Black, new[] { new Point(x1, y1), new Point(x1, y2), new Point(x2, y2), new Point(x2, y1), new Point(x1, y1) });//draws the margins in
+           
+            
+	        e.Graphics.DrawLine(Pens.Black, x1, y3, x2, y3);//middleline
+	        e.Graphics.DrawLine(Pens.Black, x1, y4, x2, y4);//topmidline
+	        e.Graphics.DrawLine(Pens.Black, x1, y5, x2, y5);//bottommidline
+	        
+            Rectangle layoutRectangle;
+            float right = 827 - 172 - mx;
+            float right2 = 827/2 + mx;
+	        for (int i = 0; i < Files.Count; i++)
+	        {
+	            float x, xi;
+	            string text = Files[i].Text;
+	            //code per page counter
+	            if (j > 4)
+	            {
+	                j = 1; /*create new page*/
+	                break;
+	            }
+	            Image code = qr.GenerateCode(text);
+	            //Even on left. Odd on right
+	            Console.WriteLine(code.Width);
+	           
+	            if (j%2 == 1)
+	            {
+	                //layoutRectangle = new Rectangle(350, 180*j, 500, 100);
+	                x = mx;
+	                xi = right2;
+	            }
+	            else
+	            {
+	                //layoutRectangle = new Rectangle(250, 180*j, 500, 100);
+	                xi = mx;
+	                x = right;
+	            }
+                e.Graphics.DrawString(text, font, fontColor, new RectangleF(xi, (float)((int)ys[j] + 90),500,100));
+                e.Graphics.DrawImage(code,x,(float)( (int)ys[j] + 34.5));
+	            j++;
+	        }
+	    }
+
+	    /// <summary>
 		/// Synchronise bacon in freezer with the bacon in the butchery.
 		/// </summary>
 		/// <param name="sender"></param>
