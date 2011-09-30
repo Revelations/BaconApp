@@ -1,7 +1,7 @@
 ﻿
 namespace BaconBuilder.View
 {
-	partial class ImageSelectionDialog
+	partial class AudioSelectionDialog
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -34,7 +34,7 @@ namespace BaconBuilder.View
             this.pnlContainer = new System.Windows.Forms.Panel();
             this.tlp = new System.Windows.Forms.TableLayoutPanel();
             this.lblImageLocation = new System.Windows.Forms.Label();
-            this.txtImageURL = new System.Windows.Forms.TextBox();
+            this.txtFileURL = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -64,7 +64,7 @@ namespace BaconBuilder.View
             this.tlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tlp.Controls.Add(this.lblImageLocation, 0, 0);
-            this.tlp.Controls.Add(this.txtImageURL, 1, 0);
+            this.tlp.Controls.Add(this.txtFileURL, 1, 0);
             this.tlp.Controls.Add(this.comboBox1, 1, 1);
             this.tlp.Controls.Add(this.btnBrowse, 2, 0);
             this.tlp.Controls.Add(this.label1, 0, 1);
@@ -89,13 +89,13 @@ namespace BaconBuilder.View
             this.lblImageLocation.Text = "Image Location:";
             this.lblImageLocation.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // txtImageURL
+            // txtFileURL
             // 
-            this.txtImageURL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtImageURL.Location = new System.Drawing.Point(92, 3);
-            this.txtImageURL.Name = "txtImageURL";
-            this.txtImageURL.Size = new System.Drawing.Size(278, 20);
-            this.txtImageURL.TabIndex = 0;
+            this.txtFileURL.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtFileURL.Location = new System.Drawing.Point(92, 3);
+            this.txtFileURL.Name = "txtFileURL";
+            this.txtFileURL.Size = new System.Drawing.Size(278, 20);
+            this.txtFileURL.TabIndex = 0;
             // 
             // comboBox1
             // 
@@ -158,7 +158,7 @@ namespace BaconBuilder.View
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             // 
-            // ImageSelectionDialog
+            // AudioSelectionDialog
             // 
             this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -167,7 +167,7 @@ namespace BaconBuilder.View
             this.ClientSize = new System.Drawing.Size(494, 172);
             this.Controls.Add(this.pnlContainer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "ImageSelectionDialog";
+            this.Name = "AudioSelectionDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select Image";
             this.pnlContainer.ResumeLayout(false);
@@ -184,7 +184,7 @@ namespace BaconBuilder.View
 		private System.Windows.Forms.Panel pnlContainer;
 		private System.Windows.Forms.TableLayoutPanel tlp;
 		private System.Windows.Forms.Label lblImageLocation;
-		private System.Windows.Forms.TextBox txtImageURL;
+		private System.Windows.Forms.TextBox txtFileURL;
 		private System.Windows.Forms.Button btnBrowse;
 		private System.Windows.Forms.FlowLayoutPanel flp;
 		private System.Windows.Forms.Button btnCancel;

@@ -60,12 +60,13 @@ namespace BaconBuilder.View
 			this.statusStrip = new System.Windows.Forms.StatusStrip();
 			this.pnlContentEditor = new System.Windows.Forms.Panel();
 			this.pnlTextEditor = new System.Windows.Forms.Panel();
-			this.textBoxMain = new System.Windows.Forms.TextBox();
+			this.txtBoxMain = new System.Windows.Forms.TextBox();
 			this.flpPreview = new System.Windows.Forms.FlowLayoutPanel();
 			this.btnPreview = new System.Windows.Forms.Button();
 			this.btnPrintPreview = new System.Windows.Forms.Button();
 			this.toolContents = new System.Windows.Forms.ToolStrip();
 			this.tsbImage = new System.Windows.Forms.ToolStripButton();
+			this.tsbAudio = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
 			this.tsbBold = new System.Windows.Forms.ToolStripButton();
 			this.tsbItalics = new System.Windows.Forms.ToolStripButton();
@@ -83,7 +84,6 @@ namespace BaconBuilder.View
 			this.splitter5 = new System.Windows.Forms.Splitter();
 			this.splitter6 = new System.Windows.Forms.Splitter();
 			this.splitter4 = new System.Windows.Forms.Splitter();
-			this.tsbAudio = new System.Windows.Forms.ToolStripButton();
 			this.printDocument = new System.Drawing.Printing.PrintDocument();
 			this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
 			this.menuStrip.SuspendLayout();
@@ -326,7 +326,7 @@ namespace BaconBuilder.View
 			// 
 			// pnlTextEditor
 			// 
-			this.pnlTextEditor.Controls.Add(this.textBoxMain);
+			this.pnlTextEditor.Controls.Add(this.txtBoxMain);
 			this.pnlTextEditor.Controls.Add(this.flpPreview);
 			this.pnlTextEditor.Controls.Add(this.toolContents);
 			this.pnlTextEditor.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -335,14 +335,14 @@ namespace BaconBuilder.View
 			this.pnlTextEditor.Size = new System.Drawing.Size(606, 443);
 			this.pnlTextEditor.TabIndex = 12;
 			// 
-			// textBoxMain
+			// txtBoxMain
 			// 
-			this.textBoxMain.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.textBoxMain.Location = new System.Drawing.Point(0, 25);
-			this.textBoxMain.Multiline = true;
-			this.textBoxMain.Name = "textBoxMain";
-			this.textBoxMain.Size = new System.Drawing.Size(606, 389);
-			this.textBoxMain.TabIndex = 12;
+			this.txtBoxMain.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.txtBoxMain.Location = new System.Drawing.Point(0, 25);
+			this.txtBoxMain.Multiline = true;
+			this.txtBoxMain.Name = "txtBoxMain";
+			this.txtBoxMain.Size = new System.Drawing.Size(606, 389);
+			this.txtBoxMain.TabIndex = 12;
 			// 
 			// flpPreview
 			// 
@@ -379,6 +379,7 @@ namespace BaconBuilder.View
 			// 
 			this.toolContents.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbImage,
+            this.tsbAudio,
             this.toolStripSeparator3,
             this.tsbBold,
             this.tsbItalics});
@@ -395,6 +396,14 @@ namespace BaconBuilder.View
 			this.tsbImage.Name = "tsbImage";
 			this.tsbImage.Size = new System.Drawing.Size(60, 22);
 			this.tsbImage.Text = "Image";
+			// 
+			// tsbAudio
+			// 
+			this.tsbAudio.Image = ((System.Drawing.Image)(resources.GetObject("tsbAudio.Image")));
+			this.tsbAudio.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.tsbAudio.Name = "tsbAudio";
+			this.tsbAudio.Size = new System.Drawing.Size(59, 22);
+			this.tsbAudio.Text = "Audio";
 			// 
 			// toolStripSeparator3
 			// 
@@ -595,14 +604,6 @@ namespace BaconBuilder.View
 			this.splitter4.TabIndex = 10;
 			this.splitter4.TabStop = false;
 			// 
-			// tsbAudio
-			// 
-			this.tsbAudio.Image = ((System.Drawing.Image)(resources.GetObject("tsbAudio.Image")));
-			this.tsbAudio.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.tsbAudio.Name = "tsbAudio";
-			this.tsbAudio.Size = new System.Drawing.Size(54, 22);
-			this.tsbAudio.Text = "Audio";
-			// 
 			// printDocument
 			// 
 			this.printDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
@@ -699,7 +700,7 @@ namespace BaconBuilder.View
 		private Splitter splitter6;
 		private Splitter splitter5;
 		private ToolStripSeparator toolStripSeparator3;
-		private TextBox textBoxMain;
+		private TextBox txtBoxMain;
 		private ListView listViewContents;
 		private ImageList imageList;
 		private TableLayoutPanel tableLayoutPanel1;

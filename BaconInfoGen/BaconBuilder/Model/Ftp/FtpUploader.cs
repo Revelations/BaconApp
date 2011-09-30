@@ -44,12 +44,10 @@ namespace BaconBuilder.Model
             // Set request type to upload.
             ftp.Method = WebRequestMethods.Ftp.UploadFile;
 
-            // Create a streamreader to read the file.
-            StreamReader reader = new StreamReader(HtmlDirectory + fileName);
+            ftp.UseBinary = true;
 
             // Create a byte array and store file data.
-            byte[] contents = Encoding.UTF8.GetBytes(reader.ReadToEnd());
-            reader.Close();
+            byte[] contents = File.ReadAllBytes(HtmlDirectory + fileName);
 
             // Set ftp content length to file length.
             ftp.ContentLength = contents.Length;

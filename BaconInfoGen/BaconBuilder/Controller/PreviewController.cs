@@ -14,6 +14,16 @@ namespace BaconBuilder.Controller
 			_view = view;
 		}
 
+		public void QrCode(string fileName)
+		{
+			_view.QrCodeImage = _model.QrCode(fileName);
+		}
+
+		public void QrCode()
+		{
+			QrCode(_model.CurrentFileName);
+		}
+
 		public void PreviewPage(string text)
 		{
 			_view.SetBrowserText(text);
@@ -21,7 +31,13 @@ namespace BaconBuilder.Controller
 
 		public void PreviewDocument()
 		{
-			_view.SetBrowserText(_model.CurrentContents);
+			_model.SaveFile(_model.CurrentFileNameWithExtension);
+			_view.SetBrowserUrl(_model.GetCurrentFileUri());
+			//_model.SaveFile(_model.CurrentFileNameWithExtension);
+			//_view.SetBrowserText(_model.CurrentParsedContents);
+
+			//_view.SetBrowserUrl(_model.CurrentFileNameWithExtension);
+			
 		}
 	}
 }

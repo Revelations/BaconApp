@@ -1,10 +1,13 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace BaconBuilder.View
 {
 	internal interface IPreviewView
 	{
-		Image QrCode { get; set; }
+		Image QrCodeImage { get; set; }
 		void SetBrowserText(string text);
+
+		void SetBrowserUrl(Uri p);
 	}
 }

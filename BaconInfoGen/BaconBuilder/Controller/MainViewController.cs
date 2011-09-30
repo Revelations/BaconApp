@@ -60,7 +60,7 @@ namespace BaconBuilder.Controller
 			Point coord;
 			try
 			{
-				coord = HtmlToText.ExtractXY(_model.CurrentContents);
+				coord = HtmlToText.ExtractCoords(_model.CurrentContents);
 			}
 			catch (Exception ex)
 			{
@@ -129,25 +129,40 @@ namespace BaconBuilder.Controller
 		/// <returns>String content (plain text) of the file.</returns>
 		public string LoadHtmlToText()
 		{
-			Console.WriteLine(@"Loading from {0}", _model.CurrentFileNameWithExtension);
+			string bacon = _model.CurrentFileNameWithExtension;
+			string cooked = HtmlToText.Parse(_model.CurrentContents);
+			string raw = _model.CurrentContents;
+
+			Console.WriteLine(
+@"Loading bacon ""{0}""
+== raw bacon ==
+{1}
+== cooked bacon ==
+{2}", bacon, raw, cooked);
 			// Return plain text version of the current contents.
-			return HtmlToText.Parse(_model.CurrentContents);
+
+			return cooked;
 		}
 
 		/// <summary>
 		/// Gets the html parsed verision of plain text content and saves it to a file.
 		/// </summary>
-		/// <param name="filename">The filename of the file to save to.</param>
-		public void SaveTextToHtml(string filename)
+		/// <param name="freezer">The freezer to save the bacon to.</param>
+		public void SaveTextToHtml(string freezer)
 		{
+			_model.X = Convert.ToInt32(_view.XCoord); ;
+			_model.Y = Convert.ToInt32(_view.YCoord); ;
 			TextToHtml.X = Convert.ToInt32(_view.XCoord);
 			TextToHtml.Y = Convert.ToInt32(_view.YCoord);
-			string newContents = TextToHtml.GenerateContent(_view.Contents);
+			string cooked = TextToHtml.Parse(_view.Contents);
 
-			Console.WriteLine(@"Saving to file {0} the following content: {1}", filename, newContents);
+			Console.WriteLine(
+@"Saving bacon to ""{0}""
+== cooked ==
+{1}", freezer, cooked);
 
-			_model.CurrentContents = newContents;
-			_model.SaveFile(filename);
+			_model.CurrentContents = cooked;
+			_model.SaveFile(freezer);
 			_model.LoadFiles();
 		}
 

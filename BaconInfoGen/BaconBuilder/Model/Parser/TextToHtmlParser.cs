@@ -16,15 +16,17 @@ namespace BaconBuilder.Model
 		protected override sealed void InitialiseDictionary()
 		{
 			// Replace image pseudo tag with html equivalent.
-			RegexDict.Add(@"<\s*img\s*>\s*([^""\s]*)\s*<\s*/\s*img\s*>", @"<img src=""$1"" />");
-
+			RegexDict.Add(@"<\s*img\s*>\s*([^<>\s]*)\s*<\s*/\s*img\s*>", @"<p><img src=""$1"" /></p>");
 			// Replace audio pseudo tag with html equivalent.
-			RegexDict.Add(@"<\s*audio\s*>\s*([^""\s]*)\s*<\s*/\s*audio\s*>", @"<audio src=""$1"" controls=""controls"" style=""float:left;""></audio>");
+			RegexDict.Add(@"<\s*audio\s*>\s*([^""\s]*)\s*<\s*/\s*audio\s*>", @"<p><audio src=""$1"" controls=""controls"" style=""float:left;""></audio></p>");
 
 			// TODO: Complete set of regex rules here.
-
+            RegexDict.Add("\r\n\r\n", "</p><p>");
 			// TODO: \n\n ==> </p><p>
+            RegexDict.Add("\r\n", "</p><p>");
 			// TODO: First paragraph starts with <p>, last ends with </p>
+            RegexDict.Add("^", "<p>");
+            RegexDict.Add("$", "</p>");
 			// TODO: Begin document with <!DOCTYPE HTML><html>......<body>
 			// TODO: End document with </body></html>
 		}
@@ -39,7 +41,7 @@ namespace BaconBuilder.Model
 
 		public string GenerateContent(string bodyContent)
 		{
-			System.Console.WriteLine(@"Creating full HTML");
+			System.Console.WriteLine(@"generating full html");
 			var builder = new StringBuilder();
 
 			builder.Append(@"<!DOCTYPE HTML>").Append(@"<html>")
@@ -62,7 +64,7 @@ namespace BaconBuilder.Model
 
         public override string Parse(string bodyContent)
         {
-        	System.Console.WriteLine(@"Creating full HTML");
+			System.Console.WriteLine(@"Parsing full html");
 			var builder = new StringBuilder();
 
 			builder.Append(@"<!DOCTYPE HTML>").Append(@"<html>")
@@ -79,7 +81,7 @@ namespace BaconBuilder.Model
 				.Append(@"</body>")
 				.Append(@"</html>");
 
-            return builder.ToString();
+			return builder.ToString();
         }
     }
 }

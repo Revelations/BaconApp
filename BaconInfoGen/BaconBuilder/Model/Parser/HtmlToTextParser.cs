@@ -29,7 +29,7 @@ namespace BaconBuilder.Model
 			
 			RegexDict.Add(@"\s*</*body>\s*", "");
 			// Replace </p><p> with \n\n
-			RegexDict.Add(@"</p>\s*<p>", @"\n\n");
+			RegexDict.Add(@"</p>\s*<p>", "\r\n\r\n");
 			// Remove lone <p> and </p> tags
 			RegexDict.Add(@"(?!</p>)\s*<p>", "");
 			RegexDict.Add(@"</p>\s*(?!<p>)", "");
@@ -40,7 +40,7 @@ namespace BaconBuilder.Model
 			// Replace html audio tag with pseudo tag equivalent. NEEDS A BIT MORE WORK. SEEMS TO WORK!
 			RegexDict.Add(@"<audio (?:.*\s+)*src=""([^""]*)""(?:\s+.*\s*)*>[^<]*</audio>", "<audio>$1</audio>");
 			//RegexDict.Add(@"<\s*audio\s+(?:[\w]+=""[^""]*""\s+)*src\s*=\s*""([^""\s]*)"">[^<]*<\s*/\s*audio\s*>", "<audio>$1</audio>");
-			RegexDict.Add(@"</html>\s*", "");			
+			RegexDict.Add(@"\s*</html>\s*", "");			
 		}
 
 		/// <summary>
@@ -52,17 +52,13 @@ namespace BaconBuilder.Model
 		}
 
 		/// <summary>
-		/// 
+		/// Extracts a new (x,y) from the raw bacon.
 		/// </summary>
 		/// <returns></returns>
-		public Point ExtractXY(string input)
+		public Point ExtractCoords(string input)
 		{
-			Match m = Regex.Match(input, @"<!--\s*[xX]\s*=\s*([0-9]+)\s*-->");
-
-			int x = Convert.ToInt32(m.Groups[1].Value);
-
-			m = Regex.Match(input, @"<!--\s*[yY]\s*=\s*([0-9]+)\s*-->");
-			int y = Convert.ToInt32(m.Groups[1].Value);
+			int x = Convert.ToInt32(Regex.Match(input, @"<!--\s*[xX]\s*=\s*([0-9]+)\s*-->").Groups[1].Value);
+			int y = Convert.ToInt32(Regex.Match(input, @"<!--\s*[yY]\s*=\s*([0-9]+)\s*-->").Groups[1].Value);
 
 			return new Point(x, y);
 		}
