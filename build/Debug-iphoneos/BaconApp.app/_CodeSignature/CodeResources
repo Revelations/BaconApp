@@ -4,9 +4,9 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>Gradient.png</key>
+		<key>EntryView.nib</key>
 		<data>
-		+GJE3wRSLKoo3lylJY2zpu12Qrw=
+		IzWzZLXtDLy/g3aPwbtr0zzLdkw=
 		</data>
 		<key>InfoView.nib</key>
 		<data>
@@ -34,15 +34,35 @@
 		</data>
 		<key>ScannerView.nib</key>
 		<data>
-		1FqWxOo6E3rWFefmhvmPcDSYdJ8=
+		OUM6zpt3HkF45fKd0KBRNoEEkzs=
 		</data>
 		<key>ScannerViewController.nib</key>
 		<data>
 		AA3dm+C6y/95XyRvs5bCyKnVaLE=
 		</data>
+		<key>UpdateController.nib</key>
+		<data>
+		P2cSKKznbCf+QuPpulhUNSHlDxk=
+		</data>
+		<key>UpdateView.nib</key>
+		<data>
+		2Nnv9a+aa+/MNqAHe1WrcF5Zoj0=
+		</data>
+		<key>Web/Map.html</key>
+		<data>
+		T8fWYVxP7POX3JbtPpEZCT5jUXs=
+		</data>
 		<key>Web/Marker.png</key>
 		<data>
 		xEtzCl6C7QQt1AK0Tppzs1Xv+Pc=
+		</data>
+		<key>Web/Menu.html</key>
+		<data>
+		AG4lOmsRm4+BmNguHvn5S0yITTE=
+		</data>
+		<key>Web/VectorMap.svg</key>
+		<data>
+		0ZpZThST9FOKdfwbvxK1eQyphSk=
 		</data>
 		<key>Web/info.html</key>
 		<data>
@@ -64,17 +84,9 @@
 		<data>
 		zVwkHIQ9DcdYAc5T1mY5ShQa9AU=
 		</data>
-		<key>Web/map.html</key>
-		<data>
-		T8fWYVxP7POX3JbtPpEZCT5jUXs=
-		</data>
 		<key>Web/map.png</key>
 		<data>
 		qltkumQA1MdJ4Zdpy8QcKa0IBhM=
-		</data>
-		<key>Web/menu.html</key>
-		<data>
-		AG4lOmsRm4+BmNguHvn5S0yITTE=
 		</data>
 		<key>Web/rata.html</key>
 		<data>
@@ -118,7 +130,7 @@
 		</data>
 		<key>en.lproj/MainWindow.nib</key>
 		<data>
-		NQeEMjxBbBoSuwBMX3nndS5u1DY=
+		EedXwIhr4FsDUR5zHCkPgOE51B0=
 		</data>
 		<key>zbar-back.png</key>
 		<data>

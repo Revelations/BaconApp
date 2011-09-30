@@ -12,7 +12,7 @@
 #include <CFNetwork/CFNetwork.h>
 
 
-@interface FTPDirectory : NSObject {
+@interface FTPDirectory : NSObject <NSStreamDelegate> {
 
 }
 
@@ -22,5 +22,14 @@
 @property (nonatomic, retain)   NSInputStream *   networkStream;
 @property (nonatomic, retain)   NSMutableData *   listData;
 @property (nonatomic, retain)   NSMutableArray *  listEntries;
-@property (nonatomic, copy)     NSString *        status;
+
+- (void)startReceive:(NSString *) address;
+
+
+- (void)_addListEntries:(NSArray *)newEntries;
+
+- (void)_parseListData;
+
+- (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode;
+
 @end

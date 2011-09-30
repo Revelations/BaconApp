@@ -11,7 +11,7 @@
 #include <sys/dirent.h>
 #include <CFNetwork/CFNetwork.h>
 
-@interface FTPFile : NSObject {
+@interface FTPFile : NSObject <NSStreamDelegate> {
     
 }
 @property (nonatomic, retain) NSOutputStream *  networkStreamOutput;

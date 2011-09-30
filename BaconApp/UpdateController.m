@@ -1,27 +1,31 @@
-//
-//  UpdateController.m
-//  BaconApp
-//
-//  Created by Donovan Hoffman on 25/09/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
-
 #import "UpdateController.h"
 #import <CFNetwork/CFNetwork.h>
 #import "BaconAppDelegate.h"
+#import "FTPUpdater.h"
+#import "FTPDirectory.h"
+#import "FTPFile.h"
 
 @implementation UpdateController
+@synthesize textInfo;
 
 NSOutputStream * _networkStreamO;
 NSInputStream * _networkStreamI;
 NSOutputStream *  fileStream;
 
 -(IBAction)Update:(id)sender{
-    firstLabel.text = @"";
-    secondLabel.text = @"Updating.........................";
+	FTPDirectory *ftpDir = [[FTPDirectory alloc] init];//alloca(sizeof(FTPDirectory));
+	FTPFile *ftpFile = [[FTPFile alloc] init];
+	NSLog(@"hello jello");
+
+	[ftpDir startReceive:@"ftp://revelations.webhop.org"];
+	//[ftpFile DownloadFile:@"ftp://reveleations.webhop.org/New File.html" :@"~test.txt"];	
+	NSLog(@"file at 0 is : %@ " ,ftpDir.listData[0]);
+	NSLog(@"hello jello");
+	
+	textInfo.text = @"Updating..........";
 }
 -(IBAction)NoUpdate:(id)sender{
-     BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
+	BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.update = YES;
     [self dismissModalViewControllerAnimated:YES];
 }
@@ -32,6 +36,7 @@ NSOutputStream *  fileStream;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+		NSLog(@"Programmatic is the way to go? Will I ever be called?");
     }
     return self;
 }
@@ -55,6 +60,9 @@ NSOutputStream *  fileStream;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	
+	NSLog(@"Update view did load2");
+	
     // Do any additional setup after loading the view from its nib.
 }
 

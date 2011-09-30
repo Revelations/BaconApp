@@ -10,6 +10,8 @@
 #import "InfoViewController.h"
 #import "MapViewController.h"
 #import "DataModel.h"
+#import "UpdateController.h"
+
 
 // Name (without extension) of the main menu html page, loaded on app start.
 NSString * const MENU_HTML_FILE = @"menu";
@@ -32,13 +34,17 @@ NSString * const WEB_DIRECTORY = @"Web";
 #pragma mark -
 #pragma mark Application lifecycle
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
     update = NO;
+	
+	NSLog(@"Hello World, MainView did finish launching");
+	
     // Override point for customization after application launch.
     self.window.rootViewController = self.tabBarController;
 	
     [self.window makeKeyAndVisible];
-    
+	
     return YES;
 }
 

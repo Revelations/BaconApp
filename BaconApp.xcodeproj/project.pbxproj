@@ -41,8 +41,6 @@
 		7D1668A0142F46AD00D5666C /* FTPDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D16689E142F46AD00D5666C /* FTPDirectory.m */; };
 		7D1668A1142F46AD00D5666C /* FTPFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D16689F142F46AD00D5666C /* FTPFile.m */; };
 		7DB80438142CEEC6002A23AA /* EntryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DB80437142CEEC6002A23AA /* EntryView.xib */; };
-		7DCB6CB7142E1649002DA807 /* UpdateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DCB6CB5142E1649002DA807 /* UpdateController.m */; };
-		7DCB6CB8142E1649002DA807 /* UpdateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DCB6CB6142E1649002DA807 /* UpdateView.xib */; };
 		D340519E14164082008A82D7 /* DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D340519D14164082008A82D7 /* DataModel.m */; };
 		D340E4FF1415F4D300A2370F /* ScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D340E4FD1415F4D300A2370F /* ScannerViewController.m */; };
 		D340E5001415F4D300A2370F /* ScannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D340E4FE1415F4D300A2370F /* ScannerView.xib */; };
@@ -51,6 +49,8 @@
 		D340E5091415F50400A2370F /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D340E5071415F50400A2370F /* InfoViewController.m */; };
 		D340E50A1415F50400A2370F /* InfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D340E5081415F50400A2370F /* InfoView.xib */; };
 		D340E51B1415F88F00A2370F /* BaconAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D340E51A1415F88F00A2370F /* BaconAppDelegate.m */; };
+		D372D963142F6C0B003B3324 /* UpdateController.m in Sources */ = {isa = PBXBuildFile; fileRef = D372D961142F6C0B003B3324 /* UpdateController.m */; };
+		D372D964142F6C0B003B3324 /* UpdateController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D372D962142F6C0B003B3324 /* UpdateController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,9 +130,6 @@
 		7D16689E142F46AD00D5666C /* FTPDirectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPDirectory.m; sourceTree = "<group>"; };
 		7D16689F142F46AD00D5666C /* FTPFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPFile.m; sourceTree = "<group>"; };
 		7DB80437142CEEC6002A23AA /* EntryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EntryView.xib; sourceTree = "<group>"; };
-		7DCB6CB4142E1649002DA807 /* UpdateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateController.h; sourceTree = "<group>"; };
-		7DCB6CB5142E1649002DA807 /* UpdateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateController.m; sourceTree = "<group>"; };
-		7DCB6CB6142E1649002DA807 /* UpdateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpdateView.xib; sourceTree = "<group>"; };
 		D340519C14164082008A82D7 /* DataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataModel.h; sourceTree = "<group>"; };
 		D340519D14164082008A82D7 /* DataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataModel.m; sourceTree = "<group>"; };
 		D340E4FC1415F4D300A2370F /* ScannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScannerViewController.h; sourceTree = "<group>"; };
@@ -146,6 +143,9 @@
 		D340E5081415F50400A2370F /* InfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoView.xib; sourceTree = "<group>"; };
 		D340E5191415F88F00A2370F /* BaconAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaconAppDelegate.h; sourceTree = "<group>"; };
 		D340E51A1415F88F00A2370F /* BaconAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaconAppDelegate.m; sourceTree = "<group>"; };
+		D372D960142F6C0B003B3324 /* UpdateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateController.h; sourceTree = "<group>"; };
+		D372D961142F6C0B003B3324 /* UpdateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateController.m; sourceTree = "<group>"; };
+		D372D962142F6C0B003B3324 /* UpdateController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UpdateController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -335,7 +335,7 @@
 		7F48B9191413C3370001546A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				7DCB6CB6142E1649002DA807 /* UpdateView.xib */,
+				D372D962142F6C0B003B3324 /* UpdateController.xib */,
 				D340E4FE1415F4D300A2370F /* ScannerView.xib */,
 				D340E5081415F50400A2370F /* InfoView.xib */,
 				D340E5031415F4EE00A2370F /* MapView.xib */,
@@ -348,8 +348,8 @@
 			isa = PBXGroup;
 			children = (
 				7D16689C142F46AD00D5666C /* FTPDirectory.h */,
-				7D16689D142F46AD00D5666C /* FTPFile.h */,
 				7D16689E142F46AD00D5666C /* FTPDirectory.m */,
+				7D16689D142F46AD00D5666C /* FTPFile.h */,
 				7D16689F142F46AD00D5666C /* FTPFile.m */,
 				17A5A7F4140DF183009BB46E /* Interpreter.h */,
 				17A5A7F5140DF183009BB46E /* Interpreter.m */,
@@ -366,8 +366,8 @@
 		7F48B9331413C9010001546A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				7DCB6CB4142E1649002DA807 /* UpdateController.h */,
-				7DCB6CB5142E1649002DA807 /* UpdateController.m */,
+				D372D960142F6C0B003B3324 /* UpdateController.h */,
+				D372D961142F6C0B003B3324 /* UpdateController.m */,
 				17A5A7D0140DEEB4009BB46E /* MainViewController.h */,
 				17A5A7D1140DEEB4009BB46E /* MainViewController.m */,
 				D340E4FC1415F4D300A2370F /* ScannerViewController.h */,
@@ -458,7 +458,7 @@
 				D340E5051415F4EE00A2370F /* MapView.xib in Resources */,
 				D340E50A1415F50400A2370F /* InfoView.xib in Resources */,
 				7DB80438142CEEC6002A23AA /* EntryView.xib in Resources */,
-				7DCB6CB8142E1649002DA807 /* UpdateView.xib in Resources */,
+				D372D964142F6C0B003B3324 /* UpdateController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,9 +504,9 @@
 				D340E5091415F50400A2370F /* InfoViewController.m in Sources */,
 				D340E51B1415F88F00A2370F /* BaconAppDelegate.m in Sources */,
 				D340519E14164082008A82D7 /* DataModel.m in Sources */,
-				7DCB6CB7142E1649002DA807 /* UpdateController.m in Sources */,
 				7D1668A0142F46AD00D5666C /* FTPDirectory.m in Sources */,
 				7D1668A1142F46AD00D5666C /* FTPFile.m in Sources */,
+				D372D963142F6C0B003B3324 /* UpdateController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

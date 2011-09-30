@@ -86,19 +86,36 @@
 }
 */
 
-
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
-    BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
-    if(!appDelegate.update){
-        UpdateController *update = [[UpdateController alloc] initWithNibName:nil bundle:nil];
-        update.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        [self presentModalViewController:update animated:YES];
-        [update release];
-    }
+	NSLog(@"Scanner view did load");
+	
     [super viewDidLoad];
-    
-}
+	
+	BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
+    // /*
+	if(!appDelegate.update){
+		NSLog(@"if(!appDelegate.update)");
+		        UpdateController *updateController = [[UpdateController alloc] initWithNibName:nil bundle:nil];
+		 //updateController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+		 //[self.tabBarController presentModalViewController:update1 animated:YES];
+		 [[UIApplication sharedApplication].keyWindow.rootViewController
+		  presentModalViewController:updateController animated:YES];
+		 [updateController release];
+		
+        //UpdateController *updateController = [[UpdateController alloc] initWithNibNamed:nil bundle:nil];
+		//[self.tabBarController presentModalViewController:updateController animated:YES];
+		//[updateController release];
+    }// */
+	
+	
+	//CGRect myFrame = CGRectMake(0, 0, 320, 50);
+/*	UpdateController *myView = [[UpdateController alloc] initWithNibName:nil bundle:nil];
+	[myView view].backgroundColor = [UIColor blueColor];
+	[myView view]
+	[[self.view addSubview:[myView view]];
+	[myView release];
+*/}
 
 
 /*

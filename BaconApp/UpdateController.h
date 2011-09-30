@@ -1,8 +1,8 @@
-	//
+//
 //  UpdateController.h
 //  BaconApp
 //
-//  Created by Donovan Hoffman on 25/09/11.
+//  Created by Donoan Hoffman on 26/09/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
@@ -10,10 +10,9 @@
 
 
 @interface UpdateController : UIViewController {
-    IBOutlet UILabel *firstLabel;
-    IBOutlet UILabel *secondLabel;
+    IBOutlet UITextView *textInfo;
 }
-
+@property(nonatomic,retain) IBOutlet UITextView *textInfo;
 -(IBAction)Update:(id)sender;
 -(IBAction)NoUpdate:(id)sender;
 

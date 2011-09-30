@@ -12,40 +12,43 @@
 
 @implementation FTPDirectory
 
-@synthesize networkStream   = _networkStream;
-@synthesize listData        = _listData;
-@synthesize listEntries     = _listEntries;
+@synthesize networkStream;
+@synthesize listData;
+@synthesize listEntries;
 
 - (BOOL)isReceiving
 {
     return (self.networkStream != nil);
 }
 
-- (void)_startReceive:(NSString *) address
+- (void)startReceive:(NSString *) address
 // Starts a connection to download the current URL.
 {
-    BOOL                success;
+    //BOOL                success;
+	NSLog(@"start");
     NSURL *             url;
     CFReadStreamRef     ftpStream;
-    
+    NSLog(@"start");
     assert(self.networkStream == nil);      // don't tap receive twice in a row!
     url =  [NSURL URLWithString:address];
     self.listData = [NSMutableData data];
     assert(self.listData != nil);
         
     // Open a CFFTPStream for the URL.
+	NSLog(@"creating stream");
     ftpStream = CFReadStreamCreateWithFTPURL(NULL, (CFURLRef) url);
     assert(ftpStream != NULL);
     self.networkStream = (NSInputStream *) ftpStream;
     
     //gets the stream going
+	 NSLog(@"stream starts");
     self.networkStream.delegate = self;
     [self.networkStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
     [self.networkStream open];
     
     //tidyup
     CFRelease(ftpStream);
-    [self _receiveDidStart];    
+    //[self _receiveDidStart];    
 }
 
 - (void)_addListEntries:(NSArray *)newEntries
@@ -53,6 +56,54 @@
     assert(self.listEntries != nil);
     
     [self.listEntries addObjectsFromArray:newEntries];
+}
+
+- (NSDictionary *)_entryByReencodingNameInEntry:(NSDictionary *)entry encoding:(NSStringEncoding)newEncoding
+// CFFTPCreateParsedResourceListing always interprets the file name as MacRoman, 
+// which is clearly bogus <rdar://problem/7420589>.  This code attempts to fix 
+// that by converting the Unicode name back to MacRoman (to get the original bytes; 
+// this works because there's a lossless round trip between MacRoman and Unicode) 
+// and then reconverting those bytes to Unicode using the encoding provided. 
+{
+    NSDictionary *  result;
+    NSString *      name;
+    NSData *        nameData;
+    NSString *      newName;
+    
+    newName = nil;
+    
+    // Try to get the name, convert it back to MacRoman, and then reconvert it 
+    // with the preferred encoding.
+    
+    name = [entry objectForKey:(id) kCFFTPResourceName];
+    if (name != nil) {
+        assert([name isKindOfClass:[NSString class]]);
+        
+        nameData = [name dataUsingEncoding:NSMacOSRomanStringEncoding];
+        if (nameData != nil) {
+            newName = [[[NSString alloc] initWithData:nameData encoding:newEncoding] autorelease];
+        }
+    }
+    
+    // If the above failed, just return the entry unmodified.  If it succeeded, 
+    // make a copy of the entry and replace the name with the new name that we 
+    // calculated.
+    
+    if (newName == nil) {
+        assert(NO);                 // in the debug builds, if this fails, we should investigate why
+        result = (NSDictionary *) entry;
+    } else {
+        NSMutableDictionary *   newEntry;
+        
+        newEntry = [[entry mutableCopy] autorelease];
+        assert(newEntry != nil);
+        
+        [newEntry setObject:newName forKey:(id) kCFFTPResourceName];
+        
+        result = newEntry;
+    }
+    
+    return result;
 }
 
 - (void)_parseListData
@@ -121,7 +172,7 @@
             break;
         } else if (bytesConsumed < 0) {
             // We totally failed to parse the listing.  Fail.
-            [self _stopReceiveWithStatus:@"Listing parse failed"];
+            NSLog(@"Listing parse failed");
             break;
         }
     } while (YES);
@@ -182,6 +233,7 @@
         } break;
         case NSStreamEventEndEncountered: {
             // ignore
+			NSLog(@"End of stream");
         } break;
         default: {
             assert(NO);
@@ -192,7 +244,8 @@
 {
     NSLog(@"Stopped");
     
-    [self->_listEntries release];
+    [self->listEntries release];
+	
     
     [super dealloc];
 }

@@ -8,6 +8,7 @@
 
 #import "MainViewController.h"
 #import "BaconAppDelegate.h"
+#import "UpdateController.h"
 
 @implementation MainViewController
 
@@ -18,9 +19,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-    scanner = [Scanner new];
+	// Override point for customization after application launch.
+    
+	scanner = [Scanner new];
     interpreter = [Interpreter new];
+	
     
 	current = [[[HistoryItem alloc] initWithHtmlFile:MENU_HTML_FILE x:0 y:0] autorelease];
     
