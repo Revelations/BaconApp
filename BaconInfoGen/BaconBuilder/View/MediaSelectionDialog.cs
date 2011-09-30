@@ -6,44 +6,69 @@ using BaconBuilder.Model;
 
 namespace BaconBuilder.View
 {
-	public partial class ImageSelectionDialog : Form, IMediaSelectionDialog
+    public enum ContentType
+    {
+        Image,
+        Audio
+    }
+
+	public partial class MediaSelectionDialog : Form, IMediaSelectionDialog
 	{
 		#region Fields, properties and constants
 
-		private const string Filter = "All Image Files|*.bmp;*.gif;*.jpe;*.jpeg;*.jpg;*.png|Bitmap|*.bmp|GIF|*.gif|JPEG|*.jpe;*.jpeg;*.jpg|PNG|*.png";
+		private string _filter;
 
 		private readonly BaconModel _model;
-		private OpenFileDialog _openImageDialog;
+	    private readonly ContentType _contentType;
+	    private OpenFileDialog _openImageDialog;
 
 		#endregion
 
-		/// <summary>
-		/// Constructor that accepts a model.
-		/// </summary>
-		/// <param name="model"></param>
-		public ImageSelectionDialog(BaconModel model)
+	    /// <summary>
+	    /// Constructor that accepts a model.
+	    /// </summary>
+	    /// <param name="model"></param>
+	    /// <param name="contentType"></param>
+	    public MediaSelectionDialog(BaconModel model, ContentType contentType)
 		{
 			InitializeComponent();
 
 			_model = model;
+	        _contentType = contentType;
 
-			BuildOpenImageDialog();
+            InitBasedOnContentType();
 
+	        BuildOpenImageDialog();
 			BuildBrowseButton();
 			BuildImageUrlTextbox();
 			BuildOptions();
 			BuildOkButton();
 			BuildCancelButton();
+
+
 		}
+
+        private void InitBasedOnContentType()
+        {
+            lblImageLocation.Text = _contentType + @" Location:";
+            Text = @"Select " + _contentType;
+
+            comboBox1.Items.AddRange(new[]
+			                         	{
+			                         		"Insert " + _contentType.ToString().ToLower() + " before selction",
+			                         		"Insert " + _contentType.ToString().ToLower() + " after selction",
+			                         		"Replace selection with " + _contentType.ToString().ToLower()
+			                         	});
+
+            if(_contentType == ContentType.Image)
+                _filter =
+                    "All Image Files|*.bmp;*.gif;*.jpe;*.jpeg;*.jpg;*.png|Bitmap|*.bmp|GIF|*.gif|JPEG|*.jpe;*.jpeg;*.jpg|PNG|*.png";
+            else
+                _filter = "All Audio Files|*.mp3;*.ogg|MP3|*.mp3|Ogg|*.ogg";
+        }
 
 		private void BuildOptions()
 		{
-			comboBox1.Items.AddRange(new[]
-			                         	{
-			                         		"Insert image before selction",
-			                         		"Insert image after selction",
-			                         		"Replace selection with image"
-			                         	});
 			comboBox1.SelectedIndex = 2;
 		}
 
@@ -53,7 +78,7 @@ namespace BaconBuilder.View
 		private void BuildOpenImageDialog()
 		{
 			_openImageDialog = new OpenFileDialog();
-			_openImageDialog.Filter = Filter;
+			_openImageDialog.Filter = _filter;
 		}
 
 		/// <summary>

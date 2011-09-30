@@ -153,7 +153,7 @@ namespace BaconBuilder.View
 			int caretPos = txtBoxMain.SelectionStart;
 			//int selectionLength = txtBoxMain.SelectionLength;
 
-			var dialog = new AudioSelectionDialog(_model);
+			var dialog = new MediaSelectionDialog(_model, ContentType.Audio);
 			if (dialog.ShowDialog() != DialogResult.Cancel)
 			{
 				txtBoxMain.SelectionStart = caretPos;
@@ -172,7 +172,7 @@ namespace BaconBuilder.View
 			int caretPos = txtBoxMain.SelectionStart;
 			//int selectionLength = txtBoxMain.SelectionLength;
 
-			var dialog = new ImageSelectionDialog(_model);
+			var dialog = new MediaSelectionDialog(_model, ContentType.Image);
 			if (dialog.ShowDialog() != DialogResult.Cancel)
 			{
 				txtBoxMain.SelectionStart = caretPos;

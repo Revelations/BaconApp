@@ -1,7 +1,7 @@
 ﻿
 namespace BaconBuilder.View
 {
-	partial class ImageSelectionDialog
+	partial class MediaSelectionDialog
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -60,7 +60,7 @@ namespace BaconBuilder.View
             // tlp
             // 
             this.tlp.ColumnCount = 3;
-            this.tlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tlp.Controls.Add(this.lblImageLocation, 0, 0);
@@ -84,7 +84,7 @@ namespace BaconBuilder.View
             this.lblImageLocation.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblImageLocation.Location = new System.Drawing.Point(3, 0);
             this.lblImageLocation.Name = "lblImageLocation";
-            this.lblImageLocation.Size = new System.Drawing.Size(83, 29);
+            this.lblImageLocation.Size = new System.Drawing.Size(94, 29);
             this.lblImageLocation.TabIndex = 0;
             this.lblImageLocation.Text = "Image Location:";
             this.lblImageLocation.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -92,9 +92,9 @@ namespace BaconBuilder.View
             // txtImageURL
             // 
             this.txtImageURL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtImageURL.Location = new System.Drawing.Point(92, 3);
+            this.txtImageURL.Location = new System.Drawing.Point(103, 3);
             this.txtImageURL.Name = "txtImageURL";
-            this.txtImageURL.Size = new System.Drawing.Size(278, 20);
+            this.txtImageURL.Size = new System.Drawing.Size(267, 20);
             this.txtImageURL.TabIndex = 0;
             // 
             // comboBox1
@@ -102,9 +102,9 @@ namespace BaconBuilder.View
             this.comboBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(92, 32);
+            this.comboBox1.Location = new System.Drawing.Point(103, 32);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(278, 21);
+            this.comboBox1.Size = new System.Drawing.Size(267, 21);
             this.comboBox1.TabIndex = 2;
             // 
             // btnBrowse
@@ -122,7 +122,7 @@ namespace BaconBuilder.View
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Location = new System.Drawing.Point(3, 29);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(83, 27);
+            this.label1.Size = new System.Drawing.Size(94, 27);
             this.label1.TabIndex = 0;
             this.label1.Text = "Options:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -167,7 +167,7 @@ namespace BaconBuilder.View
             this.ClientSize = new System.Drawing.Size(494, 172);
             this.Controls.Add(this.pnlContainer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "ImageSelectionDialog";
+            this.Name = "MediaSelectionDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select Image";
             this.pnlContainer.ResumeLayout(false);
