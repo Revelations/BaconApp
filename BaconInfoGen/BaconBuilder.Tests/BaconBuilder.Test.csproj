@@ -51,6 +51,7 @@
     <Compile Include="Parser\HtmlToTextParserTest.cs" />
     <Compile Include="MainWindowTest.cs" />
     <Compile Include="Parser\TextToHtmlParserTest.cs" />
+    <Compile Include="XmlReaderTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

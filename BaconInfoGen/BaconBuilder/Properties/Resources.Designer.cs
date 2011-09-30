@@ -92,5 +92,14 @@ namespace BaconBuilder.Properties {
                 return ResourceManager.GetString("ServerLocation", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE HTML&gt;&lt;html&gt;&lt;head&gt;&lt;link href=&quot;style.css&quot; rel=&quot;stylesheet&quot; /&gt;&lt;title&gt;&lt;/title&gt;&lt;!-- x = 42 --&gt;&lt;!-- y = 13 --&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;hello world&lt;/p&gt;&lt;p&gt;hello you&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;.
+        /// </summary>
+        public static string TestFile {
+            get {
+                return ResourceManager.GetString("TestFile", resourceCulture);
+            }
+        }
     }
 }
