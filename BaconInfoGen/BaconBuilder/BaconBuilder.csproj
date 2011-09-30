@@ -100,9 +100,9 @@
     <Compile Include="Model\Parser\Parser.cs" />
     <Compile Include="Model\Ftp\FtpDownloader.cs" />
     <Compile Include="Model\Ftp\FtpUploader.cs" />
+    <Compile Include="Model\Reader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\AudioSelectionController.cs" />
     <Compile Include="View\FtpDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -201,6 +201,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Blank.html" />
+    <Content Include="Resources\test.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
