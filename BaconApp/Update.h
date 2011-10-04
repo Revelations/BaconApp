@@ -14,4 +14,6 @@
 }
 
 - (void)getFile:(NSString *) urlPath;
+-(void)getDirectory:(NSString *)urlPath;
+
 @end

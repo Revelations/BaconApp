@@ -40,6 +40,7 @@ NSString * const WEB_DIRECTORY = @"Web";
     update = NO;
 	
 	NSLog(@"Hello World, MainView did finish launching");
+    NSLog(@"earth to the world of jim...");
 	
     // Override point for customization after application launch.
     self.window.rootViewController = self.tabBarController;

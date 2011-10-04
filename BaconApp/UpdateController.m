@@ -7,26 +7,26 @@
 //
 
 #import "UpdateController.h"
+#import "BaconAppDelegate.h"
 #import "Update.h"
 
 @implementation UpdateController
+@synthesize progBar;
 
 
 -(IBAction)Update:(id)sender{
+    NSLog(@"Jim is busy looking in a file system.");
     Update *currentFileRequest = [[Update alloc] init];
-    [currentFileRequest getFile:@"http://revelations.webhop.org:81/kiwi.html"];
-	/*FTPDirectory *ftpDir = [[FTPDirectory alloc] init];//alloca(sizeof(FTPDirectory));
-	FTPFile *ftpFile = [[FTPFile alloc] init];
-	NSLog(@"hello jello");
-    
-	[ftpDir startReceive:@"ftp://revelations.webhop.org"];
-	//[ftpFile DownloadFile:@"ftp://reveleations.webhop.org/New File.html" :@"~test.txt"];	
-	NSLog(@"file at 0 is : %@ " ,ftpDir.listData[0]);
-	NSLog(@"hello jello");
-	
-	textInfo.text = @"Updating..........";*/
-    
+    [currentFileRequest getDirectory:@"http://revelations.webhop.org:81/"];   
+    NSLog(@"Jim has now finished looking for the files");
+    [self dismissModalViewControllerAnimated:YES];
 }
+-(IBAction)CarryOn:(id)sender{
+    NSLog(@"Carry on Jim");
+    BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
