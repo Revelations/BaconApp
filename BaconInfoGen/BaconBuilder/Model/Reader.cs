@@ -1,23 +1,21 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml;
 
-namespace BaconBuilder
+namespace BaconBuilder.Model
 {
 	public class Reader
 	{
-		private XmlNode node;
-		private readonly FileInfo _page =
-			new FileInfo(@"C:\Users\sk218\BaconApp\BaconInfoGen\BaconBuilder\Resources\test.html");
+		public FileInfo Page { get; set; }
 
 		public string GetProperties(string property)
 		{
-			using (var reader = new XmlTextReader(_page.FullName))
+			using (var reader = new XmlTextReader(Page.FullName))
 			{
 				reader.DtdProcessing = DtdProcessing.Ignore;
-				//reader.WhitespaceHandling = WhitespaceHandling.None;
 
 				reader.MoveToContent();
 				while (reader.Read())
@@ -34,49 +32,61 @@ namespace BaconBuilder
 
 		public string GetBody()
 		{
-			using (var reader = new XmlTextReader(_page.FullName))
+			using (var reader = new XmlTextReader(Page.FullName))
 			{
 				reader.DtdProcessing = DtdProcessing.Ignore;
 				reader.WhitespaceHandling = WhitespaceHandling.None;
 
-				reader.MoveToContent();
 				reader.ReadToFollowing("body");
 				var builder = new StringBuilder();
-				foreach (var line in Subtree(reader.ReadSubtree()))
+				var sub = reader.ReadSubtree();
+				while (sub.Read())
 				{
-					builder.Append(line);
+					builder.Append(sub.ReadInnerXml());
 				}
 				return builder.ToString();
 			}
 		}
 
 		/*
-		 * //We need recursive search down the tree
-		 * public List<string> Recursive(List<string> list) {}
+		 * We need recursive search down the tree
 		 */
-
-		public List<string> Subtree(XmlReader reader)
+		private static void Recursive(IEnumerable d, ICollection<object> list, int level)
 		{
-			var result = new List<string>();
-			while (reader.Read())
+			foreach (XmlNode node in d)
 			{
-				//if (reader.Name.Length > 0 || reader.HasValue) result.Add(string.Format("<{0}>{1}</{0}>", reader.Name, reader.Value));
-				result.Add(reader.ReadInnerXml());
+				Console.WriteLine("".PadRight(level, ' ') + @"<{0}>", node.LocalName);
+				switch (node.NodeType)
+				{
+					case XmlNodeType.Element:
+						if (node.LocalName.Equals("img"))
+						{
+							list.Add("<" + node.LocalName + ">");
+						}
+						break;
+						case XmlNodeType.Text:
+
+						list.Add(node.Value);
+						break;
+				}
+				if (node.HasChildNodes)
+				{
+					Recursive(node.ChildNodes, list, level + 1);
+					//list.Add(node.LocalName);
+				}
+				//list.Add("</" + node.LocalName + ">");
 			}
-			return result;
 		}
 
-		public List<string> GetBodyContents()
+		public List<object> GetBodyContents()
 		{
-			using (var reader = new XmlTextReader(_page.FullName))
-			{
-				reader.DtdProcessing = DtdProcessing.Ignore;
-				reader.WhitespaceHandling = WhitespaceHandling.None;
+			var list = new List<object>();
+			var d = new XmlDocument();
+			d.Load(Page.FullName);
+			var body = d.GetElementsByTagName("body");
+			Recursive(body, list, 0);
 
-				reader.MoveToContent();
-				reader.ReadToFollowing("body");
-				return Subtree(reader.ReadSubtree());
-			}
+			return list;
 		}
 	}
 }
