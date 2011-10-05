@@ -76,22 +76,22 @@ function SetParams()
 	// Chrome 14.0.835.187 on university computers has issues passing parameters.
 	if (paramCount == 0)
 	{
-		marker.setAttribute( "style", "display:none");
-		return;
-	}
-	
-	var color = "none";
-	var urhere = "";
-	var delta = "translate(0,0)";
-	
-	if ( paramArray[ "color" ] != undefined )
-		color = paramArray[ "color" ];
-	if ( paramArray[ "label" ] != undefined )
-		urhere = paramArray[ "label" ];
-	if ( paramArray[ "x" ] != undefined && paramArray[ "y" ] != undefined ) 
-		delta = "translate("+paramArray[ "x" ]+", "+paramArray[ "y" ]+")";
+		groupMarker.setAttribute( "style", "display:none");
+	} else {
+		groupMarker.setAttribute( "style", "display:inline");
+		var color = "none";
+		var urhere = "";
+		var delta = "translate(0,0)";
+		
+		if ( paramArray[ "color" ] != undefined )
+			color = paramArray[ "color" ];
+		if ( paramArray[ "label" ] != undefined )
+			urhere = paramArray[ "label" ];
+		if ( paramArray[ "x" ] != undefined && paramArray[ "y" ] != undefined ) 
+			delta = "translate("+paramArray[ "x" ]+", "+paramArray[ "y" ]+")";
 
-	pinhead.setAttribute( "fill", color );
-	pintext.appendChild( document.createTextNode( urhere ) );
-	groupMarker.setAttribute( "transform", delta );
+		pinhead.setAttribute( "fill", color );
+		pintext.appendChild( document.createTextNode( urhere ) );
+		groupMarker.setAttribute( "transform", delta );
+	}
 }
