@@ -49,47 +49,49 @@ function playSound(path)
     document.getElementById('audioPlayer').play();
 }
 
-// SVG
+// For SVG marker parameter passing.
 function SetParams()
 {
 	var paramArray = [];
 	var paramCount = 0;
 	if ( document.defaultView.frameElement )
 	{
-	   var params = document.defaultView.frameElement.getElementsByTagName("param");
+		var params = document.defaultView.frameElement.getElementsByTagName("param");
 		paramCount = params.length;
-	   for ( var i = 0, iLen = paramCount; iLen > i; i++ )
-	   {
-		  var eachParam = params[ i ];
-		  var name = eachParam.getAttribute( "name" );
-		  var value = eachParam.getAttribute( "value" );
+		for ( var i = 0, iLen = paramCount; iLen > i; i++ )
+		{
+			var eachParam = params[ i ];
+			var name = eachParam.getAttribute( "name" );
+			var value = eachParam.getAttribute( "value" );
 		  
-		  paramArray[ name ] = value;
-	   }
+			paramArray[ name ] = value;
+		}
 	}
 	
-	var light  = document.getElementById("light");
-	var label  = document.getElementById("label");
-	var marker = document.getElementById("gMarker");
+	var pinhead = document.getElementById("light");
+	var pintext = document.getElementById("label");
+	var groupMarker = document.getElementById("gMarker");
 	
+	// If no parameter was passed in, hide the pin marker.
+	// Chrome 14.0.835.187 on university computers has issues passing parameters.
 	if (paramCount == 0)
 	{
 		marker.setAttribute( "style", "display:none");
 		return;
 	}
 	
-	var color = "red";
-	var urhere = "YOU ARE HERE";
+	var color = "none";
+	var urhere = "";
 	var delta = "translate(0,0)";
 	
-	//if ( paramArray[ "color" ] != undefined )
+	if ( paramArray[ "color" ] != undefined )
 		color = paramArray[ "color" ];
-	//if ( paramArray[ "label" ] != undefined )
+	if ( paramArray[ "label" ] != undefined )
 		urhere = paramArray[ "label" ];
-	//if ( paramArray[ "x" ] != undefined && paramArray[ "y" ] != undefined ) 
+	if ( paramArray[ "x" ] != undefined && paramArray[ "y" ] != undefined ) 
 		delta = "translate("+paramArray[ "x" ]+", "+paramArray[ "y" ]+")";
 
-	light.setAttribute( "fill", color );
-	label.appendChild( document.createTextNode( urhere ) );
-	marker.setAttribute( "transform", delta );
+	pinhead.setAttribute( "fill", color );
+	pintext.appendChild( document.createTextNode( urhere ) );
+	groupMarker.setAttribute( "transform", delta );
 }
