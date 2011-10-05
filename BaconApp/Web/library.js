@@ -49,12 +49,47 @@ function playSound(path)
     document.getElementById('audioPlayer').play();
 }
 
-// Dynamically applies css to a page.
-function addCSS()
+// SVG
+function SetParams()
 {
-	var _link = document.createElement('link');
-	_link.type = 'text/css';
-	_link.rel = 'stylesheet';
-	_link.href = 'style.css';
-	document.getElementsByTagName("head")[0].appendChild(_link);
+	var paramArray = [];
+	var paramCount = 0;
+	if ( document.defaultView.frameElement )
+	{
+	   var params = document.defaultView.frameElement.getElementsByTagName("param");
+		paramCount = params.length;
+	   for ( var i = 0, iLen = paramCount; iLen > i; i++ )
+	   {
+		  var eachParam = params[ i ];
+		  var name = eachParam.getAttribute( "name" );
+		  var value = eachParam.getAttribute( "value" );
+		  
+		  paramArray[ name ] = value;
+	   }
+	}
+	
+	var light  = document.getElementById("light");
+	var label  = document.getElementById("label");
+	var marker = document.getElementById("gMarker");
+	
+	if (paramCount == 0)
+	{
+		marker.setAttribute( "style", "display:none");
+		return;
+	}
+	
+	var color = "red";
+	var urhere = "YOU ARE HERE";
+	var delta = "translate(0,0)";
+	
+	//if ( paramArray[ "color" ] != undefined )
+		color = paramArray[ "color" ];
+	//if ( paramArray[ "label" ] != undefined )
+		urhere = paramArray[ "label" ];
+	//if ( paramArray[ "x" ] != undefined && paramArray[ "y" ] != undefined ) 
+		delta = "translate("+paramArray[ "x" ]+", "+paramArray[ "y" ]+")";
+
+	light.setAttribute( "fill", color );
+	label.appendChild( document.createTextNode( urhere ) );
+	marker.setAttribute( "transform", delta );
 }

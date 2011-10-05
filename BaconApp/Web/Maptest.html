@@ -1,10 +1,65 @@
+<!DOCTYPE HTML>
+<!--
+
+NOTE: The marker doesn't get moved on Chrome 14 for some reason. Use FireFox for now.
+
+Also, the example page from http://www.schepers.cc/svg/params/params.html
+	renders perfectly fine on Chrome (shows colours, and "stop", "fast", "go" as text), 
+	yet when the page is saved to local disk, it does not call the script
+	(hence showing a black circle, and UNDEFINED text).
+	
+	This issue is not prominent in Firefox.
+
+-->
+ 
 <html>
     <head>
-        <script tye="text/javascript" src="library.js"></script>
+        <script type="text/javascript" src="library.js"></script>
+		<meta name="svg.render.forceflash" content="true">
     </head>
     
     <body style="background-color:green">
-        <object data="vmap.svg" type="image/svg+xml" width=300 height=360 style="background-color:red"></object>
-		<!-- JavaScript gets called to put map and draw a location pin. -->
+        <object id="vmap" data="vmap2.svg" type="image/svg+xml" width=300 height=360 style="background-color:red">	
+			<param name="color" value="url(#Shiny)" />
+			<param name="label" value="YOU ARE HERE" />
+			
+			<!-- TODO: Modify these values through JavaScript. -->
+			<param name="x" value="120" />
+			<param name="y" value="100" />
+		</object>
+		<br>
+		<object id="vmap" data="vmap2.svg" type="image/svg+xml" width=300 height=360 style="background-color:red">	
+			<param name="color" value="blue" />
+			<param name="label" value="HERE YOU ARE" />
+			
+
+			<!-- TODO: Modify these values through JavaScript. -->
+			<param name="x" value="100" />
+			<param name="y" value="200" />
+		</object>
+		<br>
+		<object id="vmap" data="params.svg" type="image/svg+xml" width=500 height=100 style="background-color:red">	
+			<param name="color" value="red" />
+			<param name="label" value="YOU ARE HERE" />
+			<param name="x" value="200" />
+			<param name="y" value="200" />
+			
+		</object>
+		<!--
+		<div id="reusable">
+		   <object type="image/svg+xml" data="vmap2.svg" style="width: 150px; height:150px; display:inline;">
+			  <param name="color" value="red" />
+			  <param name="label" value="stop" />
+		   </object>
+		   <object type="image/svg+xml" data="vmap2.svg" style="width: 150px; height:150px; display:inline;">
+			  <param name="color" value="orange" />
+			  <param name="label" value="fast" />
+		   </object>
+		   <object type="image/svg+xml" data="vmap2.svg" style="width: 150px; height:150px; display:inline;">
+			  <param name="color" value="green" />
+			  <param name="label" value="go" />
+		   </object>
+		</div>
+		-->
     </body>
 </html>
