@@ -1,7 +1,8 @@
 <svg id="svgMaungaMap"
-	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="360" width="300" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/"
-	onload="SetParams()"
-	>
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns="http://www.w3.org/2000/svg" height="360" width="300" version="1.1"
+	xmlns:cc="http://creativecommons.org/ns#" xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns:dc="http://purl.org/dc/elements/1.1/">
 
 	<script id="library" xlink:href="library.js"/>
 	<defs id="localdefs">
@@ -50,8 +51,8 @@
 			<text id="textRataTrack" style="writing-mode:lr-tb;text-anchor:middle;text-align:center;" xml:space="preserve" font-size="98.57134247px" line-height="114.99999762%" y="2015" x="1625"><tspan id="tspan3790" style="writing-mode:lr-tb;text-anchor:middle;text-align:center;" line-height="114.99999762%" font-family="Arial" font-size="98.57134247px" font-stretch="normal" font-variant="normal" y="2015" x="1625" font-weight="bold" font-style="normal">Rata Track</tspan></text>
 		</g>
 	</g>
-	<g id="gMarker" style="display:none">
-		<circle id="light" cx="0" cy="0" r="5" stroke="black" fill="none" stroke-width="1"/>
-		<text id="label" x="7.5" y="5" font-size="12" fill="black" text-anchor="left" font-family="Arial" ></text>
+	<g id="gMarker">
+		<circle id="pinhead" cx="0" cy="0" r="5" stroke="black" fill="none" stroke-width="1"/>
+		<text id="pintext" x="7.5" y="5" font-size="12" fill="black" text-anchor="left" font-family="Arial" ></text>
    </g>
 </svg>
