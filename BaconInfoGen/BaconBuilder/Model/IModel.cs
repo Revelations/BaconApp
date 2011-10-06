@@ -69,7 +69,7 @@ namespace BaconBuilder.Model
 		int X { get; set; }
 		int Y { get; set; }
 
-		string CurrentParsedContents { get; }
+		//string CurrentParsedContents { get; }
 		Uri GetCurrentFileUri();
 	}
 }

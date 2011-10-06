@@ -17,8 +17,6 @@ namespace BaconBuilder.View
 			_model = model;
 			_controller = new PreviewController(_model, this);
 			_controller.QrCode();
-
-			browser.DocumentCompleted += browser_DocumentCompleted;
 		}
 
 		#region IPreviewView Members
@@ -29,27 +27,7 @@ namespace BaconBuilder.View
 			set { picboxQRCode.Image = value; }
 		}
 
-		public void SetBrowserText(string text)
-		{
-			if (browser.Document != null)
-			{
-				browser.Document.OpenNew(true);
-				browser.Document.Write(text);
-			}
-		}
-
-		public void SetBrowserUrl(Uri uri)
-		{
-			browser.Url = uri;
-		}
-
 		#endregion
-
-		private void browser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-		{
-			_controller.PreviewDocument();
-			browser.DocumentCompleted -= browser_DocumentCompleted;
-		}
 
 		private void btnClose_Click(object sender, EventArgs e)
 		{

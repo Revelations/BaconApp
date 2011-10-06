@@ -2,7 +2,7 @@
 {
 	public interface IMediaSelectionDialog
 	{
-		string ItemFileName { get; set; }
+		string FileName { get; set; }
 		void ShowOpenItemDialog();
 	}
 }

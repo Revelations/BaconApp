@@ -6,8 +6,5 @@ namespace BaconBuilder.View
 	internal interface IPreviewView
 	{
 		Image QrCodeImage { get; set; }
-		void SetBrowserText(string text);
-
-		void SetBrowserUrl(Uri p);
 	}
 }

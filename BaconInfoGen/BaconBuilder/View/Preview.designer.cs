@@ -31,140 +31,52 @@ namespace BaconBuilder.View
 		[System.CodeDom.Compiler.GeneratedCode("Winform Designer", "VS2010 SP1")]
 		private void InitializeComponent()
 		{
-			this.panel1 = new System.Windows.Forms.Panel();
-			this.panel3 = new System.Windows.Forms.Panel();
-			this.btnClose = new System.Windows.Forms.Button();
-			this.picboxQRCode = new System.Windows.Forms.PictureBox();
-			this.splitter4 = new System.Windows.Forms.Splitter();
-			this.picboxMap = new System.Windows.Forms.PictureBox();
-			this.splitter2 = new System.Windows.Forms.Splitter();
-			this.browser = new System.Windows.Forms.WebBrowser();
-			this.panel1.SuspendLayout();
-			this.panel3.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.picboxQRCode)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.picboxMap)).BeginInit();
-			this.SuspendLayout();
-			// 
-			// panel1
-			// 
-			this.panel1.AutoSize = true;
-			this.panel1.Controls.Add(this.panel3);
-			this.panel1.Controls.Add(this.splitter4);
-			this.panel1.Controls.Add(this.picboxMap);
-			this.panel1.Controls.Add(this.splitter2);
-			this.panel1.Controls.Add(this.browser);
-			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel1.Location = new System.Drawing.Point(0, 0);
-			this.panel1.MinimumSize = new System.Drawing.Size(608, 360);
-			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(822, 365);
-			this.panel1.TabIndex = 12;
-			// 
-			// panel3
-			// 
-			this.panel3.Controls.Add(this.btnClose);
-			this.panel3.Controls.Add(this.picboxQRCode);
-			this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
-			this.panel3.Location = new System.Drawing.Point(616, 0);
-			this.panel3.Name = "panel3";
-			this.panel3.Size = new System.Drawing.Size(200, 365);
-			this.panel3.TabIndex = 12;
-			// 
-			// btnClose
-			// 
-			this.btnClose.Location = new System.Drawing.Point(62, 267);
-			this.btnClose.Name = "btnClose";
-			this.btnClose.Size = new System.Drawing.Size(75, 23);
-			this.btnClose.TabIndex = 11;
-			this.btnClose.Text = "Close";
-			this.btnClose.UseVisualStyleBackColor = true;
-			this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-			// 
-			// picboxQRCode
-			// 
-			this.picboxQRCode.BackColor = System.Drawing.Color.White;
-			this.picboxQRCode.Location = new System.Drawing.Point(0, 0);
-			this.picboxQRCode.Margin = new System.Windows.Forms.Padding(3, 3, 3, 13);
-			this.picboxQRCode.Name = "picboxQRCode";
-			this.picboxQRCode.Size = new System.Drawing.Size(200, 200);
-			this.picboxQRCode.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-			this.picboxQRCode.TabIndex = 10;
-			this.picboxQRCode.TabStop = false;
-			// 
-			// splitter4
-			// 
-			this.splitter4.BackColor = System.Drawing.SystemColors.ControlDark;
-			this.splitter4.Enabled = false;
-			this.splitter4.Location = new System.Drawing.Point(608, 0);
-			this.splitter4.Name = "splitter4";
-			this.splitter4.Size = new System.Drawing.Size(8, 365);
-			this.splitter4.TabIndex = 11;
-			this.splitter4.TabStop = false;
-			// 
-			// picboxMap
-			// 
-			this.picboxMap.BackColor = System.Drawing.Color.White;
-			this.picboxMap.BackgroundImage = global::BaconBuilder.Properties.Resources.map;
-			this.picboxMap.Dock = System.Windows.Forms.DockStyle.Left;
-			this.picboxMap.Location = new System.Drawing.Point(308, 0);
-			this.picboxMap.Margin = new System.Windows.Forms.Padding(3, 3, 3, 23);
-			this.picboxMap.MaximumSize = new System.Drawing.Size(300, 360);
-			this.picboxMap.MinimumSize = new System.Drawing.Size(300, 60);
-			this.picboxMap.Name = "picboxMap";
-			this.picboxMap.Size = new System.Drawing.Size(300, 360);
-			this.picboxMap.TabIndex = 9;
-			this.picboxMap.TabStop = false;
-			// 
-			// splitter2
-			// 
-			this.splitter2.BackColor = System.Drawing.SystemColors.ControlDark;
-			this.splitter2.Enabled = false;
-			this.splitter2.Location = new System.Drawing.Point(300, 0);
-			this.splitter2.Name = "splitter2";
-			this.splitter2.Size = new System.Drawing.Size(8, 365);
-			this.splitter2.TabIndex = 10;
-			this.splitter2.TabStop = false;
-			// 
-			// browser
-			// 
-			this.browser.AllowWebBrowserDrop = false;
-			this.browser.Dock = System.Windows.Forms.DockStyle.Left;
-			this.browser.Location = new System.Drawing.Point(0, 0);
-			this.browser.MaximumSize = new System.Drawing.Size(300, 360);
-			this.browser.MinimumSize = new System.Drawing.Size(300, 360);
-			this.browser.Name = "browser";
-			this.browser.Size = new System.Drawing.Size(300, 360);
-			this.browser.TabIndex = 8;
-			this.browser.Url = new System.Uri("", System.UriKind.Relative);
-			// 
-			// Preview
-			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.AutoSize = true;
-			this.ClientSize = new System.Drawing.Size(822, 365);
-			this.Controls.Add(this.panel1);
-			this.Name = "Preview";
-			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "Preview";
-			this.panel1.ResumeLayout(false);
-			this.panel3.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.picboxQRCode)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.picboxMap)).EndInit();
-			this.ResumeLayout(false);
-			this.PerformLayout();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.picboxQRCode = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.picboxQRCode)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(12, 228);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(200, 23);
+            this.btnClose.TabIndex = 13;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            // 
+            // picboxQRCode
+            // 
+            this.picboxQRCode.BackColor = System.Drawing.Color.White;
+            this.picboxQRCode.Location = new System.Drawing.Point(12, 12);
+            this.picboxQRCode.Margin = new System.Windows.Forms.Padding(3, 3, 3, 13);
+            this.picboxQRCode.Name = "picboxQRCode";
+            this.picboxQRCode.Size = new System.Drawing.Size(200, 200);
+            this.picboxQRCode.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picboxQRCode.TabIndex = 12;
+            this.picboxQRCode.TabStop = false;
+            // 
+            // Preview
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.CancelButton = this.btnClose;
+            this.ClientSize = new System.Drawing.Size(224, 263);
+            this.Controls.Add(this.btnClose);
+            this.Controls.Add(this.picboxQRCode);
+            this.Name = "Preview";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Preview";
+            ((System.ComponentModel.ISupportInitialize)(this.picboxQRCode)).EndInit();
+            this.ResumeLayout(false);
 
 		}
 
 		#endregion
 
-		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.Panel panel3;
-		private System.Windows.Forms.PictureBox picboxQRCode;
-		private System.Windows.Forms.Splitter splitter4;
-		private System.Windows.Forms.PictureBox picboxMap;
-		private System.Windows.Forms.Splitter splitter2;
-		private System.Windows.Forms.WebBrowser browser;
-		private System.Windows.Forms.Button btnClose;
-	}
+        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.PictureBox picboxQRCode;
+
+    }
 }
