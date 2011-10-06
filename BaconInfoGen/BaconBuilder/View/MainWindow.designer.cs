@@ -60,7 +60,9 @@ namespace BaconBuilder.View
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.pnlContentEditor = new System.Windows.Forms.Panel();
             this.pnlTextEditor = new System.Windows.Forms.Panel();
-            this.txtBoxMain = new System.Windows.Forms.TextBox();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.browser = new System.Windows.Forms.WebBrowser();
+            this.mapBox = new System.Windows.Forms.PictureBox();
             this.flpPreview = new System.Windows.Forms.FlowLayoutPanel();
             this.btnPreview = new System.Windows.Forms.Button();
             this.btnPrintPreview = new System.Windows.Forms.Button();
@@ -72,7 +74,6 @@ namespace BaconBuilder.View
             this.tsbItalics = new System.Windows.Forms.ToolStripButton();
             this.splitter3 = new System.Windows.Forms.Splitter();
             this.tlpDataFields = new System.Windows.Forms.TableLayoutPanel();
-            this.btnMapPreview = new System.Windows.Forms.Button();
             this.txtY = new System.Windows.Forms.NumericUpDown();
             this.lblY = new System.Windows.Forms.Label();
             this.txtX = new System.Windows.Forms.NumericUpDown();
@@ -95,6 +96,11 @@ namespace BaconBuilder.View
             this.toolStripContainer1.SuspendLayout();
             this.pnlContentEditor.SuspendLayout();
             this.pnlTextEditor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mapBox)).BeginInit();
             this.flpPreview.SuspendLayout();
             this.toolContents.SuspendLayout();
             this.tlpDataFields.SuspendLayout();
@@ -326,23 +332,52 @@ namespace BaconBuilder.View
             // 
             // pnlTextEditor
             // 
-            this.pnlTextEditor.Controls.Add(this.txtBoxMain);
+            this.pnlTextEditor.Controls.Add(this.splitContainer1);
             this.pnlTextEditor.Controls.Add(this.flpPreview);
             this.pnlTextEditor.Controls.Add(this.toolContents);
             this.pnlTextEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTextEditor.Location = new System.Drawing.Point(0, 66);
+            this.pnlTextEditor.Location = new System.Drawing.Point(0, 60);
             this.pnlTextEditor.Name = "pnlTextEditor";
-            this.pnlTextEditor.Size = new System.Drawing.Size(606, 443);
+            this.pnlTextEditor.Size = new System.Drawing.Size(606, 449);
             this.pnlTextEditor.TabIndex = 12;
             // 
-            // txtBoxMain
+            // splitContainer1
             // 
-            this.txtBoxMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtBoxMain.Location = new System.Drawing.Point(0, 25);
-            this.txtBoxMain.Multiline = true;
-            this.txtBoxMain.Name = "txtBoxMain";
-            this.txtBoxMain.Size = new System.Drawing.Size(606, 389);
-            this.txtBoxMain.TabIndex = 12;
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 25);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.browser);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.mapBox);
+            this.splitContainer1.Size = new System.Drawing.Size(606, 395);
+            this.splitContainer1.SplitterDistance = 303;
+            this.splitContainer1.TabIndex = 12;
+            // 
+            // browser
+            // 
+            this.browser.AllowWebBrowserDrop = false;
+            this.browser.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.browser.Location = new System.Drawing.Point(0, 0);
+            this.browser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.browser.Name = "browser";
+            this.browser.ScriptErrorsSuppressed = true;
+            this.browser.Size = new System.Drawing.Size(303, 395);
+            this.browser.TabIndex = 0;
+            // 
+            // mapBox
+            // 
+            this.mapBox.BackColor = System.Drawing.Color.White;
+            this.mapBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mapBox.Location = new System.Drawing.Point(0, 0);
+            this.mapBox.Name = "mapBox";
+            this.mapBox.Size = new System.Drawing.Size(299, 395);
+            this.mapBox.TabIndex = 0;
+            this.mapBox.TabStop = false;
             // 
             // flpPreview
             // 
@@ -351,7 +386,7 @@ namespace BaconBuilder.View
             this.flpPreview.Controls.Add(this.btnPrintPreview);
             this.flpPreview.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flpPreview.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flpPreview.Location = new System.Drawing.Point(0, 414);
+            this.flpPreview.Location = new System.Drawing.Point(0, 420);
             this.flpPreview.Name = "flpPreview";
             this.flpPreview.Size = new System.Drawing.Size(606, 29);
             this.flpPreview.TabIndex = 11;
@@ -429,7 +464,7 @@ namespace BaconBuilder.View
             this.splitter3.BackColor = System.Drawing.SystemColors.ControlDark;
             this.splitter3.Dock = System.Windows.Forms.DockStyle.Top;
             this.splitter3.Enabled = false;
-            this.splitter3.Location = new System.Drawing.Point(0, 58);
+            this.splitter3.Location = new System.Drawing.Point(0, 52);
             this.splitter3.Name = "splitter3";
             this.splitter3.Size = new System.Drawing.Size(606, 8);
             this.splitter3.TabIndex = 13;
@@ -444,7 +479,6 @@ namespace BaconBuilder.View
             this.tlpDataFields.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tlpDataFields.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpDataFields.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tlpDataFields.Controls.Add(this.btnMapPreview, 4, 1);
             this.tlpDataFields.Controls.Add(this.txtY, 3, 1);
             this.tlpDataFields.Controls.Add(this.lblY, 2, 1);
             this.tlpDataFields.Controls.Add(this.txtX, 1, 1);
@@ -457,20 +491,8 @@ namespace BaconBuilder.View
             this.tlpDataFields.RowCount = 2;
             this.tlpDataFields.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpDataFields.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpDataFields.Size = new System.Drawing.Size(606, 58);
+            this.tlpDataFields.Size = new System.Drawing.Size(606, 52);
             this.tlpDataFields.TabIndex = 9;
-            // 
-            // btnMapPreview
-            // 
-            this.btnMapPreview.Enabled = false;
-            this.btnMapPreview.Location = new System.Drawing.Point(448, 32);
-            this.btnMapPreview.Margin = new System.Windows.Forms.Padding(8, 3, 8, 3);
-            this.btnMapPreview.Name = "btnMapPreview";
-            this.btnMapPreview.Size = new System.Drawing.Size(150, 23);
-            this.btnMapPreview.TabIndex = 6;
-            this.btnMapPreview.Text = "Map Preview";
-            this.btnMapPreview.UseVisualStyleBackColor = true;
-            this.btnMapPreview.Visible = false;
             // 
             // txtY
             // 
@@ -480,24 +502,24 @@ namespace BaconBuilder.View
             0,
             0,
             0});
-            this.txtY.Location = new System.Drawing.Point(273, 32);
+            this.txtY.Location = new System.Drawing.Point(356, 29);
             this.txtY.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
             this.txtY.Name = "txtY";
-            this.txtY.Size = new System.Drawing.Size(164, 20);
+            this.txtY.Size = new System.Drawing.Size(247, 20);
             this.txtY.TabIndex = 5;
             // 
             // lblY
             // 
             this.lblY.AutoSize = true;
             this.lblY.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblY.Location = new System.Drawing.Point(223, 32);
+            this.lblY.Location = new System.Drawing.Point(306, 29);
             this.lblY.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             this.lblY.Name = "lblY";
-            this.lblY.Size = new System.Drawing.Size(44, 16);
+            this.lblY.Size = new System.Drawing.Size(44, 13);
             this.lblY.TabIndex = 2;
             this.lblY.Text = "Y:";
             this.lblY.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -510,24 +532,24 @@ namespace BaconBuilder.View
             0,
             0,
             0});
-            this.txtX.Location = new System.Drawing.Point(53, 32);
+            this.txtX.Location = new System.Drawing.Point(53, 29);
             this.txtX.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
             this.txtX.Name = "txtX";
-            this.txtX.Size = new System.Drawing.Size(164, 20);
+            this.txtX.Size = new System.Drawing.Size(247, 20);
             this.txtX.TabIndex = 4;
             // 
             // lblX
             // 
             this.lblX.AutoSize = true;
             this.lblX.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblX.Location = new System.Drawing.Point(3, 32);
+            this.lblX.Location = new System.Drawing.Point(3, 29);
             this.lblX.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             this.lblX.Name = "lblX";
-            this.lblX.Size = new System.Drawing.Size(44, 16);
+            this.lblX.Size = new System.Drawing.Size(44, 13);
             this.lblX.TabIndex = 1;
             this.lblX.Text = "X:";
             this.lblX.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -538,7 +560,7 @@ namespace BaconBuilder.View
             this.txtTitle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtTitle.Location = new System.Drawing.Point(53, 3);
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(384, 20);
+            this.txtTitle.Size = new System.Drawing.Size(550, 20);
             this.txtTitle.TabIndex = 3;
             this.txtTitle.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTitle_KeyDown);
             this.txtTitle.Leave += new System.EventHandler(this.txtTitle_FocusLeft);
@@ -550,7 +572,7 @@ namespace BaconBuilder.View
             this.lblTitle.Location = new System.Drawing.Point(3, 3);
             this.lblTitle.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(44, 16);
+            this.lblTitle.Size = new System.Drawing.Size(44, 13);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Title:";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -648,6 +670,11 @@ namespace BaconBuilder.View
             this.pnlContentEditor.PerformLayout();
             this.pnlTextEditor.ResumeLayout(false);
             this.pnlTextEditor.PerformLayout();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.mapBox)).EndInit();
             this.flpPreview.ResumeLayout(false);
             this.toolContents.ResumeLayout(false);
             this.toolContents.PerformLayout();
@@ -680,8 +707,7 @@ namespace BaconBuilder.View
 		private Label lblX;
 		private Label lblY;
 		private NumericUpDown txtX;
-		private TextBox txtTitle;
-		private Button btnMapPreview;
+        private TextBox txtTitle;
 		private ToolStripMenuItem editToolStripMenuItem;
 		private ToolStripMenuItem viewToolStripMenuItem;
 		private ToolStripMenuItem toolsToolStripMenuItem;
@@ -699,8 +725,7 @@ namespace BaconBuilder.View
 		private Splitter splitter4;
 		private Splitter splitter6;
 		private Splitter splitter5;
-		private ToolStripSeparator toolStripSeparator3;
-		private TextBox txtBoxMain;
+        private ToolStripSeparator toolStripSeparator3;
 		private ListView listViewContents;
 		private ImageList imageList;
 		private TableLayoutPanel tableLayoutPanel1;
@@ -711,6 +736,9 @@ namespace BaconBuilder.View
 		private ToolStripButton tsbAudio;
 		private ColumnHeader columnHeader1;
 		private ToolStripSeparator toolStripSeparator4;
+        private SplitContainer splitContainer1;
+        private WebBrowser browser;
+        private PictureBox mapBox;
 
 	}
 }

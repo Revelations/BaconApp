@@ -41,7 +41,6 @@ namespace BaconBuilder.Model
 		/// <param name="fileName">Name of file</param>
 		public void CreateNewFile(string fileName)
 		{
-			Console.WriteLine(@"Creating new file {0}", fileName);
 			File.WriteAllText(GetLowestUnusedNewFileName(), Resources.Blank);
 		}
 
@@ -57,7 +56,6 @@ namespace BaconBuilder.Model
 
 			var oldInfo = new FileInfo(HtmlDirectory + oldHtmlName);
 			var newInfo = new FileInfo(HtmlDirectory + newHtmlName);
-			Console.WriteLine(@"Renaming file {0} to {1}", oldHtmlName, newHtmlName);
 
 			if (newInfo.Exists)
 			{
@@ -75,7 +73,7 @@ namespace BaconBuilder.Model
 		/// <param name="fileName">The filename of the file to save.</param>
 		public void SaveFile(string fileName)
 		{
-			File.WriteAllText(HtmlDirectory + fileName, CurrentParsedContents);
+			File.WriteAllText(HtmlDirectory + fileName, CurrentContents);
 		}
 
 		/// <summary>
@@ -94,6 +92,13 @@ namespace BaconBuilder.Model
 
 		/// <summary>
 		/// Reloads the files into memory.
+		/// 
+		/// TODO:
+		/// 
+		/// WAIT, WHAT? Every Html file in the directory is loaded into memory?
+		/// And whenever a file is saved, the WHOLE LOT ARE LOADED INTO MEMORY AGAIN?
+		/// 
+		/// SHAME ON YOU GOOD SIR.
 		/// </summary>
 		/// <returns></returns>
 		public void LoadFiles()
@@ -123,17 +128,6 @@ namespace BaconBuilder.Model
 		{
 			get { return _fileContents[CurrentFileNameWithExtension]; }
 			set { _fileContents[CurrentFileNameWithExtension] = value; }
-		}
-
-		public string CurrentParsedContents
-		{
-			get
-			{
-				_texthtmlparser.X = X;
-				_texthtmlparser.Y = Y;
-				string html = _texthtmlparser.Parse(CurrentContents);
-				return html;
-			}
 		}
 
 		public Uri GetCurrentFileUri()
@@ -173,6 +167,7 @@ namespace BaconBuilder.Model
 		{
 			string name = HtmlDirectory + NewHtmlFileName;
 			string result = name + HtmlExtension;
+
 			// Otherwise iterate to find the lowest number available to append.
 			for (int i = 2; File.Exists(result); i++)
 			{

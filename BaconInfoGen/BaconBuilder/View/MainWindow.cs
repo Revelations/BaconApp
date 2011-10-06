@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
 using BaconBuilder.Controller;
+using mshtml;
 using BaconBuilder.Model;
 
 namespace BaconBuilder.View
@@ -13,21 +14,21 @@ namespace BaconBuilder.View
 		private readonly MainViewController _controller;
 		private readonly BaconModel _model;
 
+        public IHTMLDocument2 Document { get; set; }
+
 		#region Constructors
 
 		public MainWindow()
 		{
 			InitializeComponent();
 
-			_model = new BaconModel();
-			_controller = new MainViewController(_model, this);
+
 
 			// Event binding
 			tsbImage.Click += btnImage_Click;
 			tsbAudio.Click += btnAudio_Click;
 			tsbBold.Click += tsbBold_Click;
 			tsbItalics.Click += tsbItalics_Click;
-			btnMapPreview.Click += btnMapPreview_Click;
 			btnPreview.Click += btnPreview_Click;
 
 			printToolStripMenuItem.Click += btnPrintPreview_Click;
@@ -35,26 +36,15 @@ namespace BaconBuilder.View
 			exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
 
 			listViewContents.SelectedIndexChanged += listViewContents_SelectedIndexChanged;
-		}
 
-		/// <summary>
-		/// Wrap the selected text in bold tags.
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void tsbBold_Click(object sender, EventArgs e)
-		{
-			txtBoxMain.SelectedText = "<b>" + txtBoxMain.SelectedText + "</b>";
-		}
 
-		/// <summary>
-		/// Wrap the selected text in italics.
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void tsbItalics_Click(object sender, EventArgs e)
-		{
-			txtBoxMain.SelectedText = "<i>" + txtBoxMain.SelectedText + "</i`>";
+            browser.DocumentText = "<html><body></body></html>";
+		    Document = browser.Document.DomDocument as IHTMLDocument2;
+
+		    Document.designMode = "on";
+
+            _model = new BaconModel();
+            _controller = new MainViewController(_model, this);
 		}
 
 		#endregion
@@ -93,8 +83,12 @@ namespace BaconBuilder.View
 		/// </summary>
 		public string Contents
 		{
-			get { return txtBoxMain.Text; }
-			set { txtBoxMain.Text = value; }
+			get { return browser.DocumentText; }
+            set
+            {
+                browser.Document.OpenNew(true);
+                browser.DocumentText = value;
+            }
 		}
 
 		/// <summary>
@@ -114,11 +108,30 @@ namespace BaconBuilder.View
 			btnRemoveFile.Enabled = listViewContents.SelectedItems.Count != 0;
 			btnPreview.Enabled = _model.CurrentFileName != null;
 			toolContents.Enabled = _model.CurrentFileName != null;
-			txtBoxMain.Enabled = _model.CurrentFileName != null;
 		}
 
 		#endregion
-        
+
+
+        /// <summary>
+        /// Wrap the selected text in bold tags.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbBold_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// Wrap the selected text in italics.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbItalics_Click(object sender, EventArgs e)
+        {
+
+        }
 
 		/// <summary>
 		/// Exit the program.
@@ -150,17 +163,7 @@ namespace BaconBuilder.View
 		/// <param name="e"></param>
 		private void btnAudio_Click(object sender, EventArgs e)
 		{
-			_model.CurrentContents = Contents;
-			// Stores the current caret position and length of selection.
-			int caretPos = txtBoxMain.SelectionStart;
-			//int selectionLength = txtBoxMain.SelectionLength;
 
-			var dialog = new MediaSelectionDialog(_model, ContentType.Audio);
-			if (dialog.ShowDialog() != DialogResult.Cancel)
-			{
-				txtBoxMain.SelectionStart = caretPos;
-				txtBoxMain.SelectedText = string.Format("<audio>{0}</audio>", _model.AudioUrl);
-			}
 		}
 
 		/// <summary>
@@ -170,26 +173,7 @@ namespace BaconBuilder.View
 		/// <param name="e"></param>
 		private void btnImage_Click(object sender, EventArgs e)
 		{
-			// Stores the current caret position and length of selection.
-			int caretPos = txtBoxMain.SelectionStart;
-			//int selectionLength = txtBoxMain.SelectionLength;
-
-			var dialog = new MediaSelectionDialog(_model, ContentType.Image);
-			if (dialog.ShowDialog() != DialogResult.Cancel)
-			{
-				txtBoxMain.SelectionStart = caretPos;
-				txtBoxMain.SelectedText = string.Format("<img>{0}</img>", _model.ImageUrl);
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void btnMapPreview_Click(object sender, EventArgs e)
-		{
-			//throw new NotImplementedException("btnMapPreview_Click");
+		    
 		}
 
 		/// <summary>
@@ -236,7 +220,7 @@ namespace BaconBuilder.View
 			else if (e.KeyCode == Keys.Escape)
 			{
 				TitleText = _model.CurrentFileName;
-				txtBoxMain.Focus();
+				browser.Focus();
 			}
 		}
 
@@ -271,12 +255,11 @@ namespace BaconBuilder.View
 			{
 				_controller.SelectFile(e.Item.Text);
 			}
-			else
+			else if (_controller.ContentsHaveChanged())
 			{
-				if (_controller.ContentsHaveChanged())
-				{
-					_controller.SaveTextToHtml(e.Item.Text);
-				}
+                _model.CurrentContents = Contents;
+                _model.SaveFile(e.Item.Text);
+                _model.LoadFiles();
 			}
 		}
 

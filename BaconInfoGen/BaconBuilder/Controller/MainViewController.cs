@@ -55,20 +55,10 @@ namespace BaconBuilder.Controller
 		{
 			_model.CurrentFileNameWithExtension = value;
 			_view.TitleText = _model.CurrentFileName;
-			_view.Contents = LoadHtmlToText();
+			_view.Contents = _model.CurrentContents;
 
-			Point coord;
-			try
-			{
-				coord = HtmlToText.ExtractCoords(_model.CurrentContents);
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine(ex.Message);
-				coord = new Point(0, 0);
-			}
-			_view.XCoord = coord.X;
-			_view.YCoord = coord.Y;
+            // TODO: Re implement handling of point data.
+
 			_view.EnableRequiredControls();
 		}
 
@@ -119,51 +109,6 @@ namespace BaconBuilder.Controller
 		public bool ContentsHaveChanged()
 		{
 			return !_model.CurrentContents.Equals(_view.Contents);
-		}
-
-		/// <summary>
-		/// Gets the text content of an HTML file.
-		/// 
-		/// Uses an HtmlToTextParser to parse its content to plain text.
-		/// </summary>
-		/// <returns>String content (plain text) of the file.</returns>
-		public string LoadHtmlToText()
-		{
-			string bacon = _model.CurrentFileNameWithExtension;
-			string cooked = HtmlToText.Parse(_model.CurrentContents);
-			string raw = _model.CurrentContents;
-
-			Console.WriteLine(
-@"Loading bacon ""{0}""
-== raw bacon ==
-{1}
-== cooked bacon ==
-{2}", bacon, raw, cooked);
-			// Return plain text version of the current contents.
-
-			return cooked;
-		}
-
-		/// <summary>
-		/// Gets the html parsed verision of plain text content and saves it to a file.
-		/// </summary>
-		/// <param name="freezer">The freezer to save the bacon to.</param>
-		public void SaveTextToHtml(string freezer)
-		{
-			_model.X = Convert.ToInt32(_view.XCoord); ;
-			_model.Y = Convert.ToInt32(_view.YCoord); ;
-			TextToHtml.X = Convert.ToInt32(_view.XCoord);
-			TextToHtml.Y = Convert.ToInt32(_view.YCoord);
-			string cooked = TextToHtml.Parse(_view.Contents);
-
-			Console.WriteLine(
-@"Saving bacon to ""{0}""
-== cooked ==
-{1}", freezer, cooked);
-
-			_model.CurrentContents = cooked;
-			_model.SaveFile(freezer);
-			_model.LoadFiles();
 		}
 
 		/// <summary>
