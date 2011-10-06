@@ -115,7 +115,7 @@ namespace BaconBuilder.View
 		private void BuildOkButton()
 		{
 			AcceptButton = btnOK;
-			btnOK.Enabled = (!string.IsNullOrEmpty(ItemFileName));
+			btnOK.Enabled = (!string.IsNullOrEmpty(FileName));
 			btnOK.DialogResult = DialogResult.OK;
 
 			btnOK.Click += btnOK_Click;
@@ -125,29 +125,29 @@ namespace BaconBuilder.View
 
 		private void txtImageURL_TextChanged(object sender, EventArgs e)
 		{
-			btnOK.Enabled = (!string.IsNullOrEmpty(ItemFileName));
+			btnOK.Enabled = (!string.IsNullOrEmpty(FileName));
 		}
 
 		private void btnBrowser_Click(object sender, EventArgs e)
 		{
 			if (_openImageDialog.ShowDialog() != DialogResult.Cancel)
 			{
-				ItemFileName = _openImageDialog.FileName;
+				FileName = _openImageDialog.FileName;
 			}
 		}
 
 		private void btnOK_Click(object sender, EventArgs e)
 		{
-            FileInfo f = new FileInfo(ItemFileName);
-            ImageManipulator i = new ImageManipulator(ItemFileName);
+            FileInfo f = new FileInfo(FileName);
+            ImageManipulator i = new ImageManipulator(FileName);
 
-            i.ScaleImage(270, 200, true);
+            i.ScaleImage(270, 300, true);
 
 		    string fileName = f.Name.Replace(f.Extension, "");
 
-            i.SaveImage("C:/Users/" + Environment.UserName + "/test/", fileName, ImageType.Jpg);
+            i.SaveImage("C:/Users/" + Environment.UserName + "/test/", fileName, ImageType.Png);
 
-			_model.ImageUrl = fileName + ".jpg";
+            _model.ImageUrl = "C:/Users/" + Environment.UserName + "/test/" + fileName + ".png";
 		}
 
 		private void btnCancel_Click(object sender, EventArgs e)
@@ -157,7 +157,7 @@ namespace BaconBuilder.View
 
 		#endregion
 
-		public string ItemFileName
+		public string FileName
 		{
 			get { return txtImageURL.Text; }
 			set { txtImageURL.Text = value; }

@@ -14,8 +14,6 @@ namespace BaconBuilder.View
 		private readonly MainViewController _controller;
 		private readonly BaconModel _model;
 
-        public IHTMLDocument2 Document { get; set; }
-
 		#region Constructors
 
 		public MainWindow()
@@ -39,9 +37,9 @@ namespace BaconBuilder.View
 
 
             browser.DocumentText = "<html><body></body></html>";
-		    Document = browser.Document.DomDocument as IHTMLDocument2;
+            IHTMLDocument2 doc = browser.Document.DomDocument as IHTMLDocument2;
 
-		    Document.designMode = "on";
+		    doc.designMode = "on";
 
             _model = new BaconModel();
             _controller = new MainViewController(_model, this);
@@ -112,26 +110,54 @@ namespace BaconBuilder.View
 
 		#endregion
 
+        #region Toolbar Button Events
 
         /// <summary>
         /// Wrap the selected text in bold tags.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void tsbBold_Click(object sender, EventArgs e)
         {
-
+            browser.Document.ExecCommand("Bold", false, null);
         }
 
         /// <summary>
         /// Wrap the selected text in italics.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void tsbItalics_Click(object sender, EventArgs e)
         {
-
+            browser.Document.ExecCommand("Italic", false, null);
         }
+
+        private void btn_Underline_Click(object sender, EventArgs e)
+        {
+            browser.Document.ExecCommand("Underline", false, null);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void btnAudio_Click(object sender, EventArgs e)
+        {
+            MediaSelectionDialog msd = new MediaSelectionDialog(_model, ContentType.Audio);
+            if(msd.DialogResult == DialogResult.OK)
+            {
+                
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void btnImage_Click(object sender, EventArgs e)
+        {
+            MediaSelectionDialog msd = new MediaSelectionDialog(_model, ContentType.Image);
+            if (msd.ShowDialog() == DialogResult.OK)
+            {
+                browser.Document.ExecCommand("InsertImage", false, _model.ImageUrl);
+            }
+        }
+
+        #endregion
 
 		/// <summary>
 		/// Exit the program.
@@ -154,26 +180,6 @@ namespace BaconBuilder.View
 			var preview = new Preview(_model);
 
 			preview.ShowDialog();
-		}
-
-		/// <summary>
-		/// Inserts an audio wrapped in tags. TODO: Implement importing of foreign images.
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void btnAudio_Click(object sender, EventArgs e)
-		{
-
-		}
-
-		/// <summary>
-		/// Inserts an image wrapped in tags. TODO: Implement importing of foreign images.
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void btnImage_Click(object sender, EventArgs e)
-		{
-		    
 		}
 
 		/// <summary>

@@ -87,6 +87,7 @@ namespace BaconBuilder.View
             this.splitter4 = new System.Windows.Forms.Splitter();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
+            this.btn_Underline = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.pnlDirectories.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -417,7 +418,8 @@ namespace BaconBuilder.View
             this.tsbAudio,
             this.toolStripSeparator3,
             this.tsbBold,
-            this.tsbItalics});
+            this.tsbItalics,
+            this.btn_Underline});
             this.toolContents.Location = new System.Drawing.Point(0, 0);
             this.toolContents.Name = "toolContents";
             this.toolContents.Size = new System.Drawing.Size(606, 25);
@@ -640,6 +642,16 @@ namespace BaconBuilder.View
             this.printPreviewDialog.Name = "printPreviewDialog";
             this.printPreviewDialog.Visible = false;
             // 
+            // btn_Underline
+            // 
+            this.btn_Underline.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btn_Underline.Image = ((System.Drawing.Image)(resources.GetObject("btn_Underline.Image")));
+            this.btn_Underline.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_Underline.Name = "btn_Underline";
+            this.btn_Underline.Size = new System.Drawing.Size(62, 22);
+            this.btn_Underline.Text = "Underline";
+            this.btn_Underline.Click += new System.EventHandler(this.btn_Underline_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -739,6 +751,7 @@ namespace BaconBuilder.View
         private SplitContainer splitContainer1;
         private WebBrowser browser;
         private PictureBox mapBox;
+        private ToolStripButton btn_Underline;
 
 	}
 }
