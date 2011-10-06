@@ -14,6 +14,11 @@ namespace BaconBuilder.View
         private readonly MainViewController _controller;
         private readonly BaconModel _model;
 
+        /// <summary>
+        /// Flag that controls whether drawing on the map view is enabled or not.
+        /// </summary>
+        private bool _mouseDownOnMap;
+
         #region IMainView Members
 
         /// <summary>
@@ -224,6 +229,84 @@ namespace BaconBuilder.View
 
         #endregion
 
+        #region Map Box Events and Methods
+
+        /// <summary>
+        /// Called when the user presses down their mouse button on the picture box.
+        /// 
+        /// Updates the UI to reflect their click.
+        /// </summary>
+        private void mapBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            // Allow drawing on the map.
+            _mouseDownOnMap = true;
+            mapBox_Modify(e);
+        }
+
+        /// <summary>
+        /// Called when the user moves their mouse over the picture box.
+        /// 
+        /// Updates the UI to reflect their action.
+        /// </summary>
+        private void mapBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            // If drawing is allowed, then do so.
+            if (_mouseDownOnMap)
+                mapBox_Modify(e);
+        }
+
+        /// <summary>
+        /// Called when the user releases their mouse button over the picture box.
+        /// </summary>
+        private void mapBox_MouseUp(object sender, MouseEventArgs e)
+        {
+            // Disallow any more drawing.
+            _mouseDownOnMap = false;
+        }
+
+        /// <summary>
+        /// Modifies the UI to reflect clicks and/or click-drags on the picture box.
+        /// </summary>
+        /// <param name="e">Mouse event args from the method that calls this.</param>
+        private void mapBox_Modify(MouseEventArgs e)
+        {
+            // Change the numeric up/down values. Don't allow values below 0.
+            txtX.Value = Math.Min(Math.Max(0, e.X), mapBox.Width);
+            txtY.Value = Math.Min(Math.Max(0, e.Y), mapBox.Height);
+
+            // Redraw and invalidate the picturebox.
+            mapBox.Invalidate();
+        }
+
+        /// <summary>
+        /// Called when the picture box needs repainting.
+        /// 
+        /// Draws the marker on the map.
+        /// </summary>
+        private void mapBox_Paint(object sender, PaintEventArgs e)
+        {
+            // Don't bother drawing anything outside the box.
+            if (txtX.Value >= 0 && txtY.Value >= 0 && txtX.Value <= mapBox.Width && txtY.Value <= mapBox.Height && !(txtX.Value == 0 && txtY.Value == 0))
+            {
+                // No magic numbers allowed.
+                const int radius = 5;
+
+                // Create a rectangle and brush to draw with.
+                Rectangle marker = new Rectangle((int)txtX.Value - radius, (int)txtY.Value - radius, 2 * radius, 2 * radius);
+                SolidBrush b = new SolidBrush(Color.Red);
+
+                // Draw marker ellipse.
+                e.Graphics.FillEllipse(b, marker);
+
+                // Change brush colour and draw 'you are here' text.
+                b.Color = Color.Black;
+                e.Graphics.DrawString("You are here", new Font(Font.FontFamily, 10), b, (float)txtX.Value + radius,
+                                      (float)txtY.Value - radius - 3);
+            }
+        }
+
+        #endregion
+
         #region Other Events
 
         /// <summary>
@@ -317,6 +400,20 @@ namespace BaconBuilder.View
             }
         }
 
+        /// <summary>
+        /// Called when the numeric up/down boxes have their value changed.
+        /// 
+        /// Constrains those values to lie within a boundary given by the picture box size.
+        /// Redraws and invalidates the picture box.
+        /// </summary>
+        private void txt_ValueChanged(object sender, EventArgs e)
+        {
+            txtX.Value = Math.Min(Math.Max(0, txtX.Value), mapBox.Width);
+            txtY.Value = Math.Min(Math.Max(0, txtY.Value), mapBox.Height);
+
+            mapBox.Invalidate();
+        }
+
         #endregion
 
         // TODO: Refactor the below to a new class.
@@ -407,5 +504,5 @@ namespace BaconBuilder.View
         }
 
         #endregion
-	}
+    }
 }

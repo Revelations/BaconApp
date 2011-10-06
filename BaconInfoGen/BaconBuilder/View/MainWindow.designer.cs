@@ -373,12 +373,16 @@ namespace BaconBuilder.View
             // mapBox
             // 
             this.mapBox.BackColor = System.Drawing.Color.White;
-            this.mapBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mapBox.BackgroundImage = global::BaconBuilder.Properties.Resources.map;
             this.mapBox.Location = new System.Drawing.Point(0, 0);
             this.mapBox.Name = "mapBox";
-            this.mapBox.Size = new System.Drawing.Size(299, 395);
-            this.mapBox.TabIndex = 0;
+            this.mapBox.Size = new System.Drawing.Size(299, 350);
+            this.mapBox.TabIndex = 2;
             this.mapBox.TabStop = false;
+            this.mapBox.Paint += new System.Windows.Forms.PaintEventHandler(this.mapBox_Paint);
+            this.mapBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mapBox_MouseDown);
+            this.mapBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mapBox_MouseMove);
+            this.mapBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mapBox_MouseUp);
             // 
             // flpPreview
             // 
@@ -523,6 +527,7 @@ namespace BaconBuilder.View
             this.txtY.Name = "txtY";
             this.txtY.Size = new System.Drawing.Size(247, 20);
             this.txtY.TabIndex = 5;
+            this.txtY.ValueChanged += new System.EventHandler(this.txt_ValueChanged);
             // 
             // lblY
             // 
@@ -553,6 +558,7 @@ namespace BaconBuilder.View
             this.txtX.Name = "txtX";
             this.txtX.Size = new System.Drawing.Size(247, 20);
             this.txtX.TabIndex = 4;
+            this.txtX.ValueChanged += new System.EventHandler(this.txt_ValueChanged);
             // 
             // lblX
             // 
@@ -749,8 +755,8 @@ namespace BaconBuilder.View
 		private ToolStripSeparator toolStripSeparator4;
         private SplitContainer splitContainer1;
         private WebBrowser browser;
-        private PictureBox mapBox;
         private ToolStripButton btn_Underline;
+        private PictureBox mapBox;
 
 	}
 }
