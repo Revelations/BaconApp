@@ -1,4 +1,3 @@
-<!DOCTYPE HTML>
 <!--
 
 NOTE: The marker doesn't get moved on Chrome 14 for some reason. Use FireFox for now.
@@ -11,51 +10,14 @@ Also, the example page from http://www.schepers.cc/svg/params/params.html
 	This issue is not prominent in Firefox.
 
 -->
- 
+
+<!DOCTYPE HTML>
 <html>
 	<head>
-		<script type="text/javascript" src="library.js"></script>
-		<meta name="svg.render.forceflash" content="true">
+		<script type="text/javascript" src="marker.js"></script>
 	</head>
-    
-	<body style="background-color:green">
-		<object id="vmap1" data="vmap.svg" type="image/svg+xml" style="width:300px; height:360px;">	
-			<param name="color" value="url(#Shiny)" />
-			<param name="label" value="YOU ARE HERE" />
-			<!-- TODO: Modify these values through JavaScript. -->
-			<param name="x" value="120" />
-			<param name="y" value="100" />
-		</object>
-		<object id="vmap2" data="vmap.svg" type="image/svg+xml" style="width:300px; height:360px;">	
-			<param name="color" value="blue" />
-			<param name="label" value="HERE YOU ARE" />
-			<param name="x" value="100" />
-		</object>
-		<object id="vmap3" data="vmap.svg" type="image/svg+xml" style="width:300px; height:360px;">	
-			<!-- empty args-->
-		</object>
-		<object id="params1" data="params.svg" type="image/svg+xml" style="width:500px; height:100px;">	
-			<param name="color" value="red" />
-			<param name="label" value="YOU ARE HERE" />
-			<param name="x" value="200" />
-			<param name="y" value="200" />
-			
-		</object>
-		<!--
-		<div id="reusable">
-			<object type="image/svg+xml" data="vmap2.svg" style="width: 150px; height:150px; display:inline;">
-				<param name="color" value="red" />
-				<param name="label" value="stop" />
-			</object>
-			<object type="image/svg+xml" data="vmap2.svg" style="width: 150px; height:150px; display:inline;">
-				<param name="color" value="orange" />
-				<param name="label" value="fast" />
-			</object>
-			<object type="image/svg+xml" data="vmap2.svg" style="width: 150px; height:150px; display:inline;">
-				<param name="color" value="green" />
-				<param name="label" value="go" />
-			</object>
-		</div>
-		-->
+
+	<body onload=" initMarker(); moveMarkerTo(100,100);">
+		<object id="mapobj" data="map.svg">Object not supported by browser.</object>
 	</body>
 </html>
