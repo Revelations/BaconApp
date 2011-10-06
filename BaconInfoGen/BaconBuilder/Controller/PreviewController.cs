@@ -24,20 +24,9 @@ namespace BaconBuilder.Controller
 			QrCode(_model.CurrentFileName);
 		}
 
-		public void PreviewPage(string text)
-		{
-			_view.SetBrowserText(text);
-		}
-
 		public void PreviewDocument()
 		{
 			_model.SaveFile(_model.CurrentFileNameWithExtension);
-			_view.SetBrowserUrl(_model.GetCurrentFileUri());
-			//_model.SaveFile(_model.CurrentFileNameWithExtension);
-			//_view.SetBrowserText(_model.CurrentParsedContents);
-
-			//_view.SetBrowserUrl(_model.CurrentFileNameWithExtension);
-			
 		}
 	}
 }

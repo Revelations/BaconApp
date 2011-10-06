@@ -72,6 +72,7 @@ namespace BaconBuilder.View
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbBold = new System.Windows.Forms.ToolStripButton();
             this.tsbItalics = new System.Windows.Forms.ToolStripButton();
+            this.btn_Underline = new System.Windows.Forms.ToolStripButton();
             this.splitter3 = new System.Windows.Forms.Splitter();
             this.tlpDataFields = new System.Windows.Forms.TableLayoutPanel();
             this.txtY = new System.Windows.Forms.NumericUpDown();
@@ -87,7 +88,6 @@ namespace BaconBuilder.View
             this.splitter4 = new System.Windows.Forms.Splitter();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
-            this.btn_Underline = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.pnlDirectories.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -398,7 +398,7 @@ namespace BaconBuilder.View
             this.btnPreview.Name = "btnPreview";
             this.btnPreview.Size = new System.Drawing.Size(150, 23);
             this.btnPreview.TabIndex = 10;
-            this.btnPreview.Text = "Preview";
+            this.btnPreview.Text = "Preview QR Code";
             this.btnPreview.UseVisualStyleBackColor = true;
             // 
             // btnPrintPreview
@@ -460,6 +460,16 @@ namespace BaconBuilder.View
             this.tsbItalics.Name = "tsbItalics";
             this.tsbItalics.Size = new System.Drawing.Size(41, 22);
             this.tsbItalics.Text = "Italics";
+            // 
+            // btn_Underline
+            // 
+            this.btn_Underline.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btn_Underline.Image = ((System.Drawing.Image)(resources.GetObject("btn_Underline.Image")));
+            this.btn_Underline.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_Underline.Name = "btn_Underline";
+            this.btn_Underline.Size = new System.Drawing.Size(62, 22);
+            this.btn_Underline.Text = "Underline";
+            this.btn_Underline.Click += new System.EventHandler(this.btn_Underline_Click);
             // 
             // splitter3
             // 
@@ -641,16 +651,6 @@ namespace BaconBuilder.View
             this.printPreviewDialog.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog.Icon")));
             this.printPreviewDialog.Name = "printPreviewDialog";
             this.printPreviewDialog.Visible = false;
-            // 
-            // btn_Underline
-            // 
-            this.btn_Underline.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btn_Underline.Image = ((System.Drawing.Image)(resources.GetObject("btn_Underline.Image")));
-            this.btn_Underline.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btn_Underline.Name = "btn_Underline";
-            this.btn_Underline.Size = new System.Drawing.Size(62, 22);
-            this.btn_Underline.Text = "Underline";
-            this.btn_Underline.Click += new System.EventHandler(this.btn_Underline_Click);
             // 
             // MainWindow
             // 
