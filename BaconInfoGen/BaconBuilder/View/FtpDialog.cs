@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using BaconBuilder.Model;
-using BaconBuilder.Properties;
 
 namespace BaconBuilder.View
 {
@@ -38,6 +37,7 @@ namespace BaconBuilder.View
 		{
 			InitializeComponent();
 			_helper = helper;
+			worker.WorkerSupportsCancellation = true;
 
 			// Set the method used by the worker for doing work. Adjust information label accordingly.
 			if (helper is FtpDownloader)
