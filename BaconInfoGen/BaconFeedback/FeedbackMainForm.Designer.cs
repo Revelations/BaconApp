@@ -44,9 +44,12 @@
             this.splitter3 = new System.Windows.Forms.Splitter();
             this.splitter4 = new System.Windows.Forms.Splitter();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnRemoveFile = new System.Windows.Forms.Button();
+            this.folderView = new System.Windows.Forms.ListView();
+            this.colHeaderFolder = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.imageList = new System.Windows.Forms.ImageList(this.components);
-            this.splitter5 = new System.Windows.Forms.Splitter();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.btnRemoveFile = new System.Windows.Forms.Button();
+            this.splitter = new System.Windows.Forms.Splitter();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.textBoxMisc = new System.Windows.Forms.TextBox();
@@ -60,14 +63,14 @@
             this.splitter6 = new System.Windows.Forms.Splitter();
             this.panel4 = new System.Windows.Forms.Panel();
             this.fileView = new System.Windows.Forms.ListView();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.folderView = new System.Windows.Forms.ListView();
+            this.colHeaderFilename = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colHeaderCreatedDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.menuStrip.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip
@@ -200,6 +203,45 @@
             this.panel1.Size = new System.Drawing.Size(162, 488);
             this.panel1.TabIndex = 6;
             // 
+            // folderView
+            // 
+            this.folderView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.colHeaderFolder});
+            this.folderView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.folderView.FullRowSelect = true;
+            this.folderView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.folderView.HideSelection = false;
+            this.folderView.Location = new System.Drawing.Point(0, 0);
+            this.folderView.Name = "folderView";
+            this.folderView.Size = new System.Drawing.Size(162, 449);
+            this.folderView.SmallImageList = this.imageList;
+            this.folderView.TabIndex = 3;
+            this.folderView.UseCompatibleStateImageBehavior = false;
+            this.folderView.View = System.Windows.Forms.View.Details;
+            this.folderView.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.folderView_ItemSelectionChanged);
+            // 
+            // colHeaderFolder
+            // 
+            this.colHeaderFolder.Text = "Folder";
+            this.colHeaderFolder.Width = 158;
+            // 
+            // imageList
+            // 
+            this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
+            this.imageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList.Images.SetKeyName(0, "folder.ico");
+            this.imageList.Images.SetKeyName(1, "folder_explorer.ico");
+            this.imageList.Images.SetKeyName(2, "doc.ico");
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.btnRemoveFile);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel3.Location = new System.Drawing.Point(0, 449);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(162, 39);
+            this.panel3.TabIndex = 0;
+            // 
             // btnRemoveFile
             // 
             this.btnRemoveFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
@@ -211,22 +253,15 @@
             this.btnRemoveFile.Text = "Herp";
             this.btnRemoveFile.UseVisualStyleBackColor = true;
             // 
-            // imageList
+            // splitter
             // 
-            this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
-            this.imageList.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList.Images.SetKeyName(0, "folder.ico");
-            this.imageList.Images.SetKeyName(1, "folder_explorer.ico");
-            this.imageList.Images.SetKeyName(2, "doc.ico");
-            // 
-            // splitter5
-            // 
-            this.splitter5.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.splitter5.Location = new System.Drawing.Point(170, 32);
-            this.splitter5.Name = "splitter5";
-            this.splitter5.Size = new System.Drawing.Size(8, 488);
-            this.splitter5.TabIndex = 7;
-            this.splitter5.TabStop = false;
+            this.splitter.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.splitter.Location = new System.Drawing.Point(170, 32);
+            this.splitter.Name = "splitter";
+            this.splitter.Size = new System.Drawing.Size(8, 488);
+            this.splitter.TabIndex = 7;
+            this.splitter.TabStop = false;
+            this.splitter.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitter_SplitterMoved);
             // 
             // panel2
             // 
@@ -366,42 +401,31 @@
             // 
             // fileView
             // 
+            this.fileView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.colHeaderFilename,
+            this.colHeaderCreatedDate});
             this.fileView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fileView.FullRowSelect = true;
             this.fileView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.fileView.HideSelection = false;
             this.fileView.Location = new System.Drawing.Point(0, 0);
-            this.fileView.MultiSelect = false;
             this.fileView.Name = "fileView";
             this.fileView.Size = new System.Drawing.Size(555, 186);
             this.fileView.SmallImageList = this.imageList;
             this.fileView.TabIndex = 0;
             this.fileView.UseCompatibleStateImageBehavior = false;
-            this.fileView.View = System.Windows.Forms.View.List;
+            this.fileView.View = System.Windows.Forms.View.Details;
             this.fileView.SelectedIndexChanged += new System.EventHandler(this.fileView_SelectedIndexChanged);
             // 
-            // panel3
+            // colHeaderFilename
             // 
-            this.panel3.Controls.Add(this.btnRemoveFile);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 449);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(162, 39);
-            this.panel3.TabIndex = 0;
+            this.colHeaderFilename.Text = "File Name";
+            this.colHeaderFilename.Width = 250;
             // 
-            // folderView
+            // colHeaderCreatedDate
             // 
-            this.folderView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.folderView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.folderView.HideSelection = false;
-            this.folderView.Location = new System.Drawing.Point(0, 0);
-            this.folderView.MultiSelect = false;
-            this.folderView.Name = "folderView";
-            this.folderView.Size = new System.Drawing.Size(162, 449);
-            this.folderView.SmallImageList = this.imageList;
-            this.folderView.TabIndex = 3;
-            this.folderView.UseCompatibleStateImageBehavior = false;
-            this.folderView.View = System.Windows.Forms.View.List;
-            this.folderView.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.folderView_ItemSelectionChanged);
+            this.colHeaderCreatedDate.Text = "Created On...";
+            this.colHeaderCreatedDate.Width = 200;
             // 
             // FeedbackMainForm
             // 
@@ -409,7 +433,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(741, 550);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.splitter5);
+            this.Controls.Add(this.splitter);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.splitter4);
             this.Controls.Add(this.splitter3);
@@ -423,11 +447,11 @@
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.panel4.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -442,7 +466,7 @@
         private System.Windows.Forms.Splitter splitter3;
         private System.Windows.Forms.Splitter splitter4;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Splitter splitter5;
+        private System.Windows.Forms.Splitter splitter;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnRemoveFile;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
@@ -467,6 +491,9 @@
         private System.Windows.Forms.ImageList imageList;
         private System.Windows.Forms.ListView folderView;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.ColumnHeader colHeaderFolder;
+        private System.Windows.Forms.ColumnHeader colHeaderFilename;
+        private System.Windows.Forms.ColumnHeader colHeaderCreatedDate;
     }
 }
 

@@ -4,9 +4,15 @@ using System.IO;
 
 namespace BaconFeedback
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class FileHandler
     {
+        // We all recognize this, amirite?
         private static readonly string _feedbackDirectory = "C:/Users/" + System.Environment.UserName + "/FeedbackTest/";
+
+        // Feedback file extension.
         private const string _feedbackExtension = ".fbk";
 
         public static IEnumerable<string> GetSubdirectories()
@@ -41,6 +47,12 @@ namespace BaconFeedback
         {
             string[] split = directory.Split('/');
             return split[split.Length - 1];
+        }
+
+        public static string GetCreationDate(string path)
+        {
+            FileInfo f = new FileInfo(_feedbackDirectory + path);
+            return f.CreationTime.ToString();
         }
 
         public static string[] GetFeedbackContents(string path)

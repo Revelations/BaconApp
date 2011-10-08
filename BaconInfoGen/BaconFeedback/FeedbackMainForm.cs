@@ -28,14 +28,23 @@ namespace BaconFeedback
 
         private void folderView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            _presenter.ChangeFolder();
-
             e.Item.ImageIndex = e.IsSelected ? 1 : 0;
+
+            if (e.Item.Selected)
+                _presenter.FileViewAddDirectory(e.Item.Text);
+            else
+                _presenter.FileViewRemoveDirectory(e.Item.Text);
         }
 
         private void fileView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _presenter.ChangeFile();
+            if (fileView.SelectedItems.Count > 0)
+                _presenter.DisplayFeedbackFile();
+        }
+
+        private void splitter_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            colHeaderFolder.Width = folderView.Width - 4;
         }
     }
 }
