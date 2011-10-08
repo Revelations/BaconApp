@@ -11,9 +11,19 @@ namespace BaconFeedback
 {
     public partial class FeedbackMainForm : Form
     {
+        public ListView FolderView { get { return folderView; } }
+        public ListView FileView { get { return fileView; } }
+
+        private FeedbackPresenter _presenter;
+
         public FeedbackMainForm()
         {
             InitializeComponent();
+
+            _presenter = new FeedbackPresenter(this);
+
+            _presenter.PopulateFolderView();
+            _presenter.PopulateFileView("Herp");
         }
     }
 }

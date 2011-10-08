@@ -52,6 +52,8 @@
     <Compile Include="FeedbackMainForm.Designer.cs">
       <DependentUpon>FeedbackMainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="FeedbackPresenter.cs" />
+    <Compile Include="FileHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FeedbackMainForm.resx">
