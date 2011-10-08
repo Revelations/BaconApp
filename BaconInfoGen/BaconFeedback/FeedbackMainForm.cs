@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace BaconFeedback
@@ -14,7 +8,9 @@ namespace BaconFeedback
         public ListView FolderView { get { return folderView; } }
         public ListView FileView { get { return fileView; } }
 
-        private FeedbackPresenter _presenter;
+        public TextBox[] FeedbackFields { get { return new [] { textBoxNumber, textBoxNationality, textBoxSighted, textBoxMisc }; } }
+
+        private readonly FeedbackPresenter _presenter;
 
         public FeedbackMainForm()
         {
@@ -23,7 +19,23 @@ namespace BaconFeedback
             _presenter = new FeedbackPresenter(this);
 
             _presenter.PopulateFolderView();
-            _presenter.PopulateFileView("Herp");
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void folderView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            _presenter.ChangeFolder();
+
+            e.Item.ImageIndex = e.IsSelected ? 1 : 0;
+        }
+
+        private void fileView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _presenter.ChangeFile();
         }
     }
 }
