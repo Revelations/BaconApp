@@ -9,6 +9,11 @@ namespace BaconFeedback
     /// </summary>
     public class FileHandler
     {
+        public FileHandler()
+        {
+            if (!Directory.Exists(_feedbackDirectory))
+                Directory.CreateDirectory(_feedbackDirectory);
+        }
         // We all recognize this, amirite?
         private static readonly string _feedbackDirectory = "C:/Users/" + System.Environment.UserName + "/FeedbackTest/";
 

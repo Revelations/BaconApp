@@ -5,7 +5,6 @@ namespace BaconBuilder.View
 {
 	partial class MainWindow
 	{
-		const int splitterWidth = 4;
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
@@ -356,7 +355,6 @@ namespace BaconBuilder.View
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.mapBox);
-            this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.mapBox_Paint);
             this.splitContainer1.Size = new System.Drawing.Size(606, 421);
             this.splitContainer1.SplitterDistance = 303;
             this.splitContainer1.TabIndex = 12;
