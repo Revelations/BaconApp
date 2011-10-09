@@ -9,11 +9,13 @@
 #import <Foundation/Foundation.h>
 
 
-@interface Update : NSObject {
+@interface Update : NSObject <NSStreamDelegate> {
     
 }
 
 - (void)getFile:(NSString *) urlPath;
 -(void)getDirectory:(NSString *)urlPath;
+-(void)upLoadFile:(NSString *)urlPath;
+-(void)_startSend:(NSString *)filePath : (NSString *) urlPath;
 
 @end
