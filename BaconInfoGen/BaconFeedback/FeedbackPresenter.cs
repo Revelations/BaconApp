@@ -200,7 +200,7 @@ namespace BaconFeedback
         /// </summary>
         public void InitPrintHandler()
         {
-            _printer = new PrintHandler(CreateFeedbackPrintList());
+            _printer = new PrintHandler(CreateFeedbackList());
         }
 
         #endregion
@@ -225,10 +225,10 @@ namespace BaconFeedback
         #endregion
 
         /// <summary>
-        /// Gets data from all selected feedback and creates a list of feedback data for printing.
+        /// Gets data from all selected feedback and creates a list of feedback data for passing to other classes.
         /// </summary>
-        /// <returns>List of feedback files requested for printing.</returns>
-        private List<FeedbackFile> CreateFeedbackPrintList()
+        /// <returns>List of all selected feedback files.</returns>
+        public List<FeedbackFile> CreateFeedbackList()
         {
             // Initialise a list to store results.
             List<FeedbackFile> result = new List<FeedbackFile>();

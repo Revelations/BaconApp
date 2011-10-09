@@ -81,6 +81,8 @@
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
+            this.toolStripStats = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -92,9 +94,9 @@
             // 
             // statusStrip
             // 
-            this.statusStrip.Location = new System.Drawing.Point(0, 528);
+            this.statusStrip.Location = new System.Drawing.Point(0, 540);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(741, 22);
+            this.statusStrip.Size = new System.Drawing.Size(784, 22);
             this.statusStrip.TabIndex = 0;
             this.statusStrip.Text = "statusStrip";
             // 
@@ -105,7 +107,7 @@
             this.editToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(741, 24);
+            this.menuStrip.Size = new System.Drawing.Size(784, 24);
             this.menuStrip.TabIndex = 1;
             this.menuStrip.Text = "menuStrip";
             // 
@@ -173,7 +175,7 @@
             this.splitter1.Enabled = false;
             this.splitter1.Location = new System.Drawing.Point(0, 24);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(8, 504);
+            this.splitter1.Size = new System.Drawing.Size(8, 516);
             this.splitter1.TabIndex = 2;
             this.splitter1.TabStop = false;
             // 
@@ -182,9 +184,9 @@
             this.splitter2.BackColor = System.Drawing.SystemColors.ControlDark;
             this.splitter2.Dock = System.Windows.Forms.DockStyle.Right;
             this.splitter2.Enabled = false;
-            this.splitter2.Location = new System.Drawing.Point(733, 24);
+            this.splitter2.Location = new System.Drawing.Point(776, 24);
             this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(8, 504);
+            this.splitter2.Size = new System.Drawing.Size(8, 516);
             this.splitter2.TabIndex = 3;
             this.splitter2.TabStop = false;
             // 
@@ -195,7 +197,7 @@
             this.splitter3.Enabled = false;
             this.splitter3.Location = new System.Drawing.Point(8, 24);
             this.splitter3.Name = "splitter3";
-            this.splitter3.Size = new System.Drawing.Size(725, 8);
+            this.splitter3.Size = new System.Drawing.Size(768, 8);
             this.splitter3.TabIndex = 4;
             this.splitter3.TabStop = false;
             // 
@@ -204,9 +206,9 @@
             this.splitter4.BackColor = System.Drawing.SystemColors.ControlDark;
             this.splitter4.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.splitter4.Enabled = false;
-            this.splitter4.Location = new System.Drawing.Point(8, 520);
+            this.splitter4.Location = new System.Drawing.Point(8, 532);
             this.splitter4.Name = "splitter4";
-            this.splitter4.Size = new System.Drawing.Size(725, 8);
+            this.splitter4.Size = new System.Drawing.Size(768, 8);
             this.splitter4.TabIndex = 5;
             this.splitter4.TabStop = false;
             // 
@@ -218,7 +220,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(8, 32);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(162, 488);
+            this.panel1.Size = new System.Drawing.Size(162, 500);
             this.panel1.TabIndex = 6;
             // 
             // folderView
@@ -232,7 +234,7 @@
             this.folderView.HideSelection = false;
             this.folderView.Location = new System.Drawing.Point(0, 0);
             this.folderView.Name = "folderView";
-            this.folderView.Size = new System.Drawing.Size(162, 449);
+            this.folderView.Size = new System.Drawing.Size(162, 461);
             this.folderView.SmallImageList = this.imageList;
             this.folderView.TabIndex = 3;
             this.folderView.UseCompatibleStateImageBehavior = false;
@@ -256,7 +258,7 @@
             // 
             this.panel3.Controls.Add(this.btnRemoveFile);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 449);
+            this.panel3.Location = new System.Drawing.Point(0, 461);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(162, 39);
             this.panel3.TabIndex = 0;
@@ -277,7 +279,7 @@
             this.splitter.BackColor = System.Drawing.SystemColors.ControlDark;
             this.splitter.Location = new System.Drawing.Point(170, 32);
             this.splitter.Name = "splitter";
-            this.splitter.Size = new System.Drawing.Size(8, 488);
+            this.splitter.Size = new System.Drawing.Size(8, 500);
             this.splitter.TabIndex = 7;
             this.splitter.TabStop = false;
             this.splitter.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitter_SplitterMoved);
@@ -290,7 +292,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(178, 32);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(555, 488);
+            this.panel2.Size = new System.Drawing.Size(598, 500);
             this.panel2.TabIndex = 8;
             // 
             // tableLayoutPanel1
@@ -314,27 +316,27 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(555, 294);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(598, 306);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // textBoxMisc
             // 
             this.textBoxMisc.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxMisc.Location = new System.Drawing.Point(123, 176);
+            this.textBoxMisc.Location = new System.Drawing.Point(123, 182);
             this.textBoxMisc.Multiline = true;
             this.textBoxMisc.Name = "textBoxMisc";
             this.textBoxMisc.ReadOnly = true;
             this.textBoxMisc.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxMisc.Size = new System.Drawing.Size(429, 115);
+            this.textBoxMisc.Size = new System.Drawing.Size(472, 121);
             this.textBoxMisc.TabIndex = 7;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label4.Location = new System.Drawing.Point(43, 173);
+            this.label4.Location = new System.Drawing.Point(43, 179);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(74, 121);
+            this.label4.Size = new System.Drawing.Size(74, 127);
             this.label4.TabIndex = 6;
             this.label4.Text = "Miscellaneous Feedback";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -348,7 +350,7 @@
             this.textBoxSighted.Name = "textBoxSighted";
             this.textBoxSighted.ReadOnly = true;
             this.textBoxSighted.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxSighted.Size = new System.Drawing.Size(429, 115);
+            this.textBoxSighted.Size = new System.Drawing.Size(472, 121);
             this.textBoxSighted.TabIndex = 5;
             // 
             // label3
@@ -357,7 +359,7 @@
             this.label3.Dock = System.Windows.Forms.DockStyle.Right;
             this.label3.Location = new System.Drawing.Point(33, 52);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(84, 121);
+            this.label3.Size = new System.Drawing.Size(84, 127);
             this.label3.TabIndex = 4;
             this.label3.Text = "What They Saw";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -379,7 +381,7 @@
             this.textBoxNationality.Location = new System.Drawing.Point(123, 29);
             this.textBoxNationality.Name = "textBoxNationality";
             this.textBoxNationality.ReadOnly = true;
-            this.textBoxNationality.Size = new System.Drawing.Size(429, 20);
+            this.textBoxNationality.Size = new System.Drawing.Size(472, 20);
             this.textBoxNationality.TabIndex = 0;
             // 
             // textBoxNumber
@@ -388,7 +390,7 @@
             this.textBoxNumber.Location = new System.Drawing.Point(123, 3);
             this.textBoxNumber.Name = "textBoxNumber";
             this.textBoxNumber.ReadOnly = true;
-            this.textBoxNumber.Size = new System.Drawing.Size(429, 20);
+            this.textBoxNumber.Size = new System.Drawing.Size(472, 20);
             this.textBoxNumber.TabIndex = 1;
             // 
             // label1
@@ -408,7 +410,7 @@
             this.splitter6.Dock = System.Windows.Forms.DockStyle.Top;
             this.splitter6.Location = new System.Drawing.Point(0, 186);
             this.splitter6.Name = "splitter6";
-            this.splitter6.Size = new System.Drawing.Size(555, 8);
+            this.splitter6.Size = new System.Drawing.Size(598, 8);
             this.splitter6.TabIndex = 1;
             this.splitter6.TabStop = false;
             // 
@@ -419,7 +421,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(555, 186);
+            this.panel4.Size = new System.Drawing.Size(598, 186);
             this.panel4.TabIndex = 0;
             // 
             // toolStrip
@@ -436,13 +438,15 @@
             this.toolStripPreview,
             this.toolStripPrint,
             this.toolStripSeparator5,
+            this.toolStripStats,
+            this.toolStripSeparator6,
             this.toolStripSync,
             this.toolStripSeparator4,
             this.toolStripConfig});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip.Size = new System.Drawing.Size(555, 48);
+            this.toolStrip.Size = new System.Drawing.Size(598, 48);
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "toolStrip";
             // 
@@ -578,7 +582,7 @@
             this.fileView.HideSelection = false;
             this.fileView.Location = new System.Drawing.Point(0, 48);
             this.fileView.Name = "fileView";
-            this.fileView.Size = new System.Drawing.Size(555, 138);
+            this.fileView.Size = new System.Drawing.Size(598, 138);
             this.fileView.SmallImageList = this.imageList;
             this.fileView.TabIndex = 0;
             this.fileView.UseCompatibleStateImageBehavior = false;
@@ -611,11 +615,30 @@
             this.printPreviewDialog.UseAntiAlias = true;
             this.printPreviewDialog.Visible = false;
             // 
+            // toolStripStats
+            // 
+            this.toolStripStats.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripStats.Image = ((System.Drawing.Image)(resources.GetObject("toolStripStats.Image")));
+            this.toolStripStats.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripStats.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripStats.Margin = new System.Windows.Forms.Padding(4, 1, 4, 2);
+            this.toolStripStats.Name = "toolStripStats";
+            this.toolStripStats.Size = new System.Drawing.Size(36, 45);
+            this.toolStripStats.Text = "Options - Opens an options dialog.";
+            this.toolStripStats.ToolTipText = "Statistics - Shows various statistics about the selected files.";
+            this.toolStripStats.Click += new System.EventHandler(this.toolStripStats_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 32);
+            // 
             // FeedbackMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(741, 550);
+            this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.splitter);
             this.Controls.Add(this.panel1);
@@ -698,6 +721,8 @@
         private System.Windows.Forms.PrintDialog printDialog;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog;
         private System.Drawing.Printing.PrintDocument printDocument;
+        private System.Windows.Forms.ToolStripButton toolStripStats;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
     }
 }
 

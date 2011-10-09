@@ -90,6 +90,12 @@ namespace BaconFeedback
 
         }
 
+        private void toolStripStats_Click(object sender, EventArgs e)
+        {
+            StatisticsForm stats = new StatisticsForm(_presenter.CreateFeedbackList());
+            stats.ShowDialog();
+        }
+
         private void toolStripSync_Click(object sender, EventArgs e)
         {
 
