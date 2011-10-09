@@ -5,6 +5,7 @@ using System.Drawing.Printing;
 using System.Linq;
 using System.Net.Sockets;
 using System.Windows.Forms;
+using BaconBuilder.Component;
 using BaconBuilder.Controller;
 using BaconBuilder.Model;
 using BaconBuilder.Properties;
@@ -137,6 +138,10 @@ namespace BaconBuilder.View
 		{
 			// Initialise form controls.
 			InitializeComponent();
+			txtX.Minimum = 0;
+			txtY.Minimum = 0;
+
+			this.mapBox.MapCoordinateChanged += MapBoxMapCoordinateChanged;
 
 			// Event binding.
 			tsbImage.Click += btnImage_Click;
@@ -166,6 +171,12 @@ namespace BaconBuilder.View
 			// Initialise MVP objects.
 			_model = new BaconModel();
 			_controller = new MainViewController(_model, this);
+		}
+
+		private void MapBoxMapCoordinateChanged(object sender, MouseEventArgs e)
+		{
+			txtY.Value = e.Y;
+			txtX.Value = e.X;
 		}
 
 		#endregion
@@ -239,7 +250,7 @@ namespace BaconBuilder.View
 		private void btnPrintPreview_Click(object sender, EventArgs e)
 		{
 			printPreviewDialog.Document = printDocument;
-            _codecount = 0;
+			_codecount = 0;
 			printPreviewDialog.ShowDialog();
 		}
 
@@ -263,6 +274,9 @@ namespace BaconBuilder.View
 			{
 				_controller.RemoveCurrentFile();
 				_controller.RefreshDirectory();
+				txtTitle.Text = "";
+				txtX.Text = "";
+				txtY.Text = "";
 			}
 		}
 
@@ -281,85 +295,6 @@ namespace BaconBuilder.View
 		private void exitToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			Close();
-		}
-
-		#endregion
-
-		#region Map Box Events and Methods
-
-		/// <summary>
-		/// Called when the user presses down their mouse button on the picture box.
-		/// 
-		/// Updates the UI to reflect their click.
-		/// </summary>
-		private void mapBox_MouseDown(object sender, MouseEventArgs e)
-		{
-			// Allow drawing on the map.
-			_mouseDownOnMap = true;
-			mapBox_Modify(e);
-		}
-
-		/// <summary>
-		/// Called when the user moves their mouse over the picture box.
-		/// 
-		/// Updates the UI to reflect their action.
-		/// </summary>
-		private void mapBox_MouseMove(object sender, MouseEventArgs e)
-		{
-			// If drawing is allowed, then do so.
-			if (_mouseDownOnMap)
-				mapBox_Modify(e);
-		}
-
-		/// <summary>
-		/// Called when the user releases their mouse button over the picture box.
-		/// </summary>
-		private void mapBox_MouseUp(object sender, MouseEventArgs e)
-		{
-			// Disallow any more drawing.
-			_mouseDownOnMap = false;
-		}
-
-		/// <summary>
-		/// Modifies the UI to reflect clicks and/or click-drags on the picture box.
-		/// </summary>
-		/// <param name="e">Mouse event args from the method that calls this.</param>
-		private void mapBox_Modify(MouseEventArgs e)
-		{
-			// Change the numeric up/down values. Don't allow values below 0.
-			txtX.Value = Math.Min(Math.Max(0, e.X), mapBox.Width);
-			txtY.Value = Math.Min(Math.Max(0, e.Y), mapBox.Height);
-
-			// Redraw and invalidate the picturebox.
-			mapBox.Invalidate();
-		}
-
-		/// <summary>
-		/// Called when the picture box needs repainting.
-		/// 
-		/// Draws the marker on the map.
-		/// </summary>
-		private void mapBox_Paint(object sender, PaintEventArgs e)
-		{
-			// Don't bother drawing anything outside the box.
-			if (txtX.Value >= 0 && txtY.Value >= 0 && txtX.Value <= mapBox.Width && txtY.Value <= mapBox.Height &&
-			    !(txtX.Value == 0 && txtY.Value == 0))
-			{
-				// No magic numbers allowed.
-				const int radius = 5;
-
-				// Create a rectangle and brush to draw with.
-				var marker = new Rectangle((int) txtX.Value - radius, (int) txtY.Value - radius, 2*radius, 2*radius);
-				var b = new SolidBrush(Color.Red);
-
-				// Draw marker ellipse.
-				e.Graphics.FillEllipse(b, marker);
-
-				// Change brush colour and draw 'you are here' text.
-				b.Color = Color.Black;
-				e.Graphics.DrawString("You are here", new Font(Font.FontFamily, 10), b, (float) txtX.Value + radius,
-				                      (float) txtY.Value - radius - 3);
-			}
 		}
 
 		#endregion
@@ -503,84 +438,75 @@ namespace BaconBuilder.View
 		}
 
 		#region Russell's Print Stuff.
-        
-        // TODO: Refactor the below to a new class.
-        int _codecount = 0;
+		
+		// TODO: Refactor the below to a new class.
+		int _codecount = 0;
 		/// <summary>
-		/// Print pages. TODO: Handle multi-page
+		/// Print multiple pages.
 		/// Russell
 		/// </summary>
 		private void printDocument_PrintPage(object sender, PrintPageEventArgs e)
 		{
-            int mx = 100,my =100;
+			int mx = 100,my =100;
 			var qr = new QrCodeGenerator();
 			var font = new Font(Font.FontFamily, 20);
 			var fontColor = new SolidBrush(Color.Black);
 
 			//drawing lines for now
-            int pageheight = 1169 - my * 2,
-                pagewidth = 827 - mx * 2;
-                //x1 = mx,
-                //x2 = pagewidth + mx,
-                //y1 = my,
-                //y2 = pageheight + my,
-                //y3 = (pageheight/2) + my,
-                //y4 = pageheight/4 + my,
-                //y5 = pageheight - (pageheight/4) + my;
-			//makes and arraylist for my variables cos i can
-			//var ys = new ArrayList(5) {0, y1, y4, y3, y5};
-            /*
-             *pageheight/4
-             *
-             * */
+			int pageheight = 1169 - my * 2,
+				pagewidth = 827 - mx * 2;
+				//x1 = mx,
+				//x2 = pagewidth + mx,
+				//y1 = my,
+				//y2 = pageheight + my,
+				//y3 = (pageheight/2) + my,
+				//y4 = pageheight/4 + my,
+				//y5 = pageheight - (pageheight/4) + my;
 			//lines drawn
-            //e.Graphics.DrawLines(Pens.Black,
-            //                     new[]
-            //                        {new Point(x1, y1), new Point(x1, y2), new Point(x2, y2), new Point(x2, y1), new Point(x1, y1)});
-            ////draws the margins in
+			//e.Graphics.DrawLines(Pens.Black,
+			//                     new[]
+			//                        {new Point(x1, y1), new Point(x1, y2), new Point(x2, y2), new Point(x2, y1), new Point(x1, y1)});
+			////draws the margins in
 
-
-            //e.Graphics.DrawLine(Pens.Black, x1, y3, x2, y3); //middleline
-            //e.Graphics.DrawLine(Pens.Black, x1, y4, x2, y4); //topmidline
-            //e.Graphics.DrawLine(Pens.Black, x1, y5, x2, y5); //bottommidline
+			//e.Graphics.DrawLine(Pens.Black, x1, y3, x2, y3); //middleline
+			//e.Graphics.DrawLine(Pens.Black, x1, y4, x2, y4); //topmidline
+			//e.Graphics.DrawLine(Pens.Black, x1, y5, x2, y5); //bottommidline
 
 			float right = 827 - 172 - mx;
 			float right2 = 827/2 + mx;
-            float yline = e.MarginBounds.Top;
-            int linediff = pageheight / 4;
+			float yline = e.MarginBounds.Top;
+			int linediff = pageheight / 4;
 			for (; _codecount< Files.Count; _codecount++)
 			{
 				float x, xi;
 				string text = Files[_codecount].Text;
-				//code per page counter
-                    if(yline + linediff > e.MarginBounds.Bottom)
-					{
+
+                if (yline + linediff > e.MarginBounds.Bottom)
+                {
                     e.HasMorePages = true;
                     return;
-                    }
-				Image code = qr.GenerateCode(text);
+                }
+			    Image code = qr.GenerateCode(text);
 				//Even on left. Odd on right
 				Console.WriteLine(code.Width);
 
 				if (_codecount%2 == 0)
 				{
-					//layoutRectangle = new Rectangle(350, 180*j, 500, 100);
 					x = mx;
 					xi = right2;
 				}
 				else
 				{
-					//layoutRectangle = new Rectangle(250, 180*j, 500, 100);
 					xi = mx;
 					x = right;
 				}
 				e.Graphics.DrawString(text, font, fontColor, new RectangleF(xi, ((int) yline + 90), 500, 100));
 				e.Graphics.DrawImage(code, x, (float) ((int) yline + 34.5));
 				
-                yline += linediff;   
+				yline += linediff;   
 			}
 
-            e.HasMorePages = false;
+			e.HasMorePages = false;
 		}
 
 		#endregion

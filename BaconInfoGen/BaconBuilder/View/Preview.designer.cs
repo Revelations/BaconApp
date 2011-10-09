@@ -38,6 +38,7 @@ namespace BaconBuilder.View
             // 
             // btnClose
             // 
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.Location = new System.Drawing.Point(12, 228);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(200, 23);
@@ -63,11 +64,16 @@ namespace BaconBuilder.View
             this.AutoSize = true;
             this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(224, 263);
+            this.ControlBox = false;
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.picboxQRCode);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Preview";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Preview";
+            this.Text = "QR Code Preview";
             ((System.ComponentModel.ISupportInitialize)(this.picboxQRCode)).EndInit();
             this.ResumeLayout(false);
 

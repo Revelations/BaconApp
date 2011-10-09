@@ -69,10 +69,16 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Freeslugs.Svg">
+      <HintPath>..\lib\Freeslugs.Svg.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Svg">
+      <HintPath>..\lib\Svg.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -89,7 +95,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Component\MyBrowser.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controller\MainViewController.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\Ftp\FtpHelper.cs" />
     <Compile Include="Model\IModel.cs" />
     <Compile Include="Model\Parser\HtmlToTextParser.cs" />
@@ -103,11 +118,20 @@
     <Compile Include="Model\Reader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Component\DBPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="View\FtpDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\FtpDialog.Designer.cs">
       <DependentUpon>FtpDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Component\MapBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Component\MapBox.Designer.cs">
+      <DependentUpon>MapBox.cs</DependentUpon>
     </Compile>
     <Compile Include="View\MediaSelectionDialog.cs">
       <SubType>Form</SubType>
@@ -137,6 +161,9 @@
     <Compile Include="View\SplashScreen.Designer.cs">
       <DependentUpon>SplashScreen.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -149,6 +176,9 @@
     </Compile>
     <EmbeddedResource Include="View\FtpDialog.resx">
       <DependentUpon>FtpDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Component\MapBox.resx">
+      <DependentUpon>MapBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\MediaSelectionDialog.resx">
       <DependentUpon>MediaSelectionDialog.cs</DependentUpon>
@@ -201,6 +231,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Blank.html" />
+    <None Include="Resources\map600x720.png" />
+    <None Include="Resources\vmap.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

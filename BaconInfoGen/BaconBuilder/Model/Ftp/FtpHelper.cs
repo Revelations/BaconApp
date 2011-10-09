@@ -13,39 +13,57 @@ namespace BaconBuilder.Model
     /// </summary>
     public abstract class FtpHelper
     {
-    	//private readonly IModel _model;
-		private static readonly string HtmlDirectory = "C:/Users/" + Environment.UserName + "/test/";
+        //private readonly IModel _model;
+        private static readonly string HtmlDirectory = "C:/Users/" + Environment.UserName + "/test/";
 
-    	/// <summary>
+        /// <summary>
+        /// Initialises a web request with the method.
+        /// </summary>
+        /// <param name="requestUriString"></param>
+        /// <param name="method"></param>
+        /// <returns></returns>
+        private static FtpWebRequest InitRequest(string requestUriString, string method)
+        {
+            // init request
+            var ftp = WebRequest.Create(requestUriString) as FtpWebRequest;
+            if (ftp == null) return null;
+
+            // set request type
+            ftp.Method = method;
+
+            return ftp;
+        }
+
+        /// <summary>
         /// Connects to an ftp server and gets a listing of all files in the main directory.
         /// </summary>
         /// <returns>String list of all files present on the server.</returns>
         public List<string> ConnectAndGetFileList()
         {
-            // Init request.
-            FtpWebRequest ftp = (FtpWebRequest)WebRequest.Create(Resources.ServerLocation);
+            var result = new List<string>();
 
-            // Request type is directory listing.
-            ftp.Method = WebRequestMethods.Ftp.ListDirectory;
+            string uriString = Resources.ServerLocation;
+            const string method = WebRequestMethods.Ftp.ListDirectory;
+            FtpWebRequest request = InitRequest(uriString, method);
 
             // Connect to server.
-            WebResponse response = ftp.GetResponse();
-
-            // Instantiate a reader to handle the stream sent back from server.
-            StreamReader reader = new StreamReader(response.GetResponseStream());
-
-            List<string> result = new List<string>();
-
-            // Continue iterating for as long as needed.
-            string line = reader.ReadLine();
-            while (line != null)
+            using (WebResponse response = request.GetResponse())
+            using (Stream responseStream = response.GetResponseStream())
             {
-                // Get file name and add it to list.
-                result.Add(line);
-                line = reader.ReadLine();
-            }
+                if (responseStream == null) return result;
 
-            response.Close();
+                // Instantiate a reader to handle the stream sent back from server.
+                using (var reader = new StreamReader(responseStream))
+                {
+                    // Continue iterating for as long as needed.
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        // Get file name and add it to list.
+                        result.Add(line);
+                    }
+                }
+            }
 
             return result;
         }
@@ -67,7 +85,8 @@ namespace BaconBuilder.Model
         /// <returns>The size of the local file in bytes.</returns>
         public long LocalVersionSize(string fileName)
         {
-            FileInfo info = new FileInfo(HtmlDirectory + fileName);
+            var info = new FileInfo(HtmlDirectory + fileName);
+
             return info.Length;
         }
 
@@ -78,19 +97,16 @@ namespace BaconBuilder.Model
         /// <returns>The size of the remote file in bytes.</returns>
         public long RemoteVersionSize(string fileName)
         {
-            // Init request.
-            FtpWebRequest ftp = (FtpWebRequest)WebRequest.Create(Resources.ServerLocation + fileName);
+            string uriString = Resources.ServerLocation + fileName;
+            const string method = WebRequestMethods.Ftp.GetFileSize;
+            FtpWebRequest request = InitRequest(uriString, method);
 
-            // Set request type to request file size.
-            ftp.Method = WebRequestMethods.Ftp.GetFileSize;
+            using (WebResponse response = request.GetResponse())
+            {
+                long result = response.ContentLength;
 
-            // Get the response, and it's length.
-            FtpWebResponse response = (FtpWebResponse)ftp.GetResponse();
-            long result = response.ContentLength;
-
-            // Close the response and return.
-            response.Close();
-            return result;
+                return result;
+            }
         }
 
         /// <summary>
@@ -99,14 +115,12 @@ namespace BaconBuilder.Model
         /// <param name="fileName">Name of the file to delete.</param>
         public void DeleteRemoteFile(string fileName)
         {
-            // Init request.
-            FtpWebRequest ftp = (FtpWebRequest) WebRequest.Create(Resources.ServerLocation + fileName);
-
-            // Request type is delete file.
-            ftp.Method = WebRequestMethods.Ftp.DeleteFile;
+            string uriString = Resources.ServerLocation + fileName;
+            const string methods = WebRequestMethods.Ftp.DeleteFile;
+            FtpWebRequest request = InitRequest(uriString, methods);
 
             // TODO: Store this value for error checking in future.
-            ftp.GetResponse();
+            WebResponse response = request.GetResponse();
         }
     }
 }

@@ -10,9 +10,12 @@ namespace BaconBuilder.View
 	{
 		private readonly IModel _model;
 		private readonly PreviewController _controller;
+
 		public Preview(IModel model)
 		{
 			InitializeComponent();
+
+			btnClose.DialogResult = DialogResult.OK;
 
 			_model = model;
 			_controller = new PreviewController(_model, this);
@@ -28,10 +31,5 @@ namespace BaconBuilder.View
 		}
 
 		#endregion
-
-		private void btnClose_Click(object sender, EventArgs e)
-		{
-			Close();
-		}
 	}
 }

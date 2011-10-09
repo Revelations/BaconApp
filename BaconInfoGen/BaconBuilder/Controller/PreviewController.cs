@@ -23,10 +23,5 @@ namespace BaconBuilder.Controller
 		{
 			QrCode(_model.CurrentFileName);
 		}
-
-		public void PreviewDocument()
-		{
-			_model.SaveFile(_model.CurrentFileNameWithExtension);
-		}
 	}
 }
