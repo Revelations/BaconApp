@@ -1,4 +1,6 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace BaconFeedback
 {
@@ -12,6 +14,9 @@ namespace BaconFeedback
         private readonly ListView _folderView;
         private readonly ListView _fileView;
         private readonly TextBox[] _feedbackFields;
+
+        private List<string> _deletedFolders;
+        private List<string> _deletedFiles;
 
         #endregion
 
@@ -27,7 +32,7 @@ namespace BaconFeedback
             _folderView.Items.Clear();
             _folderView.Refresh();
 
-            foreach (string s in FileHandler.GetSubdirectories())
+            foreach (string s in FileHandler.GetSubfolders())
                 _folderView.Items.Add(s, 0);
         }
 
@@ -36,26 +41,26 @@ namespace BaconFeedback
         /// 
         /// Will not clear out files already present in the view.
         /// </summary>
-        /// <param name="directory">The directory to add files from.</param>
-        public void FileViewAddDirectory(string directory)
+        /// <param name="folder">The directory to add files from.</param>
+        public void FileViewAddFolder(string folder)
         {
-            foreach (string s in FileHandler.GetFeedbackFiles(directory))
+            foreach (string s in FileHandler.GetFeedbackFiles(folder))
             {
                 _fileView.Items.Add(s, 2);
 
-                string lmd = FileHandler.GetCreationDate(directory + '/' + s);
+                string lmd = FileHandler.GetCreationDate(folder + '/' + s);
                 _fileView.Items[_fileView.Items.Count - 1].SubItems.Add(lmd);
-                _fileView.Items[_fileView.Items.Count - 1].SubItems.Add(directory);
+                _fileView.Items[_fileView.Items.Count - 1].SubItems.Add(folder);
             }
         }
 
         /// <summary>
         /// Removes the feedback files from a given directory from the file view.
         /// </summary>
-        /// <param name="directory">The directory being excluded from the file view.</param>
-        public void FileViewRemoveDirectory(string directory)
+        /// <param name="folder">The directory being excluded from the file view.</param>
+        public void FileViewRemoveFolder(string folder)
         {
-            foreach (string s in FileHandler.GetFeedbackFiles(directory))
+            foreach (string s in FileHandler.GetFeedbackFiles(folder))
                 foreach (ListViewItem i in _fileView.Items)
                     if (i.Text.Equals(s))
                         _fileView.Items.Remove(i);
@@ -75,14 +80,42 @@ namespace BaconFeedback
         /// </summary>
         public void DisplayFeedbackFile()
         {
-            // Get the file contents.
-            string[] contents =
-                FileHandler.GetFeedbackContents(_fileView.SelectedItems[0].SubItems[2].Text + '/' +
-                                                _fileView.SelectedItems[0].Text);
+            string[] contents;
+
+            // If there is a file selected, then get file contents.
+            if (_fileView.SelectedItems.Count > 0)
+                contents =
+                    FileHandler.GetFeedbackContents(_fileView.SelectedItems[0].SubItems[2].Text + '/' +
+                                                    _fileView.SelectedItems[0].Text);
+
+            // Otherwise get a bunch of empty strings.
+            else
+                contents = new[] {string.Empty, string.Empty, string.Empty, string.Empty};
 
             // For each line of the file, insert data into the appropriate textboxes.
-            for(int i = 0; i < 4; i++)
+            for (int i = 0; i < 4; i++)
                 _feedbackFields[i].Text = contents[i];
+        }
+
+        public void DeleteFolder(string folder)
+        {
+            FileViewClear();
+
+            FileHandler.DeleteFolder(folder);
+            _deletedFolders.Add(folder);
+        }
+
+        public void DeleteFiles()
+        {
+            foreach (ListViewItem i in _fileView.SelectedItems)
+            {
+                string path = i.SubItems[2].Text + '/' + i.Text;
+                _fileView.Items.Remove(i);
+
+                FileHandler.DeleteFile(path);
+                _deletedFiles.Add(path);
+            }
+            
         }
 
         #endregion
@@ -99,8 +132,42 @@ namespace BaconFeedback
             _folderView = f.FolderView;
             _fileView = f.FileView;
             _feedbackFields = f.FeedbackFields;
+
+            _deletedFolders = new List<string>();
+            _deletedFiles = new List<string>();
         }
 
         #endregion
+
+        public bool ConfirmDelete(bool folder)
+        {
+            ListView view = folder ? _folderView : _fileView;
+            string type = folder ? "folder" : "file";
+
+            if (view.SelectedItems.Count == 0)
+            {
+                MessageBox.Show(string.Format(@"No {0}s selected for deletion.", type), @"Error!", MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                return false;
+            }
+
+            if (MessageBox.Show(string.Format(@"Are you sure you wish to delete all selected {0}s in the {0} view? These {0}s will be gone forever.", type),
+                @"Confirm!", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button2) == DialogResult.OK)
+                return true;
+
+            return false;
+        }
+
+        public void CopySelectedText()
+        {
+            foreach(TextBox t in _feedbackFields)
+            {
+                if (t.ContainsFocus)
+                {
+                    Clipboard.SetText(t.SelectedText);
+                    return;
+                }
+            }
+        }
     }
 }

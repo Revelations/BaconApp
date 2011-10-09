@@ -31,20 +31,77 @@ namespace BaconFeedback
             e.Item.ImageIndex = e.IsSelected ? 1 : 0;
 
             if (e.Item.Selected)
-                _presenter.FileViewAddDirectory(e.Item.Text);
+                _presenter.FileViewAddFolder(e.Item.Text);
             else
-                _presenter.FileViewRemoveDirectory(e.Item.Text);
+                _presenter.FileViewRemoveFolder(e.Item.Text);
         }
 
         private void fileView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (fileView.SelectedItems.Count > 0)
-                _presenter.DisplayFeedbackFile();
+            _presenter.DisplayFeedbackFile();
         }
 
         private void splitter_SplitterMoved(object sender, SplitterEventArgs e)
         {
-            colHeaderFolder.Width = folderView.Width - 4;
+            colHeaderFolder.Width = folderView.Width;
+        }
+
+        #region Toolbar Button Events
+
+        private void toolStripDeleteFolder_Click(object sender, EventArgs e)
+        {
+            if (_presenter.ConfirmDelete(true))
+            {
+                foreach (ListViewItem i in folderView.SelectedItems)
+                    _presenter.DeleteFolder(i.Text);
+                _presenter.PopulateFolderView();
+            }
+        }
+
+        private void toolStripDeleteFile_Click(object sender, EventArgs e)
+        {
+            if(_presenter.ConfirmDelete(false))
+            {
+                _presenter.DeleteFiles();
+                _presenter.DisplayFeedbackFile();
+            }
+        }
+
+        private void toolStripCopy_Click(object sender, EventArgs e)
+        {
+            _presenter.CopySelectedText();
+        }
+
+        private void toolStripExport_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void toolStripPreview_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripPrint_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripSync_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripConfig_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+
+        private void menuStripCopy_Click(object sender, EventArgs e)
+        {
+            _presenter.CopySelectedText();
         }
     }
 }
