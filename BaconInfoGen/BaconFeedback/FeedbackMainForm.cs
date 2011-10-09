@@ -19,11 +19,8 @@ namespace BaconFeedback
             _presenter = new FeedbackPresenter(this);
 
             _presenter.PopulateFolderView();
-        }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Close();
+            printDocument.PrintPage += _presenter.ConstructPrintDocument;
         }
 
         private void folderView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
@@ -79,7 +76,13 @@ namespace BaconFeedback
 
         private void toolStripPreview_Click(object sender, EventArgs e)
         {
-
+            if (fileView.SelectedItems.Count > 0)
+            {
+                _presenter.InitPrintHandler();
+                printPreviewDialog.ShowDialog();
+            }
+            else
+                _presenter.ShowErrorMessage(@"No files selected. Cannot display preview.");
         }
 
         private void toolStripPrint_Click(object sender, EventArgs e)
@@ -99,9 +102,18 @@ namespace BaconFeedback
 
         #endregion
 
+        #region Menustrip Button Events
+        
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
         private void menuStripCopy_Click(object sender, EventArgs e)
         {
             _presenter.CopySelectedText();
         }
+
+        #endregion
     }
 }

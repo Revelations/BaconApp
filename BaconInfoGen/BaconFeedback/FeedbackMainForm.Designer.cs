@@ -78,6 +78,9 @@
             this.fileView = new System.Windows.Forms.ListView();
             this.colHeaderFilename = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colHeaderCreatedDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.printDialog = new System.Windows.Forms.PrintDialog();
+            this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
+            this.printDocument = new System.Drawing.Printing.PrintDocument();
             this.menuStrip.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -160,7 +163,7 @@
             this.menuStripCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.menuStripCopy.Name = "menuStripCopy";
             this.menuStripCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.menuStripCopy.Size = new System.Drawing.Size(152, 22);
+            this.menuStripCopy.Size = new System.Drawing.Size(144, 22);
             this.menuStripCopy.Text = "&Copy";
             this.menuStripCopy.Click += new System.EventHandler(this.menuStripCopy_Click);
             // 
@@ -321,6 +324,7 @@
             this.textBoxMisc.Multiline = true;
             this.textBoxMisc.Name = "textBoxMisc";
             this.textBoxMisc.ReadOnly = true;
+            this.textBoxMisc.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBoxMisc.Size = new System.Drawing.Size(429, 115);
             this.textBoxMisc.TabIndex = 7;
             // 
@@ -337,11 +341,13 @@
             // 
             // textBoxSighted
             // 
+            this.textBoxSighted.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.textBoxSighted.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBoxSighted.Location = new System.Drawing.Point(123, 55);
             this.textBoxSighted.Multiline = true;
             this.textBoxSighted.Name = "textBoxSighted";
             this.textBoxSighted.ReadOnly = true;
+            this.textBoxSighted.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBoxSighted.Size = new System.Drawing.Size(429, 115);
             this.textBoxSighted.TabIndex = 5;
             // 
@@ -589,6 +595,22 @@
             this.colHeaderCreatedDate.Text = "Created On...";
             this.colHeaderCreatedDate.Width = 200;
             // 
+            // printDialog
+            // 
+            this.printDialog.UseEXDialog = true;
+            // 
+            // printPreviewDialog
+            // 
+            this.printPreviewDialog.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog.Document = this.printDocument;
+            this.printPreviewDialog.Enabled = true;
+            this.printPreviewDialog.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog.Icon")));
+            this.printPreviewDialog.Name = "printPreviewDialog";
+            this.printPreviewDialog.UseAntiAlias = true;
+            this.printPreviewDialog.Visible = false;
+            // 
             // FeedbackMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -605,6 +627,7 @@
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
             this.Name = "FeedbackMainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Feedback Reader";
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
@@ -672,6 +695,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton toolStripSync;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.PrintDialog printDialog;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog;
+        private System.Drawing.Printing.PrintDocument printDocument;
     }
 }
 
