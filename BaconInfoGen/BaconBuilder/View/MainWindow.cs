@@ -239,6 +239,7 @@ namespace BaconBuilder.View
 		private void btnPrintPreview_Click(object sender, EventArgs e)
 		{
 			printPreviewDialog.Document = printDocument;
+            _codecount = 0;
 			printPreviewDialog.ShowDialog();
 		}
 
@@ -502,72 +503,66 @@ namespace BaconBuilder.View
 		}
 
 		#region Russell's Print Stuff.
-
-		// TODO: Refactor the below to a new class.
-
+        
+        // TODO: Refactor the below to a new class.
+        int _codecount = 0;
 		/// <summary>
 		/// Print pages. TODO: Handle multi-page
 		/// Russell
 		/// </summary>
 		private void printDocument_PrintPage(object sender, PrintPageEventArgs e)
 		{
-			ArrangeQrCode(e, 100, 100);
-		}
-
-		/// <summary>
-		/// Arranges the qr codes on the page
-		/// Russell
-		/// </summary>
-		/// <param name="e">printeventargs from the print document</param>
-		/// <param name="mx">X margin size</param>
-		/// <param name="my">Y margin size</param>
-		private void ArrangeQrCode(PrintPageEventArgs e, int mx, int my)
-		{
+            int mx = 100,my =100;
 			var qr = new QrCodeGenerator();
 			var font = new Font(Font.FontFamily, 20);
 			var fontColor = new SolidBrush(Color.Black);
 
-			int j = 1;
 			//drawing lines for now
-			int pageheight = 1169 - my*2,
-			    pagewidth = 827 - mx*2,
-			    x1 = mx,
-			    x2 = pagewidth + mx,
-			    y1 = my,
-			    y2 = pageheight + my,
-			    y3 = (pageheight/2) + my,
-			    y4 = pageheight/4 + my,
-			    y5 = pageheight - (pageheight/4) + my;
+            int pageheight = 1169 - my * 2,
+                pagewidth = 827 - mx * 2;
+                //x1 = mx,
+                //x2 = pagewidth + mx,
+                //y1 = my,
+                //y2 = pageheight + my,
+                //y3 = (pageheight/2) + my,
+                //y4 = pageheight/4 + my,
+                //y5 = pageheight - (pageheight/4) + my;
 			//makes and arraylist for my variables cos i can
-			var ys = new ArrayList(5) {0, y1, y4, y3, y5};
+			//var ys = new ArrayList(5) {0, y1, y4, y3, y5};
+            /*
+             *pageheight/4
+             *
+             * */
 			//lines drawn
-			e.Graphics.DrawLines(Pens.Black,
-			                     new[]
-			                     	{new Point(x1, y1), new Point(x1, y2), new Point(x2, y2), new Point(x2, y1), new Point(x1, y1)});
-			//draws the margins in
+            //e.Graphics.DrawLines(Pens.Black,
+            //                     new[]
+            //                        {new Point(x1, y1), new Point(x1, y2), new Point(x2, y2), new Point(x2, y1), new Point(x1, y1)});
+            ////draws the margins in
 
 
-			e.Graphics.DrawLine(Pens.Black, x1, y3, x2, y3); //middleline
-			e.Graphics.DrawLine(Pens.Black, x1, y4, x2, y4); //topmidline
-			e.Graphics.DrawLine(Pens.Black, x1, y5, x2, y5); //bottommidline
+            //e.Graphics.DrawLine(Pens.Black, x1, y3, x2, y3); //middleline
+            //e.Graphics.DrawLine(Pens.Black, x1, y4, x2, y4); //topmidline
+            //e.Graphics.DrawLine(Pens.Black, x1, y5, x2, y5); //bottommidline
 
 			float right = 827 - 172 - mx;
 			float right2 = 827/2 + mx;
-			for (int i = 0; i < Files.Count; i++)
+            float yline = e.MarginBounds.Top;
+            int linediff = pageheight / 4;
+			for (; _codecount< Files.Count; _codecount++)
 			{
 				float x, xi;
-				string text = Files[i].Text;
+				string text = Files[_codecount].Text;
 				//code per page counter
-				if (j > 4)
-				{
-					j = 1; /*create new page*/
-					break;
-				}
+                    if(yline + linediff > e.MarginBounds.Bottom)
+					{
+                    e.HasMorePages = true;
+                    return;
+                    }
 				Image code = qr.GenerateCode(text);
 				//Even on left. Odd on right
 				Console.WriteLine(code.Width);
 
-				if (j%2 == 1)
+				if (_codecount%2 == 0)
 				{
 					//layoutRectangle = new Rectangle(350, 180*j, 500, 100);
 					x = mx;
@@ -579,10 +574,13 @@ namespace BaconBuilder.View
 					xi = mx;
 					x = right;
 				}
-				e.Graphics.DrawString(text, font, fontColor, new RectangleF(xi, ((int) ys[j] + 90), 500, 100));
-				e.Graphics.DrawImage(code, x, (float) ((int) ys[j] + 34.5));
-				j++;
+				e.Graphics.DrawString(text, font, fontColor, new RectangleF(xi, ((int) yline + 90), 500, 100));
+				e.Graphics.DrawImage(code, x, (float) ((int) yline + 34.5));
+				
+                yline += linediff;   
 			}
+
+            e.HasMorePages = false;
 		}
 
 		#endregion
