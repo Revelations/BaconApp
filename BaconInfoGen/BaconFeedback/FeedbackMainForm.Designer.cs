@@ -38,7 +38,7 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStripCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.splitter3 = new System.Windows.Forms.Splitter();
@@ -62,6 +62,19 @@
             this.label1 = new System.Windows.Forms.Label();
             this.splitter6 = new System.Windows.Forms.Splitter();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.toolStrip = new System.Windows.Forms.ToolStrip();
+            this.toolStripDeleteFolder = new System.Windows.Forms.ToolStripButton();
+            this.toolStripDeleteFile = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripCopy = new System.Windows.Forms.ToolStripButton();
+            this.toolStripExport = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripPreview = new System.Windows.Forms.ToolStripButton();
+            this.toolStripPrint = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSync = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripConfig = new System.Windows.Forms.ToolStripButton();
             this.fileView = new System.Windows.Forms.ListView();
             this.colHeaderFilename = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colHeaderCreatedDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -71,6 +84,7 @@
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.toolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip
@@ -135,19 +149,20 @@
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.copyToolStripMenuItem});
+            this.menuStripCopy});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.editToolStripMenuItem.Text = "&Edit";
             // 
-            // copyToolStripMenuItem
+            // menuStripCopy
             // 
-            this.copyToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("copyToolStripMenuItem.Image")));
-            this.copyToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
-            this.copyToolStripMenuItem.Text = "&Copy";
+            this.menuStripCopy.Image = ((System.Drawing.Image)(resources.GetObject("menuStripCopy.Image")));
+            this.menuStripCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.menuStripCopy.Name = "menuStripCopy";
+            this.menuStripCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.menuStripCopy.Size = new System.Drawing.Size(152, 22);
+            this.menuStripCopy.Text = "&Copy";
+            this.menuStripCopy.Click += new System.EventHandler(this.menuStripCopy_Click);
             // 
             // splitter1
             // 
@@ -205,6 +220,7 @@
             // 
             // folderView
             // 
+            this.folderView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.folderView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colHeaderFolder});
             this.folderView.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -223,15 +239,15 @@
             // colHeaderFolder
             // 
             this.colHeaderFolder.Text = "Folder";
-            this.colHeaderFolder.Width = 158;
+            this.colHeaderFolder.Width = 162;
             // 
             // imageList
             // 
             this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
             this.imageList.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList.Images.SetKeyName(0, "folder.ico");
-            this.imageList.Images.SetKeyName(1, "folder_explorer.ico");
-            this.imageList.Images.SetKeyName(2, "doc.ico");
+            this.imageList.Images.SetKeyName(1, "folder_info.ico");
+            this.imageList.Images.SetKeyName(2, "file_info.ico");
             // 
             // panel3
             // 
@@ -392,6 +408,7 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.toolStrip);
             this.panel4.Controls.Add(this.fileView);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
@@ -399,18 +416,163 @@
             this.panel4.Size = new System.Drawing.Size(555, 186);
             this.panel4.TabIndex = 0;
             // 
+            // toolStrip
+            // 
+            this.toolStrip.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripDeleteFolder,
+            this.toolStripDeleteFile,
+            this.toolStripSeparator3,
+            this.toolStripCopy,
+            this.toolStripExport,
+            this.toolStripSeparator1,
+            this.toolStripPreview,
+            this.toolStripPrint,
+            this.toolStripSeparator5,
+            this.toolStripSync,
+            this.toolStripSeparator4,
+            this.toolStripConfig});
+            this.toolStrip.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip.Name = "toolStrip";
+            this.toolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip.Size = new System.Drawing.Size(555, 48);
+            this.toolStrip.TabIndex = 1;
+            this.toolStrip.Text = "toolStrip";
+            // 
+            // toolStripDeleteFolder
+            // 
+            this.toolStripDeleteFolder.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDeleteFolder.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDeleteFolder.Image")));
+            this.toolStripDeleteFolder.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripDeleteFolder.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDeleteFolder.Margin = new System.Windows.Forms.Padding(4, 1, 4, 2);
+            this.toolStripDeleteFolder.Name = "toolStripDeleteFolder";
+            this.toolStripDeleteFolder.Size = new System.Drawing.Size(36, 45);
+            this.toolStripDeleteFolder.ToolTipText = "Folder Delete - Deletes all selected folders in the view.";
+            this.toolStripDeleteFolder.Click += new System.EventHandler(this.toolStripDeleteFolder_Click);
+            // 
+            // toolStripDeleteFile
+            // 
+            this.toolStripDeleteFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDeleteFile.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDeleteFile.Image")));
+            this.toolStripDeleteFile.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripDeleteFile.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDeleteFile.Margin = new System.Windows.Forms.Padding(4, 1, 4, 2);
+            this.toolStripDeleteFile.Name = "toolStripDeleteFile";
+            this.toolStripDeleteFile.Size = new System.Drawing.Size(36, 45);
+            this.toolStripDeleteFile.ToolTipText = "File Delete - Deletes all selected files in the view.";
+            this.toolStripDeleteFile.Click += new System.EventHandler(this.toolStripDeleteFile_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 32);
+            // 
+            // toolStripCopy
+            // 
+            this.toolStripCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripCopy.Image = ((System.Drawing.Image)(resources.GetObject("toolStripCopy.Image")));
+            this.toolStripCopy.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripCopy.Margin = new System.Windows.Forms.Padding(4, 1, 4, 2);
+            this.toolStripCopy.Name = "toolStripCopy";
+            this.toolStripCopy.Size = new System.Drawing.Size(36, 45);
+            this.toolStripCopy.ToolTipText = "Copy - Copies selected text to the clipboard.";
+            this.toolStripCopy.Click += new System.EventHandler(this.toolStripCopy_Click);
+            // 
+            // toolStripExport
+            // 
+            this.toolStripExport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripExport.Image = ((System.Drawing.Image)(resources.GetObject("toolStripExport.Image")));
+            this.toolStripExport.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripExport.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripExport.Margin = new System.Windows.Forms.Padding(4, 1, 4, 2);
+            this.toolStripExport.Name = "toolStripExport";
+            this.toolStripExport.Size = new System.Drawing.Size(36, 45);
+            this.toolStripExport.ToolTipText = "Export - Exports the selected feedback to a text file.";
+            this.toolStripExport.Click += new System.EventHandler(this.toolStripExport_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 32);
+            // 
+            // toolStripPreview
+            // 
+            this.toolStripPreview.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripPreview.Image = ((System.Drawing.Image)(resources.GetObject("toolStripPreview.Image")));
+            this.toolStripPreview.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripPreview.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripPreview.Margin = new System.Windows.Forms.Padding(4, 1, 4, 2);
+            this.toolStripPreview.Name = "toolStripPreview";
+            this.toolStripPreview.Size = new System.Drawing.Size(36, 45);
+            this.toolStripPreview.ToolTipText = "Print Preview - Shows what selected feedback will look like when printed.";
+            this.toolStripPreview.Click += new System.EventHandler(this.toolStripPreview_Click);
+            // 
+            // toolStripPrint
+            // 
+            this.toolStripPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripPrint.Image = ((System.Drawing.Image)(resources.GetObject("toolStripPrint.Image")));
+            this.toolStripPrint.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripPrint.Margin = new System.Windows.Forms.Padding(4, 1, 4, 2);
+            this.toolStripPrint.Name = "toolStripPrint";
+            this.toolStripPrint.Size = new System.Drawing.Size(36, 45);
+            this.toolStripPrint.ToolTipText = "Print - Prints the selected feedback files.";
+            this.toolStripPrint.Click += new System.EventHandler(this.toolStripPrint_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 32);
+            // 
+            // toolStripSync
+            // 
+            this.toolStripSync.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripSync.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSync.Image")));
+            this.toolStripSync.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripSync.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSync.Margin = new System.Windows.Forms.Padding(4, 1, 4, 2);
+            this.toolStripSync.Name = "toolStripSync";
+            this.toolStripSync.Size = new System.Drawing.Size(36, 45);
+            this.toolStripSync.Text = "Synchronise - Gets new feedback and processes any deletions on the server.";
+            this.toolStripSync.Click += new System.EventHandler(this.toolStripSync_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 32);
+            // 
+            // toolStripConfig
+            // 
+            this.toolStripConfig.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripConfig.Image = ((System.Drawing.Image)(resources.GetObject("toolStripConfig.Image")));
+            this.toolStripConfig.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripConfig.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripConfig.Margin = new System.Windows.Forms.Padding(4, 1, 4, 2);
+            this.toolStripConfig.Name = "toolStripConfig";
+            this.toolStripConfig.Size = new System.Drawing.Size(36, 45);
+            this.toolStripConfig.Text = "Options - Opens an options dialog.";
+            this.toolStripConfig.Click += new System.EventHandler(this.toolStripConfig_Click);
+            // 
             // fileView
             // 
+            this.fileView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.fileView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colHeaderFilename,
             this.colHeaderCreatedDate});
-            this.fileView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fileView.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.fileView.FullRowSelect = true;
             this.fileView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.fileView.HideSelection = false;
-            this.fileView.Location = new System.Drawing.Point(0, 0);
+            this.fileView.Location = new System.Drawing.Point(0, 48);
             this.fileView.Name = "fileView";
-            this.fileView.Size = new System.Drawing.Size(555, 186);
+            this.fileView.Size = new System.Drawing.Size(555, 138);
             this.fileView.SmallImageList = this.imageList;
             this.fileView.TabIndex = 0;
             this.fileView.UseCompatibleStateImageBehavior = false;
@@ -452,6 +614,9 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.toolStrip.ResumeLayout(false);
+            this.toolStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -487,13 +652,26 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuStripCopy;
         private System.Windows.Forms.ImageList imageList;
         private System.Windows.Forms.ListView folderView;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.ColumnHeader colHeaderFolder;
         private System.Windows.Forms.ColumnHeader colHeaderFilename;
         private System.Windows.Forms.ColumnHeader colHeaderCreatedDate;
+        private System.Windows.Forms.ToolStrip toolStrip;
+        private System.Windows.Forms.ToolStripButton toolStripCopy;
+        private System.Windows.Forms.ToolStripButton toolStripDeleteFile;
+        private System.Windows.Forms.ToolStripButton toolStripDeleteFolder;
+        private System.Windows.Forms.ToolStripButton toolStripPrint;
+        private System.Windows.Forms.ToolStripButton toolStripPreview;
+        private System.Windows.Forms.ToolStripButton toolStripExport;
+        private System.Windows.Forms.ToolStripButton toolStripConfig;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripButton toolStripSync;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
     }
 }
 

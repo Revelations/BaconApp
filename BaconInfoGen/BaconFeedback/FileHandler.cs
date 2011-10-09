@@ -15,7 +15,7 @@ namespace BaconFeedback
         // Feedback file extension.
         private const string _feedbackExtension = ".fbk";
 
-        public static IEnumerable<string> GetSubdirectories()
+        public static IEnumerable<string> GetSubfolders()
         {
             String[] s = Directory.GetDirectories(_feedbackDirectory);
             for (int i = 0; i < s.Length; i++)
@@ -58,6 +58,24 @@ namespace BaconFeedback
         public static string[] GetFeedbackContents(string path)
         {
             return File.ReadAllLines(_feedbackDirectory + path);
+        }
+
+        public static void DeleteFolder(string folder)
+        {
+            string[] files = Directory.GetFiles(_feedbackDirectory + folder);
+            foreach (string file in files)
+            {
+                File.SetAttributes(file, FileAttributes.Normal);
+                File.Delete(file);
+            }
+
+            Directory.Delete(_feedbackDirectory + folder);
+        }
+
+        public static void DeleteFile(string path)
+        {
+            Console.WriteLine(_feedbackDirectory + path);
+            File.Delete(_feedbackDirectory + path);
         }
     }
 }
