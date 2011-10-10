@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -10,9 +9,7 @@ namespace BaconBuilder.Component
         private const int Radius = 5;
         private const double Epsilon = 0;
         private readonly Font _font;
-        private readonly DbPanel _panel = new DbPanel();
-        private Bitmap _bmp;
-        private Rectangle _marker = new Rectangle(0, 0, Radius*2, Radius*2);
+    	private Rectangle _marker = new Rectangle(0, 0, Radius*2, Radius*2);
         private string _markerText;
         private Size _markerTextSize;
         private bool _mouseDown;
@@ -24,31 +21,17 @@ namespace BaconBuilder.Component
         {
             InitializeComponent();
 
-            btnZoomIn.Click += ZoomIn;
-            btnZoomReset.Click += ZoomReset;
-            btnZoomOut.Click += ZoomOut;
-
-            _panel.Dock = DockStyle.Fill;
-            _panel.Paint += PanelPaint;
-            _panel.MouseDown += PanelMouseDown;
-            _panel.MouseMove += PanelMouseMove;
-            _panel.MouseUp += PanelMouseUp;
-
-            Controls.Add(_panel);
-
             _font = new Font(Font.FontFamily, 10);
             MarkerText = "You are here";
         }
 
-
         public Image Image
         {
-            get { return _bmp; }
+            get { return canvas.BackgroundImage; }
             set
             {
-                _bmp = value as Bitmap;
-                Debug.Assert(_bmp != null, "_bmp != null");
-                ClientSize = new Size(_bmp.Width, _bmp.Height + panel1.Height);
+            	canvas.BackgroundImage = value;
+				canvas.ClientSize = new Size(Image.Width, Image.Height);
             }
         }
 
@@ -57,13 +40,11 @@ namespace BaconBuilder.Component
             get { return _pt.X; }
             set
             {
-                if (Math.Abs(_pt.X - value) > Epsilon)
-                {
-                    _pt.X = value;
-                    _marker.X = value - Radius;
-                    _textpt.X = value + Radius;
-                    OnMapCoordinateChanged(EventArgs.Empty);
-                }
+            	if (Math.Abs(_pt.X - value) <= Epsilon) return;
+            	_pt.X = value;
+            	_marker.X = value - Radius;
+            	_textpt.X = value + Radius;
+            	OnMapCoordinateChanged(EventArgs.Empty);
             }
         }
 
@@ -72,13 +53,11 @@ namespace BaconBuilder.Component
             get { return _pt.Y; }
             set
             {
-                if (Math.Abs(_pt.Y - value) > Epsilon)
-                {
-                    _pt.Y = value;
-                    _marker.Y = value - Radius;
-                    _textpt.Y = value - (_markerTextSize.Height/2);
-                    OnMapCoordinateChanged(EventArgs.Empty);
-                }
+            	if (Math.Abs(_pt.Y - value) <= Epsilon) return;
+            	_pt.Y = value;
+            	_marker.Y = value - Radius;
+            	_textpt.Y = value - (_markerTextSize.Height/2);
+            	OnMapCoordinateChanged(EventArgs.Empty);
             }
         }
 
@@ -97,30 +76,28 @@ namespace BaconBuilder.Component
             get { return _zoom; }
             set
             {
-                if (Math.Abs(_zoom - value) > Epsilon)
-                {
-                    _zoom = value;
-                    OnZoomChanged(EventArgs.Empty);
-                }
+            	if (Math.Abs(_zoom - value) <= Epsilon) return;
+            	_zoom = value;
+            	OnZoomChanged(EventArgs.Empty);
             }
         }
 
         private void ZoomIn(object sender, EventArgs e)
         {
             Zoom *= 2f;
-            _panel.Invalidate();
+            canvas.Invalidate();
         }
 
         private void ZoomReset(object sender, EventArgs e)
         {
             Zoom = 100.0f;
-            _panel.Invalidate();
+            canvas.Invalidate();
         }
 
         private void ZoomOut(object sender, EventArgs e)
         {
             Zoom /= 2f;
-            _panel.Invalidate();
+            canvas.Invalidate();
         }
 
         public event EventHandler MapCoordinateChanged;
@@ -143,18 +120,18 @@ namespace BaconBuilder.Component
 
         public void MoveTo(int x, int y)
         {
-            X = Math.Min(Math.Max(0, x), _bmp.Width);
-            Y = Math.Min(Math.Max(0, y), _bmp.Height);
+            X = Math.Min(Math.Max(0, x), Image.Width);
+            Y = Math.Min(Math.Max(0, y), Image.Height);
         }
 
-        private void PanelPaint(object sender, PaintEventArgs e)
+        private void CanvasPaint(object sender, PaintEventArgs e)
         {
             //float scale = _zoom/100;
-            if (_bmp != null)
-                e.Graphics.DrawImage(_bmp, 0, 0, _bmp.Width, _bmp.Height);
+            if (Image != null)
+                e.Graphics.DrawImage(Image, 0, 0, Image.Width, Image.Height);
 
             // Don't bother drawing anything outside the box.
-            if (X < 0 || X < 0 || X > _panel.Width || Y > _panel.Height || (X == 0 && Y == 0)) return;
+            if (X < 0 || X < 0 || X > canvas.Width || Y > canvas.Height || (X == 0 && Y == 0)) return;
 
             // Draw marker ellipse.
             e.Graphics.FillEllipse(Brushes.Red, _marker.X, _marker.Y, _marker.Width, _marker.Height);
@@ -164,25 +141,23 @@ namespace BaconBuilder.Component
             TextRenderer.DrawText(e.Graphics, MarkerText, _font, _textpt, Color.Black, Color.White);
         }
 
-        private void PanelMouseDown(object sender, MouseEventArgs e)
+        private void CanvasMouseDown(object sender, MouseEventArgs e)
         {
             _mouseDown = true;
 
             MoveTo(e.X, e.Y);
-            _panel.Invalidate();
+            canvas.Invalidate();
         }
 
-        private void PanelMouseMove(object sender, MouseEventArgs e)
+        private void CanvasMouseMove(object sender, MouseEventArgs e)
         {
-            if (_mouseDown)
-            {
-                MoveTo(e.X, e.Y);
-                // Redraw and invalidate the picturebox.
-                _panel.Invalidate();
-            }
+        	if (!_mouseDown) return;
+        	MoveTo(e.X, e.Y);
+        	// Redraw and invalidate the picturebox.
+        	canvas.Invalidate();
         }
 
-        private void PanelMouseUp(object sender, MouseEventArgs e)
+        private void CanvasMouseUp(object sender, MouseEventArgs e)
         {
             _mouseDown = false;
         }

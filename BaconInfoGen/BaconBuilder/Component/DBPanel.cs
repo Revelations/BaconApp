@@ -1,12 +1,11 @@
-﻿using System.Windows.Forms;
-
-namespace BaconBuilder
+﻿
+namespace BaconBuilder.Component
 {
-    public sealed class DbPanel : Panel
+    public sealed class DbPanel : System.Windows.Forms.Panel
     {
         public DbPanel()
         {
-            DoubleBuffered = true;
+			base.DoubleBuffered = true;
         }
     }
 }

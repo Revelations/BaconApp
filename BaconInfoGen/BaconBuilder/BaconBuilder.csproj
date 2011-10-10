@@ -95,9 +95,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Component\MyBrowser.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Controller\MainViewController.cs" />
     <Compile Include="Model\Ftp\FtpHelper.cs" />
     <Compile Include="Model\IModel.cs" />

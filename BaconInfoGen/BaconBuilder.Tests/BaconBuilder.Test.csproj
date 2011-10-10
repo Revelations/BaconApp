@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Feedback\StatisticsCalculatorTest.cs" />
     <Compile Include="ImageManipulatorTest.cs" />
     <Compile Include="Parser\ParserTest.cs" />
     <Compile Include="Parser\HtmlToTextParserTest.cs" />

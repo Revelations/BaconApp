@@ -99,26 +99,18 @@ namespace BaconFeedback
             get
             {
                 // Init a dictionary to store quantities of people of varying nationalities.
-                Dictionary<string, int> dictionary = new Dictionary<string, int>();
+                var dictionary = new Dictionary<string, int>();
 
                 // For each file...
                 foreach (FeedbackFile f in _files)
                 {
-                    // If the dictionary contains the nationality specified by that file...
-                    if (dictionary.ContainsKey(f.Nationality))
-                    {
-                        // Update the value.
-                        int old = dictionary[f.Nationality];
-                        dictionary.Remove(f.Nationality);
-                        dictionary.Add(f.Nationality, old + Convert.ToInt32(f.Number));
-                    }
-                    // Otherwise add that nationality to the dictionary.
-                    else
-                        dictionary.Add(f.Nationality, Convert.ToInt32(f.Number));
+					int old;
+					dictionary.TryGetValue(f.Nationality, out old);
+					dictionary[f.Nationality] = old + Convert.ToInt32(f.Number);
                 }
 
                 // Initialise an object to store the largest nationality found.
-                KeyValuePair<string, int> max = new KeyValuePair<string, int>("None", 0);
+                var max = new KeyValuePair<string, int>("None", 0);
 
                 // Iterate and find maximum value.
                 foreach (KeyValuePair<string, int> kvp in dictionary)
@@ -130,5 +122,41 @@ namespace BaconFeedback
                 return max;
             }
         }
-    }
+		public KeyValuePair<string, int> MostCommonNationalityOld
+		{
+			get
+			{
+				// Init a dictionary to store quantities of people of varying nationalities.
+				Dictionary<string, int> dictionary = new Dictionary<string, int>();
+
+				// For each file...
+				foreach (FeedbackFile f in _files)
+				{
+					// If the dictionary contains the nationality specified by that file...
+					if (dictionary.ContainsKey(f.Nationality))
+					{
+						// Update the value.
+						int old = dictionary[f.Nationality];
+						dictionary.Remove(f.Nationality);
+						dictionary.Add(f.Nationality, old + Convert.ToInt32(f.Number));
+					}
+					// Otherwise add that nationality to the dictionary.
+					else
+						dictionary.Add(f.Nationality, Convert.ToInt32(f.Number));
+				}
+
+				// Initialise an object to store the largest nationality found.
+				KeyValuePair<string, int> max = new KeyValuePair<string, int>("None", 0);
+
+				// Iterate and find maximum value.
+				foreach (KeyValuePair<string, int> kvp in dictionary)
+				{
+					if (kvp.Value > max.Value)
+						max = kvp;
+				}
+
+				return max;
+			}
+		}
+	}
 }
