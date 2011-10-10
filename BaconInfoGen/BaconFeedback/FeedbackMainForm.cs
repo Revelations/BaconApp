@@ -79,6 +79,8 @@ namespace BaconFeedback
             if (fileView.SelectedItems.Count > 0)
             {
                 _presenter.InitPrintHandler();
+                printPreviewDialog.Width = 800;
+                printPreviewDialog.Height = 600;
                 printPreviewDialog.ShowDialog();
             }
             else
