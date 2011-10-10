@@ -42,10 +42,10 @@
     if (self) {
         
         NSString * filePath = @"/Users/donovanhoffman/test.txt";
-        NSString * urlPath = @"ftp://revelations.webhop.org/";
+        NSString * urlPath = @"ftp://revelations.webhop.org";
         
         Update * fileRequest = [[Update alloc] init];
-        [fileRequest _startSend: filePath : urlPath];
+        [fileRequest uploadPhp: filePath];
         // Custom initialization
     }
     return self;

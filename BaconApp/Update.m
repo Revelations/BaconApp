@@ -11,6 +11,63 @@
 
 @implementation Update
 
+@synthesize isSendingU;
+@synthesize networkStreamU;
+@synthesize fileStreamU;
+@synthesize bufferU;
+@synthesize bufferOffsetU;
+@synthesize bufferLimitU;
+
+-(void)uploadPhp:(NSString *) filePath{
+        
+    NSString *urlString = @"http://localhost/test.php";
+    NSData *data = [NSData dataWithContentsOfFile:filePath ];// dataWithContentsOfURL:[NSURL URLWithString:filePath]];
+        
+        // setting up the request object now
+    NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"POST"];
+    
+    NSString *boundary = [NSString stringWithString:@"---------------------------14737809831466499882746641449"];
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+    [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+        
+        
+    /* now lets create the body of the post */
+        
+    NSString *content = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userfile\"; filename=\"%@.txt\"\r\n",@"feedback"];
+        
+    NSMutableData *body = [NSMutableData data];
+    [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];    
+    [body appendData:[[NSString stringWithString:content] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithString:@"Content-Type: text/plain\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[NSData dataWithData:data]];
+    [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        
+    // setting the body of the post to the reqeust
+    
+    /*POST /path/script.cgi HTTP/1.0
+From: frog@jmarshall.com
+    User-Agent: HTTPTool/1.0
+    Content-Type: application/x-www-form-urlencoded
+    Content-Length: 32
+    
+    home=Cosby&favorite+flavor=flies*/
+        
+    [request setHTTPBody:body];
+        
+        // now lets make the connection to the web
+        NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil]; 
+    if(returnData){
+        [returnData writeToFile:@"result.txt" atomically:YES];
+        NSLog(@"success!");
+    }
+    else{
+        NSLog(@"failure!");
+    }
+
+}
+
 -(void)getFile:(NSString *)urlPath{
     
     NSURL *url = [NSURL URLWithString:urlPath];
@@ -97,20 +154,15 @@
 
 #include <CFNetwork/CFNetwork.h>
 
-/*@interface PutController ()
+//@interface PutController ()
 
 // Properties that don't need to be seen by the outside world.
 
-@property (nonatomic, readonly) BOOL              isSending;
-@property (nonatomic, retain)   NSOutputStream *  networkStream;
-@property (nonatomic, retain)   NSInputStream *   fileStream;
-@property (nonatomic, readonly) uint8_t *         buffer;
-@property (nonatomic, assign)   size_t            bufferOffset;
-@property (nonatomic, assign)   size_t            bufferLimit;
 
-@end
 
-@implementation PutController*/
+//@end
+
+//@implementation PutController
 
 #pragma mark * UI Upload methods
 
@@ -132,6 +184,7 @@
 
 - (void)_sendDidStopWithStatus:(NSString *)statusString
 {
+    NSLog(@"stopped with message : %@", statusString);
     /*if (statusString == nil) {
         statusString = @"Put succeeded";
     }
@@ -177,8 +230,6 @@ size_t                      _bufferLimit;
 - (void)_startSend:(NSString *)filePath : (NSString *) uploadPath
 {
 //    BOOL                    success;
-
-        
     NSURL *                 url;
     CFWriteStreamRef        ftpStream;
     
@@ -192,7 +243,7 @@ size_t                      _bufferLimit;
     url = [NSURL URLWithString:uploadPath];
     
     // If the URL is bogus, let the user know.  Otherwise kick off the connection.
-    
+    if (url != nil) {
     // else {
         
         // Open a stream for the file we're going to send.  We do not open this stream; 
@@ -210,7 +261,7 @@ size_t                      _bufferLimit;
         
         _networkStream = (NSOutputStream *) ftpStream;
         
-    
+    }    
     //setting password and username
     
         /*if (self.usernameText.text.length != 0) {
@@ -227,7 +278,7 @@ size_t                      _bufferLimit;
         
         // Have to release ftpStream to balance out the create.
         
-        CFRelease(ftpStream);
+       // CFRelease(ftpStream);
         
         // Tell the UI we're sending.
         
@@ -238,15 +289,16 @@ size_t                      _bufferLimit;
 //method called when the stream has stopped for whatever reason, deals with cleanup to make sure nothing is left dangling
 - (void)_stopSendWithStatus:(NSString *)statusString
 {
+    NSLog(@"hello I am in stopsend");
     if (_networkStream != nil) {
         [_networkStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-       // _networkStream.delegate = nil;
+        _networkStream.delegate = nil;
         [_networkStream close];
-        //_networkStream = nil;
+       // _networkStream = nil;
     }
     if (_fileStream != nil) {
         [_fileStream close];
-        //_fileStream = nil;
+       // _fileStream = nil;
     }
     [self _sendDidStopWithStatus:statusString];
 }
@@ -261,7 +313,7 @@ size_t                      _bufferLimit;
     switch (eventCode) {
         case NSStreamEventOpenCompleted: {
             [self _updateStatus:@"Opened connection"];
-            } break;
+        } break;
         case NSStreamEventHasBytesAvailable: {
             assert(NO);     // should never happen for the output stream
         } break;
@@ -299,6 +351,7 @@ size_t                      _bufferLimit;
             }
         } break;
         case NSStreamEventErrorOccurred: {
+            
             [self _stopSendWithStatus:@"Stream open error"];
         } break;
         case NSStreamEventEndEncountered: {
