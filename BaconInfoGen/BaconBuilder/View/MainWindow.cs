@@ -19,11 +19,6 @@ namespace BaconBuilder.View
         private readonly BaconModel _model;
         private bool _hasConnection;
 
-        /// <summary>
-        /// Flag that controls whether drawing on the map view is enabled or not.
-        /// </summary>
-        private bool _mouseDownOnMap;
-
         private bool HtmlBrowserEditable
         {
             get
@@ -403,9 +398,7 @@ namespace BaconBuilder.View
         /// </summary>
         private void txt_ValueChanged(object sender, EventArgs e)
         {
-            txtX.Value = Math.Min(Math.Max(0, txtX.Value), mapBox.Width);
-            txtY.Value = Math.Min(Math.Max(0, txtY.Value), mapBox.Height);
-
+			mapBox.MoveTo((int)Math.Min(Math.Max(0, txtX.Value), mapBox.Image.Width), (int)Math.Min(Math.Max(0, txtY.Value), mapBox.Image.Height));
             mapBox.Invalidate();
         }
 
@@ -439,7 +432,7 @@ namespace BaconBuilder.View
 
         #region Russell's Print Stuff.
         
-        // TODO: Refactor the below to a new class.
+        // TODO: Refactor the below to a method that takes margins
         int _codecount = 0;
         /// <summary>
         /// Print multiple pages.
@@ -447,7 +440,7 @@ namespace BaconBuilder.View
         /// </summary>
         private void printDocument_PrintPage(object sender, PrintPageEventArgs e)
         {
-            int mx = 100,my =100;
+            int mx = 100, my =100;
             var qr = new QrCodeGenerator();
             var font = new Font(Font.FontFamily, 20);
             var fontColor = new SolidBrush(Color.Black);
@@ -455,25 +448,26 @@ namespace BaconBuilder.View
             //drawing lines for now
             int pageheight = 1169 - my * 2,
                 pagewidth = 827 - mx * 2;
-                //x1 = mx,
-                //x2 = pagewidth + mx,
-                //y1 = my,
-                //y2 = pageheight + my,
-                //y3 = (pageheight/2) + my,
-                //y4 = pageheight/4 + my,
-                //y5 = pageheight - (pageheight/4) + my;
-            //lines drawn
-            //e.Graphics.DrawLines(Pens.Black,
-            //                     new[]
-            //                        {new Point(x1, y1), new Point(x1, y2), new Point(x2, y2), new Point(x2, y1), new Point(x1, y1)});
-            ////draws the margins in
+/*
+                x1 = mx,
+                x2 = pagewidth + mx,
+                y1 = my,
+                y2 = pageheight + my,
+                y3 = (pageheight/2) + my,
+                y4 = pageheight/4 + my,
+                y5 = pageheight - (pageheight/4) + my;
+            lines drawn
+            e.Graphics.DrawLines(Pens.Black,
+                                 new[]
+                                    {new Point(x1, y1), new Point(x1, y2), new Point(x2, y2), new Point(x2, y1), new Point(x1, y1)});
+            //draws the margins in
 
-            //e.Graphics.DrawLine(Pens.Black, x1, y3, x2, y3); //middleline
-            //e.Graphics.DrawLine(Pens.Black, x1, y4, x2, y4); //topmidline
-            //e.Graphics.DrawLine(Pens.Black, x1, y5, x2, y5); //bottommidline
-
+            e.Graphics.DrawLine(Pens.Black, x1, y3, x2, y3); //middleline
+            e.Graphics.DrawLine(Pens.Black, x1, y4, x2, y4); //topmidline
+            e.Graphics.DrawLine(Pens.Black, x1, y5, x2, y5); //bottommidline
+			*/
             float right = 827 - 172 - mx;
-            float right2 = 827/2 + mx;
+            float left = 827/2 + mx;
             float yline = e.MarginBounds.Top;
             int linediff = pageheight / 4;
             for (; _codecount< Files.Count; _codecount++)
@@ -488,12 +482,10 @@ namespace BaconBuilder.View
                 }
                 Image code = qr.GenerateCode(text);
                 //Even on left. Odd on right
-                Console.WriteLine(code.Width);
-
                 if (_codecount%2 == 0)
                 {
                     x = mx;
-                    xi = right2;
+                    xi = left;
                 }
                 else
                 {

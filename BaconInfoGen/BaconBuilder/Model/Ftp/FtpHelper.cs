@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
 using BaconBuilder.Properties;
 
@@ -40,32 +42,12 @@ namespace BaconBuilder.Model
         /// <returns>String list of all files present on the server.</returns>
         public List<string> ConnectAndGetFileList()
         {
-            var result = new List<string>();
+        	string uriString = Resources.ServerLocation;
+        	var tuple = GetDirectoryTuple(uriString);
+        	var files = tuple.Item2;
+        	var dirs = tuple.Item1;
 
-            string uriString = Resources.ServerLocation;
-            const string method = WebRequestMethods.Ftp.ListDirectory;
-            FtpWebRequest request = InitRequest(uriString, method);
-
-            // Connect to server.
-            using (WebResponse response = request.GetResponse())
-            using (Stream responseStream = response.GetResponseStream())
-            {
-                if (responseStream == null) return result;
-
-                // Instantiate a reader to handle the stream sent back from server.
-                using (var reader = new StreamReader(responseStream))
-                {
-                    // Continue iterating for as long as needed.
-                    string line;
-                    while ((line = reader.ReadLine()) != null)
-                    {
-                        // Get file name and add it to list.
-                        result.Add(line);
-                    }
-                }
-            }
-
-            return result;
+        	return files;
         }
 
         /// <summary>
@@ -122,5 +104,72 @@ namespace BaconBuilder.Model
             // TODO: Store this value for error checking in future.
             WebResponse response = request.GetResponse();
         }
+
+		#region Shii's fix for separating directories from files.
+
+		private List<string> GetDirectoryDetail(string root, string method)
+		{
+			var list = new List<string>();
+
+			//Get Directory Details
+			var ftp = (FtpWebRequest)WebRequest.Create(root);
+			ftp.Method = method;
+
+			// Connect and get bytestream from server.
+			using (WebResponse response = ftp.GetResponse())
+			{
+				Stream responseStream = response.GetResponseStream();
+
+				// Create a read/write buffer.
+				// Get byte data from server stream for as long as it is available.
+				Debug.Assert(responseStream != null, "responseStream != null");
+				using (var reader = new StreamReader(responseStream))
+					{
+						string line = reader.ReadLine();
+						while (line != null)
+						{
+							list.Add(line);
+							line = reader.ReadLine();
+						}
+					}
+			}
+			return list;
+		}
+
+		// TODO: Check boolean to ensure the logic is correct. Results so far do not exhibit "drw-rw-rw-" properties.
+		private static bool ItemIsSubFile(string item)
+		{
+			return !item.ToLower().Contains("<dir>") && !(item.StartsWith("d") && !item.EndsWith("."));
+		}
+
+		// TODO: Check boolean to ensure the logic is correct. Results so far do not exhibit "drw-rw-rw-" properties.
+		private static bool ItemIsSubDirectory(string item)
+		{
+			return item.ToLower().Contains("<dir>") || (item.StartsWith("d") && !item.EndsWith("."));
+		}
+
+		public Tuple<List<string>, List<string>> GetDirectoryTuple(string root)
+		{
+			var directorySimple = GetDirectoryDetail(root, WebRequestMethods.Ftp.ListDirectory);
+			var directoryDetail = GetDirectoryDetail(root, WebRequestMethods.Ftp.ListDirectoryDetails);
+
+			var subdir = new List<string>();
+			var subfil = new List<string>();
+
+			foreach (var item in directoryDetail.Where(ItemIsSubDirectory))
+			{
+				subdir.AddRange(directorySimple.Where(s=> item.EndsWith(s)));
+			}
+
+			foreach (var item in directoryDetail.Where(ItemIsSubFile))
+			{
+				subfil.AddRange(directorySimple.Where(s => item.EndsWith(s)));
+			}
+
+			return new Tuple<List<string>, List<string>>(subdir, subfil);
+		}
+
+		#endregion
+
     }
 }

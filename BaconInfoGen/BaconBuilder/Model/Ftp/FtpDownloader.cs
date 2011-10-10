@@ -1,80 +1,93 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
 using BaconBuilder.Properties;
 
 namespace BaconBuilder.Model
 {
-    /// <summary>
-    /// Class that handles connection to an FTP server to download necessary files.
-    /// </summary>
-    public class FtpDownloader : FtpHelper
-    {
-    	private readonly IModel _model;
+	/// <summary>
+	/// Class that handles connection to an FTP server to download necessary files.
+	/// </summary>
+	public class FtpDownloader : FtpHelper
+	{
 		private static readonly string HtmlDirectory = "C:/Users/" + Environment.UserName + "/test/";
-    	public FtpDownloader(IModel model)
-    	{
-    		_model = model;
-    	}
+		private readonly IModel _model;
 
-    	/// <summary>
-        /// Helper method that connects to a server and downloads every file present in the main directory that needs to be downloaded.
-        /// </summary>
-        public void ConnectAndDownloadAll()
-    	{
-            foreach(string fileName in ConnectAndGetFileList())
-                if(FileNeedsDownload(fileName))
-                    DownloadSingleFile(fileName);
-        }
+		public FtpDownloader(IModel model)
+		{
+			_model = model;
+		}
 
-        /// <summary>
-        /// Method that downloads a single file from an FTP server.
-        /// </summary>
-        /// <param name="fileName">Name of the file to download.</param>
-        public void DownloadSingleFile(string fileName)
-        {
-            // Init request.
-            FtpWebRequest ftp = (FtpWebRequest)WebRequest.Create(Resources.ServerLocation + fileName);
+		/// <summary>
+		/// Helper method that connects to a server and downloads every file present in the main directory that needs to be downloaded.
+		/// </summary>
+//		private void ConnectAndDownloadAll()
+//		{
+//			var tuple = GetDirectoryTuple(Resources.ServerLocation);
+//			//foreach (string fileName in ConnectAndGetFileList())
+//			Console.WriteLine("File to download is: ");
+//			foreach (string fileName in tuple.Item2)
+//			{
+//				if (FileNeedsDownload(fileName))
+//				{
+//					Console.WriteLine(fileName);
+//					DownloadSingleFile(fileName);
+//				}
+//			}
+//		}
 
-            // Request type is download.
-            ftp.Method = WebRequestMethods.Ftp.DownloadFile;
+		/// <summary>
+		/// Method that downloads a single file from an FTP server.
+		/// </summary>
+		/// <param name="fileName">Name of the file to download.</param>
+		public void DownloadSingleFile(string fileName)
+		{
+			// Init request.
+			var ftp = (FtpWebRequest) WebRequest.Create(Resources.ServerLocation + fileName);
 
-            // Connect and get bytestream from server.
-            FtpWebResponse response = (FtpWebResponse) ftp.GetResponse();
-            Stream responseStream = response.GetResponseStream();
+			// Request type is download.
+			ftp.Method = WebRequestMethods.Ftp.DownloadFile;
 
-            // Initialise filestream to write to file.
-            FileStream writer = new FileStream(HtmlDirectory + fileName, FileMode.Create);
+			// Connect and get bytestream from server.
+			var response = (FtpWebResponse) ftp.GetResponse();
+			Stream responseStream = response.GetResponseStream();
 
-            // Create a read/write buffer.
-            const int bufferLength = 2048;
-            byte[] buffer = new byte[bufferLength];
+			// Initialise filestream to write to file.
+			var writer = new FileStream(HtmlDirectory + fileName, FileMode.Create);
 
-            // Get byte data from server stream for as long as it is available.
-            int bytes = responseStream.Read(buffer, 0, bufferLength);
-            while(bytes > 0)
-            {
-                // Write byte data to file.
-                writer.Write(buffer, 0, bytes);
-                bytes = responseStream.Read(buffer, 0, bufferLength);
-            }
+			// Create a read/write buffer.
+			const int bufferLength = 2048;
+			var buffer = new byte[bufferLength];
 
-            // Close streams once file transfer is complete.
-            writer.Close();
-            response.Close();
-        }
+			// Get byte data from server stream for as long as it is available.
+			int bytes = responseStream.Read(buffer, 0, bufferLength);
+			while (bytes > 0)
+			{
+				// Write byte data to file.
+				writer.Write(buffer, 0, bytes);
+				bytes = responseStream.Read(buffer, 0, bufferLength);
+			}
 
-        /// <summary>
-        /// Asserts whether or not a file needs to be downloaded.
-        /// 
-        /// If it does not exists locally or it's remote version is a different size to the local one,
-        /// then will return true.
-        /// </summary>
-        /// <param name="fileName">The name of the file to check.</param>
-        /// <returns>Whether or not the file needs downloading.</returns>
-        public bool FileNeedsDownload(string fileName)
-        {
-            return (!CheckIfLocalCopyExists(fileName) || LocalVersionSize(fileName) != RemoteVersionSize(fileName));
-        }
-    }
+			// Close streams once file transfer is complete.
+			writer.Close();
+			response.Close();
+		}
+
+		/// <summary>
+		/// Asserts whether or not a file needs to be downloaded.
+		/// 
+		/// If it does not exists locally or it's remote version is a different size to the local one,
+		/// then will return true.
+		/// </summary>
+		/// <param name="fileName">The name of the file to check.</param>
+		/// <returns>Whether or not the file needs downloading.</returns>
+		public bool FileNeedsDownload(string fileName)
+		{
+			return (!CheckIfLocalCopyExists(fileName) || LocalVersionSize(fileName) != RemoteVersionSize(fileName));
+		}
+
+	}
 }
