@@ -101,7 +101,7 @@ namespace BaconBuilder.Component
         public void MoveTo(int x, int y)
         {
             X = Math.Min(Math.Max(0, x), _panel.ClientSize.Width);
-            Y = Math.Min(Math.Max(0, y), _panel.ClientSize.Height);
+            Y = Math.Min(Math.Max(0, y), _panel.ClientSize.Height - panel1.Height - Radius);
 
             if (MapCoordinateChanged != null)
             {
@@ -150,85 +150,4 @@ namespace BaconBuilder.Component
     }
         
     public delegate void MapCoordinateChangedHandler(object sender, MouseEventArgs eventArgs);
-    #region Map Box Events and Methods
-
-    //		/// <summary>
-    //		/// Called when the user presses down their mouse button on the picture box.
-    //		/// 
-    //		/// Updates the UI to reflect their click.
-    //		/// </summary>
-    //		private void mapBox_MouseDown(object sender, MouseEventArgs e)
-    //		{
-    //			// Allow drawing on the map.
-    //			_mouseDownOnMap = true;
-    //			mapBox_Modify(sender, e);
-    //		}
-
-    //		/// <summary>
-    //		/// Called when the user moves their mouse over the picture box.
-    //		/// 
-    //		/// Updates the UI to reflect their action.
-    //		/// </summary>
-    //		private void mapBox_MouseMove(object sender, MouseEventArgs e)
-    //		{
-    //			// If drawing is allowed, then do so.
-    //			if (_mouseDownOnMap)
-    //				mapBox_Modify(sender, e);
-    //		}
-
-    //		/// <summary>
-    //		/// Called when the user releases their mouse button over the picture box.
-    //		/// </summary>
-    //		private void mapBox_MouseUp(object sender, MouseEventArgs e)
-    //		{
-    //			// Disallow any more drawing.
-    //			_mouseDownOnMap = false;
-    //		}
-
-    //		/// <summary>
-    //		/// Modifies the UI to reflect clicks and/or click-drags on the picture box.
-    //		/// </summary>
-    //		/// <param name="sender"></param>
-    //		/// <param name="e">Mouse event args from the method that calls this.</param>
-    //		private void mapBox_Modify(object sender, MouseEventArgs e)
-    //		{
-    //			// Change the numeric up/down values. Don't allow values below 0.
-    //			txtX.Value = Math.Min(Math.Max(0, e.X), mapBox.Width);
-    //			txtY.Value = Math.Min(Math.Max(0, e.Y), mapBox.Height);
-    //
-    //			// Redraw and invalidate the picturebox.
-    //			mapBox.Invalidate();
-    //		}
-
-    //		/// <summary>
-    //		/// Called when the picture box needs repainting.
-    //		/// 
-    //		/// Draws the marker on the map.
-    //		/// </summary>
-    //		private void mapBox_Paint(object sender, PaintEventArgs e)
-    //		{
-    //			// Don't bother drawing anything outside the box.
-    //			if (txtX.Value >= 0 && txtY.Value >= 0 && txtX.Value <= mapBox.Width && txtY.Value <= mapBox.Height &&
-    //				!(txtX.Value == 0 && txtY.Value == 0))
-    //			{
-    //
-    //				// Create a rectangle and brush to draw with.
-    //				var marker = new Rectangle((int)txtX.Value - radius, (int)txtY.Value - radius, 2 * radius, 2 * radius);
-    //
-    //				// Draw marker ellipse.
-    //				e.Graphics.FillEllipse(Brushes.Red, marker);
-    //
-    //				TextRenderer.DrawText(e.Graphics, "You are here", new Font(Font.FontFamily, 10), new Point((int)txtX.Value + radius,
-    //									  (int)txtY.Value - radius - 3), Color.Black);
-    //				// Change brush colour and draw 'you are here' text.
-    ////				e.Graphics.DrawString("You are here", new Font(Font.FontFamily, 10), Brushes.Black, (float) txtX.Value + radius,
-    ////									  (float) txtY.Value - radius - 3);
-    //			}
-    //		}
-    //		// No magic numbers allowed.
-    //		const int radius = 5;
-
-    //		Rectangle marker = new Rectangle(0,0, 2*radius, 2*radius);
-
-    #endregion
 }

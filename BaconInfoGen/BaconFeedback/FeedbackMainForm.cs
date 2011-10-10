@@ -94,8 +94,13 @@ namespace BaconFeedback
 
         private void toolStripStats_Click(object sender, EventArgs e)
         {
-            StatisticsForm stats = new StatisticsForm(_presenter.CreateFeedbackList());
-            stats.ShowDialog();
+            if (fileView.SelectedItems.Count > 0)
+            {
+                StatisticsForm stats = new StatisticsForm(_presenter.CreateFeedbackList());
+                stats.ShowDialog();
+            }
+            else
+                _presenter.ShowErrorMessage(@"No files selected. Cannot display statistics.");
         }
 
         private void toolStripSync_Click(object sender, EventArgs e)
