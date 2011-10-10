@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaconBuilder.Test", "BaconB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaconFeedback", "BaconFeedback\BaconFeedback.csproj", "{E09F36D3-D0FE-4B25-A122-C87886C3C807}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaconGame", "BaconGame\BaconGame.csproj", "{2C4898B8-DD30-432F-9D5F-08BAB120B3BD}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = BaconInfoGen.vsmdi
@@ -62,6 +64,18 @@ Global
 		{E09F36D3-D0FE-4B25-A122-C87886C3C807}.Release|x64.ActiveCfg = Release|x86
 		{E09F36D3-D0FE-4B25-A122-C87886C3C807}.Release|x86.ActiveCfg = Release|x86
 		{E09F36D3-D0FE-4B25-A122-C87886C3C807}.Release|x86.Build.0 = Release|x86
+		{2C4898B8-DD30-432F-9D5F-08BAB120B3BD}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{2C4898B8-DD30-432F-9D5F-08BAB120B3BD}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{2C4898B8-DD30-432F-9D5F-08BAB120B3BD}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{2C4898B8-DD30-432F-9D5F-08BAB120B3BD}.Debug|x64.ActiveCfg = Debug|x86
+		{2C4898B8-DD30-432F-9D5F-08BAB120B3BD}.Debug|x86.ActiveCfg = Debug|x86
+		{2C4898B8-DD30-432F-9D5F-08BAB120B3BD}.Debug|x86.Build.0 = Debug|x86
+		{2C4898B8-DD30-432F-9D5F-08BAB120B3BD}.Release|Any CPU.ActiveCfg = Release|x86
+		{2C4898B8-DD30-432F-9D5F-08BAB120B3BD}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{2C4898B8-DD30-432F-9D5F-08BAB120B3BD}.Release|Mixed Platforms.Build.0 = Release|x86
+		{2C4898B8-DD30-432F-9D5F-08BAB120B3BD}.Release|x64.ActiveCfg = Release|x86
+		{2C4898B8-DD30-432F-9D5F-08BAB120B3BD}.Release|x86.ActiveCfg = Release|x86
+		{2C4898B8-DD30-432F-9D5F-08BAB120B3BD}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

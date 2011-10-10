@@ -47,8 +47,6 @@
             this.folderView = new System.Windows.Forms.ListView();
             this.colHeaderFolder = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.imageList = new System.Windows.Forms.ImageList(this.components);
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.btnRemoveFile = new System.Windows.Forms.Button();
             this.splitter = new System.Windows.Forms.Splitter();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -72,6 +70,8 @@
             this.toolStripPreview = new System.Windows.Forms.ToolStripButton();
             this.toolStripPrint = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripStats = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSync = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripConfig = new System.Windows.Forms.ToolStripButton();
@@ -81,11 +81,8 @@
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
-            this.toolStripStats = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -216,7 +213,6 @@
             // 
             this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel1.Controls.Add(this.folderView);
-            this.panel1.Controls.Add(this.panel3);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(8, 32);
             this.panel1.Name = "panel1";
@@ -234,7 +230,7 @@
             this.folderView.HideSelection = false;
             this.folderView.Location = new System.Drawing.Point(0, 0);
             this.folderView.Name = "folderView";
-            this.folderView.Size = new System.Drawing.Size(162, 461);
+            this.folderView.Size = new System.Drawing.Size(162, 500);
             this.folderView.SmallImageList = this.imageList;
             this.folderView.TabIndex = 3;
             this.folderView.UseCompatibleStateImageBehavior = false;
@@ -253,26 +249,6 @@
             this.imageList.Images.SetKeyName(0, "folder.ico");
             this.imageList.Images.SetKeyName(1, "folder_info.ico");
             this.imageList.Images.SetKeyName(2, "file_info.ico");
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.btnRemoveFile);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 461);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(162, 39);
-            this.panel3.TabIndex = 0;
-            // 
-            // btnRemoveFile
-            // 
-            this.btnRemoveFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRemoveFile.Location = new System.Drawing.Point(3, 6);
-            this.btnRemoveFile.Name = "btnRemoveFile";
-            this.btnRemoveFile.Size = new System.Drawing.Size(156, 27);
-            this.btnRemoveFile.TabIndex = 4;
-            this.btnRemoveFile.Text = "Herp";
-            this.btnRemoveFile.UseVisualStyleBackColor = true;
             // 
             // splitter
             // 
@@ -540,6 +516,25 @@
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(6, 32);
             // 
+            // toolStripStats
+            // 
+            this.toolStripStats.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripStats.Image = ((System.Drawing.Image)(resources.GetObject("toolStripStats.Image")));
+            this.toolStripStats.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripStats.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripStats.Margin = new System.Windows.Forms.Padding(4, 1, 4, 2);
+            this.toolStripStats.Name = "toolStripStats";
+            this.toolStripStats.Size = new System.Drawing.Size(36, 45);
+            this.toolStripStats.Text = "Options - Opens an options dialog.";
+            this.toolStripStats.ToolTipText = "Statistics - Shows various statistics about the selected files.";
+            this.toolStripStats.Click += new System.EventHandler(this.toolStripStats_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 32);
+            // 
             // toolStripSync
             // 
             this.toolStripSync.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -615,25 +610,6 @@
             this.printPreviewDialog.UseAntiAlias = true;
             this.printPreviewDialog.Visible = false;
             // 
-            // toolStripStats
-            // 
-            this.toolStripStats.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripStats.Image = ((System.Drawing.Image)(resources.GetObject("toolStripStats.Image")));
-            this.toolStripStats.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripStats.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripStats.Margin = new System.Windows.Forms.Padding(4, 1, 4, 2);
-            this.toolStripStats.Name = "toolStripStats";
-            this.toolStripStats.Size = new System.Drawing.Size(36, 45);
-            this.toolStripStats.Text = "Options - Opens an options dialog.";
-            this.toolStripStats.ToolTipText = "Statistics - Shows various statistics about the selected files.";
-            this.toolStripStats.Click += new System.EventHandler(this.toolStripStats_Click);
-            // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 32);
-            // 
             // FeedbackMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -655,7 +631,6 @@
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -679,7 +654,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Splitter splitter;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button btnRemoveFile;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Splitter splitter6;
         private System.Windows.Forms.Panel panel4;
@@ -701,7 +675,6 @@
         private System.Windows.Forms.ToolStripMenuItem menuStripCopy;
         private System.Windows.Forms.ImageList imageList;
         private System.Windows.Forms.ListView folderView;
-        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.ColumnHeader colHeaderFolder;
         private System.Windows.Forms.ColumnHeader colHeaderFilename;
         private System.Windows.Forms.ColumnHeader colHeaderCreatedDate;
