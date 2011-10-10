@@ -1,12 +1,14 @@
-﻿using System;
+using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace BaconBuilder.Component
 {
-    public sealed partial class MapBox : UserControl
+    public partial class MapBox : UserControl
     {
         private const int Radius = 5;
+        private const double Epsilon = 0;
         private readonly Font _font;
         private readonly DbPanel _panel = new DbPanel();
         private Bitmap _bmp;
@@ -15,15 +17,15 @@ namespace BaconBuilder.Component
         private Size _markerTextSize;
         private bool _mouseDown;
         private Point _pt;
-
-        private float _scale = 100.00f;
         private Point _textpt;
+        private float _zoom = 100.00f;
 
         public MapBox()
         {
             InitializeComponent();
 
             btnZoomIn.Click += ZoomIn;
+            btnZoomReset.Click += ZoomReset;
             btnZoomOut.Click += ZoomOut;
 
             _panel.Dock = DockStyle.Fill;
@@ -45,30 +47,38 @@ namespace BaconBuilder.Component
             set
             {
                 _bmp = value as Bitmap;
-                if (_bmp != null)
-                    ClientSize = new Size(_bmp.Width, _bmp.Height);
+                Debug.Assert(_bmp != null, "_bmp != null");
+                ClientSize = new Size(_bmp.Width, _bmp.Height + panel1.Height);
             }
         }
 
         public int X
         {
             get { return _pt.X; }
-            private set
+            set
             {
-                _pt.X = value;
-                _marker.X = value - Radius;
-                _textpt.X = value + Radius;
+                if (Math.Abs(_pt.X - value) > Epsilon)
+                {
+                    _pt.X = value;
+                    _marker.X = value - Radius;
+                    _textpt.X = value + Radius;
+                    OnMapCoordinateChanged(EventArgs.Empty);
+                }
             }
         }
 
         public int Y
         {
             get { return _pt.Y; }
-            private set
+            set
             {
-                _pt.Y = value;
-                _marker.Y = value - Radius;
-                _textpt.Y = value - (_markerTextSize.Height/2);
+                if (Math.Abs(_pt.Y - value) > Epsilon)
+                {
+                    _pt.Y = value;
+                    _marker.Y = value - Radius;
+                    _textpt.Y = value - (_markerTextSize.Height/2);
+                    OnMapCoordinateChanged(EventArgs.Empty);
+                }
             }
         }
 
@@ -82,46 +92,75 @@ namespace BaconBuilder.Component
             }
         }
 
+        public float Zoom
+        {
+            get { return _zoom; }
+            set
+            {
+                if (Math.Abs(_zoom - value) > Epsilon)
+                {
+                    _zoom = value;
+                    OnZoomChanged(EventArgs.Empty);
+                }
+            }
+        }
+
         private void ZoomIn(object sender, EventArgs e)
         {
+            Zoom *= 2f;
+            _panel.Invalidate();
+        }
+
+        private void ZoomReset(object sender, EventArgs e)
+        {
+            Zoom = 100.0f;
+            _panel.Invalidate();
         }
 
         private void ZoomOut(object sender, EventArgs e)
         {
+            Zoom /= 2f;
+            _panel.Invalidate();
         }
 
-        public event MapCoordinateChangedHandler MapCoordinateChanged;
+        public event EventHandler MapCoordinateChanged;
 
-        public void OnMapCoordinateChanged(MouseEventArgs e)
+        public event EventHandler ZoomChanged;
+
+        private void OnMapCoordinateChanged(EventArgs e)
         {
-            MapCoordinateChangedHandler handler = MapCoordinateChanged;
-            if (handler != null) handler(this, e);
+            //this.AdjustLayout();
+            if (MapCoordinateChanged != null)
+                MapCoordinateChanged(this, e);
+        }
+
+        private void OnZoomChanged(EventArgs e)
+        {
+            //this.AdjustLayout();
+            if (ZoomChanged != null)
+                ZoomChanged(this, e);
         }
 
         public void MoveTo(int x, int y)
         {
-            X = Math.Min(Math.Max(0, x), _panel.ClientSize.Width);
-            Y = Math.Min(Math.Max(0, y), _panel.ClientSize.Height - panel1.Height - Radius);
-
-            if (MapCoordinateChanged != null)
-            {
-                var e = new MouseEventArgs(MouseButtons.Right, 0, X, Y, 0);
-                MapCoordinateChanged(this, e);
-            }
+            X = Math.Min(Math.Max(0, x), _bmp.Width);
+            Y = Math.Min(Math.Max(0, y), _bmp.Height);
         }
 
         private void PanelPaint(object sender, PaintEventArgs e)
         {
+            //float scale = _zoom/100;
             if (_bmp != null)
-                e.Graphics.DrawImage(_bmp, 0, 0);
+                e.Graphics.DrawImage(_bmp, 0, 0, _bmp.Width, _bmp.Height);
 
             // Don't bother drawing anything outside the box.
             if (X < 0 || X < 0 || X > _panel.Width || Y > _panel.Height || (X == 0 && Y == 0)) return;
 
             // Draw marker ellipse.
-            e.Graphics.FillEllipse(Brushes.Red, _marker);
+            e.Graphics.FillEllipse(Brushes.Red, _marker.X, _marker.Y, _marker.Width, _marker.Height);
 
             // Change brush colour and draw 'you are here' text.
+            //var p = new Point((int) (_textpt.X * scale), (int) (_textpt.Y * scale));
             TextRenderer.DrawText(e.Graphics, MarkerText, _font, _textpt, Color.Black, Color.White);
         }
 
@@ -148,6 +187,4 @@ namespace BaconBuilder.Component
             _mouseDown = false;
         }
     }
-        
-    public delegate void MapCoordinateChangedHandler(object sender, MouseEventArgs eventArgs);
 }
