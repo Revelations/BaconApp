@@ -41,14 +41,7 @@ namespace BaconFeedback
         {
             get
             {
-                // Init a total count.
-                int total = 0;
-
-                // Sum group numbers over each file.
-                foreach (FeedbackFile f in _files)
-                    total += Convert.ToInt32(f.Number);
-
-                return total;
+            	return _files.Sum(f => Convert.ToInt32(f.Number));
             }
         }
 
@@ -79,13 +72,7 @@ namespace BaconFeedback
         {
             get
             {
-                int max = 0;
-                foreach (FeedbackFile f in _files)
-                {
-                    int current = Convert.ToInt32(f.Number);
-                    max = Math.Max(current, max);
-                }
-                return max;
+            	return _files.Select(f => Convert.ToInt32(f.Number)).Concat(new[] {0}).Max();
             }
         }
 
