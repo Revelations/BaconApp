@@ -141,6 +141,7 @@
             this.fileHeader});
             this.fileView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileView.FullRowSelect = true;
+            this.fileView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.fileView.HideSelection = false;
             this.fileView.Location = new System.Drawing.Point(0, 0);
             this.fileView.MultiSelect = false;
@@ -360,6 +361,7 @@
             this.answerHeader});
             this.questionView.Dock = System.Windows.Forms.DockStyle.Top;
             this.questionView.FullRowSelect = true;
+            this.questionView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.questionView.HideSelection = false;
             this.questionView.Location = new System.Drawing.Point(178, 80);
             this.questionView.Name = "questionView";
