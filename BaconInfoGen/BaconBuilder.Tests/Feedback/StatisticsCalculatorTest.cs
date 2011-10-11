@@ -29,5 +29,44 @@ namespace BaconBuilder.Feedback
 				Assert.AreEqual(values[i], d[strings[i]]);
 			}
 		}
+
+		[Test]
+		public void GetLargestGroups()
+		{
+			var d = new Dictionary<string, int>();
+
+			string[] strings = "a b c d e".Split(' ');
+			int[] values = { 7, 42, 36, 42, 1 };
+
+			for (int i = 0; i < strings.Length; i++)
+			{
+				int old;
+				d.TryGetValue(strings[i], out old);
+				d[strings[i]] = old + values[i];
+			}
+
+			for (int i = 0; i < strings.Length; i++)
+			{
+				Assert.AreEqual(values[i], d[strings[i]]);
+			}
+
+			var largest = new List<KeyValuePair<string, int>>();
+			int max = 0;
+
+			// Iterate and find maximum value.
+			foreach (var kvp in d)
+			{
+				if (kvp.Value > max)
+				{
+					largest.Clear();
+					max = kvp.Value;
+				}
+				if (kvp.Value == max)
+					largest.Add(kvp);
+			}
+
+			Assert.IsTrue(largest.Contains(new KeyValuePair<string, int>("b", 42)));
+			Assert.IsTrue(largest.Contains(new KeyValuePair<string, int>("d", 42)));
+		}
 	}
 }

@@ -76,6 +76,41 @@ namespace BaconFeedback
             }
         }
 
+    	public List<KeyValuePair<string, int>> LargestNationalities
+    	{
+    		get
+    		{
+				// Init a dictionary to store quantities of people of varying nationalities.
+				var dictionary = new Dictionary<string, int>();
+
+				// For each file...
+				foreach (FeedbackFile f in _files)
+				{
+					int old;
+					dictionary.TryGetValue(f.Nationality, out old);
+					dictionary[f.Nationality] = old + Convert.ToInt32(f.Number);
+				}
+
+				// Initialise an object to store the largest nationality found.
+				var largest = new List<KeyValuePair<string, int>>();
+    			int max = 0;
+
+				// Iterate and find maximum value.
+				foreach (var kvp in dictionary)
+				{
+					if (kvp.Value > max)
+					{
+						largest.Clear();
+						max = kvp.Value;
+					}
+					if (kvp.Value == max)
+						largest.Add(kvp);
+				}
+
+				return largest;
+    		}
+    	} 
+
         /// <summary>
         /// Gets a key value pair containing the most common nationality present in a group of feedback files, as well as the
         /// quantity of visitors specifying that same nationality.
@@ -97,7 +132,7 @@ namespace BaconFeedback
                 }
 
                 // Initialise an object to store the largest nationality found.
-                var max = new KeyValuePair<string, int>("None", 0);
+                KeyValuePair<string, int> max = new KeyValuePair<string, int>("None", 0);
 
                 // Iterate and find maximum value.
                 foreach (KeyValuePair<string, int> kvp in dictionary)
@@ -109,6 +144,7 @@ namespace BaconFeedback
                 return max;
             }
         }
+
 		public KeyValuePair<string, int> MostCommonNationalityOld
 		{
 			get

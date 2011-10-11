@@ -47,11 +47,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Feedback\StatisticsCalculatorTest.cs" />
-    <Compile Include="ImageManipulatorTest.cs" />
-    <Compile Include="Parser\ParserTest.cs" />
-    <Compile Include="Parser\HtmlToTextParserTest.cs" />
-    <Compile Include="MainWindowTest.cs" />
-    <Compile Include="Parser\TextToHtmlParserTest.cs" />
+    <Compile Include="InfoGen\ImageManipulatorTest.cs" />
+    <Compile Include="InfoGen\Parser\ParserTest.cs" />
+    <Compile Include="InfoGen\Parser\HtmlToTextParserTest.cs" />
+    <Compile Include="InfoGen\MainWindowTest.cs" />
+    <Compile Include="InfoGen\Parser\TextToHtmlParserTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
