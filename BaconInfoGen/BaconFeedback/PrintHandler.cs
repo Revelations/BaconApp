@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Printing;
 using BaconFeedback.Properties;
@@ -62,27 +63,61 @@ namespace BaconFeedback
 			FeedbackFile file = _files[_currentPage - 1];
 
 			// Build the content and layout for the feedback data.
-			string content = string.Format(Resources.LayoutTextFile, file.FileName, file.Directory, file.CreatedDate,
-			                               file.Number, file.Nationality, file.Sighted);
-
-			// Setup tab stops to format the page.
-			var stringFormat = new StringFormat();
-			stringFormat.SetTabStops(200, new float[1]);
-
-			// Draw the page skeleton in bold.
-			e.Graphics.DrawString(Resources.SkeletonPrintFile, _boldFont, _brush, e.MarginBounds);
-
-			// Draw the laid-out fields.
-			e.Graphics.DrawString(content, _font, _brush, e.MarginBounds, stringFormat);
-
-			// Draw the Misc heading and content.
-			int verticalPos = (int) e.Graphics.MeasureString(content, _font).Height + e.MarginBounds.Top;
-			e.Graphics.DrawString("\r\nMiscellaneous Feedback:", _boldFont, _brush,
-			                      new RectangleF(e.MarginBounds.X, verticalPos, e.MarginBounds.Width, e.MarginBounds.Height));
-
-			verticalPos += (int) e.Graphics.MeasureString("\r\nMiscellaneous Feedback:", _boldFont).Height;
-			e.Graphics.DrawString(file.Misc, _font, _brush,
-			                      new RectangleF(e.MarginBounds.X, verticalPos, e.MarginBounds.Width, e.MarginBounds.Height));
+			// TODO: Reintroduce the skeletons and layout format to let the program decide columns -- Shii
+			int yOffset = e.MarginBounds.Top;
+			yOffset = PrintTwoColumn(e, "Filename:", file.FileName, yOffset);
+			yOffset = PrintTwoColumn(e, "Directory:", file.Directory, yOffset);
+			yOffset = PrintTwoColumn(e, "Creation Date:", file.CreatedDate, yOffset);
+			yOffset = PrintTwoColumn(e, " ", " ", yOffset);
+			yOffset = PrintTwoColumn(e, "Group number:", file.Number, yOffset);
+			yOffset = PrintTwoColumn(e, "Nationality:", file.Nationality, yOffset);
+			yOffset = PrintTwoColumn(e, " ", " ", yOffset);
+			yOffset = PrintSingleColumn(e, "What was seen:", file.Sighted, yOffset);
+			yOffset = PrintTwoColumn(e, " ", " ", yOffset);
+			yOffset = PrintSingleColumn(e, "Misc", file.Misc, yOffset);
 		}
+
+
+		private int PrintTwoColumn(PrintPageEventArgs e, string head, string body, int yOffset)
+		{
+			int headOffset = PrintHead(e, head, yOffset);
+
+			int bodyOffset = PrintBody(e, body, yOffset, 200);
+
+			return Math.Max(headOffset, bodyOffset);
+		}
+
+		private int PrintSingleColumn(PrintPageEventArgs e, string head, string body, int yOffset)
+		{
+			int headOffset = PrintHead(e, head, yOffset);
+
+			int bodyOffset = PrintBody(e, body, headOffset, 0);
+
+			return bodyOffset;
+		}
+
+		private int PrintHead(PrintPageEventArgs e, string head, int yOffset)
+		{
+			SizeF textBounds = e.Graphics.MeasureString(head, _boldFont, e.MarginBounds.Width);
+			var layoutRectangle = new Rectangle(e.MarginBounds.X, yOffset, e.MarginBounds.Width, e.MarginBounds.Height);
+			var headOffset = textBounds.Height;
+			e.Graphics.DrawString(head, _boldFont, _brush, layoutRectangle);
+
+			return (int) (yOffset + headOffset);			
+		}
+
+		private int PrintBody(PrintPageEventArgs e, string body, int yOffset, int xOffset)
+		{
+			var stringFormat = new StringFormat();
+			stringFormat.SetTabStops(xOffset, new float[1]);
+			var layoutRectangle = new Rectangle(e.MarginBounds.X + xOffset, yOffset, e.MarginBounds.Width, e.MarginBounds.Height);
+			var bodyOffset = e.Graphics.MeasureString(body, _font, e.MarginBounds.Width, stringFormat).Height;
+			e.Graphics.DrawString(body, _font, _brush, layoutRectangle, stringFormat);
+
+			return (int)(yOffset + bodyOffset);
+
+		}
+
+
 	}
 }
