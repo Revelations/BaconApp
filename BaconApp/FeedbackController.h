@@ -10,7 +10,11 @@
 
 
 @interface FeedbackController : UIViewController {
+    IBOutlet UITextField *  numberTextField;
+    IBOutlet UITextField *  nationalityTextField;
+    IBOutlet UITextView  *  feedBackTextView;
     
 }
-
+-(IBAction)SendFeedback:(id)sender;
+-(IBAction)Cancel:(id)sender;
 @end
