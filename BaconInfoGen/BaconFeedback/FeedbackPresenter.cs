@@ -99,7 +99,7 @@ namespace BaconFeedback
 				MessageBox.Show(@"Bad feedback file");
 				return;
 			}
-			Debug.Assert(contents.Length == 4, "Bad feedback file!");
+			Debug.Assert(contents.Length == 4, "contents.Length == 4");
 			for (int i = 0; i < contents.Length; i++)
 				_feedbackFields[i].Text = contents[i];
 		}

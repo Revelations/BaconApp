@@ -100,6 +100,7 @@ namespace BaconFeedback
 			get { return MostCommonNationalities[0]; }
 		}
 
+		/* // Jordan's method
 		public KeyValuePair<string, int> MostCommonNationalityOld
 		{
 			get
@@ -118,7 +119,7 @@ namespace BaconFeedback
 						dictionary.Remove(f.Nationality);
 						dictionary.Add(f.Nationality, old + Convert.ToInt32(f.Number));
 					}
-						// Otherwise add that nationality to the dictionary.
+					// Otherwise add that nationality to the dictionary.
 					else
 						dictionary.Add(f.Nationality, Convert.ToInt32(f.Number));
 				}
@@ -136,6 +137,7 @@ namespace BaconFeedback
 				return max;
 			}
 		}
+		*/
 
 		private Dictionary<string, int> GetConsolidatedNationalityDictionary()
 		{

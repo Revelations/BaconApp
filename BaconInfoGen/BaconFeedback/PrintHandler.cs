@@ -10,10 +10,13 @@ namespace BaconFeedback
 	/// </summary>
 	public class PrintHandler
 	{
+		// Create fonts and brush for drawing strings.
+		private readonly Brush _brush = Brushes.Black;
+		private readonly Font _font = new Font(FontFamily.GenericSansSerif, 12);
+		private readonly Font _boldFont = new Font(FontFamily.GenericSansSerif, 12, FontStyle.Bold);
 		// Not really used at this point in time. Will be if multiple feedback reports are printed on a single page.
 		private readonly List<FeedbackFile> _files;
 		private readonly int _numPages;
-
 		// The current page being laid out for printing.
 		private int _currentPage = 1;
 
@@ -55,11 +58,6 @@ namespace BaconFeedback
 		/// <param name="e">PrintPageEventArgs used for layout.</param>
 		private void ConstructSingleFeedback(PrintPageEventArgs e)
 		{
-			// Create fonts and brush for drawing strings.
-			Brush b = Brushes.Black;
-			var font = new Font(FontFamily.GenericSansSerif, 12);
-			var boldFont = new Font(FontFamily.GenericSansSerif, 12, FontStyle.Bold);
-
 			// Get the feedback file that belongs on this page.
 			FeedbackFile file = _files[_currentPage - 1];
 
@@ -72,18 +70,18 @@ namespace BaconFeedback
 			stringFormat.SetTabStops(200, new float[1]);
 
 			// Draw the page skeleton in bold.
-			e.Graphics.DrawString(Resources.SkeletonPrintFile, boldFont, b, e.MarginBounds);
+			e.Graphics.DrawString(Resources.SkeletonPrintFile, _boldFont, _brush, e.MarginBounds);
 
 			// Draw the laid-out fields.
-			e.Graphics.DrawString(content, font, b, e.MarginBounds, stringFormat);
+			e.Graphics.DrawString(content, _font, _brush, e.MarginBounds, stringFormat);
 
 			// Draw the Misc heading and content.
-			int verticalPos = (int) e.Graphics.MeasureString(content, font).Height + e.MarginBounds.Top;
-			e.Graphics.DrawString("\r\nMiscellaneous Feedback:", boldFont, b,
+			int verticalPos = (int) e.Graphics.MeasureString(content, _font).Height + e.MarginBounds.Top;
+			e.Graphics.DrawString("\r\nMiscellaneous Feedback:", _boldFont, _brush,
 			                      new RectangleF(e.MarginBounds.X, verticalPos, e.MarginBounds.Width, e.MarginBounds.Height));
 
-			verticalPos += (int) e.Graphics.MeasureString("\r\nMiscellaneous Feedback:", boldFont).Height;
-			e.Graphics.DrawString(file.Misc, font, b,
+			verticalPos += (int) e.Graphics.MeasureString("\r\nMiscellaneous Feedback:", _boldFont).Height;
+			e.Graphics.DrawString(file.Misc, _font, _brush,
 			                      new RectangleF(e.MarginBounds.X, verticalPos, e.MarginBounds.Width, e.MarginBounds.Height));
 		}
 	}
