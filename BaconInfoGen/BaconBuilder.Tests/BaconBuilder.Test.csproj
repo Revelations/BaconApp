@@ -54,6 +54,7 @@
     <Compile Include="InfoGen\Parser\TextToHtmlParserTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Game\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
