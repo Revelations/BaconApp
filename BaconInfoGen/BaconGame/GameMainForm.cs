@@ -11,6 +11,10 @@ namespace BaconGame
 			InitializeComponent();
 
 		    _presenter = new GamePresenter(this);
+
+		    _presenter.PopulateFileView();
+
+
 		}
 
         private void textBox_KeyDown(object sender, KeyEventArgs e)
@@ -31,7 +35,7 @@ namespace BaconGame
             get { return questionView; }
         }
 
-        public ComboBox CorrectAnswer
+	    public ComboBox CorrectAnswer
         {
             get { return comboBoxCorrectAnswer; }
         }
@@ -67,5 +71,21 @@ namespace BaconGame
         }
 
         #endregion
+
+        private void fileView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if (e.IsSelected)
+                _presenter.PopulateQuestionView(fileView.SelectedItems[0].Text);
+            else
+                _presenter.DepopulateQuestionView();
+        }
+
+        private void questionView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if (e.IsSelected)
+                _presenter.LoadTextFields();
+            else
+                _presenter.ClearTextFields();
+        }
     }
 }

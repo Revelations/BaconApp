@@ -29,6 +29,7 @@
 		[System.Diagnostics.DebuggerNonUserCode, System.CodeDom.Compiler.GeneratedCode("Winform Designer", "VS2010 SP1")]
 		private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameMainForm));
             this.splitter = new System.Windows.Forms.Splitter();
             this.splitter4 = new System.Windows.Forms.Splitter();
@@ -56,12 +57,17 @@
             this.comboBoxCorrectAnswer = new System.Windows.Forms.ComboBox();
             this.splitter5 = new System.Windows.Forms.Splitter();
             this.questionView = new System.Windows.Forms.ListView();
-            this.questionHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.numberHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripDeleteFile = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSync = new System.Windows.Forms.ToolStripButton();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.imageList = new System.Windows.Forms.ImageList(this.components);
+            this.questionHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.answerHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.toolStrip.SuspendLayout();
@@ -134,12 +140,17 @@
             this.fileView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.fileHeader});
             this.fileView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fileView.FullRowSelect = true;
+            this.fileView.HideSelection = false;
             this.fileView.Location = new System.Drawing.Point(0, 0);
+            this.fileView.MultiSelect = false;
             this.fileView.Name = "fileView";
             this.fileView.Size = new System.Drawing.Size(162, 500);
+            this.fileView.SmallImageList = this.imageList;
             this.fileView.TabIndex = 0;
             this.fileView.UseCompatibleStateImageBehavior = false;
             this.fileView.View = System.Windows.Forms.View.Details;
+            this.fileView.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.fileView_ItemSelectionChanged);
             // 
             // fileHeader
             // 
@@ -156,6 +167,8 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(784, 24);
@@ -342,19 +355,25 @@
             // 
             this.questionView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.questionView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.questionHeader});
+            this.numberHeader,
+            this.questionHeader,
+            this.answerHeader});
             this.questionView.Dock = System.Windows.Forms.DockStyle.Top;
+            this.questionView.FullRowSelect = true;
+            this.questionView.HideSelection = false;
             this.questionView.Location = new System.Drawing.Point(178, 80);
             this.questionView.Name = "questionView";
             this.questionView.Size = new System.Drawing.Size(598, 141);
+            this.questionView.SmallImageList = this.imageList;
             this.questionView.TabIndex = 18;
             this.questionView.UseCompatibleStateImageBehavior = false;
             this.questionView.View = System.Windows.Forms.View.Details;
+            this.questionView.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.questionView_ItemSelectionChanged);
             // 
-            // questionHeader
+            // numberHeader
             // 
-            this.questionHeader.Text = "Question";
-            this.questionHeader.Width = 300;
+            this.numberHeader.Text = "#";
+            this.numberHeader.Width = 40;
             // 
             // toolStrip
             // 
@@ -398,6 +417,30 @@
             this.toolStripSync.Size = new System.Drawing.Size(36, 45);
             this.toolStripSync.ToolTipText = "Synchronise - Uploads question files to the server.";
             // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "&File";
+            // 
+            // imageList
+            // 
+            this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
+            this.imageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList.Images.SetKeyName(0, "folder.ico");
+            this.imageList.Images.SetKeyName(1, "folder_info.ico");
+            this.imageList.Images.SetKeyName(2, "file_info.ico");
+            // 
+            // questionHeader
+            // 
+            this.questionHeader.Text = "Question Text";
+            this.questionHeader.Width = 350;
+            // 
+            // answerHeader
+            // 
+            this.answerHeader.Text = "Correct Answer";
+            this.answerHeader.Width = 250;
+            // 
             // GameMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -420,6 +463,8 @@
             this.Name = "GameMainForm";
             this.Text = "Game Creator";
             this.panel1.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -462,7 +507,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxQuestion;
         private System.Windows.Forms.ComboBox comboBoxCorrectAnswer;
+        private System.Windows.Forms.ColumnHeader numberHeader;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ImageList imageList;
         private System.Windows.Forms.ColumnHeader questionHeader;
+        private System.Windows.Forms.ColumnHeader answerHeader;
     }
 }
 

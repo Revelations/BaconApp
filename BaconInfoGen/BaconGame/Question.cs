@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace BaconGame
 {
@@ -15,7 +12,7 @@ namespace BaconGame
         public int CorrectAnswer
         {
             get { return _correctAnswer; }
-            set { _correctAnswer = Math.Max(value, 3); }
+            set { _correctAnswer = Math.Min(value, 3); }
         }
 
         public Question(string text, string[] answers, int correctAnswer) : this()
