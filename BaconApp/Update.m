@@ -21,9 +21,9 @@
 -(void)uploadPhp:(NSString *) filePath{
         
     NSString *urlString = @"http://localhost/test.php";
-    NSData *data = [NSData dataWithContentsOfFile:filePath ];// dataWithContentsOfURL:[NSURL URLWithString:filePath]];
+    NSData *data = [NSData dataWithContentsOfFile:filePath ];
         
-        // setting up the request object now
+    //the request object
     NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];
     [request setURL:[NSURL URLWithString:urlString]];
     [request setHTTPMethod:@"POST"];
@@ -33,9 +33,9 @@
     [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
         
         
-    /* now lets create the body of the post */
+    /*the body of the post */
         
-    NSString *content = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userfile\"; filename=\"%@.txt\"\r\n",@"feedback"];
+    NSString *content = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userfile\"; filename=\"%@%@.txt\"\r\n",[[NSDate date] timeIntervalSince1970],@"feedback"];
         
     NSMutableData *body = [NSMutableData data];
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];    
@@ -44,27 +44,18 @@
     [body appendData:[NSData dataWithData:data]];
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
         
-    // setting the body of the post to the reqeust
-    
-    /*POST /path/script.cgi HTTP/1.0
-From: frog@jmarshall.com
-    User-Agent: HTTPTool/1.0
-    Content-Type: application/x-www-form-urlencoded
-    Content-Length: 32
-    
-    home=Cosby&favorite+flavor=flies*/
-        
     [request setHTTPBody:body];
         
         // now lets make the connection to the web
-        NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil]; 
+
+    NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil]; 
     if(returnData){
         [returnData writeToFile:@"result.txt" atomically:YES];
-        NSLog(@"success!");
+    //    NSLog(@"success!");
     }
-    else{
+    /*else{
         NSLog(@"failure!");
-    }
+    }*/
 
 }
 
@@ -149,42 +140,29 @@ From: frog@jmarshall.com
 
 
 //#import "PutController.h"
-
 //#import "AppDelegate.h"
-
-#include <CFNetwork/CFNetwork.h>
-
+//#include <CFNetwork/CFNetwork.h>
 //@interface PutController ()
-
 // Properties that don't need to be seen by the outside world.
-
-
-
 //@end
-
 //@implementation PutController
-
-#pragma mark * UI Upload methods
-
+//#pragma mark * UI Upload methods
 // These methods are used by the core transfer code to update the UI.
-
-- (void)_sendDidStart
-{
+//- (void)_sendDidStart
+//{
     /*self.statusLabel.text = @"Sending";
     self.cancelButton.enabled = YES;
     [self.activityIndicator startAnimating];
     [[AppDelegate sharedAppDelegate] didStartNetworking];*/
-}
-
-- (void)_updateStatus:(NSString *)statusString
-{
+//}
+//- (void)_updateStatus:(NSString *)statusString
+//{
 /*    assert(statusString != nil);
     self.statusLabel.text = statusString;*/
-}
-
-- (void)_sendDidStopWithStatus:(NSString *)statusString
-{
-    NSLog(@"stopped with message : %@", statusString);
+//}
+//- (void)_sendDidStopWithStatus:(NSString *)statusString
+//{
+//    NSLog(@"stopped with message : %@", statusString);
     /*if (statusString == nil) {
         statusString = @"Put succeeded";
     }
@@ -192,76 +170,56 @@ From: frog@jmarshall.com
     self.cancelButton.enabled = NO;
     [self.activityIndicator stopAnimating];
     [[AppDelegate sharedAppDelegate] didStopNetworking];*/
-}
-
-#pragma mark * Network Upload methods
-
-
-
+//}
+//#pragma mark * Network Upload methods
 // This is the code that actually does the networking.
-NSOutputStream *            _networkStream;
-NSInputStream *             _fileStream;
-enum {
-    kSendBufferSize = 32768
-};
-uint8_t                     _buffer[kSendBufferSize];
-size_t                      _bufferOffset;
-size_t                      _bufferLimit;
-
-
+//NSOutputStream *            _networkStream;
+//NSInputStream *             _fileStream;
+//enum {
+//    kSendBufferSize = 32768
+//};
+//uint8_t                     _buffer[kSendBufferSize];
+//size_t                      _bufferOffset;
+//size_t                      _bufferLimit;
 /*@synthesize networkStream = _networkStream;    need to declare properties for these
 @synthesize fileStream    = _fileStream;
 @synthesize bufferOffset  = _bufferOffset;
 @synthesize bufferLimit   = _bufferLimit;*/
-
 // Because buffer is declared as an array, you have to use a custom getter.  
 // A synthesised getter doesn't compile.
-
-- (uint8_t *)buffer
-{
-    return _buffer;
-}
-
-- (BOOL)isSending
-{
-    return (_networkStream != nil);
-}
-
-- (void)_startSend:(NSString *)filePath : (NSString *) uploadPath
-{
+//- (uint8_t *)buffer
+//{
+//    return _buffer;
+//}
+//- (BOOL)isSending
+//{
+//    return (_networkStream != nil);
+//}
+//- (void)_startSend:(NSString *)filePath : (NSString *) uploadPath
+//{
 //    BOOL                    success;
-    NSURL *                 url;
-    CFWriteStreamRef        ftpStream;
-    
-    assert(filePath != nil);
-    assert([[NSFileManager defaultManager] fileExistsAtPath:filePath]);
-    
-    assert(_networkStream == nil);      // don't tap send twice in a row!
-    assert(_fileStream == nil);         // ditto
-    
+//    NSURL *                 url;
+//    CFWriteStreamRef        ftpStream;
+//    assert(filePath != nil);
+//    assert([[NSFileManager defaultManager] fileExistsAtPath:filePath]);
+//    assert(_networkStream == nil);      // don't tap send twice in a row!
+//    assert(_fileStream == nil);         // ditto    
     // First get and check the URL.
-    url = [NSURL URLWithString:uploadPath];
-    
+//    url = [NSURL URLWithString:uploadPath];    
     // If the URL is bogus, let the user know.  Otherwise kick off the connection.
-    if (url != nil) {
+//    if (url != nil) {
     // else {
-        
         // Open a stream for the file we're going to send.  We do not open this stream; 
         // NSURLConnection will do it for us.
         
-        _fileStream = [NSInputStream inputStreamWithFileAtPath:filePath];
-        assert(_fileStream != nil);
-        
-        [_fileStream open];
-        
+//        _fileStream = [NSInputStream inputStreamWithFileAtPath:filePath];
+//        assert(_fileStream != nil);
+//        [_fileStream open];
         // Open a CFFTPStream for the URL.
-        
-        ftpStream = CFWriteStreamCreateWithFTPURL(NULL, (CFURLRef) url);
-        assert(ftpStream != NULL);
-        
-        _networkStream = (NSOutputStream *) ftpStream;
-        
-    }    
+//        ftpStream = CFWriteStreamCreateWithFTPURL(NULL, (CFURLRef) url);
+//        assert(ftpStream != NULL);
+//        _networkStream = (NSOutputStream *) ftpStream;
+//    }    
     //setting password and username
     
         /*if (self.usernameText.text.length != 0) {
@@ -272,9 +230,9 @@ size_t                      _bufferLimit;
             assert(success);
         }*/
         
-        _networkStream.delegate = self;
-        [_networkStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-        [_networkStream open];
+//        _networkStream.delegate = self;
+//        [_networkStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+//        [_networkStream open];
         
         // Have to release ftpStream to balance out the create.
         
@@ -282,136 +240,134 @@ size_t                      _bufferLimit;
         
         // Tell the UI we're sending.
         
-        [self _sendDidStart];
-}
+//        [self _sendDidStart];
+//}
 
 
 //method called when the stream has stopped for whatever reason, deals with cleanup to make sure nothing is left dangling
-- (void)_stopSendWithStatus:(NSString *)statusString
-{
-    NSLog(@"hello I am in stopsend");
-    if (_networkStream != nil) {
-        [_networkStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-        _networkStream.delegate = nil;
-        [_networkStream close];
+//- (void)_stopSendWithStatus:(NSString *)statusString
+//{
+//    NSLog(@"hello I am in stopsend");
+//    if (_networkStream != nil) {
+//        [_networkStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+//        _networkStream.delegate = nil;
+//        [_networkStream close];
        // _networkStream = nil;
-    }
-    if (_fileStream != nil) {
-        [_fileStream close];
+//    }
+//    if (_fileStream != nil) {
+////        [_fileStream close];
        // _fileStream = nil;
-    }
-    [self _sendDidStopWithStatus:statusString];
-}
-
+//    }
+//    [self _sendDidStopWithStatus:statusString];
+//}
 // An NSStream delegate callback that's called when events happen on the 
 // network stream.
-- (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode
-{
+//- (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode
+//{
 //#pragma unused(aStream)
-    assert(aStream == _networkStream);
-    
-    switch (eventCode) {
-        case NSStreamEventOpenCompleted: {
-            [self _updateStatus:@"Opened connection"];
-        } break;
-        case NSStreamEventHasBytesAvailable: {
-            assert(NO);     // should never happen for the output stream
-        } break;
-        case NSStreamEventHasSpaceAvailable: {
-            [self _updateStatus:@"Sending"];
+//    assert(aStream == _networkStream);
+//    switch (eventCode) {
+ //       case NSStreamEventOpenCompleted: {
+//            [self _updateStatus:@"Opened connection"];
+//        } break;
+//        case NSStreamEventHasBytesAvailable: {
+//            assert(NO);     // should never happen for the output stream
+//        } break;
+//        case NSStreamEventHasSpaceAvailable: {
+//            [self _updateStatus:@"Sending"];
             
             // If we don't have any data buffered, go read the next chunk of data.
             
-            if (_bufferOffset == _bufferLimit) {
-                NSInteger   bytesRead;
+//            if (_bufferOffset == _bufferLimit) {
+//                NSInteger   bytesRead;
                 
-                bytesRead = [_fileStream read:self.buffer maxLength:kSendBufferSize];
+//                bytesRead = [_fileStream read:self.buffer maxLength:kSendBufferSize];
                 
-                if (bytesRead == -1) {
-                    [self _stopSendWithStatus:@"File read error"];
-                } else if (bytesRead == 0) {
-                    [self _stopSendWithStatus:nil];//has reached the end of the stream for the file ie, its finished normally
-                } else {
-                    _bufferOffset = 0;
-                    _bufferLimit  = bytesRead;
-                }
-            }
+//                if (bytesRead == -1) {
+//                    [self _stopSendWithStatus:@"File read error"];
+//                } else if (bytesRead == 0) {
+//                    [self _stopSendWithStatus:nil];//has reached the end of the stream for the file ie, its finished normally
+//                } else {
+//                    _bufferOffset = 0;
+//                    _bufferLimit  = bytesRead;
+//                }
+//            }
             
             // If we're not out of data completely, send the next chunk.
             
-            if (_bufferOffset != _bufferLimit) {
-                NSInteger   bytesWritten;
-                bytesWritten = [_networkStream write:&_buffer[_bufferOffset] maxLength:_bufferLimit - _bufferOffset];
-                assert(bytesWritten != 0);
-                if (bytesWritten == -1) {
-                    [self _stopSendWithStatus:@"Network write error"];
-                } else {
-                    _bufferOffset += bytesWritten;
-                }
-            }
-        } break;
-        case NSStreamEventErrorOccurred: {
+//            if (_bufferOffset != _bufferLimit) {
+//                NSInteger   bytesWritten;
+//                bytesWritten = [_networkStream write:&_buffer[_bufferOffset] maxLength:_bufferLimit - _bufferOffset];
+//                assert(bytesWritten != 0);
+//                if (bytesWritten == -1) {
+//                    [self _stopSendWithStatus:@"Network write error"];
+//                } else {
+//                    _bufferOffset += bytesWritten;
+//                }
+//            }
+//        } break;
+//        case NSStreamEventErrorOccurred: {
             
-            [self _stopSendWithStatus:@"Stream open error"];
-        } break;
-        case NSStreamEventEndEncountered: {
+//            [self _stopSendWithStatus:@"Stream open error"];
+//        } break;
+//        case NSStreamEventEndEncountered: {
             // ignore
-        } break;
-        default: {
-            assert(NO);
-        } break;
-    }
-}
+//        } break;
+//        default: {
+//            assert(NO);
+//        } break;
+//    }
+//}
 
-#pragma mark * Actions
+//#pragma mark * Actions
 
 
 //method to initiate the upload
-- (IBAction)sendAction:(UIView *)sender
-{
-   assert( [sender isKindOfClass:[UIView class]] );
+//- (IBAction)sendAction:(UIView *)sender
+//{
+//   assert( [sender isKindOfClass:[UIView class]] );
     
-    if ( ! self.isSending ) {
-        NSString *  filePath;
-        NSString * urlPath;
+//    if ( ! self.isSending ) {
+//        NSString *  filePath;
+//        NSString * urlPath;
         
         // User the tag on the UIButton to determine which image to send.
         
         //	filePath = [[AppDelegate sharedAppDelegate] pathForTestImage:sender.tag];
-        filePath = @"/Users/donovanhoffman/test.txt";
-        urlPath = @"http://revelations.webhop.org:81/";
-        assert(filePath != nil);
+//        filePath = @"/Users/donovanhoffman/test.txt";
+//        urlPath = @"http://revelations.webhop.org:81/";
+//        assert(filePath != nil);
         
-        [self _startSend:filePath :urlPath];
-    }
-}
+//        [self _startSend:filePath :urlPath];
+//    }
+//}
 
 
 //method to stop the upload
-- (IBAction)cancelAction:(id)sender
-{
+//- (IBAction)cancelAction:(id)sender
+//{
 /*#pragma unused(sender)
     [self _stopSendWithStatus:@"Cancelled"];*/
-}
+//}
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
+//- (void)textFieldDidEndEditing:(UITextField *)textField
 // A delegate method called by the URL text field when the editing is complete. 
 // We save the current value of the field in our settings.
-{
-}
+//{
+//}
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
+//- (BOOL)textFieldShouldReturn:(UITextField *)textField
 // A delegate method called by the URL text field when the user taps the Return 
 // key.  We just dismiss the keyboard.
-{
+//{
 /*#pragma unused(textField)
     assert( (textField == self.urlText) || (textField == self.usernameText) || (textField == self.passwordText) );
     [textField resignFirstResponder];
     return NO;*/
-    return NO;
-}
+//    return NO;
+//}
 
-#pragma mark * View controller boilerplate
+//#pragma mark * View controller boilerplate
 
 /*@synthesize urlText           = _urlText;
 @synthesize usernameText      = _usernameText;
@@ -420,8 +376,8 @@ size_t                      _bufferLimit;
 @synthesize activityIndicator = _activityIndicator;
 @synthesize cancelButton      = _cancelButton;*/
 
-- (void)viewDidLoad
-{
+//- (void)viewDidLoad
+//{
 /*    [super viewDidLoad];
     assert(self.urlText != nil);
     assert(self.usernameText != nil);
@@ -437,17 +393,17 @@ size_t                      _bufferLimit;
     self.activityIndicator.hidden = YES;
     self.statusLabel.text = @"Tap a picture to start the put";
     self.cancelButton.enabled = NO;*/
-}
+//}
 
-- (void)viewWillAppear:(BOOL)animated
-{
+//- (void)viewWillAppear:(BOOL)animated
+//{
 /*    [super viewWillAppear:animated];
     self.usernameText.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"Username"];
     self.passwordText.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"Password"];*/
-}
+//}
 
-- (void)viewDidUnload
-{
+//- (void)viewDidUnload
+//{
 /*    [super viewDidUnload];
     
     self.urlText = nil;
@@ -456,10 +412,10 @@ size_t                      _bufferLimit;
     self.statusLabel = nil;
     self.activityIndicator = nil;
     self.cancelButton = nil;*/
-}
+//}
 
-- (void)dealloc
-{
+//- (void)dealloc
+//{
 /*    [self _stopSendWithStatus:@"Stopped"];
     
     [self->_urlText release];
@@ -469,8 +425,8 @@ size_t                      _bufferLimit;
     [self->_activityIndicator release];
     [self->_cancelButton release];
     */
-    [super dealloc];
-}
+//    [super dealloc];
+//}
 
 @end
 

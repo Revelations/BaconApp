@@ -13,13 +13,13 @@
 @implementation UpdateController
 @synthesize progBar;
 
--(IBAction)UploadFile:(id)sender{
+/*-(IBAction)UploadFile:(id)sender{
     NSString * filePath = @"/Users/donovanhoffman/test.txt";
     NSString * urlPath = @"ftp://revelations.webhop.org";
     
     Update * fileRequest = [[Update alloc] init];
     [fileRequest _startSend: filePath : urlPath];
-}
+}*/
 
 -(IBAction)Update:(id)sender{
     NSLog(@"Jim is busy looking in a file system.");
@@ -42,7 +42,7 @@
     if (self) {
         
         NSString * filePath = @"/Users/donovanhoffman/test.txt";
-        NSString * urlPath = @"ftp://revelations.webhop.org";
+        //NSString * urlPath = @"ftp://revelations.webhop.org";
         
         Update * fileRequest = [[Update alloc] init];
         [fileRequest uploadPhp: filePath];

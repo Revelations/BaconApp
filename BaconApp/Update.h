@@ -22,8 +22,8 @@
 
 - (void)getFile:(NSString *) urlPath;
 -(void)getDirectory:(NSString *)urlPath;
--(void)upLoadFile:(NSString *)urlPath;
--(void)_startSend:(NSString *)filePath : (NSString *) urlPath;
+//-(void)upLoadFile:(NSString *)urlPath;
+//-(void)_startSend:(NSString *)filePath : (NSString *) urlPath;
 -(void)uploadPhp:(NSString *) filePath;
 
 @end
