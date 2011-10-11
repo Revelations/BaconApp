@@ -27,9 +27,7 @@ namespace BaconBuilder.View
 		/// Required method for Designer support - do not modify
 		/// the contents of this method with the code editor.
 		/// </summary>
-		[System.Diagnostics.DebuggerNonUserCode]
-		[System.CodeDom.Compiler.GeneratedCode("Winform Designer", "VS2010 SP1")]
-		private void InitializeComponent()
+		[System.Diagnostics.DebuggerNonUserCode, System.CodeDom.Compiler.GeneratedCode("Winform Designer", "VS2010 SP1")]     private void InitializeComponent()
 		{
             this.pnlContainer = new System.Windows.Forms.Panel();
             this.tlp = new System.Windows.Forms.TableLayoutPanel();

@@ -27,8 +27,7 @@ namespace BaconBuilder.View
 		/// Required method for Designer support - do not modify
 		/// the contents of this method with the code editor.
 		/// </summary>
-		[System.Diagnostics.DebuggerNonUserCode]
-		[System.CodeDom.Compiler.GeneratedCode("Winform Designer", "VS2010 SP1")]
+		[System.Diagnostics.DebuggerNonUserCode, System.CodeDom.Compiler.GeneratedCode("Winform Designer", "VS2010 SP1")]
 		private void InitializeComponent()
 		{
 			this.label1 = new System.Windows.Forms.Label();
