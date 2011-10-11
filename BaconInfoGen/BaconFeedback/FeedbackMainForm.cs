@@ -3,130 +3,136 @@ using System.Windows.Forms;
 
 namespace BaconFeedback
 {
-    public partial class FeedbackMainForm : Form
-    {
-        public ListView FolderView { get { return folderView; } }
-        public ListView FileView { get { return fileView; } }
+	public partial class FeedbackMainForm : Form
+	{
+		private readonly FeedbackPresenter _presenter;
 
-        public TextBox[] FeedbackFields { get { return new [] { textBoxNumber, textBoxNationality, textBoxSighted, textBoxMisc }; } }
+		public FeedbackMainForm()
+		{
+			InitializeComponent();
 
-        private readonly FeedbackPresenter _presenter;
+			_presenter = new FeedbackPresenter(this);
 
-        public FeedbackMainForm()
-        {
-            InitializeComponent();
+			_presenter.PopulateFolderView();
 
-            _presenter = new FeedbackPresenter(this);
+			printDocument.PrintPage += _presenter.ConstructPrintDocument;
+		}
 
-            _presenter.PopulateFolderView();
+		public ListView FolderView
+		{
+			get { return folderView; }
+		}
 
-            printDocument.PrintPage += _presenter.ConstructPrintDocument;
-        }
+		public ListView FileView
+		{
+			get { return fileView; }
+		}
 
-        private void folderView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
-        {
-            e.Item.ImageIndex = e.IsSelected ? 1 : 0;
+		public TextBox[] FeedbackFields
+		{
+			get { return new[] {textBoxNumber, textBoxNationality, textBoxSighted, textBoxMisc}; }
+		}
 
-            if (e.Item.Selected)
-                _presenter.FileViewAddFolder(e.Item.Text);
-            else
-                _presenter.FileViewRemoveFolder(e.Item.Text);
-        }
+		private void folderView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+		{
+			e.Item.ImageIndex = e.IsSelected ? 1 : 0;
 
-        private void fileView_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            _presenter.DisplayFeedbackFile();
-        }
+			if (e.Item.Selected)
+				_presenter.FileViewAddFolder(e.Item.Text);
+			else
+				_presenter.FileViewRemoveFolder(e.Item.Text);
+		}
 
-        private void splitter_SplitterMoved(object sender, SplitterEventArgs e)
-        {
-            colHeaderFolder.Width = folderView.Width;
-        }
+		private void fileView_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			_presenter.DisplayFeedbackFile();
+		}
 
-        #region Toolbar Button Events
+		private void splitter_SplitterMoved(object sender, SplitterEventArgs e)
+		{
+			colHeaderFolder.Width = folderView.Width;
+		}
 
-        private void toolStripDeleteFolder_Click(object sender, EventArgs e)
-        {
-            if (_presenter.ConfirmDelete(true))
-            {
-                foreach (ListViewItem i in folderView.SelectedItems)
-                    _presenter.DeleteFolder(i.Text);
-                _presenter.PopulateFolderView();
-            }
-        }
+		#region Toolbar Button Events
 
-        private void toolStripDeleteFile_Click(object sender, EventArgs e)
-        {
-            if(_presenter.ConfirmDelete(false))
-            {
-                _presenter.DeleteFiles();
-                _presenter.DisplayFeedbackFile();
-            }
-        }
+		private void toolStripDeleteFolder_Click(object sender, EventArgs e)
+		{
+			if (_presenter.ConfirmDelete(true))
+			{
+				foreach (ListViewItem i in folderView.SelectedItems)
+					_presenter.DeleteFolder(i.Text);
+				_presenter.PopulateFolderView();
+			}
+		}
 
-        private void toolStripCopy_Click(object sender, EventArgs e)
-        {
-            _presenter.CopySelectedText();
-        }
+		private void toolStripDeleteFile_Click(object sender, EventArgs e)
+		{
+			if (_presenter.ConfirmDelete(false))
+			{
+				_presenter.DeleteFiles();
+				_presenter.DisplayFeedbackFile();
+			}
+		}
 
-        private void toolStripExport_Click(object sender, EventArgs e)
-        {
-            
-        }
+		private void toolStripCopy_Click(object sender, EventArgs e)
+		{
+			_presenter.CopySelectedText();
+		}
 
-        private void toolStripPreview_Click(object sender, EventArgs e)
-        {
-            if (fileView.SelectedItems.Count > 0)
-            {
-                _presenter.InitPrintHandler();
-                printPreviewDialog.Width = 800;
-                printPreviewDialog.Height = 600;
-                printPreviewDialog.ShowDialog();
-            }
-            else
-                _presenter.ShowErrorMessage(@"No files selected. Cannot display preview.");
-        }
+		private void toolStripExport_Click(object sender, EventArgs e)
+		{
+		}
 
-        private void toolStripPrint_Click(object sender, EventArgs e)
-        {
+		private void toolStripPreview_Click(object sender, EventArgs e)
+		{
+			if (fileView.SelectedItems.Count > 0)
+			{
+				_presenter.InitPrintHandler();
+				printPreviewDialog.Width = 800;
+				printPreviewDialog.Height = 600;
+				printPreviewDialog.ShowDialog();
+			}
+			else
+				_presenter.ShowErrorMessage(@"No files selected. Cannot display preview.");
+		}
 
-        }
+		private void toolStripPrint_Click(object sender, EventArgs e)
+		{
+		}
 
-        private void toolStripStats_Click(object sender, EventArgs e)
-        {
-            if (fileView.SelectedItems.Count > 0)
-            {
-                StatisticsForm stats = new StatisticsForm(_presenter.CreateFeedbackList());
-                stats.ShowDialog();
-            }
-            else
-                _presenter.ShowErrorMessage(@"No files selected. Cannot display statistics.");
-        }
+		private void toolStripStats_Click(object sender, EventArgs e)
+		{
+			if (fileView.SelectedItems.Count > 0)
+			{
+				var stats = new StatisticsForm(_presenter.CreateFeedbackList());
+				stats.ShowDialog();
+			}
+			else
+				_presenter.ShowErrorMessage(@"No files selected. Cannot display statistics.");
+		}
 
-        private void toolStripSync_Click(object sender, EventArgs e)
-        {
+		private void toolStripSync_Click(object sender, EventArgs e)
+		{
+		}
 
-        }
+		private void toolStripConfig_Click(object sender, EventArgs e)
+		{
+		}
 
-        private void toolStripConfig_Click(object sender, EventArgs e)
-        {
+		#endregion
 
-        }
+		#region Menustrip Button Events
 
-        #endregion
+		private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Close();
+		}
 
-        #region Menustrip Button Events
-        
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+		private void menuStripCopy_Click(object sender, EventArgs e)
+		{
+			_presenter.CopySelectedText();
+		}
 
-        private void menuStripCopy_Click(object sender, EventArgs e)
-        {
-            _presenter.CopySelectedText();
-        }
-
-        #endregion
-    }
+		#endregion
+	}
 }

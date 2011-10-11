@@ -13,8 +13,8 @@ namespace BaconBuilder.View
 	/// </summary>
 	public partial class FtpDialog : Form
 	{
-
 		private static readonly string HtmlDirectory = "C:/Users/" + Environment.UserName + "/test/";
+
 		#region Properties and Attributes
 
 		// Hard coded html directory. Obviously this is to soon be removed.

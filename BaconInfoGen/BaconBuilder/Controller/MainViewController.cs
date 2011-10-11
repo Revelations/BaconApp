@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using BaconBuilder.Model;
@@ -57,7 +56,7 @@ namespace BaconBuilder.Controller
 			_view.TitleText = _model.CurrentFileName;
 			_view.Contents = _model.CurrentContents;
 
-            // TODO: Re implement handling of point data.
+			// TODO: Re implement handling of point data.
 
 			_view.EnableRequiredControls();
 		}

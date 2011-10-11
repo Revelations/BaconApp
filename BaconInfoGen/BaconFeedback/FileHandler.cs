@@ -4,89 +4,88 @@ using System.IO;
 
 namespace BaconFeedback
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public class FileHandler
-    {
-        private static readonly string Dir = "C:/Users/" + System.Environment.UserName + "/FeedbackTest/";
+	/// <summary>
+	/// 
+	/// </summary>
+	public class FileHandler
+	{
+		private const string _feedbackExtension = ".fbk";
+		private static readonly string Dir = "C:/Users/" + Environment.UserName + "/FeedbackTest/";
 
-        // We all recognize this, amirite?
-        private static string FeedbackDirectory
-        {
-            get
-            {
-                
-                if (!Directory.Exists(Dir))
-                    Directory.CreateDirectory(Dir);
-                return Dir;
-            }
-        }
+		// We all recognize this, amirite?
+		private static string FeedbackDirectory
+		{
+			get
+			{
+				if (!Directory.Exists(Dir))
+					Directory.CreateDirectory(Dir);
+				return Dir;
+			}
+		}
 
-        // Feedback file extension.
-        private const string _feedbackExtension = ".fbk";
+		// Feedback file extension.
 
-        public static IEnumerable<string> GetSubfolders()
-        {
-            String[] s = Directory.GetDirectories(FeedbackDirectory);
-            for (int i = 0; i < s.Length; i++)
-            {
-                s[i] = GetShortDirectoryName(s[i]);
-            }
+		public static IEnumerable<string> GetSubfolders()
+		{
+			String[] s = Directory.GetDirectories(FeedbackDirectory);
+			for (int i = 0; i < s.Length; i++)
+			{
+				s[i] = GetShortDirectoryName(s[i]);
+			}
 
-            return s;
-        }
+			return s;
+		}
 
-        public static IEnumerable<string> GetFeedbackFiles(string directory)
-        {
-            List<string> result = new List<string>();
+		public static IEnumerable<string> GetFeedbackFiles(string directory)
+		{
+			var result = new List<string>();
 
-            foreach(string s in Directory.GetFiles(FeedbackDirectory + directory))
-            {
-                FileInfo f = new FileInfo(s);
+			foreach (string s in Directory.GetFiles(FeedbackDirectory + directory))
+			{
+				var f = new FileInfo(s);
 
-                if(f.Extension == _feedbackExtension)
-                {
-                    result.Add(f.Name);
-                }
-            }
+				if (f.Extension == _feedbackExtension)
+				{
+					result.Add(f.Name);
+				}
+			}
 
-            return result;
-        }
+			return result;
+		}
 
-        private static string GetShortDirectoryName(string directory)
-        {
-            string[] split = directory.Split('/');
-            return split[split.Length - 1];
-        }
+		private static string GetShortDirectoryName(string directory)
+		{
+			string[] split = directory.Split('/');
+			return split[split.Length - 1];
+		}
 
-        public static string GetCreationDate(string path)
-        {
-            FileInfo f = new FileInfo(FeedbackDirectory + path);
-            return f.CreationTime.ToString();
-        }
+		public static string GetCreationDate(string path)
+		{
+			var f = new FileInfo(FeedbackDirectory + path);
+			return f.CreationTime.ToString();
+		}
 
-        public static string[] GetFeedbackContents(string path)
-        {
-            return File.ReadAllLines(FeedbackDirectory + path);
-        }
+		public static string[] GetFeedbackContents(string path)
+		{
+			return File.ReadAllLines(FeedbackDirectory + path);
+		}
 
-        public static void DeleteFolder(string folder)
-        {
-            string[] files = Directory.GetFiles(FeedbackDirectory + folder);
-            foreach (string file in files)
-            {
-                File.SetAttributes(file, FileAttributes.Normal);
-                File.Delete(file);
-            }
+		public static void DeleteFolder(string folder)
+		{
+			string[] files = Directory.GetFiles(FeedbackDirectory + folder);
+			foreach (string file in files)
+			{
+				File.SetAttributes(file, FileAttributes.Normal);
+				File.Delete(file);
+			}
 
-            Directory.Delete(FeedbackDirectory + folder);
-        }
+			Directory.Delete(FeedbackDirectory + folder);
+		}
 
-        public static void DeleteFile(string path)
-        {
-            Console.WriteLine(FeedbackDirectory + path);
-            File.Delete(FeedbackDirectory + path);
-        }
-    }
+		public static void DeleteFile(string path)
+		{
+			Console.WriteLine(FeedbackDirectory + path);
+			File.Delete(FeedbackDirectory + path);
+		}
+	}
 }

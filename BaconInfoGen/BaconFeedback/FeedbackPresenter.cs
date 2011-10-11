@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing.Printing;
 using System.Windows.Forms;
@@ -13,12 +12,11 @@ namespace BaconFeedback
 	{
 		#region Fields and Attributes
 
-		private readonly ListView _folderView;
-		private readonly ListView _fileView;
-		private readonly TextBox[] _feedbackFields;
-
-		private readonly List<string> _deletedFolders;
 		private readonly List<string> _deletedFiles;
+		private readonly List<string> _deletedFolders;
+		private readonly TextBox[] _feedbackFields;
+		private readonly ListView _fileView;
+		private readonly ListView _folderView;
 
 		private PrintHandler _printer;
 
@@ -158,8 +156,11 @@ namespace BaconFeedback
 			}
 
 			// Prompt for confirmation.
-			string message = string.Format(@"Are you sure you wish to delete all selected {0}s in the {0} view? These {0}s will be gone forever.", type);
-			DialogResult dialogResult = MessageBox.Show(message, @"Confirm!", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button2);
+			string message =
+				string.Format(
+					@"Are you sure you wish to delete all selected {0}s in the {0} view? These {0}s will be gone forever.", type);
+			DialogResult dialogResult = MessageBox.Show(message, @"Confirm!", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop,
+			                                            MessageBoxDefaultButton.Button2);
 			if (dialogResult == DialogResult.OK)
 				return true;
 
@@ -238,7 +239,7 @@ namespace BaconFeedback
 		public List<FeedbackFile> CreateFeedbackList()
 		{
 			// Initialise a list to store results.
-			List<FeedbackFile> result = new List<FeedbackFile>();
+			var result = new List<FeedbackFile>();
 
 			// For each selected feedback...
 			foreach (ListViewItem i in _fileView.SelectedItems)
@@ -247,7 +248,7 @@ namespace BaconFeedback
 				string[] contents = FileHandler.GetFeedbackContents(i.SubItems[2].Text + '/' + i.Text);
 
 				// Initialise a struct to store info in.
-				FeedbackFile f = new FeedbackFile();
+				var f = new FeedbackFile();
 
 				// Hand info to struct properties.
 				f.FileName = i.Text;

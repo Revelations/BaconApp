@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net;
 using BaconBuilder.Properties;
 
@@ -38,7 +35,6 @@ namespace BaconBuilder.Model
 //				}
 //			}
 //		}
-
 		/// <summary>
 		/// Method that downloads a single file from an FTP server.
 		/// </summary>
@@ -88,6 +84,5 @@ namespace BaconBuilder.Model
 		{
 			return (!CheckIfLocalCopyExists(fileName) || LocalVersionSize(fileName) != RemoteVersionSize(fileName));
 		}
-
 	}
 }

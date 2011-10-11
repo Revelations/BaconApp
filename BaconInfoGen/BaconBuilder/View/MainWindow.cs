@@ -133,7 +133,7 @@ namespace BaconBuilder.View
 			//txtX.Minimum = 0;
 			//txtY.Minimum = 0;
 
-            mapBox.ZoomChanged += MapZoomChanged;
+			mapBox.ZoomChanged += MapZoomChanged;
 			mapBox.MapCoordinateChanged += MapCoordinateChanged;
 
 			// Event binding.
@@ -164,15 +164,15 @@ namespace BaconBuilder.View
 			_controller = new MainViewController(_model, this);
 		}
 
-        private void MapZoomChanged(object sender, EventArgs e)
-        {
-            lblZoom.Text = string.Format("{0}%", mapBox.Zoom);
-        }
+		private void MapZoomChanged(object sender, EventArgs e)
+		{
+			lblZoom.Text = string.Format("{0}%", mapBox.Zoom);
+		}
 
 		private void MapCoordinateChanged(object sender, EventArgs e)
 		{
-            txtY.Value = mapBox.Y;
-            txtX.Value = mapBox.X;
+			txtY.Value = mapBox.Y;
+			txtX.Value = mapBox.X;
 		}
 
 		#endregion
@@ -386,7 +386,7 @@ namespace BaconBuilder.View
 				_controller.SelectFile(e.Item.Text);
 			}
 
-			// If this item is being unselected, then save it if necessary.
+				// If this item is being unselected, then save it if necessary.
 			else if (_controller.ContentsHaveChanged())
 			{
 				_model.CurrentContents = Contents;
@@ -403,8 +403,8 @@ namespace BaconBuilder.View
 		/// </summary>
 		private void txt_ValueChanged(object sender, EventArgs e)
 		{
-			int x = (int)Math.Min(Math.Max(0, txtX.Value), mapBox.Image.Width);
-			int y = (int)Math.Min(Math.Max(0, txtY.Value), mapBox.Image.Height);
+			var x = (int) Math.Min(Math.Max(0, txtX.Value), mapBox.Image.Width);
+			var y = (int) Math.Min(Math.Max(0, txtY.Value), mapBox.Image.Height);
 
 			mapBox.MoveTo(x, y);
 			mapBox.Invalidate();
@@ -430,8 +430,8 @@ namespace BaconBuilder.View
 		private void MainWindow_Load(object sender, EventArgs e)
 		{
 			_hasConnection = ConnectionExists();
-            if (!_hasConnection)
-                MessageBox.Show("Could not connect");
+			if (!_hasConnection)
+				MessageBox.Show("Could not connect");
 		}
 
 		private void toolStripButton1_Click(object sender, EventArgs e)
@@ -441,23 +441,24 @@ namespace BaconBuilder.View
 		}
 
 		#region Russell's Print Stuff.
-		
+
 		// TODO: Refactor the below to a method that takes margins
-		int _codecount = 0;
+		private int _codecount;
+
 		/// <summary>
 		/// Print multiple pages.
 		/// Russell
 		/// </summary>
 		private void printDocument_PrintPage(object sender, PrintPageEventArgs e)
 		{
-			int mx = 100, my =100;
+			int mx = 100, my = 100;
 			var qr = new QrCodeGenerator();
 			var font = new Font(Font.FontFamily, 20);
 			var fontColor = new SolidBrush(Color.Black);
 
 			//drawing lines for now
-			int pageheight = 1169 - my * 2,
-				pagewidth = 827 - mx * 2;
+			int pageheight = 1169 - my*2,
+			    pagewidth = 827 - mx*2;
 /*
 				x1 = mx,
 				x2 = pagewidth + mx,
@@ -479,8 +480,8 @@ namespace BaconBuilder.View
 			float right = 827 - 172 - mx;
 			float left = 827/2 + mx;
 			float yline = e.MarginBounds.Top;
-			int linediff = pageheight / 4;
-			for (; _codecount< Files.Count; _codecount++)
+			int linediff = pageheight/4;
+			for (; _codecount < Files.Count; _codecount++)
 			{
 				float x, xi;
 				string text = Files[_codecount].Text;
@@ -504,8 +505,8 @@ namespace BaconBuilder.View
 				}
 				e.Graphics.DrawString(text, font, fontColor, new RectangleF(xi, ((int) yline + 90), 500, 100));
 				e.Graphics.DrawImage(code, x, (float) ((int) yline + 34.5));
-				
-				yline += linediff;   
+
+				yline += linediff;
 			}
 
 			e.HasMorePages = false;

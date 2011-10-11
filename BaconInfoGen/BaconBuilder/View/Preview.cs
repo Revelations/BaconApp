@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 using BaconBuilder.Controller;
 using BaconBuilder.Model;
@@ -8,8 +7,8 @@ namespace BaconBuilder.View
 {
 	public partial class Preview : Form, IPreviewView
 	{
-		private readonly IModel _model;
 		private readonly PreviewController _controller;
+		private readonly IModel _model;
 
 		public Preview(IModel model)
 		{

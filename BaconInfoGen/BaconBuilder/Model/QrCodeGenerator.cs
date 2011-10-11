@@ -18,7 +18,7 @@ namespace BaconBuilder.Model
 			qrCodeEncoder.QRCodeEncodeMode = QRCodeEncoder.ENCODE_MODE.BYTE;
 			qrCodeEncoder.QRCodeVersion = 4;
 			qrCodeEncoder.QRCodeScale = 5;
-            qrCodeEncoder.QRCodeBackgroundColor = Color.White; //must be light
+			qrCodeEncoder.QRCodeBackgroundColor = Color.White; //must be light
 			qrCodeEncoder.QRCodeForegroundColor = Color.Black; //must be dark
 			Image qrCode = qrCodeEncoder.Encode(data);
 			return qrCode;

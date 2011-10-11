@@ -1,71 +1,81 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 using BaconBuilder.Model;
 
 namespace BaconBuilder.View
 {
-    public enum ContentType
-    {
-        Image,
-        Audio
-    }
+	public enum ContentType
+	{
+		Image,
+		Audio
+	}
 
 	public partial class MediaSelectionDialog : Form, IMediaSelectionDialog
 	{
 		#region Fields, properties and constants
 
-		private string _filter;
-
+		private readonly ContentType _contentType;
 		private readonly BaconModel _model;
-	    private readonly ContentType _contentType;
-	    private OpenFileDialog _openImageDialog;
+		private string _filter;
+		private OpenFileDialog _openImageDialog;
 
 		#endregion
 
-	    /// <summary>
-	    /// Constructor that accepts a model.
-	    /// </summary>
-	    /// <param name="model"></param>
-	    /// <param name="contentType"></param>
-	    public MediaSelectionDialog(BaconModel model, ContentType contentType)
+		/// <summary>
+		/// Constructor that accepts a model.
+		/// </summary>
+		/// <param name="model"></param>
+		/// <param name="contentType"></param>
+		public MediaSelectionDialog(BaconModel model, ContentType contentType)
 		{
 			InitializeComponent();
 
 			_model = model;
-	        _contentType = contentType;
+			_contentType = contentType;
 
-            InitBasedOnContentType();
+			InitBasedOnContentType();
 
-	        BuildOpenImageDialog();
+			BuildOpenImageDialog();
 			BuildBrowseButton();
 			BuildImageUrlTextbox();
 			BuildOptions();
 			BuildOkButton();
 			BuildCancelButton();
-
-
 		}
 
-        private void InitBasedOnContentType()
-        {
-            lblImageLocation.Text = _contentType + @" Location:";
-            Text = @"Select " + _contentType;
+		#region IMediaSelectionDialog Members
 
-            comboBox1.Items.AddRange(new[]
+		public string FileName
+		{
+			get { return txtImageURL.Text; }
+			set { txtImageURL.Text = value; }
+		}
+
+		public void ShowOpenItemDialog()
+		{
+		}
+
+		#endregion
+
+		private void InitBasedOnContentType()
+		{
+			lblImageLocation.Text = _contentType + @" Location:";
+			Text = @"Select " + _contentType;
+
+			comboBox1.Items.AddRange(new[]
 			                         	{
 			                         		"Insert " + _contentType.ToString().ToLower() + " before selction",
 			                         		"Insert " + _contentType.ToString().ToLower() + " after selction",
 			                         		"Replace selection with " + _contentType.ToString().ToLower()
 			                         	});
 
-            if(_contentType == ContentType.Image)
-                _filter =
-                    "All Image Files|*.bmp;*.gif;*.jpe;*.jpeg;*.jpg;*.png|Bitmap|*.bmp|GIF|*.gif|JPEG|*.jpe;*.jpeg;*.jpg|PNG|*.png";
-            else
-                _filter = "All Audio Files|*.mp3;*.ogg|MP3|*.mp3|Ogg|*.ogg";
-        }
+			if (_contentType == ContentType.Image)
+				_filter =
+					"All Image Files|*.bmp;*.gif;*.jpe;*.jpeg;*.jpg;*.png|Bitmap|*.bmp|GIF|*.gif|JPEG|*.jpe;*.jpeg;*.jpg|PNG|*.png";
+			else
+				_filter = "All Audio Files|*.mp3;*.ogg|MP3|*.mp3|Ogg|*.ogg";
+		}
 
 		private void BuildOptions()
 		{
@@ -138,34 +148,22 @@ namespace BaconBuilder.View
 
 		private void btnOK_Click(object sender, EventArgs e)
 		{
-            FileInfo f = new FileInfo(FileName);
-            ImageManipulator i = new ImageManipulator(FileName);
+			var f = new FileInfo(FileName);
+			var i = new ImageManipulator(FileName);
 
-            i.ScaleImage(270, 300, true);
+			i.ScaleImage(270, 300, true);
 
-		    string fileName = f.Name.Replace(f.Extension, "");
+			string fileName = f.Name.Replace(f.Extension, "");
 
-            i.SaveImage("C:/Users/" + Environment.UserName + "/test/", fileName, ImageType.Png);
+			i.SaveImage("C:/Users/" + Environment.UserName + "/test/", fileName, ImageType.Png);
 
-            _model.ImageUrl = "C:/Users/" + Environment.UserName + "/test/" + fileName + ".png";
+			_model.ImageUrl = "C:/Users/" + Environment.UserName + "/test/" + fileName + ".png";
 		}
 
 		private void btnCancel_Click(object sender, EventArgs e)
 		{
-
 		}
 
 		#endregion
-
-		public string FileName
-		{
-			get { return txtImageURL.Text; }
-			set { txtImageURL.Text = value; }
-		}
-
-		public void ShowOpenItemDialog()
-		{
-			 
-		}
 	}
 }

@@ -27,6 +27,8 @@ namespace BaconBuilder.Model
 		string CurrentContents { get; set; }
 
 		string AudioUrl { get; set; }
+		int X { get; set; }
+		int Y { get; set; }
 
 		/// <summary>
 		/// Change the working directory.
@@ -65,9 +67,6 @@ namespace BaconBuilder.Model
 		void SaveFile(string fileName);
 
 		Image QrCode(string file);
-
-		int X { get; set; }
-		int Y { get; set; }
 
 		//string CurrentParsedContents { get; }
 		Uri GetCurrentFileUri();

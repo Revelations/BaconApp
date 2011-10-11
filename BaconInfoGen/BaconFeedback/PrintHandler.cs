@@ -56,7 +56,7 @@ namespace BaconFeedback
 		private void ConstructSingleFeedback(PrintPageEventArgs e)
 		{
 			// Create fonts and brush for drawing strings.
-			var b = Brushes.Black;
+			Brush b = Brushes.Black;
 			var font = new Font(FontFamily.GenericSansSerif, 12);
 			var boldFont = new Font(FontFamily.GenericSansSerif, 12, FontStyle.Bold);
 

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Windows.Forms;
 using BaconBuilder.Controller;
 using BaconBuilder.Model;
@@ -8,16 +9,10 @@ using NUnit.Framework;
 namespace BaconBuilder
 {
 	[TestFixture]
-	class MainWindowTest
+	internal class MainWindowTest
 	{
-		private MainWindow _view;
-		private BaconModel _model;
-		private MainViewController _controller;
-		TreeNodeCollection _currentDirNodes;
-		private const string TestPath = @"./testFiles/";
-		private const string TestFile = @"satisfaction.html";
-
 		#region Setup/Teardown
+
 		[SetUp]
 		public void SetUp()
 		{
@@ -28,7 +23,9 @@ namespace BaconBuilder
 			Directory.CreateDirectory(TestPath);
 			_model.ChangeDirectory(TestPath);
 			var tp = new FileInfo(TestPath + TestFile);
-			string test = "Push me" + System.Environment.NewLine + "And then just touch me" + System.Environment.NewLine + "Till I can get my satisfaction" + System.Environment.NewLine + "Satisfaction, satisfaction, satisfaction, satifaction";
+			string test = "Push me" + Environment.NewLine + "And then just touch me" + Environment.NewLine +
+			              "Till I can get my satisfaction" + Environment.NewLine +
+			              "Satisfaction, satisfaction, satisfaction, satifaction";
 			File.WriteAllText(tp.FullName, test);
 		}
 
@@ -41,7 +38,15 @@ namespace BaconBuilder
 			_currentDirNodes = null;
 			Directory.Delete(TestPath, true);
 		}
+
 		#endregion
+
+		private MainWindow _view;
+		private BaconModel _model;
+		private MainViewController _controller;
+		private TreeNodeCollection _currentDirNodes;
+		private const string TestPath = @"./testFiles/";
+		private const string TestFile = @"satisfaction.html";
 
 		[Test]
 		public void TestTreeDirHasLoaded()
@@ -49,7 +54,7 @@ namespace BaconBuilder
 			Assert.IsEmpty(_currentDirNodes, "Current dir is not empty");
 
 			_controller.InitialiseListView();
-			
+
 			Assert.That(_view.Files.Count == 1, "Content Count:" + _view.Files.Count + " does not equal 1");
 			foreach (ListViewItem s in _view.Files)
 				_currentDirNodes.Add(s.Text);
@@ -57,9 +62,8 @@ namespace BaconBuilder
 			int expectedCount = _currentDirNodes.Count;
 			Assert.That(expectedCount == 1, "TreeNodes Count:{0} does not equal 1", expectedCount);
 
-			var expected = _currentDirNodes[0].Text;
+			string expected = _currentDirNodes[0].Text;
 			Assert.That(expected == TestFile, "Current Contents[0]:{0} does not equal satisfaction.html", expected);
 		}
-	
 	}
 }

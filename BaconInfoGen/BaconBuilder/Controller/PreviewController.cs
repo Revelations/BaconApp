@@ -3,7 +3,7 @@ using BaconBuilder.View;
 
 namespace BaconBuilder.Controller
 {
-	class PreviewController
+	internal class PreviewController
 	{
 		private readonly IModel _model;
 		private readonly IPreviewView _view;

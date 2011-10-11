@@ -13,14 +13,14 @@ namespace BaconBuilder.Model
 		private static readonly string HtmlDirectory = "C:/Users/" + Environment.UserName + "/test/";
 
 		private readonly Dictionary<string, string> _fileContents = new Dictionary<string, string>();
-		private DirectoryInfo _directory = new DirectoryInfo(HtmlDirectory);
 
 		private readonly TextToHtmlParser _texthtmlparser = new TextToHtmlParser();
+		private DirectoryInfo _directory = new DirectoryInfo(HtmlDirectory);
 
-	    /// <summary>
-	    /// Get or set the image url, obtained from an image selection dialog.
-	    /// </summary>
-        public string ImageUrl { get; set; }
+		/// <summary>
+		/// Get or set the image url, obtained from an image selection dialog.
+		/// </summary>
+		public string ImageUrl { get; set; }
 
 		#region IModel Members
 
