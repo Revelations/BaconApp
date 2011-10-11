@@ -62,7 +62,7 @@ namespace BaconBuilder.Model
         /// <summary>
         /// Checks whether or not a file needs to be uploaded to the remote server.
         /// 
-        /// If it does not exists remotely or it's remote version is a different size to the local one,
+        /// If it does not exists remotely or its remote version is a different size to the local one,
         /// then this will return true.
         /// </summary>
         /// <param name="fileName">Name of the file to check.</param>

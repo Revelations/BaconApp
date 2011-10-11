@@ -192,7 +192,7 @@ namespace BaconBuilder.View
 		}
 
 		/// <summary>
-		/// Called when the worker reports that progress has changed on it's task.
+		/// Called when the worker reports that progress has changed on its task.
 		/// </summary>
 		private void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
 		{
@@ -200,7 +200,7 @@ namespace BaconBuilder.View
 		}
 
 		/// <summary>
-		/// Called when the worker has completed it's task.
+		/// Called when the worker has completed its task.
 		/// </summary>
 		private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{

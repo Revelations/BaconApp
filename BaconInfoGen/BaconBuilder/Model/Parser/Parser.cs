@@ -39,7 +39,7 @@ namespace BaconBuilder.Model
 		protected virtual void InitialiseDictionary() { }
 
 		/// <summary>
-		/// Replaces each matching regex key in the dictionary with it's associated value for a given string.
+		/// Replaces each matching regex key in the dictionary with its associated value for a given string.
 		/// </summary>
 		/// <param name="input">String to perform substitutions on.</param>
 		/// <returns>Output, with all regex substitutions completed.</returns>

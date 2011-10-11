@@ -112,7 +112,7 @@ namespace BaconFeedback
 		/// <param name="folder">Path of the folder to delete.</param>
 		public void DeleteFolder(string folder)
 		{
-			// Clear the folder view since it's contents no longer exist.
+			// Clear the folder view since its contents no longer exist.
 			FileViewClear();
 
 			// Pass the buck.

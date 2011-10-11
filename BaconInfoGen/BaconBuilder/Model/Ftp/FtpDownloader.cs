@@ -79,7 +79,7 @@ namespace BaconBuilder.Model
 		/// <summary>
 		/// Asserts whether or not a file needs to be downloaded.
 		/// 
-		/// If it does not exists locally or it's remote version is a different size to the local one,
+		/// If it does not exists locally or its remote version is a different size to the local one,
 		/// then will return true.
 		/// </summary>
 		/// <param name="fileName">The name of the file to check.</param>
