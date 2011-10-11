@@ -46,14 +46,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileHandler.cs" />
     <Compile Include="GameMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GameMainForm.Designer.cs">
       <DependentUpon>GameMainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GamePresenter.cs" />
+    <Compile Include="IGameMainForm.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Question.cs" />
+    <Compile Include="QuestionFile.cs" />
     <EmbeddedResource Include="GameMainForm.resx">
       <DependentUpon>GameMainForm.cs</DependentUpon>
     </EmbeddedResource>
