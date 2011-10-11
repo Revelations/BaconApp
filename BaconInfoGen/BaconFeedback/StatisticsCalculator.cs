@@ -28,10 +28,7 @@ namespace BaconFeedback
         /// <returns></returns>
         public int FeedbackQuantity
         {
-            get
-            {
-                return _files.Count;
-            }
+            get { return _files.Count; }
         }
 
         /// <summary>
@@ -39,10 +36,7 @@ namespace BaconFeedback
         /// </summary>
         public int TotalVisitors
         {
-            get
-            {
-            	return _files.Sum(f => Convert.ToInt32(f.Number));
-            }
+            get { return _files.Sum(f => Convert.ToInt32(f.Number)); }
         }
 
         /// <summary>
@@ -59,10 +53,7 @@ namespace BaconFeedback
         /// </summary>
         public float AverageGroupSize
         {
-            get
-            {
-                return (float)TotalVisitors / _files.Count;
-            }
+            get { return (float)TotalVisitors / _files.Count; }
         }
 
         /// <summary>
@@ -70,30 +61,19 @@ namespace BaconFeedback
         /// </summary>
         public int LargestGroup
         {
-            get
-            {
-            	return _files.Select(f => Convert.ToInt32(f.Number)).Concat(new[] {0}).Max();
-            }
+            get { return _files.Select(f => Convert.ToInt32(f.Number)).Concat(new[] {0}).Max(); }
         }
 
-    	public List<KeyValuePair<string, int>> LargestNationalities
+    	public List<KeyValuePair<string, int>> MostCommonNationalities
     	{
     		get
     		{
 				// Init a dictionary to store quantities of people of varying nationalities.
-				var dictionary = new Dictionary<string, int>();
+				var dictionary = GetConsolidatedNationalityDictionary();
 
-				// For each file...
-				foreach (FeedbackFile f in _files)
-				{
-					int old;
-					dictionary.TryGetValue(f.Nationality, out old);
-					dictionary[f.Nationality] = old + Convert.ToInt32(f.Number);
-				}
-
-				// Initialise an object to store the largest nationality found.
-				var largest = new List<KeyValuePair<string, int>>();
-    			int max = 0;
+    			// Initialise an object to store the largest nationality found.
+				var largest = new List<KeyValuePair<string, int>> { new KeyValuePair<string, int>("None", 0)};
+    			var max = 0;
 
 				// Iterate and find maximum value.
 				foreach (var kvp in dictionary)
@@ -109,40 +89,16 @@ namespace BaconFeedback
 
 				return largest;
     		}
-    	} 
+    	}
 
-        /// <summary>
+    	/// <summary>
         /// Gets a key value pair containing the most common nationality present in a group of feedback files, as well as the
         /// quantity of visitors specifying that same nationality.
         /// </summary>
         /// <returns>Most common nationality of visitors, quantity of that nationality.</returns>
         public KeyValuePair<string, int> MostCommonNationality
         {
-            get
-            {
-                // Init a dictionary to store quantities of people of varying nationalities.
-                var dictionary = new Dictionary<string, int>();
-
-                // For each file...
-                foreach (FeedbackFile f in _files)
-                {
-					int old;
-					dictionary.TryGetValue(f.Nationality, out old);
-					dictionary[f.Nationality] = old + Convert.ToInt32(f.Number);
-                }
-
-                // Initialise an object to store the largest nationality found.
-                KeyValuePair<string, int> max = new KeyValuePair<string, int>("None", 0);
-
-                // Iterate and find maximum value.
-                foreach (KeyValuePair<string, int> kvp in dictionary)
-                {
-                    if (kvp.Value > max.Value)
-                        max = kvp;
-                }
-
-                return max;
-            }
+            get { return MostCommonNationalities[0]; }
         }
 
 		public KeyValuePair<string, int> MostCommonNationalityOld
@@ -180,6 +136,20 @@ namespace BaconFeedback
 
 				return max;
 			}
+		}
+
+		private Dictionary<string, int> GetConsolidatedNationalityDictionary()
+		{
+			var dictionary = new Dictionary<string, int>();
+
+			// For each file...
+			foreach (FeedbackFile f in _files)
+			{
+				int old;
+				dictionary.TryGetValue(f.Nationality, out old);
+				dictionary[f.Nationality] = old + Convert.ToInt32(f.Number);
+			}
+			return dictionary;
 		}
 	}
 }

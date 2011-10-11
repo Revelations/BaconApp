@@ -166,7 +166,7 @@ namespace BaconBuilder.View
 
         private void MapZoomChanged(object sender, EventArgs e)
         {
-            toolStripStatusLabel1.Text = string.Format("{0}%", mapBox.Zoom);
+            lblZoom.Text = string.Format("{0}%", mapBox.Zoom);
         }
 
 		private void MapCoordinateChanged(object sender, EventArgs e)

@@ -7,16 +7,16 @@ namespace BaconFeedback
 {
     public class StatisticsPresenter
     {
-        private StatisticsForm _view;
-        private List<FeedbackFile> _selectedFiles;
+        private readonly StatisticsForm _view;
+        private readonly List<FeedbackFile> _selectedFiles;
 
-        private StatisticsCalculator _calculator;
+        private readonly StatisticsCalculator _calculator;
 
         public StatisticsPresenter(StatisticsForm view, List<FeedbackFile> selectedFiles)
         {
             _view = view;
             _selectedFiles = selectedFiles;
-            _calculator = new StatisticsCalculator(selectedFiles);
+            _calculator = new StatisticsCalculator(_selectedFiles);
         }
 
         public void ShowStatistics()

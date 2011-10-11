@@ -11,7 +11,7 @@ namespace BaconFeedback
 {
     public partial class StatisticsForm : Form
     {
-        private StatisticsPresenter _presenter;
+        private readonly StatisticsPresenter _presenter;
         private List<FeedbackFile> _selectedFiles;
 
         public string MainText

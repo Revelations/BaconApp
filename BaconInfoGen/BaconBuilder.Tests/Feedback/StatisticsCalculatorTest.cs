@@ -50,10 +50,10 @@ namespace BaconBuilder.Feedback
 				Assert.AreEqual(values[i], d[strings[i]]);
 			}
 
-			var largest = new List<KeyValuePair<string, int>>();
+			var largest = new List<KeyValuePair<string, int>> { new KeyValuePair<string, int>("None", 0) };
 			int max = 0;
 
-			// Iterate and find maximum value.
+			// Iterate and find maximum values.
 			foreach (var kvp in d)
 			{
 				if (kvp.Value > max)
@@ -65,6 +65,7 @@ namespace BaconBuilder.Feedback
 					largest.Add(kvp);
 			}
 
+			Assert.AreEqual(2, largest.Count);
 			Assert.IsTrue(largest.Contains(new KeyValuePair<string, int>("b", 42)));
 			Assert.IsTrue(largest.Contains(new KeyValuePair<string, int>("d", 42)));
 		}
