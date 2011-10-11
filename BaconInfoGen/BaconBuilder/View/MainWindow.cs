@@ -139,8 +139,8 @@ namespace BaconBuilder.View
 			// Event binding.
 			tsbImage.Click += btnImage_Click;
 			tsbAudio.Click += btnAudio_Click;
-			tsbBold.Click += tsbBold_Click;
-			tsbItalics.Click += tsbItalics_Click;
+			tsbBold.Click += btnBold_Click;
+			tsbItalics.Click += btnItalics_Click;
 			btnPreview.Click += btnPreview_Click;
 
 			printToolStripMenuItem.Click += btnPrintPreview_Click;
@@ -164,6 +164,13 @@ namespace BaconBuilder.View
 			_controller = new MainViewController(_model, this);
 		}
 
+		private void NetworkChanged(object sender, EventArgs e)
+		{
+			_hasConnection = ConnectionExists();
+			lblNetworkStatus.Text = (_hasConnection) ? "Connected" : "Local only";
+
+		}
+
 		private void MapZoomChanged(object sender, EventArgs e)
 		{
 			lblZoom.Text = string.Format("{0}%", mapBox.Zoom);
@@ -177,12 +184,18 @@ namespace BaconBuilder.View
 
 		#endregion
 
-		#region Toolbar Button Events
+		#region Toolbar Button and Other Button Events
+
+		private void toolStripButton1_Click(object sender, EventArgs e)
+		{
+			HtmlBrowserEditable = !HtmlBrowserEditable;
+			EnableRequiredControls();
+		}
 
 		/// <summary>
 		/// Makes the selected HTMLEditor text bold, or toggles new text being typed in bold.
 		/// </summary>
-		private void tsbBold_Click(object sender, EventArgs e)
+		private void btnBold_Click(object sender, EventArgs e)
 		{
 			Debug.Assert(HTMLEditor.Document != null, "HTMLEditor.Document != null");
 			HTMLEditor.Document.ExecCommand("Bold", false, null);
@@ -191,7 +204,7 @@ namespace BaconBuilder.View
 		/// <summary>
 		/// Makes the selected HTMLEditor text italic, or toggles new text being typed in italic.
 		/// </summary>
-		private void tsbItalics_Click(object sender, EventArgs e)
+		private void btnItalics_Click(object sender, EventArgs e)
 		{
 			Debug.Assert(HTMLEditor.Document != null, "HTMLEditor.Document != null");
 			HTMLEditor.Document.ExecCommand("Italic", false, null);
@@ -200,7 +213,7 @@ namespace BaconBuilder.View
 		/// <summary>
 		/// Makes the selected HTMLEditor text underlined, or toggles new text being typed underlined.
 		/// </summary>
-		private void btn_Underline_Click(object sender, EventArgs e)
+		private void btnUnderline_Click(object sender, EventArgs e)
 		{
 			Debug.Assert(HTMLEditor.Document != null, "HTMLEditor.Document != null");
 			HTMLEditor.Document.ExecCommand("Underline", false, null);
@@ -227,10 +240,6 @@ namespace BaconBuilder.View
 				HTMLEditor.Document.ExecCommand("InsertImage", false, _model.ImageUrl);
 			}
 		}
-
-		#endregion
-
-		#region Other Button Events
 
 		/// <summary>
 		/// Preview html, map page, and QR code in a dialog.
@@ -301,6 +310,13 @@ namespace BaconBuilder.View
 
 		#region Other Events
 
+		private void MainWindow_Load(object sender, EventArgs e)
+		{
+			_hasConnection = ConnectionExists();
+			if (!_hasConnection)
+				MessageBox.Show("Could not connect", "Error");
+		}
+
 		/// <summary>
 		/// Called when the main window is first shown.
 		/// 
@@ -324,6 +340,12 @@ namespace BaconBuilder.View
 		/// </summary>
 		private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
 		{
+			MessageBox.Show("Exitting");
+			if (!_hasConnection)
+			{
+				MessageBox.Show("No connection. Exitting without submitting.");
+				return;
+			}
 			// Promp user.
 			DialogResult result =
 				MessageBox.Show(
@@ -425,19 +447,6 @@ namespace BaconBuilder.View
 			{
 				return false;
 			}
-		}
-
-		private void MainWindow_Load(object sender, EventArgs e)
-		{
-			_hasConnection = ConnectionExists();
-			if (!_hasConnection)
-				MessageBox.Show("Could not connect");
-		}
-
-		private void toolStripButton1_Click(object sender, EventArgs e)
-		{
-			HtmlBrowserEditable = !HtmlBrowserEditable;
-			EnableRequiredControls();
 		}
 
 		#region Russell's Print Stuff.

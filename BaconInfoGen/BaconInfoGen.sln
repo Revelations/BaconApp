@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaconFeedback", "BaconFeedb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaconGame", "BaconGame\BaconGame.csproj", "{2C4898B8-DD30-432F-9D5F-08BAB120B3BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkCheckApp", "NetworkCheckApp\NetworkCheckApp.csproj", "{051F67FB-1D9A-4602-B216-B27722F83BC8}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = BaconInfoGen.vsmdi
@@ -77,6 +79,18 @@ Global
 		{2C4898B8-DD30-432F-9D5F-08BAB120B3BD}.Release|x64.ActiveCfg = Release|x86
 		{2C4898B8-DD30-432F-9D5F-08BAB120B3BD}.Release|x86.ActiveCfg = Release|x86
 		{2C4898B8-DD30-432F-9D5F-08BAB120B3BD}.Release|x86.Build.0 = Release|x86
+		{051F67FB-1D9A-4602-B216-B27722F83BC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{051F67FB-1D9A-4602-B216-B27722F83BC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{051F67FB-1D9A-4602-B216-B27722F83BC8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{051F67FB-1D9A-4602-B216-B27722F83BC8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{051F67FB-1D9A-4602-B216-B27722F83BC8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{051F67FB-1D9A-4602-B216-B27722F83BC8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{051F67FB-1D9A-4602-B216-B27722F83BC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{051F67FB-1D9A-4602-B216-B27722F83BC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{051F67FB-1D9A-4602-B216-B27722F83BC8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{051F67FB-1D9A-4602-B216-B27722F83BC8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{051F67FB-1D9A-4602-B216-B27722F83BC8}.Release|x64.ActiveCfg = Release|Any CPU
+		{051F67FB-1D9A-4602-B216-B27722F83BC8}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
