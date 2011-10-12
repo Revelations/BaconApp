@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
-using BaconBuilder.Properties;
 
-namespace BaconBuilder.Model
+namespace BaconBuilder.Model.Ftp
 {
 	/// <summary>
 	/// Class that handles connection to an FTP server to upload necessary files.
 	/// </summary>
 	public class FtpUploader : FtpHelper
 	{
-		private static readonly string HtmlDirectory = "C:/Users/" + Environment.UserName + "/test/";
-
 		/// <summary>
 		/// A list of all the remote files present on the server.
 		/// </summary>
@@ -38,9 +36,8 @@ namespace BaconBuilder.Model
 		{
 			var info = new DirectoryInfo(HtmlDirectory);
 
-			foreach (FileInfo f in info.GetFiles())
-				if (FileNeedsUpload(f.Name))
-					UploadSingleFile(f.Name);
+			foreach (FileInfo f in info.GetFiles().Where(f => FileNeedsUpload(f.Name)))
+				UploadSingleFile(f.Name);
 		}
 
 		/// <summary>

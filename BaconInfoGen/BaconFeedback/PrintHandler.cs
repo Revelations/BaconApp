@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Printing;
-using BaconFeedback.Properties;
 
 namespace BaconFeedback
 {
@@ -12,11 +11,9 @@ namespace BaconFeedback
 	public class PrintHandler
 	{
 		// Create fonts and brush for drawing strings.
-		private readonly Brush _brush = Brushes.Black;
-		private readonly Font _font = new Font(FontFamily.GenericSansSerif, 12);
-		private readonly Font _boldFont = new Font(FontFamily.GenericSansSerif, 12, FontStyle.Bold);
-		// Not really used at this point in time. Will be if multiple feedback reports are printed on a single page.
 		private readonly List<FeedbackFile> _files;
+		private readonly Font _fontHeader = new Font(FontFamily.GenericSansSerif, 12, FontStyle.Bold);
+		// Not really used at this point in time. Will be if multiple feedback reports are printed on a single page.
 		private readonly int _numPages;
 		// The current page being laid out for printing.
 		private int _currentPage = 1;
@@ -64,60 +61,89 @@ namespace BaconFeedback
 
 			// Build the content and layout for the feedback data.
 			// TODO: Reintroduce the skeletons and layout format to let the program decide columns -- Shii
+
+			Print(e, SkeletonFile(file));
+		}
+
+		private void Print(PrintPageEventArgs e, IEnumerable<Tuple<int, string, string>> pairs)
+		{
 			int yOffset = e.MarginBounds.Top;
-			yOffset = PrintTwoColumn(e, "Filename:", file.FileName, yOffset);
-			yOffset = PrintTwoColumn(e, "Directory:", file.Directory, yOffset);
-			yOffset = PrintTwoColumn(e, "Creation Date:", file.CreatedDate, yOffset);
-			yOffset = PrintTwoColumn(e, " ", " ", yOffset);
-			yOffset = PrintTwoColumn(e, "Group number:", file.Number, yOffset);
-			yOffset = PrintTwoColumn(e, "Nationality:", file.Nationality, yOffset);
-			yOffset = PrintTwoColumn(e, " ", " ", yOffset);
-			yOffset = PrintSingleColumn(e, "What was seen:", file.Sighted, yOffset);
-			yOffset = PrintTwoColumn(e, " ", " ", yOffset);
-			yOffset = PrintSingleColumn(e, "Misc", file.Misc, yOffset);
+			foreach (var tuple in pairs)
+			{
+				switch (tuple.Item1)
+				{
+					case 0:
+						PrintEmptyLine(e, ref yOffset);
+						break;
+					case 1:
+						PrintTwoColumn(e, tuple.Item2, tuple.Item3, ref yOffset);
+						break;
+					case 2:
+						PrintSingleColumn(e, tuple.Item2, tuple.Item3, ref yOffset);
+						break;
+				}
+			}
 		}
 
-
-		private int PrintTwoColumn(PrintPageEventArgs e, string head, string body, int yOffset)
+		private IEnumerable<Tuple<int, string, string>> SkeletonFile(FeedbackFile file)
 		{
-			int headOffset = PrintHead(e, head, yOffset);
-
-			int bodyOffset = PrintBody(e, body, yOffset, 200);
-
-			return Math.Max(headOffset, bodyOffset);
+			var lineBreak = new Tuple<int, string, string>(0, "", "");
+			return new List<Tuple<int, string, string>>
+			       	{
+			       		new Tuple<int, string, string>(1, "Filename:", file.FileName),
+			       		new Tuple<int, string, string>(1, "Directory:", file.Directory),
+			       		new Tuple<int, string, string>(1, "Creation Date:", file.CreatedDate),
+			       		lineBreak,
+			       		new Tuple<int, string, string>(1, "Group Number:", file.Number),
+			       		new Tuple<int, string, string>(1, "Nationality:", file.Nationality),
+			       		lineBreak,
+			       		new Tuple<int, string, string>(2, "What was seen:", file.Sighted),
+			       		lineBreak,
+			       		new Tuple<int, string, string>(2, "Miscelleneous:", file.Misc),
+			       		lineBreak
+			       	};
 		}
 
-		private int PrintSingleColumn(PrintPageEventArgs e, string head, string body, int yOffset)
+		private void PrintEmptyLine(PrintPageEventArgs e, ref int yOffset)
 		{
-			int headOffset = PrintHead(e, head, yOffset);
-
-			int bodyOffset = PrintBody(e, body, headOffset, 0);
-
-			return bodyOffset;
+			if (e == null) return;
+			yOffset += (int) e.Graphics.MeasureString(" ^________________^ ", _fontHeader).Height;
 		}
 
-		private int PrintHead(PrintPageEventArgs e, string head, int yOffset)
+		private void PrintTwoColumn(PrintPageEventArgs e, string head, string body, ref int yOffset)
 		{
-			SizeF textBounds = e.Graphics.MeasureString(head, _boldFont, e.MarginBounds.Width);
-			var layoutRectangle = new Rectangle(e.MarginBounds.X, yOffset, e.MarginBounds.Width, e.MarginBounds.Height);
-			var headOffset = textBounds.Height;
-			e.Graphics.DrawString(head, _boldFont, _brush, layoutRectangle);
+			int headOffset = yOffset;
+			int bodyOffset = yOffset;
+			PrintHead(e, head, ref headOffset);
+			PrintBody(e, body, ref bodyOffset, 200);
 
-			return (int) (yOffset + headOffset);			
+			yOffset = Math.Max(headOffset, bodyOffset);
 		}
 
-		private int PrintBody(PrintPageEventArgs e, string body, int yOffset, int xOffset)
+		private void PrintSingleColumn(PrintPageEventArgs e, string head, string body, ref int yOffset)
+		{
+			PrintHead(e, head, ref yOffset);
+			PrintBody(e, body, ref yOffset, 0);
+		}
+
+		private void PrintHead(PrintPageEventArgs e, string head, ref int yOffset)
+		{
+			e.Graphics.DrawString(head, _fontHeader, Brushes.Black, 
+				new Rectangle(e.MarginBounds.X, yOffset, e.MarginBounds.Width, e.MarginBounds.Height));
+
+			yOffset += (int) e.Graphics.MeasureString(head, _fontHeader, e.MarginBounds.Width).Height;
+		}
+
+		private void PrintBody(PrintPageEventArgs e, string body, ref int yOffset, int xOffset)
 		{
 			var stringFormat = new StringFormat();
 			stringFormat.SetTabStops(xOffset, new float[1]);
-			var layoutRectangle = new Rectangle(e.MarginBounds.X + xOffset, yOffset, e.MarginBounds.Width, e.MarginBounds.Height);
-			var bodyOffset = e.Graphics.MeasureString(body, _font, e.MarginBounds.Width, stringFormat).Height;
-			e.Graphics.DrawString(body, _font, _brush, layoutRectangle, stringFormat);
 
-			return (int)(yOffset + bodyOffset);
+			var font = new Font(FontFamily.GenericSansSerif, 12);
+			e.Graphics.DrawString(body, font, Brushes.Black,
+				new Rectangle(e.MarginBounds.X + xOffset, yOffset, e.MarginBounds.Width, e.MarginBounds.Height), stringFormat);
 
+			yOffset += (int) e.Graphics.MeasureString(body, font, e.MarginBounds.Width, stringFormat).Height;
 		}
-
-
 	}
 }

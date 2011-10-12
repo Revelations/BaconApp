@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using BaconBuilder.Model;
+using BaconBuilder.Model.Ftp;
 
 namespace BaconBuilder.View
 {

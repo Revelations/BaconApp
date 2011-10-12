@@ -3,13 +3,12 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Linq;
-using System.Net;
 using System.Windows.Forms;
 using BaconBuilder.Controller;
 using BaconBuilder.Model;
-using BaconBuilder.Properties;
-using NetworkCheckApp;
+using BaconBuilder.Model.Ftp;
 using mshtml;
+using NetworkCheckApp;
 
 namespace BaconBuilder.View
 {

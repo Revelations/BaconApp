@@ -112,15 +112,6 @@ namespace BaconBuilder.Properties {
             }
         }
         
-        /// <summary>
-        ///   Looks up a localized string similar to ftp://revelations.webhop.org/.
-        /// </summary>
-        public static string ServerLocation {
-            get {
-                return ResourceManager.GetString("ServerLocation", resourceCulture);
-            }
-        }
-        
         public static System.Drawing.Bitmap vmap {
             get {
                 object obj = ResourceManager.GetObject("vmap", resourceCulture);

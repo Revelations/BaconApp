@@ -67,13 +67,13 @@ namespace BaconFeedback
 		{
 			get
 			{
-				// Init a dictionary to store quantities of people of varying nationalities.
-				Dictionary<string, int> dictionary = GetConsolidatedNationalityDictionary();
-
 				// Initialise an object to store the largest nationality found.
 				var largest = new List<KeyValuePair<string, int>> {new KeyValuePair<string, int>("None", 0)};
-				int max = 0;
-
+					
+				// Init a dictionary to store quantities of people of varying nationalities.
+				Dictionary<string, int> dictionary = GetConsolidatedNationalityDictionary();
+				int max = 1;
+				
 				// Iterate and find maximum value.
 				foreach (var kvp in dictionary)
 				{
@@ -99,45 +99,6 @@ namespace BaconFeedback
 		{
 			get { return MostCommonNationalities[0]; }
 		}
-
-		/* // Jordan's method
-		public KeyValuePair<string, int> MostCommonNationalityOld
-		{
-			get
-			{
-				// Init a dictionary to store quantities of people of varying nationalities.
-				var dictionary = new Dictionary<string, int>();
-
-				// For each file...
-				foreach (FeedbackFile f in _files)
-				{
-					// If the dictionary contains the nationality specified by that file...
-					if (dictionary.ContainsKey(f.Nationality))
-					{
-						// Update the value.
-						int old = dictionary[f.Nationality];
-						dictionary.Remove(f.Nationality);
-						dictionary.Add(f.Nationality, old + Convert.ToInt32(f.Number));
-					}
-					// Otherwise add that nationality to the dictionary.
-					else
-						dictionary.Add(f.Nationality, Convert.ToInt32(f.Number));
-				}
-
-				// Initialise an object to store the largest nationality found.
-				var max = new KeyValuePair<string, int>("None", 0);
-
-				// Iterate and find maximum value.
-				foreach (var kvp in dictionary)
-				{
-					if (kvp.Value > max.Value)
-						max = kvp;
-				}
-
-				return max;
-			}
-		}
-		*/
 
 		private Dictionary<string, int> GetConsolidatedNationalityDictionary()
 		{

@@ -1,16 +1,14 @@
 ﻿using System;
 using System.IO;
 using System.Net;
-using BaconBuilder.Properties;
 
-namespace BaconBuilder.Model
+namespace BaconBuilder.Model.Ftp
 {
 	/// <summary>
 	/// Class that handles connection to an FTP server to download necessary files.
 	/// </summary>
 	public class FtpDownloader : FtpHelper
 	{
-		private static readonly string HtmlDirectory = "C:/Users/" + Environment.UserName + "/test/";
 		private readonly IModel _model;
 
 		public FtpDownloader(IModel model)
@@ -43,10 +41,7 @@ namespace BaconBuilder.Model
 		public void DownloadSingleFile(string fileName)
 		{
 			// Init request.
-			var ftp = (FtpWebRequest) WebRequest.Create(FtpUriString(fileName));
-
-			// Request type is download.
-			ftp.Method = WebRequestMethods.Ftp.DownloadFile;
+			var ftp = InitRequest(FtpUriString(fileName), WebRequestMethods.Ftp.DownloadFile);
 
 			// Connect and get bytestream from server.
 			var response = (FtpWebResponse) ftp.GetResponse();

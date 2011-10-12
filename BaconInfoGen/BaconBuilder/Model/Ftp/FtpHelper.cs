@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
 using BaconBuilder.Properties;
 
-namespace BaconBuilder.Model
+namespace BaconBuilder.Model.Ftp
 {
 	// TODO: DEALING WITH A LOT OF STREAMS HERE -> ERRORS NEED TO BE HANDLED.
 
@@ -16,7 +15,7 @@ namespace BaconBuilder.Model
 	public abstract class FtpHelper
 	{
 		//private readonly IModel _model;
-		private static readonly string HtmlDirectory = "C:/Users/" + Environment.UserName + "/test/";
+		protected static readonly string HtmlDirectory = "C:/Users/" + Environment.UserName + "/test/";
 
 		public static string FtpUriString(string fileName = "")
 		{
@@ -29,12 +28,10 @@ namespace BaconBuilder.Model
 		/// <param name="requestUriString"></param>
 		/// <param name="method"></param>
 		/// <returns></returns>
-		private static FtpWebRequest InitRequest(string requestUriString, string method)
+		protected static FtpWebRequest InitRequest(string requestUriString, string method)
 		{
 			// init request
-			var ftp = WebRequest.Create(requestUriString) as FtpWebRequest;
-			if (ftp == null) return null;
-
+			var ftp = (FtpWebRequest) WebRequest.Create(requestUriString);
 			// set request type
 			ftp.Method = method;
 
@@ -47,12 +44,7 @@ namespace BaconBuilder.Model
 		/// <returns>String list of all files present on the server.</returns>
 		public List<string> ConnectAndGetFileList()
 		{
-			string uriString = FtpUriString();
-			Tuple<List<string>, List<string>> tuple = GetDirectoryTuple(uriString);
-			List<string> files = tuple.Item2;
-			List<string> dirs = tuple.Item1;
-
-			return files;
+			return GetDirectoryTuple(FtpUriString()).Item2;
 		}
 
 		/// <summary>
@@ -72,9 +64,7 @@ namespace BaconBuilder.Model
 		/// <returns>The size of the local file in bytes.</returns>
 		public long LocalVersionSize(string fileName)
 		{
-			var info = new FileInfo(HtmlDirectory + fileName);
-
-			return info.Length;
+			return new FileInfo(HtmlDirectory + fileName).Length;
 		}
 
 		/// <summary>
@@ -84,16 +74,7 @@ namespace BaconBuilder.Model
 		/// <returns>The size of the remote file in bytes.</returns>
 		public long RemoteVersionSize(string fileName)
 		{
-			string uriString = FtpUriString(fileName);
-			const string method = WebRequestMethods.Ftp.GetFileSize;
-			FtpWebRequest request = InitRequest(uriString, method);
-
-			using (WebResponse response = request.GetResponse())
-			{
-				long result = response.ContentLength;
-
-				return result;
-			}
+			return InitRequest(FtpUriString(fileName), WebRequestMethods.Ftp.GetFileSize).GetResponse().ContentLength;
 		}
 
 		/// <summary>
@@ -102,43 +83,30 @@ namespace BaconBuilder.Model
 		/// <param name="fileName">Name of the file to delete.</param>
 		public void DeleteRemoteFile(string fileName)
 		{
-			string uriString = FtpUriString(fileName);
-			const string methods = WebRequestMethods.Ftp.DeleteFile;
-			FtpWebRequest request = InitRequest(uriString, methods);
+			FtpWebRequest request = InitRequest(FtpUriString(fileName), WebRequestMethods.Ftp.DeleteFile);
 
 			// TODO: Store this value for error checking in future.
-			WebResponse response = request.GetResponse();
+			request.GetResponse();
 		}
 
 		#region Shii's fix for separating directories from files.
 
 		private List<string> GetDirectoryDetail(string root, string method)
 		{
-			var list = new List<string>();
-
-			//Get Directory Details
-			var ftp = (FtpWebRequest) WebRequest.Create(root);
-			ftp.Method = method;
-
 			// Connect and get bytestream from server.
-			using (WebResponse response = ftp.GetResponse())
+			using (Stream responseStream = InitRequest(root, method).GetResponse().GetResponseStream())
+			// Create a read/write buffer.
+			// Get byte data from server stream for as long as it is available.
+			using (var reader = new StreamReader(responseStream))
 			{
-				Stream responseStream = response.GetResponseStream();
-
-				// Create a read/write buffer.
-				// Get byte data from server stream for as long as it is available.
-				Debug.Assert(responseStream != null, "responseStream != null");
-				using (var reader = new StreamReader(responseStream))
+				var list = new List<string>();
+				string line;
+				while ((line = reader.ReadLine()) != null)
 				{
-					string line = reader.ReadLine();
-					while (line != null)
-					{
-						list.Add(line);
-						line = reader.ReadLine();
-					}
+					list.Add(line);
 				}
+				return list;
 			}
-			return list;
 		}
 
 		// TODO: Check boolean to ensure the logic is correct. Results so far do not exhibit "drw-rw-rw-" properties.
@@ -161,14 +129,16 @@ namespace BaconBuilder.Model
 			var subdir = new List<string>();
 			var subfil = new List<string>();
 
-			foreach (string item in directoryDetail.Where(ItemIsSubDirectory))
+			foreach (string item in directoryDetail)
 			{
-				subdir.AddRange(directorySimple.Where(s => item.EndsWith(s)));
-			}
-
-			foreach (string item in directoryDetail.Where(ItemIsSubFile))
-			{
-				subfil.AddRange(directorySimple.Where(s => item.EndsWith(s)));
+				if (ItemIsSubDirectory(item))
+				{
+					subdir.AddRange(directorySimple.Where(s => item.EndsWith(s)));
+				}
+				else if (ItemIsSubFile(item))
+				{
+					subfil.AddRange(directorySimple.Where(s => item.EndsWith(s)));
+				}
 			}
 
 			return new Tuple<List<string>, List<string>>(subdir, subfil);
