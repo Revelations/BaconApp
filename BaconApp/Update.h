@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "Reachability.h"
 
 @interface Update : NSObject <NSStreamDelegate> {
     
@@ -22,6 +22,7 @@
 
 - (void)getFile:(NSString *) urlPath;
 -(void)getDirectory:(NSString *)urlPath;
+-(int)CheckForInternet: (Reachability *) curReach;
 //-(void)upLoadFile:(NSString *)urlPath;
 //-(void)_startSend:(NSString *)filePath : (NSString *) urlPath;
 -(void)uploadPhp:(NSString *) filePath;

@@ -12,8 +12,8 @@
 @interface FeedbackController : UIViewController {
     IBOutlet UITextField *  numberTextField;
     IBOutlet UITextField *  nationalityTextField;
+    IBOutlet UITextField *  seenTextField;
     IBOutlet UITextView  *  feedBackTextView;
-    
 }
 -(IBAction)SendFeedback:(id)sender;
 -(IBAction)Cancel:(id)sender;

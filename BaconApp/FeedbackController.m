@@ -8,21 +8,28 @@
 
 #import "FeedbackController.h"
 #import "Update.h"
+#import "Reachability.h"
+#import "BaconAppDelegate.h"
 
 @implementation FeedbackController
 
 
 #pragma mark - Actions
 
+
+
 -(IBAction)SendFeedback:(id)sender{
-    NSString * numbers = [[numberTextField text] autorelease];
-    NSString * nationality = [[nationalityTextField text] autorelease];
-    NSString * feedback = [[feedBackTextView text] autorelease];
+       
+    NSString * numbers      = [[numberTextField text] autorelease];
+    NSString * nationality  = [[nationalityTextField text] autorelease];
+    NSString * feedback     = [[feedBackTextView text] autorelease];
+    NSString * seen         = [[seenTextField text] autorelease];
     
     NSMutableData *data = [NSMutableData data];
     NSString * newLine = @"%@\r\n";
     [data appendData:[[NSString stringWithFormat:newLine,numbers] dataUsingEncoding:NSUTF8StringEncoding]];    
     [data appendData:[[NSString stringWithFormat:newLine,nationality] dataUsingEncoding:NSUTF8StringEncoding]];
+    [data appendData:[[NSString stringWithFormat:newLine,seen] dataUsingEncoding:NSUTF8StringEncoding]];
     [data appendData:[[NSString stringWithFormat:newLine, feedback] dataUsingEncoding:NSUTF8StringEncoding]];
     //NSString * fileContents = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
     Update * updateSession = [[Update alloc] init];
@@ -30,17 +37,41 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     
- //   NSArray *values = [urlPath componentsSeparatedByString:@"/"];
-//    NSString *backend = [NSString stringWithFormat:@"%@%@", @"/", [values objectAtIndex:[values count] -1]];
-    
-    
     NSString *filePath = [NSString stringWithFormat:@"%@%@", documentsDirectory, @"/feedback.txt"];
     [data writeToFile:filePath atomically:YES];
     [data release];
     
+    
+    Reachability  * receptionCheck = [[Reachability alloc]init];
+    
+    if([updateSession CheckForInternet: receptionCheck] != -1){
+        [updateSession uploadPhp:filePath];
+    }
+    else{
+        
+        //spawns the thread to send feedback
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, NULL), ^{
+            while (YES) {
+                if([updateSession CheckForInternet:receptionCheck] != -1)
+                    break;
+                else
+                    sleep(300);
+            }
+            [updateSession uploadPhp:filePath];
+        });
+    }
+    
     [updateSession uploadPhp:filePath];
+    
+    [receptionCheck release];
     [updateSession release];
 }
+
+
+//returns -1 if no connection is possible
+//returns 1 if wwan is available
+//returns 0 if wifi is available
+
 
 -(IBAction)Cancel:(id)sender{
     NSLog(@"Carry on Jim");
