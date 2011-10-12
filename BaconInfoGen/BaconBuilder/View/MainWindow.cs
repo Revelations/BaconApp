@@ -296,6 +296,7 @@ namespace BaconBuilder.View
 		/// </summary>
 		private void toolStripSync_Click(object sender, EventArgs e)
 		{
+			LogGenerator.createlog();
 			var ftpDialog = new FtpDialog(new FtpUploader());
 			ftpDialog.ShowDialog();
 		}
@@ -356,6 +357,7 @@ namespace BaconBuilder.View
 			// Sync at user behest.
 			if (result == DialogResult.Yes)
 			{
+				LogGenerator.createlog();
 				var ftpDialog = new FtpDialog((new FtpUploader()));
 				ftpDialog.ShowDialog();
 			}
