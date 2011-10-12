@@ -20,7 +20,7 @@ namespace NetworkCheckApp
 		/// <summary>
 		/// Default enum <seealso cref="Method"/> to use to determine how to test connectivity. Value: Method.WIN_INET
 		/// </summary>
-		private const Method DefaultMethod = Method.WIN_INET;
+		private const Method DefaultMethod = Method.WinInet;
 
 		/// <summary>
 		/// Default host to use for <see cref=" System.Net.WebRequest"/>. Value: "www.google.com"
@@ -51,11 +51,11 @@ namespace NetworkCheckApp
 		/// </summary>
 		public enum Method
 		{
-			WEB_REQUEST = 0x1,
-			TCP_SOCKET = 0x2,
-			PING = 0x3,
-			DNS_LOOKUP = 0x4,
-			WIN_INET = 0x5
+			WebRequest = 0x1,
+			TcpSocket = 0x2,
+			Ping = 0x3,
+			DnsLookup = 0x4,
+			WinInet = 0x5
 		}
 
 		#endregion
@@ -75,18 +75,18 @@ namespace NetworkCheckApp
 			string ipv4 = DefaultIpAddress,
 			int port = DefaultPort,
 			int timeout = DefaultTimeout)
-		{
+		{ 
 			switch (method)
 			{
-				case Method.WEB_REQUEST:
+				case Method.WebRequest:
 					return WebRequestTest(host);
-				case Method.TCP_SOCKET:
+				case Method.TcpSocket:
 					return TcpSocketTest(host, port);
-				case Method.PING:
+				case Method.Ping:
 					return PingTest(ipv4, timeout);
-				case Method.DNS_LOOKUP:
+				case Method.DnsLookup:
 					return DnsTest(host);
-				case Method.WIN_INET:
+				case Method.WinInet:
 					return IsConnectionAvailable();
 
 				default:
@@ -102,7 +102,7 @@ namespace NetworkCheckApp
 		/// </summary>
 		/// <param name="address">The address to try to connect to. Defaults to Google.</param>
 		/// <returns>Whether we are connected to the internet.</returns>
-		public static bool WebRequestTest(string address = "http://www.google.com")
+		public static bool WebRequestTest(string address = DefaultHost)
 		{
 			try
 			{
@@ -144,7 +144,7 @@ namespace NetworkCheckApp
 		/// <remarks>
 		/// There can be some delay in response of web request, therefore this method may not be fast enough for some applications. A better way is to check whether port 80, default port for http traffic, of an always online website.
 		/// 
-		/// You cannot use this method in .NET Compact Framework because there is no <see cref="NetworkInformation"/> namespace that comes with Compact Framework. However, you can use Smart Device Framework ("http://www.opennetcf.com", Community Edition is free for download) provided by OpenNETCF. This framework comes with many other useful tools that .NET Compact Framework does not contain.
+		/// You cannot use this method in .NET Compact Framework because there is no <see cref="System.Net.NetworkInformation"/> namespace that comes with Compact Framework. However, you can use Smart Device Framework ("http://www.opennetcf.com", Community Edition is free for download) provided by OpenNETCF. This framework comes with many other useful tools that .NET Compact Framework does not contain.
 		/// 
 		/// Notice that I used Google’s IP address 208.69.34.231. We could use Google’s web address www.google.com:
 		/// 
