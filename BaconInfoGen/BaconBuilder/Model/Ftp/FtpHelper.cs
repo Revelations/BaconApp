@@ -18,6 +18,11 @@ namespace BaconBuilder.Model
 		//private readonly IModel _model;
 		private static readonly string HtmlDirectory = "C:/Users/" + Environment.UserName + "/test/";
 
+		public static string FtpUriString(string fileName = "")
+		{
+			return string.Format("ftp://{0}:{1}/{2}", Resources.ServerHost, Resources.FtpPort, fileName);
+		}
+
 		/// <summary>
 		/// Initialises a web request with the method.
 		/// </summary>
@@ -42,7 +47,7 @@ namespace BaconBuilder.Model
 		/// <returns>String list of all files present on the server.</returns>
 		public List<string> ConnectAndGetFileList()
 		{
-			string uriString = Resources.ServerLocation;
+			string uriString = FtpUriString();
 			Tuple<List<string>, List<string>> tuple = GetDirectoryTuple(uriString);
 			List<string> files = tuple.Item2;
 			List<string> dirs = tuple.Item1;
@@ -79,7 +84,7 @@ namespace BaconBuilder.Model
 		/// <returns>The size of the remote file in bytes.</returns>
 		public long RemoteVersionSize(string fileName)
 		{
-			string uriString = Resources.ServerLocation + fileName;
+			string uriString = FtpUriString(fileName);
 			const string method = WebRequestMethods.Ftp.GetFileSize;
 			FtpWebRequest request = InitRequest(uriString, method);
 
@@ -97,7 +102,7 @@ namespace BaconBuilder.Model
 		/// <param name="fileName">Name of the file to delete.</param>
 		public void DeleteRemoteFile(string fileName)
 		{
-			string uriString = Resources.ServerLocation + fileName;
+			string uriString = FtpUriString(fileName);
 			const string methods = WebRequestMethods.Ftp.DeleteFile;
 			FtpWebRequest request = InitRequest(uriString, methods);
 

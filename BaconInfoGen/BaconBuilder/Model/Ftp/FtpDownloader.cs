@@ -35,6 +35,7 @@ namespace BaconBuilder.Model
 //				}
 //			}
 //		}
+
 		/// <summary>
 		/// Method that downloads a single file from an FTP server.
 		/// </summary>
@@ -42,7 +43,7 @@ namespace BaconBuilder.Model
 		public void DownloadSingleFile(string fileName)
 		{
 			// Init request.
-			var ftp = (FtpWebRequest) WebRequest.Create(Resources.ServerLocation + fileName);
+			var ftp = (FtpWebRequest) WebRequest.Create(FtpUriString(fileName));
 
 			// Request type is download.
 			ftp.Method = WebRequestMethods.Ftp.DownloadFile;

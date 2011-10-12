@@ -50,7 +50,7 @@ namespace BaconBuilder.Model
 		public void UploadSingleFile(string fileName)
 		{
 			// Init request.
-			var ftp = (FtpWebRequest) WebRequest.Create(Resources.ServerLocation + fileName);
+			var ftp = (FtpWebRequest) WebRequest.Create(FtpUriString(fileName));
 
 			// Set request type to upload.
 			ftp.Method = WebRequestMethods.Ftp.UploadFile;

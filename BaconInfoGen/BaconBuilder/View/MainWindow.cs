@@ -447,7 +447,7 @@ namespace BaconBuilder.View
 //				Console.WriteLine(@"{0} for {1} took {2}", m, location, (end - start));
 //			}
 //			return false;
-			return ConnectStatus.Check() && ConnectStatus.Check(ConnectStatus.Method.TcpSocket, Resources.ServerLocation);
+			return ConnectStatus.Check() && ConnectStatus.Check(ConnectStatus.Method.TcpSocket, FtpHelper.FtpUriString());
 		}
 //
 //		private static void TestConnection()

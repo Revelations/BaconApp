@@ -80,6 +80,15 @@ namespace BaconBuilder.Properties {
             }
         }
         
+        /// <summary>
+        ///   Looks up a localized string similar to 1234.
+        /// </summary>
+        public static string FtpPort {
+            get {
+                return ResourceManager.GetString("FtpPort", resourceCulture);
+            }
+        }
+        
         public static System.Drawing.Bitmap map {
             get {
                 object obj = ResourceManager.GetObject("map", resourceCulture);
@@ -91,6 +100,15 @@ namespace BaconBuilder.Properties {
             get {
                 object obj = ResourceManager.GetObject("map600x720", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to revelations.webhop.org.
+        /// </summary>
+        public static string ServerHost {
+            get {
+                return ResourceManager.GetString("ServerHost", resourceCulture);
             }
         }
         
