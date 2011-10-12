@@ -9,6 +9,8 @@ using BaconBuilder.Controller;
 using BaconBuilder.Model;
 using BaconBuilder.Properties;
 using mshtml;
+using NetworkCheckApp;
+using System.Net;
 
 namespace BaconBuilder.View
 {
@@ -169,13 +171,6 @@ namespace BaconBuilder.View
 			// Initialise MVP objects.
 			_model = new BaconModel();
 			_controller = new MainViewController(_model, this);
-		}
-
-		private void NetworkChanged(object sender, EventArgs e)
-		{
-			_hasConnection = ConnectionExists();
-			lblNetworkStatus.Text = (_hasConnection) ? "Connected" : "Local only";
-
 		}
 
 		private void MapZoomChanged(object sender, EventArgs e)
@@ -347,8 +342,7 @@ namespace BaconBuilder.View
 		/// </summary>
 		private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			MessageBox.Show("Exitting");
-			if (!_hasConnection)
+			if (!ConnectionExists())
 			{
 				MessageBox.Show("No connection. Exitting without submitting.");
 				return;
@@ -443,17 +437,84 @@ namespace BaconBuilder.View
 
 		private static bool ConnectionExists()
 		{
-			try
+//			String location = Resources.ServerLocation;
+//			foreach (ConnectStatus.Method m in Enum.GetValues(typeof(ConnectStatus.Method)))
+//			{
+//				long start = System.DateTime.Now.Millisecond;
+//				ConnectStatus.Check(m, Resources.ServerLocation, 81);
+//				long end = System.DateTime.Now.Millisecond;
+//				Console.WriteLine(@"{0} for {1} took {2}", m, location, (end - start));
+//			}
+//			return false;
+			return ConnectStatus.Check() && ConnectStatus.Check(ConnectStatus.Method.TcpSocket, Resources.ServerLocation);
+		}
+
+		private static void TestConnection()
+		{
+			string http = "http://revelations.webhop.org/";
+			foreach (ConnectStatus.Method m in Enum.GetValues(typeof(ConnectStatus.Method)))
 			{
-				var uri = new Uri(Resources.ServerLocation);
-				var clnt = new TcpClient(uri.Host, 81);
-				clnt.Close();
-				return true;
+				Console.WriteLine(m.ToString());
+				DateTime start;
+				if (m.Equals(ConnectStatus.Method.Ping))
+				{
+					var adds = Dns.GetHostAddresses(new Uri(http).Host);
+
+					foreach (var t in adds)
+					{
+						start = DateTime.Now;
+						bool b = ConnectStatus.Check(m, t.ToString(), 81);
+						Console.WriteLine(@"{0} for {1} took {2}ms. Status = {3}", m, t.ToString(), (DateTime.Now - start).TotalMilliseconds, b);
+					}
+				}
+				else if (m.Equals(ConnectStatus.Method.WebRequest))
+				{
+					var loc = new Uri(http).AbsoluteUri;
+					start = DateTime.Now;
+					bool b = ConnectStatus.Check(m, loc, 81);
+					Console.WriteLine(@"{0} for {1} took {2}ms. Status = {3}", m, loc, (DateTime.Now - start).TotalMilliseconds, b);
+				}
+				else
+				{
+					var loc = new Uri(http).AbsoluteUri;
+					start = DateTime.Now;
+					bool b = ConnectStatus.Check(m, loc, 81);
+					Console.WriteLine(@"{0} for {1} took {2}ms. Status = {3}", m, loc, (DateTime.Now - start).TotalMilliseconds, b);
+				}
 			}
-			catch (Exception)
+
+			string ftp = Resources.ServerLocation;
+			foreach (ConnectStatus.Method m in Enum.GetValues(typeof(ConnectStatus.Method)))
 			{
-				return false;
+				Console.WriteLine(m.ToString());
+				DateTime start;
+				if (m.Equals(ConnectStatus.Method.Ping))
+				{
+					var adds = Dns.GetHostAddresses(new Uri(ftp).Host);
+
+					foreach (var t in adds)
+					{
+						start = DateTime.Now;
+						bool b = ConnectStatus.Check(m, t.ToString(), 81);
+						Console.WriteLine(@"{0} for {1} took {2}ms. Status = {3}", m, t.ToString(), (DateTime.Now - start).TotalMilliseconds, b);
+					}
+				}
+				else if (m.Equals(ConnectStatus.Method.WebRequest))
+				{
+					var loc = new Uri(ftp).AbsoluteUri;
+					start = DateTime.Now;
+					bool b = ConnectStatus.Check(m, loc, 81);
+					Console.WriteLine(@"{0} for {1} took {2}ms. Status = {3}", m, loc, (DateTime.Now - start).TotalMilliseconds, b);
+				}
+				else
+				{
+					var loc = new Uri(ftp).AbsoluteUri;
+					start = DateTime.Now;
+					bool b = ConnectStatus.Check(m, loc, 81);
+					Console.WriteLine(@"{0} for {1} took {2}ms. Status = {3}", m, loc, (DateTime.Now - start).TotalMilliseconds, b);
+				}
 			}
+
 		}
 
 		#region Russell's Print Stuff.
