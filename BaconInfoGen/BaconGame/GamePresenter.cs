@@ -39,7 +39,7 @@ namespace BaconGame
 		{
 			_view.QuestionView.Items.Add((_view.QuestionView.Items.Count + 1).ToString(), 0);
 			_view.QuestionView.Items[_view.QuestionView.Items.Count - 1].SubItems.Add(q.QuestionText);
-			_view.QuestionView.Items[_view.QuestionView.Items.Count - 1].SubItems.Add(q.CorrectAnswer.ToString());
+			_view.QuestionView.Items[_view.QuestionView.Items.Count - 1].SubItems.Add(q.Answers[q.CorrectAnswer]);
 		}
 
 		public void DepopulateQuestionView()
@@ -57,6 +57,18 @@ namespace BaconGame
 			_view.Answer4Text = q.Answers[3];
 
 			// TODO: Add support for correct answer.
+			InitComboBox(q);
+			
+		}
+
+		private void InitComboBox(Question q)
+		{
+			_view.CorrectAnswer.Items.Clear();
+			for (int i = 0; i < 4; i++)
+			{
+				_view.CorrectAnswer.Items.Add(q.Answers[i]);
+			}
+			_view.CorrectAnswer.SelectedIndex = q.CorrectAnswer;
 		}
 
 		public void ClearTextFields()
@@ -86,8 +98,12 @@ namespace BaconGame
 
 			_view.QuestionView.Items[index].SubItems[1].Text = q.QuestionText;
 
+			q.CorrectAnswer = _view.CorrectAnswer.SelectedIndex;
+
 			// Touch my hacks at your own peril.
 			_current.Questions[index] = q;
+
+			InitComboBox(q);
 
 			// TODO: Add support for correct answer.
 		}
@@ -114,6 +130,17 @@ namespace BaconGame
 			SaveQuestionFile(_view.FileView.SelectedItems[0].Text);
 			DepopulateQuestionView();
 			PopulateQuestionView(_view.FileView.SelectedItems[0].Text);
+		}
+
+		public void UpdateAnswer()
+		{
+			_view.QuestionView.SelectedItems[0].SubItems[2].Text = _view.CorrectAnswer.Text;
+		}
+
+		public bool ConfirmDelete()
+		{
+			return MessageBox.Show(@"Are you sure you wish to delete this question?", @"Confirm.", MessageBoxButtons.OKCancel,
+			                       MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.OK;
 		}
 	}
 }

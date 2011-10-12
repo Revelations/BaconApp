@@ -63,10 +63,10 @@
 			this.questionHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.answerHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.toolStrip = new System.Windows.Forms.ToolStrip();
+			this.toolStripAdd = new System.Windows.Forms.ToolStripButton();
 			this.toolStripDelete = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStripSync = new System.Windows.Forms.ToolStripButton();
-			this.toolStripAdd = new System.Windows.Forms.ToolStripButton();
 			this.panel1.SuspendLayout();
 			this.menuStrip1.SuspendLayout();
 			this.panel2.SuspendLayout();
@@ -251,6 +251,7 @@
 			this.textBoxAnswer4.Size = new System.Drawing.Size(492, 38);
 			this.textBoxAnswer4.TabIndex = 10;
 			this.textBoxAnswer4.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
+			this.textBoxAnswer4.Leave += new System.EventHandler(this.textBoxQuestion_Leave);
 			// 
 			// label5
 			// 
@@ -272,6 +273,7 @@
 			this.textBoxAnswer3.Size = new System.Drawing.Size(492, 38);
 			this.textBoxAnswer3.TabIndex = 8;
 			this.textBoxAnswer3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
+			this.textBoxAnswer3.Leave += new System.EventHandler(this.textBoxQuestion_Leave);
 			// 
 			// label4
 			// 
@@ -304,6 +306,7 @@
 			this.textBoxAnswer2.Size = new System.Drawing.Size(492, 38);
 			this.textBoxAnswer2.TabIndex = 5;
 			this.textBoxAnswer2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
+			this.textBoxAnswer2.Leave += new System.EventHandler(this.textBoxQuestion_Leave);
 			// 
 			// textBoxAnswer1
 			// 
@@ -314,6 +317,7 @@
 			this.textBoxAnswer1.Size = new System.Drawing.Size(492, 38);
 			this.textBoxAnswer1.TabIndex = 3;
 			this.textBoxAnswer1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
+			this.textBoxAnswer1.Leave += new System.EventHandler(this.textBoxQuestion_Leave);
 			// 
 			// label2
 			// 
@@ -346,6 +350,7 @@
 			this.textBoxQuestion.Size = new System.Drawing.Size(492, 74);
 			this.textBoxQuestion.TabIndex = 1;
 			this.textBoxQuestion.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
+			this.textBoxQuestion.Leave += new System.EventHandler(this.textBoxQuestion_Leave);
 			// 
 			// comboBoxCorrectAnswer
 			// 
@@ -354,8 +359,9 @@
 			this.comboBoxCorrectAnswer.FormattingEnabled = true;
 			this.comboBoxCorrectAnswer.Location = new System.Drawing.Point(103, 269);
 			this.comboBoxCorrectAnswer.Name = "comboBoxCorrectAnswer";
-			this.comboBoxCorrectAnswer.Size = new System.Drawing.Size(199, 21);
+			this.comboBoxCorrectAnswer.Size = new System.Drawing.Size(492, 21);
 			this.comboBoxCorrectAnswer.TabIndex = 12;
+			this.comboBoxCorrectAnswer.SelectedIndexChanged += new System.EventHandler(this.comboBoxCorrectAnswer_SelectedIndexChanged);
 			// 
 			// splitter5
 			// 
@@ -419,6 +425,18 @@
 			this.toolStrip.Size = new System.Drawing.Size(598, 48);
 			this.toolStrip.TabIndex = 19;
 			// 
+			// toolStripAdd
+			// 
+			this.toolStripAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.toolStripAdd.Image = ((System.Drawing.Image)(resources.GetObject("toolStripAdd.Image")));
+			this.toolStripAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+			this.toolStripAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.toolStripAdd.Margin = new System.Windows.Forms.Padding(4, 1, 4, 2);
+			this.toolStripAdd.Name = "toolStripAdd";
+			this.toolStripAdd.Size = new System.Drawing.Size(36, 45);
+			this.toolStripAdd.ToolTipText = "Add Question - Creates a new blank quesition in the currently selected file.";
+			this.toolStripAdd.Click += new System.EventHandler(this.toolStripAdd_Click);
+			// 
 			// toolStripDelete
 			// 
 			this.toolStripDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -447,18 +465,6 @@
 			this.toolStripSync.Name = "toolStripSync";
 			this.toolStripSync.Size = new System.Drawing.Size(36, 45);
 			this.toolStripSync.ToolTipText = "Synchronise - Uploads question files to the server.";
-			// 
-			// toolStripAdd
-			// 
-			this.toolStripAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.toolStripAdd.Image = ((System.Drawing.Image)(resources.GetObject("toolStripAdd.Image")));
-			this.toolStripAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-			this.toolStripAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.toolStripAdd.Margin = new System.Windows.Forms.Padding(4, 1, 4, 2);
-			this.toolStripAdd.Name = "toolStripAdd";
-			this.toolStripAdd.Size = new System.Drawing.Size(36, 45);
-			this.toolStripAdd.ToolTipText = "Add Question - Creates a new blank quesition in the currently selected file.";
-			this.toolStripAdd.Click += new System.EventHandler(this.toolStripAdd_Click);
 			// 
 			// GameMainForm
 			// 

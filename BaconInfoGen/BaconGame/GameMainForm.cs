@@ -24,7 +24,9 @@ namespace BaconGame
 			{
 				e.SuppressKeyPress = true;
 				if (questionView.SelectedItems.Count > 0)
+				{
 					_presenter.SaveQuestion(questionView.SelectedIndices[0]);
+				}
 			}
         }
 
@@ -130,7 +132,8 @@ namespace BaconGame
                 _presenter.ShowError("No question selected to delete!");
             else
             {
-                _presenter.RemoveQuestion();
+				if(_presenter.ConfirmDelete())
+					_presenter.RemoveQuestion();
             }
         }
 
@@ -148,6 +151,17 @@ namespace BaconGame
 			textBoxAnswer3.Enabled = b;
 			textBoxAnswer4.Enabled = b;
 			comboBoxCorrectAnswer.Enabled = b;
+		}
+
+		private void comboBoxCorrectAnswer_SelectedIndexChanged(object sender, System.EventArgs e)
+		{
+			if(questionView.SelectedItems.Count > 0)
+				_presenter.UpdateAnswer();
+		}
+
+		private void textBoxQuestion_Leave(object sender, System.EventArgs e)
+		{
+			_presenter.SaveQuestion(questionView.SelectedIndices[0]);
 		}
     }
 }
