@@ -150,6 +150,9 @@ namespace BaconGame
 			textBoxAnswer2.Enabled = b;
 			textBoxAnswer3.Enabled = b;
 			textBoxAnswer4.Enabled = b;
+
+			if(!b) comboBoxCorrectAnswer.Items.Clear();
+
 			comboBoxCorrectAnswer.Enabled = b;
 		}
 

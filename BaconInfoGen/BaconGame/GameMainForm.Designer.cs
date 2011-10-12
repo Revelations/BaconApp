@@ -41,7 +41,7 @@
 			this.fileHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.imageList = new System.Windows.Forms.ImageList(this.components);
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+			this.menuStrip = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -68,7 +68,7 @@
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStripSync = new System.Windows.Forms.ToolStripButton();
 			this.panel1.SuspendLayout();
-			this.menuStrip1.SuspendLayout();
+			this.menuStrip.SuspendLayout();
 			this.panel2.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.toolStrip.SuspendLayout();
@@ -176,15 +176,15 @@
 			this.statusStrip1.TabIndex = 14;
 			this.statusStrip1.Text = "statusStrip1";
 			// 
-			// menuStrip1
+			// menuStrip
 			// 
-			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem});
-			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(784, 24);
-			this.menuStrip1.TabIndex = 15;
-			this.menuStrip1.Text = "menuStrip1";
+			this.menuStrip.Location = new System.Drawing.Point(0, 0);
+			this.menuStrip.Name = "menuStrip";
+			this.menuStrip.Size = new System.Drawing.Size(784, 24);
+			this.menuStrip.TabIndex = 15;
+			this.menuStrip.Text = "menuStrip1";
 			// 
 			// fileToolStripMenuItem
 			// 
@@ -222,12 +222,12 @@
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 6;
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 27.27273F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.18182F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.18182F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.18182F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.18182F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
 			this.tableLayoutPanel1.Size = new System.Drawing.Size(598, 303);
 			this.tableLayoutPanel1.TabIndex = 0;
 			// 
@@ -235,9 +235,9 @@
 			// 
 			this.label6.AutoSize = true;
 			this.label6.Dock = System.Windows.Forms.DockStyle.Right;
-			this.label6.Location = new System.Drawing.Point(18, 256);
+			this.label6.Location = new System.Drawing.Point(18, 259);
 			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(79, 47);
+			this.label6.Size = new System.Drawing.Size(79, 44);
 			this.label6.TabIndex = 11;
 			this.label6.Text = "Correct Answer";
 			this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -248,7 +248,7 @@
 			this.textBoxAnswer4.Location = new System.Drawing.Point(103, 215);
 			this.textBoxAnswer4.Multiline = true;
 			this.textBoxAnswer4.Name = "textBoxAnswer4";
-			this.textBoxAnswer4.Size = new System.Drawing.Size(492, 38);
+			this.textBoxAnswer4.Size = new System.Drawing.Size(492, 41);
 			this.textBoxAnswer4.TabIndex = 10;
 			this.textBoxAnswer4.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
 			this.textBoxAnswer4.Leave += new System.EventHandler(this.textBoxQuestion_Leave);
@@ -259,7 +259,7 @@
 			this.label5.Dock = System.Windows.Forms.DockStyle.Right;
 			this.label5.Location = new System.Drawing.Point(31, 212);
 			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(66, 44);
+			this.label5.Size = new System.Drawing.Size(66, 47);
 			this.label5.TabIndex = 9;
 			this.label5.Text = "Answer Four";
 			this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -267,10 +267,10 @@
 			// textBoxAnswer3
 			// 
 			this.textBoxAnswer3.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.textBoxAnswer3.Location = new System.Drawing.Point(103, 171);
+			this.textBoxAnswer3.Location = new System.Drawing.Point(103, 168);
 			this.textBoxAnswer3.Multiline = true;
 			this.textBoxAnswer3.Name = "textBoxAnswer3";
-			this.textBoxAnswer3.Size = new System.Drawing.Size(492, 38);
+			this.textBoxAnswer3.Size = new System.Drawing.Size(492, 41);
 			this.textBoxAnswer3.TabIndex = 8;
 			this.textBoxAnswer3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
 			this.textBoxAnswer3.Leave += new System.EventHandler(this.textBoxQuestion_Leave);
@@ -279,9 +279,9 @@
 			// 
 			this.label4.AutoSize = true;
 			this.label4.Dock = System.Windows.Forms.DockStyle.Right;
-			this.label4.Location = new System.Drawing.Point(24, 168);
+			this.label4.Location = new System.Drawing.Point(24, 165);
 			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(73, 44);
+			this.label4.Size = new System.Drawing.Size(73, 47);
 			this.label4.TabIndex = 7;
 			this.label4.Text = "Answer Three";
 			this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -290,9 +290,9 @@
 			// 
 			this.label3.AutoSize = true;
 			this.label3.Dock = System.Windows.Forms.DockStyle.Right;
-			this.label3.Location = new System.Drawing.Point(31, 124);
+			this.label3.Location = new System.Drawing.Point(31, 118);
 			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(66, 44);
+			this.label3.Size = new System.Drawing.Size(66, 47);
 			this.label3.TabIndex = 6;
 			this.label3.Text = "Answer Two";
 			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -300,10 +300,10 @@
 			// textBoxAnswer2
 			// 
 			this.textBoxAnswer2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.textBoxAnswer2.Location = new System.Drawing.Point(103, 127);
+			this.textBoxAnswer2.Location = new System.Drawing.Point(103, 121);
 			this.textBoxAnswer2.Multiline = true;
 			this.textBoxAnswer2.Name = "textBoxAnswer2";
-			this.textBoxAnswer2.Size = new System.Drawing.Size(492, 38);
+			this.textBoxAnswer2.Size = new System.Drawing.Size(492, 41);
 			this.textBoxAnswer2.TabIndex = 5;
 			this.textBoxAnswer2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
 			this.textBoxAnswer2.Leave += new System.EventHandler(this.textBoxQuestion_Leave);
@@ -311,10 +311,10 @@
 			// textBoxAnswer1
 			// 
 			this.textBoxAnswer1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.textBoxAnswer1.Location = new System.Drawing.Point(103, 83);
+			this.textBoxAnswer1.Location = new System.Drawing.Point(103, 74);
 			this.textBoxAnswer1.Multiline = true;
 			this.textBoxAnswer1.Name = "textBoxAnswer1";
-			this.textBoxAnswer1.Size = new System.Drawing.Size(492, 38);
+			this.textBoxAnswer1.Size = new System.Drawing.Size(492, 41);
 			this.textBoxAnswer1.TabIndex = 3;
 			this.textBoxAnswer1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
 			this.textBoxAnswer1.Leave += new System.EventHandler(this.textBoxQuestion_Leave);
@@ -323,9 +323,9 @@
 			// 
 			this.label2.AutoSize = true;
 			this.label2.Dock = System.Windows.Forms.DockStyle.Right;
-			this.label2.Location = new System.Drawing.Point(32, 80);
+			this.label2.Location = new System.Drawing.Point(32, 71);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(65, 44);
+			this.label2.Size = new System.Drawing.Size(65, 47);
 			this.label2.TabIndex = 2;
 			this.label2.Text = "Answer One";
 			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -336,7 +336,7 @@
 			this.label1.Dock = System.Windows.Forms.DockStyle.Right;
 			this.label1.Location = new System.Drawing.Point(24, 0);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(73, 80);
+			this.label1.Size = new System.Drawing.Size(73, 71);
 			this.label1.TabIndex = 0;
 			this.label1.Text = "Question Text";
 			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -347,17 +347,17 @@
 			this.textBoxQuestion.Location = new System.Drawing.Point(103, 3);
 			this.textBoxQuestion.Multiline = true;
 			this.textBoxQuestion.Name = "textBoxQuestion";
-			this.textBoxQuestion.Size = new System.Drawing.Size(492, 74);
+			this.textBoxQuestion.Size = new System.Drawing.Size(492, 65);
 			this.textBoxQuestion.TabIndex = 1;
 			this.textBoxQuestion.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
 			this.textBoxQuestion.Leave += new System.EventHandler(this.textBoxQuestion_Leave);
 			// 
 			// comboBoxCorrectAnswer
 			// 
-			this.comboBoxCorrectAnswer.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.comboBoxCorrectAnswer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.comboBoxCorrectAnswer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.comboBoxCorrectAnswer.FormattingEnabled = true;
-			this.comboBoxCorrectAnswer.Location = new System.Drawing.Point(103, 269);
+			this.comboBoxCorrectAnswer.Location = new System.Drawing.Point(103, 270);
 			this.comboBoxCorrectAnswer.Name = "comboBoxCorrectAnswer";
 			this.comboBoxCorrectAnswer.Size = new System.Drawing.Size(492, 21);
 			this.comboBoxCorrectAnswer.TabIndex = 12;
@@ -482,15 +482,15 @@
 			this.Controls.Add(this.splitter2);
 			this.Controls.Add(this.splitter1);
 			this.Controls.Add(this.statusStrip1);
-			this.Controls.Add(this.menuStrip1);
-			this.MainMenuStrip = this.menuStrip1;
-			this.MinimumSize = new System.Drawing.Size(400, 300);
+			this.Controls.Add(this.menuStrip);
+			this.MainMenuStrip = this.menuStrip;
+			this.MinimumSize = new System.Drawing.Size(800, 600);
 			this.Name = "GameMainForm";
 			this.Text = "Game Creator";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GameMainForm_FormClosing);
 			this.panel1.ResumeLayout(false);
-			this.menuStrip1.ResumeLayout(false);
-			this.menuStrip1.PerformLayout();
+			this.menuStrip.ResumeLayout(false);
+			this.menuStrip.PerformLayout();
 			this.panel2.ResumeLayout(false);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
@@ -510,7 +510,7 @@
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ListView fileView;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Splitter splitter5;
