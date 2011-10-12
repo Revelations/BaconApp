@@ -133,6 +133,13 @@ namespace BaconBuilder.View
 			//txtX.Minimum = 0;
 			//txtY.Minimum = 0;
 
+			//sets tooltips for buttons
+			ToolTip tooltip = new ToolTip();
+			tooltip.SetToolTip(btnAddFile,"Creates a new blank html for the editor");
+			tooltip.SetToolTip(btnPreview, "Displays the QR code linked to the currently selected file");
+			tooltip.SetToolTip(btnRemoveFile,"Deletes the selected file from the editor");
+			tooltip.SetToolTip(btnPrintPreview, "Displays the print preview of the QR codes");
+
 			mapBox.ZoomChanged += MapZoomChanged;
 			mapBox.MapCoordinateChanged += MapCoordinateChanged;
 

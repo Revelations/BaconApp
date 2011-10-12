@@ -63,7 +63,6 @@ namespace BaconBuilder.View
 			this.pnlTextEditor = new System.Windows.Forms.Panel();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.HTMLEditor = new System.Windows.Forms.WebBrowser();
-			this.mapBox = new BaconBuilder.Component.MapBox();
 			this.flpPreview = new System.Windows.Forms.FlowLayoutPanel();
 			this.btnPreview = new System.Windows.Forms.Button();
 			this.btnPrintPreview = new System.Windows.Forms.Button();
@@ -91,6 +90,7 @@ namespace BaconBuilder.View
 			this.splitter4 = new System.Windows.Forms.Splitter();
 			this.printDocument = new System.Drawing.Printing.PrintDocument();
 			this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
+			this.mapBox = new BaconBuilder.Component.MapBox();
 			this.menuStrip.SuspendLayout();
 			this.pnlDirectories.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -145,6 +145,7 @@ namespace BaconBuilder.View
 			this.toolStripSync.Name = "toolStripSync";
 			this.toolStripSync.Size = new System.Drawing.Size(169, 22);
 			this.toolStripSync.Text = "Sync With Server...";
+			this.toolStripSync.ToolTipText = "Syncronize with the server by uploading the files to server";
 			this.toolStripSync.Click += new System.EventHandler(this.toolStripSync_Click);
 			// 
 			// toolStripSeparator2
@@ -184,6 +185,7 @@ namespace BaconBuilder.View
 			this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
 			this.exitToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
 			this.exitToolStripMenuItem.Text = "E&xit";
+			this.exitToolStripMenuItem.ToolTipText = "Closes the Program";
 			// 
 			// editToolStripMenuItem
 			// 
@@ -390,19 +392,6 @@ namespace BaconBuilder.View
 			this.HTMLEditor.ScriptErrorsSuppressed = true;
 			this.HTMLEditor.Size = new System.Drawing.Size(303, 421);
 			this.HTMLEditor.TabIndex = 0;
-			// 
-			// mapBox
-			// 
-			this.mapBox.AutoSize = true;
-			this.mapBox.Image = global::BaconBuilder.Properties.Resources.map;
-			this.mapBox.Location = new System.Drawing.Point(0, 0);
-			this.mapBox.MarkerText = "You are here";
-			this.mapBox.Name = "mapBox";
-			this.mapBox.Size = new System.Drawing.Size(300, 396);
-			this.mapBox.TabIndex = 0;
-			this.mapBox.X = 0;
-			this.mapBox.Y = 0;
-			this.mapBox.Zoom = 100F;
 			// 
 			// flpPreview
 			// 
@@ -700,6 +689,19 @@ namespace BaconBuilder.View
 			this.printPreviewDialog.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog.Icon")));
 			this.printPreviewDialog.Name = "printPreviewDialog";
 			this.printPreviewDialog.Visible = false;
+			// 
+			// mapBox
+			// 
+			this.mapBox.AutoSize = true;
+			this.mapBox.Image = global::BaconBuilder.Properties.Resources.map;
+			this.mapBox.Location = new System.Drawing.Point(0, 0);
+			this.mapBox.MarkerText = "You are here";
+			this.mapBox.Name = "mapBox";
+			this.mapBox.Size = new System.Drawing.Size(300, 396);
+			this.mapBox.TabIndex = 0;
+			this.mapBox.X = 0;
+			this.mapBox.Y = 0;
+			this.mapBox.Zoom = 100F;
 			// 
 			// MainWindow
 			// 
