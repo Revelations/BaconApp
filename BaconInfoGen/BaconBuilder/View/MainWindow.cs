@@ -3,14 +3,13 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Linq;
-using System.Net.Sockets;
+using System.Net;
 using System.Windows.Forms;
 using BaconBuilder.Controller;
 using BaconBuilder.Model;
 using BaconBuilder.Properties;
-using mshtml;
 using NetworkCheckApp;
-using System.Net;
+using mshtml;
 
 namespace BaconBuilder.View
 {
@@ -450,74 +449,74 @@ namespace BaconBuilder.View
 //			return false;
 			return ConnectStatus.Check() && ConnectStatus.Check(ConnectStatus.Method.TcpSocket, Resources.ServerLocation);
 		}
-
-		private static void TestConnection()
-		{
-			string http = "http://revelations.webhop.org/";
-			foreach (ConnectStatus.Method m in Enum.GetValues(typeof(ConnectStatus.Method)))
-			{
-				Console.WriteLine(m.ToString());
-				DateTime start;
-				if (m.Equals(ConnectStatus.Method.Ping))
-				{
-					var adds = Dns.GetHostAddresses(new Uri(http).Host);
-
-					foreach (var t in adds)
-					{
-						start = DateTime.Now;
-						bool b = ConnectStatus.Check(m, t.ToString(), 81);
-						Console.WriteLine(@"{0} for {1} took {2}ms. Status = {3}", m, t.ToString(), (DateTime.Now - start).TotalMilliseconds, b);
-					}
-				}
-				else if (m.Equals(ConnectStatus.Method.WebRequest))
-				{
-					var loc = new Uri(http).AbsoluteUri;
-					start = DateTime.Now;
-					bool b = ConnectStatus.Check(m, loc, 81);
-					Console.WriteLine(@"{0} for {1} took {2}ms. Status = {3}", m, loc, (DateTime.Now - start).TotalMilliseconds, b);
-				}
-				else
-				{
-					var loc = new Uri(http).AbsoluteUri;
-					start = DateTime.Now;
-					bool b = ConnectStatus.Check(m, loc, 81);
-					Console.WriteLine(@"{0} for {1} took {2}ms. Status = {3}", m, loc, (DateTime.Now - start).TotalMilliseconds, b);
-				}
-			}
-
-			string ftp = Resources.ServerLocation;
-			foreach (ConnectStatus.Method m in Enum.GetValues(typeof(ConnectStatus.Method)))
-			{
-				Console.WriteLine(m.ToString());
-				DateTime start;
-				if (m.Equals(ConnectStatus.Method.Ping))
-				{
-					var adds = Dns.GetHostAddresses(new Uri(ftp).Host);
-
-					foreach (var t in adds)
-					{
-						start = DateTime.Now;
-						bool b = ConnectStatus.Check(m, t.ToString(), 81);
-						Console.WriteLine(@"{0} for {1} took {2}ms. Status = {3}", m, t.ToString(), (DateTime.Now - start).TotalMilliseconds, b);
-					}
-				}
-				else if (m.Equals(ConnectStatus.Method.WebRequest))
-				{
-					var loc = new Uri(ftp).AbsoluteUri;
-					start = DateTime.Now;
-					bool b = ConnectStatus.Check(m, loc, 81);
-					Console.WriteLine(@"{0} for {1} took {2}ms. Status = {3}", m, loc, (DateTime.Now - start).TotalMilliseconds, b);
-				}
-				else
-				{
-					var loc = new Uri(ftp).AbsoluteUri;
-					start = DateTime.Now;
-					bool b = ConnectStatus.Check(m, loc, 81);
-					Console.WriteLine(@"{0} for {1} took {2}ms. Status = {3}", m, loc, (DateTime.Now - start).TotalMilliseconds, b);
-				}
-			}
-
-		}
+//
+//		private static void TestConnection()
+//		{
+//			string http = "http://revelations.webhop.org/";
+//			foreach (ConnectStatus.Method m in Enum.GetValues(typeof(ConnectStatus.Method)))
+//			{
+//				Console.WriteLine(m.ToString());
+//				DateTime start;
+//				if (m.Equals(ConnectStatus.Method.Ping))
+//				{
+//					var adds = Dns.GetHostAddresses(new Uri(http).Host);
+//
+//					foreach (var t in adds)
+//					{
+//						start = DateTime.Now;
+//						bool b = ConnectStatus.Check(m, t.ToString(), 81);
+//						Console.WriteLine(@"{0} for {1} took {2}ms. Status = {3}", m, t.ToString(), (DateTime.Now - start).TotalMilliseconds, b);
+//					}
+//				}
+//				else if (m.Equals(ConnectStatus.Method.WebRequest))
+//				{
+//					var loc = new Uri(http).AbsoluteUri;
+//					start = DateTime.Now;
+//					bool b = ConnectStatus.Check(m, loc, 81);
+//					Console.WriteLine(@"{0} for {1} took {2}ms. Status = {3}", m, loc, (DateTime.Now - start).TotalMilliseconds, b);
+//				}
+//				else
+//				{
+//					var loc = new Uri(http).AbsoluteUri;
+//					start = DateTime.Now;
+//					bool b = ConnectStatus.Check(m, loc, 81);
+//					Console.WriteLine(@"{0} for {1} took {2}ms. Status = {3}", m, loc, (DateTime.Now - start).TotalMilliseconds, b);
+//				}
+//			}
+//
+//			string ftp = Resources.ServerLocation;
+//			foreach (ConnectStatus.Method m in Enum.GetValues(typeof(ConnectStatus.Method)))
+//			{
+//				Console.WriteLine(m.ToString());
+//				DateTime start;
+//				if (m.Equals(ConnectStatus.Method.Ping))
+//				{
+//					var adds = Dns.GetHostAddresses(new Uri(ftp).Host);
+//
+//					foreach (var t in adds)
+//					{
+//						start = DateTime.Now;
+//						bool b = ConnectStatus.Check(m, t.ToString(), 81);
+//						Console.WriteLine(@"{0} for {1} took {2}ms. Status = {3}", m, t.ToString(), (DateTime.Now - start).TotalMilliseconds, b);
+//					}
+//				}
+//				else if (m.Equals(ConnectStatus.Method.WebRequest))
+//				{
+//					var loc = new Uri(ftp).AbsoluteUri;
+//					start = DateTime.Now;
+//					bool b = ConnectStatus.Check(m, loc, 81);
+//					Console.WriteLine(@"{0} for {1} took {2}ms. Status = {3}", m, loc, (DateTime.Now - start).TotalMilliseconds, b);
+//				}
+//				else
+//				{
+//					var loc = new Uri(ftp).AbsoluteUri;
+//					start = DateTime.Now;
+//					bool b = ConnectStatus.Check(m, loc, 81);
+//					Console.WriteLine(@"{0} for {1} took {2}ms. Status = {3}", m, loc, (DateTime.Now - start).TotalMilliseconds, b);
+//				}
+//			}
+//
+//		}
 
 		#region Russell's Print Stuff.
 

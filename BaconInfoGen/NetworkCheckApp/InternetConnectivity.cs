@@ -13,7 +13,7 @@ namespace NetworkCheckApp
 	/// <summary>
 	/// Some of the functions of our applications may require a run-time test of internet connectivity. Once internet connectivity is detected, the functions that require internet access may temporarily be disabled and/or the user can be notified via an alert message. Otherwise, the application may result in error during operation or it may cause annoying problems for the user.
 	/// </summary>
-	public static class ConnectStatus
+	public class ConnectStatus
 	{
 		#region Default arguments for checking
 
@@ -116,22 +116,18 @@ namespace NetworkCheckApp
 		public static bool WebRequestTest(string address = DefaultHost)
 		{
 			{
-				Uri Url = new Uri(address);
+				var url = new Uri(address);
 
-				WebRequest WebReq;
-				WebResponse Resp;
-				WebReq = WebRequest.Create(Url);
+				WebRequest webReq = WebRequest.Create(url);
 				try
 				{
-					Resp = WebReq.GetResponse();
-					Resp.Close();
-					WebReq = null;
+					WebResponse resp = webReq.GetResponse();
+					resp.Close();
 					return true;
 				}
 
 				catch
 				{
-					WebReq = null;
 					return false;
 				}
 			}
@@ -183,7 +179,7 @@ namespace NetworkCheckApp
 			DateTime start = DateTime.Now;
 			PingReply pingStatus = ping.Send(address, timeout);
 			//PingReply pingStatus = ping.Send(IPAddress.Parse(address), timeout);
-			long end = (long) (DateTime.Now - start).TotalMilliseconds;
+			var end = (long) (DateTime.Now - start).TotalMilliseconds;
 			Console.WriteLine("Inside Ping method, took: " + end);
 			if (pingStatus != null && pingStatus.Status == IPStatus.Success)
 			{

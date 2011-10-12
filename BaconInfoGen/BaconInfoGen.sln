@@ -2,6 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaconBuilder", "BaconBuilder\BaconBuilder.csproj", "{B3668BD4-4001-4EE7-8F6F-E1DA776E98BB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{051F67FB-1D9A-4602-B216-B27722F83BC8} = {051F67FB-1D9A-4602-B216-B27722F83BC8}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaconBuilder.Test", "BaconBuilder.Tests\BaconBuilder.Test.csproj", "{5B521FE9-F3F4-42C2-BD6E-333AB669FEB7}"
 EndProject

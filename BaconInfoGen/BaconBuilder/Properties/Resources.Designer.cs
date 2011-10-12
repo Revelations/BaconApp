@@ -95,7 +95,7 @@ namespace BaconBuilder.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ftp://Revelations.webhop.org/.
+        ///   Looks up a localized string similar to ftp://revelations.webhop.org/.
         /// </summary>
         public static string ServerLocation {
             get {

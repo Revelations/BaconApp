@@ -76,6 +76,9 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="NetworkCheckApp">
+      <HintPath>..\lib\NetworkCheckApp.dll</HintPath>
+    </Reference>
     <Reference Include="Svg">
       <HintPath>..\lib\Svg.dll</HintPath>
     </Reference>
@@ -222,13 +225,10 @@
     <None Include="Resources\map600x720.png" />
     <None Include="Resources\vmap.png" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NetworkCheckApp\NetworkCheckApp.csproj">
-      <Project>{051F67FB-1D9A-4602-B216-B27722F83BC8}</Project>
-      <Name>NetworkCheckApp</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(ProjectDir)$(OutDir)$(TargetFileName)" "$(SolutionDir)lib\$(TargetFileName)"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
