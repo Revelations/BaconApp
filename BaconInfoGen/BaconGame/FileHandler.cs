@@ -41,17 +41,36 @@ namespace BaconGame
 
             for(int i = 0; i < content.Length; i += 6)
             {
-                Question q = new Question
-                {
-                    QuestionText = content[i],
-                    Answers = new[] {content[i + 1], content[i + 2], content[i + 3], content[i + 4]},
-                    CorrectAnswer = Convert.ToInt32(content[i + 5])
-                };
+                Question q = new Question(content[i],
+                                          new[] {content[i + 1], content[i + 2], content[i + 3], content[i + 4]},
+                                          Convert.ToInt32(content[i + 5]));
                 
                 result.Questions.Add(q);
             }
 
             return result;
+        }
+
+        public static void CreateFileFromQuestions(string path, string[] content)
+        {
+            File.WriteAllLines(QuestionDirectory + path + _questionExtension, content);
+        }
+
+        public static string[] CreateFileContentFromQuestions(List<Question> questions)
+        {
+            List<string> result = new List<string>();
+
+            foreach (Question q in questions)
+            {
+                result.Add(q.QuestionText);
+
+                foreach (string s in q.Answers)
+                    result.Add(s);
+
+                result.Add(q.CorrectAnswer.ToString());
+            }
+
+            return result.ToArray();
         }
     }
 }

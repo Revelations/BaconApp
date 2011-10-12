@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Drawing;
+using System.Windows.Forms;
 
 namespace BaconGame
 {
@@ -14,13 +15,17 @@ namespace BaconGame
 
 		    _presenter.PopulateFileView();
 
-
+			EnableTextFields();
 		}
 
         private void textBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-                e.SuppressKeyPress = true;
+			if (e.KeyCode == Keys.Enter)
+			{
+				e.SuppressKeyPress = true;
+				if (questionView.SelectedItems.Count > 0)
+					_presenter.SaveQuestion(questionView.SelectedIndices[0]);
+			}
         }
 
         #region Interface Members
@@ -77,7 +82,15 @@ namespace BaconGame
             if (e.IsSelected)
                 _presenter.PopulateQuestionView(fileView.SelectedItems[0].Text);
             else
+            {
+				if(questionView.SelectedItems.Count > 0)
+					_presenter.SaveQuestion(questionView.SelectedIndices[0]);
+                _presenter.SaveQuestionFile(e.Item.Text);
                 _presenter.DepopulateQuestionView();
+				_presenter.ClearTextFields();
+            }
+
+			EnableTextFields();
         }
 
         private void questionView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
@@ -85,7 +98,56 @@ namespace BaconGame
             if (e.IsSelected)
                 _presenter.LoadTextFields();
             else
+            {
+                _presenter.SaveQuestion(e.ItemIndex);
                 _presenter.ClearTextFields();
+            }
+
+			EnableTextFields();
         }
+
+        private void GameMainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(questionView.SelectedItems.Count > 0)
+                _presenter.SaveQuestion(questionView.SelectedIndices[0]);
+            if(fileView.SelectedItems.Count > 0)
+                _presenter.SaveQuestionFile(fileView.SelectedItems[0].Text);
+        }
+
+        private void toolStripAdd_Click(object sender, System.EventArgs e)
+        {
+            if (fileView.SelectedItems.Count == 0)
+                _presenter.ShowError("No question file selected. Cannot create new question.");
+            else
+            {
+                _presenter.AddQuestion();
+            }
+        }
+
+        private void toolStripDelete_Click(object sender, System.EventArgs e)
+        {
+            if (questionView.SelectedItems.Count == 0)
+                _presenter.ShowError("No question selected to delete!");
+            else
+            {
+                _presenter.RemoveQuestion();
+            }
+        }
+
+		private void splitter_SplitterMoved(object sender, SplitterEventArgs e)
+		{
+			fileHeader.Width = fileView.Width;
+		}
+
+		public void EnableTextFields()
+		{
+			bool b = questionView.SelectedItems.Count > 0;
+			textBoxQuestion.Enabled = b;
+			textBoxAnswer1.Enabled = b;
+			textBoxAnswer2.Enabled = b;
+			textBoxAnswer3.Enabled = b;
+			textBoxAnswer4.Enabled = b;
+			comboBoxCorrectAnswer.Enabled = b;
+		}
     }
 }

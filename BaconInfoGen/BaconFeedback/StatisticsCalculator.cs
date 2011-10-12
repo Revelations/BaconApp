@@ -39,7 +39,7 @@ namespace BaconFeedback
 		}
 
 		/// <summary>
-		/// Gets the number of visitors in the requested feedback files. Attempts to exclude duplicates.
+		/// Gets the number of visitors in the requested feedback files. Attempts to exclude duplicates by looking for similar files and ignoring them.
 		/// </summary>
 		public int TotalVisitorsExcludingDuplicates
 		{
