@@ -266,14 +266,8 @@ namespace BaconGame
 		/// </summary>
 		private void comboBoxCorrectAnswer_SelectedIndexChanged(object sender, System.EventArgs e)
 		{
-			if(questionView.SelectedItems.Count > 0)
+			if (questionView.SelectedItems.Count > 0)
 				_presenter.UpdateAnswer();
 		}
-
-
-
-
-
-
-    }
+	}
 }
