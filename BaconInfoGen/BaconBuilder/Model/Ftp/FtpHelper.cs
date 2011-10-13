@@ -14,8 +14,23 @@ namespace BaconBuilder.Model.Ftp
 	/// </summary>
 	public abstract class FtpHelper
 	{
+		private static DirectoryInfo _directoryInfo;
 		//private readonly IModel _model;
-		public static readonly DirectoryInfo HtmlDirectory = new DirectoryInfo("C:/Users/" + Environment.UserName + "/test/");
+		
+		public static DirectoryInfo HtmlDirectory
+		{
+			get
+			{
+				_directoryInfo = new DirectoryInfo("C:/Users/" + Environment.UserName + "/test/");
+				if (!_directoryInfo.Exists)
+					_directoryInfo.Create();
+				return _directoryInfo;
+			}
+			set
+			{
+				_directoryInfo = value;
+			}
+		}
 
 		public static int FtpPort
 		{

@@ -21,6 +21,7 @@ namespace BaconBuilder.View
 		[System.Diagnostics.Conditional("DEBUG")]
 		private static void KeepServerOffline()
 		{
+			// TODO: Remove this before shipping off!!!
 			MessageBox.Show(string.Format("Everytime this message is not shown, Ceiling Cat throttles the FTP server. Please, think of the kittens in {0}.", typeof(MainWindow)));
 			OFFLINE = true;
 		}

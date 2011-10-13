@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Windows.Forms;
+using System.Xml;
+using BaconBuilder.Model.Ftp;
 using BaconBuilder.Properties;
+using mshtml;
 
 namespace BaconBuilder.Model
 {
@@ -10,12 +14,10 @@ namespace BaconBuilder.Model
 	{
 		private const string HtmlExtension = ".html";
 		private const string NewHtmlFileName = "New File";
-		private static readonly string HtmlDirectory = "C:/Users/" + Environment.UserName + "/test/";
 
 		private readonly Dictionary<string, string> _fileContents = new Dictionary<string, string>();
 
 		private readonly TextToHtmlParser _texthtmlparser = new TextToHtmlParser();
-		private DirectoryInfo _directory = new DirectoryInfo(HtmlDirectory);
 
 		/// <summary>
 		/// Get or set the image url, obtained from an image selection dialog.
@@ -31,7 +33,7 @@ namespace BaconBuilder.Model
 		public void RemoveFile(string fileName)
 		{
 			_fileContents.Remove(fileName);
-			File.Delete(HtmlDirectory + fileName);
+			File.Delete(FtpHelper.HtmlDirectory + fileName);
 			CurrentFileNameWithExtension = null;
 		}
 
@@ -54,8 +56,8 @@ namespace BaconBuilder.Model
 			string oldHtmlName = oldName + HtmlExtension;
 			string newHtmlName = newName + HtmlExtension;
 
-			var oldInfo = new FileInfo(HtmlDirectory + oldHtmlName);
-			var newInfo = new FileInfo(HtmlDirectory + newHtmlName);
+			var oldInfo = new FileInfo(FtpHelper.HtmlDirectory + oldHtmlName);
+			var newInfo = new FileInfo(FtpHelper.HtmlDirectory + newHtmlName);
 
 			if (newInfo.Exists)
 			{
@@ -73,7 +75,7 @@ namespace BaconBuilder.Model
 		/// <param name="fileName">The filename of the file to save.</param>
 		public void SaveFile(string fileName)
 		{
-			File.WriteAllText(HtmlDirectory + fileName, CurrentContents);
+			File.WriteAllText(FtpHelper.HtmlDirectory + fileName, CurrentContents);
 		}
 
 		/// <summary>
@@ -103,9 +105,7 @@ namespace BaconBuilder.Model
 		/// <returns></returns>
 		public void LoadFiles()
 		{
-			if (!_directory.Exists) _directory.Create();
-
-			FileInfo[] f = _directory.GetFiles("*.html");
+			FileInfo[] f = FtpHelper.HtmlDirectory.GetFiles("*.html");
 			_fileContents.Clear();
 			foreach (FileInfo file in f)
 			{
@@ -132,7 +132,7 @@ namespace BaconBuilder.Model
 
 		public Uri GetCurrentFileUri()
 		{
-			return new Uri(HtmlDirectory + CurrentFileNameWithExtension);
+			return new Uri(FtpHelper.HtmlDirectory + CurrentFileNameWithExtension);
 		}
 
 		public string AudioUrl { get; set; }
@@ -148,7 +148,7 @@ namespace BaconBuilder.Model
 		/// <param name="newDir">The name of the new working directory.</param>
 		public void ChangeDirectory(string newDir)
 		{
-			_directory = new DirectoryInfo(newDir);
+			FtpHelper.HtmlDirectory = new DirectoryInfo(newDir);
 		}
 
 		#endregion
@@ -162,7 +162,7 @@ namespace BaconBuilder.Model
 		/// <returns>Unused filname with the lowest possible appended integer.</returns>
 		private static string GetLowestUnusedNewFileName()
 		{
-			string name = HtmlDirectory + NewHtmlFileName;
+			string name = FtpHelper.HtmlDirectory + NewHtmlFileName;
 			string result = name + HtmlExtension;
 
 			// Otherwise iterate to find the lowest number available to append.
@@ -185,6 +185,36 @@ namespace BaconBuilder.Model
 				return fileName.Remove(fileName.LastIndexOf(HtmlExtension));
 			}
 			return fileName;
+		}
+
+
+
+
+		// TODO: CAN I HAS PLONK HERE? <!-- I CAN HAS CHEEZBURGER -->
+		public static string InsertComment(HtmlDocument document, string comm)
+		{
+			return null;
+//			// Gte head tags.
+//
+//
+//			HtmlElementCollection all = document.All.GetElementsByName("head");
+//			XmlTextReader reader = new XmlTextReader();
+//			XmlTextWriter writer = new XmlTextWriter(new );
+//			
+//			// If comments exist within head tags.
+//			if ()
+//			// Check group
+//
+//
+//
+//			HtmlElement head = document.GetElementsByTagName("head")[0];
+//			HtmlElement scriptEl = document.CreateElement("script");
+//			IHTMLCommentElement comment = new HTMLCommentElementClass();
+//			IHTMLScriptElement element = (IHTMLScriptElement)scriptEl.DomElement;
+//			element.text = "function sayHello() { alert('hello') }";
+//			head.AppendChild(scriptEl);
+//			webBrowser1.Document.InvokeScript("sayHello");
+
 		}
 	}
 }

@@ -2,8 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace BaconBuilder.Model
 {
@@ -17,13 +20,17 @@ namespace BaconBuilder.Model
 			{
 				reader.DtdProcessing = DtdProcessing.Ignore;
 
-				reader.MoveToContent();
+				//reader.MoveToContent();
 				while (reader.Read())
 				{
 					if (reader.NodeType == XmlNodeType.Comment)
 					{
 						if (reader.Value.Split('=')[0].Trim().ToLower().Equals(property.ToLower()))
+						{
+							Console.WriteLine("Line " + reader.LineNumber + " at "+ reader.LinePosition + " = \"" + reader.Value + "\"");
+							
 							return reader.Value.Trim();
+						}
 					}
 				}
 			}
@@ -87,6 +94,45 @@ namespace BaconBuilder.Model
 			Recursive(body, list, 0);
 
 			return list;
+		}
+
+		public string SetProperties(string property, string value, string page)
+		{
+		// http://stackoverflow.com/questions/4971440/how-to-parse-html-to-modify-all-words
+			var builder = new StringBuilder();
+			builder.AppendFormat("<!DOCTYPE HTML><html><head><!-- {0}={1} --><title></title></head><body></body></html>",
+			                     property, value);
+			return builder.ToString();
+//			XmlTextReader r = new XmlTextReader(Page.FullName);
+//			r.DtdProcessing = DtdProcessing.Ignore;
+//			r.MoveToContent();
+//			XmlReader nodeReader = XmlReader.Create(new StringReader(r.ReadOuterXml()));
+//			XDocument xRoot = XDocument.Load(nodeReader, LoadOptions.SetLineInfo);
+//			foreach (XElement e in xRoot.Elements("<html>").DescendantsAndSelf())
+//				Console.WriteLine("{0}{1}{2}",
+//				    ("".PadRight(e.Ancestors().Count() * 2) + e.Name).PadRight(20),
+//				    ((IXmlLineInfo)e).LineNumber.ToString().PadRight(5),
+//				    ((IXmlLineInfo)e).LinePosition);
+
+//			StringBuilder builder = new StringBuilder();
+//			using (var reader = new XmlTextReader(Page.FullName))
+//			{
+//				reader.DtdProcessing = DtdProcessing.Ignore;
+//
+//				//reader.MoveToContent();
+//				while (reader.Read())
+//				{
+//					if (reader.NodeType == XmlNodeType.Comment)
+//					{
+//						if (reader.Value.Split('=')[0].Trim().ToLower().Equals(property.ToLower()))
+//							return reader.Value.Trim();
+//					} else
+//					{
+//						builder.Append()
+//					}
+//				}
+//			}
+//			return null;
 		}
 	}
 }

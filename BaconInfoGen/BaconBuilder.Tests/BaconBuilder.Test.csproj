@@ -54,6 +54,7 @@
     <Compile Include="InfoGen\MainWindowTest.cs" />
     <Compile Include="InfoGen\Parser\TextToHtmlParserTest.cs" />
     <Compile Include="LogGeneratorTest.cs" />
+    <Compile Include="XmlReaderTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Game\" />

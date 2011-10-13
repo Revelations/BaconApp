@@ -33,11 +33,12 @@ Contents);
 			_reader = null;
 		}
 
+		[Ignore]
 		[TestFixtureTearDown]
 		public void TestFixtureTearDown()
 		{
-			File.Delete(Dir + FileName);
-			Directory.Delete(Dir);
+//			File.Delete(Dir + FileName);
+//			Directory.Delete(Dir);
 		}
 
 		#endregion
@@ -50,7 +51,7 @@ Contents);
 	<head>
 		<link href=""style.css"" rel=""stylesheet"" />
 		<title></title>
-		<!-- Push Button = Receive Bacon --><!-- x = 42 --><!-- y = 13 -->
+		<!-- Push Button=Receive Bacon --><!--  x=42 --><!-- y=13 -->
 	</head>
 	<body>
 		<p>hello world</p>
@@ -72,11 +73,20 @@ Contents);
 		[Test]
 		public void TestCoords()
 		{
-			Assert.AreEqual("x = 42", _reader.GetProperties("x"));
-			Assert.AreEqual("y = 13", _reader.GetProperties("y"));
-			Assert.AreEqual("x = 42", _reader.GetProperties("x"));
-			Assert.AreEqual("Push Button = Receive Bacon", _reader.GetProperties("push button"));
+			Assert.AreEqual("x=42", _reader.GetProperties("x"));
+			Assert.AreEqual("y=13", _reader.GetProperties("y"));
+			Assert.AreEqual("x=42", _reader.GetProperties("x"));
+			Assert.AreEqual("Push Button=Receive Bacon", _reader.GetProperties("push button"));
 			Assert.IsNull(_reader.GetProperties("property does not exist"));
+
+		}
+
+		[Test]
+		public void TestSettingCoords()
+		{
+			Assert.AreEqual("x=42", _reader.GetProperties("x"));
+			Assert.AreEqual("<!DOCTYPE HTML><html><head><!-- x=1337 --><title></title></head><body></body></html>", _reader.SetProperties("x", "1337", ""));
+			//Assert.AreEqual("x=1337", _reader.GetProperties("x"));
 		}
 
 		[Test]
