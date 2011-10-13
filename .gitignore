@@ -20,3 +20,4 @@ _ReSharper.*
 Ankh.NoLoad
 
 *.xcuserstate
+*.exe
