@@ -115,8 +115,8 @@ namespace BaconBuilder.View
 			{
 				item.Enabled = _model.CurrentFileName != null && HtmlBrowserEditable;
 			}
-			toolStripButton1.Enabled = true;
-			toolStripButton1.Checked = HtmlBrowserEditable;
+			btnToggleEditMode.Enabled = true;
+			btnToggleEditMode.Checked = HtmlBrowserEditable;
 		}
 
 		#endregion
@@ -165,10 +165,17 @@ namespace BaconBuilder.View
 			var doc = HTMLEditor.Document.DomDocument as IHTMLDocument2;
 			Debug.Assert(doc != null, "doc != null");
 			doc.designMode = "on";
+			HTMLEditor.Navigating += HTMLEditor_Navigating;
 
 			// Initialise MVP objects.
 			_model = new BaconModel();
 			_controller = new MainViewController(_model, this);
+		}
+
+		void HTMLEditor_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+		{
+			if (e.Url.ToString() != "about:blank")
+				e.Cancel = true;
 		}
 
 		private void MapZoomChanged(object sender, EventArgs e)
@@ -186,7 +193,7 @@ namespace BaconBuilder.View
 
 		#region Toolbar Button and Other Button Events
 
-		private void toolStripButton1_Click(object sender, EventArgs e)
+		private void btnToggleEditMode_Click(object sender, EventArgs e)
 		{
 			HtmlBrowserEditable = !HtmlBrowserEditable;
 			EnableRequiredControls();

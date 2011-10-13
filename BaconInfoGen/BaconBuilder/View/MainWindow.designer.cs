@@ -64,11 +64,12 @@ namespace BaconBuilder.View
 			this.pnlTextEditor = new System.Windows.Forms.Panel();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.HTMLEditor = new System.Windows.Forms.WebBrowser();
+			this.mapBox = new BaconBuilder.Component.MapBox();
 			this.flpPreview = new System.Windows.Forms.FlowLayoutPanel();
 			this.btnPreview = new System.Windows.Forms.Button();
 			this.btnPrintPreview = new System.Windows.Forms.Button();
 			this.toolContents = new System.Windows.Forms.ToolStrip();
-			this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+			this.btnToggleEditMode = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.tsbImage = new System.Windows.Forms.ToolStripButton();
 			this.tsbAudio = new System.Windows.Forms.ToolStripButton();
@@ -91,7 +92,6 @@ namespace BaconBuilder.View
 			this.splitter4 = new System.Windows.Forms.Splitter();
 			this.printDocument = new System.Drawing.Printing.PrintDocument();
 			this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
-			this.mapBox = new BaconBuilder.Component.MapBox();
 			this.menuStrip.SuspendLayout();
 			this.pnlDirectories.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -138,13 +138,13 @@ namespace BaconBuilder.View
             this.toolStripSeparator4,
             this.exitToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-			this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
+			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
 			this.fileToolStripMenuItem.Text = "&File";
 			// 
 			// toolStripSync
 			// 
 			this.toolStripSync.Name = "toolStripSync";
-			this.toolStripSync.Size = new System.Drawing.Size(169, 22);
+			this.toolStripSync.Size = new System.Drawing.Size(176, 22);
 			this.toolStripSync.Text = "Sync With Server...";
 			this.toolStripSync.ToolTipText = "Syncronize with the server by uploading the files to server";
 			this.toolStripSync.Click += new System.EventHandler(this.toolStripSync_Click);
@@ -152,25 +152,25 @@ namespace BaconBuilder.View
 			// toolStripSeparator2
 			// 
 			this.toolStripSeparator2.Name = "toolStripSeparator2";
-			this.toolStripSeparator2.Size = new System.Drawing.Size(166, 6);
+			this.toolStripSeparator2.Size = new System.Drawing.Size(173, 6);
 			// 
 			// printToolStripMenuItem
 			// 
 			this.printToolStripMenuItem.Name = "printToolStripMenuItem";
 			this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-			this.printToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+			this.printToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
 			this.printToolStripMenuItem.Text = "Print...";
 			// 
 			// printAllModifiedToolStripMenuItem
 			// 
 			this.printAllModifiedToolStripMenuItem.Name = "printAllModifiedToolStripMenuItem";
-			this.printAllModifiedToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+			this.printAllModifiedToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
 			this.printAllModifiedToolStripMenuItem.Text = "Print All Modified...";
 			// 
 			// printAllToolStripMenuItem
 			// 
 			this.printAllToolStripMenuItem.Name = "printAllToolStripMenuItem";
-			this.printAllToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+			this.printAllToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
 			this.printAllToolStripMenuItem.Text = "Print All...";
 			this.printAllToolStripMenuItem.ToolTipText = "Print the QR codes for all of the html files";
 			this.printAllToolStripMenuItem.Click += new System.EventHandler(this.btnPrintPreview_Click);
@@ -178,26 +178,26 @@ namespace BaconBuilder.View
 			// toolStripSeparator4
 			// 
 			this.toolStripSeparator4.Name = "toolStripSeparator4";
-			this.toolStripSeparator4.Size = new System.Drawing.Size(166, 6);
+			this.toolStripSeparator4.Size = new System.Drawing.Size(173, 6);
 			// 
 			// exitToolStripMenuItem
 			// 
 			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
 			this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
 			this.exitToolStripMenuItem.Text = "E&xit";
 			this.exitToolStripMenuItem.ToolTipText = "Closes the Program";
 			// 
 			// editToolStripMenuItem
 			// 
 			this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-			this.editToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+			this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
 			this.editToolStripMenuItem.Text = "&Edit";
 			// 
 			// viewToolStripMenuItem
 			// 
 			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-			this.viewToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
+			this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
 			this.viewToolStripMenuItem.Text = "&View";
 			// 
 			// toolsToolStripMenuItem
@@ -205,13 +205,13 @@ namespace BaconBuilder.View
 			this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.optionsToolStripMenuItem});
 			this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-			this.toolsToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+			this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
 			this.toolsToolStripMenuItem.Text = "&Tools";
 			// 
 			// optionsToolStripMenuItem
 			// 
 			this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-			this.optionsToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+			this.optionsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
 			this.optionsToolStripMenuItem.Text = "&Options...";
 			// 
 			// pnlDirectories
@@ -333,13 +333,13 @@ namespace BaconBuilder.View
 			// 
 			this.lblZoom.BackColor = System.Drawing.SystemColors.Control;
 			this.lblZoom.Name = "lblZoom";
-			this.lblZoom.Size = new System.Drawing.Size(36, 17);
+			this.lblZoom.Size = new System.Drawing.Size(35, 17);
 			this.lblZoom.Text = "100%";
 			// 
 			// lblNetworkStatus
 			// 
 			this.lblNetworkStatus.Name = "lblNetworkStatus";
-			this.lblNetworkStatus.Size = new System.Drawing.Size(61, 17);
+			this.lblNetworkStatus.Size = new System.Drawing.Size(69, 17);
 			this.lblNetworkStatus.Text = "Connection";
 			// 
 			// pnlContentEditor
@@ -394,6 +394,19 @@ namespace BaconBuilder.View
 			this.HTMLEditor.Size = new System.Drawing.Size(303, 421);
 			this.HTMLEditor.TabIndex = 0;
 			// 
+			// mapBox
+			// 
+			this.mapBox.AutoSize = true;
+			this.mapBox.Image = global::BaconBuilder.Properties.Resources.map;
+			this.mapBox.Location = new System.Drawing.Point(0, 0);
+			this.mapBox.MarkerText = "You are here";
+			this.mapBox.Name = "mapBox";
+			this.mapBox.Size = new System.Drawing.Size(300, 396);
+			this.mapBox.TabIndex = 0;
+			this.mapBox.X = 0;
+			this.mapBox.Y = 0;
+			this.mapBox.Zoom = 100F;
+			// 
 			// flpPreview
 			// 
 			this.flpPreview.AutoSize = true;
@@ -428,7 +441,7 @@ namespace BaconBuilder.View
 			// toolContents
 			// 
 			this.toolContents.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
+            this.btnToggleEditMode,
             this.toolStripSeparator1,
             this.tsbImage,
             this.tsbAudio,
@@ -442,16 +455,16 @@ namespace BaconBuilder.View
 			this.toolContents.TabIndex = 8;
 			this.toolContents.Text = "toolStrip1";
 			// 
-			// toolStripButton1
+			// btnToggleEditMode
 			// 
-			this.toolStripButton1.CheckOnClick = true;
-			this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-			this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-			this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.toolStripButton1.Name = "toolStripButton1";
-			this.toolStripButton1.Size = new System.Drawing.Size(29, 22);
-			this.toolStripButton1.Text = "Edit";
-			this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+			this.btnToggleEditMode.CheckOnClick = true;
+			this.btnToggleEditMode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.btnToggleEditMode.Image = ((System.Drawing.Image)(resources.GetObject("btnToggleEditMode.Image")));
+			this.btnToggleEditMode.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnToggleEditMode.Name = "btnToggleEditMode";
+			this.btnToggleEditMode.Size = new System.Drawing.Size(31, 22);
+			this.btnToggleEditMode.Text = "Edit";
+			this.btnToggleEditMode.Click += new System.EventHandler(this.btnToggleEditMode_Click);
 			// 
 			// toolStripSeparator1
 			// 
@@ -463,7 +476,7 @@ namespace BaconBuilder.View
 			this.tsbImage.Image = ((System.Drawing.Image)(resources.GetObject("tsbImage.Image")));
 			this.tsbImage.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.tsbImage.Name = "tsbImage";
-			this.tsbImage.Size = new System.Drawing.Size(57, 22);
+			this.tsbImage.Size = new System.Drawing.Size(60, 22);
 			this.tsbImage.Text = "Image";
 			this.tsbImage.ToolTipText = "Add An Image to the Html file";
 			// 
@@ -472,7 +485,7 @@ namespace BaconBuilder.View
 			this.tsbAudio.Image = ((System.Drawing.Image)(resources.GetObject("tsbAudio.Image")));
 			this.tsbAudio.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.tsbAudio.Name = "tsbAudio";
-			this.tsbAudio.Size = new System.Drawing.Size(54, 22);
+			this.tsbAudio.Size = new System.Drawing.Size(59, 22);
 			this.tsbAudio.Text = "Audio";
 			this.tsbAudio.ToolTipText = "Add Audio to the Html file";
 			// 
@@ -485,7 +498,7 @@ namespace BaconBuilder.View
 			// 
 			this.tsbBold.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.tsbBold.Name = "tsbBold";
-			this.tsbBold.Size = new System.Drawing.Size(31, 22);
+			this.tsbBold.Size = new System.Drawing.Size(35, 22);
 			this.tsbBold.Text = "Bold";
 			this.tsbBold.ToolTipText = "Bold (Ctrl + B)\r\n\r\nMake the selected text bold";
 			// 
@@ -493,7 +506,7 @@ namespace BaconBuilder.View
 			// 
 			this.tsbItalics.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.tsbItalics.Name = "tsbItalics";
-			this.tsbItalics.Size = new System.Drawing.Size(39, 22);
+			this.tsbItalics.Size = new System.Drawing.Size(41, 22);
 			this.tsbItalics.Text = "Italics";
 			this.tsbItalics.ToolTipText = "Italic (Ctrl + I)\r\nItalicize the selected text ";
 			// 
@@ -503,7 +516,7 @@ namespace BaconBuilder.View
 			this.btn_Underline.Image = ((System.Drawing.Image)(resources.GetObject("btn_Underline.Image")));
 			this.btn_Underline.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btn_Underline.Name = "btn_Underline";
-			this.btn_Underline.Size = new System.Drawing.Size(56, 22);
+			this.btn_Underline.Size = new System.Drawing.Size(62, 22);
 			this.btn_Underline.Text = "Underline";
 			this.btn_Underline.ToolTipText = "Underline (Ctrl + U)\r\nUnderline the selected text";
 			this.btn_Underline.Click += new System.EventHandler(this.btnUnderline_Click);
@@ -691,19 +704,6 @@ namespace BaconBuilder.View
 			this.printPreviewDialog.Name = "printPreviewDialog";
 			this.printPreviewDialog.Visible = false;
 			// 
-			// mapBox
-			// 
-			this.mapBox.AutoSize = true;
-			this.mapBox.Image = global::BaconBuilder.Properties.Resources.map;
-			this.mapBox.Location = new System.Drawing.Point(0, 0);
-			this.mapBox.MarkerText = "You are here";
-			this.mapBox.Name = "mapBox";
-			this.mapBox.Size = new System.Drawing.Size(300, 396);
-			this.mapBox.TabIndex = 0;
-			this.mapBox.X = 0;
-			this.mapBox.Y = 0;
-			this.mapBox.Zoom = 100F;
-			// 
 			// MainWindow
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -800,7 +800,7 @@ namespace BaconBuilder.View
 		private SplitContainer splitContainer1;
 		private WebBrowser HTMLEditor;
 		private ToolStripButton btn_Underline;
-		private ToolStripButton toolStripButton1;
+		private ToolStripButton btnToggleEditMode;
 		private ToolStripSeparator toolStripSeparator1;
 		private NumericUpDown txtY;
 		private Label lblY;
