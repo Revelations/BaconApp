@@ -64,9 +64,8 @@
 	
     // Retrieve scanner results.
 	interpreter = [Interpreter new];
-    interpreter.storedInputString = symbol.data;
-    
-   
+    [interpreter setVals: symbol.data];
+    //interpreter.storedInputString = symbol.data;
     
     current = [[HistoryItem alloc] initWithHtmlFile:[interpreter htmlPath] x:interpreter.x y:interpreter.y];
 
@@ -96,34 +95,11 @@
     [super viewDidLoad];
 	
 	//BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
-    UpdateController *updateController = [[UpdateController alloc] initWithNibName:nil bundle:nil];
+   /* UpdateController *updateController = [[UpdateController alloc] initWithNibName:nil bundle:nil];
     [[UIApplication sharedApplication].keyWindow.rootViewController
      presentModalViewController:updateController animated:YES];
-    [updateController release];
-    // /*
-	/*if(!appDelegate.update){
-		NSLog(@"if(!appDelegate.update)");
-		        UpdateController *updateController = [[UpdateController alloc] initWithNibName:nil bundle:nil];
-		 //updateController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-		 //[self.tabBarController presentModalViewController:update1 animated:YES];
-		 [[UIApplication sharedApplication].keyWindow.rootViewController
-		  presentModalViewController:updateController animated:YES];
-		 [updateController release];*/
-		
-        //UpdateController *updateController = [[UpdateController alloc] initWithNibNamed:nil bundle:nil];
-		//[self.tabBarController presentModalViewController:updateController animated:YES];
-		//[updateController release];
-    }// */
-	
-	
-	//CGRect myFrame = CGRectMake(0, 0, 320, 50);
-/*	UpdateController *myView = [[UpdateController alloc] initWithNibName:nil bundle:nil];
-	[myView view].backgroundColor = [UIColor blueColor];
-	[myView view]
-	[[self.view addSubview:[myView view]];
-	[myView release];
-}*/
-
+    [updateController release];*/
+}
 
 /*
 // Override to allow orientations other than the default portrait orientation.

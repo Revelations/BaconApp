@@ -42,8 +42,6 @@ extern NSString * const WEB_DIRECTORY;
 @property (readwrite) int y;
 @property (nonatomic, retain) NSString * html;
 @property (readwrite) BOOL update;// a property to test if the app has already asked to update
-@property (readwrite) BOOL hasFeedbackToUpload;
-@property (readwrite) BOOL FeedbackUploaded;
 
 
 @end

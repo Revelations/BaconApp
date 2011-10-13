@@ -17,14 +17,17 @@
 }
 
 @property(nonatomic, retain) NSString * storedInputString;
+@property(readwrite) int map_x;
+@property(readwrite) int map_y;
 
 -(int) x;
--(int) x:(NSString *) inputString;
+//-(int) x:(NSString *) inputString;
 
 -(int) y;
--(int) y:(NSString *) inputString;
+//-(int) y:(NSString *) inputString;
 
 -(NSString *) htmlPath;
--(NSString *) htmlPath:(NSString *) inputString;
+//-(NSString *) htmlPath:(NSString *) inputString;
+-(void) setVals: (NSString *) filePath;
 
 @end

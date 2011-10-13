@@ -54,7 +54,8 @@
     [scanner scan:self];
     
     // Retrieve scanner results.
-    interpreter.storedInputString = scanner.ouputString;    
+    [interpreter setVals: scanner.ouputString];
+    //interpreter.storedInputString = scanner.ouputString;    
     
     // Set the current history item to interpreted scanner data.
     current = [[HistoryItem alloc] initWithHtmlFile:[interpreter htmlPath] x:interpreter.x y:interpreter.y];

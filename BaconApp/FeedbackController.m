@@ -24,6 +24,8 @@
     NSString * nationality  = [[nationalityTextField text] autorelease];
     NSString * feedback     = [[feedBackTextView text] autorelease];
     NSString * seen         = [[seenTextField text] autorelease];
+        NSMutableArray * scannedContents = [(BaconAppDelegate *) [[UIApplication sharedApplication] delegate]scannedItems];
+    int val_count = [scannedContents count];
     
     NSMutableData *data = [NSMutableData data];
     NSString * newLine = @"%@\r\n";
@@ -31,7 +33,7 @@
     [data appendData:[[NSString stringWithFormat:newLine,nationality] dataUsingEncoding:NSUTF8StringEncoding]];
     [data appendData:[[NSString stringWithFormat:newLine,seen] dataUsingEncoding:NSUTF8StringEncoding]];
     [data appendData:[[NSString stringWithFormat:newLine, feedback] dataUsingEncoding:NSUTF8StringEncoding]];
-    //NSString * fileContents = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+    [data appendData:[[NSString stringWithFormat:newLine, [NSString stringWithFormat:@"%d", val_count]] dataUsingEncoding:NSUTF8StringEncoding]];
     Update * updateSession = [[Update alloc] init];
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

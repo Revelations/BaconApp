@@ -33,8 +33,6 @@ NSString * const WEB_DIRECTORY = @"Web";
 @synthesize update;
 @synthesize scannedItems;
 @synthesize currentView = _currentView;
-@synthesize FeedbackUploaded;
-@synthesize hasFeedbackToUpload;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -81,7 +79,7 @@ NSString * const WEB_DIRECTORY = @"Web";
             
             //spawns the thread to send feedback
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, NULL), ^{
-                while (YES) {
+                while ([application backgroundTimeRemaining] > 5.0) {
                     if([updateSession CheckForInternet:receptionCheck] != -1)
                         break;
                     else
@@ -101,6 +99,8 @@ NSString * const WEB_DIRECTORY = @"Web";
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
+    
+    
     /*
      Called as part of  transition from the background to the inactive state: here you can undo many of the changes made on entering the background.
      */
@@ -108,6 +108,33 @@ NSString * const WEB_DIRECTORY = @"Web";
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    Update * updateSession = [[Update alloc]init];
+    Reachability * receptionCheck = [[Reachability alloc] init];
+    
+    NSString *filePath = [NSString stringWithFormat:@"%@%@", documentsDirectory, @"/feedback.txt"];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if([fileManager fileExistsAtPath:filePath]){
+        if([updateSession CheckForInternet:receptionCheck] != -1){
+            [updateSession uploadPhp:filePath];
+        }
+        else{
+            
+            //spawns the thread to send feedback
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, NULL), ^{
+                while (YES) {
+                    if([updateSession CheckForInternet:receptionCheck] != -1)
+                        break;
+                    else
+                        sleep(300);
+                }
+                [updateSession uploadPhp:filePath];
+            });
+        }
+    }
+    
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
