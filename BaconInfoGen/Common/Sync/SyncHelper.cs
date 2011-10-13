@@ -8,18 +8,7 @@ namespace Common
 {
 	public class SyncHelper
 	{
-		private const string _serverLocation = "ftp://wserver/";
-
-/*		private const string _workingDirectory = "D:/Test/";
-		private static string WorkingDirectory
-		{
-			get
-			{
-				if (!Directory.Exists(_workingDirectory))
-					Directory.CreateDirectory(_workingDirectory);
-				return _workingDirectory;
-			}
-		}*/
+		private const string _serverLocation = "ftp://revelations.webhop.org/";
 
 		#region Remote Information
 
