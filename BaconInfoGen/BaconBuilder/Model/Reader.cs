@@ -12,10 +12,74 @@ namespace BaconBuilder.Model
 {
 	public class Reader
 	{
+		public string Body { get; set; }
 		public FileInfo Page { get; set; }
+		private Dictionary<string, string> _props;
 
-		public string GetProperties(string property)
+		public Dictionary<string, string> Properties
 		{
+			get
+			{
+				if (_props == null)
+				{
+					using (var reader = new XmlTextReader(new StringReader(Body)))
+					{
+						reader.DtdProcessing = DtdProcessing.Ignore;
+						reader.ReadToFollowing("head");
+
+						_props = GetPropertiesFromHead(reader);
+
+					}
+				}
+				return _props;
+			}
+			//set { _props = value; }
+		} 
+
+		private Dictionary<string, string> GetPropertiesFromHead(XmlReader root)
+		{
+			var result = new Dictionary<string, string>();
+			using (var reader = root.ReadSubtree())
+			{
+				while (reader.Read())
+				{
+					if (reader.NodeType == XmlNodeType.Comment && reader.HasValue)
+					{
+						string[] data = reader.Value.Split('=');
+						if (data.Length == 2)
+						{
+							result.Add(data[0].Trim(), data[1].Trim());
+						}
+					}
+				}
+			}
+			return result;
+		}
+
+		public void SetProperties(string property, string value)
+		{
+			
+			Properties[property] = value;
+
+			UpdateDocument();
+
+			#region Junk
+
+			// http://stackoverflow.com/questions/4971440/how-to-parse-html-to-modify-all-words
+			/*
+			
+			XmlTextReader r = new XmlTextReader(Page.FullName);
+			r.DtdProcessing = DtdProcessing.Ignore;
+			r.MoveToContent();
+			XmlReader nodeReader = XmlReader.Create(new StringReader(r.ReadOuterXml()));
+			XDocument xRoot = XDocument.Load(nodeReader, LoadOptions.SetLineInfo);
+			foreach (XElement e in xRoot.Elements("<html>").DescendantsAndSelf())
+				Console.WriteLine("{0}{1}{2}",
+				    ("".PadRight(e.Ancestors().Count() * 2) + e.Name).PadRight(20),
+				    ((IXmlLineInfo)e).LineNumber.ToString().PadRight(5),
+				    ((IXmlLineInfo)e).LinePosition);
+
+			StringBuilder builder = new StringBuilder();
 			using (var reader = new XmlTextReader(Page.FullName))
 			{
 				reader.DtdProcessing = DtdProcessing.Ignore;
@@ -26,20 +90,38 @@ namespace BaconBuilder.Model
 					if (reader.NodeType == XmlNodeType.Comment)
 					{
 						if (reader.Value.Split('=')[0].Trim().ToLower().Equals(property.ToLower()))
-						{
-							Console.WriteLine("Line " + reader.LineNumber + " at "+ reader.LinePosition + " = \"" + reader.Value + "\"");
-							
 							return reader.Value.Trim();
-						}
+					} else
+					{
+						builder.Append()
 					}
 				}
 			}
 			return null;
+			
+			*/
+
+			#endregion
 		}
+
+		public void UpdateDocument()
+		{
+			var builder = new StringBuilder();
+
+			builder.Append("<!DOCTYPE HTML><html><head>");
+			foreach (var p in Properties)
+			{
+				builder.AppendFormat("<!-- {0}={1} -->", p.Key, p.Value);
+			}
+			builder.Append("<title></title></head><body></body></html>");
+
+			Body = builder.ToString();
+		}
+
 
 		public string GetBody()
 		{
-			using (var reader = new XmlTextReader(Page.FullName))
+			using (var reader = new XmlTextReader(new StringReader(Body)))
 			{
 				reader.DtdProcessing = DtdProcessing.Ignore;
 				reader.WhitespaceHandling = WhitespaceHandling.None;
@@ -54,10 +136,18 @@ namespace BaconBuilder.Model
 				return builder.ToString();
 			}
 		}
+		public List<object> GetBodyContents()
+		{
+			var list = new List<object>();
 
-		/*
-		 * We need recursive search down the tree
-		 */
+			var d = new XmlDocument();
+			d.Load(Body);
+			var body = d.GetElementsByTagName("body");
+			Recursive(body, list, 0);
+
+			return list;
+		}
+
 		private static void Recursive(IEnumerable d, ICollection<object> list, int level)
 		{
 			foreach (XmlNode node in d)
@@ -71,7 +161,7 @@ namespace BaconBuilder.Model
 							list.Add("<" + node.LocalName + ">");
 						}
 						break;
-						case XmlNodeType.Text:
+					case XmlNodeType.Text:
 
 						list.Add(node.Value);
 						break;
@@ -85,54 +175,5 @@ namespace BaconBuilder.Model
 			}
 		}
 
-		public List<object> GetBodyContents()
-		{
-			var list = new List<object>();
-			var d = new XmlDocument();
-			d.Load(Page.FullName);
-			var body = d.GetElementsByTagName("body");
-			Recursive(body, list, 0);
-
-			return list;
-		}
-
-		public string SetProperties(string property, string value, string page)
-		{
-		// http://stackoverflow.com/questions/4971440/how-to-parse-html-to-modify-all-words
-			var builder = new StringBuilder();
-			builder.AppendFormat("<!DOCTYPE HTML><html><head><!-- {0}={1} --><title></title></head><body></body></html>",
-			                     property, value);
-			return builder.ToString();
-//			XmlTextReader r = new XmlTextReader(Page.FullName);
-//			r.DtdProcessing = DtdProcessing.Ignore;
-//			r.MoveToContent();
-//			XmlReader nodeReader = XmlReader.Create(new StringReader(r.ReadOuterXml()));
-//			XDocument xRoot = XDocument.Load(nodeReader, LoadOptions.SetLineInfo);
-//			foreach (XElement e in xRoot.Elements("<html>").DescendantsAndSelf())
-//				Console.WriteLine("{0}{1}{2}",
-//				    ("".PadRight(e.Ancestors().Count() * 2) + e.Name).PadRight(20),
-//				    ((IXmlLineInfo)e).LineNumber.ToString().PadRight(5),
-//				    ((IXmlLineInfo)e).LinePosition);
-
-//			StringBuilder builder = new StringBuilder();
-//			using (var reader = new XmlTextReader(Page.FullName))
-//			{
-//				reader.DtdProcessing = DtdProcessing.Ignore;
-//
-//				//reader.MoveToContent();
-//				while (reader.Read())
-//				{
-//					if (reader.NodeType == XmlNodeType.Comment)
-//					{
-//						if (reader.Value.Split('=')[0].Trim().ToLower().Equals(property.ToLower()))
-//							return reader.Value.Trim();
-//					} else
-//					{
-//						builder.Append()
-//					}
-//				}
-//			}
-//			return null;
-		}
 	}
 }
