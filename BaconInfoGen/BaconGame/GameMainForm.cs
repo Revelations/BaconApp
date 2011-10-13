@@ -13,6 +13,8 @@ namespace BaconGame
 
 		    _presenter = new GamePresenter(this);
 
+			_presenter.DownloadSync();
+
 		    _presenter.PopulateFileView();
 
 			EnableTextFields();

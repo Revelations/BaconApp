@@ -4,12 +4,22 @@ using System.IO;
 using System.Linq;
 using System.Net;
 
-namespace BaconFeedback
+namespace Common
 {
-	public class FtpHelper
+	public class SyncHelper
 	{
-		private const string _serverLocation = "ftp://Revelations.webhop.org/";
-		private const string _workingDirectory = "";
+		private const string _serverLocation = "ftp://wserver/";
+
+		private const string _workingDirectory = "D:/Test/";
+		private static string WorkingDirectory
+		{
+			get
+			{
+				if (!Directory.Exists(_workingDirectory))
+					Directory.CreateDirectory(_workingDirectory);
+				return _workingDirectory;
+			}
+		}
 
 		#region Remote Information
 
@@ -17,7 +27,7 @@ namespace BaconFeedback
 		/// Gets a listing of all the files in the root directory of the FTP server.
 		/// </summary>
 		/// <returns>List of file names.</returns>
-		public List<string> GetRemoteDirectoryListing()
+		public static List<string> GetRemoteDirectoryListing()
 		{
 			return GetRemoteDirectoryListing(string.Empty);
 		}
@@ -27,7 +37,7 @@ namespace BaconFeedback
 		/// </summary>
 		/// <param name="subDirectory">Name of the subdirectory to index.</param>
 		/// <returns>List of file names.</returns>
-		public List<string> GetRemoteDirectoryListing(string subDirectory)
+		public static List<string> GetRemoteDirectoryListing(string subDirectory)
 		{
 			List<string> directorySimple = GetDirectoryDetails(subDirectory, WebRequestMethods.Ftp.ListDirectory);
 			List<string> directoryDetail = GetDirectoryDetails(subDirectory, WebRequestMethods.Ftp.ListDirectoryDetails);
@@ -47,7 +57,7 @@ namespace BaconFeedback
 		/// <param name="directory"></param>
 		/// <param name="method"></param>
 		/// <returns></returns>
-		private List<string> GetDirectoryDetails(string directory, string method)
+		private static List<string> GetDirectoryDetails(string directory, string method)
 		{
 			var result = new List<string>();
 
@@ -91,7 +101,7 @@ namespace BaconFeedback
 		/// <param name="fileName"></param>
 		/// <param name="remoteDirectory"></param>
 		/// <returns></returns>
-		public long? GetRemoteFileSize(string fileName, string remoteDirectory = "")
+		public static long? GetRemoteFileSize(string fileName, string remoteDirectory = "")
 		{
 			FtpWebRequest request = InitRequest(remoteDirectory + fileName,
 			                                    WebRequestMethods.Ftp.GetFileSize);
@@ -113,7 +123,7 @@ namespace BaconFeedback
 		/// <param name="fileName"></param>
 		/// <param name="remoteDirectory"></param>
 		/// <returns></returns>
-		public DateTime? GetRemoteLastModified(string fileName, string remoteDirectory = "")
+		public static DateTime? GetRemoteLastModified(string fileName, string remoteDirectory = "")
 		{
 			FtpWebRequest request = InitRequest(remoteDirectory + fileName,
 			                                    WebRequestMethods.Ftp.GetDateTimestamp);
@@ -133,17 +143,28 @@ namespace BaconFeedback
 
 		#region Local Information
 
+		public static List<string> GetLocalDirectoryListing(string directory = "")
+		{
+			List<string> result = new List<string>();
+
+			DirectoryInfo d = new DirectoryInfo(WorkingDirectory + directory);
+			foreach(FileInfo f in d.GetFiles())
+				result.Add(f.Name);
+
+			return result;
+		}
+
 		/// <summary>
 		/// Gets the size of a file stored on the local file system.
 		/// </summary>
 		/// <param name="fileName">Name of the file.</param>
 		/// <param name="localDirectory">Directory it is located in. Relative to the working directory.</param>
 		/// <returns>Length of the file in bytes.</returns>
-		public long? GetLocalFileSize(string fileName, string localDirectory = "")
+		public static long? GetLocalFileSize(string fileName, string localDirectory = "")
 		{
 			try
 			{
-				FileInfo f = new FileInfo(_workingDirectory + localDirectory + fileName);
+				FileInfo f = new FileInfo(WorkingDirectory + localDirectory + fileName);
 				return f.Length;
 			}
 			catch(Exception e)
@@ -159,11 +180,11 @@ namespace BaconFeedback
 		/// <param name="fileName">Name of the file.</param>
 		/// <param name="localDirectory">Directory it is located in. Relative to the working directory.</param>
 		/// <returns>DateTime object corresponding to when the file was last modified.</returns>
-		public DateTime? GetLocalLastModified(string fileName, string localDirectory = "")
+		public static DateTime? GetLocalLastModified(string fileName, string localDirectory = "")
 		{
 			try
 			{
-				FileInfo f = new FileInfo(_workingDirectory + localDirectory + fileName);
+				FileInfo f = new FileInfo(WorkingDirectory + localDirectory + fileName);
 				return f.LastWriteTime;
 			}
 			catch (Exception e)
@@ -183,7 +204,7 @@ namespace BaconFeedback
 		/// <param name="fileName">Name of the file to download.</param>
 		/// <param name="localDirectory">Directory relative to the working directory to store it in once downloaded.</param>
 		/// <param name="remoteDirectory">Subdirectory the file is located in on the server.</param>
-		public void DownloadRemoteFile(string fileName, string localDirectory = "", string remoteDirectory = "")
+		public static void DownloadRemoteFile(string fileName, string localDirectory = "", string remoteDirectory = "")
 		{
 			FtpWebRequest request = InitRequest(remoteDirectory + fileName,
 												WebRequestMethods.Ftp.DownloadFile);
@@ -198,7 +219,7 @@ namespace BaconFeedback
 				responseStream = response.GetResponseStream();
 
 				// Initialise filestream to write to file.
-				writer = new FileStream(localDirectory + fileName, FileMode.Create);
+				writer = new FileStream(WorkingDirectory + localDirectory + fileName, FileMode.Create);
 
 				// Create a read/write buffer.
 				const int bufferLength = 2048;
@@ -232,7 +253,7 @@ namespace BaconFeedback
 		/// <param name="fileName">Name of the file.</param>
 		/// <param name="localDirectory">Directory relative to the working directory that file is currently stored in.</param>
 		/// <param name="remoteDirectory">Remote directory to store the file in once uploaded.</param>
-		public void UploadFile(string fileName, string localDirectory = "", string remoteDirectory = "")
+		public static void UploadFile(string fileName, string localDirectory = "", string remoteDirectory = "")
 		{
 			FtpWebRequest request = InitRequest(remoteDirectory + fileName,
 												WebRequestMethods.Ftp.UploadFile);
@@ -270,7 +291,7 @@ namespace BaconFeedback
 		/// </summary>
 		/// <param name="fileName">Name of the file to delete.</param>
 		/// <param name="remoteDirectory">Optional subdirectory it is located in.</param>
-		public void DeleteRemoteFile(string fileName, string remoteDirectory = "")
+		public static void DeleteRemoteFile(string fileName, string remoteDirectory = "")
 		{
 			try
 			{
@@ -287,11 +308,11 @@ namespace BaconFeedback
 		/// </summary>
 		/// <param name="fileName">Name of the file to delete.</param>
 		/// <param name="localDirectory">Directory relative to working directory that it is stored in.</param>
-		public void DeleteLocalFile(string fileName, string localDirectory = "")
+		public static void DeleteLocalFile(string fileName, string localDirectory = "")
 		{
 			try
 			{
-				File.Delete(_workingDirectory + localDirectory + fileName);
+				File.Delete(WorkingDirectory + localDirectory + fileName);
 			}
 			catch (Exception e)
 			{
@@ -310,7 +331,7 @@ namespace BaconFeedback
 		/// <param name="localDirectory">Directory that local version is stored in. Relative to working directory.</param>
 		/// <param name="remoteDirectory">Directory that remote version is stored in.</param>
 		/// <returns>True if file sizes match. False if not.</returns>
-		public bool CompareFileSize(string fileName, string localDirectory = "", string remoteDirectory = "")
+		public static bool CompareFileSize(string fileName, string localDirectory = "", string remoteDirectory = "")
 		{
 			return (GetLocalFileSize(fileName, localDirectory).Equals(GetRemoteFileSize(fileName, remoteDirectory)));
 		}
@@ -322,7 +343,7 @@ namespace BaconFeedback
 		/// <param name="localDirectory">Directory that local version is stored in. Relative to working directory.</param>
 		/// <param name="remoteDirectory">Directory that remote version is stored in.</param>
 		/// <returns>True if last modified dates match. False if not.</returns>
-		public bool CompareLastModified(string fileName, string localDirectory = "", string remoteDirectory = "")
+		public static bool CompareLastModified(string fileName, string localDirectory = "", string remoteDirectory = "")
 		{
 			return (GetLocalLastModified(fileName, localDirectory).Equals(GetRemoteLastModified(fileName, remoteDirectory)));
 		}
@@ -333,7 +354,7 @@ namespace BaconFeedback
 		/// <param name="fileName">Name of the file.</param>
 		/// <param name="remoteDirectory">Remote subdirectory it resides in.</param>
 		/// <returns>True if the file exists, false otherwise.</returns>
-		public bool RemoteVersionExists(string fileName, string remoteDirectory = "")
+		public static bool RemoteVersionExists(string fileName, string remoteDirectory = "")
 		{
 			FtpWebRequest request = InitRequest(remoteDirectory + fileName, WebRequestMethods.Ftp.GetFileSize);
 
@@ -358,9 +379,9 @@ namespace BaconFeedback
 		/// <param name="fileName">Name of the file.</param>
 		/// <param name="localDirectory">Directory it is located in. Relative to working directory.</param>
 		/// <returns>True if the file exists, false otherwise.</returns>
-		public bool LocalVersionExists(string fileName, string localDirectory = "")
+		public static bool LocalVersionExists(string fileName, string localDirectory = "")
 		{
-			return File.Exists(_workingDirectory + localDirectory + fileName);
+			return File.Exists(WorkingDirectory + localDirectory + fileName);
 		}
 
 		/// <summary>
@@ -370,7 +391,7 @@ namespace BaconFeedback
 		/// <param name="localDirectory"></param>
 		/// <param name="remoteDirectory"></param>
 		/// <returns></returns>
-		public bool NeedsDownload(string filename, string localDirectory = "", string remoteDirectory = "")
+		public static bool NeedsDownload(string filename, string localDirectory = "", string remoteDirectory = "")
 		{
 			if (!LocalVersionExists(filename, localDirectory))
 				return true;
@@ -391,7 +412,7 @@ namespace BaconFeedback
 		/// <param name="localDirectory"></param>
 		/// <param name="remoteDirectory"></param>
 		/// <returns></returns>
-		public bool NeedsUpload(string filename, string localDirectory = "", string remoteDirectory = "")
+		public static bool NeedsUpload(string filename, string localDirectory = "", string remoteDirectory = "")
 		{
 			if (!RemoteVersionExists(filename, remoteDirectory))
 				return true;
@@ -413,7 +434,7 @@ namespace BaconFeedback
 		/// <param name="location"></param>
 		/// <param name="method"></param>
 		/// <returns></returns>
-		public FtpWebRequest InitRequest(string location, string method)
+		private static FtpWebRequest InitRequest(string location, string method)
 		{
 			var request = WebRequest.Create(_serverLocation + location) as FtpWebRequest;
 

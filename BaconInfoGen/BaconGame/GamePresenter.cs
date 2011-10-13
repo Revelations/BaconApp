@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
+using Common;
 
 namespace BaconGame
 {
@@ -141,6 +142,12 @@ namespace BaconGame
 		{
 			return MessageBox.Show(@"Are you sure you wish to delete this question?", @"Confirm.", MessageBoxButtons.OKCancel,
 			                       MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.OK;
+		}
+
+		public void DownloadSync()
+		{
+			SyncDialog dialog = new SyncDialog(new SyncInfo("Jugga/", string.Empty, FtpJobType.Download));
+			dialog.ShowDialog();
 		}
 	}
 }
