@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 
 namespace BaconBuilder.Feedback
@@ -6,24 +7,34 @@ namespace BaconBuilder.Feedback
 	[TestFixture]
 	internal class StatisticsCalculatorTest
 	{
+		readonly string[] _strings = "a b c d e".Split(' ');
+		readonly int[] _values = {7, 42, 36, 42, 1};
+		private Dictionary<string, int> _dictionary;
+		[SetUp]
+		public void Setup()
+		{
+			_dictionary = new Dictionary<string, int>
+			             	{
+			             		{"a", 7}, {"b", 42}, {"c", 36}, {"d", 42}, {"e", 1}
+			             	};
+		}
+
 		[Test]
 		public void GetLargestGroups()
 		{
 			var d = new Dictionary<string, int>();
 
-			string[] strings = "a b c d e".Split(' ');
-			int[] values = {7, 42, 36, 42, 1};
 
-			for (int i = 0; i < strings.Length; i++)
+			for (int i = 0; i < _strings.Length; i++)
 			{
 				int old;
-				d.TryGetValue(strings[i], out old);
-				d[strings[i]] = old + values[i];
+				d.TryGetValue(_strings[i], out old);
+				d[_strings[i]] = old + _values[i];
 			}
 
-			for (int i = 0; i < strings.Length; i++)
+			for (int i = 0; i < _strings.Length; i++)
 			{
-				Assert.AreEqual(values[i], d[strings[i]]);
+				Assert.AreEqual(_values[i], d[_strings[i]]);
 			}
 
 			var largest = new List<KeyValuePair<string, int>> {new KeyValuePair<string, int>("None", 0)};
@@ -51,20 +62,44 @@ namespace BaconBuilder.Feedback
 		{
 			var d = new Dictionary<string, int>();
 
-			string[] strings = "a b c d e".Split(' ');
-			int[] values = {42, 7, 36, 98, 402};
-
-			for (int i = 0; i < strings.Length; i++)
+			for (int i = 0; i < _strings.Length; i++)
 			{
 				int old;
-				d.TryGetValue(strings[i], out old);
-				d[strings[i]] = old + values[i];
+				d.TryGetValue(_strings[i], out old);
+				d[_strings[i]] = old + _values[i];
 			}
 
-			for (int i = 0; i < strings.Length; i++)
+			for (int i = 0; i < _strings.Length; i++)
 			{
-				Assert.AreEqual(values[i], d[strings[i]]);
+				Assert.AreEqual(_values[i], d[_strings[i]]);
 			}
+		}
+
+		[Test]
+		public void TestMostCommon()
+		{
+			var largest = new Dictionary<string, int>();
+
+			// Init a dictionary to store quantities of people of varying nationalities.
+			Dictionary<string, int> dict = _dictionary;
+			int max = dict.Values.Max();
+
+			foreach (var kvp in dict)
+			{
+				if (max == kvp.Value)
+					largest.Add(kvp.Key, kvp.Value);
+			}
+
+			Assert.AreEqual(42, max);
+			Assert.Contains("b", largest.Keys);
+			Assert.Contains("d", largest.Keys);
+			largest.Clear();
+
+			largest = dict.Where(kvp => max == kvp.Value).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+
+			Assert.AreEqual(42, max);
+			Assert.Contains("b", largest.Keys);
+			Assert.Contains("d", largest.Keys);
 		}
 	}
 }
