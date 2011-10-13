@@ -14,10 +14,25 @@ namespace BaconBuilder.View
 {
 	public partial class MainWindow : Form, IMainView
 	{
+		/// <summary>
+		/// For reducing the stress on server. http://social.msdn.microsoft.com/Forums/is/clr/thread/a7a44123-937a-4b02-a918-042a881fa55f
+		/// </summary>
+		/// <returns></returns>
+		[System.Diagnostics.Conditional("DEBUG")]
+		private static void KeepServerOffline()
+		{
+			MessageBox.Show(string.Format("Everytime this message is not shown, Ceiling Cat throttles the FTP server. Please, think of the kittens in {0}.", typeof(MainWindow)));
+			OFFLINE = true;
+		}
+		private static bool OFFLINE = true;
+
+
+
+
 		private readonly MainViewController _controller;
 		private readonly BaconModel _model;
 		private bool _hasConnection;
-
+		
 		private bool HtmlBrowserEditable
 		{
 			get
@@ -457,7 +472,9 @@ namespace BaconBuilder.View
 //			return false;
 
 			uri = FtpHelper.FtpUri();
-
+			KeepServerOffline();
+			if (OFFLINE)
+				return false;
 			return ConnectStatus.Check() && ConnectStatus.Check(ConnectStatus.Method.TcpSocket, uri, FtpHelper.FtpPort);
 		}
 
@@ -540,39 +557,23 @@ namespace BaconBuilder.View
 		/// </summary>
 		private void printDocument_PrintPage(object sender, PrintPageEventArgs e)
 		{
-			int mx = 100, my = 100;
+			//Page width = 827
+			//Page height = 1169
+
+			int mx = e.MarginBounds.Left;
 			var qr = new QrCodeGenerator();
 			var font = new Font(Font.FontFamily, 20);
 			var fontColor = new SolidBrush(Color.Black);
 
 			//drawing lines for now
-			int pageheight = 1169 - my * 2,
-				pagewidth = 827 - mx * 2;
-			/*
-							x1 = mx,
-							x2 = pagewidth + mx,
-							y1 = my,
-							y2 = pageheight + my,
-							y3 = (pageheight/2) + my,
-							y4 = pageheight/4 + my,
-							y5 = pageheight - (pageheight/4) + my;
-						lines drawn
-						e.Graphics.DrawLines(Pens.Black,
-											 new[]
-												{new Point(x1, y1), new Point(x1, y2), new Point(x2, y2), new Point(x2, y1), new Point(x1, y1)});
-						//draws the margins in
-
-						e.Graphics.DrawLine(Pens.Black, x1, y3, x2, y3); //middleline
-						e.Graphics.DrawLine(Pens.Black, x1, y4, x2, y4); //topmidline
-						e.Graphics.DrawLine(Pens.Black, x1, y5, x2, y5); //bottommidline
-						*/
-			float right = 827 - 172 - mx;
-			float left = 827 / 2 + mx;
+			int pageheight = e.MarginBounds.Height;
+			float right = e.PageBounds.Width - 172 - mx;
+			float left = e.PageBounds.Width / 2 + mx;
 			float yline = e.MarginBounds.Top;
 			int linediff = pageheight / 4;
 			for (; _codecount < Files.Count; _codecount++)
 			{
-				float x, xi;
+				float qrImageX, qrTextX;
 				string text = Files[_codecount].Text;
 				text = text.Substring(0, text.Length - 5);
 
@@ -585,16 +586,17 @@ namespace BaconBuilder.View
 				//Even on left. Odd on right
 				if (_codecount % 2 == 0)
 				{
-					x = mx;
-					xi = left;
+					qrImageX = mx;
+					qrTextX = left;
 				}
 				else
 				{
-					xi = mx;
-					x = right;
+					qrImageX = right;
+					qrTextX = mx;
 				}
-				e.Graphics.DrawString(text, font, fontColor, new RectangleF(xi, ((int)yline + 90), 500, 100));
-				e.Graphics.DrawImage(code, x, (float)((int)yline + 34.5));
+
+				e.Graphics.DrawString(text, font, fontColor, new RectangleF(qrTextX, ((int)yline + 90), 500, 100));
+				e.Graphics.DrawImage(code, qrImageX, (float)((int)yline + 34.5));
 
 				yline += linediff;
 			}

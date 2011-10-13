@@ -135,9 +135,6 @@ namespace BaconBuilder.Model
 			return new Uri(HtmlDirectory + CurrentFileNameWithExtension);
 		}
 
-		public int X { get; set; }
-		public int Y { get; set; }
-
 		public string AudioUrl { get; set; }
 
 		public Image QrCode(string file)
