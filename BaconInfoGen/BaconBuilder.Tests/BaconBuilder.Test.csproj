@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Feedback\StatisticsCalculatorTest.cs" />
+    <Compile Include="InfoGen\FtpTest.cs" />
     <Compile Include="InfoGen\ImageManipulatorTest.cs" />
     <Compile Include="InfoGen\Parser\ParserTest.cs" />
     <Compile Include="InfoGen\Parser\HtmlToTextParserTest.cs" />

@@ -13,8 +13,6 @@ namespace BaconBuilder.View
 	/// </summary>
 	public partial class FtpDialog : Form
 	{
-		private static readonly string HtmlDirectory = "C:/Users/" + Environment.UserName + "/test/";
-
 		#region Properties and Attributes
 
 		// Hard coded html directory. Obviously this is to soon be removed.
@@ -43,13 +41,11 @@ namespace BaconBuilder.View
 			if (helper is FtpDownloader)
 			{
 				worker.DoWork += downloadWorker_DoWork;
-				labelText.Text = @"Synchronising local directory with server.";
 				Text = @"Retrieving Files.";
 			}
 			else if (helper is FtpUploader)
 			{
 				worker.DoWork += uploadWorker_DoWork;
-				labelText.Text = @"Synchronising server with local directory.";
 				Text = @"Sending Files.";
 			}
 		}
@@ -76,11 +72,11 @@ namespace BaconBuilder.View
 		/// Threadsafe method for changing the text in the label just above the progress bar.
 		/// </summary>
 		/// <param name="text"></param>
-		private void SetLabelText(string text)
+		private void SetProgressText(string text)
 		{
 			if (labelProgress.InvokeRequired)
 			{
-				SetTextCallback stc = SetLabelText;
+				SetTextCallback stc = SetProgressText;
 				Invoke(stc, new object[] {text});
 			}
 			else
@@ -91,47 +87,68 @@ namespace BaconBuilder.View
 
 		#region Background Worker Thread Methods
 
-		/// <summary>
-		/// Used by a BackgroundWorker to download all files from a server and update UI accordingly.
-		/// </summary>
-		private void downloadWorker_DoWork(object sender, DoWorkEventArgs e)
+		private static void SynchLocalWithServer(List<string> fileList)
 		{
-			// Get the helper object to perform transfers.
-			var helper = (FtpDownloader) _helper;
-
-			SetLabelText(@"Getting list of files from server.");
-
-			// Get a list of all files on the server, and instantiate a list to store names of those needing download.
-			List<string> fileList = helper.ConnectAndGetFileList();
-
-			var d = new DirectoryInfo(HtmlDirectory);
-			foreach (FileInfo f in d.GetFiles())
+			foreach (FileInfo file in FtpHelper.HtmlDirectory.GetFiles().Where(f => !fileList.Contains(f.Name)))
 			{
-				if (!fileList.Contains(f.Name))
-					f.Delete();
+				file.Delete();
 			}
+		}
 
+		private List<string> FilterFilesToDownload(List<string> fileList)
+		{
+			SetProgressText(@"Checking file versions.");
 			var neededFiles = new List<string>();
-
-			SetLabelText(@"Checking file versions.");
-
 			// Determine if each file on the server needs to be downloaded.
 			for (int i = 0; i < fileList.Count; i++)
 			{
-				if (helper.FileNeedsDownload(fileList[i]))
+				if (((FtpDownloader) _helper).FileNeedsDownload(fileList[i]))
 					neededFiles.Add(fileList[i]);
 
 				// Update progress. Use float to maintain fraction.
-				float progress = (float) (i + 1)/fileList.Count*100;
-				worker.ReportProgress((int) progress);
+				worker.ReportProgress((int) ((i + 1)/(float) fileList.Count*100));
 			}
+			return neededFiles;
+		}
 
-			SetLabelText(@"Downloading required files.");
+		private List<string> FilterFilesToUpload(FileInfo[] fileList)
+		{
+			SetProgressText(@"Checking file versions.");
+			var neededFiles = new List<string>();
+			// Check each file in the directory to see if upload is needed.
+			for (int i = 0; i < fileList.Length; i++)
+			{
+				if (((FtpUploader) _helper).FileNeedsUpload(fileList[i].Name))
+					neededFiles.Add(fileList[i].Name);
+
+				// Update progress. Use float to maintain fraction.
+				worker.ReportProgress((int) ((i + 1)/(float) fileList.Length*100));
+			}
+			return neededFiles;
+		}
+
+		private void DownloadRequiredFiles(List<string> neededFiles)
+		{
+			SetProgressText(@"Downloading required files.");
 
 			// Download each file that needs it.
 			for (int i = 0; i < neededFiles.Count; i++)
 			{
-				helper.DownloadSingleFile(neededFiles[i]);
+				((FtpDownloader) _helper).DownloadSingleFile(neededFiles[i]);
+
+				// Update progress. Use float to maintain fraction.
+				worker.ReportProgress((int) ((i + 1)/(float) neededFiles.Count*100));
+			}
+		}
+
+		private void UploadRequiredFiles(List<string> neededFiles)
+		{
+			SetProgressText(@"Uploading required files.");
+
+			// Upload each file that requires it.
+			for (int i = 0; i < neededFiles.Count; i++)
+			{
+				((FtpUploader) _helper).UploadSingleFile(neededFiles[i]);
 
 				// Update progress. Use float to maintain fraction.
 				float progress = (float) (i + 1)/neededFiles.Count*100;
@@ -140,55 +157,44 @@ namespace BaconBuilder.View
 		}
 
 		/// <summary>
+		/// Used by a BackgroundWorker to download all files from a server and update UI accordingly.
+		/// </summary>
+		private void downloadWorker_DoWork(object sender, DoWorkEventArgs e)
+		{
+			labelText.Text = @"Synchronising local directory with server.";
+
+			SetProgressText(@"Getting list of files from server.");
+
+			// Get a list of all files on the server, and instantiate a list to store names of those needing download.
+			List<string> fileList = _helper.ConnectAndGetFileList();
+
+			SynchLocalWithServer(fileList);
+
+			DownloadRequiredFiles(FilterFilesToDownload(fileList));
+		}
+
+		/// <summary>
 		/// Used by a BackgroundWorker to upload all files to a server and update UI accordingly.
 		/// </summary>
 		private void uploadWorker_DoWork(object sender, DoWorkEventArgs e)
 		{
-			// Get the helper object to perform transfers.
-			var helper = (FtpUploader) _helper;
+			labelText.Text = @"Synchronising server with local directory.";
 
-			SetLabelText(@"Getting list of files from server.");
-
-			// Instantiate a list to store files needing transfer.
-			var neededFiles = new List<string>();
+			SetProgressText(@"Getting list of files from server.");
 
 			// Get a list of all files in the html directory.
 			// TODO: Embed html directory into the resources file.
-			var info = new DirectoryInfo(HtmlDirectory);
-			FileInfo[] files = info.GetFiles();
+			FileInfo[] files = FtpHelper.HtmlDirectory.GetFiles();
 
-			foreach (string s in helper.RemoteFiles)
+			foreach (string s in ((FtpUploader) _helper).RemoteFiles)
 			{
 				if (!files.Any(f => f.Name.Equals(s)))
 				{
-					helper.DeleteRemoteFile(s);
+					_helper.DeleteRemoteFile(s);
 				}
 			}
 
-			SetLabelText(@"Checking file versions.");
-
-			// Check each file in the directory to see if upload is needed.
-			for (int i = 0; i < files.Length; i++)
-			{
-				if (helper.FileNeedsUpload(files[i].Name))
-					neededFiles.Add(files[i].Name);
-
-				// Update progress. Use float to maintain fraction.
-				float progress = (float) (i + 1)/files.Length*100;
-				worker.ReportProgress((int) progress);
-			}
-
-			SetLabelText(@"Uploading required files.");
-
-			// Upload each file that requires it.
-			for (int i = 0; i < neededFiles.Count; i++)
-			{
-				helper.UploadSingleFile(neededFiles[i]);
-
-				// Update progress. Use float to maintain fraction.
-				float progress = (float) (i + 1)/neededFiles.Count*100;
-				worker.ReportProgress((int) progress);
-			}
+			UploadRequiredFiles(FilterFilesToUpload(files));
 		}
 
 		/// <summary>

@@ -34,10 +34,12 @@ namespace BaconFeedback
 
 		private void toolStripPrint_Click(object sender, EventArgs e)
 		{
+			_presenter.Print();
 		}
 
 		private void toolStripExport_Click(object sender, EventArgs e)
 		{
+			_presenter.Export();
 		}
 
 		#endregion

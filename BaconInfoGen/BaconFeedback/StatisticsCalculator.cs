@@ -35,7 +35,7 @@ namespace BaconFeedback
 		/// </summary>
 		public int TotalVisitors
 		{
-			get { return _files.Sum(f => Convert.ToInt32(f.Number)); }
+			get { return _files.Sum(file => Convert.ToInt32(file.Number)); }
 		}
 
 		/// <summary>
@@ -63,30 +63,15 @@ namespace BaconFeedback
 			get { return _files.Select(f => Convert.ToInt32(f.Number)).Concat(new[] {0}).Max(); }
 		}
 
-		public List<KeyValuePair<string, int>> MostCommonNationalities
+		private IEnumerable<KeyValuePair<string, int>> MostCommonNationalities
 		{
 			get
 			{
-				// Initialise an object to store the largest nationality found.
-				var largest = new List<KeyValuePair<string, int>> {new KeyValuePair<string, int>("None", 0)};
-					
 				// Init a dictionary to store quantities of people of varying nationalities.
 				Dictionary<string, int> dictionary = GetConsolidatedNationalityDictionary();
-				int max = 1;
-				
-				// Iterate and find maximum value.
-				foreach (var kvp in dictionary)
-				{
-					if (kvp.Value > max)
-					{
-						largest.Clear();
-						max = kvp.Value;
-					}
-					if (kvp.Value == max)
-						largest.Add(kvp);
-				}
+				int max = dictionary.Values.Max();
 
-				return largest;
+				return dictionary.Where(kvp => max == kvp.Value);
 			}
 		}
 
@@ -97,7 +82,7 @@ namespace BaconFeedback
 		/// <returns>Most common nationality of visitors, quantity of that nationality.</returns>
 		public KeyValuePair<string, int> MostCommonNationality
 		{
-			get { return MostCommonNationalities[0]; }
+			get { return MostCommonNationalities.First(); }
 		}
 
 		private Dictionary<string, int> GetConsolidatedNationalityDictionary()
@@ -111,6 +96,7 @@ namespace BaconFeedback
 				dictionary.TryGetValue(f.Nationality, out old);
 				dictionary[f.Nationality] = old + Convert.ToInt32(f.Number);
 			}
+
 			return dictionary;
 		}
 	}

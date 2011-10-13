@@ -15,11 +15,16 @@ namespace BaconBuilder.Model.Ftp
 	public abstract class FtpHelper
 	{
 		//private readonly IModel _model;
-		protected static readonly string HtmlDirectory = "C:/Users/" + Environment.UserName + "/test/";
+		public static readonly DirectoryInfo HtmlDirectory = new DirectoryInfo("C:/Users/" + Environment.UserName + "/test/");
 
-		public static string FtpUriString(string fileName = "")
+		public static int FtpPort
 		{
-			return string.Format("ftp://{0}:{1}/{2}", Resources.ServerHost, Resources.FtpPort, fileName);
+			get { return Convert.ToInt32(Resources.FtpPort); }
+		}
+
+		public static string FtpUri(string fileName = "")
+		{
+			return new UriBuilder("ftp", Resources.ServerHost, FtpPort, fileName).ToString();
 		}
 
 		/// <summary>
@@ -38,23 +43,24 @@ namespace BaconBuilder.Model.Ftp
 			return ftp;
 		}
 
+		public static WebResponse Response(string root, string method)
+		{
+			return InitRequest(root, method).GetResponse();
+		}
+
+		public static Stream ResponseStream(string root, string method)
+		{
+			return Response(root, method).GetResponseStream();
+		}
+
+
 		/// <summary>
 		/// Connects to an ftp server and gets a listing of all files in the main directory.
 		/// </summary>
 		/// <returns>String list of all files present on the server.</returns>
 		public List<string> ConnectAndGetFileList()
 		{
-			return GetDirectoryTuple(FtpUriString()).Item2;
-		}
-
-		/// <summary>
-		/// Checks if a copy of the file with the given name exists on the local filesystem.
-		/// </summary>
-		/// <param name="fileName">The file name to check for.</param>
-		/// <returns>True if the file can be found in the html directory. False otherwise.</returns>
-		public bool CheckIfLocalCopyExists(string fileName)
-		{
-			return (File.Exists(HtmlDirectory + fileName));
+			return GetDirectoryTuple(FtpUri()).Item2;
 		}
 
 		/// <summary>
@@ -74,7 +80,7 @@ namespace BaconBuilder.Model.Ftp
 		/// <returns>The size of the remote file in bytes.</returns>
 		public long RemoteVersionSize(string fileName)
 		{
-			return InitRequest(FtpUriString(fileName), WebRequestMethods.Ftp.GetFileSize).GetResponse().ContentLength;
+			return Response(FtpUri(fileName), WebRequestMethods.Ftp.GetFileSize).ContentLength;
 		}
 
 		/// <summary>
@@ -83,21 +89,18 @@ namespace BaconBuilder.Model.Ftp
 		/// <param name="fileName">Name of the file to delete.</param>
 		public void DeleteRemoteFile(string fileName)
 		{
-			FtpWebRequest request = InitRequest(FtpUriString(fileName), WebRequestMethods.Ftp.DeleteFile);
-
 			// TODO: Store this value for error checking in future.
-			request.GetResponse();
+			Response(FtpUri(fileName), WebRequestMethods.Ftp.DeleteFile);
 		}
 
 		#region Shii's fix for separating directories from files.
 
-		private List<string> GetDirectoryDetail(string root, string method)
+		private static List<string> GetDirectoryDetail(string root, string method)
 		{
 			// Connect and get bytestream from server.
-			using (Stream responseStream = InitRequest(root, method).GetResponse().GetResponseStream())
 			// Create a read/write buffer.
 			// Get byte data from server stream for as long as it is available.
-			using (var reader = new StreamReader(responseStream))
+			using (var reader = new StreamReader(ResponseStream(root, method)))
 			{
 				var list = new List<string>();
 				string line;

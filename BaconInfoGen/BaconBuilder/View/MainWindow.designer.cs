@@ -15,6 +15,7 @@ namespace BaconBuilder.View
 		/// Clean up any resources being used.
 		/// </summary>
 		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		[System.Diagnostics.DebuggerNonUserCode, System.CodeDom.Compiler.GeneratedCode("Winform Designer", "VS2010 SP1")]
 		protected override void Dispose(bool disposing)
 		{
 			if (disposing && (components != null))
