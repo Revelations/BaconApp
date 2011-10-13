@@ -257,22 +257,5 @@ namespace BaconFeedback
 			SyncDialog dialog = new SyncDialog(new SyncInfo(Resources.FeedbackDirectory, "Feedback/", SyncJobType.Download));
 			dialog.ShowDialog();
 		}
-
-		public void UploadSync()
-		{
-			SyncDialog dialog = new SyncDialog(new SyncInfo(Resources.FeedbackDirectory, "Feedback/", SyncJobType.Upload));
-			dialog.ShowDialog();
-		}
-
-		public void UploadSync(FormClosingEventArgs e)
-		{
-			DialogResult result = MessageBox.Show(@"Would you like to synchronise your content with the distribution server before exiting?",
-					@"Confirm", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3);
-
-			if (result == DialogResult.Cancel)
-				e.Cancel = true;
-			else if (result == DialogResult.Yes)
-				UploadSync();
-		}
 	}
 }

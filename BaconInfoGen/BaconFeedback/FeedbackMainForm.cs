@@ -134,10 +134,5 @@ namespace BaconFeedback
 		{
 			_presenter.DownloadSync();
 		}
-
-		private void FeedbackMainForm_FormClosing(object sender, FormClosingEventArgs e)
-		{
-			_presenter.UploadSync(e);
-		}
 	}
 }

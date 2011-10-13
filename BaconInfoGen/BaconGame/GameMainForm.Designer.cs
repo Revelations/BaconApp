@@ -42,7 +42,7 @@
 			this.imageList = new System.Windows.Forms.ImageList(this.components);
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.menuStrip = new System.Windows.Forms.MenuStrip();
-			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripFile = new System.Windows.Forms.ToolStripMenuItem();
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.label6 = new System.Windows.Forms.Label();
@@ -67,6 +67,7 @@
 			this.toolStripDelete = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStripSync = new System.Windows.Forms.ToolStripButton();
+			this.toolStripExit = new System.Windows.Forms.ToolStripMenuItem();
 			this.panel1.SuspendLayout();
 			this.menuStrip.SuspendLayout();
 			this.panel2.SuspendLayout();
@@ -164,9 +165,9 @@
 			// 
 			this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
 			this.imageList.TransparentColor = System.Drawing.Color.Transparent;
-			this.imageList.Images.SetKeyName(0, "folder.ico");
-			this.imageList.Images.SetKeyName(1, "folder_info.ico");
-			this.imageList.Images.SetKeyName(2, "file_info.ico");
+			this.imageList.Images.SetKeyName(0, "file_info.ico");
+			this.imageList.Images.SetKeyName(1, "file_edit.ico");
+			this.imageList.Images.SetKeyName(2, "file.ico");
 			// 
 			// statusStrip1
 			// 
@@ -179,18 +180,20 @@
 			// menuStrip
 			// 
 			this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.toolStripFile});
 			this.menuStrip.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip.Name = "menuStrip";
 			this.menuStrip.Size = new System.Drawing.Size(784, 24);
 			this.menuStrip.TabIndex = 15;
 			this.menuStrip.Text = "menuStrip1";
 			// 
-			// fileToolStripMenuItem
+			// toolStripFile
 			// 
-			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-			this.fileToolStripMenuItem.Text = "&File";
+			this.toolStripFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripExit});
+			this.toolStripFile.Name = "toolStripFile";
+			this.toolStripFile.Size = new System.Drawing.Size(37, 20);
+			this.toolStripFile.Text = "&File";
 			// 
 			// panel2
 			// 
@@ -467,6 +470,13 @@
 			this.toolStripSync.ToolTipText = "Synchronise - Uploads question files to the server.";
 			this.toolStripSync.Click += new System.EventHandler(this.toolStripSync_Click);
 			// 
+			// toolStripExit
+			// 
+			this.toolStripExit.Name = "toolStripExit";
+			this.toolStripExit.Size = new System.Drawing.Size(152, 22);
+			this.toolStripExit.Text = "E&xit";
+			this.toolStripExit.Click += new System.EventHandler(this.toolStripExit_Click);
+			// 
 			// GameMainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -537,11 +547,12 @@
         private System.Windows.Forms.TextBox textBoxQuestion;
         private System.Windows.Forms.ComboBox comboBoxCorrectAnswer;
         private System.Windows.Forms.ColumnHeader numberHeader;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripFile;
         private System.Windows.Forms.ImageList imageList;
         private System.Windows.Forms.ColumnHeader questionHeader;
         private System.Windows.Forms.ColumnHeader answerHeader;
         private System.Windows.Forms.ToolStripButton toolStripAdd;
+		private System.Windows.Forms.ToolStripMenuItem toolStripExit;
     }
 }
 

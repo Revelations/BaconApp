@@ -629,7 +629,6 @@
 			this.Name = "FeedbackMainForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Feedback Reader";
-			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FeedbackMainForm_FormClosing);
 			this.Shown += new System.EventHandler(this.FeedbackMainForm_Shown);
 			this.menuStrip.ResumeLayout(false);
 			this.menuStrip.PerformLayout();
