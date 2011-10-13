@@ -40,10 +40,10 @@ namespace Common
 		{
 			switch(_info.JobType)
 			{
-				case FtpJobType.Download:
+				case SyncJobType.Download:
 					_view.Worker.DoWork += _ftpWorker.DownloadAll;
 					break;
-				case FtpJobType.Upload:
+				case SyncJobType.Upload:
 					_view.Worker.DoWork += _ftpWorker.UploadAll;
 					break;
 				default:

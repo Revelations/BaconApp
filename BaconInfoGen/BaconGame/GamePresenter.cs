@@ -6,7 +6,7 @@ namespace BaconGame
 {
 	public class GamePresenter
 	{
-		private IGameMainForm _view;
+		private readonly IGameMainForm _view;
 
 		private QuestionFile _current;
 
@@ -146,7 +146,7 @@ namespace BaconGame
 
 		public void DownloadSync()
 		{
-			SyncDialog dialog = new SyncDialog(new SyncInfo("Jugga/", string.Empty, FtpJobType.Download));
+			SyncDialog dialog = new SyncDialog(new SyncInfo(Resources.GameDirectory, "Game/", SyncJobType.Download));
 			dialog.ShowDialog();
 		}
 	}
