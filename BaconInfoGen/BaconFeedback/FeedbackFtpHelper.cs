@@ -8,39 +8,42 @@ namespace BaconFeedback
 	public class FeedbackFtpHelper
 	{
 		private const string ServerLocation = "ftp://Revelations.webhop.org/feedback/";
+		private const int BufferLength = 2048;
 
 		private static FtpWebRequest InitRequest(string location, string method)
 		{
-			var request = (FtpWebRequest)WebRequest.Create(location);
+			var request = (FtpWebRequest) WebRequest.Create(location);
 			request.Method = method;
 
 			return request;
 		}
 
+		private static Stream ResponseStream(string uri, string method)
+		{
+			return InitRequest(uri, method).GetResponse().GetResponseStream();
+		}
+
 		public List<string> GetRemoteDirectoryListing()
 		{
-			var result = new List<string>();
-
 			try
 			{
-				Stream responseStream = InitRequest(ServerLocation, WebRequestMethods.Ftp.ListDirectory).GetResponse().GetResponseStream();
-				if (responseStream != null)
-					using (var reader = new StreamReader(responseStream))
+				using (var reader = new StreamReader(ResponseStream(ServerLocation, WebRequestMethods.Ftp.ListDirectory)))
+				{
+					var result = new List<string>();
+					string line;
+					while ((line = reader.ReadLine()) != null)
 					{
-						string line;
-						while ((line = reader.ReadLine()) != null)
-						{
-							// Get file name and add it to list.
-							result.Add(line);
-						}
+						// Get file name and add it to list.
+						result.Add(line);
 					}
+					return result;
+				}
 			}
 			catch (Exception e)
 			{
 				Console.WriteLine(e.Message);
+				return null;
 			}
-
-			return result;
 		}
 
 		public void DeleteRemoteFile(string fileName)
@@ -60,17 +63,16 @@ namespace BaconFeedback
 			try
 			{
 				// Init request, connect and get bytestream from server.
-				using (var responseStream = InitRequest(ServerLocation + fileName, WebRequestMethods.Ftp.DownloadFile).GetResponse().GetResponseStream())
+				using (Stream responseStream = ResponseStream(ServerLocation + fileName, WebRequestMethods.Ftp.DownloadFile))
 				// Initialise filestream to write to file.
 				using (var writer = new FileStream(localDirectory + fileName, FileMode.Create))
 				{
 					// Create a read/write buffer.
-					const int bufferLength = 2048;
-					var buffer = new byte[bufferLength];
+					var buffer = new byte[BufferLength];
 
 					// Get byte data from server stream for as long as it is available.
 					int bytes;
-					while ((bytes = responseStream.Read(buffer, 0, bufferLength)) > 0)
+					while ((bytes = responseStream.Read(buffer, 0, BufferLength)) > 0)
 					{
 						// Write byte data to file.
 						writer.Write(buffer, 0, bytes);

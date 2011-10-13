@@ -74,12 +74,12 @@ namespace BaconFeedback
 			}
 		}
 
-		private void toolStripCopy_Click(object sender, EventArgs e)
+		private void Copy_Click(object sender, EventArgs e)
 		{
 			_presenter.CopySelectedText();
 		}
 
-		private void toolStripExport_Click(object sender, EventArgs e)
+		private void Export_Click(object sender, EventArgs e)
 		{
 		}
 
@@ -126,11 +126,6 @@ namespace BaconFeedback
 		private void exitToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			Close();
-		}
-
-		private void menuStripCopy_Click(object sender, EventArgs e)
-		{
-			_presenter.CopySelectedText();
 		}
 
 		#endregion

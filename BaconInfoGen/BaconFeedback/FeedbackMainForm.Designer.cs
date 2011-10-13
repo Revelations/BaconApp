@@ -11,6 +11,7 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+	[System.Diagnostics.DebuggerNonUserCode, System.CodeDom.Compiler.GeneratedCode("Winform Designer", "VS2010 SP1")]
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -164,7 +165,7 @@
             this.menuStripCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
             this.menuStripCopy.Size = new System.Drawing.Size(144, 22);
             this.menuStripCopy.Text = "&Copy";
-            this.menuStripCopy.Click += new System.EventHandler(this.menuStripCopy_Click);
+            this.menuStripCopy.Click += new System.EventHandler(this.Copy_Click);
             // 
             // splitter1
             // 
@@ -466,7 +467,7 @@
             this.toolStripCopy.Name = "toolStripCopy";
             this.toolStripCopy.Size = new System.Drawing.Size(36, 45);
             this.toolStripCopy.ToolTipText = "Copy - Copies selected text to the clipboard.";
-            this.toolStripCopy.Click += new System.EventHandler(this.toolStripCopy_Click);
+            this.toolStripCopy.Click += new System.EventHandler(this.Copy_Click);
             // 
             // toolStripExport
             // 
@@ -478,7 +479,7 @@
             this.toolStripExport.Name = "toolStripExport";
             this.toolStripExport.Size = new System.Drawing.Size(36, 45);
             this.toolStripExport.ToolTipText = "Export - Exports the selected feedback to a text file.";
-            this.toolStripExport.Click += new System.EventHandler(this.toolStripExport_Click);
+            this.toolStripExport.Click += new System.EventHandler(this.Export_Click);
             // 
             // toolStripSeparator1
             // 

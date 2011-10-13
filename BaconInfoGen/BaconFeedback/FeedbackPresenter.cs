@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing.Printing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace BaconFeedback
@@ -14,9 +14,7 @@ namespace BaconFeedback
 
 		private readonly List<string> _deletedFiles;
 		private readonly List<string> _deletedFolders;
-		private readonly TextBox[] _feedbackFields;
-		private readonly ListView _fileView;
-		private readonly ListView _folderView;
+		private readonly FeedbackMainForm _view;
 
 		private PrintHandler _printer;
 
@@ -31,11 +29,10 @@ namespace BaconFeedback
 		/// </summary>
 		public void PopulateFolderView()
 		{
-			_folderView.Items.Clear();
-			_folderView.Refresh();
+			ListViewClear(_view.FolderView);
 
 			foreach (string s in FileHandler.GetSubfolders())
-				_folderView.Items.Add(s, 0);
+				_view.FolderView.Items.Add(s, 0);
 		}
 
 		/// <summary>
@@ -48,11 +45,11 @@ namespace BaconFeedback
 		{
 			foreach (string s in FileHandler.GetFeedbackFiles(folder))
 			{
-				_fileView.Items.Add(s, 2);
+				_view.FileView.Items.Add(s, 2);
 
 				string lmd = FileHandler.GetCreationDate(folder + '/' + s);
-				_fileView.Items[_fileView.Items.Count - 1].SubItems.Add(lmd);
-				_fileView.Items[_fileView.Items.Count - 1].SubItems.Add(folder);
+				_view.FileView.Items[_view.FileView.Items.Count - 1].SubItems.Add(lmd);
+				_view.FileView.Items[_view.FileView.Items.Count - 1].SubItems.Add(folder);
 			}
 		}
 
@@ -63,18 +60,18 @@ namespace BaconFeedback
 		public void FileViewRemoveFolder(string folder)
 		{
 			foreach (string s in FileHandler.GetFeedbackFiles(folder))
-				foreach (ListViewItem i in _fileView.Items)
+				foreach (ListViewItem i in _view.FileView.Items)
 					if (i.Text.Equals(s))
-						_fileView.Items.Remove(i);
+						_view.FileView.Items.Remove(i);
 		}
 
 		/// <summary>
 		/// Clears and refreshes the contents of the file view.
 		/// </summary>
-		public void FileViewClear()
+		private void ListViewClear(ListView listView)
 		{
-			_fileView.Items.Clear();
-			_fileView.Refresh();
+			listView.Items.Clear();
+			listView.Refresh();
 		}
 
 		/// <summary>
@@ -82,26 +79,26 @@ namespace BaconFeedback
 		/// </summary>
 		public void DisplayFeedbackFile()
 		{
-			string[] contents;
+			DisplayFeedbackFile((_view.FileView.SelectedItems.Count > 0) ? _view.FileView.SelectedItems[0] : null);
+		}
 
+		private void DisplayFeedbackFile(ListViewItem item)
+		{
 			// If there is a file selected, then get file contents.
-			if (_fileView.SelectedItems.Count > 0)
-				contents =
-					FileHandler.GetFeedbackContents(_fileView.SelectedItems[0].SubItems[2].Text + '/' + _fileView.SelectedItems[0].Text);
-
-				// Otherwise get a bunch of empty strings.
-			else
-				contents = new[] {string.Empty, string.Empty, string.Empty, string.Empty};
+			string[] contents = item != null
+			                    ? FileHandler.GetFeedbackContents(item.SubItems[2].Text + '/' + item.Text)
+			                    : new[] {string.Empty, string.Empty, string.Empty, string.Empty};
 
 			// For each line of the file, insert data into the appropriate textboxes.
-			if (contents.Length < 4)
+			if (contents.Length != 4)
 			{
-				MessageBox.Show(@"Bad feedback file");
-				return;
+				ShowErrorMessage(@"Bad feedback file");
 			}
-			Debug.Assert(contents.Length == 4, "contents.Length == 4");
-			for (int i = 0; i < contents.Length; i++)
-				_feedbackFields[i].Text = contents[i];
+			else
+			{
+				for (int i = 0; i < contents.Length; i++)
+					_view.FeedbackFields[i].Text = contents[i];
+			}
 		}
 
 		/// <summary>
@@ -111,7 +108,7 @@ namespace BaconFeedback
 		public void DeleteFolder(string folder)
 		{
 			// Clear the folder view since its contents no longer exist.
-			FileViewClear();
+			ListViewClear(_view.FileView);
 
 			// Pass the buck.
 			FileHandler.DeleteFolder(folder);
@@ -125,10 +122,10 @@ namespace BaconFeedback
 		/// </summary>
 		public void DeleteFiles()
 		{
-			foreach (ListViewItem i in _fileView.SelectedItems)
+			foreach (ListViewItem i in _view.FileView.SelectedItems)
 			{
 				string path = i.SubItems[2].Text + '/' + i.Text;
-				_fileView.Items.Remove(i);
+				_view.FileView.Items.Remove(i);
 
 				FileHandler.DeleteFile(path);
 
@@ -145,8 +142,12 @@ namespace BaconFeedback
 		public bool ConfirmDelete(bool folder)
 		{
 			// Initi properties based on type of object to delete.
-			ListView view = folder ? _folderView : _fileView;
-			string type = folder ? "folder" : "file";
+			ListView view = folder
+				? _view.FolderView
+				: _view.FileView;
+			string type = folder
+				? "folder"
+				: "file";
 
 			// If nothing is selected, inform user and return.
 			if (view.SelectedItems.Count == 0)
@@ -156,12 +157,12 @@ namespace BaconFeedback
 			}
 
 			// Prompt for confirmation.
-			string message =
-				string.Format(
-					@"Are you sure you wish to delete all selected {0}s in the {0} view? These {0}s will be gone forever.", type);
-			DialogResult dialogResult = MessageBox.Show(message, @"Confirm!", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop,
-			                                            MessageBoxDefaultButton.Button2);
-			return dialogResult == DialogResult.OK;
+			return DialogResult.OK == MessageBox.Show(
+				string.Format(@"Are you sure you wish to delete all selected {0}s in the {0} view? These {0}s will be gone forever.", type),
+				@"Confirm!",
+				MessageBoxButtons.OKCancel,
+				MessageBoxIcon.Stop,
+				MessageBoxDefaultButton.Button2);
 		}
 
 		/// <summary>
@@ -179,7 +180,7 @@ namespace BaconFeedback
 		public void CopySelectedText()
 		{
 			// Check each textbox for focus.
-			foreach (TextBox t in _feedbackFields)
+			foreach (TextBox t in _view.FeedbackFields)
 			{
 				if (t.ContainsFocus)
 				{
@@ -214,13 +215,10 @@ namespace BaconFeedback
 		/// <summary>
 		/// Constructor accepting a single argument.
 		/// </summary>
-		/// <param name="f">The form that this will control presentation for.</param>
-		public FeedbackPresenter(FeedbackMainForm f)
+		/// <param name="view">The form that this will control presentation for.</param>
+		public FeedbackPresenter(FeedbackMainForm view)
 		{
-			// Assign form elements to member variables.
-			_folderView = f.FolderView;
-			_fileView = f.FileView;
-			_feedbackFields = f.FeedbackFields;
+			_view = view;
 
 			_deletedFolders = new List<string>();
 			_deletedFiles = new List<string>();
@@ -234,31 +232,21 @@ namespace BaconFeedback
 		/// <returns>List of all selected feedback files.</returns>
 		public List<FeedbackFile> CreateFeedbackList()
 		{
-			// Initialise a list to store results.
-			var result = new List<FeedbackFile>();
-
 			// For each selected feedback...
-			foreach (ListViewItem i in _fileView.SelectedItems)
-			{
-				// Get the feedback file contents.
-				string[] contents = FileHandler.GetFeedbackContents(i.SubItems[2].Text + '/' + i.Text);
-
-				// Initialise a struct.
-				var f = new FeedbackFile
-				        	{
-				        		FileName = i.Text,
-				        		Directory = i.SubItems[2].Text,
-				        		CreatedDate = i.SubItems[1].Text,
-				        		Number = contents[0],
-				        		Nationality = contents[1],
-				        		Sighted = contents[2],
-				        		Misc = contents[3]
-				        	};
-
-				// Add resulting struct to feedback list.
-				result.Add(f);
-			}
-			return result;
+			return (from ListViewItem i in _view.FileView.SelectedItems
+			        // Get the feedback file contents.
+			        let contents = FileHandler.GetFeedbackContents(i.SubItems[2].Text + '/' + i.Text)
+			        // Add resulting struct to feedback list.
+			        select new FeedbackFile
+			               	{
+			               		FileName = i.Text,
+			               		Directory = i.SubItems[2].Text,
+			               		CreatedDate = i.SubItems[1].Text,
+			               		Number = contents[0],
+			               		Nationality = contents[1],
+			               		Sighted = contents[2],
+			               		Misc = contents[3]
+			               	}).ToList();
 		}
 	}
 }

@@ -18,7 +18,7 @@ namespace BaconFeedback
 
 		public void ShowStatistics()
 		{
-			var builder = new StringBuilder()
+			_view.MainText = new StringBuilder()
 				.AppendFormat("Number of files selected: {0}", _calculator.FeedbackQuantity).AppendLine()
 				.AppendLine()
 				.AppendFormat("Total number of visitors: {0}", _calculator.TotalVisitors).AppendLine()
@@ -27,9 +27,17 @@ namespace BaconFeedback
 				.AppendFormat("Average group size: {0}", _calculator.AverageGroupSize.ToString("0.0")).AppendLine()
 				.AppendFormat("Largest single group: {0}", _calculator.LargestGroup).AppendLine()
 				.AppendLine()
-				.AppendFormat("Most common visitor nationality: {0}", _calculator.MostCommonNationality.Key).AppendLine();
+				.AppendFormat("Most common visitor nationality: {0}", _calculator.MostCommonNationality.Key).AppendLine().ToString();
+		}
 
-			_view.MainText = builder.ToString();
+		public void Print()
+		{
+			throw new System.NotImplementedException();
+		}
+
+		public void Export()
+		{
+			throw new System.NotImplementedException();
 		}
 	}
 }
