@@ -114,20 +114,11 @@
     <Compile Include="Model\Reader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Component\DBPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="View\FtpDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\FtpDialog.Designer.cs">
       <DependentUpon>FtpDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Component\MapBox.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Component\MapBox.Designer.cs">
-      <DependentUpon>MapBox.cs</DependentUpon>
     </Compile>
     <Compile Include="View\MediaSelectionDialog.cs">
       <SubType>Form</SubType>
@@ -163,9 +154,6 @@
     </Compile>
     <EmbeddedResource Include="View\FtpDialog.resx">
       <DependentUpon>FtpDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Component\MapBox.resx">
-      <DependentUpon>MapBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\MediaSelectionDialog.resx">
       <DependentUpon>MediaSelectionDialog.cs</DependentUpon>
@@ -217,6 +205,12 @@
     <Content Include="Resources\Blank.html" />
     <None Include="Resources\map600x720.png" />
     <None Include="Resources\vmap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Components\Components.csproj">
+      <Project>{E3691811-21A1-4F03-A1DD-8D5AF7249183}</Project>
+      <Name>Components</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

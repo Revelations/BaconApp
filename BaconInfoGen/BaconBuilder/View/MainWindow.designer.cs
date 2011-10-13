@@ -1,6 +1,5 @@
 
 using System.Windows.Forms;
-using BaconBuilder.Component;
 
 namespace BaconBuilder.View
 {
@@ -64,7 +63,7 @@ namespace BaconBuilder.View
 			this.pnlTextEditor = new System.Windows.Forms.Panel();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.HTMLEditor = new System.Windows.Forms.WebBrowser();
-			this.mapBox = new BaconBuilder.Component.MapBox();
+			this.mapBox = new Components.MapBox();
 			this.flpPreview = new System.Windows.Forms.FlowLayoutPanel();
 			this.btnPreview = new System.Windows.Forms.Button();
 			this.btnPrintPreview = new System.Windows.Forms.Button();
@@ -806,7 +805,7 @@ namespace BaconBuilder.View
 		private Label lblY;
 		private NumericUpDown txtX;
 		private Label lblX;
-		private MapBox mapBox;
+		private Components.MapBox mapBox;
 		private ToolStripStatusLabel lblZoom;
 		private ToolStripStatusLabel lblNetworkStatus;
 

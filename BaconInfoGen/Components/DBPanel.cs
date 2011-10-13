@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace BaconBuilder.Component
+namespace Components
 {
 	public sealed class DbPanel : Panel
 	{
