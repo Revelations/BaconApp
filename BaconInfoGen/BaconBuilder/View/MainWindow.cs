@@ -558,8 +558,8 @@ namespace BaconBuilder.View
 		/// </summary>
 		private void printDocument_PrintPage(object sender, PrintPageEventArgs e)
 		{
-			//Page width = 827
-			//Page height = 1169
+			//Info width = 827
+			//Info height = 1169
 
 			int mx = e.MarginBounds.Left;
 			var qr = new QrCodeGenerator();

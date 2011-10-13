@@ -4,16 +4,118 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
 
 namespace BaconBuilder.Model
 {
+	/// <summary>
+	/// 
+	/// </summary>
+	public class InfoPage
+	{
+		Reader _reader = new Reader();
+		private string page = "<html><head></head><body></body></html>";
+
+		public int X { get; set; }
+		public int Y { get; set; }
+		public string Title { get; set; }
+		public string Body { get; set; }
+
+		public string SourceCode
+		{
+			get { return page; }
+		}
+
+		public void ConstructFullPage(int x, int y, string title, string body)
+		{
+			X = x;
+			Y = y;
+			Title = title;
+			Body = body;
+			ConstructFullPage();
+		}
+
+		public void ConstructFullPage()
+		{
+			page = new StringBuilder("<!DOCTYPE HTML>")
+				.AppendLine()
+				.Append("<html>")
+				.AppendLine()
+				.Append(ConstructHead())
+				.AppendLine()
+				.Append(ConstructBody())
+				.AppendLine()
+				.Append("</html>")
+				.AppendLine()
+				.ToString();
+		}
+
+		public Dictionary<string, string> Properties(XmlReader reader)
+		{
+			var result = new Dictionary<string, string>();
+			while (reader.Read())
+			{
+				if (reader.NodeType == XmlNodeType.Comment && reader.HasValue)
+				{
+					string[] data = reader.Value.Split('=');
+					if (data.Length == 2)
+					{
+						result.Add(data[0].Trim(), data[1].Trim());
+					}
+				}
+			}
+			return result;
+		}
+
+		public string ConstructHead()
+		{
+			Dictionary<string, string> props;
+			using (var reader = new XmlTextReader(new StringReader(page)))
+			{
+				reader.DtdProcessing = DtdProcessing.Ignore;
+				reader.ReadToFollowing("head");
+
+				props = Properties(reader.ReadSubtree());
+			}
+
+			props["x"] = X.ToString();
+			props["y"] = Y.ToString();
+
+			var builder = new StringBuilder();
+			builder.Append("<head>").AppendLine();
+			foreach (var p in props)
+			{
+				builder.AppendFormat("<!-- {0}={1} -->", p.Key, p.Value);
+			}
+			builder.AppendLine().AppendFormat("<title>{0}</title>",Title).AppendLine()
+			.Append("</head>").AppendLine();
+
+			return builder.ToString();
+		}
+
+		private string ConstructStyleSheet()
+		{
+			string href = "style.css";
+			return string.Format(@"<style link=""{0}"" >", href);
+		}
+
+		public string ConstructBody()
+		{
+			using (var reader = new XmlTextReader(new StringReader(page)))
+			{
+				reader.DtdProcessing = DtdProcessing.Ignore;
+				reader.ReadToFollowing("body");
+
+				return reader.ReadOuterXml();
+			}
+		}
+	}
+
 	public class Reader
 	{
 		public string Body { get; set; }
-		public FileInfo Page { get; set; }
+		public FileInfo Info { get; set; }
 		private Dictionary<string, string> _props;
 
 		public Dictionary<string, string> Properties
@@ -27,29 +129,24 @@ namespace BaconBuilder.Model
 						reader.DtdProcessing = DtdProcessing.Ignore;
 						reader.ReadToFollowing("head");
 
-						_props = GetPropertiesFromHead(reader);
-
+						_props = HeadProperties(reader.ReadSubtree());
 					}
 				}
 				return _props;
 			}
-			//set { _props = value; }
-		} 
+		}
 
-		private Dictionary<string, string> GetPropertiesFromHead(XmlReader root)
+		public Dictionary<string, string> HeadProperties(XmlReader reader)
 		{
 			var result = new Dictionary<string, string>();
-			using (var reader = root.ReadSubtree())
+			while (reader.Read())
 			{
-				while (reader.Read())
+				if (reader.NodeType == XmlNodeType.Comment && reader.HasValue)
 				{
-					if (reader.NodeType == XmlNodeType.Comment && reader.HasValue)
+					string[] data = reader.Value.Split('=');
+					if (data.Length == 2)
 					{
-						string[] data = reader.Value.Split('=');
-						if (data.Length == 2)
-						{
-							result.Add(data[0].Trim(), data[1].Trim());
-						}
+						result.Add(data[0].Trim(), data[1].Trim());
 					}
 				}
 			}
@@ -68,7 +165,7 @@ namespace BaconBuilder.Model
 			// http://stackoverflow.com/questions/4971440/how-to-parse-html-to-modify-all-words
 			/*
 			
-			XmlTextReader r = new XmlTextReader(Page.FullName);
+			XmlTextReader r = new XmlTextReader(Info.FullName);
 			r.DtdProcessing = DtdProcessing.Ignore;
 			r.MoveToContent();
 			XmlReader nodeReader = XmlReader.Create(new StringReader(r.ReadOuterXml()));
@@ -80,7 +177,7 @@ namespace BaconBuilder.Model
 				    ((IXmlLineInfo)e).LinePosition);
 
 			StringBuilder builder = new StringBuilder();
-			using (var reader = new XmlTextReader(Page.FullName))
+			using (var reader = new XmlTextReader(Info.FullName))
 			{
 				reader.DtdProcessing = DtdProcessing.Ignore;
 

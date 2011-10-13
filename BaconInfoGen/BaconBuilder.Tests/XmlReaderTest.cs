@@ -1,12 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Xml;
 using BaconBuilder.Model;
 using BaconBuilder.Properties;
 using NUnit.Framework;
 
 namespace BaconBuilder
 {
+	[TestFixture]
+	public class InfoPageTest
+	{
+		private InfoPage _page;
+		[SetUp]
+		public void Setup()
+		{
+			_page = new InfoPage();
+		}
+
+		[Test]
+		public void Construct()
+		{
+			_page.ConstructFullPage(42, 13, "Hello World", "<p>This is a test</p>");
+			Console.WriteLine(_page.SourceCode);
+		}
+	}
+
 	[TestFixture]
 	public class XmlReaderTest
 	{
@@ -25,7 +44,7 @@ namespace BaconBuilder
 		{
 			_reader = new Reader
 			          	{
-			          		//Page = new FileInfo(Dir + FileName),
+			          		//Info = new FileInfo(Dir + FileName),
 						Body = Contents
 			          	};
 		}
@@ -91,6 +110,15 @@ namespace BaconBuilder
 			
 			Assert.That(!actual.ContainsKey("missing"));
 			Assert.AreEqual("HelloWorld", actual["missing"]);
+		}
+
+		[Test]
+		public void TestHead()
+		{
+			Assert.AreEqual("42", _reader.Properties["x"]);
+			_reader.Body = "<head><!-- x=0 --><!-- y=0 --></head>";
+			var p = _reader.HeadProperties(XmlReader.Create(new StringReader(_reader.Body)));
+			Assert.AreEqual("0", p["x"]);
 		}
 
 		[Test]
