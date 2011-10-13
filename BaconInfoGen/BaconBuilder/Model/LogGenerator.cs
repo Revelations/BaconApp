@@ -1,44 +1,68 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using BaconBuilder.Model.Ftp;
 
 namespace BaconBuilder.Model
 {
-	class LogGenerator
+	public class LogGenerator
 	{
+		private static readonly string[] Allowed = new[] {".html", ".css", ".jpg", ".bmp", ".jpeg", ".jpe", ".gif", ".mp3", ".js", ".svg", ""};
+		private const string Deli = "|";
+
+		public static string FilePath
+		{
+			get { return FtpHelper.HtmlDirectory + "log.txt"; }
+		}
 		public static void createlog()
 		{
-			string HtmlDirectory = "C:/Users/" + Environment.UserName + "/test/";
-			FileStream log = new FileStream(HtmlDirectory + "log.txt", FileMode.Create);
-			StreamWriter writer = new StreamWriter(log);
-
-			/*
-			loop thru each file in the directory
-			get filesname
-			get size in bytes
-				if file is not named "log.txt"
-				append the filename to the stream
-				append , to the stream
-				append the filesize to the stream
-			endloop
-			*/
-			string[] allowed = { ".html", ".css", ".jpg", ".bmp", ".jpeg", ".jpe", ".gif", ".mp3", ".js", ".svg", "" };
-			StringBuilder sb = new StringBuilder();
-			char deli = '|';
-			foreach (var f in new DirectoryInfo(HtmlDirectory).GetFiles())
+			using (StreamWriter writer = new StreamWriter(new FileStream(FilePath, FileMode.Create)))
 			{
-				if (allowed.Contains(f.Extension))
+				StringBuilder sb = new StringBuilder();
+				//List<string> data = new List<string>();
+				// loop thru each file in the directory
+				foreach (var f in FtpHelper.HtmlDirectory.GetFiles())
 				{
-					sb.Append(f.Name).Append(deli);
-					sb.Append(f.Length).Append(deli);
+					// if file extension is permitted
+					if (Allowed.Contains(f.Extension))
+					{
+						// append the filename, delimiter, filesize, and delimiter to the builder
+						sb.Append(f.Name).Append(Deli).Append(f.Length).Append(Deli);
+					}
 				}
-			}
-			sb.Remove(sb.Length - 1, 1);
-			writer.Write(sb);
+				//truncate the last delimiter
+				sb.Remove(sb.Length - 1, 1);
+				//Write out to stream.
+				writer.Write(sb);
 
-			writer.Close();
+			}
+		}
+
+		public static void createlog2()
+		{
+			using (var writer = new StreamWriter(new FileStream(FilePath, FileMode.Create)))
+			{
+				//StringBuilder sb = new StringBuilder();
+				var data = new ArrayList();
+				// loop thru each file in the directory
+				GetFiles(data);
+				//Write out to stream.
+				writer.Write(String.Join(Deli, data));
+
+			}
+		}
+
+		public static void GetFiles(ArrayList data)
+		{
+			foreach (var f in FtpHelper.HtmlDirectory.GetFiles().Where(f => Allowed.Contains(f.Extension)))
+			{
+				// append the filename, and filesize to the builder
+				data.Add(f.Name);
+				data.Add(f.Length);
+			}
 		}
 	}
 }
