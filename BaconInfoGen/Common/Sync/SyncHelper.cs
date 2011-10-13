@@ -6,10 +6,15 @@ using System.Net;
 
 namespace Common
 {
+	/// <summary>
+	/// Implements various methods involved in communication with an ftp server.
+	/// </summary>
 	public class SyncHelper
 	{
-		private const string _serverLocation = "ftp://revelations.webhop.org/";
+		// Location of the server. Refer to common resource file.
+		private static readonly string _serverLocation = Resources.ServerLocation;
 
+		// Contains methods for getting remote file or directory information.
 		#region Remote Information
 
 		/// <summary>
@@ -32,7 +37,7 @@ namespace Common
 			List<string> directoryDetail = GetDirectoryDetails(subDirectory, WebRequestMethods.Ftp.ListDirectoryDetails);
 
 			var result = new List<string>();
-			foreach (string item in directoryDetail.Where(ItemIsSubFile))
+			foreach (string item in directoryDetail.Where(ItemIsFile))
 			{
 				result.AddRange(directorySimple.Where(item.EndsWith));
 			}
@@ -41,11 +46,11 @@ namespace Common
 		}
 
 		/// <summary>
-		/// 
+		/// Gets a directory listing from a remote server in a format according to the web request method used.
 		/// </summary>
-		/// <param name="directory"></param>
-		/// <param name="method"></param>
-		/// <returns></returns>
+		/// <param name="directory">Name of subdirectory to retrieve listing for. Use empty string if retrieving root dir.</param>
+		/// <param name="method">Web request method to use. Acceptable values are ListDirectory or ListDirectoryDetails.</param>
+		/// <returns>List of files in the specified directory.</returns>
 		private static List<string> GetDirectoryDetails(string directory, string method)
 		{
 			var result = new List<string>();
@@ -75,21 +80,21 @@ namespace Common
 		}
 
 		/// <summary>
-		/// 
+		/// Checks whether a specified string represents a file or a directory.
 		/// </summary>
-		/// <param name="item"></param>
-		/// <returns></returns>
-		private static bool ItemIsSubFile(string item)
+		/// <param name="item">Input string to check.</param>
+		/// <returns>True if item is a file. False if it's a directory.</returns>
+		private static bool ItemIsFile(string item)
 		{
 			return !item.ToLower().Contains("<dir>") && !(item.StartsWith("d") && !item.EndsWith("."));
 		}
 
 		/// <summary>
-		/// 
+		/// Gets the size of a file stored on the remote server.
 		/// </summary>
-		/// <param name="fileName"></param>
-		/// <param name="remoteDirectory"></param>
-		/// <returns></returns>
+		/// <param name="fileName">Name of the file.</param>
+		/// <param name="remoteDirectory">Directory it is located in. Relative to the root directory.</param>
+		/// <returns>Length of the file in bytes.</returns>
 		public static long? GetRemoteFileSize(string fileName, string remoteDirectory = "")
 		{
 			FtpWebRequest request = InitRequest(remoteDirectory + fileName,
@@ -107,11 +112,11 @@ namespace Common
 		}
 
 		/// <summary>
-		/// 
+		/// Gets the time at which a remote file was last modified.
 		/// </summary>
-		/// <param name="fileName"></param>
-		/// <param name="remoteDirectory"></param>
-		/// <returns></returns>
+		/// <param name="fileName">Name of the file.</param>
+		/// <param name="remoteDirectory">Directory it is located in. Relative to the root directory.</param>
+		/// <returns>DateTime object corresponding to when the file was last modified.</returns>
 		public static DateTime? GetRemoteLastModified(string fileName, string remoteDirectory = "")
 		{
 			FtpWebRequest request = InitRequest(remoteDirectory + fileName,
@@ -130,8 +135,14 @@ namespace Common
 
 		#endregion
 
+		// Contains methods for retrieving information about locally stored files.
 		#region Local Information
 
+		/// <summary>
+		/// Gets a list of files stored in a given local directory.
+		/// </summary>
+		/// <param name="directory">Optional subdirectory to retrieve list for instead.</param>
+		/// <returns>List of all files stored in the given directory.</returns>
 		public static List<string> GetLocalDirectoryListing(string directory = "")
 		{
 			List<string> result = new List<string>();
@@ -188,6 +199,7 @@ namespace Common
 
 		#endregion
 
+		// Contains methods for transferring files to and from a remote server.
 		#region Uploading and Downloading
 
 		/// <summary>
@@ -276,6 +288,7 @@ namespace Common
 
 		#endregion
 
+		// Contains methods for deleting files from either remote server or local filesystem.
 		#region Deleting
 
 		/// <summary>
@@ -314,6 +327,7 @@ namespace Common
 
 		#endregion
 
+		// Contains methods for comparing files on the server with their local versions.
 		#region Comparing
 
 		/// <summary>
@@ -377,45 +391,45 @@ namespace Common
 		}
 
 		/// <summary>
-		/// 
+		/// Determines if a file needs to be downloaded, based on differences between the server and filesystem.
 		/// </summary>
-		/// <param name="filename"></param>
-		/// <param name="localDirectory"></param>
-		/// <param name="remoteDirectory"></param>
-		/// <returns></returns>
+		/// <param name="filename">Name of the file.</param>
+		/// <param name="localDirectory">Optional additional directory it is stored in.</param>
+		/// <param name="remoteDirectory">Directory it is located in on the server.</param>
+		/// <returns>True if the file needs downloading. False if the server version matches the local one.</returns>
 		public static bool NeedsDownload(string filename, string localDirectory = "", string remoteDirectory = "")
 		{
+			// If the file does not exist locally, flag it for download.
 			if (!LocalVersionExists(filename, localDirectory))
 				return true;
 
+			// If the remote version is a different size to the local version, flag it for download.
 			if (!CompareFileSize(filename, localDirectory, remoteDirectory))
 				return true;
 
-			if (!CompareLastModified(filename, localDirectory, remoteDirectory))
-				return true;
-
-			return false;
+			// If the remote version has a different last modified date, flag it for download.
+			return !CompareLastModified(filename, localDirectory, remoteDirectory);
 		}
 
 		/// <summary>
-		/// 
+		/// Determines if a file needs to be downloaded, based on differences between the server and filesystem.
 		/// </summary>
-		/// <param name="filename"></param>
-		/// <param name="localDirectory"></param>
-		/// <param name="remoteDirectory"></param>
-		/// <returns></returns>
+		/// <param name="filename">Name of the file.</param>
+		/// <param name="localDirectory">Optional additional directory it is stored in.</param>
+		/// <param name="remoteDirectory">Directory it is located in on the server.</param>
+		/// <returns>True if the file needs uploading. False if the server version matches the local one.</returns>
 		public static bool NeedsUpload(string filename, string localDirectory = "", string remoteDirectory = "")
 		{
+			// If the file does not exist remotely, flag it for upload.
 			if (!RemoteVersionExists(filename, remoteDirectory))
 				return true;
 
+			// If the local version is a different size to the remote version, flag it for upload.
 			if (!CompareFileSize(filename, localDirectory, remoteDirectory))
 				return true;
 
-			if (!CompareLastModified(filename, localDirectory, remoteDirectory))
-				return true;
-
-			return false;
+			// If the local version has a different last modified date, flag it for upload.
+			return !CompareLastModified(filename, localDirectory, remoteDirectory);
 		}
 
 		#endregion
@@ -423,9 +437,9 @@ namespace Common
 		/// <summary>
 		///  Initialises an FTPWebRequest to perform operations on a remote FTP server.
 		/// </summary>
-		/// <param name="location"></param>
-		/// <param name="method"></param>
-		/// <returns></returns>
+		/// <param name="location">Web address of the server.</param>
+		/// <param name="method">Web request method to generate the request for.</param>
+		/// <returns>Web request, ready for connecting.</returns>
 		private static FtpWebRequest InitRequest(string location, string method)
 		{
 			var request = WebRequest.Create(_serverLocation + location) as FtpWebRequest;

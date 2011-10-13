@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Common
+﻿namespace Common
 {
 	/// <summary>
 	/// Contains information about a synchronisation request with a remote server.
@@ -26,11 +21,11 @@ namespace Common
 		public SyncJobType JobType { get; set; }
 
 		/// <summary>
-		/// 
+		/// Constructor for a SyncInfo accepting 3 arguments.
 		/// </summary>
-		/// <param name="localDirectory"></param>
-		/// <param name="remoteDirectory"></param>
-		/// <param name="jobtype"></param>
+		/// <param name="localDirectory">Local directory to synchronise.</param>
+		/// <param name="remoteDirectory">Remote directory to synchronise.</param>
+		/// <param name="jobtype">Type of sync job to perform.</param>
 		public SyncInfo(string localDirectory, string remoteDirectory, SyncJobType jobtype) : this()
 		{
 			LocalDirectory = localDirectory;
