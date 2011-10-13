@@ -13,7 +13,7 @@ namespace BaconBuilder.Model.Ftp
 
 		public FtpDownloader(IModel model)
 		{
-			_model = model;
+			//_model = model;
 		}
 
 		/// <summary>
@@ -40,33 +40,26 @@ namespace BaconBuilder.Model.Ftp
 		/// <param name="fileName">Name of the file to download.</param>
 		public void DownloadSingleFile(string fileName)
 		{
-			// Init request.
-			var ftp = InitRequest(FtpUriString(fileName), WebRequestMethods.Ftp.DownloadFile);
-
-			// Connect and get bytestream from server.
-			var response = (FtpWebResponse) ftp.GetResponse();
-			Stream responseStream = response.GetResponseStream();
-
+			// Init request, connect and get bytestream from server.
+			using (Stream responseStream = ResponseStream(FtpUri(fileName), WebRequestMethods.Ftp.DownloadFile))
 			// Initialise filestream to write to file.
-			var writer = new FileStream(HtmlDirectory + fileName, FileMode.Create);
-
-			// Create a read/write buffer.
-			const int bufferLength = 2048;
-			var buffer = new byte[bufferLength];
-
-			// Get byte data from server stream for as long as it is available.
-			int bytes = responseStream.Read(buffer, 0, bufferLength);
-			while (bytes > 0)
+			using (var writer = new FileStream(HtmlDirectory + fileName, FileMode.Create))
 			{
-				// Write byte data to file.
-				writer.Write(buffer, 0, bytes);
-				bytes = responseStream.Read(buffer, 0, bufferLength);
-			}
+				// Create a read/write buffer.
+				const int bufferLength = 2048;
+				var buffer = new byte[bufferLength];
 
-			// Close streams once file transfer is complete.
-			writer.Close();
-			response.Close();
+				// Get byte data from server stream for as long as it is available.
+				int bytes = responseStream.Read(buffer, 0, bufferLength);
+				while (bytes > 0)
+				{
+					// Write byte data to file.
+					writer.Write(buffer, 0, bytes);
+					bytes = responseStream.Read(buffer, 0, bufferLength);
+				}
+			}
 		}
+
 
 		/// <summary>
 		/// Asserts whether or not a file needs to be downloaded.
@@ -78,7 +71,17 @@ namespace BaconBuilder.Model.Ftp
 		/// <returns>Whether or not the file needs downloading.</returns>
 		public bool FileNeedsDownload(string fileName)
 		{
-			return (!CheckIfLocalCopyExists(fileName) || LocalVersionSize(fileName) != RemoteVersionSize(fileName));
+			return (!LocalCopyExists(fileName) || LocalVersionSize(fileName) != RemoteVersionSize(fileName));
+		}
+
+		/// <summary>
+		/// Checks if a copy of the file with the given name exists on the local filesystem.
+		/// </summary>
+		/// <param name="fileName">The file name to check for.</param>
+		/// <returns>True if the file can be found in the html directory. False otherwise.</returns>
+		public bool LocalCopyExists(string fileName)
+		{
+			return (File.Exists(HtmlDirectory + fileName));
 		}
 	}
 }

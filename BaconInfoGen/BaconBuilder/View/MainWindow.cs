@@ -313,9 +313,10 @@ namespace BaconBuilder.View
 
 		private void MainWindow_Load(object sender, EventArgs e)
 		{
-			_hasConnection = ConnectionExists();
+			string uri;
+			_hasConnection = ConnectionExists(out uri);
 			if (!_hasConnection)
-				MessageBox.Show("Could not connect", "Error");
+				MessageBox.Show(string.Format("Could not connect to {0}", uri), "Error");
 		}
 
 		/// <summary>
@@ -341,9 +342,10 @@ namespace BaconBuilder.View
 		/// </summary>
 		private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			if (!ConnectionExists())
-			{
-				MessageBox.Show("No connection. Exitting without submitting.");
+			string uri;
+			_hasConnection = ConnectionExists(out uri);
+			if (!_hasConnection) {
+				MessageBox.Show(string.Format("Could not connect to {0}", uri), "Error");
 				return;
 			}
 			// Promp user.
@@ -435,7 +437,7 @@ namespace BaconBuilder.View
 
 		#endregion
 
-		private static bool ConnectionExists()
+		private static bool ConnectionExists(out string uri)
 		{
 //			String location = Resources.ServerLocation;
 //			foreach (ConnectStatus.Method m in Enum.GetValues(typeof(ConnectStatus.Method)))
@@ -446,9 +448,12 @@ namespace BaconBuilder.View
 //				Console.WriteLine(@"{0} for {1} took {2}", m, location, (end - start));
 //			}
 //			return false;
-			return ConnectStatus.Check() && ConnectStatus.Check(ConnectStatus.Method.TcpSocket, FtpHelper.FtpUriString());
+
+			uri = FtpHelper.FtpUri();
+
+			return ConnectStatus.Check() && ConnectStatus.Check(ConnectStatus.Method.TcpSocket, uri, FtpHelper.FtpPort);
 		}
-//
+
 //		private static void TestConnection()
 //		{
 //			string http = "http://revelations.webhop.org/";

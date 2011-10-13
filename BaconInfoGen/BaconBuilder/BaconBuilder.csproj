@@ -150,12 +150,6 @@
       <DependentUpon>Preview.cs</DependentUpon>
     </Compile>
     <Compile Include="Controller\PreviewController.cs" />
-    <Compile Include="View\SplashScreen.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\SplashScreen.Designer.cs">
-      <DependentUpon>SplashScreen.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -181,9 +175,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Preview.resx">
       <DependentUpon>Preview.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\SplashScreen.resx">
-      <DependentUpon>SplashScreen.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
