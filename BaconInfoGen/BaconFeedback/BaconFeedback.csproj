@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FeedbackFile.cs" />
-    <Compile Include="FeedbackFtpHelper.cs" />
     <Compile Include="FeedbackMainForm.cs">
       <SubType>Form</SubType>
     </Compile>

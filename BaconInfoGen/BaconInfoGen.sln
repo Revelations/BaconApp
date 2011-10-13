@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaconGame", "BaconGame\Baco
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkCheckApp", "NetworkCheckApp\NetworkCheckApp.csproj", "{051F67FB-1D9A-4602-B216-B27722F83BC8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{A21BCBFB-04AE-4774-AE3D-12E163243E95}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = BaconInfoGen.vsmdi
@@ -91,6 +93,18 @@ Global
 		{051F67FB-1D9A-4602-B216-B27722F83BC8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{051F67FB-1D9A-4602-B216-B27722F83BC8}.Release|x64.ActiveCfg = Release|Any CPU
 		{051F67FB-1D9A-4602-B216-B27722F83BC8}.Release|x86.ActiveCfg = Release|Any CPU
+		{A21BCBFB-04AE-4774-AE3D-12E163243E95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A21BCBFB-04AE-4774-AE3D-12E163243E95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A21BCBFB-04AE-4774-AE3D-12E163243E95}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A21BCBFB-04AE-4774-AE3D-12E163243E95}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A21BCBFB-04AE-4774-AE3D-12E163243E95}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A21BCBFB-04AE-4774-AE3D-12E163243E95}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A21BCBFB-04AE-4774-AE3D-12E163243E95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A21BCBFB-04AE-4774-AE3D-12E163243E95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A21BCBFB-04AE-4774-AE3D-12E163243E95}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A21BCBFB-04AE-4774-AE3D-12E163243E95}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A21BCBFB-04AE-4774-AE3D-12E163243E95}.Release|x64.ActiveCfg = Release|Any CPU
+		{A21BCBFB-04AE-4774-AE3D-12E163243E95}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
