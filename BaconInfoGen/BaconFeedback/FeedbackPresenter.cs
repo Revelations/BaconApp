@@ -161,11 +161,7 @@ namespace BaconFeedback
 					@"Are you sure you wish to delete all selected {0}s in the {0} view? These {0}s will be gone forever.", type);
 			DialogResult dialogResult = MessageBox.Show(message, @"Confirm!", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop,
 			                                            MessageBoxDefaultButton.Button2);
-			if (dialogResult == DialogResult.OK)
-				return true;
-
-			// If we get this far then the user did not confirm deletion.
-			return false;
+			return dialogResult == DialogResult.OK;
 		}
 
 		/// <summary>
@@ -247,18 +243,17 @@ namespace BaconFeedback
 				// Get the feedback file contents.
 				string[] contents = FileHandler.GetFeedbackContents(i.SubItems[2].Text + '/' + i.Text);
 
-				// Initialise a struct to store info in.
-				var f = new FeedbackFile();
-
-				// Hand info to struct properties.
-				f.FileName = i.Text;
-				f.Directory = i.SubItems[2].Text;
-				f.CreatedDate = i.SubItems[1].Text;
-
-				f.Number = contents[0];
-				f.Nationality = contents[1];
-				f.Sighted = contents[2];
-				f.Misc = contents[3];
+				// Initialise a struct.
+				var f = new FeedbackFile
+				        	{
+				        		FileName = i.Text,
+				        		Directory = i.SubItems[2].Text,
+				        		CreatedDate = i.SubItems[1].Text,
+				        		Number = contents[0],
+				        		Nationality = contents[1],
+				        		Sighted = contents[2],
+				        		Misc = contents[3]
+				        	};
 
 				// Add resulting struct to feedback list.
 				result.Add(f);

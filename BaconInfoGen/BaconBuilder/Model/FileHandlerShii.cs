@@ -4,7 +4,7 @@ using System.IO;
 
 namespace BaconBuilder.Model
 {
-	public class FileHandler
+	public class FileHandlerShii
 	{
 		/// <summary>
 		/// The safe limit for files. If the HTML files are this large, consider splitting it up into smaller files.
@@ -22,7 +22,7 @@ namespace BaconBuilder.Model
 		private readonly Dictionary<string, IEnumerable<string>> _contents;
 		private readonly Dictionary<string, DateTime> _files;
 
-		public FileHandler(string ext)
+		public FileHandlerShii(string ext)
 		{
 			Extension = ext;
 			_files = new Dictionary<string, DateTime>();

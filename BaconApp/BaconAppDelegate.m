@@ -11,7 +11,8 @@
 #import "MapViewController.h"
 #import "DataModel.h"
 #import "UpdateController.h"
-
+#import "Update.h"
+#import "Reachability.h"
 
 // Name (without extension) of the main menu html page, loaded on app start.
 NSString * const MENU_HTML_FILE = @"menu";
@@ -30,7 +31,10 @@ NSString * const WEB_DIRECTORY = @"Web";
 @synthesize model;
 @synthesize x, y, html;
 @synthesize update;
+@synthesize scannedItems;
 @synthesize currentView = _currentView;
+@synthesize FeedbackUploaded;
+@synthesize hasFeedbackToUpload;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -60,6 +64,35 @@ NSString * const WEB_DIRECTORY = @"Web";
 
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
+    
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    Update * updateSession = [[Update alloc]init];
+    Reachability * receptionCheck = [[Reachability alloc] init];
+    
+    NSString *filePath = [NSString stringWithFormat:@"%@%@", documentsDirectory, @"/feedback.txt"];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if([fileManager fileExistsAtPath:filePath]){
+        if([updateSession CheckForInternet:receptionCheck] != -1){
+            [updateSession uploadPhp:filePath];
+        }
+        else{
+            
+            //spawns the thread to send feedback
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, NULL), ^{
+                while (YES) {
+                    if([updateSession CheckForInternet:receptionCheck] != -1)
+                        break;
+                    else
+                        sleep(60);
+                }
+                [updateSession uploadPhp:filePath];
+            });
+        }
+    }
+    
+    
     /*
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
      If your application supports background execution, called instead of applicationWillTerminate: when the user quits.

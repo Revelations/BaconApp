@@ -9,7 +9,7 @@ namespace BaconFeedback
 	/// </summary>
 	public class FileHandler
 	{
-		private const string _feedbackExtension = ".fbk";
+		private const string FeedbackExtension = ".fbk";
 		private static readonly string Dir = "C:/Users/" + Environment.UserName + "/FeedbackTest/";
 
 		// We all recognize this, amirite?
@@ -44,7 +44,7 @@ namespace BaconFeedback
 			{
 				var f = new FileInfo(s);
 
-				if (f.Extension == _feedbackExtension)
+				if (f.Extension == FeedbackExtension)
 				{
 					result.Add(f.Name);
 				}

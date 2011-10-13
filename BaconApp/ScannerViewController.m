@@ -51,6 +51,7 @@
         break;
 	
     // EXAMPLE: do something useful with the barcode data
+
     resultText.text = @"Scan was successful!";
 	
     // EXAMPLE: do something useful with the barcode image
@@ -64,6 +65,8 @@
     // Retrieve scanner results.
 	interpreter = [Interpreter new];
     interpreter.storedInputString = symbol.data;
+    
+   
     
     current = [[HistoryItem alloc] initWithHtmlFile:[interpreter htmlPath] x:interpreter.x y:interpreter.y];
 
@@ -143,6 +146,31 @@
     // e.g. self.myOutlet = nil;
 }
 
+
+-(void)addToViewsSeen:(NSString *) file{
+    
+    NSArray * contents = [[file componentsSeparatedByString:@"."] autorelease];
+    NSString * currentFile = [[contents objectAtIndex:0] autorelease];
+    
+    NSMutableArray * currentP = [(BaconAppDelegate *) [[UIApplication sharedApplication] delegate]scannedItems];
+    
+    BOOL found = NO;
+    for (NSString * s in currentP) {
+        if (s == currentFile) {
+            found = YES;
+            break;
+        }
+    }
+    
+    if(!found){
+        [currentP addObject : currentFile];
+    }
+                                
+    
+    
+    [[(BaconAppDelegate *)[[UIApplication sharedApplication] delegate] scannedItems] addObject:interpreter.htmlPath];
+}
+
 // Called when the view disappears.
 
 -(void)viewWillDisappear:(BOOL)animated {
@@ -153,6 +181,8 @@
 	appDelegate.x = interpreter.x;
 	appDelegate.y = interpreter.y;
 	appDelegate.html = interpreter.htmlPath;
+    [self addToViewsSeen:interpreter.htmlPath];
+    
 	
 	//appDelegate.model.current = [[HistoryItem alloc] initWithHtmlFile:[interpreter htmlPath] x:interpreter.x y:interpreter.y];
 	// Add the current history item to the list.
@@ -160,6 +190,7 @@
 	
 	
 }
+
 
 - (void) dealloc
 {

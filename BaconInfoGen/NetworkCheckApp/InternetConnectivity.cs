@@ -60,6 +60,17 @@ namespace NetworkCheckApp
 
 		#endregion
 
+		public static bool Check(Method method, string address, int port)
+		{
+			string s = address;
+			if (method == Method.WebRequest)
+			{
+				var host = new Uri(address);
+				s = host.AbsoluteUri;
+			}
+			return Check(method, s, s, port);
+		}
+
 		/// <summary>
 		/// Checks whether there is an internet connection. Defaults to calling the <see cref="IsConnectionAvailable"/> method.
 		/// </summary>
@@ -104,16 +115,22 @@ namespace NetworkCheckApp
 		/// <returns>Whether we are connected to the internet.</returns>
 		public static bool WebRequestTest(string address = DefaultHost)
 		{
-			try
 			{
-				WebRequest myRequest = WebRequest.Create(address);
-				myRequest.GetResponse();
+				var url = new Uri(address);
+
+				WebRequest webReq = WebRequest.Create(url);
+				try
+				{
+					WebResponse resp = webReq.GetResponse();
+					resp.Close();
+					return true;
+				}
+
+				catch
+				{
+					return false;
+				}
 			}
-			catch (WebException)
-			{
-				return false;
-			}
-			return true;
 		}
 
 		/// <summary>
@@ -122,8 +139,7 @@ namespace NetworkCheckApp
 		/// <param name="address">The address to try to connect to. Defaults to <see cref="DefaultHost"/>.</param>
 		/// <param name="port">The port to use. Defaults to <see cref="DefaultPort"/></param>
 		/// <returns></returns>
-		public static bool TcpSocketTest(string address = DefaultHost,
-		                                 int port = DefaultPort)
+		public static bool TcpSocketTest(string address = DefaultHost, int port = DefaultPort)
 		{
 			try
 			{
@@ -160,10 +176,14 @@ namespace NetworkCheckApp
 		public static bool PingTest(string address = DefaultIpAddress, int timeout = DefaultTimeout)
 		{
 			var ping = new Ping();
-			PingReply pingStatus = ping.Send(IPAddress.Parse(address), timeout);
-			
+			DateTime start = DateTime.Now;
+			PingReply pingStatus = ping.Send(address, timeout);
+			//PingReply pingStatus = ping.Send(IPAddress.Parse(address), timeout);
+			var end = (long) (DateTime.Now - start).TotalMilliseconds;
+			Console.WriteLine("Inside Ping method, took: " + end);
 			if (pingStatus != null && pingStatus.Status == IPStatus.Success)
 			{
+				Console.WriteLine("Still Alive");
 				return true;
 			}
 			return false;
