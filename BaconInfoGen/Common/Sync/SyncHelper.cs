@@ -208,7 +208,7 @@ namespace Common
 		/// <param name="fileName">Name of the file to download.</param>
 		/// <param name="localDirectory">Directory relative to the working directory to store it in once downloaded.</param>
 		/// <param name="remoteDirectory">Subdirectory the file is located in on the server.</param>
-		public static void DownloadRemoteFile(string fileName, string localDirectory = "", string remoteDirectory = "")
+		public static void DownloadFile(string fileName, string localDirectory = "", string remoteDirectory = "")
 		{
 			FtpWebRequest request = InitRequest(remoteDirectory + fileName,
 												WebRequestMethods.Ftp.DownloadFile);

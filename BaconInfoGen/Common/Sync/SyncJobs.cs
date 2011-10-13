@@ -39,7 +39,7 @@ namespace Common
 			for (int i = 0; i < files.Count; i++)
 			{
 				if (SyncHelper.NeedsDownload(files[i], info.LocalDirectory, info.RemoteDirectory))
-					SyncHelper.DownloadRemoteFile(files[i], info.LocalDirectory, info.RemoteDirectory);
+					SyncHelper.DownloadFile(files[i], info.LocalDirectory, info.RemoteDirectory);
 
 				float progress = (float) (i + 1) / files.Count * 100;
 				_worker.ReportProgress((int) progress);
@@ -62,7 +62,24 @@ namespace Common
 		/// </summary>
 		public void UploadAll(object sender, DoWorkEventArgs e)
 		{
-			
+			SyncInfo info = (SyncInfo)e.Argument;
+
+			List<string> files = SyncHelper.GetLocalDirectoryListing(info.LocalDirectory);
+
+			for (int i = 0; i < files.Count; i++)
+			{
+				if (SyncHelper.NeedsUpload(files[i], info.LocalDirectory, info.RemoteDirectory))
+					SyncHelper.UploadFile(files[i], info.LocalDirectory, info.RemoteDirectory);
+
+				float progress = (float) (i + 1) / files.Count * 100;
+				_worker.ReportProgress((int) progress);
+			}
+
+			foreach (string s in SyncHelper.GetRemoteDirectoryListing(info.RemoteDirectory))
+			{
+				if (!files.Contains(s))
+					SyncHelper.DeleteRemoteFile(s, info.RemoteDirectory);
+			}
 		}
 	}
 }
