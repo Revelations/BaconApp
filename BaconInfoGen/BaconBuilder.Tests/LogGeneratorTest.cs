@@ -1,15 +1,14 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.IO;
 using BaconBuilder.Model;
-using BaconBuilder.Model.Ftp;
 using NUnit.Framework;
 
 namespace BaconBuilder
 {
 	[TestFixture]
-	class LogGeneratorTest
+	internal class LogGeneratorTest
 	{
 		[Test]
 		public void TestFileLocation()
@@ -20,7 +19,13 @@ namespace BaconBuilder
 		[Test]
 		public void TestFileRetrieval()
 		{
-			LogGenerator.
+			var info = new FileInfo(LogGenerator.FilePath);
+			Assert.IsNotNull(info.Directory);
+			var dir = new DirectoryInfo(info.Directory.FullName);
+			Assert.AreNotEqual(0, dir.GetFiles().Length);
+			IList files = new List<object>();
+			LogGenerator.GetFiles(files);
+			Assert.AreNotEqual(0, files.Count);
 		}
 	}
 }
