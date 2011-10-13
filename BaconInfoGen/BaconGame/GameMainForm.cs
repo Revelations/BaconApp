@@ -11,9 +11,7 @@ namespace BaconGame
 		{
 			InitializeComponent();
 
-		    _presenter = new GamePresenter(this);
-
-			_presenter.DownloadSync();
+			_presenter = new GamePresenter(this);
 
 		    _presenter.PopulateFileView();
 
@@ -112,10 +110,9 @@ namespace BaconGame
 
         private void GameMainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(questionView.SelectedItems.Count > 0)
-                _presenter.SaveQuestion(questionView.SelectedIndices[0]);
-            if(fileView.SelectedItems.Count > 0)
-                _presenter.SaveQuestionFile(fileView.SelectedItems[0].Text);
+        	_presenter.SaveOpen();
+
+        	_presenter.UploadSync(e);
         }
 
         private void toolStripAdd_Click(object sender, System.EventArgs e)
@@ -167,6 +164,17 @@ namespace BaconGame
 		private void textBoxQuestion_Leave(object sender, System.EventArgs e)
 		{
 			_presenter.SaveQuestion(questionView.SelectedIndices[0]);
+		}
+
+		private void GameMainForm_Shown(object sender, System.EventArgs e)
+		{
+			_presenter.DownloadSync();
+		}
+
+		private void toolStripSync_Click(object sender, System.EventArgs e)
+		{
+			_presenter.SaveOpen();
+			_presenter.UploadSync();
 		}
     }
 }

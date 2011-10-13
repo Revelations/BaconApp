@@ -98,6 +98,12 @@
   <ItemGroup>
     <None Include="Resources\LayoutTextFile.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{A21BCBFB-04AE-4774-AE3D-12E163243E95}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy "$(ProjectDir)$(OutDir)$(TargetFileName)" "$(SolutionDir)lib\$(TargetFileName)"</PostBuildEvent>

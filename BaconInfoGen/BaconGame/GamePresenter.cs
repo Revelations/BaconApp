@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using Common;
 
@@ -148,6 +149,31 @@ namespace BaconGame
 		{
 			SyncDialog dialog = new SyncDialog(new SyncInfo(Resources.GameDirectory, "Game/", SyncJobType.Download));
 			dialog.ShowDialog();
+		}
+
+		public void UploadSync()
+		{
+			SyncDialog dialog = new SyncDialog(new SyncInfo(Resources.GameDirectory, "Game/", SyncJobType.Upload));
+			dialog.ShowDialog();
+		}
+
+		public void UploadSync(FormClosingEventArgs e)
+		{
+			DialogResult result = MessageBox.Show(@"Would you like to synchronise your content with the distribution server before exiting?",
+					@"Confirm", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3);
+
+			if (result == DialogResult.Cancel)
+				e.Cancel = true;
+			else if (result == DialogResult.Yes)
+				UploadSync();
+		}
+
+		public void SaveOpen()
+		{
+			if (_view.QuestionView.SelectedItems.Count > 0)
+				SaveQuestion(_view.QuestionView.SelectedIndices[0]);
+			if (_view.FileView.SelectedItems.Count > 0)
+				SaveQuestionFile(_view.FileView.SelectedItems[0].Text);
 		}
 	}
 }

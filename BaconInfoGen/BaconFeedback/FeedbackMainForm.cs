@@ -129,5 +129,15 @@ namespace BaconFeedback
 		}
 
 		#endregion
+
+		private void FeedbackMainForm_Shown(object sender, EventArgs e)
+		{
+			_presenter.DownloadSync();
+		}
+
+		private void FeedbackMainForm_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			_presenter.UploadSync(e);
+		}
 	}
 }

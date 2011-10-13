@@ -465,6 +465,7 @@
 			this.toolStripSync.Name = "toolStripSync";
 			this.toolStripSync.Size = new System.Drawing.Size(36, 45);
 			this.toolStripSync.ToolTipText = "Synchronise - Uploads question files to the server.";
+			this.toolStripSync.Click += new System.EventHandler(this.toolStripSync_Click);
 			// 
 			// GameMainForm
 			// 
@@ -489,6 +490,7 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Game Creator";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GameMainForm_FormClosing);
+			this.Shown += new System.EventHandler(this.GameMainForm_Shown);
 			this.panel1.ResumeLayout(false);
 			this.menuStrip.ResumeLayout(false);
 			this.menuStrip.PerformLayout();

@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing.Printing;
 using System.Linq;
 using System.Windows.Forms;
+using Common;
+using Resources = Common.Resources;
 
 namespace BaconFeedback
 {
@@ -247,6 +250,29 @@ namespace BaconFeedback
 			               		Sighted = contents[2],
 			               		Misc = contents[3]
 			               	}).ToList();
+		}
+
+		public void DownloadSync()
+		{
+			SyncDialog dialog = new SyncDialog(new SyncInfo(Resources.FeedbackDirectory, "Feedback/", SyncJobType.Download));
+			dialog.ShowDialog();
+		}
+
+		public void UploadSync()
+		{
+			SyncDialog dialog = new SyncDialog(new SyncInfo(Resources.FeedbackDirectory, "Feedback/", SyncJobType.Upload));
+			dialog.ShowDialog();
+		}
+
+		public void UploadSync(FormClosingEventArgs e)
+		{
+			DialogResult result = MessageBox.Show(@"Would you like to synchronise your content with the distribution server before exiting?",
+					@"Confirm", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3);
+
+			if (result == DialogResult.Cancel)
+				e.Cancel = true;
+			else if (result == DialogResult.Yes)
+				UploadSync();
 		}
 	}
 }
