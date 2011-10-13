@@ -6,20 +6,9 @@ namespace BaconGame
 {
     public class FileHandler
     {
-        // We all recognize this, amirite?
-        private static readonly string Dir = "C:/Users/" + Environment.UserName + "/QuestionTest/";
-
         private const string _questionExtension = ".ques";
 
-        private static string QuestionDirectory
-        {
-            get
-            {
-                if (!Directory.Exists(Dir))
-                    Directory.CreateDirectory(Dir);
-                return Dir;
-            }
-        }
+		private static string QuestionDirectory { get { return Common.Resources.GameDirectory; } }
 
         public static IEnumerable<string> GetQuestionFileList()
         {

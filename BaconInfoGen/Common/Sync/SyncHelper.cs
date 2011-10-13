@@ -10,7 +10,7 @@ namespace Common
 	{
 		private const string _serverLocation = "ftp://wserver/";
 
-		private const string _workingDirectory = "D:/Test/";
+/*		private const string _workingDirectory = "D:/Test/";
 		private static string WorkingDirectory
 		{
 			get
@@ -19,7 +19,7 @@ namespace Common
 					Directory.CreateDirectory(_workingDirectory);
 				return _workingDirectory;
 			}
-		}
+		}*/
 
 		#region Remote Information
 
@@ -147,9 +147,12 @@ namespace Common
 		{
 			List<string> result = new List<string>();
 
-			DirectoryInfo d = new DirectoryInfo(WorkingDirectory + directory);
-			foreach(FileInfo f in d.GetFiles())
-				result.Add(f.Name);
+			if (Directory.Exists(directory))
+			{
+				DirectoryInfo d = new DirectoryInfo(directory);
+				foreach (FileInfo f in d.GetFiles())
+					result.Add(f.Name);
+			}
 
 			return result;
 		}
@@ -164,7 +167,7 @@ namespace Common
 		{
 			try
 			{
-				FileInfo f = new FileInfo(WorkingDirectory + localDirectory + fileName);
+				FileInfo f = new FileInfo(localDirectory + fileName);
 				return f.Length;
 			}
 			catch(Exception e)
@@ -184,7 +187,7 @@ namespace Common
 		{
 			try
 			{
-				FileInfo f = new FileInfo(WorkingDirectory + localDirectory + fileName);
+				FileInfo f = new FileInfo(localDirectory + fileName);
 				return f.LastWriteTime;
 			}
 			catch (Exception e)
@@ -219,7 +222,7 @@ namespace Common
 				responseStream = response.GetResponseStream();
 
 				// Initialise filestream to write to file.
-				writer = new FileStream(WorkingDirectory + localDirectory + fileName, FileMode.Create);
+				writer = new FileStream(localDirectory + fileName, FileMode.Create);
 
 				// Create a read/write buffer.
 				const int bufferLength = 2048;
@@ -312,7 +315,7 @@ namespace Common
 		{
 			try
 			{
-				File.Delete(WorkingDirectory + localDirectory + fileName);
+				File.Delete(localDirectory + fileName);
 			}
 			catch (Exception e)
 			{
@@ -381,7 +384,7 @@ namespace Common
 		/// <returns>True if the file exists, false otherwise.</returns>
 		public static bool LocalVersionExists(string fileName, string localDirectory = "")
 		{
-			return File.Exists(WorkingDirectory + localDirectory + fileName);
+			return File.Exists(localDirectory + fileName);
 		}
 
 		/// <summary>
