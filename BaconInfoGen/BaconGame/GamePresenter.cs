@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using BaconBuilder.Model;
 using Common;
 
 namespace BaconGame
@@ -221,8 +222,10 @@ namespace BaconGame
 		/// </summary>
 		public void UploadSync()
 		{
+			LogGenerator.CreateGameLog();
+
 			SyncDialog dialog = new SyncDialog(new SyncInfo(Resources.GameDirectory, "Game/", SyncJobType.Upload));
-			dialog.ShowDialog();
+			dialog.ShowDialog();	
 		}
 
 		/// <summary>
