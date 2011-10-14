@@ -22,8 +22,8 @@
 
 
 
--(int)CheckForInternet: (Reachability*) curReach
-{
+    
+-(int)CheckForInternet: (Reachability *) curReach{
     NetworkStatus netStatus = [curReach currentReachabilityStatus];
     switch (netStatus)
     {
@@ -93,25 +93,38 @@
 
 }
 
--(void)getFile:(NSString *)urlPath{
-    
+-(void)getFile:(NSString *)uP :(NSString *) filePath{
+
+
+    NSString * urlPath = [uP stringByReplacingOccurrencesOfString:@" "withString:@"%20"];
+        NSLog(@"File is being downloaded from %@ and being written to %@",urlPath,filePath);
     NSURL *url = [NSURL URLWithString:urlPath];
-    NSData *urlData = [NSData dataWithContentsOfURL:url];
+    
+    NSError * err = [[NSError alloc] init];    
+    //retrieves the data from the url --Donovan
+    NSData *urlData = [NSData dataWithContentsOfURL:url options:NSDataReadingUncached error:&err];
+    
+  //  if (err) {
+  //      NSLog(@"Error : %@", [err localizedDescription]);
+  //      [err release];
+  //  } else {
+  //      NSLog(@"Data has loaded successfully.");
+  //  }
       
     //checks to see if the urlData has been downloaded
     if(urlData){
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentsDirectory = [paths objectAtIndex:0];
+        //NSString *documentsDirectory = [paths objectAtIndex:0];
         
-         NSArray *values = [urlPath componentsSeparatedByString:@"/"];
-        NSString *backend = [NSString stringWithFormat:@"%@%@", @"/", [values objectAtIndex:[values count] -1]];
+        //NSArray *values = [urlPath componentsSeparatedByString:@"/"];
+        //NSString *backend = [NSString stringWithFormat:@"%@%@", @"/", [values objectAtIndex:[values count] -1]];
         
         
-        NSString *filePath = [NSString stringWithFormat:@"%@%@", documentsDirectory, backend];
+        //NSString *filePath = [NSString stringWithFormat:@"%@%@", documentsDirectory, backend];
         [urlData writeToFile:filePath atomically:YES];
     }	
         else{
-            NSLog(@"%@ File Was not created", urlPath);
+            NSLog(@"%@ File Was not created", filePath);
         }
     }
 
@@ -152,19 +165,76 @@
                 
                 //checks to see if it already has the file
                 if(size != result){	
-                    [self getFile:retrieveUrl];
+                    [self getFile:retrieveUrl:filePath];
                 }
             }
             else{
                 i++;
-                [self getFile:retrieveUrl];
+                [self getFile:retrieveUrl:filePath];
             }
         }
         }
         else{
             NSLog(@"Directory was not created");
         }    
-}   
+}
+
+-(void)GetGameFiles:(NSString *) urlPath{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"%@%@", urlPath, @"Game/gamelog.txt"]];
+    NSError * err = [[NSError alloc] init];  
+    NSLog(@"Downloading dir info from %@", url);
+    //retrieves the data from the url --Donovan     
+    NSData *urlData = [NSData dataWithContentsOfURL:url];
+    
+   
+    
+    if(urlData){        
+        
+        //finds the relevant directory to ensure that iOS does not purge it --Donovan
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        [fileManager createDirectoryAtPath:[NSString stringWithFormat: @"%@%@",documentsDirectory, @"/Game"] withIntermediateDirectories:NO attributes:nil error: nil];
+        NSString *filePath = [NSString stringWithFormat:@"%@%@", documentsDirectory, @"/Game/log.txt"];
+        NSLog(@"log is being written to %@", filePath);
+        [urlData writeToFile:filePath atomically:YES];
+        
+        NSString *fileContents = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+        
+        NSArray *values = [fileContents componentsSeparatedByString:@"|"];
+        
+        
+        //iterates over the files it needs to download
+        for(int i = 0; i < [values count]; i++){
+            NSString *s = [values objectAtIndex:i];
+            NSString *filePath = [NSString stringWithFormat:@"%@%@%@", documentsDirectory,@"/Game/", s];
+//            NSFileManager *fileManager = [NSFileManager defaultManager];
+            NSString *retrieveUrl = [NSString stringWithFormat:@"%@Game/%@", urlPath,s]; 
+            NSLog(@"retrieveURL has value of %@", retrieveUrl);
+            if ([fileManager fileExistsAtPath:filePath]) {
+                
+                NSDictionary *attrs = [fileManager attributesOfItemAtPath: filePath error: NULL];
+                
+                int result = [attrs fileSize];                
+                int size = [[values objectAtIndex:++i] intValue];
+                
+                //checks to see if it already has the file
+                if(size != result){	
+                    [self getFile:retrieveUrl:filePath];
+                }
+            }
+            else{
+                i++;
+                [self getFile:retrieveUrl:filePath];
+            }
+        }
+    }
+    else{
+        NSLog(@"Directory was not created");
+    }    
+
+}
 
 @end
 

@@ -27,7 +27,9 @@ extern NSString * const WEB_DIRECTORY;
 	int x;
 	int y;
 	NSString *html;
-    NSMutableArray * scanNum;
+    NSMutableArray * scannedItems;
+	NSString * serverIpAddress;
+	NSString * fontSize;
 }
 
 
@@ -35,7 +37,8 @@ extern NSString * const WEB_DIRECTORY;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 @property (nonatomic, retain) IBOutlet UIView *currentView;
 //@property (nonatomic, retain) IBOutlet UpdateController *tempTestView;
-
+@property (nonatomic,retain) NSString * serverIpAddress;
+@property (nonatomic,retain) NSString * fontSize;
 @property (nonatomic, retain) NSMutableArray* scannedItems;
 @property (nonatomic, retain) DataModel *model;
 @property (readwrite) int x;

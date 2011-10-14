@@ -20,11 +20,12 @@
 @property (nonatomic, assign)   size_t            bufferOffsetU;
 @property (nonatomic, assign)   size_t            bufferLimitU;
 
-- (void)getFile:(NSString *) urlPath;
+- (void)getFile:(NSString *) urlPath :(NSString *) filePath;
 -(void)getDirectory:(NSString *)urlPath;
 -(int)CheckForInternet: (Reachability *) curReach;
 //-(void)upLoadFile:(NSString *)urlPath;
 //-(void)_startSend:(NSString *)filePath : (NSString *) urlPath;
 -(void)uploadPhp:(NSString *) filePath;
+-(void)GetGameFiles:(NSString *) urlPath;
 
 @end
