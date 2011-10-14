@@ -1,4 +1,4 @@
-ï»¿// Author: Ozcan ILIKHAN
+// Author: Ozcan ILIKHAN
 // Source address: http://www.codeproject.com/Tips/147662/Testing-Internet-Connectivity
 // Date accessed: 12 October 2011
 
@@ -8,7 +8,7 @@ using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 
-namespace NetworkCheckApp
+namespace Common
 {
 	/// <summary>
 	/// Some of the functions of our applications may require a run-time test of internet connectivity. Once internet connectivity is detected, the functions that require internet access may temporarily be disabled and/or the user can be notified via an alert message. Otherwise, the application may result in error during operation or it may cause annoying problems for the user.
@@ -162,7 +162,7 @@ namespace NetworkCheckApp
 		/// 
 		/// You cannot use this method in .NET Compact Framework because there is no <see cref="System.Net.NetworkInformation"/> namespace that comes with Compact Framework. However, you can use Smart Device Framework ("http://www.opennetcf.com", Community Edition is free for download) provided by OpenNETCF. This framework comes with many other useful tools that .NET Compact Framework does not contain.
 		/// 
-		/// Notice that I used Googleâ€™s IP address 208.69.34.231. We could use Googleâ€™s web address www.google.com:
+		/// Notice that I used Google’s IP address 208.69.34.231. We could use Google’s web address www.google.com:
 		/// 
 		/// <code>
 		///	System.Net.NetworkInformation.PingReply pingStatus = ping.Send("www.google.com",1000);

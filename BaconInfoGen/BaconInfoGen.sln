@@ -2,17 +2,12 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaconBuilder", "BaconBuilder\BaconBuilder.csproj", "{B3668BD4-4001-4EE7-8F6F-E1DA776E98BB}"
-	ProjectSection(ProjectDependencies) = postProject
-		{051F67FB-1D9A-4602-B216-B27722F83BC8} = {051F67FB-1D9A-4602-B216-B27722F83BC8}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaconBuilder.Test", "BaconBuilder.Tests\BaconBuilder.Test.csproj", "{5B521FE9-F3F4-42C2-BD6E-333AB669FEB7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaconFeedback", "BaconFeedback\BaconFeedback.csproj", "{E09F36D3-D0FE-4B25-A122-C87886C3C807}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaconGame", "BaconGame\BaconGame.csproj", "{2C4898B8-DD30-432F-9D5F-08BAB120B3BD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkCheckApp", "NetworkCheckApp\NetworkCheckApp.csproj", "{051F67FB-1D9A-4602-B216-B27722F83BC8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{A21BCBFB-04AE-4774-AE3D-12E163243E95}"
 EndProject
@@ -85,18 +80,6 @@ Global
 		{2C4898B8-DD30-432F-9D5F-08BAB120B3BD}.Release|x64.ActiveCfg = Release|x86
 		{2C4898B8-DD30-432F-9D5F-08BAB120B3BD}.Release|x86.ActiveCfg = Release|x86
 		{2C4898B8-DD30-432F-9D5F-08BAB120B3BD}.Release|x86.Build.0 = Release|x86
-		{051F67FB-1D9A-4602-B216-B27722F83BC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{051F67FB-1D9A-4602-B216-B27722F83BC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{051F67FB-1D9A-4602-B216-B27722F83BC8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{051F67FB-1D9A-4602-B216-B27722F83BC8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{051F67FB-1D9A-4602-B216-B27722F83BC8}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{051F67FB-1D9A-4602-B216-B27722F83BC8}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{051F67FB-1D9A-4602-B216-B27722F83BC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{051F67FB-1D9A-4602-B216-B27722F83BC8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{051F67FB-1D9A-4602-B216-B27722F83BC8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{051F67FB-1D9A-4602-B216-B27722F83BC8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{051F67FB-1D9A-4602-B216-B27722F83BC8}.Release|x64.ActiveCfg = Release|Any CPU
-		{051F67FB-1D9A-4602-B216-B27722F83BC8}.Release|x86.ActiveCfg = Release|Any CPU
 		{A21BCBFB-04AE-4774-AE3D-12E163243E95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A21BCBFB-04AE-4774-AE3D-12E163243E95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A21BCBFB-04AE-4774-AE3D-12E163243E95}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU

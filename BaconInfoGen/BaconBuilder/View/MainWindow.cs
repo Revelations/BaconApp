@@ -8,7 +8,6 @@ using BaconBuilder.Controller;
 using BaconBuilder.Model;
 using Common;
 using mshtml;
-using NetworkCheckApp;
 
 namespace BaconBuilder.View
 {
