@@ -23,9 +23,6 @@ namespace BaconGame
 			// Instantiate a presenter.
 			_presenter = new GamePresenter(this);
 
-			// Populate the file view.
-		    _presenter.PopulateFileView();
-
 			// Temporarily disable textfields.
 			EnableTextFields();
 		}
@@ -36,6 +33,9 @@ namespace BaconGame
 		private void GameMainForm_Shown(object sender, System.EventArgs e)
 		{
 			_presenter.DownloadSync();
+			_presenter.CreateNeededQuestionFiles();
+
+			_presenter.PopulateFileView();
 		}
 
 		/// <summary>
