@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing.Printing;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using Common;
 using Resources = Common.Resources;
@@ -90,17 +91,18 @@ namespace BaconFeedback
 			// If there is a file selected, then get file contents.
 			string[] contents = item != null
 			                    ? FileHandler.GetFeedbackContents(item.SubItems[2].Text + '/' + item.Text)
-			                    : new[] {string.Empty, string.Empty, string.Empty, string.Empty};
+			                    : new[] {string.Empty, string.Empty, string.Empty, string.Empty, string.Empty};
 
 			// For each line of the file, insert data into the appropriate textboxes.
-			if (contents.Length != 4)
+			if (contents.Length != 5)
 			{
 				ShowErrorMessage(@"Bad feedback file");
 			}
 			else
 			{
-				for (int i = 0; i < contents.Length; i++)
+				for (int i = 0; i < 4; i++)
 					_view.FeedbackFields[i].Text = contents[i];
+				_view.FeedbackFields[4].Text = GetScannedString(contents[4]);
 			}
 		}
 
@@ -248,8 +250,32 @@ namespace BaconFeedback
 			               		Number = contents[0],
 			               		Nationality = contents[1],
 			               		Sighted = contents[2],
-			               		Misc = contents[3]
+			               		Misc = contents[3],
+								Scanned = GetScannedList(contents[4])
 			               	}).ToList();
+		}
+
+		private List<string> GetScannedList(string input)
+		{
+			List<string> result = new List<string>();
+
+			string[] split = input.Split(',');
+			for (int i = 1; i < split.Length; i++)
+				result.Add(split[i]);
+
+			return result;
+		}
+
+		private string GetScannedString(string input)
+		{
+			string[] split = input.Split(',');
+			StringBuilder builder = new StringBuilder();
+
+			for (int i = 1; i < split.Length - 1; i++)
+				builder.Append(split[i]).Append(", ");
+			builder.Append(split[split.Length - 1]);
+
+			return builder.ToString();
 		}
 
 		public void DownloadSync()

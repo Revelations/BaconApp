@@ -28,7 +28,7 @@ namespace BaconFeedback
 
 		public TextBox[] FeedbackFields
 		{
-			get { return new[] {textBoxNumber, textBoxNationality, textBoxSighted, textBoxMisc}; }
+			get { return new[] {textBoxNumber, textBoxNationality, textBoxSighted, textBoxMisc, textBoxScanned}; }
 		}
 
 		private void folderView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)

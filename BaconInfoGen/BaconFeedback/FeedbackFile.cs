@@ -1,4 +1,6 @@
-﻿namespace BaconFeedback
+﻿using System.Collections.Generic;
+
+namespace BaconFeedback
 {
 	/// <summary>
 	/// Struct that stores information about a feedback file.
@@ -25,5 +27,8 @@
 
 		// Miscellaneous feedback specified in the file.
 		public string Misc { get; set; }
+
+		// Collection of all barcodes scanned.
+		public List<string> Scanned { get; set; }
 	}
 }
