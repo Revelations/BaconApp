@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace Common
@@ -65,10 +66,11 @@ namespace Common
 			SyncInfo info = (SyncInfo)e.Argument;
 
 			List<string> files = SyncHelper.GetLocalDirectoryListing(info.LocalDirectory);
+			List<string> remoteFiles = SyncHelper.GetRemoteDirectoryListing(info.RemoteDirectory);
 
 			for (int i = 0; i < files.Count; i++)
 			{
-				if (SyncHelper.NeedsUpload(files[i], info.LocalDirectory, info.RemoteDirectory))
+				if (SyncHelper.NeedsUpload(files[i], remoteFiles, info.LocalDirectory, info.RemoteDirectory))
 					SyncHelper.UploadFile(files[i], info.LocalDirectory, info.RemoteDirectory);
 
 				float progress = (float) (i + 1) / files.Count * 100;

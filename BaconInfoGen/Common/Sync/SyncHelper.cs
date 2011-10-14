@@ -300,7 +300,7 @@ namespace Common
 		{
 			try
 			{
-				InitRequest(remoteDirectory + fileName, WebRequestMethods.Ftp.DeleteFile);
+				InitRequest(remoteDirectory + fileName, WebRequestMethods.Ftp.DeleteFile).GetResponse();
 			}
 			catch (Exception e)
 			{
@@ -422,6 +422,27 @@ namespace Common
 		{
 			// If the file does not exist remotely, flag it for upload.
 			if (!RemoteVersionExists(filename, remoteDirectory))
+				return true;
+
+			// If the local version is a different size to the remote version, flag it for upload.
+			if (!CompareFileSize(filename, localDirectory, remoteDirectory))
+				return true;
+
+			// If the local version has a different last modified date, flag it for upload.
+			return !CompareLastModified(filename, localDirectory, remoteDirectory);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="filename"></param>
+		/// <param name="files"></param>
+		/// <param name="localDirectory"></param>
+		/// <param name="remoteDirectory"></param>
+		/// <returns></returns>
+		public static bool NeedsUpload(string filename, List<string> files, string localDirectory = "", string remoteDirectory = "")
+		{
+			if (!files.Contains(filename))
 				return true;
 
 			// If the local version is a different size to the remote version, flag it for upload.
