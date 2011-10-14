@@ -13,8 +13,6 @@ namespace BaconFeedback
 
 			_presenter = new FeedbackPresenter(this);
 
-			_presenter.PopulateFolderView();
-
 			printDocument.PrintPage += _presenter.ConstructPrintDocument;
 		}
 
@@ -113,6 +111,9 @@ namespace BaconFeedback
 
 		private void toolStripSync_Click(object sender, EventArgs e)
 		{
+			_presenter.DownloadSync();
+			_presenter.ListViewClear(fileView);
+			_presenter.PopulateFolderView();
 		}
 
 		private void toolStripConfig_Click(object sender, EventArgs e)
@@ -133,6 +134,12 @@ namespace BaconFeedback
 		private void FeedbackMainForm_Shown(object sender, EventArgs e)
 		{
 			_presenter.DownloadSync();
+			_presenter.PopulateFolderView();
+		}
+
+		private void FeedbackMainForm_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			_presenter.UploadSyncExit();
 		}
 	}
 }

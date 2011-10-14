@@ -157,6 +157,28 @@ namespace Common
 			return result;
 		}
 
+		public static List<string>  GetLocalDirectoryListing(string directory, bool subdirectories)
+		{
+			List<string> result = new List<string>();
+
+			if (Directory.Exists(directory))
+			{
+				DirectoryInfo dir = new DirectoryInfo(directory);
+				foreach (var d in dir.GetDirectories())
+				{
+					var subDirResult = GetLocalDirectoryListing(d.FullName, true);
+					foreach (string s in subDirResult)
+					{
+						result.Add(s);
+					}
+				}
+				foreach (var f in dir.GetFiles())
+					result.Add(f.Name);
+			}
+
+			return result;
+		}
+
 		/// <summary>
 		/// Gets the size of a file stored on the local file system.
 		/// </summary>
@@ -409,6 +431,17 @@ namespace Common
 
 			// If the remote version has a different last modified date, flag it for download.
 			return !CompareLastModified(filename, localDirectory, remoteDirectory);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="filename"></param>
+		/// <param name="files"></param>
+		/// <returns></returns>
+		public static bool NeedsFeedbackDownload(string filename, List<string> files)
+		{
+			return !files.Contains(filename);
 		}
 
 		/// <summary>

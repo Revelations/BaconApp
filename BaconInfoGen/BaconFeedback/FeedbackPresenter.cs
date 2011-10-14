@@ -71,7 +71,7 @@ namespace BaconFeedback
 		/// <summary>
 		/// Clears and refreshes the contents of the file view.
 		/// </summary>
-		private void ListViewClear(ListView listView)
+		public void ListViewClear(ListView listView)
 		{
 			listView.Items.Clear();
 			listView.Refresh();
@@ -161,7 +161,7 @@ namespace BaconFeedback
 
 			// Prompt for confirmation.
 			return DialogResult.OK == MessageBox.Show(
-				string.Format(@"Are you sure you wish to delete all selected {0}s in the {0} view? These {0}s will be gone forever.", type),
+				string.Format(@"Are you sure you wish to delete all selected {0}s in the {0} view?", type),
 				@"Confirm!",
 				MessageBoxButtons.OKCancel,
 				MessageBoxIcon.Stop,
@@ -254,8 +254,25 @@ namespace BaconFeedback
 
 		public void DownloadSync()
 		{
-			SyncDialog dialog = new SyncDialog(new SyncInfo(Resources.FeedbackDirectory, "Feedback/", SyncJobType.Download));
+			SyncDialog dialog = new SyncDialog(new SyncInfo(Resources.FeedbackDirectory, "Feedback/", SyncJobType.DownloadFeedback));
 			dialog.ShowDialog();
+
+			FileHandler.SortFiles();
+		}
+
+		public void UploadSyncExit()
+		{
+			if (_deletedFiles.Count > 0)
+			{
+				DialogResult result =
+					MessageBox.Show(@"Would you like to synchronise your deleted feedback with the server before exiting?",
+					                @"Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3);
+				if (result == DialogResult.Yes)
+				{
+					SyncDialog dialog = new SyncDialog(new SyncInfo(Resources.FeedbackDirectory, "Feedback/", SyncJobType.DeleteFeedback));
+					dialog.ShowDialog();
+				}
+			}
 		}
 	}
 }

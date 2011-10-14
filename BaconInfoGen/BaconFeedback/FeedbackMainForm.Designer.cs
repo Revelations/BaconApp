@@ -545,7 +545,8 @@
 			this.toolStripSync.Margin = new System.Windows.Forms.Padding(4, 1, 4, 2);
 			this.toolStripSync.Name = "toolStripSync";
 			this.toolStripSync.Size = new System.Drawing.Size(36, 45);
-			this.toolStripSync.Text = "Synchronise - Gets new feedback and processes any deletions on the server.";
+			this.toolStripSync.Text = "Synchronise - Gets any new feedback from the server. Will also undo recent deleti" +
+				"ons.";
 			this.toolStripSync.Click += new System.EventHandler(this.toolStripSync_Click);
 			// 
 			// toolStripSeparator4
@@ -629,6 +630,7 @@
 			this.Name = "FeedbackMainForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Feedback Reader";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FeedbackMainForm_FormClosing);
 			this.Shown += new System.EventHandler(this.FeedbackMainForm_Shown);
 			this.menuStrip.ResumeLayout(false);
 			this.menuStrip.PerformLayout();

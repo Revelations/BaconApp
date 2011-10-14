@@ -83,5 +83,51 @@ namespace Common
 					SyncHelper.DeleteRemoteFile(s, info.RemoteDirectory);
 			}
 		}
+
+		public void DownloadFeedback(object sender, DoWorkEventArgs e)
+		{
+			SyncInfo info = (SyncInfo)e.Argument;
+
+			List<string> files = SyncHelper.GetRemoteDirectoryListing(info.RemoteDirectory);
+			List<string> localFiles = SyncHelper.GetLocalDirectoryListing(info.LocalDirectory, true);
+
+			// TODO: Set text to increment files downloaded.
+
+			// Iterate through the list of files, download each one if needed, and increment progress.
+			for (int i = 0; i < files.Count; i++)
+			{
+				if (SyncHelper.NeedsFeedbackDownload(files[i], localFiles))
+					SyncHelper.DownloadFile(files[i], info.LocalDirectory, info.RemoteDirectory);
+
+				float progress = (float)(i + 1) / files.Count * 100;
+				_worker.ReportProgress((int)progress);
+			}
+
+			// TODO: Set text to mention cleanup.
+
+			// Iterate through all local files in the directory, and delete them if they are not present in the remote directory.
+			foreach (string s in SyncHelper.GetLocalDirectoryListing(info.LocalDirectory, true))
+			{
+				if (!files.Contains(s))
+					SyncHelper.DeleteLocalFile(s, info.LocalDirectory);
+			}
+		}
+
+		public void DeleteFeedback(object sender, DoWorkEventArgs e)
+		{
+			SyncInfo info = (SyncInfo)e.Argument;
+			
+			List<string> remoteFiles = SyncHelper.GetRemoteDirectoryListing(info.RemoteDirectory);
+			List<string> localFiles = SyncHelper.GetLocalDirectoryListing(info.LocalDirectory, true);
+
+			for (int i = 0; i < remoteFiles.Count; i++)
+			{
+				if(!localFiles.Contains(remoteFiles[i]))
+					SyncHelper.DeleteRemoteFile(remoteFiles[i], info.RemoteDirectory); 
+				
+				float progress = (float)(i + 1) / remoteFiles.Count * 100;
+				_worker.ReportProgress((int)progress);
+			}
+		}
 	}
 }

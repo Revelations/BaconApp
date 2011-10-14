@@ -58,6 +58,12 @@ namespace Common
 				case SyncJobType.Upload:
 					_view.Worker.DoWork += _ftpJobs.UploadAll;
 					break;
+				case SyncJobType.DownloadFeedback:
+					_view.Worker.DoWork += _ftpJobs.DownloadFeedback;
+					break;
+				case SyncJobType.DeleteFeedback:
+					_view.Worker.DoWork += _ftpJobs.DeleteFeedback;
+					break;
 				default:
 					throw new ArgumentOutOfRangeException();
 			}

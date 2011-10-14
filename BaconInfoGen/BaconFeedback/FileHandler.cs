@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
+using Common;
 
 namespace BaconFeedback
 {
@@ -10,7 +12,7 @@ namespace BaconFeedback
 	public class FileHandler
 	{
 		private const string FeedbackExtension = ".fbk";
-		private static readonly string Dir = "C:/Users/" + Environment.UserName + "/FeedbackTest/";
+		private static readonly string Dir = Resources.FeedbackDirectory;
 
 		// We all recognize this, amirite?
 		private static string FeedbackDirectory
@@ -86,6 +88,21 @@ namespace BaconFeedback
 		{
 			Console.WriteLine(FeedbackDirectory + path);
 			File.Delete(FeedbackDirectory + path);
+		}
+
+		public static void SortFiles()
+		{
+			DirectoryInfo d = new DirectoryInfo(FeedbackDirectory);
+
+			foreach (FileInfo f in d.GetFiles())
+			{
+				string newDir = string.Format("{0}{1} - {2}/", FeedbackDirectory, f.LastWriteTime.Month.ToString("##"),
+				                          f.LastWriteTime.Year);
+				if (!Directory.Exists(newDir))
+					Directory.CreateDirectory(newDir);
+				if (!File.Exists(newDir + f.Name))
+					f.MoveTo(newDir + f.Name);
+			}
 		}
 	}
 }
