@@ -242,6 +242,14 @@ namespace BaconGame
 				UploadSync();
 		}
 
+		/// <summary>
+		/// Creates missing question files from the html files present on the server.
+		/// </summary>
+		public void CreateNeededQuestionFiles()
+		{
+			FileHandler.CreateNeededQuestionFiles();
+		}
+
 		#endregion
 
 		/// <summary>
