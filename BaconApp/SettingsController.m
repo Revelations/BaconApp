@@ -59,7 +59,8 @@
     NSString *filePath = [NSString stringWithFormat:@"%@%@", documentsDirectory, @"/Settings.txt"];
     [data writeToFile:filePath atomically:YES];
     [data release];
-	BaconAppDelegate *dgate = [UIApplication sharedApplication].delegate;
+	BaconAppDelegate * dgate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
+	//BaconAppDelegate *dgate = [UIApplication sharedApplication].delegate;
 	dgate.serverIpAddress = ip;
 	dgate.fontSize = size;
 	[dgate release];

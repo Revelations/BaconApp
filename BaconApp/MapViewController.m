@@ -34,7 +34,7 @@
     [self.webView loadRequest:request];
 	
 	// Draw the map and marker by evaluating the js function.
-	[self.webView stringByEvaluatingJavaScriptFromString:@"addCSS();"];
+	//[self.webView stringByEvaluatingJavaScriptFromString:@"addCSS();"];
 	
 }
 

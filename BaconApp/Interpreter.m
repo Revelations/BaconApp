@@ -13,7 +13,7 @@
 @implementation Interpreter
 
 @synthesize storedInputString;
-@synthesize map_x,map_y;
+@synthesize map_x,map_y,page_title;
 
 NSString *readLineAsNSString(FILE *file)
 {
@@ -36,26 +36,35 @@ NSString *readLineAsNSString(FILE *file)
     return result;
 }
 
-
 -(void) setVals:(NSString *) filePath{
     const char * fileName = [filePath UTF8String];
     FILE * file = fopen(fileName, "r");
     // check for NULL
     while(!feof(file))
     {
-        NSString *line = readLineAsNSString(file);
-        NSArray * contents = [[line componentsSeparatedByString:@"<!--"] autorelease];
-        if ([contents count] > 1) {
-            [contents release];
-            NSArray * x_contents = [[line componentsSeparatedByString:@"x="]autorelease];
-            NSArray * y_contents = [[line componentsSeparatedByString:@"y="]autorelease];
+		NSString *line = readLineAsNSString(file);
+		NSArray * contents = [[line componentsSeparatedByString:@"<!--"] autorelease];
+		if ([contents count] > 1)
+		{
+			[contents release];
+			NSArray * x_contents = [[line componentsSeparatedByString:@"x="] autorelease];
+			NSArray * y_contents = [[line componentsSeparatedByString:@"y="] autorelease];
             
-            
-            map_x = [[[x_contents objectAtIndex:1] substringWithRange:NSMakeRange(0, 3)] intValue];
-            map_y = [[[y_contents objectAtIndex:1] substringWithRange:NSMakeRange(0, 3)] intValue];
-            [x_contents release];
-            [y_contents release];
-        }
+			map_x = [[[x_contents objectAtIndex:1] substringWithRange:NSMakeRange(0, 3)] intValue];
+			map_y = [[[y_contents objectAtIndex:1] substringWithRange:NSMakeRange(0, 3)] intValue];
+			[x_contents release];
+			[y_contents release];
+		}
+		
+		NSArray * titles = [[line componentsSeparatedByString:@"title>"] autorelease];
+		if ([titles count] > 0)
+		{
+			[titles release];
+			NSArray * title_contents = [[line componentsSeparatedByString:@"</"] autorelease];
+			
+			page_title = [title_contents objectAtIndex:0];
+			[title_contents release];
+		}
         
         // do stuff with line; line is autoreleased, so you should NOT release it (unless you also retain it beforehand)
     }
@@ -80,9 +89,9 @@ NSString *readLineAsNSString(FILE *file)
 
 // Extract the x coordinate from the input string.
 /*-(int) x:(NSString *)inputString
-{
-    return [self substringToInt:inputString withRange:NSMakeRange(0, 3)];
-}*/
+ {
+ return [self substringToInt:inputString withRange:NSMakeRange(0, 3)];
+ }*/
 
 // Gets the last known y-coordinate
 -(int) y
@@ -93,21 +102,21 @@ NSString *readLineAsNSString(FILE *file)
 
 // Extract the y coordinate from the input string.
 /*-(int) y:(NSString *)inputString
-{
-	return [self substringToInt:inputString withRange:NSMakeRange(3, 3)];
-//    return _y;
-}*/
+ {
+ return [self substringToInt:inputString withRange:NSMakeRange(3, 3)];
+ //    return _y;
+ }*/
 
 -(NSString *) htmlPath
 {
-//	return _html;
+	//	return _html;
     return [self storedInputString];
 }
 
 /*-(NSString *) htmlPath:(NSString *)inputString
-{
-	return [inputString substringFromIndex:6];
-    //return _html;
-}*/
+ {
+ return [inputString substringFromIndex:6];
+ //return _html;
+ }*/
 
 @end

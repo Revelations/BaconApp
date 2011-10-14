@@ -20,7 +20,7 @@
 NSString * const MENU_HTML_FILE = @"menu";
 
 // Name (without extension) of the map html page.
-NSString * const MAP_HTML_FILE = @"map";
+NSString * const MAP_HTML_FILE = @"maptest";
 
 // Here is where all our webpages reside.
 NSString * const WEB_DIRECTORY = @"Web";

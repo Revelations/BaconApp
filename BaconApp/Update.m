@@ -155,7 +155,7 @@
             NSString *s = [values objectAtIndex:i];
             NSString *filePath = [NSString stringWithFormat:@"%@%@%@", documentsDirectory,@"/", s];
             NSFileManager *fileManager = [NSFileManager defaultManager];
-            NSString *retrieveUrl = [NSString stringWithFormat:@"%@%@", urlPath,s]; 
+            NSString *retrieveUrl = [NSString stringWithFormat:@"%@%@%@", urlPath,@"Content/",s]; 
             if ([fileManager fileExistsAtPath:filePath]) {
                 
                 NSDictionary *attrs = [fileManager attributesOfItemAtPath: filePath error: NULL];

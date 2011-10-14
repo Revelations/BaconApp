@@ -19,6 +19,7 @@
 @property(nonatomic, retain) NSString * storedInputString;
 @property(readwrite) int map_x;
 @property(readwrite) int map_y;
+@property(nonatomic, retain) NSString * page_title;
 
 -(int) x;
 //-(int) x:(NSString *) inputString;

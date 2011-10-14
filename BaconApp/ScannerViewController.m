@@ -42,10 +42,11 @@
 	//	SettingsController *setting = [[SettingsController alloc]init];
 	NSLog(@"HI? u want settings?");
 	BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
-	SettingsController *updateController = [[SettingsController alloc] initWithNibName:nil bundle:nil];
+	
+	SettingsController *settingsController = [[SettingsController alloc] initWithNibName:nil bundle:nil];
 	[[UIApplication sharedApplication].keyWindow.rootViewController
-     presentModalViewController:updateController animated:YES];
-	[updateController release];
+     presentModalViewController:settingsController animated:YES];
+	[settingsController release];
 	
 	
 	//	[self presentModalViewController:setting animated:YES];
@@ -112,10 +113,10 @@
     [super viewDidLoad];
 	
 	//BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
-   /* UpdateController *updateController = [[UpdateController alloc] initWithNibName:nil bundle:nil];
+    UpdateController *updateController = [[UpdateController alloc] initWithNibName:nil bundle:nil];
     [[UIApplication sharedApplication].keyWindow.rootViewController
      presentModalViewController:updateController animated:YES];
-    [updateController release];*/
+    [updateController release];
 }
 
 /*
