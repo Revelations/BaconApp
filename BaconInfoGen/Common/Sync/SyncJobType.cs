@@ -13,6 +13,16 @@
 		Download,
 
 		/// <summary>
+		/// 
+		/// </summary>
+		DownloadFeedback,
+
+		/// <summary>
+		/// 
+		/// </summary>
+		DeleteFeedback,
+
+		/// <summary>
 		/// This job will upload all files from a local directory to the remote directory, and delete anything in the
 		/// remote directory that is not in the local one.
 		/// </summary>

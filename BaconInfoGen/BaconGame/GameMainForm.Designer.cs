@@ -43,6 +43,13 @@
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.menuStrip = new System.Windows.Forms.MenuStrip();
 			this.toolStripFile = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSynchronise = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+			this.toolStripExit = new System.Windows.Forms.ToolStripMenuItem();
+			this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripAdd2 = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripDelete2 = new System.Windows.Forms.ToolStripMenuItem();
+			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.label6 = new System.Windows.Forms.Label();
@@ -67,7 +74,6 @@
 			this.toolStripDelete = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStripSync = new System.Windows.Forms.ToolStripButton();
-			this.toolStripExit = new System.Windows.Forms.ToolStripMenuItem();
 			this.panel1.SuspendLayout();
 			this.menuStrip.SuspendLayout();
 			this.panel2.SuspendLayout();
@@ -180,7 +186,9 @@
 			// menuStrip
 			// 
 			this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripFile});
+            this.toolStripFile,
+            this.editToolStripMenuItem,
+            this.helpToolStripMenuItem});
 			this.menuStrip.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip.Name = "menuStrip";
 			this.menuStrip.Size = new System.Drawing.Size(784, 24);
@@ -190,10 +198,64 @@
 			// toolStripFile
 			// 
 			this.toolStripFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSynchronise,
+            this.toolStripMenuItem1,
             this.toolStripExit});
 			this.toolStripFile.Name = "toolStripFile";
 			this.toolStripFile.Size = new System.Drawing.Size(37, 20);
 			this.toolStripFile.Text = "&File";
+			// 
+			// toolStripSynchronise
+			// 
+			this.toolStripSynchronise.Name = "toolStripSynchronise";
+			this.toolStripSynchronise.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+			this.toolStripSynchronise.Size = new System.Drawing.Size(178, 22);
+			this.toolStripSynchronise.Text = "&Synchronise";
+			this.toolStripSynchronise.Click += new System.EventHandler(this.toolStripSync_Click);
+			// 
+			// toolStripMenuItem1
+			// 
+			this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+			this.toolStripMenuItem1.Size = new System.Drawing.Size(175, 6);
+			// 
+			// toolStripExit
+			// 
+			this.toolStripExit.Name = "toolStripExit";
+			this.toolStripExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+			this.toolStripExit.Size = new System.Drawing.Size(178, 22);
+			this.toolStripExit.Text = "E&xit";
+			this.toolStripExit.Click += new System.EventHandler(this.toolStripExit_Click);
+			// 
+			// editToolStripMenuItem
+			// 
+			this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripAdd2,
+            this.toolStripDelete2});
+			this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+			this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+			this.editToolStripMenuItem.Text = "&Edit";
+			// 
+			// toolStripAdd2
+			// 
+			this.toolStripAdd2.Name = "toolStripAdd2";
+			this.toolStripAdd2.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+			this.toolStripAdd2.Size = new System.Drawing.Size(200, 22);
+			this.toolStripAdd2.Text = "&Add Question";
+			this.toolStripAdd2.Click += new System.EventHandler(this.toolStripAdd_Click);
+			// 
+			// toolStripDelete2
+			// 
+			this.toolStripDelete2.Name = "toolStripDelete2";
+			this.toolStripDelete2.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+			this.toolStripDelete2.Size = new System.Drawing.Size(200, 22);
+			this.toolStripDelete2.Text = "&Delete Question";
+			this.toolStripDelete2.Click += new System.EventHandler(this.toolStripDelete_Click);
+			// 
+			// helpToolStripMenuItem
+			// 
+			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+			this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+			this.helpToolStripMenuItem.Text = "&Help";
 			// 
 			// panel2
 			// 
@@ -251,6 +313,7 @@
 			this.textBoxAnswer4.Location = new System.Drawing.Point(103, 215);
 			this.textBoxAnswer4.Multiline = true;
 			this.textBoxAnswer4.Name = "textBoxAnswer4";
+			this.textBoxAnswer4.ShortcutsEnabled = false;
 			this.textBoxAnswer4.Size = new System.Drawing.Size(492, 41);
 			this.textBoxAnswer4.TabIndex = 10;
 			this.textBoxAnswer4.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
@@ -273,6 +336,7 @@
 			this.textBoxAnswer3.Location = new System.Drawing.Point(103, 168);
 			this.textBoxAnswer3.Multiline = true;
 			this.textBoxAnswer3.Name = "textBoxAnswer3";
+			this.textBoxAnswer3.ShortcutsEnabled = false;
 			this.textBoxAnswer3.Size = new System.Drawing.Size(492, 41);
 			this.textBoxAnswer3.TabIndex = 8;
 			this.textBoxAnswer3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
@@ -306,6 +370,7 @@
 			this.textBoxAnswer2.Location = new System.Drawing.Point(103, 121);
 			this.textBoxAnswer2.Multiline = true;
 			this.textBoxAnswer2.Name = "textBoxAnswer2";
+			this.textBoxAnswer2.ShortcutsEnabled = false;
 			this.textBoxAnswer2.Size = new System.Drawing.Size(492, 41);
 			this.textBoxAnswer2.TabIndex = 5;
 			this.textBoxAnswer2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
@@ -317,6 +382,7 @@
 			this.textBoxAnswer1.Location = new System.Drawing.Point(103, 74);
 			this.textBoxAnswer1.Multiline = true;
 			this.textBoxAnswer1.Name = "textBoxAnswer1";
+			this.textBoxAnswer1.ShortcutsEnabled = false;
 			this.textBoxAnswer1.Size = new System.Drawing.Size(492, 41);
 			this.textBoxAnswer1.TabIndex = 3;
 			this.textBoxAnswer1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
@@ -350,6 +416,7 @@
 			this.textBoxQuestion.Location = new System.Drawing.Point(103, 3);
 			this.textBoxQuestion.Multiline = true;
 			this.textBoxQuestion.Name = "textBoxQuestion";
+			this.textBoxQuestion.ShortcutsEnabled = false;
 			this.textBoxQuestion.Size = new System.Drawing.Size(492, 65);
 			this.textBoxQuestion.TabIndex = 1;
 			this.textBoxQuestion.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
@@ -467,15 +534,8 @@
 			this.toolStripSync.Margin = new System.Windows.Forms.Padding(4, 1, 4, 2);
 			this.toolStripSync.Name = "toolStripSync";
 			this.toolStripSync.Size = new System.Drawing.Size(36, 45);
-			this.toolStripSync.ToolTipText = "Synchronise - Uploads question files to the server.";
+			this.toolStripSync.ToolTipText = "Synchronise - Uploads any new game content to the server.";
 			this.toolStripSync.Click += new System.EventHandler(this.toolStripSync_Click);
-			// 
-			// toolStripExit
-			// 
-			this.toolStripExit.Name = "toolStripExit";
-			this.toolStripExit.Size = new System.Drawing.Size(152, 22);
-			this.toolStripExit.Text = "E&xit";
-			this.toolStripExit.Click += new System.EventHandler(this.toolStripExit_Click);
 			// 
 			// GameMainForm
 			// 
@@ -553,6 +613,12 @@
         private System.Windows.Forms.ColumnHeader answerHeader;
         private System.Windows.Forms.ToolStripButton toolStripAdd;
 		private System.Windows.Forms.ToolStripMenuItem toolStripExit;
+		private System.Windows.Forms.ToolStripMenuItem toolStripSynchronise;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+		private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem toolStripAdd2;
+		private System.Windows.Forms.ToolStripMenuItem toolStripDelete2;
+		private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
     }
 }
 
