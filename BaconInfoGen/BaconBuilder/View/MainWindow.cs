@@ -462,11 +462,8 @@ namespace BaconBuilder.View
 		private static void KeepServerOffline()
 		{
 			// TODO: Remove this before shipping off!!!
-			MessageBox.Show(
-				string.Format(
-					"Everytime this message is not shown, Ceiling Cat throttles the FTP server. Please, think of the kittens in {0}.",
-					typeof (MainWindow)));
-			OFFLINE = true;
+			//MessageBox.Show( string.Format("Everytime this message is not shown, Ceiling Cat throttles the FTP server. Please, think of the kittens in {0}.", typeof (MainWindow)));
+			//OFFLINE = true;
 		}
 
 		private static bool ConnectionExists(out string uri)

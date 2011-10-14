@@ -21,7 +21,7 @@ namespace BaconBuilder.Model
 
 		public static string FilePath
 		{
-			get { return Common.Resources.WorkingDirectory + "log.txt"; }
+			get { return Resources.ContentDirectory + "log.txt"; }
 		}
 
 		public static string QuizLogFilePath
