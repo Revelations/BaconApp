@@ -15,6 +15,7 @@
 #import "Update.h"
 #import "Reachability.h"
 
+#import "NavigationView.h"
 // Name (without extension) of the main menu html page, loaded on app start.
 NSString * const MENU_HTML_FILE = @"menu";
 
@@ -48,7 +49,7 @@ NSString * const WEB_DIRECTORY = @"Web";
     NSLog(@"earth to the world of jim...");
 	
     // Override point for customization after application launch.
-    self.window.rootViewController = self.tabBarController;
+    self.window.rootViewController = [NavigationView new];
 	
     [self.window makeKeyAndVisible];
 	

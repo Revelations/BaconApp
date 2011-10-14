@@ -12,7 +12,7 @@
 #import "MapViewController.h"
 #import "FeedbackController.h"
 #import "GameViewController.h"
-#import "SettingsViewController.h"
+#import "SettingsController.h"
 #import "HelpViewController.h"
 #import "InfoViewController.h"
 #import "BaconAppDelegate.h"
@@ -236,8 +236,8 @@
             
         case 7:
             if(settingsView == nil){
-                SettingsViewController * aController =
-                [[SettingsViewController alloc] initWithNibName:@"SettingsView" bundle:nil];
+                SettingsController * aController =
+                [[SettingsController alloc] initWithNibName:@"SettingsView" bundle:nil];
                 self.settingsView = aController;
                 [aController release];
             }
