@@ -14,8 +14,8 @@ namespace BaconBuilder.Model
 	/// </summary>
 	public class InfoPage
 	{
-		Reader _reader = new Reader();
 		private string page = "<html><head></head><body></body></html>";
+		private Dictionary<string, string> _properties;
 
 		public int X { get; set; }
 		public int Y { get; set; }
@@ -51,7 +51,26 @@ namespace BaconBuilder.Model
 				.ToString();
 		}
 
-		public Dictionary<string, string> Properties(XmlReader reader)
+		public Dictionary<string, string> Props
+		{
+			get
+			{
+				if (_properties == null)
+				{
+					using (var reader = new XmlTextReader(new StringReader(page)))
+					{
+						reader.DtdProcessing = DtdProcessing.Ignore;
+						reader.ReadToFollowing("head");
+
+						_properties = Properties(reader.ReadSubtree());
+					}
+				}
+
+				return _properties;
+			}
+		}
+
+		private Dictionary<string, string> Properties(XmlReader reader)
 		{
 			var result = new Dictionary<string, string>();
 			while (reader.Read())
@@ -70,14 +89,7 @@ namespace BaconBuilder.Model
 
 		public string ConstructHead()
 		{
-			Dictionary<string, string> props;
-			using (var reader = new XmlTextReader(new StringReader(page)))
-			{
-				reader.DtdProcessing = DtdProcessing.Ignore;
-				reader.ReadToFollowing("head");
-
-				props = Properties(reader.ReadSubtree());
-			}
+			var props = Props;
 
 			props["x"] = X.ToString();
 			props["y"] = Y.ToString();
@@ -88,16 +100,18 @@ namespace BaconBuilder.Model
 			{
 				builder.AppendFormat("<!-- {0}={1} -->", p.Key, p.Value);
 			}
-			builder.AppendLine().AppendFormat("<title>{0}</title>",Title).AppendLine()
-			.Append("</head>").AppendLine();
+			builder.AppendLine()
+				.Append(ConstructStyleSheet()).AppendLine()
+				.AppendFormat("<title>{0}</title>",Title).AppendLine()
+				.Append("</head>").AppendLine();
 
 			return builder.ToString();
 		}
 
 		private string ConstructStyleSheet()
 		{
-			string href = "style.css";
-			return string.Format(@"<style link=""{0}"" >", href);
+			const string href = "style.css";
+			return string.Format(@"<link rel=""stylesheet"" href=""{0}"" />", href);
 		}
 
 		public string ConstructBody()

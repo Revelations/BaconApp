@@ -207,6 +207,10 @@
     <None Include="Resources\vmap.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{A21BCBFB-04AE-4774-AE3D-12E163243E95}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Components\Components.csproj">
       <Project>{E3691811-21A1-4F03-A1DD-8D5AF7249183}</Project>
       <Name>Components</Name>

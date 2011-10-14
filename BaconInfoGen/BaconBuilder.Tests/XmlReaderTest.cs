@@ -18,10 +18,16 @@ namespace BaconBuilder
 			_page = new InfoPage();
 		}
 
-		[Test]
+		[Test, ExpectedException(typeof(KeyNotFoundException))]
 		public void Construct()
 		{
+			//Console.WriteLine(_page.SourceCode);
+			Assert.AreEqual("0", _page.Props["x"]); // Should fail.
 			_page.ConstructFullPage(42, 13, "Hello World", "<p>This is a test</p>");
+			Assert.AreEqual("42", _page.Props["x"]);
+			Console.WriteLine(_page.SourceCode);
+			_page.ConstructFullPage(0, 0, "Hello World", "<p>This is a test</p>");
+			Assert.AreEqual("0", _page.Props["x"]);
 			Console.WriteLine(_page.SourceCode);
 		}
 	}
