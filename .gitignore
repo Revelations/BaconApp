@@ -18,6 +18,14 @@ data/
 _ReSharper.*
 *.resharper
 Ankh.NoLoad
-
+xcuserdata
+*.mode1
+*.mode1v3
+*.mode2
+*.mode2v3
+*.pbxuser
+*.perspective
+*.perspectivev3
 *.xcuserstate
 *.exe
+*~.nib
