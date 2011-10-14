@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using BaconBuilder.Model;
 
 namespace BaconGame
 {
@@ -131,6 +132,7 @@ namespace BaconGame
 		/// </summary>
 		private void toolStripSync_Click(object sender, System.EventArgs e)
 		{
+			LogGenerator.CreateGameLog();
 			_presenter.SaveOpen();
 			_presenter.UploadSync();
 		}

@@ -82,6 +82,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BaconBuilder\BaconBuilder.csproj">
+      <Project>{B3668BD4-4001-4EE7-8F6F-E1DA776E98BB}</Project>
+      <Name>BaconBuilder</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{A21BCBFB-04AE-4774-AE3D-12E163243E95}</Project>
       <Name>Common</Name>

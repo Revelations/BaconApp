@@ -23,8 +23,8 @@ namespace BaconBuilder
 			Assert.IsNotNull(info.Directory);
 			var dir = new DirectoryInfo(info.Directory.FullName);
 			Assert.AreNotEqual(0, dir.GetFiles().Length);
-			IList files = new List<object>();
-			LogGenerator.GetFiles(files);
+			var files = new List<object>();
+			LogGenerator.GetFiles(files, LogGenerator.Purpose.Info);
 			Assert.AreNotEqual(0, files.Count);
 		}
 	}
