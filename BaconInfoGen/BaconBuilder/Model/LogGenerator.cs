@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using BaconBuilder.Model.Ftp;
 using Common;
 
 namespace BaconBuilder.Model
@@ -22,7 +21,7 @@ namespace BaconBuilder.Model
 
 		public static string FilePath
 		{
-			get { return FtpHelper.HtmlDirectory + "log.txt"; }
+			get { return Common.Resources.WorkingDirectory + "log.txt"; }
 		}
 
 		public static string QuizLogFilePath
@@ -63,7 +62,7 @@ namespace BaconBuilder.Model
 			switch (purpose)
 			{
 				case Purpose.Info:
-					dir = FtpHelper.HtmlDirectory;
+					dir = new DirectoryInfo(Resources.ContentDirectory);
 					allowed = ContentExtensions;
 					break;
 				case Purpose.Game:

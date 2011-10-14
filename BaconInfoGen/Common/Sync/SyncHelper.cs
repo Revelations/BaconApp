@@ -313,7 +313,7 @@ namespace Common
 		/// </summary>
 		/// <param name="fileName">Name of the file to delete.</param>
 		/// <param name="localDirectory">Directory relative to working directory that it is stored in.</param>
-		public static void DeleteLocalFile(string fileName, string localDirectory = "")
+		public static void DeleteLocalFile(string fileName, string localDirectory)
 		{
 			try
 			{

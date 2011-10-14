@@ -21,7 +21,7 @@ namespace BaconBuilder
 			_controller = new MainViewController(_model, _view);
 			_currentDirNodes = new TreeView().Nodes;
 			Directory.CreateDirectory(TestPath);
-			_model.ChangeDirectory(TestPath);
+			//_model.ChangeDirectory(TestPath);
 			var tp = new FileInfo(TestPath + TestFile);
 			string test = "Push me" + Environment.NewLine + "And then just touch me" + Environment.NewLine +
 			              "Till I can get my satisfaction" + Environment.NewLine +

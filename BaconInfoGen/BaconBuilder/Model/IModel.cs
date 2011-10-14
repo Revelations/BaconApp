@@ -29,12 +29,6 @@ namespace BaconBuilder.Model
 		string AudioUrl { get; set; }
 
 		/// <summary>
-		/// Change the working directory.
-		/// </summary>
-		/// <param name="newDir">The name of the new working directory.</param>
-		void ChangeDirectory(string newDir);
-
-		/// <summary>
 		/// Loads files in the current working directory.
 		/// </summary>
 		void LoadFiles();

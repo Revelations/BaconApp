@@ -4,8 +4,8 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
-using BaconBuilder.Model.Ftp;
 using BaconBuilder.Properties;
+using Resources = Common.Resources;
 using mshtml;
 
 namespace BaconBuilder.Model
@@ -33,7 +33,7 @@ namespace BaconBuilder.Model
 		public void RemoveFile(string fileName)
 		{
 			_fileContents.Remove(fileName);
-			File.Delete(FtpHelper.HtmlDirectory + fileName);
+			Common.SyncHelper.DeleteLocalFile(fileName, Resources.ContentDirectory);
 			CurrentFileNameWithExtension = null;
 		}
 
@@ -43,7 +43,7 @@ namespace BaconBuilder.Model
 		/// <param name="fileName">Name of file</param>
 		public void CreateNewFile(string fileName)
 		{
-			File.WriteAllText(GetLowestUnusedNewFileName(), Resources.Blank);
+			File.WriteAllText(GetLowestUnusedNewFileName(), Properties.Resources.Blank);
 		}
 
 		/// <summary>
@@ -56,8 +56,8 @@ namespace BaconBuilder.Model
 			string oldHtmlName = oldName + HtmlExtension;
 			string newHtmlName = newName + HtmlExtension;
 
-			var oldInfo = new FileInfo(FtpHelper.HtmlDirectory + oldHtmlName);
-			var newInfo = new FileInfo(FtpHelper.HtmlDirectory + newHtmlName);
+			var oldInfo = new FileInfo(Resources.ContentDirectory + oldHtmlName);
+			var newInfo = new FileInfo(Resources.ContentDirectory + newHtmlName);
 
 			if (newInfo.Exists)
 			{
@@ -75,7 +75,7 @@ namespace BaconBuilder.Model
 		/// <param name="fileName">The filename of the file to save.</param>
 		public void SaveFile(string fileName)
 		{
-			File.WriteAllText(FtpHelper.HtmlDirectory + fileName, CurrentContents);
+			File.WriteAllText(Resources.ContentDirectory + fileName, CurrentContents);
 		}
 
 		/// <summary>
@@ -105,7 +105,7 @@ namespace BaconBuilder.Model
 		/// <returns></returns>
 		public void LoadFiles()
 		{
-			FileInfo[] f = FtpHelper.HtmlDirectory.GetFiles("*.html");
+			FileInfo[] f = new DirectoryInfo(Resources.ContentDirectory).GetFiles("*.html");
 			_fileContents.Clear();
 			foreach (FileInfo file in f)
 			{
@@ -132,7 +132,7 @@ namespace BaconBuilder.Model
 
 		public Uri GetCurrentFileUri()
 		{
-			return new Uri(FtpHelper.HtmlDirectory + CurrentFileNameWithExtension);
+			return new Uri(Resources.ContentDirectory + CurrentFileNameWithExtension);
 		}
 
 		public string AudioUrl { get; set; }
@@ -140,15 +140,6 @@ namespace BaconBuilder.Model
 		public Image QrCode(string file)
 		{
 			return new QrCodeGenerator().GenerateCode(file);
-		}
-
-		/// <summary>
-		/// Change the working directory.
-		/// </summary>
-		/// <param name="newDir">The name of the new working directory.</param>
-		public void ChangeDirectory(string newDir)
-		{
-			FtpHelper.HtmlDirectory = new DirectoryInfo(newDir);
 		}
 
 		#endregion
@@ -162,7 +153,7 @@ namespace BaconBuilder.Model
 		/// <returns>Unused filname with the lowest possible appended integer.</returns>
 		private static string GetLowestUnusedNewFileName()
 		{
-			string name = FtpHelper.HtmlDirectory + NewHtmlFileName;
+			string name = Resources.ContentDirectory + NewHtmlFileName;
 			string result = name + HtmlExtension;
 
 			// Otherwise iterate to find the lowest number available to append.

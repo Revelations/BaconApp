@@ -100,7 +100,6 @@
   <ItemGroup>
     <Compile Include="Controller\MainViewController.cs" />
     <Compile Include="Model\FileHandlerShii.cs" />
-    <Compile Include="Model\Ftp\FtpHelper.cs" />
     <Compile Include="Model\IModel.cs" />
     <Compile Include="Model\LogGenerator.cs" />
     <Compile Include="Model\Parser\HtmlToTextParser.cs" />
@@ -109,17 +108,9 @@
     <Compile Include="Model\QrCodeGenerator.cs" />
     <Compile Include="Model\Parser\TextToHtmlParser.cs" />
     <Compile Include="Model\Parser\Parser.cs" />
-    <Compile Include="Model\Ftp\FtpDownloader.cs" />
-    <Compile Include="Model\Ftp\FtpUploader.cs" />
     <Compile Include="Model\Reader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\FtpDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\FtpDialog.Designer.cs">
-      <DependentUpon>FtpDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\MediaSelectionDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -152,9 +143,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="View\FtpDialog.resx">
-      <DependentUpon>FtpDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\MediaSelectionDialog.resx">
       <DependentUpon>MediaSelectionDialog.cs</DependentUpon>
     </EmbeddedResource>

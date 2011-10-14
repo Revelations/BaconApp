@@ -266,11 +266,5 @@ namespace BaconGame
 		{
 			MessageBox.Show(error, @"Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
-
-
-
-
-
-
 	}
 }

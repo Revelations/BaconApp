@@ -6,7 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using BaconBuilder.Controller;
 using BaconBuilder.Model;
-using BaconBuilder.Model.Ftp;
+using Common;
 using mshtml;
 using NetworkCheckApp;
 
@@ -18,14 +18,14 @@ namespace BaconBuilder.View
 		/// For reducing the stress on server. http://social.msdn.microsoft.com/Forums/is/clr/thread/a7a44123-937a-4b02-a918-042a881fa55f
 		/// </summary>
 		/// <returns></returns>
-		[System.Diagnostics.Conditional("DEBUG")]
+		[System.Diagnostics.Conditional("RELEASE")]
 		private static void KeepServerOffline()
 		{
 			// TODO: Remove this before shipping off!!!
 			MessageBox.Show(string.Format("Everytime this message is not shown, Ceiling Cat throttles the FTP server. Please, think of the kittens in {0}.", typeof(MainWindow)));
 			OFFLINE = true;
 		}
-		private static bool OFFLINE = true;
+		private static bool OFFLINE = false;
 
 
 
@@ -318,7 +318,7 @@ namespace BaconBuilder.View
 		private void toolStripSync_Click(object sender, EventArgs e)
 		{
 			LogGenerator.CreateContentLog();
-			var ftpDialog = new FtpDialog(new FtpUploader());
+			var ftpDialog = new SyncDialog(new SyncInfo(Resources.ContentDirectory, "Content/", SyncJobType.Upload));
 			ftpDialog.ShowDialog();
 		}
 
@@ -352,7 +352,7 @@ namespace BaconBuilder.View
 		{
 			if (_hasConnection)
 			{
-				var ftpDialog = new FtpDialog(new FtpDownloader(_model));
+				var ftpDialog = new SyncDialog(new SyncInfo(Resources.ContentDirectory, "Content/", SyncJobType.Download));
 				ftpDialog.ShowDialog();
 			}
 			_controller.InitialiseListView();
@@ -381,7 +381,7 @@ namespace BaconBuilder.View
 			if (result == DialogResult.Yes)
 			{
 				LogGenerator.CreateContentLog();
-				var ftpDialog = new FtpDialog((new FtpUploader()));
+				var ftpDialog = new SyncDialog(new SyncInfo(Resources.ContentDirectory, "Content/", SyncJobType.Upload));
 				ftpDialog.ShowDialog();
 			}
 
@@ -472,11 +472,11 @@ namespace BaconBuilder.View
 //			}
 //			return false;
 
-			uri = FtpHelper.FtpUri();
+			uri = Resources.ServerLocation;
 			KeepServerOffline();
 			if (OFFLINE)
 				return false;
-			return ConnectStatus.Check() && ConnectStatus.Check(ConnectStatus.Method.TcpSocket, uri, FtpHelper.FtpPort);
+			return ConnectStatus.Check() && ConnectStatus.Check(ConnectStatus.Method.TcpSocket, uri, 21);
 		}
 
 //		private static void TestConnection()
