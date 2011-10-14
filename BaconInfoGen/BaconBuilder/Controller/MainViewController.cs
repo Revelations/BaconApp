@@ -14,10 +14,10 @@ namespace BaconBuilder.Controller
 		// Parser object to handle html to text conversion.
 		private static readonly HtmlToTextParser HtmlToText = new HtmlToTextParser();
 		private static readonly TextToHtmlParser TextToHtml = new TextToHtmlParser();
-		private readonly IModel _model;
+		private readonly BaconModel _model;
 		private readonly IMainView _view;
 
-		public MainViewController(IModel model, IMainView view)
+		public MainViewController(BaconModel model, IMainView view)
 		{
 			_model = model;
 			_view = view;
@@ -55,6 +55,10 @@ namespace BaconBuilder.Controller
 			_model.CurrentFileNameWithExtension = value;
 			_view.TitleText = _model.CurrentFileName;
 			_view.Contents = _model.CurrentContents;
+
+			_view.Browser.Document.OpenNew(true);
+			_view.Browser.Document.Write(File.ReadAllText(Common.Resources.ContentDirectory + value));
+			_view.Browser.Url = new Uri(Common.Resources.ContentDirectory + value);
 
 			// TODO: Re implement handling of point data.
 

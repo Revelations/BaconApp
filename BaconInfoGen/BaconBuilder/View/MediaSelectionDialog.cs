@@ -155,9 +155,11 @@ namespace BaconBuilder.View
 
 			string fileName = f.Name.Replace(f.Extension, "");
 
-			i.SaveImage("C:/Users/" + Environment.UserName + "/test/", fileName, ImageType.Png);
+			i.SaveImage(Common.Resources.ContentDirectory, fileName, ImageType.Png);
+			//i.SaveImage("C:/Users/" + Environment.UserName + "/test/", fileName, ImageType.Png);
 
-			_model.ImageUrl = "C:/Users/" + Environment.UserName + "/test/" + fileName + ".png";
+			_model.ImageUrl = Common.Resources.ContentDirectory + fileName + ".png";
+			//_model.ImageUrl = "C:/Users/" + Environment.UserName + "/test/" + fileName + ".png";
 		}
 
 		private void btnCancel_Click(object sender, EventArgs e)

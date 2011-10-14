@@ -5,10 +5,10 @@ namespace BaconBuilder.Controller
 {
 	internal class PreviewController
 	{
-		private readonly IModel _model;
+		private readonly BaconModel _model;
 		private readonly IPreviewView _view;
 
-		public PreviewController(IModel model, IPreviewView view)
+		public PreviewController(BaconModel model, IPreviewView view)
 		{
 			_model = model;
 			_view = view;

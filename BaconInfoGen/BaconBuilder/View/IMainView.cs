@@ -10,5 +10,6 @@ namespace BaconBuilder.View
 		string Contents { get; set; }
 		ListView.ListViewItemCollection Files { get; }
 		void EnableRequiredControls();
+		WebBrowser Browser { get; }
 	}
 }

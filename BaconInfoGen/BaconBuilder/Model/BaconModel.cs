@@ -10,7 +10,7 @@ using mshtml;
 
 namespace BaconBuilder.Model
 {
-	public class BaconModel : IModel
+	public class BaconModel
 	{
 		private const string HtmlExtension = ".html";
 		private const string NewHtmlFileName = "New File";

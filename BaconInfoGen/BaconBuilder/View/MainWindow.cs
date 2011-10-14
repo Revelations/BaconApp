@@ -135,6 +135,11 @@ namespace BaconBuilder.View
 			btnToggleEditMode.Checked = HtmlBrowserEditable;
 		}
 
+		public WebBrowser Browser
+		{
+			get { return HTMLEditor; }
+		}
+
 		#endregion
 
 		#region Constructors
@@ -190,8 +195,8 @@ namespace BaconBuilder.View
 
 		void HTMLEditor_Navigating(object sender, WebBrowserNavigatingEventArgs e)
 		{
-			if (e.Url.ToString() != "about:blank")
-				e.Cancel = true;
+//			if (e.Url.ToString() != "about:blank")
+//				e.Cancel = true;
 		}
 
 		private void MapZoomChanged(object sender, EventArgs e)
@@ -260,7 +265,7 @@ namespace BaconBuilder.View
 			if (msd.ShowDialog() == DialogResult.OK)
 			{
 				Debug.Assert(HTMLEditor.Document != null, "HTMLEditor.Document != null");
-				HTMLEditor.Document.ExecCommand("InsertImage", false, _model.ImageUrl);
+				HTMLEditor.Document.ExecCommand("InsertImage", false, _model.ImageUrl.Replace(Common.Resources.ContentDirectory, ""));
 			}
 		}
 

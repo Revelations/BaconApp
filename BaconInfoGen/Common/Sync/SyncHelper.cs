@@ -73,7 +73,7 @@ namespace Common
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e.Message);
+				Console.WriteLine("GetDirectoryDetails" + e.Message);
 			}
 
 			return result;
@@ -106,7 +106,7 @@ namespace Common
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e.Message);
+				Console.WriteLine("GetRemoteFileSize: " + e.Message);
 				return null;
 			}
 		}
@@ -128,7 +128,7 @@ namespace Common
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e.Message);
+				Console.WriteLine("GetRemoteLastModified: " + e.Message);
 				return null;
 			}
 		}
@@ -172,7 +172,7 @@ namespace Common
 			}
 			catch(Exception e)
 			{
-				Console.WriteLine(e.Message);
+				Console.WriteLine("GetLocalFileSize: " + e.Message);
 				return null;
 			}
 		}
@@ -192,7 +192,7 @@ namespace Common
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e.Message);
+				Console.WriteLine("GetLocalLastModified: " + e.Message);
 				return null;
 			}
 		}
@@ -247,7 +247,7 @@ namespace Common
 				if (responseStream != null) responseStream.Close();
 				if (writer != null) writer.Close();
 
-				Console.WriteLine(e.Message);
+				Console.WriteLine("DownloadFile: " + e.Message);
 			}
 		}
 
@@ -282,7 +282,7 @@ namespace Common
 			{
 				if (ftpstream != null) ftpstream.Close();
 
-				Console.WriteLine(e.Message);
+				Console.WriteLine("UploadFile: " + e.Message);
 			}
 		}
 
@@ -304,7 +304,7 @@ namespace Common
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e.Message);
+				Console.WriteLine("DeleteRemoteFile: " + e.Message);
 			}
 		}
 
@@ -321,7 +321,7 @@ namespace Common
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e.Message);
+				Console.WriteLine("DeleteLocalFile: " + e.Message);
 			}
 		}
 

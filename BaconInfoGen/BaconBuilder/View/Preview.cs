@@ -8,9 +8,9 @@ namespace BaconBuilder.View
 	public partial class Preview : Form, IPreviewView
 	{
 		private readonly PreviewController _controller;
-		private readonly IModel _model;
+		private readonly BaconModel _model;
 
-		public Preview(IModel model)
+		public Preview(BaconModel model)
 		{
 			InitializeComponent();
 
