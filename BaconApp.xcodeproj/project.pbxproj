@@ -54,6 +54,7 @@
 		7DC1899A144484A300BD9041 /* FeedbackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC18999144484A300BD9041 /* FeedbackController.m */; };
 		7DC1899E1445066900BD9041 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC1899D1445066900BD9041 /* Reachability.m */; };
 		7DC189A01445084B00BD9041 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DC1899F1445084B00BD9041 /* SystemConfiguration.framework */; };
+		C8DD0DC0144826820019E80A /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8DD0DBE144826820019E80A /* SettingsController.m */; };
 		D340519E14164082008A82D7 /* DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D340519D14164082008A82D7 /* DataModel.m */; };
 		D340E4FF1415F4D300A2370F /* ScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D340E4FD1415F4D300A2370F /* ScannerViewController.m */; };
 		D340E5001415F4D300A2370F /* ScannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D340E4FE1415F4D300A2370F /* ScannerView.xib */; };
@@ -159,6 +160,8 @@
 		7DC1899C1445066900BD9041 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		7DC1899D1445066900BD9041 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		7DC1899F1445084B00BD9041 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		C8DD0DBD144826820019E80A /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
+		C8DD0DBE144826820019E80A /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
 		D340519C14164082008A82D7 /* DataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataModel.h; sourceTree = "<group>"; };
 		D340519D14164082008A82D7 /* DataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataModel.m; sourceTree = "<group>"; };
 		D340E4FC1415F4D300A2370F /* ScannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScannerViewController.h; sourceTree = "<group>"; };
@@ -418,6 +421,8 @@
 				7D81E89514465F7E00486F43 /* Controller1.m */,
 				7DACEE2E1447B1A200B321D5 /* GameViewController.h */,
 				7DACEE2F1447B1A200B321D5 /* GameViewController.m */,
+				C8DD0DBD144826820019E80A /* SettingsController.h */,
+				C8DD0DBE144826820019E80A /* SettingsController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -559,6 +564,7 @@
 				7D81E89614465F7F00486F43 /* Controller1.m in Sources */,
 				7DACEE301447B1A300B321D5 /* GameViewController.m in Sources */,
 				7DACEE331447F92400B321D5 /* Quiz.m in Sources */,
+				C8DD0DC0144826820019E80A /* SettingsController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,6 +11,7 @@
 #import "MapViewController.h"
 #import "DataModel.h"
 #import "UpdateController.h"
+#import "SettingsController.h"
 #import "Update.h"
 #import "Reachability.h"
 
@@ -33,6 +34,8 @@ NSString * const WEB_DIRECTORY = @"Web";
 @synthesize update;
 @synthesize scannedItems = _scannedItems;
 @synthesize currentView = _currentView;
+@synthesize serverIpAddress = _serverIpAddress;
+@synthesize fontSize = _fontSize;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -52,6 +55,28 @@ NSString * const WEB_DIRECTORY = @"Web";
     return YES;
 }
 
+-(void)readsettingsfile{
+	/*if(settings file exists){
+	 //readline from file
+	 //split on the |
+	 //first part is the font size [0]=fontSize;
+	 //second part is serveripaddress [1] = serverIpAddress;
+	 //close the file
+	 }*/
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+	NSString *s = @"settings.txt";
+	NSString *filePath = [NSString stringWithFormat:@"%@%@%@", documentsDirectory,@"/", s];
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	if ([fileManager fileExistsAtPath:filePath]) {
+		NSString *line = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+		
+		NSArray *parts = [line componentsSeparatedByString: @"|"]; 
+		serverIpAddress = [parts objectAtIndex:1];
+		fontSize = [parts objectAtIndex:0];
+	}
+	
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     /*

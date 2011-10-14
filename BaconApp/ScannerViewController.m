@@ -11,6 +11,7 @@
 #import "BaconAppDelegate.h"
 #import "UpdateController.h"
 #import "Update.h"
+#import "SettingsController.h"
 
 @implementation ScannerViewController
 
@@ -36,6 +37,19 @@
 		  animated:YES];
 	[reader release];
 	
+}
+-(IBAction) settingsButtonPressed{
+	//	SettingsController *setting = [[SettingsController alloc]init];
+	NSLog(@"HI? u want settings?");
+	BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
+	SettingsController *updateController = [[SettingsController alloc] initWithNibName:nil bundle:nil];
+	[[UIApplication sharedApplication].keyWindow.rootViewController
+     presentModalViewController:updateController animated:YES];
+	[updateController release];
+	
+	
+	//	[self presentModalViewController:setting animated:YES];
+	//	[setting release];
 }
 
 // TODO: See if we can refactor the output from scanner to DataModel.
