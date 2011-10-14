@@ -139,7 +139,7 @@ namespace BaconBuilder.Model
 
 		public Image QrCode(string file)
 		{
-			return new QrCodeGenerator().GenerateCode(file);
+			return QrCodeGenerator.GenerateCode(file);
 		}
 
 		#endregion

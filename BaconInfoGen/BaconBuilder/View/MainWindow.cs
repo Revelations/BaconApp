@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Printing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using BaconBuilder.Controller;
@@ -13,26 +14,13 @@ namespace BaconBuilder.View
 {
 	public partial class MainWindow : Form, IMainView
 	{
-		/// <summary>
-		/// For reducing the stress on server. http://social.msdn.microsoft.com/Forums/is/clr/thread/a7a44123-937a-4b02-a918-042a881fa55f
-		/// </summary>
-		/// <returns></returns>
-		[System.Diagnostics.Conditional("RELEASE")]
-		private static void KeepServerOffline()
-		{
-			// TODO: Remove this before shipping off!!!
-			MessageBox.Show(string.Format("Everytime this message is not shown, Ceiling Cat throttles the FTP server. Please, think of the kittens in {0}.", typeof(MainWindow)));
-			OFFLINE = true;
-		}
-		private static bool OFFLINE = false;
-
-
+		private static bool OFFLINE;
 
 
 		private readonly MainViewController _controller;
 		private readonly BaconModel _model;
 		private bool _hasConnection;
-		
+
 		private bool HtmlBrowserEditable
 		{
 			get
@@ -148,16 +136,17 @@ namespace BaconBuilder.View
 		/// </summary>
 		public MainWindow()
 		{
+			font = new Font(Font.FontFamily, 20);
 			// Initialise form controls.
 			InitializeComponent();
 			//txtX.Minimum = 0;
 			//txtY.Minimum = 0;
 
 			//sets tooltips for buttons
-			ToolTip tooltip = new ToolTip();
-			tooltip.SetToolTip(btnAddFile,"Creates a new blank html for the editor");
+			var tooltip = new ToolTip();
+			tooltip.SetToolTip(btnAddFile, "Creates a new blank html for the editor");
 			tooltip.SetToolTip(btnPreview, "Displays the QR code linked to the currently selected file");
-			tooltip.SetToolTip(btnRemoveFile,"Deletes the selected file from the editor");
+			tooltip.SetToolTip(btnRemoveFile, "Deletes the selected file from the editor");
 			tooltip.SetToolTip(btnPrintPreview, "Displays the print preview of the QR codes");
 
 			mapBox.ZoomChanged += MapZoomChanged;
@@ -192,7 +181,7 @@ namespace BaconBuilder.View
 			_controller = new MainViewController(_model, this);
 		}
 
-		void HTMLEditor_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+		private void HTMLEditor_Navigating(object sender, WebBrowserNavigatingEventArgs e)
 		{
 //			if (e.Url.ToString() != "about:blank")
 //				e.Cancel = true;
@@ -264,7 +253,7 @@ namespace BaconBuilder.View
 			if (msd.ShowDialog() == DialogResult.OK)
 			{
 				Debug.Assert(HTMLEditor.Document != null, "HTMLEditor.Document != null");
-				HTMLEditor.Document.ExecCommand("InsertImage", false, _model.ImageUrl.Replace(Common.Resources.ContentDirectory, ""));
+				HTMLEditor.Document.ExecCommand("InsertImage", false, _model.ImageUrl.Replace(Resources.ContentDirectory, ""));
 			}
 		}
 
@@ -371,7 +360,8 @@ namespace BaconBuilder.View
 		{
 			string uri;
 			_hasConnection = ConnectionExists(out uri);
-			if (!_hasConnection) {
+			if (!_hasConnection)
+			{
 				MessageBox.Show(string.Format("Could not connect to {0}", uri), "Error");
 				return;
 			}
@@ -455,14 +445,29 @@ namespace BaconBuilder.View
 		/// </summary>
 		private void txt_ValueChanged(object sender, EventArgs e)
 		{
-			var x = (int)Math.Min(Math.Max(0, txtX.Value), mapBox.Image.Width);
-			var y = (int)Math.Min(Math.Max(0, txtY.Value), mapBox.Image.Height);
+			var x = (int) Math.Min(Math.Max(0, txtX.Value), mapBox.Image.Width);
+			var y = (int) Math.Min(Math.Max(0, txtY.Value), mapBox.Image.Height);
 
 			mapBox.MoveTo(x, y);
 			mapBox.Invalidate();
 		}
 
 		#endregion
+
+		/// <summary>
+		/// For reducing the stress on server. http://social.msdn.microsoft.com/Forums/is/clr/thread/a7a44123-937a-4b02-a918-042a881fa55f
+		/// </summary>
+		/// <returns></returns>
+		[Conditional("DEBUG")]
+		private static void KeepServerOffline()
+		{
+			// TODO: Remove this before shipping off!!!
+			MessageBox.Show(
+				string.Format(
+					"Everytime this message is not shown, Ceiling Cat throttles the FTP server. Please, think of the kittens in {0}.",
+					typeof (MainWindow)));
+			OFFLINE = true;
+		}
 
 		private static bool ConnectionExists(out string uri)
 		{
@@ -483,99 +488,28 @@ namespace BaconBuilder.View
 			return ConnectStatus.Check() && ConnectStatus.Check(ConnectStatus.Method.TcpSocket, uri, 21);
 		}
 
-//		private static void TestConnection()
-//		{
-//			string http = "http://revelations.webhop.org/";
-//			foreach (ConnectStatus.Method m in Enum.GetValues(typeof(ConnectStatus.Method)))
-//			{
-//				Console.WriteLine(m.ToString());
-//				DateTime start;
-//				if (m.Equals(ConnectStatus.Method.Ping))
-//				{
-//					var adds = Dns.GetHostAddresses(new Uri(http).Host);
-//
-//					foreach (var t in adds)
-//					{
-//						start = DateTime.Now;
-//						bool b = ConnectStatus.Check(m, t.ToString(), 81);
-//						Console.WriteLine(@"{0} for {1} took {2}ms. Status = {3}", m, t.ToString(), (DateTime.Now - start).TotalMilliseconds, b);
-//					}
-//				}
-//				else if (m.Equals(ConnectStatus.Method.WebRequest))
-//				{
-//					var loc = new Uri(http).AbsoluteUri;
-//					start = DateTime.Now;
-//					bool b = ConnectStatus.Check(m, loc, 81);
-//					Console.WriteLine(@"{0} for {1} took {2}ms. Status = {3}", m, loc, (DateTime.Now - start).TotalMilliseconds, b);
-//				}
-//				else
-//				{
-//					var loc = new Uri(http).AbsoluteUri;
-//					start = DateTime.Now;
-//					bool b = ConnectStatus.Check(m, loc, 81);
-//					Console.WriteLine(@"{0} for {1} took {2}ms. Status = {3}", m, loc, (DateTime.Now - start).TotalMilliseconds, b);
-//				}
-//			}
-//
-//			string ftp = Resources.ServerLocation;
-//			foreach (ConnectStatus.Method m in Enum.GetValues(typeof(ConnectStatus.Method)))
-//			{
-//				Console.WriteLine(m.ToString());
-//				DateTime start;
-//				if (m.Equals(ConnectStatus.Method.Ping))
-//				{
-//					var adds = Dns.GetHostAddresses(new Uri(ftp).Host);
-//
-//					foreach (var t in adds)
-//					{
-//						start = DateTime.Now;
-//						bool b = ConnectStatus.Check(m, t.ToString(), 81);
-//						Console.WriteLine(@"{0} for {1} took {2}ms. Status = {3}", m, t.ToString(), (DateTime.Now - start).TotalMilliseconds, b);
-//					}
-//				}
-//				else if (m.Equals(ConnectStatus.Method.WebRequest))
-//				{
-//					var loc = new Uri(ftp).AbsoluteUri;
-//					start = DateTime.Now;
-//					bool b = ConnectStatus.Check(m, loc, 81);
-//					Console.WriteLine(@"{0} for {1} took {2}ms. Status = {3}", m, loc, (DateTime.Now - start).TotalMilliseconds, b);
-//				}
-//				else
-//				{
-//					var loc = new Uri(ftp).AbsoluteUri;
-//					start = DateTime.Now;
-//					bool b = ConnectStatus.Check(m, loc, 81);
-//					Console.WriteLine(@"{0} for {1} took {2}ms. Status = {3}", m, loc, (DateTime.Now - start).TotalMilliseconds, b);
-//				}
-//			}
-//
-//		}
-
 		#region Russell's Print Stuff.
 
 		// TODO: Refactor the below to a method that takes margins
+		private readonly Font font;
+		private readonly Brush fontColor = Brushes.Black;
 		private int _codecount;
 
-		/// <summary>
-		/// Print multiple pages.
-		/// Russell
-		/// </summary>
-		private void printDocument_PrintPage(object sender, PrintPageEventArgs e)
+		private void printDocument_PrintPage1(object sender, PrintPageEventArgs e)
 		{
 			//Info width = 827
 			//Info height = 1169
 
 			int mx = e.MarginBounds.Left;
-			var qr = new QrCodeGenerator();
 			var font = new Font(Font.FontFamily, 20);
 			var fontColor = new SolidBrush(Color.Black);
 
 			//drawing lines for now
 			int pageheight = e.MarginBounds.Height;
 			float right = e.PageBounds.Width - 172 - mx;
-			float left = e.PageBounds.Width / 2 + mx;
+			float left = e.PageBounds.Width/2 + mx;
 			float yline = e.MarginBounds.Top;
-			int linediff = pageheight / 4;
+			int linediff = pageheight/4;
 			for (; _codecount < Files.Count; _codecount++)
 			{
 				float qrImageX, qrTextX;
@@ -587,9 +521,9 @@ namespace BaconBuilder.View
 					e.HasMorePages = true;
 					return;
 				}
-				Image code = qr.GenerateCode(text);
+				Image code = QrCodeGenerator.GenerateCode(text);
 				//Even on left. Odd on right
-				if (_codecount % 2 == 0)
+				if (_codecount%2 == 0)
 				{
 					qrImageX = mx;
 					qrTextX = left;
@@ -600,13 +534,60 @@ namespace BaconBuilder.View
 					qrTextX = mx;
 				}
 
-				e.Graphics.DrawString(text, font, fontColor, new RectangleF(qrTextX, ((int)yline + 90), 500, 100));
-				e.Graphics.DrawImage(code, qrImageX, (float)((int)yline + 34.5));
+				e.Graphics.DrawString(text, font, fontColor, new RectangleF(qrTextX, ((int) yline + 90), 500, 100));
+				e.Graphics.DrawImage(code, qrImageX, (float) ((int) yline + 34.5));
 
 				yline += linediff;
 			}
 
 			e.HasMorePages = false;
+		}
+
+		/// <summary>
+		/// Print multiple pages.
+		/// Russell
+		/// </summary>
+		private void printDocument_PrintPage(object sender, PrintPageEventArgs e)
+		{
+			//e.Graphics.DrawRectangle(Pens.Red, new Rectangle (e.MarginBounds.X, e.MarginBounds.Y, e.MarginBounds.Width, e.MarginBounds.Height));
+			//Info width = 827
+			//Info height = 1169
+			float top = e.MarginBounds.Top;
+			float bot = e.MarginBounds.Top;
+			for (; _codecount < Files.Count; _codecount++)
+			{
+				if (bot > e.MarginBounds.Bottom)
+				{
+					e.HasMorePages = true;
+					return;
+				}
+
+				var info = new FileInfo(Files[_codecount].Text);
+				var text = info.Name.Substring(0, info.Name.Length - info.Extension.Length);
+
+				float height;
+				PrintCodeImageText(e, text, ref top, out bot, 32, out height);
+				bot = top + height;
+			}
+
+			 e.HasMorePages = false;
+		}
+
+		private void PrintCodeImageText(PrintPageEventArgs e, string text, ref float imageTop, out float imageBottom, int margin, out float height)
+		{
+			Image code = QrCodeGenerator.GenerateCode(text);
+
+			float qrTextX = e.MarginBounds.Left + code.Width + (e.MarginBounds.Left/2);
+
+			height = code.Height;
+			
+
+			e.Graphics.DrawString(text, font, fontColor, new RectangleF(qrTextX, (imageTop + 90), e.MarginBounds.Width - code.Width, code.Height));
+			
+			e.Graphics.DrawImage(code, e.MarginBounds.Left, imageTop);
+			
+			imageBottom = imageTop + code.Height;
+			imageTop = imageBottom + margin;
 		}
 
 		#endregion

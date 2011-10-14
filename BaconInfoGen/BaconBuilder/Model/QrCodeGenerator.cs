@@ -3,25 +3,29 @@ using ThoughtWorks.QRCode.Codec;
 
 namespace BaconBuilder.Model
 {
-	public class QrCodeGenerator
+	public static class QrCodeGenerator
 	{
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="data">the string of data to convert to a qr code</param>
 		/// <returns>the image of the qr code generated</returns>
-		public Image GenerateCode(string data)
+		public static Image GenerateCode(string data)
 		{
-			var qrCodeEncoder = new QRCodeEncoder();
+			var qrCodeEncoder =
+				new QRCodeEncoder
+					{
+						//sets encode mode to encode as bytes
+						QRCodeEncodeMode = QRCodeEncoder.ENCODE_MODE.BYTE,
+						QRCodeVersion = 4,
+						QRCodeScale = 5,
+						//must be light
+						QRCodeBackgroundColor = Color.White,
+						//must be dark
+						QRCodeForegroundColor = Color.Black
+					};
 
-			//sets encode mode to encode as bytes
-			qrCodeEncoder.QRCodeEncodeMode = QRCodeEncoder.ENCODE_MODE.BYTE;
-			qrCodeEncoder.QRCodeVersion = 4;
-			qrCodeEncoder.QRCodeScale = 5;
-			qrCodeEncoder.QRCodeBackgroundColor = Color.White; //must be light
-			qrCodeEncoder.QRCodeForegroundColor = Color.Black; //must be dark
-			Image qrCode = qrCodeEncoder.Encode(data);
-			return qrCode;
+			return qrCodeEncoder.Encode(data);
 		}
 	}
 }
