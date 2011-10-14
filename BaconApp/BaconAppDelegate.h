@@ -27,7 +27,7 @@ extern NSString * const WEB_DIRECTORY;
 	int x;
 	int y;
 	NSString *html;
-    NSMutableArray * scanNum;
+    NSMutableArray * scannedItems;
 }
 
 

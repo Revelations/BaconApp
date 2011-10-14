@@ -10,6 +10,7 @@
 #import "Interpreter.h"
 #import "BaconAppDelegate.h"
 #import "UpdateController.h"
+#import "Update.h"
 
 @implementation ScannerViewController
 
@@ -91,7 +92,9 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	NSLog(@"Scanner view did load");
-	
+	Update * updateSession = [[[Update alloc]init]autorelease];
+    [updateSession GetGameFiles:@"ftp://revelations.webhop.org/"];
+    NSLog(@"Update Session has finished");
     [super viewDidLoad];
 	
 	//BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];

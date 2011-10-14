@@ -31,7 +31,7 @@ NSString * const WEB_DIRECTORY = @"Web";
 @synthesize model;
 @synthesize x, y, html;
 @synthesize update;
-@synthesize scannedItems;
+@synthesize scannedItems = _scannedItems;
 @synthesize currentView = _currentView;
 
 #pragma mark -

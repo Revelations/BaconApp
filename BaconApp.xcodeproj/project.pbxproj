@@ -47,6 +47,9 @@
 		7D8ECCA6143645810099D07E /* Update.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8ECCA5143645810099D07E /* Update.m */; };
 		7DACEE281446F1E900B321D5 /* NavSubView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DACEE271446F1E900B321D5 /* NavSubView.xib */; };
 		7DACEE2B1446F77400B321D5 /* HelpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DACEE2A1446F77300B321D5 /* HelpView.xib */; };
+		7DACEE2D1447B0F100B321D5 /* GameView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DACEE2C1447B0F000B321D5 /* GameView.xib */; };
+		7DACEE301447B1A300B321D5 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DACEE2F1447B1A200B321D5 /* GameViewController.m */; };
+		7DACEE331447F92400B321D5 /* Quiz.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DACEE321447F92300B321D5 /* Quiz.m */; };
 		7DB80438142CEEC6002A23AA /* EntryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DB80437142CEEC6002A23AA /* EntryView.xib */; };
 		7DC1899A144484A300BD9041 /* FeedbackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC18999144484A300BD9041 /* FeedbackController.m */; };
 		7DC1899E1445066900BD9041 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC1899D1445066900BD9041 /* Reachability.m */; };
@@ -145,6 +148,11 @@
 		7D8ECCA5143645810099D07E /* Update.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Update.m; sourceTree = "<group>"; };
 		7DACEE271446F1E900B321D5 /* NavSubView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NavSubView.xib; sourceTree = "<group>"; };
 		7DACEE2A1446F77300B321D5 /* HelpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpView.xib; sourceTree = "<group>"; };
+		7DACEE2C1447B0F000B321D5 /* GameView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameView.xib; sourceTree = "<group>"; };
+		7DACEE2E1447B1A200B321D5 /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
+		7DACEE2F1447B1A200B321D5 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		7DACEE311447F92300B321D5 /* Quiz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quiz.h; sourceTree = "<group>"; };
+		7DACEE321447F92300B321D5 /* Quiz.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Quiz.m; sourceTree = "<group>"; };
 		7DB80437142CEEC6002A23AA /* EntryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EntryView.xib; sourceTree = "<group>"; };
 		7DC18998144484A300BD9041 /* FeedbackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackController.h; sourceTree = "<group>"; };
 		7DC18999144484A300BD9041 /* FeedbackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackController.m; sourceTree = "<group>"; };
@@ -365,6 +373,7 @@
 				7D81E89214465E7A00486F43 /* SettingsView.xib */,
 				7DACEE271446F1E900B321D5 /* NavSubView.xib */,
 				7DACEE2A1446F77300B321D5 /* HelpView.xib */,
+				7DACEE2C1447B0F000B321D5 /* GameView.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -384,6 +393,8 @@
 				D340519D14164082008A82D7 /* DataModel.m */,
 				7D8ECCA4143645810099D07E /* Update.h */,
 				7D8ECCA5143645810099D07E /* Update.m */,
+				7DACEE311447F92300B321D5 /* Quiz.h */,
+				7DACEE321447F92300B321D5 /* Quiz.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -405,6 +416,8 @@
 				7DC18999144484A300BD9041 /* FeedbackController.m */,
 				7D81E89414465F7D00486F43 /* Controller1.h */,
 				7D81E89514465F7E00486F43 /* Controller1.m */,
+				7DACEE2E1447B1A200B321D5 /* GameViewController.h */,
+				7DACEE2F1447B1A200B321D5 /* GameViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -493,6 +506,7 @@
 				7D81E89314465E7A00486F43 /* SettingsView.xib in Resources */,
 				7DACEE281446F1E900B321D5 /* NavSubView.xib in Resources */,
 				7DACEE2B1446F77400B321D5 /* HelpView.xib in Resources */,
+				7DACEE2D1447B0F100B321D5 /* GameView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -543,6 +557,8 @@
 				7DC1899A144484A300BD9041 /* FeedbackController.m in Sources */,
 				7DC1899E1445066900BD9041 /* Reachability.m in Sources */,
 				7D81E89614465F7F00486F43 /* Controller1.m in Sources */,
+				7DACEE301447B1A300B321D5 /* GameViewController.m in Sources */,
+				7DACEE331447F92400B321D5 /* Quiz.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
