@@ -54,7 +54,7 @@ namespace BaconBuilder.Controller
 		{
 			_model.CurrentFileNameWithExtension = value;
 			_view.TitleText = _model.CurrentFileName;
-			_view.Contents = _model.CurrentContents;
+			//_view.Contents = _model.CurrentContents;
 
 			_view.Browser.Document.OpenNew(true);
 			_view.Browser.Document.Write(File.ReadAllText(Common.Resources.ContentDirectory + value));

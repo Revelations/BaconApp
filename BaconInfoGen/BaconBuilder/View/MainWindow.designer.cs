@@ -91,6 +91,7 @@ namespace BaconBuilder.View
 			this.splitter4 = new System.Windows.Forms.Splitter();
 			this.printDocument = new System.Drawing.Printing.PrintDocument();
 			this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
+			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip.SuspendLayout();
 			this.pnlDirectories.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -129,6 +130,7 @@ namespace BaconBuilder.View
 			// fileToolStripMenuItem
 			// 
 			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
             this.toolStripSync,
             this.toolStripSeparator2,
             this.printToolStripMenuItem,
@@ -210,7 +212,7 @@ namespace BaconBuilder.View
 			// optionsToolStripMenuItem
 			// 
 			this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-			this.optionsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+			this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.optionsToolStripMenuItem.Text = "&Options...";
 			// 
 			// pnlDirectories
@@ -703,6 +705,14 @@ namespace BaconBuilder.View
 			this.printPreviewDialog.Name = "printPreviewDialog";
 			this.printPreviewDialog.Visible = false;
 			// 
+			// toolStripMenuItem1
+			// 
+			this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+			this.toolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+			this.toolStripMenuItem1.Size = new System.Drawing.Size(176, 22);
+			this.toolStripMenuItem1.Text = "&New File";
+			this.toolStripMenuItem1.Click += new System.EventHandler(this.btnAddFile_Click);
+			// 
 			// MainWindow
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -808,6 +818,7 @@ namespace BaconBuilder.View
 		private Components.MapBox mapBox;
 		private ToolStripStatusLabel lblZoom;
 		private ToolStripStatusLabel lblNetworkStatus;
+		private ToolStripMenuItem toolStripMenuItem1;
 
 	}
 }

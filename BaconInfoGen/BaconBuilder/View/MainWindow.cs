@@ -20,36 +20,75 @@ namespace BaconBuilder.View
 		private readonly MainViewController _controller;
 		private readonly BaconModel _model;
 		private bool _hasConnection;
+		string contents;
+		protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+		{
+			switch (keyData)
+			{
+				case Keys.Control | Keys.Tab:
+					NextTab();
+					return true;
+				case Keys.Control | Keys.Shift | Keys.Tab:
+					PreviousTab();
+					return true;
+				case Keys.Control | Keys.N:
+					CreateConnection(null);
+					return true;
+			}
+			return false;
+		}
+
+		private void CreateConnection(object o)
+		{
+			btnAddFile_Click(null, EventArgs.Empty);
+		}
+
+		private void PreviousTab()
+		{
+			throw new NotImplementedException();
+		}
+
+		private void NextTab()
+		{
+			throw new NotImplementedException();
+		}
 
 		private bool HtmlBrowserEditable
 		{
 			get
 			{
-				Debug.Assert(HTMLEditor.Document != null, "HTMLEditor.Document != null");
 				var doc = HTMLEditor.Document.DomDocument as IHTMLDocument2;
-				Debug.Assert(doc != null, "doc != null");
 				string mode = doc.designMode.ToLower();
+				Console.WriteLine(mode);
 				return (mode.Equals("on") && !mode.Equals("off"));
 			}
 			set
 			{
-				Debug.Assert(HTMLEditor.Document != null, "HTMLEditor.Document != null");
+			Console.WriteLine("Setting design mode to: " + value);
 				var doc = HTMLEditor.Document.DomDocument as IHTMLDocument2;
-				Debug.Assert(doc != null, "doc != null");
 				if (value)
 				{
-					string contents = HTMLEditor.DocumentText;
+					//string contents = HTMLEditor.DocumentText;
 					doc.designMode = "on";
-					doc.write(contents);
+
+					//contents = HTMLEditor.DocumentText;
+					//doc.write(contents);
 				}
 				else
 				{
+					//TODO: It's a hack to get pages showing correctly and saving our edits, without saving to harddisk file....
 					string contents = HTMLEditor.DocumentText;
+					contents = HTMLEditor.DocumentText;
+					Console.WriteLine(contents);
 					doc.designMode = "off";
-					if (HTMLEditor.Document != null)
+					if (HTMLEditor.Document != null && File.Exists(Resources.ContentDirectory + _model.CurrentFileNameWithExtension))
 					{
-						HTMLEditor.Document.OpenNew(false);
-						HTMLEditor.Document.Write(contents);
+//						HTMLEditor.Document.OpenNew(false);
+//						HTMLEditor.Document.Write(contents);
+						HTMLEditor.Document.OpenNew(true);
+						File.WriteAllText(Resources.ContentDirectory + _model.CurrentFileNameWithExtension, contents);
+						//HTMLEditor.Document.Write(File.ReadAllText(Resources.ContentDirectory + _model.CurrentFileNameWithExtension));
+						HTMLEditor.Url = new Uri(Resources.ContentDirectory + _model.CurrentFileNameWithExtension);
 					}
 				}
 			}
