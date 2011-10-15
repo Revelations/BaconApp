@@ -109,7 +109,7 @@
 - (void)viewDidLoad {
 	NSLog(@"Scanner view did load");
 	Update * updateSession = [[[Update alloc]init]autorelease];
-	[updateSession GetGameFiles:@"ftp://revelations.webhop.org/"];
+	[updateSession GetGameFiles:@"ftp://revelations.webhop.org"];
 	NSLog(@"Update Session has finished");
 	[super viewDidLoad];
 	
@@ -142,13 +142,13 @@
 }
 
 
--(void)addToViewsSeen:(NSString *) file{
+-(void)addToViewsSeen:(NSString *) file {
+	BaconAppDelegate * appDelegate = (BaconAppDelegate *) [[UIApplication sharedApplication] delegate];
 	
 	NSArray * contents = [[file componentsSeparatedByString:@"."] autorelease];
 	NSString * currentFile = [[contents objectAtIndex:0] autorelease];
 	
-	NSMutableArray * currentP = [(BaconAppDelegate *) [[UIApplication sharedApplication] delegate]scannedItems];
-	
+	NSMutableArray * currentP = [appDelegate scannedItems];
 	BOOL found = NO;
 	for (NSString * s in currentP) {
 		if (s == currentFile) {
@@ -158,16 +158,13 @@
 	}
 	
 	if(!found){
-		[currentP addObject : currentFile];
+		[currentP addObject:currentFile];
 	}
-								
 	
-	
-	[[(BaconAppDelegate *)[[UIApplication sharedApplication] delegate] scannedItems] addObject:interpreter.htmlPath];
+	[[appDelegate scannedItems] addObject:interpreter.htmlPath];
 }
 
 // Called when the view disappears.
-
 -(void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
 	// Set the current history item to interpreted scanner data.
@@ -176,14 +173,12 @@
 	appDelegate.x = interpreter.x;
 	appDelegate.y = interpreter.y;
 	appDelegate.html = interpreter.htmlPath;
-	[self addToViewsSeen:interpreter.htmlPath];
 	
+	[self addToViewsSeen:interpreter.htmlPath];
 	
 	//appDelegate.model.current = [[HistoryItem alloc] initWithHtmlFile:[interpreter htmlPath] x:interpreter.x y:interpreter.y];
 	// Add the current history item to the list.
 	//[appDelegate.model.history addObject:appDelegate.model.current];
-	
-	
 }
 
 

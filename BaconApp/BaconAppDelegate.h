@@ -17,6 +17,8 @@ extern NSString * const MAP_HTML_FILE;
 
 // Here is where all our webpages reside.
 extern NSString * const WEB_DIRECTORY;
+extern NSString * const GAME_DIRECTORY;
+extern NSString * const CONTENT_DIRECTORY;
 
 @interface BaconAppDelegate : NSObject
 	<UIApplicationDelegate, UITabBarDelegate>

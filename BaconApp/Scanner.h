@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-
 @interface Scanner : NSObject <ZBarReaderDelegate>
 {
 	NSString * outputString;

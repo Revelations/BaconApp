@@ -8,7 +8,6 @@
 
 #import "Scanner.h"
 
-
 @implementation Scanner
 
 @synthesize ouputString;

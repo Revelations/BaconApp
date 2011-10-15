@@ -20,7 +20,7 @@
 @property (nonatomic, assign)   size_t            bufferOffsetU;
 @property (nonatomic, assign)   size_t            bufferLimitU;
 
-- (void)getFile:(NSString *) urlPath :(NSString *) filePath;
+-(void)getFile:(NSString *)urlPath:(NSString *)filePath;
 -(void)getDirectory:(NSString *)urlPath;
 -(int)CheckForInternet: (Reachability *) curReach;
 //-(void)upLoadFile:(NSString *)urlPath;

@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="6"/>
+			<integer value="1"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -45,10 +45,10 @@
 					<object class="IBUITextView" id="43684010">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{0, 56}, {320, 142}}</string>
+						<string key="NSFrame">{{0, 44}, {320, 372}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSNextKeyView" ref="942880792"/>
-						<object class="NSColor" key="IBUIBackgroundColor" id="764322758">
+						<reference key="NSNextKeyView"/>
+						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MSAxIDEAA</bytes>
 						</object>
@@ -58,8 +58,14 @@
 							<integer value="256" key="IBUIAccessibilityTraits"/>
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">This app was made for the Maungatautari Ecological Island Trust, by the University of Waikato. Its purpose is to help provide information about the Trust and the animals they help protect. </string>
-						<object class="NSFont" key="IBUIFont" id="883730241">
+						<bool key="IBUIEditable">NO</bool>
+						<string type="base64-UTF8" key="IBUIText">VGhpcyBhcHAgd2FzIG1hZGUgZm9yIHRoZSBNYXVuZ2F0YXV0YXJpIEVjb2xvZ2ljYWwgSXNsYW5kIFRy
+dXN0LCBieSB0aGUgVW5pdmVyc2l0eSBvZiBXYWlrYXRvLiBJdHMgcHVycG9zZSBpcyB0byBoZWxwIHBy
+b3ZpZGUgaW5mb3JtYXRpb24gYWJvdXQgdGhlIFRydXN0IGFuZCB0aGUgYW5pbWFscyB0aGV5IGhlbHAg
+cHJvdGVjdC4gCgpGb3IgZnVydGhlciBpbmZvcm1hdGlvbiByZWdhcmRpbmcgdGhlIFRydXN0LCBqdXN0
+IHNlbGVjdCB0aGUgbGlua3MgYmVsb3cuIFlvdSB3aWxsIG5lZWQgYW4gYWN0aXZlIGNvbm5lY3Rpb24g
+dG8gdGhlIGludGVybmV0IHRvIHZpZXcgdGhlbS4</string>
+						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Helvetica</string>
 							<double key="NSSize">17</double>
 							<int key="NSfFlags">16</int>
@@ -83,26 +89,6 @@
 								<string key="IBUITitle">About</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
-						</object>
-					</object>
-					<object class="IBUITextView" id="942880792">
-						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{0, 199}, {319.469, 109.168}}</string>
-						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSNextKeyView" ref="548086887"/>
-						<reference key="IBUIBackgroundColor" ref="764322758"/>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<bool key="IBUIMultipleTouchEnabled">YES</bool>
-						<object class="IBUIAccessibilityConfiguration" key="IBUIAccessibilityConfiguration">
-							<integer value="256" key="IBUIAccessibilityTraits"/>
-						</object>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">For further information regarding the Trust, just select the links below. You will need an active connection to the internet to view them.</string>
-						<reference key="IBUIFont" ref="883730241"/>
-						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
-							<int key="IBUIAutocapitalizationType">2</int>
-							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
 					</object>
 					<object class="IBUIToolbar" id="548086887">
@@ -204,9 +190,8 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="43684010"/>
-							<reference ref="942880792"/>
-							<reference ref="548086887"/>
 							<reference ref="245317731"/>
+							<reference ref="548086887"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">mainView</string>
@@ -244,11 +229,6 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 						</object>
 						<reference key="parent" ref="245317731"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">8</int>
-						<reference key="object" ref="942880792"/>
-						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">9</int>
@@ -292,8 +272,8 @@
 					<string>3.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
 					<string>7.IBPluginDependency</string>
-					<string>8.IBPluginDependency</string>
 					<string>9.IBPluginDependency</string>
+					<string>9.IBViewBoundsToFrameTransform</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -308,7 +288,9 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<object class="NSAffineTransform">
+						<bytes key="NSTransformStruct">P4AAAL+AAAAAAAAAw+UAAA</bytes>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">

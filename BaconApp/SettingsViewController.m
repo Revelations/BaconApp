@@ -11,10 +11,14 @@
 
 @implementation SettingsViewController
 
+@synthesize txtFontSize, txtIPAddress;
+
+
 -(IBAction)applyChangesPressed:(id)sender {
-	
+	NSLog(@"Applying changes. (Not yet implemented)");
 }
 -(IBAction)discardChangesPressed:(id)sender {
+	NSLog(@"Discarding changes. (Not yet implemented)");
 	//Revert font size.
 	//Revert server address.
 }
@@ -50,6 +54,16 @@
 	return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 */
+
+- (void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event {  
+    if (txtFontSize) {  
+        if ([txtFontSize canResignFirstResponder]) [txtFontSize resignFirstResponder];  
+    }
+    if (txtIPAddress) {  
+        if ([txtIPAddress canResignFirstResponder]) [txtIPAddress resignFirstResponder];  
+    }
+    [super touchesBegan: touches withEvent: event];  
+}
 
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.

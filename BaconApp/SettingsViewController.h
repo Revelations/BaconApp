@@ -14,6 +14,9 @@
 	IBOutlet UITextField * txtIPAddress;
 }
 
+@property (nonatomic, retain) IBOutlet UITextField * txtFontSize;
+@property (nonatomic, retain) IBOutlet UITextField * txtIPAddress;
+
 -(IBAction)applyChangesPressed:(id)sender;
 -(IBAction)discardChangesPressed:(id)sender;
 

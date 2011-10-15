@@ -17,13 +17,13 @@
 #import "NavigationView.h"
 // Name (without extension) of the main menu html page, loaded on app start.
 NSString * const MENU_HTML_FILE = @"menu";
-
 // Name (without extension) of the map html page.
 NSString * const MAP_HTML_FILE = @"map";
 
 // Here is where all our webpages reside.
 NSString * const WEB_DIRECTORY = @"Web";
-
+NSString * const GAME_DIRECTORY = @"Game";
+NSString * const CONTENT_DIRECTORY = @"Content";
 
 @implementation BaconAppDelegate
 

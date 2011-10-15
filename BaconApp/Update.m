@@ -8,7 +8,7 @@
 
 #import "Update.h"
 #import "Reachability.h"
-
+#import "BaconAppDelegate.h"
 
 @implementation Update
 
@@ -90,12 +90,11 @@
 	
 }
 
--(void)getFile:(NSString *)uP :(NSString *) filePath{
-	
-	
-	NSString * urlPath = [uP stringByReplacingOccurrencesOfString:@" "withString:@"%20"];
-	NSLog(@"File is being downloaded from %@ and being written to %@",urlPath,filePath);
-	NSURL *url = [NSURL URLWithString:urlPath];
+-(void)getFile:(NSString *)urlPath:(NSString *)filePath {
+	//Replace spaces with %20
+	NSString * parsedUrlPath = [urlPath stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+	NSLog(@"File is being downloaded from %@ and being written to %@", parsedUrlPath, filePath);
+	NSURL *url = [NSURL URLWithString:parsedUrlPath];
 	
 	NSError * err = [[NSError alloc] init];    
 	//retrieves the data from the url --Donovan
@@ -125,10 +124,8 @@
 	}
 }
 
-
 -(void)getDirectory:(NSString *)urlPath{
-	
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"%@%@", urlPath, @"log.txt"]];
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"%@/%@", urlPath, @"log.txt"]];
 	
 	//retrieves the data from the url --Donovan
 	NSData *urlData = [NSData dataWithContentsOfURL:url];
@@ -139,10 +136,10 @@
 		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 		NSString *documentsDirectory = [paths objectAtIndex:0];
 		
-		NSString *filePath = [NSString stringWithFormat:@"%@%@", documentsDirectory, @"//log.txt"];
-		[urlData writeToFile:filePath atomically:YES];
+		NSString *logFilePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory, @"/log.txt"];
+		[urlData writeToFile:logFilePath atomically:YES];
 		
-		NSString *fileContents = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+		NSString *fileContents = [NSString stringWithContentsOfFile:logFilePath encoding:NSUTF8StringEncoding error:nil];
 		
 		NSArray *values = [fileContents componentsSeparatedByString:@"|"];
 		
@@ -150,24 +147,24 @@
 		//iterates over the files it needs to download
 		for(int i = 0; i < [values count]; i++){
 			NSString *s = [values objectAtIndex:i];
-			NSString *filePath = [NSString stringWithFormat:@"%@%@%@", documentsDirectory,@"/", s];
+			NSString *logFilePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory, s];
 			NSFileManager *fileManager = [NSFileManager defaultManager];
-			NSString *retrieveUrl = [NSString stringWithFormat:@"%@%@%@", urlPath,@"Content/",s]; 
-			if ([fileManager fileExistsAtPath:filePath]) {
+			NSString *retrieveUrl = [NSString stringWithFormat:@"%@/%@/%@", urlPath, CONTENT_DIRECTORY,s]; 
+			if ([fileManager fileExistsAtPath:logFilePath]) {
 				
-				NSDictionary *attrs = [fileManager attributesOfItemAtPath: filePath error: NULL];
+				NSDictionary *attrs = [fileManager attributesOfItemAtPath:logFilePath error: NULL];
 				
 				int result = [attrs fileSize];                
 				int size = [[values objectAtIndex:++i] intValue];
 				
 				//checks to see if it already has the file
 				if(size != result){	
-					[self getFile:retrieveUrl:filePath];
+					[self getFile:retrieveUrl:logFilePath];
 				}
 			}
 			else{
 				i++;
-				[self getFile:retrieveUrl:filePath];
+				[self getFile:retrieveUrl:logFilePath];
 			}
 		}
 	}
@@ -176,52 +173,56 @@
 	}    
 }
 
--(void)GetGameFiles:(NSString *) urlPath{
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"%@%@", urlPath, @"Game/gamelog.txt"]];
+// urlPath does not need slash at the end.
+// Currently, revelations.webhop.org
+-(void)GetGameFiles:(NSString *) urlPath {
+	NSLog(@"-(void)GetGameFiles:(NSString *) urlPath;");
+	NSString *remoteGameFilesDirectory = [NSString stringWithFormat: @"%@/%@", urlPath, GAME_DIRECTORY];
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"%@/%@", remoteGameFilesDirectory, @"gamelog.txt"]];
 	NSError * err = [[NSError alloc] init];  
 	NSLog(@"Downloading dir info from %@", url);
-	//retrieves the data from the url --Donovan     
+	//retrieves the data from the url --Donovan
 	NSData *urlData = [NSData dataWithContentsOfURL:url];
 
-	if(urlData){        
+	if (urlData) {
 		
 		//finds the relevant directory to ensure that iOS does not purge it --Donovan
 		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 		NSString *documentsDirectory = [paths objectAtIndex:0];
-		
+		NSString *localGameFilesDirectory = [NSString stringWithFormat: @"%@/%@", documentsDirectory, GAME_DIRECTORY];
 		NSFileManager *fileManager = [NSFileManager defaultManager];
-		[fileManager createDirectoryAtPath:[NSString stringWithFormat: @"%@%@",documentsDirectory, @"/Game"] withIntermediateDirectories:NO attributes:nil error: nil];
-		NSString *filePath = [NSString stringWithFormat:@"%@%@", documentsDirectory, @"/Game/log.txt"];
-		NSLog(@"log is being written to %@", filePath);
-		[urlData writeToFile:filePath atomically:YES];
+		[fileManager createDirectoryAtPath:localGameFilesDirectory
+			   withIntermediateDirectories:NO attributes:nil error:nil];
+		NSString *logFilePath = [NSString stringWithFormat:@"%@/%@", localGameFilesDirectory, @"log.txt"];
+		NSLog(@"log is being written to %@", logFilePath);
+		[urlData writeToFile:logFilePath atomically:YES];
 		
-		NSString *fileContents = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+		NSString *fileContents = [NSString stringWithContentsOfFile:logFilePath encoding:NSUTF8StringEncoding error:nil];
 		
 		NSArray *values = [fileContents componentsSeparatedByString:@"|"];
-		
 		
 		//iterates over the files it needs to download
 		for(int i = 0; i < [values count]; i++){
 			NSString *s = [values objectAtIndex:i];
-			NSString *filePath = [NSString stringWithFormat:@"%@%@%@", documentsDirectory,@"/Game/", s];
-			//            NSFileManager *fileManager = [NSFileManager defaultManager];
-			NSString *retrieveUrl = [NSString stringWithFormat:@"%@Game/%@", urlPath,s]; 
+			NSString *logFilePath = [NSString stringWithFormat:@"%@/%@", localGameFilesDirectory, s];
+			// NSFileManager *fileManager = [NSFileManager defaultManager];
+			NSString *retrieveUrl = [NSString stringWithFormat:@"%@/%@", remoteGameFilesDirectory, s]; 
 			NSLog(@"retrieveURL has value of %@", retrieveUrl);
-			if ([fileManager fileExistsAtPath:filePath]) {
+			if ([fileManager fileExistsAtPath:logFilePath]) {
 				
-				NSDictionary *attrs = [fileManager attributesOfItemAtPath: filePath error: NULL];
+				NSDictionary *attrs = [fileManager attributesOfItemAtPath:logFilePath error:NULL];
 				
 				int result = [attrs fileSize];                
 				int size = [[values objectAtIndex:++i] intValue];
 				
 				//checks to see if it already has the file
 				if(size != result){	
-					[self getFile:retrieveUrl:filePath];
+					[self getFile:retrieveUrl:logFilePath];
 				}
 			}
-			else{
+			else {
 				i++;
-				[self getFile:retrieveUrl:filePath];
+				[self getFile:retrieveUrl:logFilePath];
 			}
 		}
 	}

@@ -25,8 +25,10 @@
 	NSString * filePath = [[NSBundle mainBundle] pathForResource:inputString ofType:@"html" inDirectory:WEB_DIRECTORY];
 	
 	// If that file doesn't exist then break prematurely.
-	if(![[NSFileManager defaultManager] fileExistsAtPath:filePath])
+	if(![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+		NSLog(@"Page does not exist");
 		return;
+	}
 	
 	// Create and load the request.
 	NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePath]];

@@ -41,7 +41,6 @@
 		7D36FEEE144857AA00AC7042 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D36FEED144857A900AC7042 /* AboutViewController.m */; };
 		7D81E89014465B5200486F43 /* AboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D81E88F14465B5200486F43 /* AboutView.xib */; };
 		7D81E89314465E7A00486F43 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D81E89214465E7A00486F43 /* SettingsView.xib */; };
-		7D81E89614465F7F00486F43 /* Controller1.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D81E89514465F7E00486F43 /* Controller1.m */; };
 		7D898BAA1441AEF900EC0895 /* FeedbackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D898BA91441AEF900EC0895 /* FeedbackView.xib */; };
 		7D8ECCA214363ABF0099D07E /* UpdateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8ECCA014363ABE0099D07E /* UpdateController.m */; };
 		7D8ECCA314363ABF0099D07E /* UpdateController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D8ECCA114363ABF0099D07E /* UpdateController.xib */; };
@@ -148,8 +147,6 @@
 		7D36FEED144857A900AC7042 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		7D81E88F14465B5200486F43 /* AboutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutView.xib; sourceTree = "<group>"; };
 		7D81E89214465E7A00486F43 /* SettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
-		7D81E89414465F7D00486F43 /* Controller1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Controller1.h; sourceTree = "<group>"; };
-		7D81E89514465F7E00486F43 /* Controller1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Controller1.m; sourceTree = "<group>"; };
 		7D898BA91441AEF900EC0895 /* FeedbackView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedbackView.xib; sourceTree = "<group>"; };
 		7D8ECC9F14363ABE0099D07E /* UpdateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateController.h; sourceTree = "<group>"; };
 		7D8ECCA014363ABE0099D07E /* UpdateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateController.m; sourceTree = "<group>"; };
@@ -437,8 +434,6 @@
 				7D8ECCA014363ABE0099D07E /* UpdateController.m */,
 				7DC18998144484A300BD9041 /* FeedbackController.h */,
 				7DC18999144484A300BD9041 /* FeedbackController.m */,
-				7D81E89414465F7D00486F43 /* Controller1.h */,
-				7D81E89514465F7E00486F43 /* Controller1.m */,
 				7DACEE2E1447B1A200B321D5 /* GameViewController.h */,
 				7DACEE2F1447B1A200B321D5 /* GameViewController.m */,
 				7D36FEEB144856F900AC7042 /* HelpViewController.h */,
@@ -588,7 +583,6 @@
 				7D8ECCA6143645810099D07E /* Update.m in Sources */,
 				7DC1899A144484A300BD9041 /* FeedbackController.m in Sources */,
 				7DC1899E1445066900BD9041 /* Reachability.m in Sources */,
-				7D81E89614465F7F00486F43 /* Controller1.m in Sources */,
 				7DACEE301447B1A300B321D5 /* GameViewController.m in Sources */,
 				7DACEE331447F92400B321D5 /* Quiz.m in Sources */,
 				7DACEE5B1448531900B321D5 /* HelpViewController.m in Sources */,

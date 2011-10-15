@@ -14,15 +14,22 @@ NSString * const website = @"http://www.maungatrust.org/";
 @implementation AboutViewController
 
 -(IBAction)btnFacebookPressed:(id)sender {
-	NSLog(@"Navigating to \"%@\" (Function not yet implemented)", facebook);
+	NSLog(@"Navigating to \"%@\"", facebook);
+	
+	NSString *urlString = facebook;
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
 }
 
 -(IBAction)btnWebsitePressed:(id)sender {
 	NSLog(@"Navigating to \"%@\" (Function not yet implemented)", website);
+	
+	NSString *urlString = website;
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
 }
 
 -(IBAction)btnOkPressed:(id)sender {
-	
+	NSLog(@"Ok button pressed");
+	//Do stuff here to dismiss this view.
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
