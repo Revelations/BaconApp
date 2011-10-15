@@ -11,6 +11,11 @@
 
 @implementation HelpViewController
 
+-(IBAction)returnToMainView {
+	NSLog(@"Returning to main view -- Not yet implemented");
+}
+
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];

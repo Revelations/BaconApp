@@ -53,7 +53,6 @@
 		7DACEE331447F92400B321D5 /* Quiz.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DACEE321447F92300B321D5 /* Quiz.m */; };
 		7DACEE5B1448531900B321D5 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DACEE561448531900B321D5 /* HelpViewController.m */; };
 		7DACEE5C1448531900B321D5 /* NavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DACEE581448531900B321D5 /* NavigationView.m */; };
-		7DACEE5D1448531900B321D5 /* NavigationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DACEE591448531900B321D5 /* NavigationView.xib */; };
 		7DACEE5E1448531900B321D5 /* UpdateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DACEE5A1448531900B321D5 /* UpdateView.xib */; };
 		7DACEE611448536500B321D5 /* NavigationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DACEE5F1448536500B321D5 /* NavigationView.xib */; };
 		7DACEE621448536500B321D5 /* UpdateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DACEE601448536500B321D5 /* UpdateView.xib */; };
@@ -167,8 +166,7 @@
 		7DACEE561448531900B321D5 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
 		7DACEE571448531900B321D5 /* NavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationView.h; sourceTree = "<group>"; };
 		7DACEE581448531900B321D5 /* NavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationView.m; sourceTree = "<group>"; };
-		7DACEE591448531900B321D5 /* NavigationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NavigationView.xib; sourceTree = "<group>"; };
-		7DACEE5A1448531900B321D5 /* UpdateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UpdateView.xib; path = BaconApp/UpdateView.xib; sourceTree = "<group>"; };
+		7DACEE5A1448531900B321D5 /* UpdateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpdateView.xib; sourceTree = "<group>"; };
 		7DACEE5F1448536500B321D5 /* NavigationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NavigationView.xib; sourceTree = "<group>"; };
 		7DACEE601448536500B321D5 /* UpdateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpdateView.xib; sourceTree = "<group>"; };
 		7DB80437142CEEC6002A23AA /* EntryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EntryView.xib; sourceTree = "<group>"; };
@@ -297,7 +295,6 @@
 				7DC1899F1445084B00BD9041 /* SystemConfiguration.framework */,
 				1726B715140F4C580000EC72 /* ZBarSDK */,
 				17A5A7C7140DEEB4009BB46E /* BaconApp */,
-				7DACEE5A1448531900B321D5 /* UpdateView.xib */,
 				17A5A7E1140DEEB4009BB46E /* BaconAppTests */,
 				17A5A7C0140DEEB4009BB46E /* Frameworks */,
 				17A5A7BE140DEEB4009BB46E /* Products */,
@@ -339,7 +336,6 @@
 				7F48B9191413C3370001546A /* Resources */,
 				17BBA94E1412FF2C00D0BE9D /* Web */,
 				17A5A7C8140DEEB4009BB46E /* Supporting Files */,
-				7DB80437142CEEC6002A23AA /* EntryView.xib */,
 			);
 			path = BaconApp;
 			sourceTree = "<group>";
@@ -384,7 +380,8 @@
 		7F48B9191413C3370001546A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				7DACEE591448531900B321D5 /* NavigationView.xib */,
+				7DB80437142CEEC6002A23AA /* EntryView.xib */,
+				7DACEE5A1448531900B321D5 /* UpdateView.xib */,
 				7DACEE5F1448536500B321D5 /* NavigationView.xib */,
 				7DACEE601448536500B321D5 /* UpdateView.xib */,
 				7D8ECCA114363ABF0099D07E /* UpdateController.xib */,
@@ -539,7 +536,6 @@
 				7DACEE281446F1E900B321D5 /* NavSubView.xib in Resources */,
 				7DACEE2B1446F77400B321D5 /* HelpView.xib in Resources */,
 				7DACEE2D1447B0F100B321D5 /* GameView.xib in Resources */,
-				7DACEE5D1448531900B321D5 /* NavigationView.xib in Resources */,
 				7DACEE5E1448531900B321D5 /* UpdateView.xib in Resources */,
 				7DACEE611448536500B321D5 /* NavigationView.xib in Resources */,
 				7DACEE621448536500B321D5 /* UpdateView.xib in Resources */,

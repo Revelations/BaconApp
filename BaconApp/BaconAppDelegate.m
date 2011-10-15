@@ -11,7 +11,6 @@
 #import "MapViewController.h"
 #import "DataModel.h"
 #import "UpdateController.h"
-#import "SettingsController.h"
 #import "Update.h"
 #import "Reachability.h"
 
@@ -20,7 +19,7 @@
 NSString * const MENU_HTML_FILE = @"menu";
 
 // Name (without extension) of the map html page.
-NSString * const MAP_HTML_FILE = @"maptest";
+NSString * const MAP_HTML_FILE = @"map";
 
 // Here is where all our webpages reside.
 NSString * const WEB_DIRECTORY = @"Web";
@@ -104,7 +103,7 @@ NSString * const WEB_DIRECTORY = @"Web";
         else{
             
             //spawns the thread to send feedback
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, NULL), ^{
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, (int)NULL), ^{
                 while ([application backgroundTimeRemaining] > 5.0) {
                     if([updateSession CheckForInternet:receptionCheck] != -1)
                         break;
@@ -149,7 +148,7 @@ NSString * const WEB_DIRECTORY = @"Web";
         else{
             
             //spawns the thread to send feedback
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, NULL), ^{
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, (int)NULL), ^{
                 while (YES) {
                     if([updateSession CheckForInternet:receptionCheck] != -1)
                         break;

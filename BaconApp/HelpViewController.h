@@ -10,6 +10,8 @@
 
 
 @interface HelpViewController : UIViewController {
-	
+	IBOutlet UIButton *okButton;
 }
+
+-(IBAction) returnToMainView;
 @end
