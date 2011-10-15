@@ -20,5 +20,7 @@
 
 -(IBAction)applyChangesPressed:(id)sender;
 -(IBAction)discardChangesPressed:(id)sender;
+-(IBAction)updateButtonPressed:(id)sender;
+
 
 @end

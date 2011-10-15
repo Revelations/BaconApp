@@ -5,7 +5,8 @@
 //  Created by Donoan Hoffman on 15/10/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
-
+#import "Update.h"
+#import "UpdateController.h"
 #import "SettingsViewController.h"
 
 
@@ -21,6 +22,20 @@
 	NSLog(@"Discarding changes. (Not yet implemented)");
 	//Revert font size.
 	//Revert server address.
+}
+
+-(IBAction)updateButtonPressed:(id)sender {
+	//TODO: Move to start of program.
+	Update * updateSession = [[[Update alloc]init]autorelease];
+	[updateSession GetGameFiles:@"ftp://revelations.webhop.org"];
+	NSLog(@"Update Session has finished");
+	
+	//BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
+	UpdateController *updateController = [[UpdateController alloc] initWithNibName:nil bundle:nil];
+	[[UIApplication sharedApplication].keyWindow.rootViewController
+	 presentModalViewController:updateController animated:YES];
+	[updateController release];
+	
 }
 
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
