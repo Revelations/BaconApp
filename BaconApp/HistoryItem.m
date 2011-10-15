@@ -15,27 +15,27 @@
 
 -(CGPoint) coordinates
 {
-    return CGPointMake(x, y);
+	return CGPointMake(x, y);
 }
 
 -(void) setCoordinates:(CGPoint)coordinates
 {
-    x = coordinates.x;
-    y = coordinates.y;
+	x = coordinates.x;
+	y = coordinates.y;
 }
 
 -(HistoryItem *) initWithHtmlFile:(NSString *)HtmlFile x:(int)xCoord y:(int)yCoord
 {
-    self = [super init];
-    
-    if(self)
-    {
-        self.htmlFile = HtmlFile;
-        self.x = xCoord;
-        self.y = yCoord;
-    }
-    
-    return self;
+	self = [super init];
+	
+	if(self)
+	{
+		self.htmlFile = HtmlFile;
+		self.x = xCoord;
+		self.y = yCoord;
+	}
+	
+	return self;
 }
 
 @end

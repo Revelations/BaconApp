@@ -12,19 +12,19 @@
 #import "HistoryItem.h"
 
 @interface MapViewController : UIViewController <UIWebViewDelegate> {
-    IBOutlet UIWebView * webView;
-    IBOutlet NSString * menuPath;
-    IBOutlet UIActivityIndicatorView * activityIndicator;
-    
-    NSMutableArray * history;
-    HistoryItem * current;
-    
-    Scanner * scanner;
-    Interpreter * interpreter;
-    
-    bool loadingMapScreen;
-    
-    NSString * jScript;
+	IBOutlet UIWebView * webView;
+	IBOutlet NSString * menuPath;
+	IBOutlet UIActivityIndicatorView * activityIndicator;
+	
+	NSMutableArray * history;
+	HistoryItem * current;
+	
+	Scanner * scanner;
+	Interpreter * interpreter;
+	
+	bool loadingMapScreen;
+	
+	NSString * jScript;
 }
 
 @property (nonatomic, retain) IBOutlet UIWebView *webView;

@@ -10,8 +10,8 @@
 
 
 @interface UpdateController : UIViewController {
-    IBOutlet UILabel *output;
-    IBOutlet UIProgressView *progBar;
+	IBOutlet UILabel *output;
+	IBOutlet UIProgressView *progBar;
 }
 @property(nonatomic,retain) IBOutlet UIProgressView *progBar;
 -(IBAction)Update:(id)sender;

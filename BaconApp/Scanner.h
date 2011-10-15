@@ -11,7 +11,7 @@
 
 @interface Scanner : NSObject <ZBarReaderDelegate>
 {
-    NSString * outputString;
+	NSString * outputString;
 }
 
 @property(nonatomic, retain) NSString * ouputString;

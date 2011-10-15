@@ -8,17 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-
 @interface Quiz : NSObject {
-    NSMutableArray  * questions;
-    NSString        * questionName;
+	NSMutableArray	* questions;
+	NSString		* questionName;
 }
 
 #pragma mark - Properties
-@property (retain, nonatomic) NSMutableArray * questions;
-@property (retain, nonatomic) NSString * questionName;
-
+@property (retain, nonatomic) NSMutableArray	* questions;
+@property (retain, nonatomic) NSString			* questionName;
 
 #pragma mark - Methods
--(void)readQuizFile: (NSString *) filePath;
+- (void) readQuizFile: (NSString *) filePath;
+
 @end

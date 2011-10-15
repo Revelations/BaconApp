@@ -32,31 +32,31 @@
 #pragma mark  - App Admin
 - (id)initWithStyle:(UITableViewStyle)style
 {
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+	self = [super initWithStyle:style];
+	if (self) {
+		// Custom initialization
+	}
+	return self;
 }
 
 - (void)dealloc
 {
-    [super dealloc];
+	[super dealloc];
 }
 
 - (void)didReceiveMemoryWarning
 {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
+	// Releases the view if it doesn't have a superview.
+	[super didReceiveMemoryWarning];
+	
+	// Release any cached data, images, etc that aren't in use.
 }
 
 
 #pragma mark - View lifecycle
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+	[super viewDidLoad];
 
 	cellContent = [[NSArray arrayWithObjects:
 					@"Title",
@@ -70,44 +70,44 @@
 					@"Help",
 					nil] retain];
 	self.navigationItem.title = @"BACON!";
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+	// Uncomment the following line to preserve selection between presentations.
+	// self.clearsSelectionOnViewWillAppear = NO;
  
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+	// self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewDidUnload
 {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+	[super viewDidUnload];
+	// Release any retained subviews of the main view.
+	// e.g. self.myOutlet = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+	[super viewWillAppear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+	[super viewDidAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
+	[super viewWillDisappear:animated];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    [super viewDidDisappear:animated];
+	[super viewDidDisappear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+	// Return YES for supported orientations
+	return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - Table view data source
@@ -115,39 +115,39 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
 #warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 1;
+	// Return the number of sections.
+	return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-        return [cellContent count];
+		return [cellContent count];
 }
 
 
 //configure the appearance of the cells
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
-    
-    // Configure the cell...
+	static NSString *CellIdentifier = @"Cell";
+	
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	if (cell == nil) {
+		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+	}
+	
+	// Configure the cell...
 	NSUInteger row = [indexPath row];
 	cell.textLabel.text =[cellContent objectAtIndex:row];
-    
-    return cell;
+	
+	return cell;
 }
 
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+	// Return NO if you do not want the specified item to be editable.
+	return YES;
 }
 */
 
@@ -155,13 +155,13 @@
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+	if (editingStyle == UITableViewCellEditingStyleDelete) {
+		// Delete the row from the data source
+		[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+	}   
+	else if (editingStyle == UITableViewCellEditingStyleInsert) {
+		// Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+	}   
 }
 */
 
@@ -176,8 +176,8 @@
 // Override to support conditional rearranging of the table view.
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+	// Return NO if you do not want the item to be re-orderable.
+	return YES;
 }
 */
 
@@ -187,108 +187,108 @@
 //navigation and event handling
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    switch (indexPath.row) {
-        case 1:
-            if(aboutView == nil){
-                AboutViewController * aController =
-                [[AboutViewController alloc]initWithNibName:@"AboutView" bundle:nil];
-                self.aboutView = aController;
-                [aController release];
-            }
+	switch (indexPath.row) {
+		case 1:
+			if(aboutView == nil){
+				AboutViewController * aController =
+				[[AboutViewController alloc]initWithNibName:@"AboutView" bundle:nil];
+				self.aboutView = aController;
+				[aController release];
+			}
 			NSLog(@"You have selected aboutView");
-            [self presentModalViewController:self.aboutView animated:YES];
-            break;
-        case 2:
-            if(scannerView == nil){
-                ScannerViewController * aController = 
-                [[ScannerViewController alloc] initWithNibName:@"ScannerView" bundle:nil];
-                self.scannerView = aController;
-                [aController release];
-            }
+			[self presentModalViewController:self.aboutView animated:YES];
+			break;
+		case 2:
+			if(scannerView == nil){
+				ScannerViewController * aController = 
+				[[ScannerViewController alloc] initWithNibName:@"ScannerView" bundle:nil];
+				self.scannerView = aController;
+				[aController release];
+			}
 			NSLog(@"You have selected scannerView");
 			[self presentModalViewController:self.scannerView animated:YES];
-            break;
-        case 3:
-            if(infoView == nil){
-                InfoViewController * aController =
-                [[InfoViewController alloc] initWithNibName:@"InfoView" bundle:nil];
-                self.infoView = aController;
-                [aController release];
-            }
+			break;
+		case 3:
+			if(infoView == nil){
+				InfoViewController * aController =
+				[[InfoViewController alloc] initWithNibName:@"InfoView" bundle:nil];
+				self.infoView = aController;
+				[aController release];
+			}
 			NSLog(@"You have selected infoView");
-            [self presentModalViewController:self.infoView animated:YES];
-            break;
-        case 4:
-            if(mapView == nil){
-                MapViewController * aController =
-                [[MapViewController alloc] initWithNibName:@"MapView" bundle:nil];
-                self.mapView = aController;
-                [aController release];
-            }
+			[self presentModalViewController:self.infoView animated:YES];
+			break;
+		case 4:
+			if(mapView == nil){
+				MapViewController * aController =
+				[[MapViewController alloc] initWithNibName:@"MapView" bundle:nil];
+				self.mapView = aController;
+				[aController release];
+			}
 			//[[self presentModalViewController]:[[MapViewController alloc] initWithNibName:@"MapView" bundle:nil] animated:YES];
 			NSLog(@"You have selected mapView");
 			[self presentModalViewController:self.mapView animated:YES];
-            break;
-            
-        case 5:
-            if(feedbackView == nil){
-                FeedbackController * aController =
-                [[FeedbackController alloc] initWithNibName:@"FeedbackView" bundle:nil];
-                self.feedbackView = aController;
-                [aController release];
-            }
+			break;
+			
+		case 5:
+			if(feedbackView == nil){
+				FeedbackController * aController =
+				[[FeedbackController alloc] initWithNibName:@"FeedbackView" bundle:nil];
+				self.feedbackView = aController;
+				[aController release];
+			}
 			NSLog(@"You have selected FeedbackView");
-            [self presentModalViewController:self.feedbackView animated:YES];
-            break;
-            
-        case 6:
-            if(gameView == nil){
-                GameViewController * aController =
-                [[GameViewController alloc] initWithNibName:@"GameView" bundle:nil];
-                self.gameView = aController;
-                [aController release];
-            }
+			[self presentModalViewController:self.feedbackView animated:YES];
+			break;
+			
+		case 6:
+			if(gameView == nil){
+				GameViewController * aController =
+				[[GameViewController alloc] initWithNibName:@"GameView" bundle:nil];
+				self.gameView = aController;
+				[aController release];
+			}
 			NSLog(@"You have selected the gameView");
-            [self presentModalViewController:self.gameView animated:YES];
-            break;
-            
-        case 7:
-            if(settingsView == nil){
-                SettingsViewController * aController =
-                [[SettingsViewController alloc] initWithNibName:@"SettingsView" bundle:nil];
-                self.settingsView = aController;
-                [aController release];
-            }
+			[self presentModalViewController:self.gameView animated:YES];
+			break;
+			
+		case 7:
+			if(settingsView == nil){
+				SettingsViewController * aController =
+				[[SettingsViewController alloc] initWithNibName:@"SettingsView" bundle:nil];
+				self.settingsView = aController;
+				[aController release];
+			}
 			NSLog(@"You have selected settingsView");
-            [self presentModalViewController:self.settingsView animated:YES];
-            break;
-            
-        case 8:
-            if(helpView == nil){
-                HelpViewController * aController =
-                [[HelpViewController alloc] initWithNibName:@"helpView" bundle:nil];
-                self.helpView = aController;
-                [aController release];
-            }
+			[self presentModalViewController:self.settingsView animated:YES];
+			break;
+			
+		case 8:
+			if(helpView == nil){
+				HelpViewController * aController =
+				[[HelpViewController alloc] initWithNibName:@"helpView" bundle:nil];
+				self.helpView = aController;
+				[aController release];
+			}
 			NSLog(@"You have Selected helpView");
-            [self presentModalViewController:self.helpView animated:YES];
-            break;
-        default:
+			[self presentModalViewController:self.helpView animated:YES];
+			break;
+		default:
 			NSLog(@"You have selected something else");
-            exit(-1);
-            break;
-    }
+			exit(-1);
+			break;
+	}
 
-    // Navigation logic may go here. Create and push another view controller.
+	// Navigation logic may go here. Create and push another view controller.
    /* if (dvController == nil) {
-        Detailviewcontroller *aController =
+		Detailviewcontroller *aController =
 		[[Detailviewcontroller alloc]initWithNibName:@"DetailView" bundle:nil];
-        
-        self.dvController = aController;
-        
-        [aController release];
-    }
-    [[self navigationController] pushViewController:dvController animated:YES];*/
+		
+		self.dvController = aController;
+		
+		[aController release];
+	}
+	[[self navigationController] pushViewController:dvController animated:YES];*/
 }
 
 @end

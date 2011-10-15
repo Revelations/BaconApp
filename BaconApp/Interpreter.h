@@ -11,7 +11,7 @@
 
 @interface Interpreter : NSObject
 {
-    NSString * storedInputString;
+	NSString * storedInputString;
 	//int _x, _y;
 	//NSString *_html;
 }

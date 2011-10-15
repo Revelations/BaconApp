@@ -20,25 +20,25 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 	// Override point for customization after application launch.
-    
-	scanner = [Scanner new];
-    interpreter = [Interpreter new];
 	
-    
+	scanner = [Scanner new];
+	interpreter = [Interpreter new];
+	
+	
 	current = [[[HistoryItem alloc] initWithHtmlFile:MENU_HTML_FILE x:0 y:0] autorelease];
-    
-    loadingMapScreen = false;
-    
-    [history addObject:current];
-    
-    [self webViewLoadPage:current.htmlFile];
-    
+	
+	loadingMapScreen = false;
+	
+	[history addObject:current];
+	
+	[self webViewLoadPage:current.htmlFile];
+	
 	//Does nothing?
-    //self.webView.delegate = self;
+	//self.webView.delegate = self;
 
-    [self.window makeKeyAndVisible];
-    
-    return YES;
+	[self.window makeKeyAndVisible];
+	
+	return YES;
 }
 
 
@@ -48,24 +48,24 @@
 // creates a history node to store results, and finally brings up the associated page.
 -(IBAction) scanButtonPressed
 {
-    // Animate activity indicator.
-    [activityIndicator startAnimating];
-    
-    // Initiate a scan.
-    [scanner scan:self];
-    
-    // Retrieve scanner results.
-    [interpreter setVals: scanner.ouputString];
-    //interpreter.storedInputString = scanner.ouputString;    
-    
-    // Set the current history item to interpreted scanner data.
-    current = [[HistoryItem alloc] initWithHtmlFile:[interpreter htmlPath] x:interpreter.x y:interpreter.y];
+	// Animate activity indicator.
+	[activityIndicator startAnimating];
+	
+	// Initiate a scan.
+	[scanner scan:self];
+	
+	// Retrieve scanner results.
+	[interpreter setVals: scanner.ouputString];
+	//interpreter.storedInputString = scanner.ouputString;    
+	
+	// Set the current history item to interpreted scanner data.
+	current = [[HistoryItem alloc] initWithHtmlFile:[interpreter htmlPath] x:interpreter.x y:interpreter.y];
 
-    // Add the current history item to the list.
-    [history addObject:current];
-    
-    // Load the html file associated with the scanned item.
-    [self webViewLoadPage:current.htmlFile];
+	// Add the current history item to the list.
+	[history addObject:current];
+	
+	// Load the html file associated with the scanned item.
+	[self webViewLoadPage:current.htmlFile];
 }
 
 
@@ -75,11 +75,11 @@
 // 'you are here' image over the main image using a JS script.
 -(IBAction) mapButtonPressed
 {
-    // Load the (mostly blank) map page.
-    [self webViewLoadPage: MAP_HTML_FILE];
-    
-    // Flag to run js once page has loaded.
-    loadingMapScreen = true;
+	// Load the (mostly blank) map page.
+	[self webViewLoadPage: MAP_HTML_FILE];
+	
+	// Flag to run js once page has loaded.
+	loadingMapScreen = true;
 }
 
 
@@ -91,11 +91,11 @@
 //
 - (void)dealloc
 {
-    [scanner release];
-    [interpreter release];
-    
-    [_window release];
-    [super dealloc];
+	[scanner release];
+	[interpreter release];
+	
+	[_window release];
+	[super dealloc];
 }
 
 

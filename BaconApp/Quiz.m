@@ -18,23 +18,22 @@
  int const option2 = 2;
  int const option3 = 3;
  int const option4 = 4;
-int const answer = 5;
+ int const answer = 5;
 
 #pragma mark - Methods
--(void)readQuizFile: (NSString *) filePath{
-    
-    NSString * newline = @"\r\n";
-    NSString * fileContent = [[[NSString alloc] initWithContentsOfFile:filePath]autorelease];
-    NSArray * contents = [fileContent componentsSeparatedByString:newline];
-    NSMutableArray * question = [[NSMutableArray alloc]init ];
-    
-    
-    for (int i =0; i < [contents count]; i++) {
-        for (int k = 0; k < 6; k++) {
-            NSString * s = [contents objectAtIndex:i];
-            [[self questions]addObject:s];
-            [question addObject:s];
-        }
-    }
+-(void)readQuizFile: (NSString *) filePath {
+	
+	NSString * newline = @"\r\n";
+	NSString * fileContent = [[[NSString alloc] initWithContentsOfFile:filePath] autorelease];
+	NSArray * contents = [fileContent componentsSeparatedByString:newline];
+	NSMutableArray * question = [[NSMutableArray alloc] init];
+	
+	for (int i =0; i < [contents count]; i++) {
+		for (int k = 0; k < 6; k++) {
+			NSString * s = [contents objectAtIndex:i];
+			[[self questions] addObject:s];
+			[question addObject:s];
+		}
+	}
 }
 @end

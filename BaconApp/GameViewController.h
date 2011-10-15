@@ -10,7 +10,7 @@
 
 
 @interface GameViewController : UIViewController {
-    NSMutableArray * currentQuestionFiles;
+	NSMutableArray * currentQuestionFiles;
 }
 //-(IBAction)DismissView:(id)sender;
 @end

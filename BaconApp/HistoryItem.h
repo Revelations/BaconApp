@@ -11,7 +11,7 @@
 
 @interface HistoryItem : NSObject
 {
-    NSString * htmlFile;
+	NSString * htmlFile;
 }
 
 @property(nonatomic, retain) NSString * htmlFile;

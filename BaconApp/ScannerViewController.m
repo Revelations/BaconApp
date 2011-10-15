@@ -46,7 +46,7 @@
 	
 	SettingsController *settingsController = [[SettingsController alloc] initWithNibName:nil bundle:nil];
 	[[UIApplication sharedApplication].keyWindow.rootViewController
-     presentModalViewController:settingsController animated:YES];
+	 presentModalViewController:settingsController animated:YES];
 	[settingsController release];*/
 	
 	
@@ -59,36 +59,36 @@
 - (void) imagePickerController: (UIImagePickerController*) reader
  didFinishPickingMediaWithInfo: (NSDictionary*) info
 {
-    // ADD: get the decode results
-    id<NSFastEnumeration> results =
+	// ADD: get the decode results
+	id<NSFastEnumeration> results =
 	[info objectForKey: ZBarReaderControllerResults];
-    ZBarSymbol *symbol = nil;
-    for(symbol in results)
-        // EXAMPLE: just grab the first barcode
-        break;
+	ZBarSymbol *symbol = nil;
+	for(symbol in results)
+		// EXAMPLE: just grab the first barcode
+		break;
 	
-    // EXAMPLE: do something useful with the barcode data
+	// EXAMPLE: do something useful with the barcode data
 
-    resultText.text = @"Scan was successful!";
+	resultText.text = @"Scan was successful!";
 	
-    // EXAMPLE: do something useful with the barcode image
-    resultImage.image =
+	// EXAMPLE: do something useful with the barcode image
+	resultImage.image =
 	[info objectForKey: UIImagePickerControllerOriginalImage];
- 	
-    // ADD: dismiss the controller (NB dismiss from the *reader*!)
-    [reader dismissModalViewControllerAnimated: YES];
+	
+	// ADD: dismiss the controller (NB dismiss from the *reader*!)
+	[reader dismissModalViewControllerAnimated: YES];
 	
 	
-    // Retrieve scanner results.
+	// Retrieve scanner results.
 	interpreter = [Interpreter new];
-    [interpreter setVals: symbol.data];
-    //interpreter.storedInputString = symbol.data;
-    
-    current = [[HistoryItem alloc] initWithHtmlFile:[interpreter htmlPath] x:interpreter.x y:interpreter.y];
+	[interpreter setVals: symbol.data];
+	//interpreter.storedInputString = symbol.data;
+	
+	current = [[HistoryItem alloc] initWithHtmlFile:[interpreter htmlPath] x:interpreter.x y:interpreter.y];
 
 	// TODO: We could try use history here, that is, go to last page.
 	// OR, we could let the user choose.
-    self.tabBarController.selectedIndex = 1;
+	self.tabBarController.selectedIndex = 1;
 	
 	//model.current = current;
 	
@@ -97,11 +97,11 @@
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 /*
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization.
-    }
-    return self;
+	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+	if (self) {
+		// Custom initialization.
+	}
+	return self;
 }
 */
 
@@ -109,61 +109,61 @@
 - (void)viewDidLoad {
 	NSLog(@"Scanner view did load");
 	Update * updateSession = [[[Update alloc]init]autorelease];
-    [updateSession GetGameFiles:@"ftp://revelations.webhop.org/"];
-    NSLog(@"Update Session has finished");
-    [super viewDidLoad];
+	[updateSession GetGameFiles:@"ftp://revelations.webhop.org/"];
+	NSLog(@"Update Session has finished");
+	[super viewDidLoad];
 	
 	//BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
-    UpdateController *updateController = [[UpdateController alloc] initWithNibName:nil bundle:nil];
-    [[UIApplication sharedApplication].keyWindow.rootViewController
-     presentModalViewController:updateController animated:YES];
-    [updateController release];
+	UpdateController *updateController = [[UpdateController alloc] initWithNibName:nil bundle:nil];
+	[[UIApplication sharedApplication].keyWindow.rootViewController
+	 presentModalViewController:updateController animated:YES];
+	[updateController release];
 }
 
 /*
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations.
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+	// Return YES for supported orientations.
+	return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 */
 
 - (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc. that aren't in use.
+	// Releases the view if it doesn't have a superview.
+	[super didReceiveMemoryWarning];
+	
+	// Release any cached data, images, etc. that aren't in use.
 }
 
 - (void)viewDidUnload {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+	[super viewDidUnload];
+	// Release any retained subviews of the main view.
+	// e.g. self.myOutlet = nil;
 }
 
 
 -(void)addToViewsSeen:(NSString *) file{
-    
-    NSArray * contents = [[file componentsSeparatedByString:@"."] autorelease];
-    NSString * currentFile = [[contents objectAtIndex:0] autorelease];
-    
-    NSMutableArray * currentP = [(BaconAppDelegate *) [[UIApplication sharedApplication] delegate]scannedItems];
-    
-    BOOL found = NO;
-    for (NSString * s in currentP) {
-        if (s == currentFile) {
-            found = YES;
-            break;
-        }
-    }
-    
-    if(!found){
-        [currentP addObject : currentFile];
-    }
-                                
-    
-    
-    [[(BaconAppDelegate *)[[UIApplication sharedApplication] delegate] scannedItems] addObject:interpreter.htmlPath];
+	
+	NSArray * contents = [[file componentsSeparatedByString:@"."] autorelease];
+	NSString * currentFile = [[contents objectAtIndex:0] autorelease];
+	
+	NSMutableArray * currentP = [(BaconAppDelegate *) [[UIApplication sharedApplication] delegate]scannedItems];
+	
+	BOOL found = NO;
+	for (NSString * s in currentP) {
+		if (s == currentFile) {
+			found = YES;
+			break;
+		}
+	}
+	
+	if(!found){
+		[currentP addObject : currentFile];
+	}
+								
+	
+	
+	[[(BaconAppDelegate *)[[UIApplication sharedApplication] delegate] scannedItems] addObject:interpreter.htmlPath];
 }
 
 // Called when the view disappears.
@@ -176,8 +176,8 @@
 	appDelegate.x = interpreter.x;
 	appDelegate.y = interpreter.y;
 	appDelegate.html = interpreter.htmlPath;
-    [self addToViewsSeen:interpreter.htmlPath];
-    
+	[self addToViewsSeen:interpreter.htmlPath];
+	
 	
 	//appDelegate.model.current = [[HistoryItem alloc] initWithHtmlFile:[interpreter htmlPath] x:interpreter.x y:interpreter.y];
 	// Add the current history item to the list.
@@ -189,14 +189,14 @@
 
 - (void) dealloc
 {
-    self.resultImage = nil;
-    self.resultText = nil;
-    [super dealloc];
+	self.resultImage = nil;
+	self.resultText = nil;
+	[super dealloc];
 }
 
 - (BOOL) shouldAutorotateToInterfaceOrientation: (UIInterfaceOrientation) interfaceOrientation
 {
-    return(YES);
+	return(YES);
 }
 
 @end

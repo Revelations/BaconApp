@@ -1,4 +1,4 @@
-    //
+//
 //  NavigationView.h
 //  BaconApp
 //
@@ -19,15 +19,15 @@
 @class InfoViewController;
 
 @interface NavigationView : UITableViewController {
-    NSArray * cellContent;
-    AboutViewController * aboutView;
-    ScannerViewController * scannerView;
-    InfoViewController * infoView;
-    MapViewController * mapView;
-    FeedbackController * feedbackView;
-    GameViewController * gameView;
-    SettingsViewController * settingsView;
-    HelpViewController * helpView;
+	NSArray * cellContent;
+	AboutViewController * aboutView;
+	ScannerViewController * scannerView;
+	InfoViewController * infoView;
+	MapViewController * mapView;
+	FeedbackController * feedbackView;
+	GameViewController * gameView;
+	SettingsViewController * settingsView;
+	HelpViewController * helpView;
 }
 
 #pragma mark - properties

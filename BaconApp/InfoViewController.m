@@ -21,24 +21,20 @@
 // into the WebView if so.
 -(void) webViewLoadPage:(NSString *) inputString
 {
-    // Animate activity indicator.
-    [activityIndicator startAnimating];
-    
-    // Get the file path of the requested html file.
-    NSString * filePath = [[NSBundle mainBundle] pathForResource:inputString ofType:@"html" inDirectory:WEB_DIRECTORY];
+	// Animate activity indicator.
+	[activityIndicator startAnimating];
 	
-    // If that file doesn't exist then break prematurely.
-    if(![[NSFileManager defaultManager] fileExistsAtPath:filePath])
-        return;
-    
-    // Create and load the request.
-    NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePath]];
+	// Get the file path of the requested html file.
+	NSString * filePath = [[NSBundle mainBundle] pathForResource:inputString ofType:@"html" inDirectory:WEB_DIRECTORY];
 	
-    [self.webView loadRequest:request];
+	// If that file doesn't exist then break prematurely.
+	if(![[NSFileManager defaultManager] fileExistsAtPath:filePath])
+		return;
 	
-	// Draw the map and marker by evaluating the js function.
-	[self.webView stringByEvaluatingJavaScriptFromString:@"addCSS();"];
+	// Create and load the request.
+	NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePath]];
 	
+	[self.webView loadRequest:request];
 }
 
 
@@ -50,61 +46,61 @@
 {
 	NSLog(@"InfoView web did finish load!");
 	
-    // Make sure the page finished loading is a the map page.
-    if(loadingInformation)
-    {
+	// Make sure the page finished loading is a the map page.
+	if(loadingInformation)
+	{
 //        // Build a string to call js function with a given x, y.
 //        NSString * jScriptCall = [NSString stringWithFormat:@"drawMapAndLocation(%d, %d);", interpreter.x, interpreter.y];
 //        
 //        // Draw the map and marker by evaluating the js function.
 //        [self.webView stringByEvaluatingJavaScriptFromString:jScriptCall];
 //        
-        // Finished load of map screen.
-        loadingInformation = false;
-    }
-    
-    // Stop animating activity indicator.
-    [activityIndicator stopAnimating];
+		// Finished load of map screen.
+		loadingInformation = false;
+	}
+	
+	// Stop animating activity indicator.
+	[activityIndicator stopAnimating];
 }
 
 
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 /*
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization.
-    }
-    return self;
+	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+	if (self) {
+		// Custom initialization.
+	}
+	return self;
 }
 */
 
 /*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
-    [super viewDidLoad];
+	[super viewDidLoad];
 }
 */
 
 /*
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations.
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+	// Return YES for supported orientations.
+	return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 */
 
 - (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc. that aren't in use.
+	// Releases the view if it doesn't have a superview.
+	[super didReceiveMemoryWarning];
+	
+	// Release any cached data, images, etc. that aren't in use.
 }
 
 - (void)viewDidUnload {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+	[super viewDidUnload];
+	// Release any retained subviews of the main view.
+	// e.g. self.myOutlet = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -123,7 +119,7 @@
 	 
 
 - (void)dealloc {
-    [super dealloc];
+	[super dealloc];
 }
 
 

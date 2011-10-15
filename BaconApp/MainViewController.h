@@ -13,22 +13,22 @@
 
 @interface MainViewController : UIViewController <UIWebViewDelegate>
 {
-    IBOutlet UIWebView * webview;
-    IBOutlet UIBarButtonItem * scanButton;
-    IBOutlet UIBarButtonItem * mapButton;
-    IBOutlet NSString * menuPath;
-    IBOutlet UITextField * resultText;
-    IBOutlet UIActivityIndicatorView * activityIndicator;
-    
-    NSMutableArray * history;
-    HistoryItem * current;
-    
-    Scanner * scanner;
-    Interpreter * interpreter;
-    
-    bool loadingMapScreen;
-    
-    NSString * jScript;
+	IBOutlet UIWebView * webview;
+	IBOutlet UIBarButtonItem * scanButton;
+	IBOutlet UIBarButtonItem * mapButton;
+	IBOutlet NSString * menuPath;
+	IBOutlet UITextField * resultText;
+	IBOutlet UIActivityIndicatorView * activityIndicator;
+	
+	NSMutableArray * history;
+	HistoryItem * current;
+	
+	Scanner * scanner;
+	Interpreter * interpreter;
+	
+	bool loadingMapScreen;
+	
+	NSString * jScript;
 }
 
 // Main app window.

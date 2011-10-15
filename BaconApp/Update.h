@@ -10,7 +10,7 @@
 #import "Reachability.h"
 
 @interface Update : NSObject <NSStreamDelegate> {
-    
+	
 }
 
 @property (nonatomic, readonly) BOOL              isSendingU;

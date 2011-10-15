@@ -11,7 +11,7 @@
 
 @interface DataModel : NSObject {
 	NSMutableArray * history;
-    HistoryItem * current; 
+	HistoryItem * current; 
 }
 
 @property(nonatomic, retain) NSMutableArray * history;
