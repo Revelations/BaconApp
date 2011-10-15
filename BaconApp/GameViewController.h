@@ -8,10 +8,20 @@
 
 #import <UIKit/UIKit.h>
 #import "ModalViewController.h"
+@class AnswerSelectionController;
 
-
-@interface GameViewController : ModalViewController {
+@interface GameViewController : ModalViewController <UITableViewDelegate, UITableViewDataSource>{
 	NSMutableArray * currentQuestionFiles;
+	NSMutableArray *	quizQuestions;
+	NSMutableArray * data;
+	NSArray * cellContent;
+	UITableView * tableView;
+	NSMutableArray * answersGiven;
+	AnswerSelectionController * asc;
+	
+
 }
 
+@property (nonatomic, retain) NSMutableArray * answersGiven;
+@property (nonatomic, retain) AnswerSelectionController * asc;
 @end
