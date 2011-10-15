@@ -16,7 +16,6 @@
 @synthesize window=_window;
 @synthesize webView=_webView;
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 	// Override point for customization after application launch.

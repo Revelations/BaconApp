@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ModalViewController.h"
 
 
-@interface GameViewController : UIViewController {
+@interface GameViewController : ModalViewController {
 	NSMutableArray * currentQuestionFiles;
 }
-//-(IBAction)DismissView:(id)sender;
+
 @end

@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "DataModel.h"
+#import "ModalViewController.h"
 
-
-@interface InfoViewController : UIViewController <UIWebViewDelegate> {
+@interface InfoViewController : ModalViewController <UIWebViewDelegate> {
 	UIWebView *webView;
 //	DataModel *model;
 	UIActivityIndicatorView *activityIndicator;

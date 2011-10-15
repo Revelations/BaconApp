@@ -10,15 +10,15 @@
 #import "HistoryItem.h"
 #import "DataModel.h"
 #import "Interpreter.h"
+#import "ModalViewController.h"
 
-@interface ScannerViewController : UIViewController
+@interface ScannerViewController : ModalViewController
 	<ZBarReaderDelegate>
 {
 	UIImageView *resultImage;
 	UITextView *resultText;
 	HistoryItem *current;
 	Interpreter *interpreter;
-	
 }
 
 @property (nonatomic, retain) IBOutlet UIImageView *resultImage;

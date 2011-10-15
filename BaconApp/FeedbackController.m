@@ -13,8 +13,10 @@
 
 @implementation FeedbackController
 
-
 #pragma mark - Actions
+
+@synthesize scrollview, textField1, textField2, textField3, textField4;
+
 
 -(IBAction)SendFeedback:(id)sender{
 	   
@@ -102,7 +104,110 @@
 {
 	[super viewDidLoad];
 }
-*/
+ */
+
+
+- (void) viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	
+	[[NSNotificationCenter defaultCenter] 
+	 addObserver:self
+	 selector:@selector
+	 (keyboardDidShow:) 
+	 name: UIKeyboardDidShowNotification
+	 object:nil];
+	[[NSNotificationCenter defaultCenter]
+	 addObserver:self 
+	 selector:@selector
+	 (keyboardDidHide:) name:
+	 UIKeyboardDidHideNotification
+	 object:nil];
+	
+	scrollview.contentSize = CGSizeMake(320,
+										460);
+	
+	displayKeyboard = NO;
+}
+
+-(void) viewWillDisappear:(BOOL)animated {
+	[[NSNotificationCenter defaultCenter]
+	 removeObserver:self];
+}
+
+-(void) keyboardDidShow: (NSNotification *)notif {
+	if (displayKeyboard) {
+		return;
+	}
+	
+	NSDictionary* info = [notif userInfo];
+	NSValue* aValue = [info objectForKey:UIKeyboardBoundsUserInfoKey];
+	CGSize keyboardSize = [aValue CGRectValue].size;
+	
+	offset = scrollview.contentOffset;
+	
+	CGRect viewFrame = scrollview.frame;
+	viewFrame.size.height -= keyboardSize.height;
+	scrollview.frame = viewFrame;
+	
+	CGRect textFieldRect = [Field frame];
+	textFieldRect.origin.y += 10;
+	[scrollview scrollRectToVisible: textFieldRect animated:YES];
+	displayKeyboard = YES;
+}
+
+-(void) keyboardDidHide: (NSNotification *)notif {
+	if (!displayKeyboard) {
+		return; 
+	}
+	
+	scrollview.frame = CGRectMake(0, 0, 320,460);
+	
+	scrollview.contentOffset =offset;
+	
+	displayKeyboard = NO;
+	
+}
+
+-(BOOL) textFieldShouldBeginEditing:(UITextField*)textField {
+	Field = textField;
+	return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+	[textField resignFirstResponder];
+	return YES;
+}
+
+
+
+- (void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event {  
+    if (textField1) {  
+        if ([textField1 canResignFirstResponder]) [textField1 resignFirstResponder];  
+    }  
+    if (textField2) {  
+        if ([textField2 canResignFirstResponder]) [textField2 resignFirstResponder];  
+    }
+	if (textField3) {  
+        if ([textField3 canResignFirstResponder]) [textField3 resignFirstResponder];  
+    }
+	if (textField4) {  
+        if ([textField4 canResignFirstResponder]) [textField4 resignFirstResponder];  
+    }
+	if (numberTextField) {  
+        if ([numberTextField canResignFirstResponder]) [numberTextField resignFirstResponder];  
+    }
+	if (feedBackTextView) {  
+        if ([feedBackTextView canResignFirstResponder]) [feedBackTextView resignFirstResponder];  
+    }  
+    if (seenTextField) {  
+        if ([seenTextField canResignFirstResponder]) [seenTextField resignFirstResponder];  
+    }  
+    if (nationalityTextField) {  
+        if ([nationalityTextField canResignFirstResponder]) [nationalityTextField resignFirstResponder];  
+    }  
+    [super touchesBegan: touches withEvent: event];  
+}  
 
 - (void)viewDidUnload
 {

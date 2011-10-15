@@ -11,6 +11,13 @@
 
 @implementation GameViewController
 
+// Done button clicked
+-(void)dismissView:(id)sender {
+	
+	// Call the delegate to dismiss the modal view
+	[delegate didDismissModalView];
+}
+
 
 #pragma mark - Controller Admin
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

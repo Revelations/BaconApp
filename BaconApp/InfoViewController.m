@@ -15,6 +15,13 @@
 @synthesize webView;
 @synthesize activityIndicator;
 
+// Done button clicked
+-(void)dismissView:(id)sender {
+	
+	// Call the delegate to dismiss the modal view
+	[delegate didDismissModalView];
+}
+
 // Changes the page of the UIWebview to a given string.
 //
 // Builds a string with the given input, checks if that file exists, and loads it
@@ -75,12 +82,13 @@
 }
 */
 
-/*
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	self.navigationItem.title = @"Code Scanner";
+
 }
-*/
 
 /*
 // Override to allow orientations other than the default portrait orientation.

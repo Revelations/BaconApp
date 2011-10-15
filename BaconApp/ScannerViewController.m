@@ -107,17 +107,20 @@
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
-	NSLog(@"Scanner view did load");
-	Update * updateSession = [[[Update alloc]init]autorelease];
-	[updateSession GetGameFiles:@"ftp://revelations.webhop.org"];
-	NSLog(@"Update Session has finished");
 	[super viewDidLoad];
+	NSLog(@"Scanner view did load");
 	
-	//BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
-	UpdateController *updateController = [[UpdateController alloc] initWithNibName:nil bundle:nil];
-	[[UIApplication sharedApplication].keyWindow.rootViewController
-	 presentModalViewController:updateController animated:YES];
-	[updateController release];
+	self.navigationItem.title = @"Code Scanner";	
+//	TODO: Move to start of program.
+//	Update * updateSession = [[[Update alloc]init]autorelease];
+//	[updateSession GetGameFiles:@"ftp://revelations.webhop.org"];
+//	NSLog(@"Update Session has finished");
+//	
+//	//BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
+//	UpdateController *updateController = [[UpdateController alloc] initWithNibName:nil bundle:nil];
+//	[[UIApplication sharedApplication].keyWindow.rootViewController
+//	 presentModalViewController:updateController animated:YES];
+//	[updateController release];
 }
 
 /*

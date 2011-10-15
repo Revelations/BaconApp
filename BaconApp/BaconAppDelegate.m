@@ -92,16 +92,15 @@ NSString * const CONTENT_DIRECTORY = @"Content";
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     Update * updateSession = [[Update alloc]init];
-    Reachability * receptionCheck = [[Reachability alloc] init];
     
     NSString *filePath = [NSString stringWithFormat:@"%@%@", documentsDirectory, @"/feedback.txt"];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if([fileManager fileExistsAtPath:filePath]){
-        if([updateSession CheckForInternet:receptionCheck] != -1){
+        if([updateSession CheckForInternet] != -1){
             [updateSession uploadPhp:filePath];
         }
         else{
-			[self spawnThreadForApplication: application WithPath:filePath WithSleepTime:60 WithType:0];
+			[updateSession spawnThreadForApplication:application WithPath:filePath WithSleepTime:60 WithType:0];
             
            /* //spawns the thread to send feedback
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, (int)NULL), ^{

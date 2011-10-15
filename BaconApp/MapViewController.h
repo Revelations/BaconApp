@@ -10,8 +10,10 @@
 #import "Scanner.h"
 #import "Interpreter.h"
 #import "HistoryItem.h"
+#import "ModalViewController.h"
 
-@interface MapViewController : UIViewController <UIWebViewDelegate> {
+
+@interface MapViewController : ModalViewController <UIWebViewDelegate> {
 	IBOutlet UIWebView * webView;
 	IBOutlet NSString * menuPath;
 	IBOutlet UIActivityIndicatorView * activityIndicator;

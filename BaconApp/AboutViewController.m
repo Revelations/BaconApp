@@ -27,11 +27,6 @@ NSString * const website = @"http://www.maungatrust.org/";
 	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
 }
 
--(IBAction)btnOkPressed:(id)sender {
-	NSLog(@"Ok button pressed");
-	//Do stuff here to dismiss this view.
-}
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -63,13 +58,11 @@ NSString * const website = @"http://www.maungatrust.org/";
 }
 */
 
-/*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
 }
-*/
 
 - (void)viewDidUnload
 {

@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ModalViewController.h"
 
 
-@interface HelpViewController : UIViewController {
-	IBOutlet UIButton *okButton;
+@interface HelpViewController : ModalViewController {
+	
 }
 
 - (IBAction) returnToMainView:(id)sender;

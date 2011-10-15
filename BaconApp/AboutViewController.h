@@ -7,15 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ModalViewController.h"
 
 extern NSString * const facebook;
 extern NSString * const website;
 
-@interface AboutViewController : UIViewController {
+@interface AboutViewController : ModalViewController {
 }
 
 -(IBAction)btnFacebookPressed:(id)sender;
 -(IBAction)btnWebsitePressed:(id)sender;
--(IBAction)btnOkPressed:(id)sender;
 
 @end

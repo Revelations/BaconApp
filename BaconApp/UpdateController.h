@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ModalViewController.h"
 
 
-@interface UpdateController : UIViewController {
+@interface UpdateController : ModalViewController {
 	IBOutlet UILabel *output;
 	IBOutlet UIProgressView *progBar;
 }
+
 @property(nonatomic,retain) IBOutlet UIProgressView *progBar;
 -(IBAction)Update:(id)sender;
 -(IBAction)CarryOn:(id)sender;

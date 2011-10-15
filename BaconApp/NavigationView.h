@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ModalViewControllerDelegate.h"
+#import "ModalViewController.h"
 
 #pragma mark - import statements
 @class AboutViewController;
@@ -18,7 +20,7 @@
 @class HelpViewController;
 @class InfoViewController;
 
-@interface NavigationView : UITableViewController {
+@interface NavigationView : UITableViewController <ModalViewControllerDelegate> {
 	NSArray * cellContent;
 	AboutViewController * aboutView;
 	ScannerViewController * scannerView;
@@ -28,6 +30,8 @@
 	GameViewController * gameView;
 	SettingsViewController * settingsView;
 	HelpViewController * helpView;
+	
+	ModalViewController * currentViewController;
 }
 
 #pragma mark - properties
@@ -40,5 +44,11 @@
 @property(nonatomic, retain) SettingsViewController * settingsView;
 @property(nonatomic, retain) HelpViewController * helpView;
 @property(nonatomic, retain) InfoViewController * infoView;
+@property(nonatomic, retain) ModalViewController * currentViewController;
+
+
+@property (nonatomic,retain) IBOutlet UIButton *button;
+- (IBAction)buttonAction:(id)sender;
+
 
 @end

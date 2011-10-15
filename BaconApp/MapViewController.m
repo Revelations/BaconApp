@@ -14,6 +14,13 @@
 
 @synthesize webView;
 
+// Done button clicked
+-(void)dismissView:(id)sender {
+	
+	// Call the delegate to dismiss the modal view
+	[delegate didDismissModalView];
+}
+
 -(void) webViewLoadPage:(NSString *) inputString
 {
 	NSLog(@"webViewLoadPage");

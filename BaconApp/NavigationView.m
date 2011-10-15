@@ -29,6 +29,14 @@
 @synthesize helpView = _helpView;
 @synthesize infoView = _infoView;
 
+@synthesize currentViewController;
+
+- (void)didDismissModalView {
+    // Dismiss the modal view controller
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+
 #pragma mark  - App Admin
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -182,96 +190,152 @@
 */
 
 #pragma mark - Table view delegate
+-(void)showSomeView:(ModalViewController *)viewController {
+	
+	// We are the delegate responsible for dismissing the modal view 
+	viewController.delegate = self;
+	
+	// Create a Navigation controller
+	UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+	
+	// show the navigation controller modally
+	[self presentModalViewController:navController animated:YES];
+	
+	// Clean up resources
+	[navController release];
+}
 
+-(void)showCurrentView {
+	if (currentViewController) {
+		[self showSomeView:self.currentViewController];
+	}
+}
+
+-(void)showAboutView {
+	// Create the modal view controller
+	if (!self.aboutView) {
+		AboutViewController *viewController = [[AboutViewController alloc] initWithNibName:@"AboutView" bundle:nil];
+		self.aboutView = viewController;
+		currentViewController = viewController;
+		// Cleanup resources
+		[viewController release];
+	}
+	[self showCurrentView];
+}
+-(void)showScannerView {
+	// Create the modal view controller
+	if (!self.scannerView) {
+		ScannerViewController *viewController = [[ScannerViewController alloc] initWithNibName:@"ScannerView" bundle:nil];
+		self.scannerView = viewController;
+		currentViewController = viewController;
+		// Cleanup resources
+		[viewController release];
+	}
+	[self showCurrentView];
+}
+-(void)showInfoView {
+	// Create the modal view controller
+	if (!self.infoView) {
+		InfoViewController *viewController = [[InfoViewController alloc] initWithNibName:@"InfoView" bundle:nil];
+		self.infoView = viewController;
+		currentViewController = viewController;
+		// Cleanup resources
+		[viewController release];
+	}
+	[self showCurrentView];
+}
+
+-(void)showMapView {
+	// Create the modal view controller
+	if (!self.mapView) {
+		MapViewController *viewController = [[MapViewController alloc] initWithNibName:@"MapView" bundle:nil];
+		self.mapView = viewController;
+		currentViewController = viewController;
+		// Cleanup resources
+		[viewController release];
+	}
+	[self showCurrentView];
+}
+-(void)showFeedbackView {
+	// Create the modal view controller
+	if (!self.feedbackView) {
+		FeedbackController *viewController = [[FeedbackController alloc] initWithNibName:@"FeedbackView" bundle:nil];
+		self.feedbackView = viewController;
+		currentViewController = viewController;
+		// Cleanup resources
+		[viewController release];
+	}
+	[self showCurrentView];
+}
+-(void)showGameView {
+	// Create the modal view controller
+	if (!self.gameView) {
+		GameViewController *viewController = [[GameViewController alloc] initWithNibName:@"GameView" bundle:nil];
+		self.gameView = viewController;
+		currentViewController = viewController;
+		// Cleanup resources
+		[viewController release];
+	}
+	[self showCurrentView];
+}
+-(void)showSettingsView {
+	// Create the modal view controller
+	if (!self.settingsView) {
+		SettingsViewController *viewController = [[SettingsViewController alloc] initWithNibName:@"SettingsView" bundle:nil];
+		self.settingsView = viewController;
+		currentViewController = viewController;
+		// Cleanup resources
+		[viewController release];
+	}
+	[self showCurrentView];
+}
+-(void)showHelpView {
+	if (!helpView) {
+		// Create the modal view controller
+		HelpViewController *viewController = [[HelpViewController alloc] initWithNibName:@"HelpView" bundle:nil];
+		self.helpView = viewController;
+		currentViewController = viewController;
+		// Cleanup resources
+		[viewController release];
+	}
+	[self showCurrentView];
+}
 
 //navigation and event handling
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	switch (indexPath.row) {
 		case 1:
-			if(aboutView == nil){
-				AboutViewController * aController =
-				[[AboutViewController alloc]initWithNibName:@"AboutView" bundle:nil];
-				self.aboutView = aController;
-				[aController release];
-			}
-			NSLog(@"You have selected aboutView");
-			[self presentModalViewController:self.aboutView animated:YES];
+			NSLog(@"You have selected AboutView");
+			[self showAboutView];
 			break;
 		case 2:
-			if(scannerView == nil){
-				ScannerViewController * aController = 
-				[[ScannerViewController alloc] initWithNibName:@"ScannerView" bundle:nil];
-				self.scannerView = aController;
-				[aController release];
-			}
 			NSLog(@"You have selected scannerView");
-			[self presentModalViewController:self.scannerView animated:YES];
+			[self showScannerView];
 			break;
 		case 3:
-			if(infoView == nil){
-				InfoViewController * aController =
-				[[InfoViewController alloc] initWithNibName:@"InfoView" bundle:nil];
-				self.infoView = aController;
-				[aController release];
-			}
 			NSLog(@"You have selected infoView");
-			[self presentModalViewController:self.infoView animated:YES];
+			[self showInfoView];
 			break;
 		case 4:
-			if(mapView == nil){
-				MapViewController * aController =
-				[[MapViewController alloc] initWithNibName:@"MapView" bundle:nil];
-				self.mapView = aController;
-				[aController release];
-			}
-			//[[self presentModalViewController]:[[MapViewController alloc] initWithNibName:@"MapView" bundle:nil] animated:YES];
 			NSLog(@"You have selected mapView");
-			[self presentModalViewController:self.mapView animated:YES];
+			[self showMapView];
 			break;
-			
 		case 5:
-			if(feedbackView == nil){
-				FeedbackController * aController =
-				[[FeedbackController alloc] initWithNibName:@"FeedbackView" bundle:nil];
-				self.feedbackView = aController;
-				[aController release];
-			}
 			NSLog(@"You have selected FeedbackView");
-			[self presentModalViewController:self.feedbackView animated:YES];
+			[self showFeedbackView];
 			break;
-			
 		case 6:
-			if(gameView == nil){
-				GameViewController * aController =
-				[[GameViewController alloc] initWithNibName:@"GameView" bundle:nil];
-				self.gameView = aController;
-				[aController release];
-			}
 			NSLog(@"You have selected the gameView");
-			[self presentModalViewController:self.gameView animated:YES];
+			[self showGameView];
 			break;
-			
 		case 7:
-			if(settingsView == nil){
-				SettingsViewController * aController =
-				[[SettingsViewController alloc] initWithNibName:@"SettingsView" bundle:nil];
-				self.settingsView = aController;
-				[aController release];
-			}
 			NSLog(@"You have selected settingsView");
-			[self presentModalViewController:self.settingsView animated:YES];
+			[self showSettingsView];
 			break;
-			
 		case 8:
-			if(helpView == nil){
-				HelpViewController * aController =
-				[[HelpViewController alloc] initWithNibName:@"helpView" bundle:nil];
-				self.helpView = aController;
-				[aController release];
-			}
 			NSLog(@"You have Selected helpView");
-			[self presentModalViewController:self.helpView animated:YES];
+			[self showHelpView];
 			break;
 		default:
 			NSLog(@"You have selected something else");

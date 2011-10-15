@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ModalViewController.h"
 
 
-@interface SettingsViewController : UIViewController {
+@interface SettingsViewController : ModalViewController {
 	IBOutlet UITextField * txtFontSize;
 	IBOutlet UITextField * txtIPAddress;
 }
