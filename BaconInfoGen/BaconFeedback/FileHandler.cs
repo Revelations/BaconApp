@@ -12,20 +12,8 @@ namespace BaconFeedback
 	public class FileHandler
 	{
 		private const string FeedbackExtension = ".fbk";
-		private static readonly string Dir = Resources.FeedbackDirectory;
 
-		// We all recognize this, amirite?
-		private static string FeedbackDirectory
-		{
-			get
-			{
-				if (!Directory.Exists(Dir))
-					Directory.CreateDirectory(Dir);
-				return Dir;
-			}
-		}
-
-		// Feedback file extension.
+		private static readonly string FeedbackDirectory = Resources.FeedbackDirectory;
 
 		public static IEnumerable<string> GetSubfolders()
 		{
@@ -103,6 +91,12 @@ namespace BaconFeedback
 				if (!File.Exists(newDir + f.Name))
 					f.MoveTo(newDir + f.Name);
 			}
+		}
+
+		public static void Export(string contents, string fileName)
+		{
+			File.WriteAllText(fileName, contents);
+			System.Diagnostics.Process.Start(fileName);
 		}
 	}
 }

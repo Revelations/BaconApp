@@ -300,5 +300,37 @@ namespace BaconFeedback
 				}
 			}
 		}
+
+		public void ExportSelected()
+		{
+			DateTime d = DateTime.Now;
+			SaveFileDialog s = new SaveFileDialog();
+			s.Filter = @"Text files|*.txt";
+			s.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+			s.FileName += string.Format("Feedback - {0}.{1}.{2} - {3}.{4}.txt", d.Day, d.Month, d.Year, d.Hour, d.Minute.ToString("00"));
+
+			if (s.ShowDialog() == DialogResult.OK)
+			{
+				List<FeedbackFile> files = CreateFeedbackList();
+				StringBuilder builder = new StringBuilder();
+
+				foreach (FeedbackFile f in files)
+				{
+					builder.AppendLine(f.FileName);
+					builder.AppendLine("Created on: " + f.CreatedDate);
+					builder.AppendLine();
+					builder.AppendLine("Group size: " + f.Number);
+					builder.AppendLine("Group nationality: " + f.Nationality);
+					builder.AppendLine("Number of codes scanned: " + f.Scanned.Count);
+					builder.AppendLine();
+					builder.AppendLine("Was was seen by this group: " + f.Sighted);
+					builder.AppendLine();
+					builder.AppendLine("Miscellaneous feedback: " + f.Misc);
+					builder.AppendLine().AppendLine();
+				}
+
+				FileHandler.Export(builder.ToString(), s.FileName);
+			}
+		}
 	}
 }

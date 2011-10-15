@@ -51,10 +51,13 @@
 			this.splitter = new System.Windows.Forms.Splitter();
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+			this.textBoxScanned = new System.Windows.Forms.TextBox();
+			this.label5 = new System.Windows.Forms.Label();
 			this.textBoxMisc = new System.Windows.Forms.TextBox();
 			this.label4 = new System.Windows.Forms.Label();
 			this.textBoxSighted = new System.Windows.Forms.TextBox();
 			this.label3 = new System.Windows.Forms.Label();
+			this.label2 = new System.Windows.Forms.Label();
 			this.textBoxNationality = new System.Windows.Forms.TextBox();
 			this.textBoxNumber = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
@@ -73,17 +76,12 @@
 			this.toolStripStats = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStripSync = new System.Windows.Forms.ToolStripButton();
-			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-			this.toolStripConfig = new System.Windows.Forms.ToolStripButton();
 			this.fileView = new System.Windows.Forms.ListView();
 			this.colHeaderFilename = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.colHeaderCreatedDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.printDialog = new System.Windows.Forms.PrintDialog();
 			this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
 			this.printDocument = new System.Drawing.Printing.PrintDocument();
-			this.label2 = new System.Windows.Forms.Label();
-			this.label5 = new System.Windows.Forms.Label();
-			this.textBoxScanned = new System.Windows.Forms.TextBox();
 			this.menuStrip.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.panel2.SuspendLayout();
@@ -128,26 +126,31 @@
 			this.printToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.printToolStripMenuItem.Name = "printToolStripMenuItem";
 			this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-			this.printToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+			this.printToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
 			this.printToolStripMenuItem.Text = "&Print";
+			this.printToolStripMenuItem.Click += new System.EventHandler(this.toolStripPrint_Click);
 			// 
 			// printPreviewToolStripMenuItem
 			// 
 			this.printPreviewToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripMenuItem.Image")));
 			this.printPreviewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.printPreviewToolStripMenuItem.Name = "printPreviewToolStripMenuItem";
-			this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+			this.printPreviewToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+						| System.Windows.Forms.Keys.P)));
+			this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
 			this.printPreviewToolStripMenuItem.Text = "Print Pre&view";
+			this.printPreviewToolStripMenuItem.Click += new System.EventHandler(this.toolStripPreview_Click);
 			// 
 			// toolStripSeparator2
 			// 
 			this.toolStripSeparator2.Name = "toolStripSeparator2";
-			this.toolStripSeparator2.Size = new System.Drawing.Size(140, 6);
+			this.toolStripSeparator2.Size = new System.Drawing.Size(213, 6);
 			// 
 			// exitToolStripMenuItem
 			// 
 			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+			this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
 			this.exitToolStripMenuItem.Text = "E&xit";
 			this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
 			// 
@@ -165,7 +168,7 @@
 			this.menuStripCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.menuStripCopy.Name = "menuStripCopy";
 			this.menuStripCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-			this.menuStripCopy.Size = new System.Drawing.Size(144, 22);
+			this.menuStripCopy.Size = new System.Drawing.Size(152, 22);
 			this.menuStripCopy.Text = "&Copy";
 			this.menuStripCopy.Click += new System.EventHandler(this.Copy_Click);
 			// 
@@ -302,6 +305,26 @@
 			this.tableLayoutPanel1.Size = new System.Drawing.Size(598, 306);
 			this.tableLayoutPanel1.TabIndex = 2;
 			// 
+			// textBoxScanned
+			// 
+			this.textBoxScanned.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.textBoxScanned.Location = new System.Drawing.Point(123, 55);
+			this.textBoxScanned.Name = "textBoxScanned";
+			this.textBoxScanned.ReadOnly = true;
+			this.textBoxScanned.Size = new System.Drawing.Size(472, 20);
+			this.textBoxScanned.TabIndex = 9;
+			// 
+			// label5
+			// 
+			this.label5.AutoSize = true;
+			this.label5.Dock = System.Windows.Forms.DockStyle.Right;
+			this.label5.Location = new System.Drawing.Point(34, 52);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(83, 26);
+			this.label5.TabIndex = 8;
+			this.label5.Text = "Codes Scanned";
+			this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
 			// textBoxMisc
 			// 
 			this.textBoxMisc.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -346,6 +369,17 @@
 			this.label3.TabIndex = 4;
 			this.label3.Text = "What They Saw";
 			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Dock = System.Windows.Forms.DockStyle.Right;
+			this.label2.Location = new System.Drawing.Point(13, 26);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(104, 26);
+			this.label2.TabIndex = 3;
+			this.label2.Text = "Dominant Nationality";
+			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// textBoxNationality
 			// 
@@ -412,9 +446,7 @@
             this.toolStripSeparator5,
             this.toolStripStats,
             this.toolStripSeparator6,
-            this.toolStripSync,
-            this.toolStripSeparator4,
-            this.toolStripConfig});
+            this.toolStripSync});
 			this.toolStrip.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip.Name = "toolStrip";
 			this.toolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -544,24 +576,6 @@
 				"ons.";
 			this.toolStripSync.Click += new System.EventHandler(this.toolStripSync_Click);
 			// 
-			// toolStripSeparator4
-			// 
-			this.toolStripSeparator4.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
-			this.toolStripSeparator4.Name = "toolStripSeparator4";
-			this.toolStripSeparator4.Size = new System.Drawing.Size(6, 32);
-			// 
-			// toolStripConfig
-			// 
-			this.toolStripConfig.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.toolStripConfig.Image = ((System.Drawing.Image)(resources.GetObject("toolStripConfig.Image")));
-			this.toolStripConfig.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-			this.toolStripConfig.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.toolStripConfig.Margin = new System.Windows.Forms.Padding(4, 1, 4, 2);
-			this.toolStripConfig.Name = "toolStripConfig";
-			this.toolStripConfig.Size = new System.Drawing.Size(36, 45);
-			this.toolStripConfig.Text = "Options - Opens an options dialog.";
-			this.toolStripConfig.Click += new System.EventHandler(this.toolStripConfig_Click);
-			// 
 			// fileView
 			// 
 			this.fileView.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -584,12 +598,12 @@
 			// colHeaderFilename
 			// 
 			this.colHeaderFilename.Text = "File Name";
-			this.colHeaderFilename.Width = 250;
+			this.colHeaderFilename.Width = 320;
 			// 
 			// colHeaderCreatedDate
 			// 
 			this.colHeaderCreatedDate.Text = "Created On...";
-			this.colHeaderCreatedDate.Width = 200;
+			this.colHeaderCreatedDate.Width = 220;
 			// 
 			// printDialog
 			// 
@@ -606,37 +620,6 @@
 			this.printPreviewDialog.Name = "printPreviewDialog";
 			this.printPreviewDialog.UseAntiAlias = true;
 			this.printPreviewDialog.Visible = false;
-			// 
-			// label2
-			// 
-			this.label2.AutoSize = true;
-			this.label2.Dock = System.Windows.Forms.DockStyle.Right;
-			this.label2.Location = new System.Drawing.Point(13, 26);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(104, 26);
-			this.label2.TabIndex = 3;
-			this.label2.Text = "Dominant Nationality";
-			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			// 
-			// label5
-			// 
-			this.label5.AutoSize = true;
-			this.label5.Dock = System.Windows.Forms.DockStyle.Right;
-			this.label5.Location = new System.Drawing.Point(34, 52);
-			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(83, 26);
-			this.label5.TabIndex = 8;
-			this.label5.Text = "Codes Scanned";
-			this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			// 
-			// textBoxScanned
-			// 
-			this.textBoxScanned.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.textBoxScanned.Location = new System.Drawing.Point(123, 55);
-			this.textBoxScanned.Name = "textBoxScanned";
-			this.textBoxScanned.ReadOnly = true;
-			this.textBoxScanned.Size = new System.Drawing.Size(472, 20);
-			this.textBoxScanned.TabIndex = 9;
 			// 
 			// FeedbackMainForm
 			// 
@@ -713,11 +696,9 @@
         private System.Windows.Forms.ToolStripButton toolStripDeleteFolder;
         private System.Windows.Forms.ToolStripButton toolStripPrint;
         private System.Windows.Forms.ToolStripButton toolStripPreview;
-        private System.Windows.Forms.ToolStripButton toolStripExport;
-        private System.Windows.Forms.ToolStripButton toolStripConfig;
+		private System.Windows.Forms.ToolStripButton toolStripExport;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton toolStripSync;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.PrintDialog printDialog;

@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace BaconFeedback
 {
@@ -51,7 +53,15 @@ namespace BaconFeedback
 
 		public void Export()
 		{
-			throw new System.NotImplementedException();
+			DateTime d = DateTime.Now;
+
+			SaveFileDialog s = new SaveFileDialog();
+			s.Filter = @"Text files|*.txt";
+			s.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+			s.FileName += string.Format("Statistics - {0}.{1}.{2} - {3}.{4}.txt", d.Day, d.Month, d.Year, d.Hour, d.Minute.ToString("00"));
+
+			if (s.ShowDialog() == DialogResult.OK)
+				FileHandler.Export(_view.MainText, s.FileName);
 		}
 	}
 }

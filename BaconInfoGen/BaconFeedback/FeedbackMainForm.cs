@@ -79,6 +79,7 @@ namespace BaconFeedback
 
 		private void Export_Click(object sender, EventArgs e)
 		{
+			_presenter.ExportSelected();
 		}
 
 		private void toolStripPreview_Click(object sender, EventArgs e)
@@ -114,10 +115,6 @@ namespace BaconFeedback
 			_presenter.DownloadSync();
 			_presenter.ListViewClear(fileView);
 			_presenter.PopulateFolderView();
-		}
-
-		private void toolStripConfig_Click(object sender, EventArgs e)
-		{
 		}
 
 		#endregion
