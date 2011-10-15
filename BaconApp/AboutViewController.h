@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+extern NSString * const facebook;
+extern NSString * const website;
 
 @interface AboutViewController : UIViewController {
-    
 }
+
+-(IBAction)btnFacebookPressed:(id)sender;
+-(IBAction)btnWebsitePressed:(id)sender;
+-(IBAction)btnOkPressed:(id)sender;
 
 @end

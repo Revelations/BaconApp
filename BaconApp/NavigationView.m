@@ -56,10 +56,20 @@
 #pragma mark - View lifecycle
 - (void)viewDidLoad
 {
-    cellContent = [[NSArray arrayWithObjects:@"Title", @"About", @"Scan",@"Information", @"Map"
-    , @"Feedback", @"Game", @"Settings", @"Help", nil] retain];
     [super viewDidLoad];
 
+	cellContent = [[NSArray arrayWithObjects:
+					@"Title",
+					@"About",
+					@"Scan",
+					@"Information",
+					@"Map",
+					@"Feedback",
+					@"Game",
+					@"Settings",
+					@"Help",
+					nil] retain];
+	self.navigationItem.title = @"BACON!";
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -264,6 +274,7 @@
             [self presentModalViewController:self.helpView animated:YES];
             break;
         default:
+			NSLog(@"You have selected something else");
             exit(-1);
             break;
     }

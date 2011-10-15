@@ -13,5 +13,5 @@
 	IBOutlet UIButton *okButton;
 }
 
--(IBAction) returnToMainView;
+- (IBAction) returnToMainView:(id)sender;
 @end

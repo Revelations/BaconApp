@@ -11,7 +11,7 @@
 
 @implementation HelpViewController
 
--(IBAction)returnToMainView {
+-(IBAction)returnToMainView:(id)sender {
 	NSLog(@"Returning to main view -- Not yet implemented");
 }
 

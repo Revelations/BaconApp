@@ -10,7 +10,11 @@
 
 
 @interface SettingsViewController : UIViewController {
-
+	IBOutlet UITextField * txtFontSize;
+	IBOutlet UITextField * txtIPAddress;
 }
+
+-(IBAction)applyChangesPressed:(id)sender;
+-(IBAction)discardChangesPressed:(id)sender;
 
 @end

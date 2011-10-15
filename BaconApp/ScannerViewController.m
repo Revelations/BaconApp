@@ -17,7 +17,7 @@
 
 @synthesize resultImage, resultText, interpreter, current;
 
--(IBAction) scanButtonPressed
+-(IBAction) scanButtonPressed:(id)sender
 {
 	NSLog(@"Scan button pressed");
 	ZBarReaderViewController *reader = [ZBarReaderViewController new];
@@ -38,7 +38,8 @@
 	[reader release];
 	
 }
--(IBAction) settingsButtonPressed{
+-(IBAction) settingsButtonPressed:(id)sender
+{
 	//	SettingsController *setting = [[SettingsController alloc]init];
 	/*NSLog(@"HI? u want settings?");
 	BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];

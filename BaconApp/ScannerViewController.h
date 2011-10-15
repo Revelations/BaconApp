@@ -26,6 +26,6 @@
 @property (nonatomic, retain) HistoryItem *current;
 @property (nonatomic, retain) Interpreter *interpreter;
 
--(IBAction) scanButtonPressed;
--(IBAction) settingsButtonPressed;
+-(IBAction) scanButtonPressed:(id)sender;
+-(IBAction) settingsButtonPressed:(id)sender;
 @end

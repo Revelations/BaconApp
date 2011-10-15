@@ -8,8 +8,22 @@
 
 #import "AboutViewController.h"
 
+NSString * const facebook = @"http://www.facebook.com/SavingMaungatautari";
+NSString * const website = @"http://www.maungatrust.org/";
 
 @implementation AboutViewController
+
+-(IBAction)btnFacebookPressed:(id)sender {
+	NSLog(@"Navigating to \"%@\" (Function not yet implemented)", facebook);
+}
+
+-(IBAction)btnWebsitePressed:(id)sender {
+	NSLog(@"Navigating to \"%@\" (Function not yet implemented)", website);
+}
+
+-(IBAction)btnOkPressed:(id)sender {
+	
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

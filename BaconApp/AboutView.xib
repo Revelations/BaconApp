@@ -12,6 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
+			<integer value="6"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -37,14 +38,14 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUIView" id="191373211">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="IBUITextView" id="43684010">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{0, 56.0003}, {320, 142.387}}</string>
+						<string key="NSFrame">{{0, 56}, {320, 142}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView" ref="942880792"/>
 						<object class="NSColor" key="IBUIBackgroundColor" id="764322758">
@@ -79,7 +80,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBUINavigationItem" id="862819052">
 								<reference key="IBUINavigationBar" ref="245317731"/>
-								<string key="IBUITitle">BaconApp</string>
+								<string key="IBUITitle">About</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 						</object>
@@ -97,7 +98,7 @@
 							<integer value="256" key="IBUIAccessibilityTraits"/>
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">For further information just select the links below, be aware you will need an active connection to the internet to view them.</string>
+						<string key="IBUIText">For further information regarding the Trust, just select the links below. You will need an active connection to the internet to view them.</string>
 						<reference key="IBUIFont" ref="883730241"/>
 						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 							<int key="IBUIAutocapitalizationType">2</int>
@@ -129,7 +130,7 @@
 								<reference key="IBUIToolbar" ref="548086887"/>
 							</object>
 							<object class="IBUIBarButtonItem" id="475730386">
-								<string key="IBUITitle">Cancel</string>
+								<string key="IBUITitle">Ok</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<float key="IBUIWidth">95</float>
 								<int key="IBUIStyle">1</int>
@@ -138,7 +139,8 @@
 						</object>
 					</object>
 				</object>
-				<string key="NSFrame">{{0, 20}, {320, 460}}</string>
+				<string key="NSFrameSize">{320, 460}</string>
+				<reference key="NSSuperview"/>
 				<reference key="NSNextKeyView" ref="245317731"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -155,20 +157,36 @@
 			<object class="NSMutableArray" key="connectionRecords">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">DismissView:</string>
-						<reference key="source" ref="475730386"/>
-						<reference key="destination" ref="372490531"/>
-					</object>
-					<int key="connectionID">14</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">view</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="191373211"/>
 					</object>
 					<int key="connectionID">15</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">btnFacebookPressed:</string>
+						<reference key="source" ref="771278807"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">17</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">btnWebsitePressed:</string>
+						<reference key="source" ref="690434279"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">18</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">btnOkPressed:</string>
+						<reference key="source" ref="475730386"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">19</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -222,6 +240,9 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">7</int>
 						<reference key="object" ref="862819052"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+						</object>
 						<reference key="parent" ref="245317731"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -306,7 +327,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">15</int>
+			<int key="maxID">22</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -314,6 +335,45 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">AboutViewController</string>
 					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>btnFacebookPressed:</string>
+							<string>btnOkPressed:</string>
+							<string>btnWebsitePressed:</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>btnFacebookPressed:</string>
+							<string>btnOkPressed:</string>
+							<string>btnWebsitePressed:</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBActionInfo">
+								<string key="name">btnFacebookPressed:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">btnOkPressed:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">btnWebsitePressed:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+						</object>
+					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">BaconApp/AboutViewController.h</string>
