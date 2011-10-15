@@ -12,7 +12,7 @@
 @class AboutViewController;
 @class ScannerViewController;
 @class MapViewController;
-@class FeedbackViewController;
+@class FeedbackController;
 @class GameViewController;
 @class SettingsController;
 @class HelpViewController;
@@ -24,7 +24,7 @@
     ScannerViewController * scannerView;
     InfoViewController * infoView;
     MapViewController * mapView;
-    FeedbackViewController * feedbackView;
+    FeedbackController * feedbackView;
     GameViewController * gameView;
     SettingsController * settingsView;
     HelpViewController * helpView;
@@ -35,7 +35,7 @@
 @property(nonatomic, retain) AboutViewController * aboutView;
 @property(nonatomic, retain) ScannerViewController * scannerView;
 @property(nonatomic, retain) MapViewController * mapView;
-@property(nonatomic, retain) FeedbackViewController * feedbackView;
+@property(nonatomic, retain) FeedbackController * feedbackView;
 @property(nonatomic, retain) GameViewController * gameView;
 @property(nonatomic, retain) SettingsController * settingsView;
 @property(nonatomic, retain) HelpViewController * helpView;

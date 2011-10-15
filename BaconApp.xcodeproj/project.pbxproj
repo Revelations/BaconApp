@@ -168,7 +168,7 @@
 		7DACEE571448531900B321D5 /* NavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationView.h; sourceTree = "<group>"; };
 		7DACEE581448531900B321D5 /* NavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationView.m; sourceTree = "<group>"; };
 		7DACEE591448531900B321D5 /* NavigationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NavigationView.xib; sourceTree = "<group>"; };
-		7DACEE5A1448531900B321D5 /* UpdateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpdateView.xib; sourceTree = "<group>"; };
+		7DACEE5A1448531900B321D5 /* UpdateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UpdateView.xib; path = BaconApp/UpdateView.xib; sourceTree = "<group>"; };
 		7DACEE5F1448536500B321D5 /* NavigationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NavigationView.xib; sourceTree = "<group>"; };
 		7DACEE601448536500B321D5 /* UpdateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpdateView.xib; sourceTree = "<group>"; };
 		7DB80437142CEEC6002A23AA /* EntryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EntryView.xib; sourceTree = "<group>"; };
@@ -297,6 +297,7 @@
 				7DC1899F1445084B00BD9041 /* SystemConfiguration.framework */,
 				1726B715140F4C580000EC72 /* ZBarSDK */,
 				17A5A7C7140DEEB4009BB46E /* BaconApp */,
+				7DACEE5A1448531900B321D5 /* UpdateView.xib */,
 				17A5A7E1140DEEB4009BB46E /* BaconAppTests */,
 				17A5A7C0140DEEB4009BB46E /* Frameworks */,
 				17A5A7BE140DEEB4009BB46E /* Products */,
@@ -383,7 +384,6 @@
 		7F48B9191413C3370001546A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				7DACEE5A1448531900B321D5 /* UpdateView.xib */,
 				7DACEE591448531900B321D5 /* NavigationView.xib */,
 				7DACEE5F1448536500B321D5 /* NavigationView.xib */,
 				7DACEE601448536500B321D5 /* UpdateView.xib */,
@@ -438,8 +438,8 @@
 				D340E5011415F4EE00A2370F /* MapViewController.h */,
 				D340E5021415F4EE00A2370F /* MapViewController.m */,
 				7D8ECC9F14363ABE0099D07E /* UpdateController.h */,
-				7D8ECCA014363ABE0099D07E /* UpdateController.m */,
 				7DC18998144484A300BD9041 /* FeedbackController.h */,
+				7D8ECCA014363ABE0099D07E /* UpdateController.m */,
 				7DC18999144484A300BD9041 /* FeedbackController.m */,
 				7D81E89414465F7D00486F43 /* Controller1.h */,
 				7D81E89514465F7E00486F43 /* Controller1.m */,

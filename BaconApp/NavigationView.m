@@ -184,7 +184,7 @@
                 self.aboutView = aController;
                 [aController release];
             }
-            [[self navigationController] pushViewController:aboutView animated:YES];
+            [self presentModalViewController:self.aboutView animated:YES];
             break;
         case 2:
             if(scannerView == nil){
@@ -193,16 +193,16 @@
                 self.scannerView = aController;
                 [aController release];
             }
-            [[self navigationController]  pushViewController:scannerView animated:YES];
+			[self presentModalViewController:self.scannerView animated:YES];
             break;
         case 3:
             if(infoView == nil){
                 InfoViewController * aController =
                 [[InfoViewController alloc] initWithNibName:@"InfoView" bundle:nil];
-                self.infoView = aController;
+                self.scannerView = aController;
                 [aController release];
             }
-            [[self navigationController]  pushViewController:infoView animated:YES];
+            [self presentModalViewController:self.infoView animated:YES];
             break;
         case 4:
             if(mapView == nil){
@@ -211,7 +211,9 @@
                 self.mapView = aController;
                 [aController release];
             }
-            [[self navigationController]  pushViewController:mapView animated:YES];
+			//[[self presentModalViewController]:[[MapViewController alloc] initWithNibName:@"MapView" bundle:nil] animated:YES];
+			//NSLog(@"You have selected me");
+			[self presentModalViewController:self.mapView animated:YES];
             break;
             
         case 5:
@@ -221,7 +223,7 @@
                 self.feedbackView = aController;
                 [aController release];
             }
-            [[self navigationController]  pushViewController:feedbackView animated:YES];
+            [self presentModalViewController:self.feedbackView animated:YES];
             break;
             
         case 6:
@@ -231,7 +233,7 @@
                 self.gameView = aController;
                 [aController release];
             }
-            [[self navigationController]  pushViewController:gameView animated:YES];
+            [self presentModalViewController:self.gameView animated:YES];
             break;
             
         case 7:
@@ -241,7 +243,7 @@
                 self.settingsView = aController;
                 [aController release];
             }
-            [[self navigationController]  pushViewController:settingsView animated:YES];
+            [self presentModalViewController:self.settingsView animated:YES];
             break;
             
         case 8:
@@ -251,7 +253,7 @@
                 self.infoView = aController;
                 [aController release];
             }
-            [[self navigationController]  pushViewController:helpView animated:YES];
+            [self presentModalViewController:self.helpView animated:YES];
             break;
         default:
             exit(-1);
