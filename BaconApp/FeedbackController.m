@@ -41,29 +41,15 @@
 	[data writeToFile:filePath atomically:YES];
 	[data release];
 	
-	
-	Reachability  * receptionCheck = [[Reachability alloc] init];
-	
-	if([updateSession CheckForInternet: receptionCheck] != -1){
+	if([updateSession CheckForInternet] != -1){
 		[updateSession uploadPhp:filePath];
 	}
 	else{
 		
 		//spawns the thread to send feedback
-		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, (int)NULL), ^{
-			while (YES) {
-				if([updateSession CheckForInternet:receptionCheck] != -1)
-					break;
-				else
-					sleep(300);
-			}
-			[updateSession uploadPhp:filePath];
-		});
+		
+		[updateSession spawnThreadForApplication:nil WithPath:filePath WithSleepTime:300 WithType:1];
 	}
-	
-	[updateSession uploadPhp:filePath];
-	
-	[receptionCheck release];
 	[updateSession release];
 }
 

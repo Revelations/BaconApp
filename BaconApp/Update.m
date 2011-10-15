@@ -19,8 +19,36 @@
 @synthesize bufferOffsetU;
 @synthesize bufferLimitU;
 
+-(void) spawnThreadForApplication: (UIApplication *) application WithPath:(NSString *) filePath WithSleepTime: (int) sleepTime WithType: (int) type{
+	if (type) {
+		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, (int)NULL), ^{
+			while (YES) {
+				if([self CheckForInternet] != -1)
+					break;
+				else
+					sleep(sleepTime);
+			}
+			[self uploadPhp:filePath];
+		});
+	}
+	else {
+		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, (int)NULL), ^{
+			while ([application backgroundTimeRemaining] > 5.0) {
+				if([self CheckForInternet] != -1)
+					break;
+				else
+					sleep(sleepTime);
+			}
+			[self uploadPhp:filePath];
+		});
+	}
+	
+}
 
--(int)CheckForInternet: (Reachability *) curReach {
+-(int)CheckForInternet{
+//	Reachability reachabili
+//	[kReachabilityChangedNotification object: noteObject];
+	Reachability * curReach = [Reachability reachabilityForInternetConnection];
 	NetworkStatus netStatus = [curReach currentReachabilityStatus];
 	switch (netStatus)
 	{
@@ -86,6 +114,10 @@
 	}
 	else{
 		NSLog(@"failure!");
+	}
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	if([fileManager isDeletableFileAtPath:filePath]){
+		[fileManager removeItemAtPath:filePath error: NULL];
 	}
 	
 }

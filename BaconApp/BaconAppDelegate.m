@@ -37,7 +37,7 @@ NSString * const CONTENT_DIRECTORY = @"Content";
 @synthesize serverIpAddress = _serverIpAddress;
 @synthesize fontSize = _fontSize;
 
-#pragma mark -
+#pragma mark - helper methods
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -101,8 +101,9 @@ NSString * const CONTENT_DIRECTORY = @"Content";
             [updateSession uploadPhp:filePath];
         }
         else{
+			[self spawnThreadForApplication: application WithPath:filePath WithSleepTime:60 WithType:0];
             
-            //spawns the thread to send feedback
+           /* //spawns the thread to send feedback
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, (int)NULL), ^{
                 while ([application backgroundTimeRemaining] > 5.0) {
                     if([updateSession CheckForInternet:receptionCheck] != -1)
@@ -111,7 +112,7 @@ NSString * const CONTENT_DIRECTORY = @"Content";
                         sleep(60);
                 }
                 [updateSession uploadPhp:filePath];
-            });
+            });*/
         }
     }
     
@@ -142,13 +143,14 @@ NSString * const CONTENT_DIRECTORY = @"Content";
     NSString *filePath = [NSString stringWithFormat:@"%@%@", documentsDirectory, @"/feedback.txt"];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if([fileManager fileExistsAtPath:filePath]){
-        if([updateSession CheckForInternet:receptionCheck] != -1){
+        if([updateSession CheckForInternet] != -1){
             [updateSession uploadPhp:filePath];
         }
         else{
             
             //spawns the thread to send feedback
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, (int)NULL), ^{
+			[updateSession spawnThreadForApplication:application WithPath:filePath WithSleepTime:300 WithType:1];
+            /*dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, (int)NULL), ^{
                 while (YES) {
                     if([updateSession CheckForInternet:receptionCheck] != -1)
                         break;
@@ -156,7 +158,7 @@ NSString * const CONTENT_DIRECTORY = @"Content";
                         sleep(300);
                 }
                 [updateSession uploadPhp:filePath];
-            });
+            });*/
         }
     }
     
