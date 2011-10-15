@@ -12,7 +12,7 @@
 #import "MapViewController.h"
 #import "FeedbackController.h"
 #import "GameViewController.h"
-#import "SettingsController.h"
+#import "SettingsViewController.h"
 #import "HelpViewController.h"
 #import "InfoViewController.h"
 #import "BaconAppDelegate.h"
@@ -173,7 +173,7 @@
 #pragma mark - Table view delegate
 
 
-//customize the appearance of the table cells
+//navigation and event handling
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.row) {
@@ -184,6 +184,7 @@
                 self.aboutView = aController;
                 [aController release];
             }
+			NSLog(@"You have selected aboutView");
             [self presentModalViewController:self.aboutView animated:YES];
             break;
         case 2:
@@ -193,15 +194,17 @@
                 self.scannerView = aController;
                 [aController release];
             }
+			NSLog(@"You have selected scannerView");
 			[self presentModalViewController:self.scannerView animated:YES];
             break;
         case 3:
             if(infoView == nil){
                 InfoViewController * aController =
                 [[InfoViewController alloc] initWithNibName:@"InfoView" bundle:nil];
-                self.scannerView = aController;
+                self.infoView = aController;
                 [aController release];
             }
+			NSLog(@"You have selected infoView");
             [self presentModalViewController:self.infoView animated:YES];
             break;
         case 4:
@@ -212,7 +215,7 @@
                 [aController release];
             }
 			//[[self presentModalViewController]:[[MapViewController alloc] initWithNibName:@"MapView" bundle:nil] animated:YES];
-			//NSLog(@"You have selected me");
+			NSLog(@"You have selected mapView");
 			[self presentModalViewController:self.mapView animated:YES];
             break;
             
@@ -223,6 +226,7 @@
                 self.feedbackView = aController;
                 [aController release];
             }
+			NSLog(@"You have selected FeedbackView");
             [self presentModalViewController:self.feedbackView animated:YES];
             break;
             
@@ -233,16 +237,18 @@
                 self.gameView = aController;
                 [aController release];
             }
+			NSLog(@"You have selected the gameView");
             [self presentModalViewController:self.gameView animated:YES];
             break;
             
         case 7:
             if(settingsView == nil){
-                SettingsController * aController =
-                [[SettingsController alloc] initWithNibName:@"SettingsView" bundle:nil];
+                SettingsViewController * aController =
+                [[SettingsViewController alloc] initWithNibName:@"SettingsView" bundle:nil];
                 self.settingsView = aController;
                 [aController release];
             }
+			NSLog(@"You have selected settingsView");
             [self presentModalViewController:self.settingsView animated:YES];
             break;
             
@@ -250,9 +256,10 @@
             if(helpView == nil){
                 HelpViewController * aController =
                 [[HelpViewController alloc] initWithNibName:@"helpView" bundle:nil];
-                self.infoView = aController;
+                self.helpView = aController;
                 [aController release];
             }
+			NSLog(@"You have Selected helpView");
             [self presentModalViewController:self.helpView animated:YES];
             break;
         default:

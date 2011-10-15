@@ -1,15 +1,15 @@
     //
-//  SettingsController.m
+//  SettingsViewController.m
 //  BaconApp
 //
 //  Created by Donoan Hoffman on 15/10/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "SettingsController.h"
+#import "SettingsViewController.h"
 
 
-@implementation SettingsController
+@implementation SettingsViewController
 
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 /*

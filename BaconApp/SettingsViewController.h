@@ -1,5 +1,5 @@
 //
-//  SettingsController.h
+//  SettingsViewController.h
 //  BaconApp
 //
 //  Created by Donoan Hoffman on 15/10/11.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface SettingsController : UIViewController {
+@interface SettingsViewController : UIViewController {
 
 }
 

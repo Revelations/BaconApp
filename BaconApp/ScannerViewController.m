@@ -11,7 +11,7 @@
 #import "BaconAppDelegate.h"
 #import "UpdateController.h"
 #import "Update.h"
-#import "SettingsController.h"
+#import "SettingsViewController.h"
 
 @implementation ScannerViewController
 
@@ -40,13 +40,13 @@
 }
 -(IBAction) settingsButtonPressed{
 	//	SettingsController *setting = [[SettingsController alloc]init];
-	NSLog(@"HI? u want settings?");
+	/*NSLog(@"HI? u want settings?");
 	BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
 	SettingsController *settingsController = [[SettingsController alloc] initWithNibName:nil bundle:nil];
 	[[UIApplication sharedApplication].keyWindow.rootViewController
      presentModalViewController:settingsController animated:YES];
-	[settingsController release];
+	[settingsController release];*/
 	
 	
 	//	[self presentModalViewController:setting animated:YES];
