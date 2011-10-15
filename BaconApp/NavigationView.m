@@ -126,7 +126,8 @@
     }
     
     // Configure the cell...
-    cell.text = [cellContent objectAtIndex:indexPath.row];
+	NSUInteger row = [indexPath row];
+	cell.textLabel.text =[cellContent objectAtIndex:row];
     
     return cell;
 }

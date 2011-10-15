@@ -12,6 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
+			<integer value="4"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -37,14 +38,14 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUIView" id="191373211">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="IBUIButton" id="672655005">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{80.4062, 413}, {152.016, 37}}</string>
+						<string key="NSFrame">{{84, 403}, {152.016, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -73,7 +74,7 @@
 					<object class="IBUITextView" id="1290584">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{19, 0.999813}, {270.578, 404.992}}</string>
+						<string key="NSFrame">{{20.578, 20.9918}, {279, 374}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView" ref="672655005"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -83,7 +84,17 @@
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">To use this app, simply tap the scan button and then direct the phone's camera toward the QRcode. Once it has scanned successfully, the app will display the information for that particular code and if you tap the map button it will give you a rough idea where you are in the Trust.Please note: if you choose to send feedback, it will attempt to send it via an internet connection, if one cannot be made it will be delayed till later.        Please also note that you will need to update the app while in a good reception area to ensure that you can read all the QRcodes.</string>
+						<bool key="IBUIEditable">NO</bool>
+						<string type="base64-UTF8" key="IBUIText">VG8gdXNlIHRoaXMgYXBwLCBzaW1wbHkgdGFwIHRoZSBzY2FuIGJ1dHRvbiBhbmQgdGhlbiBkaXJlY3Qg
+dGhlIHBob25lJ3MgY2FtZXJhIHRvd2FyZCB0aGUgUVIgQ29kZS4KCk9uY2UgaXQgaGFzIHNjYW5uZWQg
+c3VjY2Vzc2Z1bGx5LCB0aGUgYXBwIHdpbGwgZGlzcGxheSB0aGUgaW5mb3JtYXRpb24gZm9yIHRoYXQg
+cGFydGljdWxhciBjb2RlIGFuZCBpZiB5b3UgdGFwIHRoZSBtYXAgYnV0dG9uIGl0IHdpbGwgZ2l2ZSB5
+b3UgYSByb3VnaCBpZGVhIHdoZXJlIHlvdSBhcmUgaW4gdGhlIFRydXN0LgoKUGxlYXNlIG5vdGU6IGlm
+IHlvdSBjaG9vc2UgdG8gc2VuZCBmZWVkYmFjaywgaXQgd2lsbCBhdHRlbXB0IHRvIHNlbmQgaXQgdmlh
+IGFuIGludGVybmV0IGNvbm5lY3Rpb24uIElmIG9uZSBjYW5ub3QgYmUgbWFkZSwgaXQgd2lsbCBiZSBk
+ZWxheWVkIHRpbGwgbGF0ZXIuCgpQbGVhc2UgYWxzbyBub3RlIHRoYXQgeW91IHdpbGwgbmVlZCB0byB1
+cGRhdGUgdGhlIGFwcCB3aGlsZSBpbiBhIGdvb2QgcmVjZXB0aW9uIGFyZWEgdG8gZW5zdXJlIHRoYXQg
+eW91IGNhbiByZWFkIGFsbCB0aGUgUVIgQ29kZXMuA</string>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Helvetica</string>
 							<double key="NSSize">17</double>
@@ -95,7 +106,8 @@
 						</object>
 					</object>
 				</object>
-				<string key="NSFrame">{{0, 20}, {320, 460}}</string>
+				<string key="NSFrameSize">{320, 460}</string>
+				<reference key="NSSuperview"/>
 				<reference key="NSNextKeyView" ref="1290584"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -143,8 +155,8 @@
 						<reference key="object" ref="191373211"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="672655005"/>
 							<reference ref="1290584"/>
+							<reference ref="672655005"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -181,6 +193,7 @@
 					<string>1.IBEditorWindowLastContentRect</string>
 					<string>1.IBPluginDependency</string>
 					<string>3.IBPluginDependency</string>
+					<string>3.IBViewBoundsToFrameTransform</string>
 					<string>4.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
@@ -190,6 +203,9 @@
 					<string>{{354, 412}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<object class="NSAffineTransform">
+						<bytes key="NSTransformStruct">P4AAAL+AAABCoM/5w+AAAA</bytes>
+					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>
 			</object>
