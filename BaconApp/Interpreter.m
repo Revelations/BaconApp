@@ -9,6 +9,7 @@
 #import "Interpreter.h"
 #include "stdio.h"
 #include "BaconAppDelegate.h"
+#include "Update.h"
 
 @implementation Interpreter
 
@@ -36,14 +37,25 @@
 	return result;
 }
 
+//#pragma mark - Remote Methods
+//+(NSString *)	remoteContentDir:(NSString *)urlPath;
+//+(NSURL *)		remoteContentLogURL:(NSString *)urlPath;
+//+(NSString *)	remoteGameDir:(NSString *)urlPath;
+//+(NSURL *)		remoteGameLogURL:(NSString *)urlPath;
+//
+//#pragma mark - Local Methods
+//+(NSString *)	localContentDir;
+//+(NSString *)	localContentLogFile;
+//+(NSString *)	localGameDir;
+//+(NSString *)	localGameLogFile;
+
+
 -(void) setVals:(NSString *) filePath {
 	NSLog(@"arg = %@", filePath);
-
-	NSString * path0 = [[NSBundle mainBundle] pathForResource:filePath ofType:@"html" inDirectory:CONTENT_DIRECTORY];
-	
-	const char * fileName = [path0 UTF8String];
+	NSString * localContentDir = [Update localContentDir];
+	const char * fileName = [[NSString stringWithFormat:@"%@/%@.html", localContentDir, filePath] UTF8String];
 	FILE * file = fopen(fileName, "r");
-	NSLog(@"FILE: %@, path0 = %@", file, path0);
+	NSLog(@"file: %@, path: %@", file, localContentDir);
 	// check for NULL
 	while(!feof(file))
 	{

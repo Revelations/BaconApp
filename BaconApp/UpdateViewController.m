@@ -24,24 +24,11 @@
 -(IBAction)Update:(id)sender{
 	NSLog(@"Jim is busy looking in a file system.");
 	Update *currentFileRequest = [[[Update alloc] init] autorelease];
-	[currentFileRequest getDirectory:@"http://revelations.webhop.org:81/"];   
+	[currentFileRequest downloadContentFilesFrom:@"http://revelations.webhop.org:81/"];   
 	NSLog(@"Jim has now finished looking for the files");
 	[self dismissModalViewControllerAnimated:YES];
-	
-	
-	
-	//	TODO: Move to start of program.
-	//	Update * updateSession = [[[Update alloc]init]autorelease];
-	//	[updateSession GetGameFiles:@"ftp://revelations.webhop.org"];
-	//	NSLog(@"Update Session has finished");
-	//	
-	//	//BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
-	//	UpdateController *updateController = [[UpdateController alloc] initWithNibName:nil bundle:nil];
-	//	[[UIApplication sharedApplication].keyWindow.rootViewController
-	//	 presentModalViewController:updateController animated:YES];
-	//	[updateController release];
-	
 }
+
 -(IBAction)CarryOn:(id)sender{
 	NSLog(@"Carry on Jim");
 	//BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];

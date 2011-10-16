@@ -2,8 +2,7 @@
 //  FeedbackController.m
 //  BaconApp
 //
-//  Created by Donovan Hoffman on 12/10/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 Team Bacon. All rights reserved.
 //
 
 #import "FeedbackViewController.h"
@@ -13,18 +12,65 @@
 
 @implementation FeedbackViewController
 
-#pragma mark - Actions
+//----------------------------------------------------------------------------------------------------------
+//
+//	Misc methods.
+//
+//----------------------------------------------------------------------------------------------------------
 
-@synthesize scrollview, textField1, textField2, textField3, textField4, feedBackTextView;
+// Adds a custom done button to the on screen keyboard.
+//
+-(void)addButtonToKeyboard
+{
+	UIButton * doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
+	doneButton.frame = CGRectMake(0, 163, 106, 53);
+	doneButton.adjustsImageWhenHighlighted = NO;
+	
+    [doneButton setImage:[UIImage imageNamed:@"DoneUp.png"] forState:UIControlStateNormal];
+    [doneButton setImage:[UIImage imageNamed:@"DoneDown.png"] forState:UIControlStateHighlighted];
+	
+    [doneButton addTarget:self action:@selector(doneButton:) forControlEvents:UIControlEventTouchUpInside];
+	
+	UIWindow* tempWindow = [[[UIApplication sharedApplication] windows] objectAtIndex:1];
+	UIView* keyboard;
+	
+    for(int i=0; i<[tempWindow.subviews count]; i++)
+    {
+		keyboard = [tempWindow.subviews objectAtIndex:i];
+		
+		// Keyboard found, add the button.
+        if([[keyboard description] hasPrefix:@"<UIPeripheralHost"] == YES)
+            [keyboard addSubview:doneButton];
+    }
+}
 
+// Custom event, fired whenever the keyboard is shown.
+// Calls above method to add custom done button to keyboard.
+//
+-(void) keyboardDidShow: (NSNotification *) note
+{
+    if(displayAdditionalDoneButton)
+        [self addButtonToKeyboard];
+}
 
+// Called when the custom done button is pressed.
+// Resigns control from the number text field, hides keyboard.
+//
+-(void)doneButton:(id)sender 
+{
+    [textFieldNumber resignFirstResponder];
+}
+
+// Sends feedback to the server.
+//
 -(IBAction)SendFeedback:(id)sender{
-	   
-	NSString * numbers      = [[numberTextField text] autorelease];
-	NSString * nationality  = [[nationalityTextField text] autorelease];
-	NSString * feedback     = [[feedBackTextView text] autorelease];
-	NSString * seen         = [[seenTextField text] autorelease];
-		NSMutableArray * scannedContents = [(BaconAppDelegate *) [[UIApplication sharedApplication] delegate]scannedItems];
+	
+	NSString * numbers      = [textFieldNumber text];
+	NSString * nationality  = [textFieldNationality text];
+	NSString * seen         = [textFieldSighted text];
+	NSString * feedback     = [textViewMiscellaneous text];
+	
+	NSMutableArray * scannedContents = [(BaconAppDelegate *) [[UIApplication sharedApplication] delegate]scannedItems];
 	int val_count = [scannedContents count];
 	
 	NSMutableData *data = [NSMutableData data];
@@ -41,38 +87,60 @@
 	
 	NSString *filePath = [NSString stringWithFormat:@"%@%@", documentsDirectory, @"/feedback.txt"];
 	[data writeToFile:filePath atomically:YES];
-	[data release];
 	
-	if([updateSession CheckForInternet] != -1){
+	// If we have internet, send the file. If not, spawn a thread to wait and send it eventually.
+	if([updateSession CheckForInternet] != -1)
 		[updateSession uploadPhp:filePath];
-	}
-	else{
-		
-		//spawns the thread to send feedback
-		
+	else
 		[updateSession spawnThreadForApplication:nil WithPath:filePath WithSleepTime:300 WithType:1];
-	}
+	
 	[updateSession release];
 }
 
+//----------------------------------------------------------------------------------------------------------
+//
+//	UIViewController Methods.
+//
+//----------------------------------------------------------------------------------------------------------
 
-//returns -1 if no connection is possible
-//returns 1 if wwan is available
-//returns 0 if wifi is available
-
-
--(IBAction)Cancel:(id)sender
+// Called when the view is finished loading.
+//
+- (void)viewDidLoad
 {
-	[self dismissModalViewControllerAnimated:YES];
+	// Set view title.
+	self.navigationItem.title = @"Feedback";
+	
+    // Hacky method of making a text view look like a text field - Put a disabled text field behind it.
+    textFieldMiscellaneous.frame = CGRectMake(20, 233, 281, 132);
+    
+	// Fire an event when the keyboard shows.
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(keyboardDidShow:) 
+                                                 name:UIKeyboardDidShowNotification 
+                                               object:nil];	
+	[super viewDidLoad];
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+// Called when the view is unloaded.
+//
+- (void)viewDidUnload
 {
-	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-	if (self) {
-		// Custom initialization
-	}
-	return self;
+	[super viewDidUnload];
+}
+
+// Called when the orientation changes.
+// Controls whether or not the interface should be auto rotated.
+//
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+	// Return YES for supported orientations
+	return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)didReceiveMemoryWarning
+{
+	// Releases the view if it doesn't have a superview.
+	[super didReceiveMemoryWarning];
 }
 
 - (void)dealloc
@@ -81,179 +149,79 @@
 	[super dealloc];
 }
 
-- (void)didReceiveMemoryWarning
-{
-	// Releases the view if it doesn't have a superview.
-	[super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
-}
 
 
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
-{
-    self.feedBackTextView.returnKeyType = UIReturnKeyDone;
-    textField1.returnKeyType = UIReturnKeyDone;
-    textField2.returnKeyType = UIReturnKeyDone;
-    textField3.returnKeyType = UIReturnKeyDone;
-    
-    // Hacky method of making a text view look like a text field.
-    textField4.frame = CGRectMake(20, 233, 281, 132);
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self 
-                                             selector:@selector(keyboardDidShow:) 
-                                                 name:UIKeyboardDidShowNotification 
-                                               object:nil];	
-    
-    self.navigationItem.title = @"Feedback";
-      
-	[super viewDidLoad];
-}
- 
 
+//----------------------------------------------------------------------------------------------------------
+//
+//	UITextFieldDelegate Methods
+//
+//----------------------------------------------------------------------------------------------------------
 
-/*- (void) viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:animated];
-	
-	[[NSNotificationCenter defaultCenter] 
-	 addObserver:self
-	 selector:@selector
-	 (keyboardDidShow:) 
-	 name: UIKeyboardDidShowNotification
-	 object:nil];
-	[[NSNotificationCenter defaultCenter]
-	 addObserver:self 
-	 selector:@selector
-	 (keyboardDidHide:) name:
-	 UIKeyboardDidHideNotification
-	 object:nil];
-	
-	scrollview.contentSize = CGSizeMake(320,
-										460);
-	
-	displayKeyboard = NO;
-}*/
-
--(void) viewWillDisappear:(BOOL)animated {
-	//[[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
--(void)addButtonToKeyboard
-{
-	doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
-	doneButton.frame = CGRectMake(0, 163, 106, 53);
-	doneButton.adjustsImageWhenHighlighted = NO;
-
-    [doneButton setImage:[UIImage imageNamed:@"DoneUp.png"] forState:UIControlStateNormal];
-    [doneButton setImage:[UIImage imageNamed:@"DoneDown.png"] forState:UIControlStateHighlighted];
-	
-    [doneButton addTarget:self action:@selector(doneButton:) forControlEvents:UIControlEventTouchUpInside];
-	
-    // locate keyboard view
-	UIWindow* tempWindow = [[[UIApplication sharedApplication] windows] objectAtIndex:1];
-	UIView* keyboard;
-	
-    for(int i=0; i<[tempWindow.subviews count]; i++)
-    {
-		keyboard = [tempWindow.subviews objectAtIndex:i];
-		// keyboard found, add the button
-
-        if([[keyboard description] hasPrefix:@"<UIPeripheralHost"] == YES)
-            [keyboard addSubview:doneButton];
-    }
-}
-
--(void) keyboardDidShow: (NSNotification *) note
-{
-    if(displayAdditionalDoneButton)
-        [self addButtonToKeyboard];
-}
-
--(void)doneButton:(id)sender {
-    [textField1 resignFirstResponder];
-}
-
--(BOOL)textViewShouldBeginEditing:(UITextView *)textView
-{
-    displayAdditionalDoneButton = NO;
-    return YES;
-}
-
+// Called when a text field is about to be edited.
+// If that text field is the group number field, enable the custom done button.
+//
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    if(textField == textField1)
+    if(textField == textFieldNumber)
         displayAdditionalDoneButton = YES;
-    else
-        displayAdditionalDoneButton = NO;
     
     return YES;
 }
 
-/*-(void) keyboardDidShow: (NSNotification *)notif {
-	if (displayKeyboard) {
-		return;
-	}
-	
-	NSDictionary* info = [notif userInfo];
-	NSValue* aValue = [info objectForKey:UIKeyboardBoundsUserInfoKey];
-	CGSize keyboardSize = [aValue CGRectValue].size;
-	
-	offset = scrollview.contentOffset;
-	
-	CGRect viewFrame = scrollview.frame;
-	viewFrame.size.height -= keyboardSize.height;
-	scrollview.frame = viewFrame;
-	
-	CGRect textFieldRect = [Field frame];
-	textFieldRect.origin.y += 10;
-	[scrollview scrollRectToVisible: textFieldRect animated:YES];
-	displayKeyboard = YES;
+// Called when a text field is finished with.
+// If that text field is the group number field, disable the custom done button.
+//
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+	if(textField == textFieldNumber)
+		displayAdditionalDoneButton = NO;
 }
 
--(void) keyboardDidHide: (NSNotification *)notif {
-	if (!displayKeyboard) {
-		return; 
-	}
-	
-	scrollview.frame = CGRectMake(0, 0, 320,460);
-	
-	scrollview.contentOffset =offset;
-	
-	displayKeyboard = NO;
-	
-}*/
-
-/*-(BOOL) textFieldShouldBeginEditing:(UITextField*)textField {
-	Field = textField;
-	return YES;
-}*/
-
+// Called when a user hits the done button on a text field keyboard.
+// Resigns focus and hides keyboard.
+//
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
 	[textField resignFirstResponder];
 	return YES;
 }
 
+//----------------------------------------------------------------------------------------------------------
+//
+//	UITextViewDelegate Methods
+//
+//----------------------------------------------------------------------------------------------------------
+
+// Called when the text view is about to be edited.
+// Moves the scroll pane upward so that keyboard is not drawn over top of text view.
+//
+-(BOOL)textViewShouldBeginEditing:(UITextView *)textView
+{
+	scrollView.frame = CGRectMake(0, -200, 320, 455);
+    return YES;
+}
+
+// Called when a text view is finished with.
+// Moves the scroll pane back to it's original location.
+//
+-(void)textViewDidEndEditing:(UITextView *)textView
+{
+	scrollView.frame = CGRectMake(0, 0, 320, 455);
+}
+
+// Called whenever the text changes in a text view.
+// If the new text is a return character, user has hit the done button.
+// Resign focus and hide keyboard.
+//
 -(BOOL) textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     if([text isEqualToString:@"\n"])
     {
-        [feedBackTextView resignFirstResponder];
+        [textViewMiscellaneous resignFirstResponder];
         return NO;
     }
     return YES;
-}
-
-- (void)viewDidUnload
-{
-	[super viewDidUnload];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-	// Return YES for supported orientations
-	return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 @end

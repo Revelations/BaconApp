@@ -2,8 +2,7 @@
 //  FeedbackController.h
 //  BaconApp
 //
-//  Created by Donovan Hoffman on 12/10/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 Team Bacon. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -11,36 +10,18 @@
 
 
 @interface FeedbackViewController : ModalViewController <UITextViewDelegate, UITextFieldDelegate> {
-	IBOutlet UITextField *  numberTextField;
-	IBOutlet UITextField *  nationalityTextField;
-	IBOutlet UITextField *  seenTextField;
-	IBOutlet UITextView  *  feedBackTextView;
-
+	IBOutlet UITextField * textFieldNumber;
+	IBOutlet UITextField * textFieldNationality;
+	IBOutlet UITextField * textFieldSighted;
 	
-	IBOutlet UIScrollView *scrollview;
-    IBOutlet UITextField *textField1;
-    IBOutlet UITextField *textField2;
-    IBOutlet UITextField *textField3;
-    IBOutlet UITextField *textField4;
+	IBOutlet UITextView  * textViewMiscellaneous;
+	IBOutlet UITextField * textFieldMiscellaneous;
 	
-	BOOL displayKeyboard;
+	IBOutlet UIScrollView * scrollView;
     
-    UIButton *doneButton;
     BOOL displayAdditionalDoneButton;
-    
-	CGPoint  offset;
-	UITextField *Field;
 }
 
-@property(nonatomic,retain) IBOutlet UIScrollView *scrollview;
-@property(nonatomic,retain) IBOutlet UITextField *textField1;
-@property(nonatomic,retain) IBOutlet UITextField *textField2;
-@property(nonatomic,retain) IBOutlet UITextField *textField3;
-@property(nonatomic,retain) IBOutlet UITextField *textField4;
-
-@property (nonatomic, retain) IBOutlet UITextView  *  feedBackTextView;
-
-
 -(IBAction)SendFeedback:(id)sender;
--(IBAction)Cancel:(id)sender;
+
 @end

@@ -22,11 +22,26 @@
 
 -(void) spawnThreadForApplication: (UIApplication *) application WithPath:(NSString *) filePath WithSleepTime: (int) sleepTime WithType: (int) type;
 -(void)getFile:(NSString *)urlPath:(NSString *)filePath;
--(void)getDirectory:(NSString *)urlPath;
+-(void)downloadContentFilesFrom:(NSString *)urlPath;
 -(int)CheckForInternet;
 //-(void)upLoadFile:(NSString *)urlPath;
 //-(void)_startSend:(NSString *)filePath : (NSString *) urlPath;
 -(void)uploadPhp:(NSString *) filePath;
 -(void)GetGameFiles:(NSString *) urlPath;
+
++(NSString *)unpurgableDirectory;
+
+#pragma mark - Remote Methods
++(NSString *)	remoteContentDir:(NSString *)urlPath;
++(NSURL *)		remoteContentLogURL:(NSString *)urlPath;
++(NSString *)	remoteGameDir:(NSString *)urlPath;
++(NSURL *)		remoteGameLogURL:(NSString *)urlPath;
+
+#pragma mark - Local Methods
++(NSString *)	localContentDir;
++(NSString *)	localContentLogFile;
++(NSString *)	localGameDir;
++(NSString *)	localGameLogFile;
+
 
 @end

@@ -77,7 +77,7 @@ static UIFont *titleFont;
 	
 	if([fileManager fileExistsAtPath: filePath]){
 		FILE * file = fopen(fileName, "r");
-        Interpreter * interpreter = [[Interpreter alloc] init];
+        Interpreter * interpreter = [[[Interpreter alloc] init] autorelease];
 		while(!feof(file)){
 			for (int i = 0; i < 6; i++) {
 				NSString * line = [interpreter readLineAsNSString:file];
@@ -86,6 +86,7 @@ static UIFont *titleFont;
 			[currentQuestionFiles addObject: array];
 		}
 	}
+	[array release];
 }
 
 -(void) readQuestionFiles{
@@ -145,7 +146,7 @@ static UIFont *titleFont;
 	for (int i = 0; i < [quizQuestions count]; i+=6) {
 		[returnArray addObject: [quizQuestions objectAtIndex: i]];
 	}
-	return returnArray;
+	return [returnArray autorelease];
 }
 
 -(NSMutableArray*)getOptions{
@@ -156,7 +157,7 @@ static UIFont *titleFont;
 			[returnArray addObject: [quizQuestions objectAtIndex: i]];
 		}
 	}
-	return returnArray;
+	return [returnArray autorelease];
 }
 
 -(NSMutableArray*)getAnswers{
@@ -165,7 +166,7 @@ static UIFont *titleFont;
 	for (int i = 5; i < [quizQuestions count]; i+=5) {
 		[returnArray addObject: [quizQuestions objectAtIndex: i]];
 	}
-	return returnArray;
+	return [returnArray autorelease];
 }
 
 - (void)dealloc
