@@ -61,9 +61,8 @@
 //returns 0 if wifi is available
 
 
--(IBAction)Cancel:(id)sender{
-	//NSLog(@"Carry on Jim");
-	//BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
+-(IBAction)Cancel:(id)sender
+{
 	[self dismissModalViewControllerAnimated:YES];
 }
 
@@ -90,15 +89,6 @@
 	// Release any cached data, images, etc that aren't in use.
 }
 
-#pragma mark - View lifecycle
-
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView
-{
-}
-*/
-
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -107,6 +97,9 @@
     textField1.returnKeyType = UIReturnKeyDone;
     textField2.returnKeyType = UIReturnKeyDone;
     textField3.returnKeyType = UIReturnKeyDone;
+    
+    // Hacky method of making a text view look like a text field.
+    textField4.frame = CGRectMake(20, 233, 281, 132);
     
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(keyboardDidShow:) 
@@ -252,40 +245,9 @@
     return YES;
 }
 
-
-/*- (void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event {  
-    if (textField1) {  
-        if ([textField1 canResignFirstResponder]) [textField1 resignFirstResponder];  
-    }  
-    if (textField2) {  
-        if ([textField2 canResignFirstResponder]) [textField2 resignFirstResponder];  
-    }
-	if (textField3) {  
-        if ([textField3 canResignFirstResponder]) [textField3 resignFirstResponder];  
-    }
-	if (textField4) {  
-        if ([textField4 canResignFirstResponder]) [textField4 resignFirstResponder];  
-    }
-	if (numberTextField) {  
-        if ([numberTextField canResignFirstResponder]) [numberTextField resignFirstResponder];  
-    }
-	if (feedBackTextView) {  
-        if ([feedBackTextView canResignFirstResponder]) [feedBackTextView resignFirstResponder];  
-    }  
-    if (seenTextField) {  
-        if ([seenTextField canResignFirstResponder]) [seenTextField resignFirstResponder];  
-    }  
-    if (nationalityTextField) {  
-        if ([nationalityTextField canResignFirstResponder]) [nationalityTextField resignFirstResponder];  
-    }  
-    [super touchesBegan: touches withEvent: event];  
-} */ 
-
 - (void)viewDidUnload
 {
 	[super viewDidUnload];
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
