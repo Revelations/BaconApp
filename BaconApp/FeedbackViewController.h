@@ -10,7 +10,7 @@
 #import "ModalViewController.h"
 
 
-@interface FeedbackViewController : ModalViewController {
+@interface FeedbackViewController : ModalViewController <UITextViewDelegate, UITextFieldDelegate> {
 	IBOutlet UITextField *  numberTextField;
 	IBOutlet UITextField *  nationalityTextField;
 	IBOutlet UITextField *  seenTextField;
@@ -24,6 +24,10 @@
     IBOutlet UITextField *textField4;
 	
 	BOOL displayKeyboard;
+    
+    UIButton *doneButton;
+    BOOL displayAdditionalDoneButton;
+    
 	CGPoint  offset;
 	UITextField *Field;
 }
@@ -33,6 +37,8 @@
 @property(nonatomic,retain) IBOutlet UITextField *textField2;
 @property(nonatomic,retain) IBOutlet UITextField *textField3;
 @property(nonatomic,retain) IBOutlet UITextField *textField4;
+
+@property (nonatomic, retain) IBOutlet UITextView  *  feedBackTextView;
 
 
 -(IBAction)SendFeedback:(id)sender;

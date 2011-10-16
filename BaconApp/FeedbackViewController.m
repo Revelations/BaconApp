@@ -15,7 +15,7 @@
 
 #pragma mark - Actions
 
-@synthesize scrollview, textField1, textField2, textField3, textField4;
+@synthesize scrollview, textField1, textField2, textField3, textField4, feedBackTextView;
 
 
 -(IBAction)SendFeedback:(id)sender{
@@ -62,7 +62,7 @@
 
 
 -(IBAction)Cancel:(id)sender{
-	NSLog(@"Carry on Jim");
+	//NSLog(@"Carry on Jim");
 	//BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
 	[self dismissModalViewControllerAnimated:YES];
 }
@@ -78,6 +78,7 @@
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 	[super dealloc];
 }
 
@@ -102,14 +103,24 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
-    self.navigationItem.title = @"Feedback";
+    self.feedBackTextView.returnKeyType = UIReturnKeyDone;
+    textField1.returnKeyType = UIReturnKeyDone;
+    textField2.returnKeyType = UIReturnKeyDone;
+    textField3.returnKeyType = UIReturnKeyDone;
     
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(keyboardDidShow:) 
+                                                 name:UIKeyboardDidShowNotification 
+                                               object:nil];	
+    
+    self.navigationItem.title = @"Feedback";
+      
 	[super viewDidLoad];
 }
  
 
 
-- (void) viewWillAppear:(BOOL)animated {
+/*- (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	
 	[[NSNotificationCenter defaultCenter] 
@@ -129,14 +140,64 @@
 										460);
 	
 	displayKeyboard = NO;
-}
+}*/
 
 -(void) viewWillDisappear:(BOOL)animated {
-	[[NSNotificationCenter defaultCenter]
-	 removeObserver:self];
+	//[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
--(void) keyboardDidShow: (NSNotification *)notif {
+-(void)addButtonToKeyboard
+{
+	doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
+	doneButton.frame = CGRectMake(0, 163, 106, 53);
+	doneButton.adjustsImageWhenHighlighted = NO;
+
+    [doneButton setImage:[UIImage imageNamed:@"DoneUp.png"] forState:UIControlStateNormal];
+    [doneButton setImage:[UIImage imageNamed:@"DoneDown.png"] forState:UIControlStateHighlighted];
+	
+    [doneButton addTarget:self action:@selector(doneButton:) forControlEvents:UIControlEventTouchUpInside];
+	
+    // locate keyboard view
+	UIWindow* tempWindow = [[[UIApplication sharedApplication] windows] objectAtIndex:1];
+	UIView* keyboard;
+	
+    for(int i=0; i<[tempWindow.subviews count]; i++)
+    {
+		keyboard = [tempWindow.subviews objectAtIndex:i];
+		// keyboard found, add the button
+
+        if([[keyboard description] hasPrefix:@"<UIPeripheralHost"] == YES)
+            [keyboard addSubview:doneButton];
+    }
+}
+
+-(void) keyboardDidShow: (NSNotification *) note
+{
+    if(displayAdditionalDoneButton)
+        [self addButtonToKeyboard];
+}
+
+-(void)doneButton:(id)sender {
+    [textField1 resignFirstResponder];
+}
+
+-(BOOL)textViewShouldBeginEditing:(UITextView *)textView
+{
+    displayAdditionalDoneButton = NO;
+    return YES;
+}
+
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if(textField == textField1)
+        displayAdditionalDoneButton = YES;
+    else
+        displayAdditionalDoneButton = NO;
+    
+    return YES;
+}
+
+/*-(void) keyboardDidShow: (NSNotification *)notif {
 	if (displayKeyboard) {
 		return;
 	}
@@ -168,12 +229,12 @@
 	
 	displayKeyboard = NO;
 	
-}
+}*/
 
--(BOOL) textFieldShouldBeginEditing:(UITextField*)textField {
+/*-(BOOL) textFieldShouldBeginEditing:(UITextField*)textField {
 	Field = textField;
 	return YES;
-}
+}*/
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -181,9 +242,18 @@
 	return YES;
 }
 
+-(BOOL) textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if([text isEqualToString:@"\n"])
+    {
+        [feedBackTextView resignFirstResponder];
+        return NO;
+    }
+    return YES;
+}
 
 
-- (void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event {  
+/*- (void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event {  
     if (textField1) {  
         if ([textField1 canResignFirstResponder]) [textField1 resignFirstResponder];  
     }  
@@ -209,7 +279,7 @@
         if ([nationalityTextField canResignFirstResponder]) [nationalityTextField resignFirstResponder];  
     }  
     [super touchesBegan: touches withEvent: event];  
-}  
+} */ 
 
 - (void)viewDidUnload
 {
