@@ -41,12 +41,6 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	// Override the right button to show a Done button
-    // which is used to dismiss the modal view
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
-											   initWithTitle:@"Done" style:UIBarButtonItemStyleBordered
-                                               target:self
-											   action:@selector(dismissView:)] autorelease];
 }
 
 

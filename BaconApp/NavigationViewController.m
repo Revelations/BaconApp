@@ -11,7 +11,7 @@
 @implementation NavigationViewController
 
 #pragma mark - Properties
-@synthesize aboutView, scannerView, mapView, feedbackView, gameView, settingsView, helpView, infoView, titleView, updateView;
+@synthesize aboutView, scannerView, mapView, feedbackView, gameView, settingsView, helpView, infoView, titleView, updateView, cellContent;
 
 @synthesize currentViewController;
 
@@ -23,6 +23,7 @@
 
 - (void)dealloc
 {
+    [cellContent dealloc];
 	[super dealloc];
 }
 
@@ -38,7 +39,7 @@
 #pragma mark - View lifecycle
 - (void)viewDidLoad
 {
-	NSArray * array = [[NSArray arrayWithObjects:
+	cellContent = [[NSArray alloc ] initWithObjects:
 					@"Title",
 					@"Scan",
 					@"Information",
@@ -49,15 +50,11 @@
                     @"About",
                     @"Update",
 					@"Help",
-					nil] retain];
-    cellContent = array;
-    [array release];
+					nil];
+    
     
 	self.navigationItem.title = @"Menu";
-	// Uncomment the following line to preserve selection between presentations.
-	// self.clearsSelectionOnViewWillAppear = NO;
-	// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-	// self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
     [self showTitleView];
 	//[super viewDidLoad];
 }
@@ -95,14 +92,28 @@
 	return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-		return [cellContent count];
+    return [self.cellContent count];
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil)
+    {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    }
+    
+    cell.textLabel.text = [cellContent objectAtIndex:[indexPath row]];
+    
+    return cell;
+}
 
 //configure the appearance of the cells
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+/*- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	static NSString *CellIdentifier = @"Cell";
 	
@@ -116,23 +127,23 @@
 	cell.textLabel.text =[cellContent objectAtIndex:row];
 	
 	return cell;
-}
+}*/
 
 
 -(void)showSomeView:(ModalViewController *)viewController {
 	
 	// We are the delegate responsible for dismissing the modal view 
 	viewController.delegate = self;
-
+    [self.navigationController pushViewController:viewController animated:YES];
 	// Create a Navigation controller
-	UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:viewController];
-    navController.navigationBar.barStyle = UIBarStyleBlackOpaque;
+	//UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    //navController.navigationBar.barStyle = UIBarStyleBlackOpaque;
 	
 	// show the navigation controller modally
-	[self presentModalViewController:navController animated:YES];
+	//[self presentModalViewController:navController animated:YES];
 	
 	// Clean up resources
-	[navController release];
+	//[navController release];
 }
 
 -(void)showCurrentView {
@@ -144,7 +155,7 @@
 -(void)showAboutView {
 	// Create the modal view controller
 	if (!self.aboutView) {
-		AboutViewController *viewController = [[AboutViewController alloc] initWithNibName:@"AboutView" bundle:nil];
+		AboutViewController *viewController = [[AboutViewController alloc] initWithNibName:@"AboutView" bundle:[NSBundle mainBundle]];
 		self.aboutView = viewController;
 		currentViewController = viewController;
 		// Cleanup resources
@@ -157,7 +168,7 @@
 -(void)showScannerView {
 	// Create the modal view controller
 	if (!self.scannerView) {
-		ScannerViewController *viewController = [[ScannerViewController alloc] initWithNibName:@"ScannerView" bundle:nil];
+		ScannerViewController *viewController = [[ScannerViewController alloc] initWithNibName:@"ScannerView" bundle:[NSBundle mainBundle]];
 		self.scannerView = viewController;
 		currentViewController = viewController;
 		// Cleanup resources
@@ -170,7 +181,7 @@
 -(void)showInfoView {
 	// Create the modal view controller
 	if (!self.infoView) {
-		InfoViewController *viewController = [[InfoViewController alloc] initWithNibName:@"InfoView" bundle:nil];
+		InfoViewController *viewController = [[InfoViewController alloc] initWithNibName:@"InfoView" bundle:[NSBundle mainBundle]];
 		self.infoView = viewController;
 		currentViewController = viewController;
 		// Cleanup resources
@@ -184,7 +195,7 @@
 -(void)showMapView {
 	// Create the modal view controller
 	if (!self.mapView) {
-		MapViewController *viewController = [[MapViewController alloc] initWithNibName:@"MapView" bundle:nil];
+		MapViewController *viewController = [[MapViewController alloc] initWithNibName:@"MapView" bundle:[NSBundle mainBundle]];
 		self.mapView = viewController;
 		currentViewController = viewController;
 		// Cleanup resources
@@ -197,7 +208,7 @@
 -(void)showFeedbackView {
 	// Create the modal view controller
 	if (!self.feedbackView) {
-		FeedbackViewController *viewController = [[FeedbackViewController alloc] initWithNibName:@"FeedbackView" bundle:nil];
+		FeedbackViewController *viewController = [[FeedbackViewController alloc] initWithNibName:@"FeedbackView" bundle:[NSBundle mainBundle]];
 		self.feedbackView = viewController;
 		currentViewController = viewController;
 		// Cleanup resources
@@ -210,7 +221,7 @@
 -(void)showGameView {
 	// Create the modal view controller
 	if (!self.gameView) {
-		GameViewController *viewController = [[GameViewController alloc] initWithNibName:@"GameView" bundle:nil];
+		GameViewController *viewController = [[GameViewController alloc] initWithNibName:@"GameView" bundle:[NSBundle mainBundle]];
 		self.gameView = viewController;
 		currentViewController = viewController;
 		// Cleanup resources
@@ -223,7 +234,7 @@
 -(void)showSettingsView {
 	// Create the modal view controller
 	if (!self.settingsView) {
-		SettingsViewController *viewController = [[SettingsViewController alloc] initWithNibName:@"SettingsView" bundle:nil];
+		SettingsViewController *viewController = [[SettingsViewController alloc] initWithNibName:@"SettingsView" bundle:[NSBundle mainBundle]];
 		self.settingsView = viewController;
 		currentViewController = viewController;
 		// Cleanup resources
@@ -236,7 +247,7 @@
 -(void)showHelpView {
 	if (!helpView) {
 		// Create the modal view controller
-		HelpViewController *viewController = [[HelpViewController alloc] initWithNibName:@"HelpView" bundle:nil];
+		HelpViewController *viewController = [[HelpViewController alloc] initWithNibName:@"HelpView" bundle:[NSBundle mainBundle]];
 		self.helpView = viewController;
 		currentViewController = viewController;
 		// Cleanup resources
@@ -250,7 +261,7 @@
 -(void)showTitleView {
 	if (!titleView) {
 		// Create the modal view controller
-		TitleViewController *viewController = [[TitleViewController alloc] initWithNibName:@"TitleView" bundle:nil];
+		TitleViewController *viewController = [[TitleViewController alloc] initWithNibName:@"TitleView" bundle:[NSBundle mainBundle]];
 		self.titleView = viewController;
 		currentViewController = viewController;
 		// Cleanup resources
@@ -264,7 +275,7 @@
 -(void)showUpdateView {
 	if (!updateView) {
 		// Create the modal view controller
-		UpdateViewController *viewController = [[UpdateViewController alloc] initWithNibName:@"UpdateView" bundle:nil];
+		UpdateViewController *viewController = [[UpdateViewController alloc] initWithNibName:@"UpdateView" bundle:[NSBundle mainBundle]];
 		self.updateView = viewController;
 		currentViewController = viewController;
 		// Cleanup resources

@@ -22,7 +22,7 @@
 #import "BaconAppDelegate.h"
 
 
-@interface NavigationViewController : UITableViewController <ModalViewControllerDelegate> {
+@interface NavigationViewController : UIViewController <ModalViewControllerDelegate, UITableViewDelegate, UITableViewDataSource> {
 	NSArray * cellContent;
 	AboutViewController * aboutView;
 	ScannerViewController * scannerView;
@@ -51,7 +51,7 @@
 @property(nonatomic, retain) ModalViewController * currentViewController;
 @property (nonatomic, retain) TitleViewController * titleView;
 @property (nonatomic, retain) UpdateViewController * updateView;
-
+@property (nonatomic, retain) NSArray * cellContent;
 
 -(void) showTitleView;
 
