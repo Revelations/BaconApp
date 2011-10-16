@@ -13,17 +13,13 @@
 
 @implementation FeedbackViewController
 
-#pragma mark - Actions
-
-@synthesize scrollview, textField1, textField2, textField3, textField4, feedBackTextView;
-
-
 -(IBAction)SendFeedback:(id)sender{
 	   
-	NSString * numbers      = [[numberTextField text] autorelease];
-	NSString * nationality  = [[nationalityTextField text] autorelease];
-	NSString * feedback     = [[feedBackTextView text] autorelease];
-	NSString * seen         = [[seenTextField text] autorelease];
+	NSString * numbers      = [textFieldNumber text];
+	NSString * nationality  = [textFieldNationality text];
+	NSString * seen         = [textFieldSighted text];
+	NSString * feedback     = [textViewMiscellaneous text];
+
 		NSMutableArray * scannedContents = [(BaconAppDelegate *) [[UIApplication sharedApplication] delegate]scannedItems];
 	int val_count = [scannedContents count];
 	
@@ -41,7 +37,6 @@
 	
 	NSString *filePath = [NSString stringWithFormat:@"%@%@", documentsDirectory, @"/feedback.txt"];
 	[data writeToFile:filePath atomically:YES];
-	[data release];
 	
 	if([updateSession CheckForInternet] != -1){
 		[updateSession uploadPhp:filePath];
@@ -54,12 +49,6 @@
 	}
 	[updateSession release];
 }
-
-
-//returns -1 if no connection is possible
-//returns 1 if wwan is available
-//returns 0 if wifi is available
-
 
 -(IBAction)Cancel:(id)sender
 {
@@ -93,13 +82,8 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
-    self.feedBackTextView.returnKeyType = UIReturnKeyDone;
-    textField1.returnKeyType = UIReturnKeyDone;
-    textField2.returnKeyType = UIReturnKeyDone;
-    textField3.returnKeyType = UIReturnKeyDone;
-    
     // Hacky method of making a text view look like a text field.
-    textField4.frame = CGRectMake(20, 233, 281, 132);
+    textFieldMiscellaneous.frame = CGRectMake(20, 233, 281, 132);
     
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(keyboardDidShow:) 
@@ -109,34 +93,6 @@
     self.navigationItem.title = @"Feedback";
       
 	[super viewDidLoad];
-}
- 
-
-
-/*- (void) viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:animated];
-	
-	[[NSNotificationCenter defaultCenter] 
-	 addObserver:self
-	 selector:@selector
-	 (keyboardDidShow:) 
-	 name: UIKeyboardDidShowNotification
-	 object:nil];
-	[[NSNotificationCenter defaultCenter]
-	 addObserver:self 
-	 selector:@selector
-	 (keyboardDidHide:) name:
-	 UIKeyboardDidHideNotification
-	 object:nil];
-	
-	scrollview.contentSize = CGSizeMake(320,
-										460);
-	
-	displayKeyboard = NO;
-}*/
-
--(void) viewWillDisappear:(BOOL)animated {
-	//[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)addButtonToKeyboard
@@ -170,64 +126,36 @@
         [self addButtonToKeyboard];
 }
 
--(void)doneButton:(id)sender {
-    [textField1 resignFirstResponder];
+-(void)doneButton:(id)sender 
+{
+    [textFieldNumber resignFirstResponder];
 }
 
 -(BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
-    displayAdditionalDoneButton = NO;
+    //displayAdditionalDoneButton = NO;
+	scrollView.frame = CGRectMake(0, -200, 320, 455);
     return YES;
+}
+
+-(void)textViewDidEndEditing:(UITextView *)textView
+{
+	scrollView.frame = CGRectMake(0, 0, 320, 455);
 }
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    if(textField == textField1)
+    if(textField == textFieldNumber)
         displayAdditionalDoneButton = YES;
-    else
-        displayAdditionalDoneButton = NO;
     
     return YES;
 }
 
-/*-(void) keyboardDidShow: (NSNotification *)notif {
-	if (displayKeyboard) {
-		return;
-	}
-	
-	NSDictionary* info = [notif userInfo];
-	NSValue* aValue = [info objectForKey:UIKeyboardBoundsUserInfoKey];
-	CGSize keyboardSize = [aValue CGRectValue].size;
-	
-	offset = scrollview.contentOffset;
-	
-	CGRect viewFrame = scrollview.frame;
-	viewFrame.size.height -= keyboardSize.height;
-	scrollview.frame = viewFrame;
-	
-	CGRect textFieldRect = [Field frame];
-	textFieldRect.origin.y += 10;
-	[scrollview scrollRectToVisible: textFieldRect animated:YES];
-	displayKeyboard = YES;
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+	if(textField == textFieldNumber)
+		displayAdditionalDoneButton = NO;
 }
-
--(void) keyboardDidHide: (NSNotification *)notif {
-	if (!displayKeyboard) {
-		return; 
-	}
-	
-	scrollview.frame = CGRectMake(0, 0, 320,460);
-	
-	scrollview.contentOffset =offset;
-	
-	displayKeyboard = NO;
-	
-}*/
-
-/*-(BOOL) textFieldShouldBeginEditing:(UITextField*)textField {
-	Field = textField;
-	return YES;
-}*/
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -239,7 +167,7 @@
 {
     if([text isEqualToString:@"\n"])
     {
-        [feedBackTextView resignFirstResponder];
+        [textViewMiscellaneous resignFirstResponder];
         return NO;
     }
     return YES;

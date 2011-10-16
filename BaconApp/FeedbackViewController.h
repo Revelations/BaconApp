@@ -11,35 +11,18 @@
 
 
 @interface FeedbackViewController : ModalViewController <UITextViewDelegate, UITextFieldDelegate> {
-	IBOutlet UITextField *  numberTextField;
-	IBOutlet UITextField *  nationalityTextField;
-	IBOutlet UITextField *  seenTextField;
-	IBOutlet UITextView  *  feedBackTextView;
-
+	IBOutlet UITextField * textFieldNumber;
+	IBOutlet UITextField * textFieldNationality;
+	IBOutlet UITextField * textFieldSighted;
 	
-	IBOutlet UIScrollView *scrollview;
-    IBOutlet UITextField *textField1;
-    IBOutlet UITextField *textField2;
-    IBOutlet UITextField *textField3;
-    IBOutlet UITextField *textField4;
+	IBOutlet UITextView  * textViewMiscellaneous;
+	IBOutlet UITextField * textFieldMiscellaneous;
 	
-	BOOL displayKeyboard;
+	IBOutlet UIScrollView * scrollView;
     
     UIButton *doneButton;
     BOOL displayAdditionalDoneButton;
-    
-	CGPoint  offset;
-	UITextField *Field;
 }
-
-@property(nonatomic,retain) IBOutlet UIScrollView *scrollview;
-@property(nonatomic,retain) IBOutlet UITextField *textField1;
-@property(nonatomic,retain) IBOutlet UITextField *textField2;
-@property(nonatomic,retain) IBOutlet UITextField *textField3;
-@property(nonatomic,retain) IBOutlet UITextField *textField4;
-
-@property (nonatomic, retain) IBOutlet UITextView  *  feedBackTextView;
-
 
 -(IBAction)SendFeedback:(id)sender;
 -(IBAction)Cancel:(id)sender;
