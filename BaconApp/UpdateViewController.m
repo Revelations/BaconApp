@@ -23,7 +23,7 @@
 
 -(IBAction)Update:(id)sender{
 	NSLog(@"Jim is busy looking in a file system.");
-	Update *currentFileRequest = [[Update alloc] init];
+	Update *currentFileRequest = [[[Update alloc] init] autorelease];
 	[currentFileRequest getDirectory:@"http://revelations.webhop.org:81/"];   
 	NSLog(@"Jim has now finished looking for the files");
 	[self dismissModalViewControllerAnimated:YES];
