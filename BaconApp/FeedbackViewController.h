@@ -2,8 +2,7 @@
 //  FeedbackController.h
 //  BaconApp
 //
-//  Created by Donovan Hoffman on 12/10/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 Team Bacon. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -20,10 +19,9 @@
 	
 	IBOutlet UIScrollView * scrollView;
     
-    UIButton *doneButton;
     BOOL displayAdditionalDoneButton;
 }
 
 -(IBAction)SendFeedback:(id)sender;
--(IBAction)Cancel:(id)sender;
+
 @end
