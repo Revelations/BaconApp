@@ -27,7 +27,7 @@
 -(IBAction)updateButtonPressed:(id)sender {
 	//TODO: Move to start of program.
 	Update * updateSession = [[[Update alloc]init]autorelease];
-	[updateSession getDirectory:@"ftp://revelations.webhop.org"];
+	[updateSession downloadContentFilesFrom:@"ftp://revelations.webhop.org"];
 	[updateSession GetGameFiles:@"ftp://revelations.webhop.org"];
 	NSLog(@"Update Session has finished");
 	
@@ -35,8 +35,7 @@
 	UpdateViewController *updateController = [[UpdateViewController alloc] initWithNibName:nil bundle:nil];
 	[[UIApplication sharedApplication].keyWindow.rootViewController
 	 presentModalViewController:updateController animated:YES];
-	[updateController release];
-	
+	[updateController release];	
 }
 
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
