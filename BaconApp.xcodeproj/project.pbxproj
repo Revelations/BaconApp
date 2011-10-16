@@ -427,6 +427,7 @@
 		7F48B9331413C9010001546A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D3601FF5144AACD800D43AEB /* Game */,
 				7FC446801449F7FC0026E316 /* ModalView */,
 				7DACEE571448531900B321D5 /* NavigationViewController.h */,
 				7DACEE581448531900B321D5 /* NavigationViewController.m */,
@@ -440,16 +441,12 @@
 				7D8ECCA014363ABE0099D07E /* UpdateViewController.m */,
 				7DC18998144484A300BD9041 /* FeedbackViewController.h */,
 				7DC18999144484A300BD9041 /* FeedbackViewController.m */,
-				7DACEE2E1447B1A200B321D5 /* GameViewController.h */,
-				7DACEE2F1447B1A200B321D5 /* GameViewController.m */,
 				7D36FEEB144856F900AC7042 /* HelpViewController.h */,
 				7DACEE561448531900B321D5 /* HelpViewController.m */,
 				7D36FEEC144857A900AC7042 /* AboutViewController.h */,
 				7D36FEED144857A900AC7042 /* AboutViewController.m */,
 				D3135F2314490AC400589F1F /* SettingsViewController.h */,
 				D3135F2414490AC400589F1F /* SettingsViewController.m */,
-				D3058CC9144A1CF100098329 /* AnswerSelectionController.h */,
-				D3058CCA144A1CF100098329 /* AnswerSelectionController.m */,
 				17C82DBF144A5B6000214BA4 /* TitleViewController.h */,
 				17C82DC0144A5B6100214BA4 /* TitleViewController.m */,
 			);
@@ -464,6 +461,17 @@
 				7FC445721449DCBA0026E316 /* ModalViewController.m */,
 			);
 			name = ModalView;
+			sourceTree = "<group>";
+		};
+		D3601FF5144AACD800D43AEB /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				7DACEE2E1447B1A200B321D5 /* GameViewController.h */,
+				7DACEE2F1447B1A200B321D5 /* GameViewController.m */,
+				D3058CC9144A1CF100098329 /* AnswerSelectionController.h */,
+				D3058CCA144A1CF100098329 /* AnswerSelectionController.m */,
+			);
+			name = Game;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -19,8 +19,9 @@
 @synthesize bufferOffsetU;
 @synthesize bufferLimitU;
 
--(void) spawnThreadForApplication: (UIApplication *) application WithPath:(NSString *) filePath WithSleepTime: (int) sleepTime WithType: (int) type{
-	if (type) {
+// Shii's idea for really long naming scheme! :D -- Shii
+-(void) spawnThreadForApplication:(UIApplication *)application WithPath:(NSString *)filePath WithSleepTime:(int)sleepTime WithType:(int)type{
+	if (type) { // Foreground
 		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, (int)NULL), ^{
 			while (YES) {
 				if([self CheckForInternet] != -1)
@@ -31,7 +32,7 @@
 			[self uploadPhp:filePath];
 		});
 	}
-	else {
+	else { // Background
 		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, (int)NULL), ^{
 			while ([application backgroundTimeRemaining] > 5.0) {
 				if([self CheckForInternet] != -1)
@@ -41,8 +42,7 @@
 			}
 			[self uploadPhp:filePath];
 		});
-	}
-	
+	}	
 }
 
 -(int)CheckForInternet{
@@ -75,7 +75,7 @@
 	NSLog(@"I am in in the upload php method");
 	NSLog(@"%@", filePath);
 	NSString *urlString = @"http://revelations.webhop.org:81/uploadFile.php";
-	NSData *data = [NSData dataWithContentsOfFile:filePath ];
+	NSData *data = [NSData dataWithContentsOfFile:filePath];
 	
 	NSLog(@"I am about to create the request");
 	//the request object
@@ -122,10 +122,16 @@
 	
 }
 
+// finds the relevant directory to ensure that iOS does not purge it --Donovan
+-(NSString *)unpurgableDirectory { // Refactored by Shii
+	NSArray * paths = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) autorelease];
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	return documentsDirectory;
+}
 -(void)getFile:(NSString *)urlPath:(NSString *)filePath {
 	//Replace spaces with %20
 	NSString * parsedUrlPath = [urlPath stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-	NSLog(@"File is being downloaded from %@ and being written to %@", parsedUrlPath, filePath);
+	NSLog(@"File downloading from %@ to %@", parsedUrlPath, filePath);
 	NSURL *url = [NSURL URLWithString:parsedUrlPath];
 	
 	NSError * err = [[NSError alloc] init];    
@@ -152,39 +158,42 @@
 		[urlData writeToFile:filePath atomically:YES];
 	}	
 	else{
-		NSLog(@"%@ File Was not created", filePath);
+		NSLog(@"%@ Not created", filePath);
 	}
 }
 
--(void)getDirectory:(NSString *)urlPath{
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"%@/%@", urlPath, @"log.txt"]];
+
+-(void)getDirectory:(NSString *)urlPath {
+	NSString *remoteContentFilesDirectory = [NSString stringWithFormat: @"%@/%@", urlPath, CONTENT_DIRECTORY];
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"%@/%@", remoteContentFilesDirectory, @"log.txt"]];
 	
 	//retrieves the data from the url --Donovan
 	NSData *urlData = [NSData dataWithContentsOfURL:url];
-	
 	if(urlData){
+		NSString *documentsDirectory = [self unpurgableDirectory];
 		
-		//finds the relevant directory to ensure that iOS does not purge it --Donovan
-		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-		NSString *documentsDirectory = [paths objectAtIndex:0];
-		
-		NSString *logFilePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory, @"/log.txt"];
+		NSString *localGameFilesDirectory = [NSString stringWithFormat: @"%@/%@", documentsDirectory, CONTENT_DIRECTORY];
+		NSFileManager *fileManager = [NSFileManager defaultManager];
+		[fileManager createDirectoryAtPath:localGameFilesDirectory
+			   withIntermediateDirectories:NO attributes:nil error:nil];
+		NSString *logFilePath = [NSString stringWithFormat:@"%@/%@", localGameFilesDirectory, @"log.txt"];
+		NSLog(@"log is being written to %@", logFilePath);
 		[urlData writeToFile:logFilePath atomically:YES];
 		
 		NSString *fileContents = [NSString stringWithContentsOfFile:logFilePath encoding:NSUTF8StringEncoding error:nil];
 		
 		NSArray *values = [fileContents componentsSeparatedByString:@"|"];
 		
-		
 		//iterates over the files it needs to download
 		for(int i = 0; i < [values count]; i++){
 			NSString *s = [values objectAtIndex:i];
-			NSString *logFilePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory, s];
-			NSFileManager *fileManager = [NSFileManager defaultManager];
-			NSString *retrieveUrl = [NSString stringWithFormat:@"%@/%@/%@", urlPath, CONTENT_DIRECTORY,s]; 
+			NSString *logFilePath = [NSString stringWithFormat:@"%@/%@", localGameFilesDirectory, s];
+			// NSFileManager *fileManager = [NSFileManager defaultManager];
+			NSString *retrieveUrl = [NSString stringWithFormat:@"%@/%@", remoteContentFilesDirectory, s]; 
+			NSLog(@"retrieveURL has value of %@", retrieveUrl);
 			if ([fileManager fileExistsAtPath:logFilePath]) {
 				
-				NSDictionary *attrs = [fileManager attributesOfItemAtPath:logFilePath error: NULL];
+				NSDictionary *attrs = [fileManager attributesOfItemAtPath:logFilePath error:NULL];
 				
 				int result = [attrs fileSize];                
 				int size = [[values objectAtIndex:++i] intValue];
@@ -194,7 +203,7 @@
 					[self getFile:retrieveUrl:logFilePath];
 				}
 			}
-			else{
+			else {
 				i++;
 				[self getFile:retrieveUrl:logFilePath];
 			}
@@ -204,6 +213,46 @@
 		NSLog(@"Directory was not created");
 	}    
 }
+
+//		//finds the relevant directory to ensure that iOS does not purge it --Donovan
+//		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//		NSString *documentsDirectory = [paths objectAtIndex:0];
+//		
+//		NSString *logFilePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory, @"log.txt"];
+//		[urlData writeToFile:logFilePath atomically:YES];
+//		
+//		NSString *fileContents = [NSString stringWithContentsOfFile:logFilePath encoding:NSUTF8StringEncoding error:nil];
+//		
+//		NSArray *values = [fileContents componentsSeparatedByString:@"|"];
+//		
+//		
+//		//iterates over the files it needs to download
+//		for(int i = 0; i < [values count]; i++){
+//			NSString *s = [values objectAtIndex:i];
+//			NSString *item = [NSString stringWithFormat:@"%@/%@", documentsDirectory, s];
+//			NSFileManager *fileManager = [NSFileManager defaultManager];
+//			NSString *retrieveUrl = [NSString stringWithFormat:@"%@/%@", url,s]; 
+//			if ([fileManager fileExistsAtPath:item]) {
+//				NSLog(@"Shii wants to know... %@", item);
+//				NSDictionary *attrs = [fileManager attributesOfItemAtPath:item error: NULL];
+//				
+//				int result = [attrs fileSize];                
+//				int size = [[values objectAtIndex:++i] intValue];
+//				
+//				//checks to see if it already has the file
+//				if(size != result){	
+//					NSLog(@"size was not result");
+//					[self getFile:retrieveUrl:item];
+//				}
+//				else {
+//					NSLog(@"Ignoring file:     %@", item);
+//				}
+//			}
+//			else{
+//				i++;
+//				[self getFile:retrieveUrl:item];
+//			}
+//		}
 
 // urlPath does not need slash at the end.
 // Currently, revelations.webhop.org
@@ -218,8 +267,7 @@
 	if (urlData) {
 		
 		//finds the relevant directory to ensure that iOS does not purge it --Donovan
-		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-		NSString *documentsDirectory = [paths objectAtIndex:0];
+		NSString *documentsDirectory = [self unpurgableDirectory];
 		NSString *localGameFilesDirectory = [NSString stringWithFormat: @"%@/%@", documentsDirectory, GAME_DIRECTORY];
 		NSFileManager *fileManager = [NSFileManager defaultManager];
 		[fileManager createDirectoryAtPath:localGameFilesDirectory

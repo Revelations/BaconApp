@@ -116,6 +116,7 @@ NSString * const CONTENT_DIRECTORY = @"Content";
             });*/
         }
     }
+	[updateSession release];
     
     
     /*
@@ -147,7 +148,6 @@ NSString * const CONTENT_DIRECTORY = @"Content";
             [updateSession uploadPhp:filePath];
         }
         else{
-            
             //spawns the thread to send feedback
 			[updateSession spawnThreadForApplication:application WithPath:filePath WithSleepTime:300 WithType:1];
             /*dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, (int)NULL), ^{
@@ -161,6 +161,7 @@ NSString * const CONTENT_DIRECTORY = @"Content";
             });*/
         }
     }
+	[updateSession release];
     
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.

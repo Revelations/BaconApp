@@ -37,9 +37,8 @@
 
 - (void)viewDidLoad
 {
-    self.navigationItem.title = @"Title Screen";
-    
     [super viewDidLoad];
+    self.navigationItem.title = @"Title Screen";
     // Do any additional setup after loading the view from its nib.
 }
 

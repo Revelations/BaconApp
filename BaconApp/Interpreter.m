@@ -8,7 +8,7 @@
 
 #import "Interpreter.h"
 #include "stdio.h"
-
+#include "BaconAppDelegate.h"
 
 @implementation Interpreter
 
@@ -36,9 +36,14 @@
 	return result;
 }
 
--(void) setVals:(NSString *) filePath{
-	const char * fileName = [filePath UTF8String];
+-(void) setVals:(NSString *) filePath {
+	NSLog(@"arg = %@", filePath);
+
+	NSString * path0 = [[NSBundle mainBundle] pathForResource:filePath ofType:@"html" inDirectory:CONTENT_DIRECTORY];
+	
+	const char * fileName = [path0 UTF8String];
 	FILE * file = fopen(fileName, "r");
+	NSLog(@"FILE: %@, path0 = %@", file, path0);
 	// check for NULL
 	while(!feof(file))
 	{

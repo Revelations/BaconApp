@@ -27,5 +27,4 @@
 @property (nonatomic, retain) Interpreter *interpreter;
 
 -(IBAction) scanButtonPressed:(id)sender;
--(IBAction) settingsButtonPressed:(id)sender;
 @end

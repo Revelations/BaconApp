@@ -27,6 +27,7 @@
 -(IBAction)updateButtonPressed:(id)sender {
 	//TODO: Move to start of program.
 	Update * updateSession = [[[Update alloc]init]autorelease];
+	[updateSession getDirectory:@"ftp://revelations.webhop.org"];
 	[updateSession GetGameFiles:@"ftp://revelations.webhop.org"];
 	NSLog(@"Update Session has finished");
 	

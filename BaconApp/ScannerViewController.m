@@ -37,27 +37,12 @@
 	[reader release];
 	
 }
--(IBAction) settingsButtonPressed:(id)sender
-{
-	//	SettingsController *setting = [[SettingsController alloc]init];
-	/*NSLog(@"HI? u want settings?");
-	BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
-	
-	SettingsController *settingsController = [[SettingsController alloc] initWithNibName:nil bundle:nil];
-	[[UIApplication sharedApplication].keyWindow.rootViewController
-	 presentModalViewController:settingsController animated:YES];
-	[settingsController release];*/
-	
-	
-	//	[self presentModalViewController:setting animated:YES];
-	//	[setting release];
-}
 
 // TODO: See if we can refactor the output from scanner to DataModel.
-
 - (void) imagePickerController: (UIImagePickerController*) reader
  didFinishPickingMediaWithInfo: (NSDictionary*) info
 {
+	NSLog(@"Scan did finish picking");
 	// ADD: get the decode results
 	id<NSFastEnumeration> results =
 	[info objectForKey: ZBarReaderControllerResults];
@@ -80,14 +65,19 @@
 	
 	// Retrieve scanner results.
 	interpreter = [Interpreter new];
+	NSLog(@"%@", symbol.data);
+
 	[interpreter setVals: symbol.data];
 	//interpreter.storedInputString = symbol.data;
-	
+	NSLog(@"%@", symbol.data);
+
 	current = [[HistoryItem alloc] initWithHtmlFile:[interpreter htmlPath] x:interpreter.x y:interpreter.y];
 
 	// TODO: We could try use history here, that is, go to last page.
 	// OR, we could let the user choose.
+	NSLog(@"LOL?");
 	self.tabBarController.selectedIndex = 1;
+	NSLog(@"ROFL");
 	
 	//model.current = current;
 	
@@ -137,8 +127,8 @@
 -(void)addToViewsSeen:(NSString *) file {
 	BaconAppDelegate * appDelegate = (BaconAppDelegate *) [[UIApplication sharedApplication] delegate];
 	
-	NSArray * contents = [[file componentsSeparatedByString:@"."] autorelease];
-	NSString * currentFile = [[contents objectAtIndex:0] autorelease];
+	NSArray * contents = [file componentsSeparatedByString:@"."];
+	NSString * currentFile = [contents objectAtIndex:0];
 	
 	NSMutableArray * currentP = [appDelegate scannedItems];
 	BOOL found = NO;
@@ -149,7 +139,7 @@
 		}
 	}
 	
-	if(!found){
+	if(!found) {
 		[currentP addObject:currentFile];
 	}
 	
