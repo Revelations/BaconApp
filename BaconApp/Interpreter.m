@@ -43,27 +43,22 @@
 	while(!feof(file))
 	{
 		NSString *line = [self readLineAsNSString:file];
-		NSArray * contents = [[line componentsSeparatedByString:@"<!--"] autorelease];
+		NSArray * contents = [line componentsSeparatedByString:@"<!--"];
 		if ([contents count] > 1)
 		{
-			[contents release];
-			NSArray * x_contents = [[line componentsSeparatedByString:@"x="] autorelease];
-			NSArray * y_contents = [[line componentsSeparatedByString:@"y="] autorelease];
+			NSArray * x_contents = [line componentsSeparatedByString:@"x="];
+			NSArray * y_contents = [line componentsSeparatedByString:@"y="];
 			
 			map_x = [[[x_contents objectAtIndex:1] substringWithRange:NSMakeRange(0, 3)] intValue];
 			map_y = [[[y_contents objectAtIndex:1] substringWithRange:NSMakeRange(0, 3)] intValue];
-			[x_contents release];
-			[y_contents release];
 		}
 		
-		NSArray * titles = [[line componentsSeparatedByString:@"title>"] autorelease];
+		NSArray * titles = [line componentsSeparatedByString:@"title>"];
 		if ([titles count] > 0)
 		{
-			[titles release];
-			NSArray * title_contents = [[line componentsSeparatedByString:@"</"] autorelease];
+			NSArray * title_contents = [line componentsSeparatedByString:@"</"] ;
 			
 			page_title = [title_contents objectAtIndex:0];
-			[title_contents release];
 		}
 		
 		// do stuff with line; line is autoreleased, so you should NOT release it (unless you also retain it beforehand)
