@@ -48,7 +48,6 @@
 						<string key="NSFrame">{{20, 9.00025}, {280, 386.594}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -56,6 +55,7 @@
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<bool key="IBUIScrollEnabled">NO</bool>
 						<bool key="IBUIEditable">NO</bool>
 						<string type="base64-UTF8" key="IBUIText">VG8gdXNlIHRoaXMgYXBwLCBmcm9tIHRoZSBzY2FuIHNjcmVlbiBzaW1wbHkgdGFwIHRoZSAnUHJlc3Mg
 aGVyZSB0byBzdGFydCBzY2FuIScgYnV0dG9uIGFuZCB0aGVuIGRpcmVjdCB0aGUgcGhvbmUncyBjYW1l
