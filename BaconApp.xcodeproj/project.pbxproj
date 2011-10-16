@@ -44,7 +44,6 @@
 		7D81E89314465E7A00486F43 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D81E89214465E7A00486F43 /* SettingsView.xib */; };
 		7D898BAA1441AEF900EC0895 /* FeedbackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D898BA91441AEF900EC0895 /* FeedbackView.xib */; };
 		7D8ECCA214363ABF0099D07E /* UpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8ECCA014363ABE0099D07E /* UpdateViewController.m */; };
-		7D8ECCA314363ABF0099D07E /* UpdateController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D8ECCA114363ABF0099D07E /* UpdateController.xib */; };
 		7D8ECCA6143645810099D07E /* Update.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8ECCA5143645810099D07E /* Update.m */; };
 		7DACEE2B1446F77400B321D5 /* HelpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DACEE2A1446F77300B321D5 /* HelpView.xib */; };
 		7DACEE2D1447B0F100B321D5 /* GameView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DACEE2C1447B0F000B321D5 /* GameView.xib */; };
@@ -151,7 +150,6 @@
 		7D898BA91441AEF900EC0895 /* FeedbackView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedbackView.xib; sourceTree = "<group>"; };
 		7D8ECC9F14363ABE0099D07E /* UpdateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateViewController.h; sourceTree = "<group>"; };
 		7D8ECCA014363ABE0099D07E /* UpdateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateViewController.m; sourceTree = "<group>"; };
-		7D8ECCA114363ABF0099D07E /* UpdateController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpdateController.xib; sourceTree = "<group>"; };
 		7D8ECCA4143645810099D07E /* Update.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Update.h; sourceTree = "<group>"; };
 		7D8ECCA5143645810099D07E /* Update.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Update.m; sourceTree = "<group>"; };
 		7DACEE2A1446F77300B321D5 /* HelpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpView.xib; sourceTree = "<group>"; };
@@ -390,7 +388,6 @@
 				7D81E89214465E7A00486F43 /* SettingsView.xib */,
 				7DACEE5F1448536500B321D5 /* NavigationView.xib */,
 				7DACEE601448536500B321D5 /* UpdateView.xib */,
-				7D8ECCA114363ABF0099D07E /* UpdateController.xib */,
 				17A5A7D3140DEEB4009BB46E /* MainWindow.xib */,
 				7DACEE2A1446F77300B321D5 /* HelpView.xib */,
 				17C82DC1144A5B6100214BA4 /* TitleView.xib */,
@@ -546,7 +543,6 @@
 				D340E5001415F4D300A2370F /* ScannerView.xib in Resources */,
 				D340E5051415F4EE00A2370F /* MapView.xib in Resources */,
 				D340E50A1415F50400A2370F /* InfoView.xib in Resources */,
-				7D8ECCA314363ABF0099D07E /* UpdateController.xib in Resources */,
 				7D898BAA1441AEF900EC0895 /* FeedbackView.xib in Resources */,
 				7D81E89014465B5200486F43 /* AboutView.xib in Resources */,
 				7D81E89314465E7A00486F43 /* SettingsView.xib in Resources */,

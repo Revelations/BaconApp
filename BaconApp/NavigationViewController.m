@@ -11,15 +11,7 @@
 @implementation NavigationViewController
 
 #pragma mark - Properties
-@synthesize aboutView;
-@synthesize scannerView;
-@synthesize mapView;
-@synthesize feedbackView;
-@synthesize gameView;
-@synthesize settingsView;
-@synthesize helpView;
-@synthesize infoView;
-@synthesize titleView;
+@synthesize aboutView, scannerView, mapView, feedbackView, gameView, settingsView, helpView, infoView, titleView, updateView;
 
 @synthesize currentViewController;
 
@@ -65,6 +57,7 @@
 					@"Game",
 					@"Settings",
                     @"About",
+                    @"Update",
 					@"Help",
 					nil] retain];
 	self.navigationItem.title = @"BACON!";
@@ -72,8 +65,8 @@
 	// self.clearsSelectionOnViewWillAppear = NO;
 	// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 	// self.navigationItem.rightBarButtonItem = self.editButtonItem;
-
-	[super viewDidLoad];
+    [self showTitleView];
+	//[super viewDidLoad];
 }
 
 - (void)viewDidUnload
@@ -275,6 +268,20 @@
     [self showCurrentView];
 }
 
+-(void)showUpdateView {
+	if (!updateView) {
+		// Create the modal view controller
+		UpdateViewController *viewController = [[UpdateViewController alloc] initWithNibName:@"UpdateView" bundle:nil];
+		self.updateView = viewController;
+		currentViewController = viewController;
+		// Cleanup resources
+		[viewController release];
+	}
+    else currentViewController = updateView;
+    
+    [self showCurrentView];
+}
+
 //navigation and event handling
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -311,7 +318,11 @@
 			NSLog(@"You have selected AboutView");
 			[self showAboutView];
 			break;
-		case 8:
+        case 8:
+            NSLog(@"You have selected UpdateView");
+            [self showUpdateView];
+            break;
+		case 9:
 			NSLog(@"You have Selected HelpView");
 			[self showHelpView];
 			break;

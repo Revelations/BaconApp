@@ -18,6 +18,7 @@
 #import "HelpViewController.h"
 #import "InfoViewController.h"
 #import "TitleViewController.h"
+#import "UpdateViewController.h"
 #import "BaconAppDelegate.h"
 
 
@@ -32,6 +33,7 @@
 	SettingsViewController * settingsView;
 	HelpViewController * helpView;
     TitleViewController * titleView;
+    UpdateViewController * updateView;
 	
 	ModalViewController * currentViewController;
 }
@@ -48,6 +50,7 @@
 @property(nonatomic, retain) InfoViewController * infoView;
 @property(nonatomic, retain) ModalViewController * currentViewController;
 @property (nonatomic, retain) TitleViewController * titleView;
+@property (nonatomic, retain) UpdateViewController * updateView;
 
 
 -(void) showTitleView;

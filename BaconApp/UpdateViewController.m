@@ -50,22 +50,6 @@
 
 
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-	if (self) {
-		
-		//NSString * filePath = @"/Users/donovanhoffman/test.txt";
-		//NSString * urlPath = @"ftp://revelations.webhop.org";
-		
-		//Update * fileRequest = [[Update alloc] init];
-		//NSLog(@"hello world I am about to upload with php");
-		//[fileRequest uploadPhp: filePath];
-		//Custom initialization
-	}
-	return self;
-}
-
 - (void)dealloc
 {
 	[super dealloc];
