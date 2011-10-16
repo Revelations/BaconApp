@@ -10,7 +10,7 @@
 #import "ModalViewController.h"
 
 
-@interface FeedbackController : ModalViewController {
+@interface FeedbackViewController : ModalViewController {
 	IBOutlet UITextField *  numberTextField;
 	IBOutlet UITextField *  nationalityTextField;
 	IBOutlet UITextField *  seenTextField;

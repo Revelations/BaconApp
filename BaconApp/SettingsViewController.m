@@ -6,7 +6,7 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 #import "Update.h"
-#import "UpdateController.h"
+#import "UpdateViewController.h"
 #import "SettingsViewController.h"
 
 
@@ -31,7 +31,7 @@
 	NSLog(@"Update Session has finished");
 	
 	//BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
-	UpdateController *updateController = [[UpdateController alloc] initWithNibName:nil bundle:nil];
+	UpdateViewController *updateController = [[UpdateViewController alloc] initWithNibName:nil bundle:nil];
 	[[UIApplication sharedApplication].keyWindow.rootViewController
 	 presentModalViewController:updateController animated:YES];
 	[updateController release];

@@ -24,7 +24,6 @@
 		17A5A7C6140DEEB4009BB46E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17A5A7C5140DEEB4009BB46E /* CoreGraphics.framework */; };
 		17A5A7CC140DEEB4009BB46E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17A5A7CA140DEEB4009BB46E /* InfoPlist.strings */; };
 		17A5A7CF140DEEB4009BB46E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5A7CE140DEEB4009BB46E /* main.m */; };
-		17A5A7D2140DEEB4009BB46E /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5A7D1140DEEB4009BB46E /* MainViewController.m */; };
 		17A5A7D5140DEEB4009BB46E /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17A5A7D3140DEEB4009BB46E /* MainWindow.xib */; };
 		17A5A7DC140DEEB4009BB46E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17A5A7C1140DEEB4009BB46E /* UIKit.framework */; };
 		17A5A7DD140DEEB4009BB46E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17A5A7C3140DEEB4009BB46E /* Foundation.framework */; };
@@ -45,20 +44,18 @@
 		7D81E89014465B5200486F43 /* AboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D81E88F14465B5200486F43 /* AboutView.xib */; };
 		7D81E89314465E7A00486F43 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D81E89214465E7A00486F43 /* SettingsView.xib */; };
 		7D898BAA1441AEF900EC0895 /* FeedbackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D898BA91441AEF900EC0895 /* FeedbackView.xib */; };
-		7D8ECCA214363ABF0099D07E /* UpdateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8ECCA014363ABE0099D07E /* UpdateController.m */; };
+		7D8ECCA214363ABF0099D07E /* UpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8ECCA014363ABE0099D07E /* UpdateViewController.m */; };
 		7D8ECCA314363ABF0099D07E /* UpdateController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D8ECCA114363ABF0099D07E /* UpdateController.xib */; };
 		7D8ECCA6143645810099D07E /* Update.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8ECCA5143645810099D07E /* Update.m */; };
-		7DACEE281446F1E900B321D5 /* NavSubView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DACEE271446F1E900B321D5 /* NavSubView.xib */; };
 		7DACEE2B1446F77400B321D5 /* HelpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DACEE2A1446F77300B321D5 /* HelpView.xib */; };
 		7DACEE2D1447B0F100B321D5 /* GameView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DACEE2C1447B0F000B321D5 /* GameView.xib */; };
 		7DACEE301447B1A300B321D5 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DACEE2F1447B1A200B321D5 /* GameViewController.m */; };
 		7DACEE331447F92400B321D5 /* Quiz.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DACEE321447F92300B321D5 /* Quiz.m */; };
 		7DACEE5B1448531900B321D5 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DACEE561448531900B321D5 /* HelpViewController.m */; };
-		7DACEE5C1448531900B321D5 /* NavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DACEE581448531900B321D5 /* NavigationView.m */; };
+		7DACEE5C1448531900B321D5 /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DACEE581448531900B321D5 /* NavigationViewController.m */; };
 		7DACEE611448536500B321D5 /* NavigationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DACEE5F1448536500B321D5 /* NavigationView.xib */; };
 		7DACEE621448536500B321D5 /* UpdateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DACEE601448536500B321D5 /* UpdateView.xib */; };
-		7DB80438142CEEC6002A23AA /* EntryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DB80437142CEEC6002A23AA /* EntryView.xib */; };
-		7DC1899A144484A300BD9041 /* FeedbackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC18999144484A300BD9041 /* FeedbackController.m */; };
+		7DC1899A144484A300BD9041 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC18999144484A300BD9041 /* FeedbackViewController.m */; };
 		7DC1899E1445066900BD9041 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC1899D1445066900BD9041 /* Reachability.m */; };
 		7DC189A01445084B00BD9041 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DC1899F1445084B00BD9041 /* SystemConfiguration.framework */; };
 		7FC445731449DCBA0026E316 /* ModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FC445721449DCBA0026E316 /* ModalViewController.m */; };
@@ -128,8 +125,6 @@
 		17A5A7CB140DEEB4009BB46E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		17A5A7CD140DEEB4009BB46E /* BaconApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BaconApp-Prefix.pch"; sourceTree = "<group>"; };
 		17A5A7CE140DEEB4009BB46E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		17A5A7D0140DEEB4009BB46E /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		17A5A7D1140DEEB4009BB46E /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		17A5A7D4140DEEB4009BB46E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		17A5A7DB140DEEB4009BB46E /* BaconAppTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BaconAppTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		17A5A7E3140DEEB4009BB46E /* BaconAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BaconAppTests-Info.plist"; sourceTree = "<group>"; };
@@ -157,12 +152,11 @@
 		7D81E88F14465B5200486F43 /* AboutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutView.xib; sourceTree = "<group>"; };
 		7D81E89214465E7A00486F43 /* SettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
 		7D898BA91441AEF900EC0895 /* FeedbackView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedbackView.xib; sourceTree = "<group>"; };
-		7D8ECC9F14363ABE0099D07E /* UpdateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateController.h; sourceTree = "<group>"; };
-		7D8ECCA014363ABE0099D07E /* UpdateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateController.m; sourceTree = "<group>"; };
+		7D8ECC9F14363ABE0099D07E /* UpdateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = UpdateViewController.h; sourceTree = "<group>"; };
+		7D8ECCA014363ABE0099D07E /* UpdateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateViewController.m; sourceTree = "<group>"; };
 		7D8ECCA114363ABF0099D07E /* UpdateController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpdateController.xib; sourceTree = "<group>"; };
 		7D8ECCA4143645810099D07E /* Update.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Update.h; sourceTree = "<group>"; };
 		7D8ECCA5143645810099D07E /* Update.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Update.m; sourceTree = "<group>"; };
-		7DACEE271446F1E900B321D5 /* NavSubView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NavSubView.xib; sourceTree = "<group>"; };
 		7DACEE2A1446F77300B321D5 /* HelpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpView.xib; sourceTree = "<group>"; };
 		7DACEE2C1447B0F000B321D5 /* GameView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameView.xib; sourceTree = "<group>"; };
 		7DACEE2E1447B1A200B321D5 /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
@@ -170,13 +164,12 @@
 		7DACEE311447F92300B321D5 /* Quiz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quiz.h; sourceTree = "<group>"; };
 		7DACEE321447F92300B321D5 /* Quiz.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Quiz.m; sourceTree = "<group>"; };
 		7DACEE561448531900B321D5 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
-		7DACEE571448531900B321D5 /* NavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationView.h; sourceTree = "<group>"; };
-		7DACEE581448531900B321D5 /* NavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationView.m; sourceTree = "<group>"; };
+		7DACEE571448531900B321D5 /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = NavigationViewController.h; sourceTree = "<group>"; };
+		7DACEE581448531900B321D5 /* NavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
 		7DACEE5F1448536500B321D5 /* NavigationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NavigationView.xib; sourceTree = "<group>"; };
 		7DACEE601448536500B321D5 /* UpdateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpdateView.xib; sourceTree = "<group>"; };
-		7DB80437142CEEC6002A23AA /* EntryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EntryView.xib; sourceTree = "<group>"; };
-		7DC18998144484A300BD9041 /* FeedbackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackController.h; sourceTree = "<group>"; };
-		7DC18999144484A300BD9041 /* FeedbackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackController.m; sourceTree = "<group>"; };
+		7DC18998144484A300BD9041 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
+		7DC18999144484A300BD9041 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
 		7DC1899C1445066900BD9041 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		7DC1899D1445066900BD9041 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		7DC1899F1445084B00BD9041 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -393,7 +386,6 @@
 			isa = PBXGroup;
 			children = (
 				D3058CCB144A1CF100098329 /* AnswerSelectionController.xib */,
-				7DB80437142CEEC6002A23AA /* EntryView.xib */,
 				7D81E88F14465B5200486F43 /* AboutView.xib */,
 				D340E4FE1415F4D300A2370F /* ScannerView.xib */,
 				D340E5081415F50400A2370F /* InfoView.xib */,
@@ -405,7 +397,6 @@
 				7DACEE601448536500B321D5 /* UpdateView.xib */,
 				7D8ECCA114363ABF0099D07E /* UpdateController.xib */,
 				17A5A7D3140DEEB4009BB46E /* MainWindow.xib */,
-				7DACEE271446F1E900B321D5 /* NavSubView.xib */,
 				7DACEE2A1446F77300B321D5 /* HelpView.xib */,
 				17C82DC1144A5B6100214BA4 /* TitleView.xib */,
 			);
@@ -445,20 +436,18 @@
 			isa = PBXGroup;
 			children = (
 				7FC446801449F7FC0026E316 /* ModalView */,
-				7DACEE571448531900B321D5 /* NavigationView.h */,
-				7DACEE581448531900B321D5 /* NavigationView.m */,
-				17A5A7D0140DEEB4009BB46E /* MainViewController.h */,
-				17A5A7D1140DEEB4009BB46E /* MainViewController.m */,
+				7DACEE571448531900B321D5 /* NavigationViewController.h */,
+				7DACEE581448531900B321D5 /* NavigationViewController.m */,
 				D340E4FC1415F4D300A2370F /* ScannerViewController.h */,
 				D340E4FD1415F4D300A2370F /* ScannerViewController.m */,
 				D340E5061415F50400A2370F /* InfoViewController.h */,
 				D340E5071415F50400A2370F /* InfoViewController.m */,
 				D340E5011415F4EE00A2370F /* MapViewController.h */,
 				D340E5021415F4EE00A2370F /* MapViewController.m */,
-				7D8ECC9F14363ABE0099D07E /* UpdateController.h */,
-				7D8ECCA014363ABE0099D07E /* UpdateController.m */,
-				7DC18998144484A300BD9041 /* FeedbackController.h */,
-				7DC18999144484A300BD9041 /* FeedbackController.m */,
+				7D8ECC9F14363ABE0099D07E /* UpdateViewController.h */,
+				7D8ECCA014363ABE0099D07E /* UpdateViewController.m */,
+				7DC18998144484A300BD9041 /* FeedbackViewController.h */,
+				7DC18999144484A300BD9041 /* FeedbackViewController.m */,
 				7DACEE2E1447B1A200B321D5 /* GameViewController.h */,
 				7DACEE2F1447B1A200B321D5 /* GameViewController.m */,
 				7D36FEEB144856F900AC7042 /* HelpViewController.h */,
@@ -562,12 +551,10 @@
 				D340E5001415F4D300A2370F /* ScannerView.xib in Resources */,
 				D340E5051415F4EE00A2370F /* MapView.xib in Resources */,
 				D340E50A1415F50400A2370F /* InfoView.xib in Resources */,
-				7DB80438142CEEC6002A23AA /* EntryView.xib in Resources */,
 				7D8ECCA314363ABF0099D07E /* UpdateController.xib in Resources */,
 				7D898BAA1441AEF900EC0895 /* FeedbackView.xib in Resources */,
 				7D81E89014465B5200486F43 /* AboutView.xib in Resources */,
 				7D81E89314465E7A00486F43 /* SettingsView.xib in Resources */,
-				7DACEE281446F1E900B321D5 /* NavSubView.xib in Resources */,
 				7DACEE2B1446F77400B321D5 /* HelpView.xib in Resources */,
 				7DACEE2D1447B0F100B321D5 /* GameView.xib in Resources */,
 				7DACEE611448536500B321D5 /* NavigationView.xib in Resources */,
@@ -611,7 +598,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				17A5A7CF140DEEB4009BB46E /* main.m in Sources */,
-				17A5A7D2140DEEB4009BB46E /* MainViewController.m in Sources */,
 				17A5A7F6140DF183009BB46E /* Interpreter.m in Sources */,
 				17A5A7F9140DF199009BB46E /* Scanner.m in Sources */,
 				17A14BC014123A9000D4192C /* HistoryItem.m in Sources */,
@@ -620,14 +606,14 @@
 				D340E5091415F50400A2370F /* InfoViewController.m in Sources */,
 				D340E51B1415F88F00A2370F /* BaconAppDelegate.m in Sources */,
 				D340519E14164082008A82D7 /* DataModel.m in Sources */,
-				7D8ECCA214363ABF0099D07E /* UpdateController.m in Sources */,
+				7D8ECCA214363ABF0099D07E /* UpdateViewController.m in Sources */,
 				7D8ECCA6143645810099D07E /* Update.m in Sources */,
-				7DC1899A144484A300BD9041 /* FeedbackController.m in Sources */,
+				7DC1899A144484A300BD9041 /* FeedbackViewController.m in Sources */,
 				7DC1899E1445066900BD9041 /* Reachability.m in Sources */,
 				7DACEE301447B1A300B321D5 /* GameViewController.m in Sources */,
 				7DACEE331447F92400B321D5 /* Quiz.m in Sources */,
 				7DACEE5B1448531900B321D5 /* HelpViewController.m in Sources */,
-				7DACEE5C1448531900B321D5 /* NavigationView.m in Sources */,
+				7DACEE5C1448531900B321D5 /* NavigationViewController.m in Sources */,
 				7D36FEEE144857AA00AC7042 /* AboutViewController.m in Sources */,
 				D3135F2514490AC400589F1F /* SettingsViewController.m in Sources */,
 				7FC445731449DCBA0026E316 /* ModalViewController.m in Sources */,

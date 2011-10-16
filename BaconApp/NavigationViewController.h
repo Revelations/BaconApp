@@ -12,7 +12,7 @@
 #import "AboutViewController.h"
 #import "ScannerViewController.h"
 #import "MapViewController.h"
-#import "FeedbackController.h"
+#import "FeedbackViewController.h"
 #import "GameViewController.h"
 #import "SettingsViewController.h"
 #import "HelpViewController.h"
@@ -21,13 +21,13 @@
 #import "BaconAppDelegate.h"
 
 
-@interface NavigationView : UITableViewController <ModalViewControllerDelegate> {
+@interface NavigationViewController : UITableViewController <ModalViewControllerDelegate> {
 	NSArray * cellContent;
 	AboutViewController * aboutView;
 	ScannerViewController * scannerView;
 	InfoViewController * infoView;
 	MapViewController * mapView;
-	FeedbackController * feedbackView;
+	FeedbackViewController * feedbackView;
 	GameViewController * gameView;
 	SettingsViewController * settingsView;
 	HelpViewController * helpView;
@@ -41,7 +41,7 @@
 @property(nonatomic, retain) AboutViewController * aboutView;
 @property(nonatomic, retain) ScannerViewController * scannerView;
 @property(nonatomic, retain) MapViewController * mapView;
-@property(nonatomic, retain) FeedbackController * feedbackView;
+@property(nonatomic, retain) FeedbackViewController * feedbackView;
 @property(nonatomic, retain) GameViewController * gameView;
 @property(nonatomic, retain) SettingsViewController * settingsView;
 @property(nonatomic, retain) HelpViewController * helpView;

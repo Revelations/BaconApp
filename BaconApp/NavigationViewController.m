@@ -6,9 +6,9 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "NavigationView.h"
+#import "NavigationViewController.h"
 
-@implementation NavigationView
+@implementation NavigationViewController
 
 #pragma mark - Properties
 @synthesize aboutView;
@@ -211,7 +211,7 @@
 -(void)showFeedbackView {
 	// Create the modal view controller
 	if (!self.feedbackView) {
-		FeedbackController *viewController = [[FeedbackController alloc] initWithNibName:@"FeedbackView" bundle:nil];
+		FeedbackViewController *viewController = [[FeedbackViewController alloc] initWithNibName:@"FeedbackView" bundle:nil];
 		self.feedbackView = viewController;
 		currentViewController = viewController;
 		// Cleanup resources

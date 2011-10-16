@@ -6,11 +6,11 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "UpdateController.h"
+#import "UpdateViewController.h"
 #import "BaconAppDelegate.h"
 #import "Update.h"
 
-@implementation UpdateController
+@implementation UpdateViewController
 @synthesize progBar;
 
 /*-(IBAction)UploadFile:(id)sender{

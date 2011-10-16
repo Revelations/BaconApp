@@ -6,12 +6,12 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "FeedbackController.h"
+#import "FeedbackViewController.h"
 #import "Update.h"
 #import "Reachability.h"
 #import "BaconAppDelegate.h"
 
-@implementation FeedbackController
+@implementation FeedbackViewController
 
 #pragma mark - Actions
 

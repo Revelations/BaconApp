@@ -14,7 +14,7 @@
 #import "Update.h"
 #import "Reachability.h"
 
-#import "NavigationView.h"
+#import "NavigationViewController.h"
 // Name (without extension) of the main menu html page, loaded on app start.
 NSString * const MENU_HTML_FILE = @"menu";
 // Name (without extension) of the map html page.
@@ -48,7 +48,7 @@ NSString * const CONTENT_DIRECTORY = @"Content";
     NSLog(@"earth to the world of jim...");
 	
     // Override point for customization after application launch.
-    self.window.rootViewController = [NavigationView new];
+    self.window.rootViewController = [NavigationViewController new];
 	
     [self.window makeKeyAndVisible];
 	

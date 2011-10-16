@@ -10,7 +10,7 @@
 #import "ModalViewController.h"
 
 
-@interface UpdateController : ModalViewController {
+@interface UpdateViewController : ModalViewController {
 	IBOutlet UILabel *output;
 	IBOutlet UIProgressView *progBar;
 }
