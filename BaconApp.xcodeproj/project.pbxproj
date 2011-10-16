@@ -34,7 +34,6 @@
 		17A5A7F6140DF183009BB46E /* Interpreter.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5A7F5140DF183009BB46E /* Interpreter.m */; };
 		17A5A7F9140DF199009BB46E /* Scanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5A7F8140DF199009BB46E /* Scanner.m */; };
 		17A5A806140E01EE009BB46E /* ScannerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5A7FB140DF1FA009BB46E /* ScannerTest.m */; };
-		17A5A807140E01F7009BB46E /* InterpreterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5A7FE140DF20F009BB46E /* InterpreterTest.m */; };
 		17BBA94F1412FF2C00D0BE9D /* Web in Resources */ = {isa = PBXBuildFile; fileRef = 17BBA94E1412FF2C00D0BE9D /* Web */; };
 		17C82DC2144A5B6200214BA4 /* TitleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C82DC0144A5B6100214BA4 /* TitleViewController.m */; };
 		17C82DC3144A5B6200214BA4 /* TitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17C82DC1144A5B6100214BA4 /* TitleView.xib */; };
@@ -138,8 +137,6 @@
 		17A5A7F8140DF199009BB46E /* Scanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Scanner.m; sourceTree = "<group>"; };
 		17A5A7FA140DF1FA009BB46E /* ScannerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScannerTest.h; sourceTree = "<group>"; };
 		17A5A7FB140DF1FA009BB46E /* ScannerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScannerTest.m; sourceTree = "<group>"; };
-		17A5A7FD140DF20F009BB46E /* InterpreterTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterpreterTest.h; sourceTree = "<group>"; };
-		17A5A7FE140DF20F009BB46E /* InterpreterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterpreterTest.m; sourceTree = "<group>"; };
 		17BBA94E1412FF2C00D0BE9D /* Web */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Web; sourceTree = "<group>"; };
 		17C82DBF144A5B6000214BA4 /* TitleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleViewController.h; sourceTree = "<group>"; };
 		17C82DC0144A5B6100214BA4 /* TitleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleViewController.m; sourceTree = "<group>"; };
@@ -152,7 +149,7 @@
 		7D81E88F14465B5200486F43 /* AboutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutView.xib; sourceTree = "<group>"; };
 		7D81E89214465E7A00486F43 /* SettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
 		7D898BA91441AEF900EC0895 /* FeedbackView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedbackView.xib; sourceTree = "<group>"; };
-		7D8ECC9F14363ABE0099D07E /* UpdateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = UpdateViewController.h; sourceTree = "<group>"; };
+		7D8ECC9F14363ABE0099D07E /* UpdateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateViewController.h; sourceTree = "<group>"; };
 		7D8ECCA014363ABE0099D07E /* UpdateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateViewController.m; sourceTree = "<group>"; };
 		7D8ECCA114363ABF0099D07E /* UpdateController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpdateController.xib; sourceTree = "<group>"; };
 		7D8ECCA4143645810099D07E /* Update.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Update.h; sourceTree = "<group>"; };
@@ -164,7 +161,7 @@
 		7DACEE311447F92300B321D5 /* Quiz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quiz.h; sourceTree = "<group>"; };
 		7DACEE321447F92300B321D5 /* Quiz.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Quiz.m; sourceTree = "<group>"; };
 		7DACEE561448531900B321D5 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
-		7DACEE571448531900B321D5 /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = NavigationViewController.h; sourceTree = "<group>"; };
+		7DACEE571448531900B321D5 /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
 		7DACEE581448531900B321D5 /* NavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
 		7DACEE5F1448536500B321D5 /* NavigationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NavigationView.xib; sourceTree = "<group>"; };
 		7DACEE601448536500B321D5 /* UpdateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpdateView.xib; sourceTree = "<group>"; };
@@ -363,8 +360,6 @@
 				17A5A7EA140DEEB4009BB46E /* BaconAppTests.m */,
 				17A5A7FA140DF1FA009BB46E /* ScannerTest.h */,
 				17A5A7FB140DF1FA009BB46E /* ScannerTest.m */,
-				17A5A7FD140DF20F009BB46E /* InterpreterTest.h */,
-				17A5A7FE140DF20F009BB46E /* InterpreterTest.m */,
 				1798168B14106DF900AB1A15 /* HistoryItemTest.h */,
 				1798168C14106DF900AB1A15 /* HistoryItemTest.m */,
 				17A5A7E2140DEEB4009BB46E /* Supporting Files */,
@@ -628,7 +623,6 @@
 			files = (
 				17A5A7EB140DEEB4009BB46E /* BaconAppTests.m in Sources */,
 				17A5A806140E01EE009BB46E /* ScannerTest.m in Sources */,
-				17A5A807140E01F7009BB46E /* InterpreterTest.m in Sources */,
 				1798168D14106DF900AB1A15 /* HistoryItemTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
