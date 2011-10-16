@@ -35,5 +35,6 @@
 			[question addObject:s];
 		}
 	}
+	[question release];
 }
 @end
