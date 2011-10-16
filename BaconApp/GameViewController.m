@@ -209,7 +209,7 @@ static NSArray *subtitles;
 					  @"Look in your mirror and tell the face you see that it's time it should create another If you do not renew yourself you would be depriving the world, and stop some woman from becoming a mother.",
 					  nil] retain];
 
-	self.navigationItem.title = @"Trivia Quiz!";
+	self.navigationItem.title = @"Trivia Quiz";
 	
 	[super viewDidLoad];
 	// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
