@@ -32,6 +32,8 @@ extern NSString * const CONTENT_DIRECTORY;
     NSMutableArray * scannedItems;
 	NSString * serverIpAddress;
 	NSString * fontSize;
+    
+    UINavigationController *navigationController;
 }
 
 
@@ -47,6 +49,6 @@ extern NSString * const CONTENT_DIRECTORY;
 @property (readwrite) int y;
 @property (nonatomic, retain) NSString * html;
 @property (readwrite) BOOL update;// a property to test if the app has already asked to update
-
+@property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
 
 @end

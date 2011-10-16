@@ -9,7 +9,6 @@
 #import "ScannerViewController.h"
 #import "Interpreter.h"
 #import "BaconAppDelegate.h"
-#import "UpdateController.h"
 #import "Update.h"
 #import "SettingsViewController.h"
 

@@ -21,16 +21,6 @@
 }
 
 
-#pragma mark  - App Admin
-- (id)initWithStyle:(UITableViewStyle)style
-{
-	self = [super initWithStyle:style];
-	if (self) {
-		// Custom initialization
-	}
-	return self;
-}
-
 - (void)dealloc
 {
 	[super dealloc];
@@ -48,7 +38,7 @@
 #pragma mark - View lifecycle
 - (void)viewDidLoad
 {
-	cellContent = [[NSArray arrayWithObjects:
+	NSArray * array = [[NSArray arrayWithObjects:
 					@"Title",
 					@"Scan",
 					@"Information",
@@ -60,7 +50,10 @@
                     @"Update",
 					@"Help",
 					nil] retain];
-	self.navigationItem.title = @"BACON!";
+    cellContent = array;
+    [array release];
+    
+	self.navigationItem.title = @"Menu";
 	// Uncomment the following line to preserve selection between presentations.
 	// self.clearsSelectionOnViewWillAppear = NO;
 	// Uncomment the following line to display an Edit button in the navigation bar for this view controller.

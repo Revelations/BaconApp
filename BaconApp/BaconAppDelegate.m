@@ -27,7 +27,7 @@ NSString * const CONTENT_DIRECTORY = @"Content";
 
 @implementation BaconAppDelegate
 
-@synthesize window;
+@synthesize window = _window;
 @synthesize tabBarController;
 @synthesize model;
 @synthesize x, y, html;
@@ -36,6 +36,8 @@ NSString * const CONTENT_DIRECTORY = @"Content";
 @synthesize currentView = _currentView;
 @synthesize serverIpAddress = _serverIpAddress;
 @synthesize fontSize = _fontSize;
+
+@synthesize navigationController;
 
 #pragma mark - helper methods
 #pragma mark Application lifecycle
@@ -48,8 +50,8 @@ NSString * const CONTENT_DIRECTORY = @"Content";
     NSLog(@"earth to the world of jim...");
 	
     // Override point for customization after application launch.
-    self.window.rootViewController = [NavigationViewController new];
-	
+    //self.window.rootViewController = [NavigationViewController new];
+	[window addSubview:[navigationController view]];
     [self.window makeKeyAndVisible];
 	
     return YES;
