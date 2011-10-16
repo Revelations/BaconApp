@@ -197,6 +197,7 @@
 	
 	// Create a Navigation controller
 	UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    navController.navigationBar.barStyle = UIBarStyleBlackOpaque;
 	
 	// show the navigation controller modally
 	[self presentModalViewController:navController animated:YES];

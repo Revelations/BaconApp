@@ -44,8 +44,8 @@
 	// Override the right button to show a Done button
     // which is used to dismiss the modal view
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
-											   initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-											   target:self
+											   initWithTitle:@"Done" style:UIBarButtonItemStyleBordered
+                                               target:self
 											   action:@selector(dismissView:)] autorelease];
 }
 
