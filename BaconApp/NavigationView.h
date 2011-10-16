@@ -9,16 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "ModalViewControllerDelegate.h"
 #import "ModalViewController.h"
+#import "AboutViewController.h"
+#import "ScannerViewController.h"
+#import "MapViewController.h"
+#import "FeedbackController.h"
+#import "GameViewController.h"
+#import "SettingsViewController.h"
+#import "HelpViewController.h"
+#import "InfoViewController.h"
+#import "TitleViewController.h"
+#import "BaconAppDelegate.h"
 
-#pragma mark - import statements
-@class AboutViewController;
-@class ScannerViewController;
-@class MapViewController;
-@class FeedbackController;
-@class GameViewController;
-@class SettingsViewController;
-@class HelpViewController;
-@class InfoViewController;
 
 @interface NavigationView : UITableViewController <ModalViewControllerDelegate> {
 	NSArray * cellContent;
@@ -30,6 +31,7 @@
 	GameViewController * gameView;
 	SettingsViewController * settingsView;
 	HelpViewController * helpView;
+    TitleViewController * titleView;
 	
 	ModalViewController * currentViewController;
 }
@@ -45,10 +47,12 @@
 @property(nonatomic, retain) HelpViewController * helpView;
 @property(nonatomic, retain) InfoViewController * infoView;
 @property(nonatomic, retain) ModalViewController * currentViewController;
+@property (nonatomic, retain) TitleViewController * titleView;
 
 
 @property (nonatomic,retain) IBOutlet UIButton *button;
-- (IBAction)buttonAction:(id)sender;
+
+-(void) showTitleView;
 
 
 @end

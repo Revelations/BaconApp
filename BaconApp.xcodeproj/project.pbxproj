@@ -37,6 +37,9 @@
 		17A5A806140E01EE009BB46E /* ScannerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5A7FB140DF1FA009BB46E /* ScannerTest.m */; };
 		17A5A807140E01F7009BB46E /* InterpreterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5A7FE140DF20F009BB46E /* InterpreterTest.m */; };
 		17BBA94F1412FF2C00D0BE9D /* Web in Resources */ = {isa = PBXBuildFile; fileRef = 17BBA94E1412FF2C00D0BE9D /* Web */; };
+		17C82DC2144A5B6200214BA4 /* TitleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C82DC0144A5B6100214BA4 /* TitleViewController.m */; };
+		17C82DC3144A5B6200214BA4 /* TitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17C82DC1144A5B6100214BA4 /* TitleView.xib */; };
+		17C82DC6144A5C1500214BA4 /* TrustLogo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 17C82DC5144A5C1500214BA4 /* TrustLogo.jpg */; };
 		7D166857142EBD8700D5666C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D166856142EBD8700D5666C /* CFNetwork.framework */; };
 		7D36FEEE144857AA00AC7042 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D36FEED144857A900AC7042 /* AboutViewController.m */; };
 		7D81E89014465B5200486F43 /* AboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D81E88F14465B5200486F43 /* AboutView.xib */; };
@@ -143,6 +146,10 @@
 		17A5A7FD140DF20F009BB46E /* InterpreterTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterpreterTest.h; sourceTree = "<group>"; };
 		17A5A7FE140DF20F009BB46E /* InterpreterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterpreterTest.m; sourceTree = "<group>"; };
 		17BBA94E1412FF2C00D0BE9D /* Web */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Web; sourceTree = "<group>"; };
+		17C82DBF144A5B6000214BA4 /* TitleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleViewController.h; sourceTree = "<group>"; };
+		17C82DC0144A5B6100214BA4 /* TitleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleViewController.m; sourceTree = "<group>"; };
+		17C82DC1144A5B6100214BA4 /* TitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleView.xib; sourceTree = "<group>"; };
+		17C82DC5144A5C1500214BA4 /* TrustLogo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = TrustLogo.jpg; sourceTree = "<group>"; };
 		7D166856142EBD8700D5666C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		7D36FEEB144856F900AC7042 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
 		7D36FEEC144857A900AC7042 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
@@ -338,8 +345,9 @@
 				7F48B9331413C9010001546A /* Controllers */,
 				7F48B9321413C8F20001546A /* Model */,
 				7F48B9191413C3370001546A /* Resources */,
-				17BBA94E1412FF2C00D0BE9D /* Web */,
+				17C82DC4144A5BE000214BA4 /* Views */,
 				17A5A7C8140DEEB4009BB46E /* Supporting Files */,
+				17BBA94E1412FF2C00D0BE9D /* Web */,
 			);
 			path = BaconApp;
 			sourceTree = "<group>";
@@ -381,7 +389,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		7F48B9191413C3370001546A /* Resources */ = {
+		17C82DC4144A5BE000214BA4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				D3058CCB144A1CF100098329 /* AnswerSelectionController.xib */,
@@ -399,6 +407,15 @@
 				17A5A7D3140DEEB4009BB46E /* MainWindow.xib */,
 				7DACEE271446F1E900B321D5 /* NavSubView.xib */,
 				7DACEE2A1446F77300B321D5 /* HelpView.xib */,
+				17C82DC1144A5B6100214BA4 /* TitleView.xib */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		7F48B9191413C3370001546A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				17C82DC5144A5C1500214BA4 /* TrustLogo.jpg */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -452,6 +469,8 @@
 				D3135F2414490AC400589F1F /* SettingsViewController.m */,
 				D3058CC9144A1CF100098329 /* AnswerSelectionController.h */,
 				D3058CCA144A1CF100098329 /* AnswerSelectionController.m */,
+				17C82DBF144A5B6000214BA4 /* TitleViewController.h */,
+				17C82DC0144A5B6100214BA4 /* TitleViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -554,6 +573,8 @@
 				7DACEE611448536500B321D5 /* NavigationView.xib in Resources */,
 				7DACEE621448536500B321D5 /* UpdateView.xib in Resources */,
 				D3058CCD144A1CF100098329 /* AnswerSelectionController.xib in Resources */,
+				17C82DC3144A5B6200214BA4 /* TitleView.xib in Resources */,
+				17C82DC6144A5C1500214BA4 /* TrustLogo.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -611,6 +632,7 @@
 				D3135F2514490AC400589F1F /* SettingsViewController.m in Sources */,
 				7FC445731449DCBA0026E316 /* ModalViewController.m in Sources */,
 				D3058CCC144A1CF100098329 /* AnswerSelectionController.m in Sources */,
+				17C82DC2144A5B6200214BA4 /* TitleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

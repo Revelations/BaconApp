@@ -7,27 +7,19 @@
 //
 
 #import "NavigationView.h"
-#import "AboutViewController.h"
-#import "ScannerViewController.h"
-#import "MapViewController.h"
-#import "FeedbackController.h"
-#import "GameViewController.h"
-#import "SettingsViewController.h"
-#import "HelpViewController.h"
-#import "InfoViewController.h"
-#import "BaconAppDelegate.h"
 
 @implementation NavigationView
 
 #pragma mark - Properties
-@synthesize aboutView = _aboutView;
-@synthesize scannerView = _scannerView;
-@synthesize mapView = _mapView;
-@synthesize feedbackView = _feedbackView;
-@synthesize gameView = _gameView;
-@synthesize settingsView = _settingsView;
-@synthesize helpView = _helpView;
-@synthesize infoView = _infoView;
+@synthesize aboutView;
+@synthesize scannerView;
+@synthesize mapView;
+@synthesize feedbackView;
+@synthesize gameView;
+@synthesize settingsView;
+@synthesize helpView;
+@synthesize infoView;
+@synthesize titleView;
 
 @synthesize currentViewController;
 
@@ -64,25 +56,24 @@
 #pragma mark - View lifecycle
 - (void)viewDidLoad
 {
-	[super viewDidLoad];
-
 	cellContent = [[NSArray arrayWithObjects:
 					@"Title",
-					@"About",
 					@"Scan",
 					@"Information",
 					@"Map",
 					@"Feedback",
 					@"Game",
 					@"Settings",
+                    @"About",
 					@"Help",
 					nil] retain];
 	self.navigationItem.title = @"BACON!";
 	// Uncomment the following line to preserve selection between presentations.
 	// self.clearsSelectionOnViewWillAppear = NO;
- 
 	// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 	// self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
+	[super viewDidLoad];
 }
 
 - (void)viewDidUnload
@@ -94,7 +85,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-	[super viewWillAppear:animated];
+	[super viewWillAppear:animated];;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -194,7 +185,7 @@
 	
 	// We are the delegate responsible for dismissing the modal view 
 	viewController.delegate = self;
-	
+
 	// Create a Navigation controller
 	UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:viewController];
     navController.navigationBar.barStyle = UIBarStyleBlackOpaque;
@@ -221,6 +212,8 @@
 		// Cleanup resources
 		[viewController release];
 	}
+    else currentViewController = aboutView;
+    
 	[self showCurrentView];
 }
 -(void)showScannerView {
@@ -232,6 +225,8 @@
 		// Cleanup resources
 		[viewController release];
 	}
+    else currentViewController = scannerView;
+    
 	[self showCurrentView];
 }
 -(void)showInfoView {
@@ -243,6 +238,8 @@
 		// Cleanup resources
 		[viewController release];
 	}
+    else currentViewController = infoView;
+    
 	[self showCurrentView];
 }
 
@@ -255,6 +252,8 @@
 		// Cleanup resources
 		[viewController release];
 	}
+    else currentViewController = mapView;
+    
 	[self showCurrentView];
 }
 -(void)showFeedbackView {
@@ -266,6 +265,8 @@
 		// Cleanup resources
 		[viewController release];
 	}
+    else currentViewController = feedbackView;
+    
 	[self showCurrentView];
 }
 -(void)showGameView {
@@ -277,6 +278,8 @@
 		// Cleanup resources
 		[viewController release];
 	}
+    else currentViewController = gameView;
+    
 	[self showCurrentView];
 }
 -(void)showSettingsView {
@@ -288,6 +291,8 @@
 		// Cleanup resources
 		[viewController release];
 	}
+    else currentViewController = settingsView;
+    
 	[self showCurrentView];
 }
 -(void)showHelpView {
@@ -299,43 +304,63 @@
 		// Cleanup resources
 		[viewController release];
 	}
+    else currentViewController = helpView;
+    
 	[self showCurrentView];
+}
+
+-(void)showTitleView {
+	if (!titleView) {
+		// Create the modal view controller
+		TitleViewController *viewController = [[TitleViewController alloc] initWithNibName:@"TitleView" bundle:nil];
+		self.titleView = viewController;
+		currentViewController = viewController;
+		// Cleanup resources
+		[viewController release];
+	}
+    else currentViewController = titleView;
+                     
+    [self showCurrentView];
 }
 
 //navigation and event handling
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	switch (indexPath.row) {
+        case 0:
+            NSLog(@"You have selected TitleView");
+            [self showTitleView];
+            break;
 		case 1:
-			NSLog(@"You have selected AboutView");
-			[self showAboutView];
-			break;
-		case 2:
-			NSLog(@"You have selected scannerView");
+			NSLog(@"You have selected ScanView");
 			[self showScannerView];
 			break;
-		case 3:
-			NSLog(@"You have selected infoView");
+		case 2:
+			NSLog(@"You have selected InfoView");
 			[self showInfoView];
 			break;
-		case 4:
-			NSLog(@"You have selected mapView");
+		case 3:
+			NSLog(@"You have selected MapView");
 			[self showMapView];
 			break;
-		case 5:
+		case 4:
 			NSLog(@"You have selected FeedbackView");
 			[self showFeedbackView];
 			break;
-		case 6:
-			NSLog(@"You have selected the gameView");
+		case 5:
+			NSLog(@"You have selected GameView");
 			[self showGameView];
 			break;
-		case 7:
-			NSLog(@"You have selected settingsView");
+		case 6:
+			NSLog(@"You have selected SettingsView");
 			[self showSettingsView];
 			break;
+		case 7:
+			NSLog(@"You have selected AboutView");
+			[self showAboutView];
+			break;
 		case 8:
-			NSLog(@"You have Selected helpView");
+			NSLog(@"You have Selected HelpView");
 			[self showHelpView];
 			break;
 		default:
