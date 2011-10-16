@@ -15,7 +15,7 @@
 @synthesize storedInputString;
 @synthesize map_x,map_y,page_title;
 
-NSString *readLineAsNSString(FILE *file)
+-(NSString *) readLineAsNSString:(FILE *) file
 {
 	char buffer[4096];
 	
@@ -42,7 +42,7 @@ NSString *readLineAsNSString(FILE *file)
 	// check for NULL
 	while(!feof(file))
 	{
-		NSString *line = readLineAsNSString(file);
+		NSString *line = [self readLineAsNSString:file];
 		NSArray * contents = [[line componentsSeparatedByString:@"<!--"] autorelease];
 		if ([contents count] > 1)
 		{

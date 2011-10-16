@@ -50,8 +50,6 @@
 @property (nonatomic, retain) TitleViewController * titleView;
 
 
-@property (nonatomic,retain) IBOutlet UIButton *button;
-
 -(void) showTitleView;
 
 

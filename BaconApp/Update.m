@@ -141,7 +141,7 @@
 	
 	//checks to see if the urlData has been downloaded
 	if(urlData){
-		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+		//NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 		//NSString *documentsDirectory = [paths objectAtIndex:0];
 		
 		//NSArray *values = [urlPath componentsSeparatedByString:@"/"];
@@ -211,7 +211,6 @@
 	NSLog(@"-(void)GetGameFiles:(NSString *) urlPath;");
 	NSString *remoteGameFilesDirectory = [NSString stringWithFormat: @"%@/%@", urlPath, GAME_DIRECTORY];
 	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"%@/%@", remoteGameFilesDirectory, @"gamelog.txt"]];
-	NSError * err = [[NSError alloc] init];  
 	NSLog(@"Downloading dir info from %@", url);
 	//retrieves the data from the url --Donovan
 	NSData *urlData = [NSData dataWithContentsOfURL:url];

@@ -75,9 +75,10 @@ static UIFont *titleFont;
 	
 	if([fileManager fileExistsAtPath: filePath]){
 		FILE * file = fopen(fileName, "r");
+        Interpreter * interpreter = [[Interpreter alloc] init];
 		while(!feof(file)){
 			for (int i = 0; i < 6; i++) {
-				NSString * line = readLineAsNSString(file);
+				NSString * line = [interpreter readLineAsNSString:file];
 				[array addObject: line];
 			}
 			[currentQuestionFiles addObject: array];
@@ -165,16 +166,6 @@ static UIFont *titleFont;
 	return returnArray;
 }
 
-#pragma mark  - App Admin
-- (id)initWithStyle:(UITableViewStyle)style
-{
-	self = [super initWithStyle:style];
-	if (self) {
-		// Custom initialization
-	}
-	return self;
-}
-
 - (void)dealloc
 {
 	[super dealloc];
@@ -200,7 +191,7 @@ static NSArray *subtitles;
 	[self.view addSubview:tableView];
 	//[table release];
 	
-	[super viewDidLoad];
+
 	
 	if (!titles)
 		titles = /*[arrayWithArray [self getQuestions]];*/
@@ -218,14 +209,9 @@ static NSArray *subtitles;
 					  @"Look in your mirror and tell the face you see that it's time it should create another If you do not renew yourself you would be depriving the world, and stop some woman from becoming a mother.",
 					  nil] retain];
 
-	self.navigationItem.title = @"BACON!";
+	self.navigationItem.title = @"Trivia Quiz!";
 	
-	// Uncomment the following line to preserve selection between presentations.
-	// self.clearsSelectionOnViewWillAppear = NO;
-											   self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
-																						  initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-																						  target:self
-																						  action:@selector(dismissView:)] autorelease];
+	[super viewDidLoad];
 	// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 	// self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
@@ -273,12 +259,12 @@ static NSArray *subtitles;
 	
 	 return MIN([titles count], [subtitles count]);
 }
-- (UITableViewCell *)tableView:(UITableView *)tableView 
+- (UITableViewCell *)tableView:(UITableView *)tView 
 		 cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [self CreateMultilinesCell:CellIdentifier];
     }

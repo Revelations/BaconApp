@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "ModalViewController.h"
+#import "Interpreter.h"
+
 @class AnswerSelectionController;
 
 @interface GameViewController : ModalViewController <UITableViewDelegate, UITableViewDataSource>{
@@ -18,8 +20,6 @@
 	UITableView * tableView;
 	NSMutableArray * answersGiven;
 	AnswerSelectionController * asc;
-	
-
 }
 
 @property (nonatomic, retain) NSMutableArray * answersGiven;

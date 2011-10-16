@@ -137,7 +137,6 @@ NSString * const CONTENT_DIRECTORY = @"Content";
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     Update * updateSession = [[Update alloc]init];
-    Reachability * receptionCheck = [[Reachability alloc] init];
     
     NSString *filePath = [NSString stringWithFormat:@"%@%@", documentsDirectory, @"/feedback.txt"];
     NSFileManager *fileManager = [NSFileManager defaultManager];

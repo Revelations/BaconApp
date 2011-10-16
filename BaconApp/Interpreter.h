@@ -31,4 +31,6 @@
 //-(NSString *) htmlPath:(NSString *) inputString;
 -(void) setVals: (NSString *) filePath;
 
+-(NSString *) readLineAsNSString:(FILE *) file;
+
 @end
