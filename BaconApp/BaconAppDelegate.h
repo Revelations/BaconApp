@@ -32,7 +32,7 @@ extern NSString * const CONTENT_DIRECTORY;
     NSMutableArray * scannedItems;
 	NSString * serverIpAddress;
 	NSString * fontSize;
-    
+    NSMutableArray * answersGiven;
     UINavigationController *navigationController;
 }
 
@@ -50,5 +50,7 @@ extern NSString * const CONTENT_DIRECTORY;
 @property (nonatomic, retain) NSString * html;
 @property (readwrite) BOOL update;// a property to test if the app has already asked to update
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
+@property (nonatomic, retain) NSMutableArray * answersGiven;
 
+-(void) updateAnswersWith:(NSString *) answerGiven At:(int) index;
 @end

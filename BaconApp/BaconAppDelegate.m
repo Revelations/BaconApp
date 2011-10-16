@@ -36,10 +36,18 @@ NSString * const CONTENT_DIRECTORY = @"Content";
 @synthesize currentView = _currentView;
 @synthesize serverIpAddress = _serverIpAddress;
 @synthesize fontSize = _fontSize;
+@synthesize answersGiven;
 
 @synthesize navigationController;
 
 #pragma mark - helper methods
+-(void) updateAnswersWith:(NSString *) answerGiven At:(int) q{
+	//NSLog(@"hello index:%i  count:%i string:%@", q, [answersGiven count], answerGiven);
+	//NSLog(@"answer at %i was %@",index, [answersGiven objectAtIndex:index]);
+	[answersGiven addObject: [NSString stringWithFormat: @"q%@a%i", answerGiven,q]];
+	//NSLog(@"answer at %i was %@ count: %i", q, [answersGiven objectAtIndex:0], [answersGiven count]);
+}
+
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {

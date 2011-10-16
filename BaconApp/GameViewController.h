@@ -18,10 +18,12 @@
 	NSMutableArray * data;
 	NSArray * cellContent;
 	UITableView * tableView;
-	NSMutableArray * answersGiven;
+	NSArray * answersGiven;
 	AnswerSelectionController * asc;
 }
 
-@property (nonatomic, retain) NSMutableArray * answersGiven;
+@property (nonatomic, retain) NSArray * answersGiven;
 @property (nonatomic, retain) AnswerSelectionController * asc;
+
+-(void) updateAnswersWith:(NSString *)answerGiven At:(int) index;
 @end

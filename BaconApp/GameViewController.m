@@ -67,6 +67,8 @@ static UIFont *titleFont;
 	return titleSize.height + subtitleSize.height;
 }
 
+
+
 //reads the file into the private var currentQuestionFiles
 -(void) readSingleQuestionFile:(NSString *) filePath{
 	NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -181,18 +183,21 @@ static UIFont *titleFont;
 
 static NSArray *titles;
 static NSArray *subtitles;
+
 #pragma mark - View lifecycle
 - (void)viewDidLoad
 {
 	[self initGame];
-	tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, 460) style:UITableViewStylePlain];
+	tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, 410) style:UITableViewStylePlain];
 	[tableView setDataSource:self];
 	[tableView setDelegate:self];
 	[self.view addSubview:tableView];
 	//[table release];
 	
+/*BaconAppDelegate * delgato = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
+	delgato.answersGiven = [NSMutableArray arrayWithArray: titles];*/
 
-	
+	answersGiven = [NSArray arrayWithArray:titles];
 	if (!titles)
 		titles = /*[arrayWithArray [self getQuestions]];*/
 	   [[NSArray arrayWithObjects:
@@ -210,6 +215,9 @@ static NSArray *subtitles;
 					  nil] retain];
 
 	self.navigationItem.title = @"Trivia Quiz";
+	
+		
+	//NSLog(@"my name is :%@", [titles objectAtIndex:0]);
 	
 	[super viewDidLoad];
 	// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
@@ -255,10 +263,10 @@ static NSArray *subtitles;
 	return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {	
 	 return MIN([titles count], [subtitles count]);
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tView 
 		 cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -273,7 +281,8 @@ static NSArray *subtitles;
 	cell.detailTextLabel.text = [subtitles objectAtIndex:indexPath.row];
     return cell;
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	NSString *title = [titles objectAtIndex:indexPath.row];
 	NSString *subtitle = [subtitles objectAtIndex:indexPath.row];
@@ -283,11 +292,16 @@ static NSArray *subtitles;
 }
 
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 	
 	if (self.asc == nil) {
 		AnswerSelectionController *viewController = [[AnswerSelectionController alloc] initWithNibName:@"AnswerSelectionController" bundle:nil];
-		self.asc = viewController;
+	
+		NSLog(@"Row: %i", indexPath.row);
+		[viewController setQuestion: [NSNumber numberWithInt:indexPath.row]];
+		NSLog(@"Using question: %i", [viewController.question intValue]);
+		viewController.my_parent = self;
+		[self setAsc: viewController];
 		//currentViewController = viewController;
 		// Cleanup resources
 		[viewController release];

@@ -7,11 +7,11 @@
 //
 
 #import "AnswerSelectionController.h"
-
+#import "BaconAppDelegate.h"
 
 @implementation AnswerSelectionController
 @synthesize question;
-@synthesize parent;
+@synthesize my_parent;
 
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 /*
@@ -39,19 +39,74 @@
 }
 */
 
+
+
 -(IBAction)btnOptionAPressed:(id)sender{
 	NSLog(@"A has been pushed");
-	[self.navigationController popToRootViewControllerAnimated:YES];
+	if (my_parent == nil)
+		NSLog(@"parent is nil");
+	else {
+		NSLog(@"parent is not nil");
+	}
+
+	int index = [question intValue];
+	NSLog(@"index is %i", index);
+	BaconAppDelegate * delgato = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
+	[delgato updateAnswersWith:@"0a" At: index];
+	//[my_parent updateAnswersWith:@"0a" At: index];
+	[self.navigationController popViewControllerAnimated:YES];
 }
+
 -(IBAction)btnOptionBPressed:(id)sender{
 	NSLog(@"B has been pushed");
+	if (my_parent == nil)
+		NSLog(@"parent is nil");
+	else {
+		NSLog(@"parent is not nil");
+	}
+	
+	int index = [question intValue];
+	NSLog(@"index is %i", index);
+	BaconAppDelegate * delgato = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
+	[delgato updateAnswersWith:@"1" At: index];
+	//[my_parent updateAnswersWith:@"0a" At: index];
+	[self.navigationController popViewControllerAnimated:YES];
 }
+
+
 -(IBAction)btnOptionCPressed:(id)sender{
 	NSLog(@"C has been pushed");
+	if (my_parent == nil)
+		NSLog(@"parent is nil");
+	else {
+		NSLog(@"parent is not nil");
+	}
+	
+	int index = [question intValue];
+	NSLog(@"index is %i", index);
+	BaconAppDelegate * delgato = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
+	[delgato updateAnswersWith:@"2" At: index];
+	//[my_parent updateAnswersWith:@"0a" At: index];
+	[self.navigationController popViewControllerAnimated:YES];
 }
+
+
 -(IBAction)btnOptionDPressed:(id)sender{
 	NSLog(@"D has been pushed");
+	if (my_parent == nil)
+		NSLog(@"parent is nil");
+	else {
+		NSLog(@"parent is not nil");
+	}
+	
+	int index = [question intValue];
+	NSLog(@"index is %i", index);
+	BaconAppDelegate * delgato = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
+	[delgato updateAnswersWith:@"3" At: index];
+	//[my_parent updateAnswersWith:@"0a" At: index];
+	[self.navigationController popViewControllerAnimated:YES];
 }
+
 
 //-(void)
 

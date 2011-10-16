@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "GameViewController.h"
 
+
+@class GameViewController;
+
 @interface AnswerSelectionController : UIViewController {
 
 	IBOutlet  UITextView * optionA;
@@ -16,6 +19,7 @@
 	IBOutlet  UITextView * optionC;
 	IBOutlet  UITextView * optionD;
 	NSNumber * question;
+	GameViewController * my_parent;
 }
 
 
@@ -25,6 +29,6 @@
 -(IBAction)btnOptionDPressed:(id)sender;
 
 @property (nonatomic, retain) NSNumber * question;
-@property (nonatomic, retain) GameViewController * parent;
+@property (nonatomic, retain) GameViewController * my_parent;
 
 @end
