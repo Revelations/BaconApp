@@ -10,7 +10,7 @@
 #import "InfoViewController.h"
 #import "MapViewController.h"
 #import "DataModel.h"
-#import "UpdateController.h"
+#import "UpdateViewController.h"
 #import "Update.h"
 #import "Reachability.h"
 
