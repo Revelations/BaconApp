@@ -169,7 +169,7 @@
 	
 	//retrieves the data from the url --Donovan
 	NSData *urlData = [NSData dataWithContentsOfURL:url];
-	if(urlData){
+	if(urlData) {
 		NSString *documentsDirectory = [self unpurgableDirectory];
 		
 		NSString *localGameFilesDirectory = [NSString stringWithFormat: @"%@/%@", documentsDirectory, CONTENT_DIRECTORY];
@@ -185,12 +185,12 @@
 		NSArray *values = [fileContents componentsSeparatedByString:@"|"];
 		
 		//iterates over the files it needs to download
-		for(int i = 0; i < [values count]; i++){
+		for(int i = 0; i < [values count]; i++) {
 			NSString *s = [values objectAtIndex:i];
 			NSString *logFilePath = [NSString stringWithFormat:@"%@/%@", localGameFilesDirectory, s];
-			// NSFileManager *fileManager = [NSFileManager defaultManager];
 			NSString *retrieveUrl = [NSString stringWithFormat:@"%@/%@", remoteContentFilesDirectory, s]; 
 			NSLog(@"retrieveURL has value of %@", retrieveUrl);
+
 			if ([fileManager fileExistsAtPath:logFilePath]) {
 				
 				NSDictionary *attrs = [fileManager attributesOfItemAtPath:logFilePath error:NULL];
@@ -214,6 +214,7 @@
 	}    
 }
 
+/*
 //		//finds the relevant directory to ensure that iOS does not purge it --Donovan
 //		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 //		NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -253,6 +254,7 @@
 //				[self getFile:retrieveUrl:item];
 //			}
 //		}
+*/
 
 // urlPath does not need slash at the end.
 // Currently, revelations.webhop.org
@@ -265,8 +267,6 @@
 	NSData *urlData = [NSData dataWithContentsOfURL:url];
 
 	if (urlData) {
-		
-		//finds the relevant directory to ensure that iOS does not purge it --Donovan
 		NSString *documentsDirectory = [self unpurgableDirectory];
 		NSString *localGameFilesDirectory = [NSString stringWithFormat: @"%@/%@", documentsDirectory, GAME_DIRECTORY];
 		NSFileManager *fileManager = [NSFileManager defaultManager];
