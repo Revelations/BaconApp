@@ -24,6 +24,4 @@
 
 @property (nonatomic, retain) NSArray * answersGiven;
 @property (nonatomic, retain) AnswerSelectionController * asc;
-
--(void) updateAnswersWith:(NSString *)answerGiven At:(int) index;
 @end

@@ -9,6 +9,8 @@
 #import "GameViewController.h"
 #import "BaconAppDelegate.h"
 #import "AnswerSelectionController.h"
+#import "Update.h"
+#import "DDFileReader.h"
 
 @implementation GameViewController
 @synthesize	answersGiven;
@@ -73,10 +75,24 @@ static UIFont *titleFont;
 -(void) readSingleQuestionFile:(NSString *) filePath{
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 	NSMutableArray * array = [[NSMutableArray alloc]init];
-	const char * fileName = [filePath UTF8String];
+	//const char * fileName = [filePath UTF8String];
 	
 	if([fileManager fileExistsAtPath: filePath]){
-		FILE * file = fopen(fileName, "r");
+		
+		DDFileReader * reader = [[DDFileReader alloc] initWithFilePath:filePath];
+		[reader enumerateLinesUsingBlock:^(NSString * line, BOOL * stop) {
+			NSLog(@"read line: %@", line);
+			for (int i = 0; i < 6; i++) {
+				//NSString * line = [interpreter readLineAsNSString:file];
+				[array addObject: line];
+			}
+			[currentQuestionFiles addObject: array];
+			
+		}];
+		[reader release];
+	}
+		
+		/*FILE * file = fopen(fileName, "r");
         Interpreter * interpreter = [[[Interpreter alloc] init] autorelease];
 		while(!feof(file)){
 			for (int i = 0; i < 6; i++) {
@@ -86,23 +102,24 @@ static UIFont *titleFont;
 			[currentQuestionFiles addObject: array];
 		}
 	}
-	[array release];
+	[array release];*/
 }
 
 -(void) readQuestionFiles{
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	NSString *documentsDirectory = [paths objectAtIndex:0];
-	NSString *localGameFilesDirectory = [NSString stringWithFormat: @"%@/%@", documentsDirectory, GAME_DIRECTORY];
+	//NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	//NSString *documentsDirectory = [paths objectAtIndex:0];
+//	NSString *localGameFilesDirectory = [Update localGameDir];
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 	BaconAppDelegate * appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
 	NSMutableArray * scannedCodes = [appDelegate scannedItems];
 	
 	//	NSString *logFilePath = [NSString stringWithFormat:@"%@/%@", localGameFilesDirectory, @"log.txt"];
 	
-	if([fileManager fileExistsAtPath:localGameFilesDirectory isDirectory:NULL]){
+	if([fileManager fileExistsAtPath:[Update localGameDir] isDirectory:NULL]){
+		NSLog(@"gameDir exists");
 		for (int i = 0; i < [scannedCodes count]; i++) {
 			NSString * currentCode = [scannedCodes objectAtIndex:i];
-			NSString * filePath = [NSString stringWithFormat:@"%@%@.html", localGameFilesDirectory,currentCode];
+			NSString * filePath = [NSString stringWithFormat:@"%@%@.html", [Update localGameDir],currentCode];
 			[self readSingleQuestionFile: filePath];
 		}
 	}
@@ -112,9 +129,14 @@ static UIFont *titleFont;
 -(void) initGame{
 	//need to iterate through the list of scanned codes
 	int quesSize = 6;
+	NSLog(@"hello");
 	[self readQuestionFiles];
+	NSLog(@"size of questionFiles is :%i", [currentQuestionFiles count]);
 	
+	//todo currentQuestionfiles is empty
+	NSLog(@"Curentquestionfiles is of count:%i", [currentQuestionFiles count]);
 	for (int i = 0; i < [currentQuestionFiles count]; i++) {
+		NSLog(@"reading in i:%i", i);
 		NSMutableArray * currentQ = [currentQuestionFiles objectAtIndex:i];
 		
 		//need to generate a random number for a question
@@ -133,6 +155,7 @@ static UIFont *titleFont;
 		}
 		[quizQuestions addObject:tmp];
 	}
+	NSLog(@"loop has finished");
 	
 	//need to display the relevant questions
 	//need to wait for user input
@@ -188,6 +211,7 @@ static NSArray *subtitles;
 #pragma mark - View lifecycle
 - (void)viewDidLoad
 {
+	[super viewDidLoad];
 	[self initGame];
 	tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, 410) style:UITableViewStylePlain];
 	[tableView setDataSource:self];
@@ -198,29 +222,36 @@ static NSArray *subtitles;
 /*BaconAppDelegate * delgato = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
 	delgato.answersGiven = [NSMutableArray arrayWithArray: titles];*/
 
-	answersGiven = [NSArray arrayWithArray:titles];
-	if (!titles)
-		titles = /*[arrayWithArray [self getQuestions]];*/
-	   [[NSArray arrayWithObjects:
+	
+	//answersGiven = [NSArray arrayWithArray:titles];
+	if (!titles){
+		NSLog(@"setting the titles");
+		titles = [NSArray arrayWithArray: [self getQuestions]];
+	NSLog(@"finished the titles");
+	}
+	   /*[[NSArray arrayWithObjects:
 				   @"Shakespeare's Sonnet 1: From Fairest Creatures We Desire Increase",
 				   @"Shakespeare's Sonnet 2: When Forty Winters Shall Besiege Thy Brow",
 				   @"Shakespeare's Sonnet 3: Look In Thy Glass, And Tell The Face Thous Viewest",
-				   nil] retain];
-	if (!subtitles)
-		subtitles = /*[arrayWithArray [self getOptions]];*/
+				   nil] retain];*/
+	if (!subtitles){
+		NSLog(@"setting the subtitles");
+		subtitles = [NSArray arrayWithArray: [self getOptions]];
+		NSLog(@"finished the subtitles");
+	}
 	
-	[[NSArray arrayWithObjects: 
+	/*[[NSArray arrayWithObjects: 
 					  @"We want all beautiful creatures to reproduce themselves so that beauty’s flower will not die out; but as an old man dies in time, he leaves a young heir to carry on his memory.",
 					  @"When forty winters have attacked your brow and wrinkled your beautiful skin, the pride and impressiveness of your youth, so much admired by everyone now, will be have become a worthless, tattered weed.",
 					  @"Look in your mirror and tell the face you see that it's time it should create another If you do not renew yourself you would be depriving the world, and stop some woman from becoming a mother.",
-					  nil] retain];
+					  nil] retain];*/
 
 	self.navigationItem.title = @"Trivia Quiz";
 	
 		
 	//NSLog(@"my name is :%@", [titles objectAtIndex:0]);
 	
-	[super viewDidLoad];
+	
 	// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 	// self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
@@ -265,6 +296,8 @@ static NSArray *subtitles;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	return 1;
+	//NSLog(@"configuring the # sections");
 	if (section == 0) {
 	 return MIN([titles count], [subtitles count]);
 	}
@@ -273,6 +306,7 @@ static NSArray *subtitles;
 
 - (UITableViewCell *)tableView:(UITableView *)tView 
 		 cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	NSLog(@"Started configuring cells");
     
     static NSString *CellIdentifier = @"Cell";
     
@@ -289,16 +323,7 @@ static NSArray *subtitles;
 	
 	if(indexPath.section == 1) {
 		switch(indexPath.row) {
-			case 0: cell.text = @"Finished!"; break;
-			case 1:
-				cell.text = @"";
-				cell.detailTextLabel.text = @"";
-				break;
-			case 2:
-				cell.text = @"";
-				cell.detailTextLabel.text = @"";
-				break;
-
+			case 0: [cell.textLabel setText:@"Finished!"]; break;
 		}
 	}
 	else {
@@ -306,6 +331,7 @@ static NSArray *subtitles;
 		cell.textLabel.text = [titles objectAtIndex:indexPath.row];
 		cell.detailTextLabel.text = [subtitles objectAtIndex:indexPath.row];
 	}
+	NSLog(@"finished configuring cells");
     return cell;
 }
 

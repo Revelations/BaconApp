@@ -11,6 +11,7 @@
 #import "BaconAppDelegate.h"
 #import "Update.h"
 #import "SettingsViewController.h"
+#import "InfoViewController.h"
 
 @implementation ScannerViewController
 
@@ -75,11 +76,16 @@
 
 	// TODO: We could try use history here, that is, go to last page.
 	// OR, we could let the user choose.
-	NSLog(@"");
+	//NSLog(@"");
 	
 	
-	self.tabBarController.selectedIndex = 1;
-	NSLog(@"ROFL");
+	//self.tabBarController.selectedIndex = 1;
+	//NSLog(@"ROFL");
+	
+	
+	
+	InfoViewController *vc = [[InfoViewController alloc] initWithNibName:@"InfoView" bundle:[NSBundle mainBundle]];
+	[self.navigationController pushViewController:vc animated:YES];
 	
 	//model.current = current;
 	
