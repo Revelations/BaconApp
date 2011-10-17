@@ -13,32 +13,21 @@
 @implementation UpdateViewController
 @synthesize progBar;
 
-/*-(IBAction)UploadFile:(id)sender{
-	NSString * filePath = @"/Users/donovanhoffman/test.txt";
-	NSString * urlPath = @"ftp://revelations.webhop.org";
-	
-	Update * fileRequest = [[Update alloc] init];
-	[fileRequest _startSend: filePath : urlPath];
-}*/
-
 -(IBAction)Update:(id)sender{
-	NSString * url = @"http://revelations.webhop.org:81/";
+	NSString * contentUrl = @"http://revelations.webhop.org:81/";
 	NSString * gameUrl = @"ftp://revelations.webhop.org/";
 	NSLog(@"Jim is busy looking in a file system.");
 	Update *currentFileRequest = [[[Update alloc] init] autorelease];
-	[currentFileRequest downloadContentFilesFrom:url]; 
+	[currentFileRequest downloadContentFilesFrom:contentUrl]; 
 	[currentFileRequest GetGameFiles:gameUrl];
 	NSLog(@"Jim has now finished looking for the files");
-	[self dismissModalViewControllerAnimated:YES];
-}
+//	[self dismissModalViewControllerAnimated:YES];	[delegate didDismissModalView]; // Let the parent dismiss the subviews.}
 
 -(IBAction)CarryOn:(id)sender{
 	NSLog(@"Carry on Jim");
 	//BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
-	[self dismissModalViewControllerAnimated:YES];
+//	[self dismissModalViewControllerAnimated:YES]; 	[delegate didDismissModalView]; // Let the parent dismiss the subviews.
 }
-
-
 
 - (void)dealloc
 {
@@ -57,11 +46,9 @@
 
 - (void)viewDidLoad
 {
-    self.navigationItem.title = @"Update";
-    
 	[super viewDidLoad];
-	// Do any additional setup after loading the view from its nib.
-}
+	// Do any additional setup after loading the view from its nib.	
+	self.navigationItem.title = @"Update";   }
 
 - (void)viewDidUnload
 {
