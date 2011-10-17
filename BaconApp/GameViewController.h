@@ -13,7 +13,7 @@
 @class AnswerSelectionController;
 
 @interface GameViewController : ModalViewController <UITableViewDelegate, UITableViewDataSource>{
-	NSMutableArray * currentQuestionFiles;
+	NSMutableArray * currentQuesOptMutArray;
 	NSMutableArray *	quizQuestions;
 	NSMutableArray * data;
 	NSArray * cellContent;

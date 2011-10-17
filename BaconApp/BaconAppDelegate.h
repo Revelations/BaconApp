@@ -28,6 +28,8 @@ extern NSString * const CONTENT_DIRECTORY;
 	DataModel *model;
 	int x;
 	int y;
+	//<title>hello</title>
+	NSString * page_title;
 	NSString *html;
     NSMutableArray * scannedItems;
 	NSString * serverIpAddress;
@@ -51,6 +53,7 @@ extern NSString * const CONTENT_DIRECTORY;
 @property (readwrite) BOOL update;// a property to test if the app has already asked to update
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
 @property (nonatomic, retain) NSMutableArray * answersGiven;
-
+@property (nonatomic, retain) NSString * page_title;
 -(void) updateAnswersWith:(NSString *) answerGiven At:(int) index;
+-(void) addToScannedCodes:(NSString *) code;
 @end

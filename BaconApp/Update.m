@@ -135,11 +135,12 @@
 +(NSString *) remoteGameDir:(NSString *)urlPath {
 	return [NSString stringWithFormat:@"%@/%@", urlPath, GAME_DIRECTORY];
 }
+#pragma mark - Log Files URLs
 +(NSURL    *) remoteContentLogURL:(NSString *)urlPath {
 	return [NSURL URLWithString:[NSString stringWithFormat: @"%@/%@", [Update remoteContentDir:urlPath], @"log.txt"]];
 }
 +(NSURL    *) remoteGameLogURL:(NSString *)urlPath {
-	return [NSURL URLWithString:[NSString stringWithFormat: @"%@/%@", [Update remoteGameLogURL:urlPath], @"gamelog.txt"]];
+	return [NSURL URLWithString:[NSString stringWithFormat: @"%@/%@", [Update remoteGameDir:urlPath], @"gamelog.txt"]];
 }
 
 #pragma mark - Local Methods
@@ -162,7 +163,7 @@
 }
 -(NSData *) dataForGameFromPath:(NSString *) urlPath {
 	//retrieves the data from the url --Donovan
-	return [NSData dataWithContentsOfURL: [Update remoteContentLogURL:urlPath]];
+	return [NSData dataWithContentsOfURL: [Update remoteGameLogURL:urlPath]];
 }
 
 -(void)getFile:(NSString *)urlPath:(NSString *)filePath {
@@ -171,16 +172,16 @@
 	NSLog(@"File downloading from %@ to %@", parsedUrlPath, filePath);
 	NSURL *url = [NSURL URLWithString:parsedUrlPath];
 	
-	NSError * err = [[NSError alloc] init];    
+	NSError * err;    
 	//retrieves the data from the url --Donovan
 	NSData *urlData = [NSData dataWithContentsOfURL:url options:NSDataReadingUncached error:&err];
 	
-	//  if (err) {
-	//      NSLog(@"Error : %@", [err localizedDescription]);
-	//      [err release];
-	//  } else {
-	//      NSLog(@"Data has loaded successfully.");
-	//  }
+	  /*if (err) {
+	      NSLog(@"Error : %@", [err localizedDescription]);
+	      [err release];
+	  } else {
+	      NSLog(@"Data has loaded successfully.");
+	  }*/
 	
 	//checks to see if the urlData has been downloaded
 	if(urlData){
@@ -191,6 +192,7 @@
 		//NSString *backend = [NSString stringWithFormat:@"%@%@", @"/", [values objectAtIndex:[values count] -1]];
 		
 		//NSString *filePath = [NSString stringWithFormat:@"%@%@", documentsDirectory, backend];
+		NSLog(@"WRITNG TO FILE; %@", filePath);
 		[urlData writeToFile:filePath atomically:YES];
 	}	
 	else{
@@ -270,6 +272,7 @@
 			NSString *retrieveUrl = [NSString stringWithFormat:@"%@/%@", [Update remoteGameDir:urlPath], s]; 
 			NSLog(@"retrieveURL has value of %@", retrieveUrl);
 
+			NSLog(@"kog maw is back, looking at %@",itemPath);
 			if ([fileManager fileExistsAtPath:itemPath]) {
 				NSDictionary *attrs = [fileManager attributesOfItemAtPath:itemPath error:NULL];
 				
@@ -279,9 +282,14 @@
 				//checks to see if it already has the file
 				if(size != result){	
 					[self getFile:retrieveUrl:itemPath];
+					NSLog(@"file is downloading : %@", itemPath);
+				}
+				else {
+					NSLog(@"File is not downloading, wrong size");
 				}
 			}
 			else {
+				NSLog(@"Downloading file: %@", itemPath);
 				i++;
 				[self getFile:retrieveUrl:itemPath];
 			}

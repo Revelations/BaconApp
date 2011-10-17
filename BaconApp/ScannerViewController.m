@@ -17,6 +17,32 @@
 
 @synthesize resultImage, resultText, interpreter, current;
 
+-(void)addToViewsSeen:(NSString *) file {
+	BaconAppDelegate * appDelegate = (BaconAppDelegate *) [[UIApplication sharedApplication] delegate];
+	
+	NSArray * contents = [file componentsSeparatedByString:@"."];
+	NSString * currentFile = [contents objectAtIndex:0];
+	
+	NSMutableArray * currentP = [appDelegate scannedItems];
+	BOOL found = NO;
+	for (NSString * s in currentP) {
+		if (s == currentFile) {
+			found = YES;
+			break;
+		}
+	}
+	
+	if(!found) {
+		[currentP addObject:currentFile];
+	}
+	[appDelegate setPage_title:interpreter.htmlPath];
+	NSLog(@"scanned count: %i", [appDelegate.scannedItems count]);
+	NSLog(@"interpreter.htmPath = %@", interpreter.htmlPath);
+	[appDelegate addToScannedCodes:interpreter.htmlPath];
+	NSLog(@"scanned count: %i", [appDelegate.scannedItems count]);
+}
+
+
 -(IBAction) scanButtonPressed:(id)sender
 {
 	NSLog(@"Scan button pressed");
@@ -43,6 +69,7 @@
 - (void) imagePickerController: (UIImagePickerController*) reader
  didFinishPickingMediaWithInfo: (NSDictionary*) info
 {
+
 	NSLog(@"Scan did finish picking");
 	// ADD: get the decode results
 	id<NSFastEnumeration> results =
@@ -55,7 +82,10 @@
 	// EXAMPLE: do something useful with the barcode data
 
 	resultText.text = @"Scan was successful!";
+
+	BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
+
 	// EXAMPLE: do something useful with the barcode image
 	resultImage.image =
 	[info objectForKey: UIImagePickerControllerOriginalImage];
@@ -76,23 +106,21 @@
 
 	// TODO: We could try use history here, that is, go to last page.
 	// OR, we could let the user choose.
-<<<<<<< HEAD
+
 	//NSLog(@"");
-	
+	appDelegate.x = interpreter.x;
+	appDelegate.y = interpreter.y;
+	appDelegate.html = interpreter.htmlPath;
+	[self addToViewsSeen:interpreter.htmlPath];
+	NSLog(@"view count:%i", [appDelegate.scannedItems count]);	
 	
 	//self.tabBarController.selectedIndex = 1;
 	//NSLog(@"ROFL");
 	
 	
 	
-	InfoViewController *vc = [[InfoViewController alloc] initWithNibName:@"InfoView" bundle:[NSBundle mainBundle]];
-	[self.navigationController pushViewController:vc animated:YES];
-=======
-
-	InfoViewController *viewController = [[InfoViewController alloc] initWithNibName:@"InfoView" bundle:[NSBundle mainBundle]];
->>>>>>> 6110195e49280f87bb58a7de13faa17462d49ded
-	
-	[[self navigationController] pushViewController:viewController animated:YES];
+	InfoViewController *vc = [[[InfoViewController alloc] initWithNibName:@"InfoView" bundle:[NSBundle mainBundle]] autorelease];
+	[self.navigationController pushViewController:vc animated:YES];	
 	
 }
 
@@ -136,40 +164,10 @@
 	// e.g. self.myOutlet = nil;
 }
 
-
--(void)addToViewsSeen:(NSString *) file {
-	BaconAppDelegate * appDelegate = (BaconAppDelegate *) [[UIApplication sharedApplication] delegate];
-	
-	NSArray * contents = [file componentsSeparatedByString:@"."];
-	NSString * currentFile = [contents objectAtIndex:0];
-	
-	NSMutableArray * currentP = [appDelegate scannedItems];
-	BOOL found = NO;
-	for (NSString * s in currentP) {
-		if (s == currentFile) {
-			found = YES;
-			break;
-		}
-	}
-	
-	if(!found) {
-		[currentP addObject:currentFile];
-	}
-	
-	[[appDelegate scannedItems] addObject:interpreter.htmlPath];
-}
-
 // Called when the view disappears.
 -(void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
 	// Set the current history item to interpreted scanner data.
-	BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
-	
-	appDelegate.x = interpreter.x;
-	appDelegate.y = interpreter.y;
-	appDelegate.html = interpreter.htmlPath;
-	
-	[self addToViewsSeen:interpreter.htmlPath];
 	
 	//appDelegate.model.current = [[HistoryItem alloc] initWithHtmlFile:[interpreter htmlPath] x:interpreter.x y:interpreter.y];
 	// Add the current history item to the list.

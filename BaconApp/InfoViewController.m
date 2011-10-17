@@ -90,7 +90,8 @@
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
-    self.navigationItem.title = @"Information";
+	
+ 
     
 	[super viewDidLoad];
 }
@@ -118,15 +119,16 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:(BOOL)animated];
-	
+	   
 	
 	//BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
 	//[self webViewLoadPage: appDelegate.model.current.htmlFile];
 	BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
 
-	NSLog(@"Page to load is: %@", appDelegate.html);
 	
+	NSLog(@"Page to load is: %@", appDelegate.html);
+	self.navigationItem.title = appDelegate.page_title;
 	[self webViewLoadPage:appDelegate.html];
 }
 	 

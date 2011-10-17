@@ -60,7 +60,13 @@
 	NSLog(@"file exists = %i", [filemanager fileExistsAtPath:fname]);
 	
 	DDFileReader * reader = [[DDFileReader alloc] initWithFilePath:fname];
-	[reader enumerateLinesUsingBlock:^(NSString * line, BOOL * stop) {
+	
+	
+	NSString * line = nil;
+	while ((line =[reader readLine])) {
+//
+//	
+//	[reader enumerateLinesUsingBlock:^(NSString * line, BOOL * stop) {
 		NSLog(@"read line: %@", line);
 		
 		NSArray * contents = [line componentsSeparatedByString:@"<!--"];
@@ -81,8 +87,9 @@
 			page_title = [title_contents objectAtIndex:0];
 		}
 		
-	}];
+	}//];
 	[reader release];
+	
 	
 	storedInputString = filePath;
 	NSLog(@"Storing filepath of %@");

@@ -12,6 +12,8 @@
 #import "Update.h"
 #import "DDFileReader.h"
 
+#include <stdlib.h>
+
 @implementation GameViewController
 @synthesize	answersGiven;
 @synthesize asc;
@@ -77,20 +79,30 @@ static UIFont *titleFont;
 	NSMutableArray * array = [[NSMutableArray alloc]init];
 	//const char * fileName = [filePath UTF8String];
 	
+		NSLog(@"jim has been lazarused, lookin at %@", filePath);
 	if([fileManager fileExistsAtPath: filePath]){
-		
+		NSLog(@"about to go into the loop");
 		DDFileReader * reader = [[DDFileReader alloc] initWithFilePath:filePath];
-		[reader enumerateLinesUsingBlock:^(NSString * line, BOOL * stop) {
+		
+		
+		NSString * line = nil;
+		while ((line =[reader readLine])) {			
+			
 			NSLog(@"read line: %@", line);
 			for (int i = 0; i < 6; i++) {
-				//NSString * line = [interpreter readLineAsNSString:file];
 				[array addObject: line];
 			}
-			[currentQuestionFiles addObject: array];
+			NSLog(@"singlequestionfile: currentQCount: %i", [currentQuesOptMutArray count]);
+			[currentQuesOptMutArray addObject: array];
+			NSLog(@"singlequestionfile: currentQCount: %i", [currentQuesOptMutArray count]);
 			
-		}];
+		}
 		[reader release];
 	}
+	else {
+		NSLog(@"file does not exist: %@", filePath);
+	}
+	[array release];
 		
 		/*FILE * file = fopen(fileName, "r");
         Interpreter * interpreter = [[[Interpreter alloc] init] autorelease];
@@ -116,10 +128,13 @@ static UIFont *titleFont;
 	//	NSString *logFilePath = [NSString stringWithFormat:@"%@/%@", localGameFilesDirectory, @"log.txt"];
 	
 	if([fileManager fileExistsAtPath:[Update localGameDir] isDirectory:NULL]){
-		NSLog(@"gameDir exists");
+		if (!scannedCodes) {	NSLog(@"Scanned codes is nil in readQuestionFiles"); }
+
+		NSLog(@"gameDir: %@ exists, scanned code count is %i", [Update localGameDir], [scannedCodes count]);
+		
 		for (int i = 0; i < [scannedCodes count]; i++) {
 			NSString * currentCode = [scannedCodes objectAtIndex:i];
-			NSString * filePath = [NSString stringWithFormat:@"%@%@.html", [Update localGameDir],currentCode];
+			NSString * filePath = [NSString stringWithFormat:@"%@/%@.ques", [Update localGameDir],currentCode];
 			[self readSingleQuestionFile: filePath];
 		}
 	}
@@ -127,35 +142,46 @@ static UIFont *titleFont;
 
 //initializes all the questions
 -(void) initGame{
+	currentQuesOptMutArray = [NSMutableArray new];
+	quizQuestions = [NSMutableArray new];//STORES THE WHOLE Q&A FILE
+	data = [NSMutableArray new];
+
 	//need to iterate through the list of scanned codes
-	int quesSize = 6;
-	NSLog(@"hello");
-	[self readQuestionFiles];
-	NSLog(@"size of questionFiles is :%i", [currentQuestionFiles count]);
+	int quesSize = 6;//size of each q, lines = 6
 	
+	[self readQuestionFiles];
+	
+	
+	
+	
+	
+	/*[self readQuestionFiles]; // We fill QA array.
 	//todo currentQuestionfiles is empty
-	NSLog(@"Curentquestionfiles is of count:%i", [currentQuestionFiles count]);
-	for (int i = 0; i < [currentQuestionFiles count]; i++) {
+	NSLog(@"Curentquestionfiles is of count:%i", [currentQuesOptMutArray count]);
+	for (int i = 0; i < [currentQuesOptMutArray count]; i++) { // For each ITEM IN THE ARRAY
 		NSLog(@"reading in i:%i", i);
-		NSMutableArray * currentQ = [currentQuestionFiles objectAtIndex:i];
+		NSMutableArray * currentQ = [currentQuesOptMutArray objectAtIndex:i];
 		
 		//need to generate a random number for a question
-		int offset =  arc4random_uniform([currentQ count] / quesSize);
+		int offset =  arc4random() %([currentQ count] / quesSize);
 		int index = 0;
 		
 		
 		//get the right index for the randomly generated question
+		NSLog(@"index: %i", index);
 		for(; index < offset; index+=quesSize){} 
+		NSLog(@"index: %i", index);
 		
 		NSMutableArray *tmp = [[NSMutableArray alloc]init];
 		
 		//populate the quiz with the new question
 		for(int k = 0; k < quesSize; k++){
+			NSLog(@"added to tmp : %@", [currentQ objectAtIndex:index]);
 			[tmp addObject: [currentQ objectAtIndex:index++]];
 		}
 		[quizQuestions addObject:tmp];
 	}
-	NSLog(@"loop has finished");
+	NSLog(@"loop has finished");*/
 	
 	//need to display the relevant questions
 	//need to wait for user input
@@ -164,26 +190,34 @@ static UIFont *titleFont;
 	//allow repeats somehow at least for diagnostics
 }
 -(NSMutableArray*)getQuestions{
+	NSLog(@"Getting questions. I can has? ");
 	NSMutableArray * returnArray = [NSMutableArray new];
 	
 	for (int i = 0; i < [quizQuestions count]; i+=6) {
+		NSLog(@"adding to getQuestions: %@ with size %i/%i", [quizQuestions objectAtIndex: i], i, [returnArray count]);
 		[returnArray addObject: [quizQuestions objectAtIndex: i]];
 	}
 	return [returnArray autorelease];
 }
 
--(NSMutableArray*)getOptions{
-	NSMutableArray *returnArray = [NSMutableArray new];
+-(NSMutableArray*)getOptions {
+	NSLog(@"Getting options. I can has !");
+	NSMutableArray *returnArray = [[NSMutableArray new] autorelease];
 	
-	for (int i = 0; i < [quizQuestions count]; ++i) {
-		for (; (i % 4) != 0; i ++) {
+	for (int i = 0; i < [quizQuestions count]; ++i) { // Loops over
+		if (0 == i%4)
+			NSLog(@"item at i%4 == 0: i=%i, %@", i, [quizQuestions objectAtIndex:i]);
+		for (; (i % 4) != 0; i ++) { // Only gets items that are options.
+			NSLog(@"item at i=%i : %@", i, [quizQuestions objectAtIndex:i]);
 			[returnArray addObject: [quizQuestions objectAtIndex: i]];
 		}
 	}
-	return [returnArray autorelease];
+	return returnArray;
 }
 
 -(NSMutableArray*)getAnswers{
+	NSLog(@"Getting answers. I can has answers? ");
+
 	NSMutableArray *returnArray = [NSMutableArray new];
 	
 	for (int i = 5; i < [quizQuestions count]; i+=5) {
@@ -192,10 +226,6 @@ static UIFont *titleFont;
 	return [returnArray autorelease];
 }
 
-- (void)dealloc
-{
-	[super dealloc];
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -211,8 +241,12 @@ static NSArray *subtitles;
 #pragma mark - View lifecycle
 - (void)viewDidLoad
 {
+	titles =  [[[NSArray alloc]init] retain];
+	subtitles = [[[NSArray alloc]init] retain];
 	[super viewDidLoad];
 	[self initGame];
+	
+	
 	tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, 410) style:UITableViewStylePlain];
 	[tableView setDataSource:self];
 	[tableView setDelegate:self];
@@ -224,21 +258,17 @@ static NSArray *subtitles;
 
 	
 	//answersGiven = [NSArray arrayWithArray:titles];
-	if (!titles){
 		NSLog(@"setting the titles");
 		titles = [NSArray arrayWithArray: [self getQuestions]];
 	NSLog(@"finished the titles");
-	}
 	   /*[[NSArray arrayWithObjects:
 				   @"Shakespeare's Sonnet 1: From Fairest Creatures We Desire Increase",
 				   @"Shakespeare's Sonnet 2: When Forty Winters Shall Besiege Thy Brow",
 				   @"Shakespeare's Sonnet 3: Look In Thy Glass, And Tell The Face Thous Viewest",
 				   nil] retain];*/
-	if (!subtitles){
 		NSLog(@"setting the subtitles");
 		subtitles = [NSArray arrayWithArray: [self getOptions]];
 		NSLog(@"finished the subtitles");
-	}
 	
 	/*[[NSArray arrayWithObjects: 
 					  @"We want all beautiful creatures to reproduce themselves so that beauty’s flower will not die out; but as an old man dies in time, he leaves a young heir to carry on his memory.",
@@ -337,6 +367,7 @@ static NSArray *subtitles;
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	NSLog(@"Hello I am Jim Kog Maw");
 	NSString *title = [titles objectAtIndex:indexPath.row];
 	NSString *subtitle = [subtitles objectAtIndex:indexPath.row];
 	
@@ -353,14 +384,17 @@ static NSArray *subtitles;
 	
 	if ([answersToMark count]) {
 	for (int i = [answersToMark count]; i >= 0; i--) {
-		NSString * answer = [answersToMark objectAtIndex:i];
+		//answer is the unparsed answer
+		NSString * answer = [answers objectAtIndex:i];
+
 		NSArray * tmp = [answer componentsSeparatedByString:@"a"];
 		
 		NSString * befuddledQuestionIndex = [tmp objectAtIndex:0];
-		NSNumber * questionIndex = [NSNumber numberWithInt:[[befuddledQuestionIndex substringWithRange:NSMakeRange(1, ([befuddledQuestionIndex length] -1))] intValue]];
+		int questionIndex = [[befuddledQuestionIndex substringWithRange:NSMakeRange(1, ([befuddledQuestionIndex length] -1))]intValue];
 		NSNumber * answerGiven = [NSNumber numberWithInt:[[tmp objectAtIndex:1] intValue]];
 		
-		if([answer intValue] == [answerGiven intValue]){
+		if([[answers objectAtIndex:questionIndex]intValue] == [answerGiven intValue]){
+			
 			correct++;
 		}
 	}
@@ -373,9 +407,9 @@ static NSArray *subtitles;
 }
 
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+-(void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 	
-	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	[aTableView deselectRowAtIndexPath:indexPath animated:YES];
 	
 	if (indexPath.section == 0) {
 		if (self.asc == nil) {
@@ -395,12 +429,17 @@ static NSArray *subtitles;
 	else {
 		[self doMark];
 	}
-
 	
 	// Create the modal view controller
-
-	//[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	//[aTableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+- (void)dealloc
+{
+	[titles release];
+	[subtitles release];
+	[super dealloc];
+}
+
 
 
 

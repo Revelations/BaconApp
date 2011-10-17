@@ -32,14 +32,23 @@ NSString * const CONTENT_DIRECTORY = @"Content";
 @synthesize model;
 @synthesize x, y, html;
 @synthesize update;
-@synthesize scannedItems = _scannedItems;
+@synthesize scannedItems;
 @synthesize currentView = _currentView;
 @synthesize serverIpAddress = _serverIpAddress;
 @synthesize fontSize = _fontSize;
 @synthesize answersGiven;
-
+@synthesize page_title;
 @synthesize navigationController;
 
+-(void) addToScannedCodes:(NSString *) code{
+	if (!scannedItems) {
+		NSLog(@"scanned items was nil");
+		scannedItems = [NSMutableArray new];
+	}
+	NSLog(@"scanned code count: %i object add:%@", [scannedItems count], code);
+	[scannedItems addObject:code];
+	NSLog(@"scanned code count: %i", [scannedItems count]);
+}
 #pragma mark - helper methods
 -(void) updateAnswersWith:(NSString *) answerGiven At:(int) q{
 	//NSLog(@"hello index:%i  count:%i string:%@", q, [answersGiven count], answerGiven);

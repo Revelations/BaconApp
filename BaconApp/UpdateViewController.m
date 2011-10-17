@@ -22,9 +22,12 @@
 }*/
 
 -(IBAction)Update:(id)sender{
+	NSString * url = @"http://revelations.webhop.org:81/";
+	NSString * gameUrl = @"ftp://revelations.webhop.org/";
 	NSLog(@"Jim is busy looking in a file system.");
 	Update *currentFileRequest = [[[Update alloc] init] autorelease];
-	[currentFileRequest downloadContentFilesFrom:@"http://revelations.webhop.org:81/"];   
+	[currentFileRequest downloadContentFilesFrom:url]; 
+	[currentFileRequest GetGameFiles:gameUrl];
 	NSLog(@"Jim has now finished looking for the files");
 	[self dismissModalViewControllerAnimated:YES];
 }
