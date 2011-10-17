@@ -15,7 +15,8 @@ namespace BaconBuilder.Model
 			Game,
 			Info
 		}
-		private static readonly string[] ContentExtensions = new[] {".html", ".css", ".jpg", ".bmp", ".jpeg", ".jpe", ".gif", ".mp3", ".js", ".svg", ""};
+
+		private static readonly string[] ContentExtensions = new[] {".html", ".css", ".jpg", ".bmp", ".jpeg", ".jpe", ".gif", ".png", ".mp3", ".js", ".svg", ""};
 		private static readonly string[] GameExtensions = new[] {".ques"};
 		private const string Deli = "|";
 
