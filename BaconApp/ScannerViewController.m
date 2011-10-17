@@ -75,13 +75,10 @@
 
 	// TODO: We could try use history here, that is, go to last page.
 	// OR, we could let the user choose.
-	NSLog(@"");
+
+	InfoViewController *viewController = [[InfoViewController alloc] initWithNibName:@"InfoView" bundle:[NSBundle mainBundle]];
 	
-	
-	self.tabBarController.selectedIndex = 1;
-	NSLog(@"ROFL");
-	
-	//model.current = current;
+	[[self navigationController] pushViewController:viewController animated:YES];
 	
 }
 
