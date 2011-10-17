@@ -76,6 +76,7 @@
 
 	// TODO: We could try use history here, that is, go to last page.
 	// OR, we could let the user choose.
+<<<<<<< HEAD
 	//NSLog(@"");
 	
 	
@@ -86,8 +87,12 @@
 	
 	InfoViewController *vc = [[InfoViewController alloc] initWithNibName:@"InfoView" bundle:[NSBundle mainBundle]];
 	[self.navigationController pushViewController:vc animated:YES];
+=======
+
+	InfoViewController *viewController = [[InfoViewController alloc] initWithNibName:@"InfoView" bundle:[NSBundle mainBundle]];
+>>>>>>> 6110195e49280f87bb58a7de13faa17462d49ded
 	
-	//model.current = current;
+	[[self navigationController] pushViewController:viewController animated:YES];
 	
 }
 
