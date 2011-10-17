@@ -261,11 +261,14 @@ static NSArray *subtitles;
 
 #pragma mark - table delegate methods
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	return 1;
+	return 2;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {	
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	if (section == 0) {
 	 return MIN([titles count], [subtitles count]);
+	}
+	else return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tView 
@@ -275,11 +278,34 @@ static NSArray *subtitles;
     
     UITableViewCell *cell = [tView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [self CreateMultilinesCell:CellIdentifier];
+		if (indexPath.section == 0) {
+			cell = [self CreateMultilinesCell:CellIdentifier];
+		}
+		else {
+			cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+		}
+
     }
-    
-    cell.textLabel.text = [titles objectAtIndex:indexPath.row];
-	cell.detailTextLabel.text = [subtitles objectAtIndex:indexPath.row];
+	
+	if(indexPath.section == 1) {
+		switch(indexPath.row) {
+			case 0: cell.text = @"Finished!"; break;
+			case 1:
+				cell.text = @"";
+				cell.detailTextLabel.text = @"";
+				break;
+			case 2:
+				cell.text = @"";
+				cell.detailTextLabel.text = @"";
+				break;
+
+		}
+	}
+	else {
+		// do whatever for the other sections
+		cell.textLabel.text = [titles objectAtIndex:indexPath.row];
+		cell.detailTextLabel.text = [subtitles objectAtIndex:indexPath.row];
+	}
     return cell;
 }
 
@@ -292,22 +318,58 @@ static NSArray *subtitles;
 	return (height < CONST_Cell_height ? CONST_Cell_height : height);
 }
 
+-(void) doMark{
+	BaconAppDelegate * delgato = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
+	NSArray * answersToMark = [NSArray arrayWithArray:delgato.answersGiven];
+	NSArray * answers  = [NSArray arrayWithArray:[self getAnswers]];
+	int correct = 0;
+	int numOfQuestions = [[self getQuestions]count];
+	
+	if ([answersToMark count]) {
+	for (int i = [answersToMark count]; i >= 0; i--) {
+		NSString * answer = [answersToMark objectAtIndex:i];
+		NSArray * tmp = [answer componentsSeparatedByString:@"a"];
+		
+		NSString * befuddledQuestionIndex = [tmp objectAtIndex:0];
+		NSNumber * questionIndex = [NSNumber numberWithInt:[[befuddledQuestionIndex substringWithRange:NSMakeRange(1, ([befuddledQuestionIndex length] -1))] intValue]];
+		NSNumber * answerGiven = [NSNumber numberWithInt:[[tmp objectAtIndex:1] intValue]];
+		
+		if([answer intValue] == [answerGiven intValue]){
+			correct++;
+		}
+	}
+	}
+		
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Marked!" message:[NSString stringWithFormat:@" You got %i out of %i right!", correct, numOfQuestions]
+													   delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+		[alert show];
+		[alert release];
+}
+
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 	
-	if (self.asc == nil) {
-		AnswerSelectionController *viewController = [[AnswerSelectionController alloc] initWithNibName:@"AnswerSelectionController" bundle:nil];
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	
-		NSLog(@"Row: %i", indexPath.row);
-		[viewController setQuestion: [NSNumber numberWithInt:indexPath.row]];
-		NSLog(@"Using question: %i", [viewController.question intValue]);
-		viewController.my_parent = self;
-		[self setAsc: viewController];
-		//currentViewController = viewController;
-		// Cleanup resources
-		[viewController release];
+	if (indexPath.section == 0) {
+		if (self.asc == nil) {
+			AnswerSelectionController *viewController = [[AnswerSelectionController alloc] initWithNibName:@"AnswerSelectionController" bundle:nil];
+		
+			NSLog(@"Row: %i", indexPath.row);
+			[viewController setQuestion: [NSNumber numberWithInt:indexPath.row]];
+			NSLog(@"Using question: %i", [viewController.question intValue]);
+			viewController.my_parent = self;
+			[self setAsc: viewController];
+			//currentViewController = viewController;
+			// Cleanup resources
+			[viewController release];
+		}
+		[[self navigationController] pushViewController:asc animated:YES];
 	}
-	[[self navigationController] pushViewController:asc animated:YES];
+	else {
+		[self doMark];
+	}
+
 	
 	// Create the modal view controller
 
