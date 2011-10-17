@@ -70,6 +70,7 @@
 		D340E5091415F50400A2370F /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D340E5071415F50400A2370F /* InfoViewController.m */; };
 		D340E50A1415F50400A2370F /* InfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D340E5081415F50400A2370F /* InfoView.xib */; };
 		D340E51B1415F88F00A2370F /* BaconAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D340E51A1415F88F00A2370F /* BaconAppDelegate.m */; };
+		D3A38CD4144BAF65002E18E7 /* DDFileReader.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A38CD3144BAF65002E18E7 /* DDFileReader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -193,6 +194,8 @@
 		D340E5081415F50400A2370F /* InfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoView.xib; sourceTree = "<group>"; };
 		D340E5191415F88F00A2370F /* BaconAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaconAppDelegate.h; sourceTree = "<group>"; };
 		D340E51A1415F88F00A2370F /* BaconAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaconAppDelegate.m; sourceTree = "<group>"; };
+		D3A38CD2144BAF65002E18E7 /* DDFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDFileReader.h; sourceTree = "<group>"; };
+		D3A38CD3144BAF65002E18E7 /* DDFileReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDFileReader.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -426,6 +429,8 @@
 				7D8ECCA5143645810099D07E /* Update.m */,
 				7DACEE311447F92300B321D5 /* Quiz.h */,
 				7DACEE321447F92300B321D5 /* Quiz.m */,
+				D3A38CD2144BAF65002E18E7 /* DDFileReader.h */,
+				D3A38CD3144BAF65002E18E7 /* DDFileReader.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -626,6 +631,7 @@
 				7FC445731449DCBA0026E316 /* ModalViewController.m in Sources */,
 				D3058CCC144A1CF100098329 /* AnswerSelectionController.m in Sources */,
 				17C82DC2144A5B6200214BA4 /* TitleViewController.m in Sources */,
+				D3A38CD4144BAF65002E18E7 /* DDFileReader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

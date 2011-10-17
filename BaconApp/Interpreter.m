@@ -10,7 +10,7 @@
 #include "stdio.h"
 #include "BaconAppDelegate.h"
 #include "Update.h"
-
+#include "DDFileReader.h"
 @implementation Interpreter
 
 @synthesize storedInputString;
@@ -51,20 +51,23 @@
 
 
 -(void) setVals:(NSString *) filePath {
-	NSLog(@"arg = %@", filePath);
-	NSString * localContentDir = [Update localContentDir];
-	const char * fileName = [[NSString stringWithFormat:@"%@/%@.html", localContentDir, filePath] UTF8String];
-	FILE * file = fopen(fileName, "r");
-	NSLog(@"file: %@, path: %@", file, localContentDir);
-	// check for NULL
-	while(!feof(file))
-	{
-		NSString *line = [self readLineAsNSString:file];
+	NSLog(@"setVals arg = %@", filePath);
+	
+	NSString * fname = [NSString stringWithFormat:@"%@/%@.html", [Update localContentDir], filePath];
+	NSLog(@"fname: %@", fname);
+	
+	NSFileManager * filemanager = [NSFileManager defaultManager]; 
+	NSLog(@"file exists = %i", [filemanager fileExistsAtPath:fname]);
+	
+	DDFileReader * reader = [[DDFileReader alloc] initWithFilePath:fname];
+	[reader enumerateLinesUsingBlock:^(NSString * line, BOOL * stop) {
+		NSLog(@"read line: %@", line);
+		
 		NSArray * contents = [line componentsSeparatedByString:@"<!--"];
 		if ([contents count] > 1)
 		{
-			NSArray * x_contents = [line componentsSeparatedByString:@"x="];
-			NSArray * y_contents = [line componentsSeparatedByString:@"y="];
+			NSArray * x_contents = [line componentsSeparatedByString:@"x = "];
+			NSArray * y_contents = [line componentsSeparatedByString:@"y = "];
 			
 			map_x = [[[x_contents objectAtIndex:1] substringWithRange:NSMakeRange(0, 3)] intValue];
 			map_y = [[[y_contents objectAtIndex:1] substringWithRange:NSMakeRange(0, 3)] intValue];
@@ -78,10 +81,11 @@
 			page_title = [title_contents objectAtIndex:0];
 		}
 		
-		// do stuff with line; line is autoreleased, so you should NOT release it (unless you also retain it beforehand)
-	}
-	fclose(file);
+	}];
+	[reader release];
+	
 	storedInputString = filePath;
+	NSLog(@"Storing filepath of %@");
 }
 
 -(int) substringToInt:(NSString *)inputString withRange:(NSRange)range

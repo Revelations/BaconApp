@@ -8,7 +8,7 @@
 
 #import "BaconAppDelegate.h"
 #import "InfoViewController.h"
-
+#include "Update.h"
 
 @implementation InfoViewController
 
@@ -28,15 +28,20 @@
 // into the WebView if so.
 -(void) webViewLoadPage:(NSString *) inputString
 {
+	NSLog(@"Attempting to load page %@", inputString);
 	// Animate activity indicator.
 	[activityIndicator startAnimating];
 	
 	// Get the file path of the requested html file.
-	NSString * filePath = [[NSBundle mainBundle] pathForResource:inputString ofType:@"html" inDirectory:WEB_DIRECTORY];
+	
+	
+	NSString * filePath = [NSString stringWithFormat:@"%@/%@.html", [Update localContentDir], inputString];
 	
 	// If that file doesn't exist then break prematurely.
-	if(![[NSFileManager defaultManager] fileExistsAtPath:filePath])
+	if(![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+		NSLog(@"File does not exist: %@", filePath);
 		return;
+	}
 	
 	// Create and load the request.
 	NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePath]];

@@ -124,8 +124,8 @@
 #pragma mark - Directories
 // finds the relevant directory to ensure that iOS does not purge it --Donovan
 +(NSString *)unpurgableDirectory { // Refactored by Shii
-	return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)
-			objectAtIndex:0];
+	NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES); 
+	return [paths objectAtIndex:0];
 }
 
 #pragma mark - Remote Methods
@@ -218,8 +218,9 @@
 			NSString *itemPath = [NSString stringWithFormat:@"%@/%@", [Update localContentDir], s];
 			NSString *retrievePath = [NSString stringWithFormat:@"%@/%@", [Update remoteContentDir:urlPath], s];
 			NSLog(@"retrieveURL has value of %@", retrievePath);
-
+			NSLog(@"Item path is %@", itemPath);
 			if ([fileManager fileExistsAtPath:itemPath]) {
+				NSLog(@"File exists");
 				
 				NSDictionary *attrs = [fileManager attributesOfItemAtPath:itemPath error:NULL];
 				
@@ -227,7 +228,7 @@
 				int size = [[values objectAtIndex:++i] intValue];
 				
 				//checks to see if it already has the file
-				if(size != result){
+				if(size != result) {
 					[self getFile:retrievePath:itemPath];
 				}
 			}
