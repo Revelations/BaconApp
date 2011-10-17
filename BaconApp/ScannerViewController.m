@@ -26,19 +26,19 @@
 	NSMutableArray * currentP = [appDelegate scannedItems];
 	BOOL found = NO;
 	for (NSString * s in currentP) {
-		if (s == currentFile) {
+		if ([s isEqualToString: currentFile]) {
 			found = YES;
 			break;
 		}
 	}
 	
 	if(!found) {
-		[currentP addObject:currentFile];
+		[appDelegate addToScannedCodes:interpreter.htmlPath];
 	}
 	[appDelegate setPage_title:interpreter.htmlPath];
 	NSLog(@"scanned count: %i", [appDelegate.scannedItems count]);
 	NSLog(@"interpreter.htmPath = %@", interpreter.htmlPath);
-	[appDelegate addToScannedCodes:interpreter.htmlPath];
+	
 	NSLog(@"scanned count: %i", [appDelegate.scannedItems count]);
 }
 

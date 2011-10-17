@@ -87,13 +87,8 @@ static UIFont *titleFont;
 		
 		NSString * line = nil;
 		while ((line =[reader readLine])) {			
-			
-			NSLog(@"read line: %@", line);
-			for (int i = 0; i < 6; i++) {
-				[array addObject: line];
-			}
 			NSLog(@"singlequestionfile: currentQCount: %i", [currentQuesOptMutArray count]);
-			[currentQuesOptMutArray addObject: array];
+			[currentQuesOptMutArray addObject: [line retain]];
 			NSLog(@"singlequestionfile: currentQCount: %i", [currentQuesOptMutArray count]);
 			
 		}
@@ -140,16 +135,92 @@ static UIFont *titleFont;
 	}
 }
 
+
+-(NSArray *) generateRandomQuestionIndices: (NSMutableArray *) pool{
+	NSLog(@"Pool count: %i ", [pool count]);
+	int maxQuizSize = 10;// max size of the quiz
+	NSMutableArray *tmp = [NSMutableArray new];// array of ordered indices
+	NSMutableArray *result = [NSMutableArray new];
+	//temporarily store all indexes for random
+	if (maxQuizSize <= [pool count]) {
+		// Fill tmp with ints, ordered.
+		for (int k = 0; k < [pool count]; k++) {
+			[tmp addObject: [NSNumber numberWithInt:k]];
+		}
+		
+		//generates a random for the index of the selected random question
+		for (int i = 0; i < maxQuizSize; i++) {
+			int randNumber = arc4random() % [tmp count];
+			NSNumber * randQuestion  = [tmp objectAtIndex: randNumber]; // Grab a number from the question index pool
+			[result addObject: [pool objectAtIndex:[randQuestion intValue]]];
+			[tmp removeObjectAtIndex:[randQuestion intValue]];
+		}
+		[tmp release];
+		
+		return [NSArray arrayWithArray:result];
+	}
+	else {
+		[tmp release];
+		[result release];
+		return [NSArray arrayWithArray: pool];
+	}
+}
+
 //initializes all the questions
--(void) initGame{
+-(void) initGame {
 	currentQuesOptMutArray = [NSMutableArray new];
-	quizQuestions = [NSMutableArray new];//STORES THE WHOLE Q&A FILE
+	//quizQuestions = [NSMutableArray new];//STORES THE WHOLE Q&A FILE
 	data = [NSMutableArray new];
 
 	//need to iterate through the list of scanned codes
 	int quesSize = 6;//size of each q, lines = 6
 	
 	[self readQuestionFiles];
+	NSLog(@"Question files count :%i", [currentQuesOptMutArray count]);
+	int numOfQuestions = [currentQuesOptMutArray count] / quesSize; // 3 if count == 18 (which is 6 * 3, ofc);
+	NSMutableArray * quesBlocks = [NSMutableArray new];
+	
+	for (int i = 0; i < numOfQuestions; i++) {
+		NSLog(@"question[%i] is:", i);
+		NSArray * quesBlock;
+		NSString * question, *correctOption, *optionA, *optionB,*optionC, *optionD;
+		for (int j = 0; j < quesSize; j++) {
+			if (j == 0) {
+				question = [[currentQuesOptMutArray objectAtIndex:j]retain];
+				NSLog(@"content[%i] = %@", j, question);
+			}
+			else if (j == (quesSize - 1)) {
+				correctOption = [[currentQuesOptMutArray objectAtIndex:j] retain];
+				NSLog(@"content[%i] = %@", j, correctOption);
+			}
+			else { // The options :A :B :C :D
+				optionA = [[currentQuesOptMutArray objectAtIndex:j++] retain];
+				NSLog(@"content[%i] = %@", j, optionA);
+				optionB = [[currentQuesOptMutArray objectAtIndex:j++] retain];
+				NSLog(@"content[%i] = %@", j, optionB);
+				optionC = [[currentQuesOptMutArray objectAtIndex:j++] retain];
+				NSLog(@"content[%i] = %@", j, optionC);
+				optionD = [[currentQuesOptMutArray objectAtIndex:j] retain];
+				NSLog(@"content[%i] = %@", j, optionD);
+			}
+		}
+		quesBlock = [NSArray arrayWithObjects:
+					 question,
+					 optionA,
+					 optionB,
+					 optionC,
+					 optionD,
+					 correctOption,
+					 nil];
+
+		[quesBlocks addObject: quesBlock];
+		NSLog(@"QuestBlock[0]R %@", [quesBlocks objectAtIndex:0]);
+	}
+	
+	// array of selected questions
+	quizQuestions = [[self generateRandomQuestionIndices: quesBlocks] retain];
+	
+	
 	
 	
 	
@@ -189,41 +260,44 @@ static UIFont *titleFont;
 	//need to show results
 	//allow repeats somehow at least for diagnostics
 }
--(NSMutableArray*)getQuestions{
-	NSLog(@"Getting questions. I can has? ");
+-(NSArray*)getQuestions{
+	NSLog(@"Getting questions. quizQuestions count = %i", [quizQuestions count]);
 	NSMutableArray * returnArray = [NSMutableArray new];
 	
-	for (int i = 0; i < [quizQuestions count]; i+=6) {
-		NSLog(@"adding to getQuestions: %@ with size %i/%i", [quizQuestions objectAtIndex: i], i, [returnArray count]);
-		[returnArray addObject: [quizQuestions objectAtIndex: i]];
+	for (int i = 0; i < [quizQuestions count]; i++) {
+		NSLog(@"adding to getQuestions: %@ with size %i/%i",
+			  [[quizQuestions objectAtIndex:i] objectAtIndex:0], i, [returnArray count]);
+		[returnArray addObject: [[quizQuestions objectAtIndex: i] objectAtIndex:0]];
 	}
-	return [returnArray autorelease];
+	return [NSArray arrayWithArray:returnArray];
+
 }
 
--(NSMutableArray*)getOptions {
+-(NSArray*)getOptions {
 	NSLog(@"Getting options. I can has !");
-	NSMutableArray *returnArray = [[NSMutableArray new] autorelease];
-	
-	for (int i = 0; i < [quizQuestions count]; ++i) { // Loops over
-		if (0 == i%4)
-			NSLog(@"item at i%4 == 0: i=%i, %@", i, [quizQuestions objectAtIndex:i]);
-		for (; (i % 4) != 0; i ++) { // Only gets items that are options.
-			NSLog(@"item at i=%i : %@", i, [quizQuestions objectAtIndex:i]);
-			[returnArray addObject: [quizQuestions objectAtIndex: i]];
-		}
-	}
-	return returnArray;
-}
-
--(NSMutableArray*)getAnswers{
-	NSLog(@"Getting answers. I can has answers? ");
-
 	NSMutableArray *returnArray = [NSMutableArray new];
 	
-	for (int i = 5; i < [quizQuestions count]; i+=5) {
-		[returnArray addObject: [quizQuestions objectAtIndex: i]];
+	for (int i = 0; i < [quizQuestions count]; i++) { // Loops over
+		[returnArray addObject:[[quizQuestions objectAtIndex:i]objectAtIndex:1]];
+		[returnArray addObject:[[quizQuestions objectAtIndex:i]objectAtIndex:2]];
+		[returnArray addObject:[[quizQuestions objectAtIndex:i]objectAtIndex:3]];
+		[returnArray addObject:[[quizQuestions objectAtIndex:i]objectAtIndex:4]];
 	}
-	return [returnArray autorelease];
+	
+	assert(([returnArray count] %4) == 0);
+	return [[NSArray arrayWithArray:returnArray] retain];
+
+}
+
+-(NSArray*)getAnswers{
+	NSLog(@"Getting answers. I can has answers? ");
+
+	NSMutableArray * returnArray = [NSMutableArray new];
+	
+	for (int i = 0; i < [quizQuestions count]; i++) {
+		[returnArray addObject: [[quizQuestions objectAtIndex: i]objectAtIndex:5]];
+	}
+	return [[NSArray arrayWithArray:returnArray] retain];
 }
 
 
@@ -235,17 +309,31 @@ static UIFont *titleFont;
 	// Release any cached data, images, etc that aren't in use.
 }
 
-static NSArray *titles;
-static NSArray *subtitles;
+-(NSArray *) formatOptionsForView{
+	NSArray * options = [self getOptions];
+	NSMutableArray * returnArray = [[NSMutableArray new]autorelease];
+	for (int i = 0; i < [options count];) {
+		NSString * optionA = [options objectAtIndex:i++];
+		NSString * optionB = [options objectAtIndex:i++];
+		NSString * optionC = [options objectAtIndex:i++];
+		NSString * optionD = [options objectAtIndex:i++];
+		
+		NSString *optionTmp = [NSString stringWithFormat:@"1:%@\r\n2:%@\r\n3:%@\r\n4:%@", optionA, optionB, optionC, optionD];
+		[returnArray addObject: optionTmp];
+	}
+	return [[NSArray arrayWithArray:returnArray] retain];
+}
+
+//static NSArray *titles;
+//static NSArray *subtitles;
 
 #pragma mark - View lifecycle
 - (void)viewDidLoad
 {
+	[super viewDidLoad];
 	titles =  [[[NSArray alloc]init] retain];
 	subtitles = [[[NSArray alloc]init] retain];
-	[super viewDidLoad];
 	[self initGame];
-	
 	
 	tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, 410) style:UITableViewStylePlain];
 	[tableView setDataSource:self];
@@ -259,7 +347,7 @@ static NSArray *subtitles;
 	
 	//answersGiven = [NSArray arrayWithArray:titles];
 		NSLog(@"setting the titles");
-		titles = [NSArray arrayWithArray: [self getQuestions]];
+		titles = [[NSArray arrayWithArray: [self getQuestions]] retain];
 	NSLog(@"finished the titles");
 	   /*[[NSArray arrayWithObjects:
 				   @"Shakespeare's Sonnet 1: From Fairest Creatures We Desire Increase",
@@ -267,7 +355,7 @@ static NSArray *subtitles;
 				   @"Shakespeare's Sonnet 3: Look In Thy Glass, And Tell The Face Thous Viewest",
 				   nil] retain];*/
 		NSLog(@"setting the subtitles");
-		subtitles = [NSArray arrayWithArray: [self getOptions]];
+		subtitles = [[NSArray arrayWithArray: [self formatOptionsForView]] retain];
 		NSLog(@"finished the subtitles");
 	
 	/*[[NSArray arrayWithObjects: 
@@ -279,7 +367,7 @@ static NSArray *subtitles;
 	self.navigationItem.title = @"Trivia Quiz";
 	
 		
-	//NSLog(@"my name is :%@", [titles objectAtIndex:0]);
+	NSLog(@"my name is :%@", [[titles retain] objectAtIndex:0]);
 	
 	
 	// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
@@ -326,7 +414,7 @@ static NSArray *subtitles;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return 1;
+	//return 1;
 	//NSLog(@"configuring the # sections");
 	if (section == 0) {
 	 return MIN([titles count], [subtitles count]);
@@ -367,7 +455,8 @@ static NSArray *subtitles;
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSLog(@"Hello I am Jim Kog Maw");
+	NSLog(@"Titles has %i items", [titles count]);
+	
 	NSString *title = [titles objectAtIndex:indexPath.row];
 	NSString *subtitle = [subtitles objectAtIndex:indexPath.row];
 	

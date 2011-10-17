@@ -14,12 +14,14 @@
 
 @interface GameViewController : ModalViewController <UITableViewDelegate, UITableViewDataSource>{
 	NSMutableArray * currentQuesOptMutArray;
-	NSMutableArray *	quizQuestions;
+	NSArray *	quizQuestions;
 	NSMutableArray * data;
 	NSArray * cellContent;
 	UITableView * tableView;
 	NSArray * answersGiven;
 	AnswerSelectionController * asc;
+	NSArray * titles;
+	NSArray * subtitles;
 }
 
 @property (nonatomic, retain) NSArray * answersGiven;
