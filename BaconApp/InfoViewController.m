@@ -40,7 +40,7 @@
 	if(![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
 
 		if ([inputString rangeOfString:@"comp314.wikidot.com"].location != NSNotFound) {
-			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:"comp314.wikidot.com"]];
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"comp314.wikidot.com"]];
 		}
 		
 		NSLog(@"File does not exist: %@", filePath);
