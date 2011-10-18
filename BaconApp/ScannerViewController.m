@@ -109,9 +109,9 @@
 	// OR, we could let the user choose.
 
 	//NSLog(@"");
-	appDelegate.x	= interpreter.x;
-	appDelegate.y	= interpreter.y;
-	appDelegate.html = interpreter.htmlPath;
+	appDelegate.x		= interpreter.x;
+	appDelegate.y		= interpreter.y;
+	appDelegate.html	= interpreter.htmlPath;
 	[self addToViewsSeen:interpreter.htmlPath];
 	NSLog(@"view count:%i", [appDelegate.scannedItems count]);	
 	

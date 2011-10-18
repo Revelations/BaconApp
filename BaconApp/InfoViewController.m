@@ -34,11 +34,15 @@
 	
 	// Get the file path of the requested html file.
 	
-	
 	NSString * filePath = [NSString stringWithFormat:@"%@/%@.html", [Update localContentDir], inputString];
 	
 	// If that file doesn't exist then break prematurely.
 	if(![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+
+		if ([inputString rangeOfString:@"comp314.wikidot.com"].location != NSNotFound) {
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:"comp314.wikidot.com"]];
+		}
+		
 		NSLog(@"File does not exist: %@", filePath);
 		return;
 	}
