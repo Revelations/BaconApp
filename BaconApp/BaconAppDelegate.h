@@ -54,6 +54,6 @@ extern NSString * const CONTENT_DIRECTORY;
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
 @property (nonatomic, retain) NSMutableArray * answersGiven;
 @property (nonatomic, retain) NSString * page_title;
--(void) updateAnswersWith:(NSString *) answerGiven At:(int) index;
+-(void) updateAnswersWith:(NSString *) answerGiven At:(NSNumber *) index;
 -(void) addToScannedCodes:(NSString *) code;
 @end

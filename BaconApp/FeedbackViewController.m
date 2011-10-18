@@ -71,15 +71,21 @@
 	NSString * feedback     = [textViewMiscellaneous text];
 	
 	NSMutableArray * scannedContents = [(BaconAppDelegate *) [[UIApplication sharedApplication] delegate]scannedItems];
-	int val_count = [scannedContents count];
+	NSMutableString * codesScanned = [NSMutableString new];
+	[codesScanned appendString:[NSString stringWithFormat:@"%i", [scannedContents count]]];
 	
+	for (int i = 0; i < [scannedContents count]; i++) {
+		[codesScanned appendFormat: @",%@",[scannedContents objectAtIndex:i]];
+	}
+	
+	NSLog(@"codesScanned: %@", codesScanned);
 	NSMutableData *data = [NSMutableData data];
 	NSString * newLine = @"%@\r\n";
 	[data appendData:[[NSString stringWithFormat:newLine, numbers] dataUsingEncoding:NSUTF8StringEncoding]];    
 	[data appendData:[[NSString stringWithFormat:newLine, nationality] dataUsingEncoding:NSUTF8StringEncoding]];
 	[data appendData:[[NSString stringWithFormat:newLine, seen] dataUsingEncoding:NSUTF8StringEncoding]];
 	[data appendData:[[NSString stringWithFormat:newLine, feedback] dataUsingEncoding:NSUTF8StringEncoding]];
-	[data appendData:[[NSString stringWithFormat:newLine, [NSString stringWithFormat:@"%d", val_count]] dataUsingEncoding:NSUTF8StringEncoding]];
+	[data appendData:[[NSString stringWithFormat:newLine, codesScanned] dataUsingEncoding:NSUTF8StringEncoding]];
 	Update * updateSession = [[Update alloc] init];
 	
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -90,7 +96,7 @@
 	
 	// If we have internet, send the file. If not, spawn a thread to wait and send it eventually.
 	if([updateSession CheckForInternet] != -1)
-		[updateSession uploadPhp:filePath];
+		[updateSession uploadPhp: filePath];
 	else
 		[updateSession spawnThreadForApplication:nil WithPath:filePath WithSleepTime:300 WithType:1];
 	

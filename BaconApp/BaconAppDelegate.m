@@ -50,11 +50,19 @@ NSString * const CONTENT_DIRECTORY = @"Content";
 	NSLog(@"scanned code count: %i", [scannedItems count]);
 }
 #pragma mark - helper methods
--(void) updateAnswersWith:(NSString *) answerGiven At:(int) q{
-	//NSLog(@"hello index:%i  count:%i string:%@", q, [answersGiven count], answerGiven);
-	//NSLog(@"answer at %i was %@",index, [answersGiven objectAtIndex:index]);
-	[answersGiven addObject: [NSString stringWithFormat: @"q%@a%i", answerGiven,q]];
-	//NSLog(@"answer at %i was %@ count: %i", q, [answersGiven objectAtIndex:0], [answersGiven count]);
+-(void) updateAnswersWith:(NSString *) answerGiven At:(NSNumber *) q{
+	if (!answersGiven) {
+		answersGiven = [NSMutableArray new];
+	}
+	
+	NSLog(@"q: %i", [answerGiven intValue]);
+	NSLog(@"q p : %@", q);
+	NSString * tp = [[NSString stringWithFormat: @"q%ia%@",[q intValue],answerGiven] retain];
+	NSLog(@"Adding %@", tp);
+	NSLog(@"hello index:%i  count:%i string:%@", [q intValue], [self.answersGiven count], answerGiven);
+	//NSLog(@"answer at %i was %@" ,q, [self.answersGiven objectAtIndex:[q intValue]]);
+	[self.answersGiven addObject:tp];
+	NSLog(@"answer at %i was %@ count: %i", [q intValue], [self.answersGiven objectAtIndex:0], [answersGiven count]);
 }
 
 #pragma mark Application lifecycle

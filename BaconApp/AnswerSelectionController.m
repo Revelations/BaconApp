@@ -52,7 +52,7 @@
 	int index = [question intValue];
 	NSLog(@"index is %i", index);
 	BaconAppDelegate * delgato = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
-	[delgato updateAnswersWith:@"0a" At: index];
+	[delgato updateAnswersWith:[@"0" retain] At: question];
 	//[my_parent updateAnswersWith:@"0a" At: index];
 	[self.navigationController popViewControllerAnimated:YES];
 }
@@ -68,7 +68,7 @@
 	int index = [question intValue];
 	NSLog(@"index is %i", index);
 	BaconAppDelegate * delgato = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
-	[delgato updateAnswersWith:@"1" At: index];
+	[delgato updateAnswersWith:[@"1" retain] At: question];
 	//[my_parent updateAnswersWith:@"0a" At: index];
 	[self.navigationController popViewControllerAnimated:YES];
 }
@@ -85,7 +85,7 @@
 	int index = [question intValue];
 	NSLog(@"index is %i", index);
 	BaconAppDelegate * delgato = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
-	[delgato updateAnswersWith:@"2" At: index];
+	[delgato updateAnswersWith:[@"2"retain] At: question];
 	//[my_parent updateAnswersWith:@"0a" At: index];
 	[self.navigationController popViewControllerAnimated:YES];
 }
@@ -102,7 +102,7 @@
 	int index = [question intValue];
 	NSLog(@"index is %i", index);
 	BaconAppDelegate * delgato = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
-	[delgato updateAnswersWith:@"3" At: index];
+	[delgato updateAnswersWith:[@"3" retain] At: question];
 	//[my_parent updateAnswersWith:@"0a" At: index];
 	[self.navigationController popViewControllerAnimated:YES];
 }

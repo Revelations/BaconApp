@@ -15,7 +15,9 @@
 
 @implementation ScannerViewController
 
-@synthesize resultImage, resultText, interpreter, current;
+@synthesize resultText
+@synthesize resultImage // TODO: debate whther we should keep.
+@synthesize interpreter, current;
 
 -(void)addToViewsSeen:(NSString *) file {
 	BaconAppDelegate * appDelegate = (BaconAppDelegate *) [[UIApplication sharedApplication] delegate];
@@ -41,7 +43,6 @@
 	
 	NSLog(@"scanned count: %i", [appDelegate.scannedItems count]);
 }
-
 
 -(IBAction) scanButtonPressed:(id)sender
 {
@@ -81,14 +82,14 @@
 	
 	// EXAMPLE: do something useful with the barcode data
 
-	resultText.text = @"Scan was successful!";
+	resultText.text = @"The scan was successful!";
 
 	BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
 
 	// EXAMPLE: do something useful with the barcode image
 	resultImage.image =
-	[info objectForKey: UIImagePickerControllerOriginalImage];
+		[info objectForKey: UIImagePickerControllerOriginalImage]; // Should we keep this? Memory/GC may be issue here.
 	
 	// ADD: dismiss the controller (NB dismiss from the *reader*!)
 	[reader dismissModalViewControllerAnimated: YES];
@@ -108,16 +109,13 @@
 	// OR, we could let the user choose.
 
 	//NSLog(@"");
-	appDelegate.x = interpreter.x;
-	appDelegate.y = interpreter.y;
+	appDelegate.x	= interpreter.x;
+	appDelegate.y	= interpreter.y;
 	appDelegate.html = interpreter.htmlPath;
 	[self addToViewsSeen:interpreter.htmlPath];
 	NSLog(@"view count:%i", [appDelegate.scannedItems count]);	
 	
 	//self.tabBarController.selectedIndex = 1;
-	//NSLog(@"ROFL");
-	
-	
 	
 	InfoViewController *vc = [[[InfoViewController alloc] initWithNibName:@"InfoView" bundle:[NSBundle mainBundle]] autorelease];
 	[self.navigationController pushViewController:vc animated:YES];	

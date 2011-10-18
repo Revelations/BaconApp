@@ -129,6 +129,10 @@
 }
 
 #pragma mark - Remote Methods
++(NSString *) remoteFeedbackDir:(NSString *) urlPath{
+		return @"";//[NSURL URLWithString:@"%@/%@" @"ftp://",urlPath
+}
+
 +(NSString *) remoteContentDir:(NSString *)urlPath {
 	return [NSString stringWithFormat:@"%@/%@", urlPath, CONTENT_DIRECTORY];
 }

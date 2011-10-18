@@ -40,7 +40,7 @@
 - (void)viewDidLoad
 {
 	cellContent = [[NSArray alloc ] initWithObjects:
-					@"Title",
+					@"Return to Title",
 					@"Scan",
 					@"Information",
 					@"Map",
@@ -51,7 +51,6 @@
                     @"Update",
 					@"Help",
 					nil];
-    
     
 	self.navigationItem.title = @"Menu";
 
@@ -179,6 +178,16 @@
 	[self showCurrentView];
 }
 -(void)showInfoView {
+	
+	BaconAppDelegate * delgato = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
+	NSArray * scannedCodes = [NSArray arrayWithArray:delgato.scannedItems];
+	
+	if([scannedCodes count] == 0){
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"No codes have been scanned, no information will be displayed"
+													   delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+		[alert show];
+		[alert release];
+	}
 	// Create the modal view controller
 	if (!self.infoView) {
 		InfoViewController *viewController = [[InfoViewController alloc] initWithNibName:@"InfoView" bundle:[NSBundle mainBundle]];
@@ -220,16 +229,25 @@
 }
 -(void)showGameView {
 	// Create the modal view controller
-	if (!self.gameView) {
-		GameViewController *viewController = [[GameViewController alloc] initWithNibName:@"GameView" bundle:[NSBundle mainBundle]];
-		self.gameView = viewController;
-		currentViewController = viewController;
-		// Cleanup resources
-		[viewController release];
+	BaconAppDelegate * delgato = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
+	NSArray * scannedCodes = [NSArray arrayWithArray:delgato.scannedItems];
+	if([scannedCodes count] == 0){
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"No codes have been scanned to create the game with"
+													   delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+		[alert show];
+		[alert release];
 	}
-    else currentViewController = gameView;
-    
-	[self showCurrentView];
+	else{
+			if(!self.gameView) {
+			GameViewController *viewController = [[GameViewController alloc] initWithNibName:@"GameView" bundle:[NSBundle mainBundle]];
+			self.gameView = viewController;
+			currentViewController = viewController;
+			// Cleanup resources
+			[viewController release];
+		}
+		else currentViewController = gameView;
+		[self showCurrentView];
+	}
 }
 -(void)showSettingsView {
 	// Create the modal view controller
@@ -289,6 +307,8 @@
 //navigation and event handling
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	
 	switch (indexPath.row) {
         case 0:
             NSLog(@"You have selected TitleView");

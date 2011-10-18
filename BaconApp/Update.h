@@ -34,6 +34,7 @@
 #pragma mark - Remote Methods
 +(NSString *)	remoteContentDir:(NSString *)urlPath;
 +(NSURL *)		remoteContentLogURL:(NSString *)urlPath;
++(NSString *)		remoteFeedbackDir:(NSString *) urlPath;
 +(NSString *)	remoteGameDir:(NSString *)urlPath;
 +(NSURL *)		remoteGameLogURL:(NSString *)urlPath;
 

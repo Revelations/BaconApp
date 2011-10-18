@@ -137,6 +137,7 @@ static UIFont *titleFont;
 
 
 -(NSArray *) generateRandomQuestionIndices: (NSMutableArray *) pool{
+	NSLog(@"hello start of of generateRandomQuestionIndices pool: %@", pool);
 	NSLog(@"Pool count: %i ", [pool count]);
 	int maxQuizSize = 10;// max size of the quiz
 	NSMutableArray *tmp = [NSMutableArray new];// array of ordered indices
@@ -154,12 +155,14 @@ static UIFont *titleFont;
 			NSNumber * randQuestion  = [tmp objectAtIndex: randNumber]; // Grab a number from the question index pool
 			[result addObject: [pool objectAtIndex:[randQuestion intValue]]];
 			[tmp removeObjectAtIndex:[randQuestion intValue]];
-		}
+		}NSLog(@"End of generate random questions: %@", result);
 		[tmp release];
+		
 		
 		return [NSArray arrayWithArray:result];
 	}
 	else {
+		
 		[tmp release];
 		[result release];
 		return [NSArray arrayWithArray: pool];
@@ -180,30 +183,18 @@ static UIFont *titleFont;
 	int numOfQuestions = [currentQuesOptMutArray count] / quesSize; // 3 if count == 18 (which is 6 * 3, ofc);
 	NSMutableArray * quesBlocks = [NSMutableArray new];
 	
-	for (int i = 0; i < numOfQuestions; i++) {
+	for (int i = 0; i < [currentQuesOptMutArray count]; i++) {
 		NSLog(@"question[%i] is:", i);
 		NSArray * quesBlock;
 		NSString * question, *correctOption, *optionA, *optionB,*optionC, *optionD;
-		for (int j = 0; j < quesSize; j++) {
-			if (j == 0) {
-				question = [[currentQuesOptMutArray objectAtIndex:j]retain];
-				NSLog(@"content[%i] = %@", j, question);
-			}
-			else if (j == (quesSize - 1)) {
-				correctOption = [[currentQuesOptMutArray objectAtIndex:j] retain];
-				NSLog(@"content[%i] = %@", j, correctOption);
-			}
-			else { // The options :A :B :C :D
-				optionA = [[currentQuesOptMutArray objectAtIndex:j++] retain];
-				NSLog(@"content[%i] = %@", j, optionA);
-				optionB = [[currentQuesOptMutArray objectAtIndex:j++] retain];
-				NSLog(@"content[%i] = %@", j, optionB);
-				optionC = [[currentQuesOptMutArray objectAtIndex:j++] retain];
-				NSLog(@"content[%i] = %@", j, optionC);
-				optionD = [[currentQuesOptMutArray objectAtIndex:j] retain];
-				NSLog(@"content[%i] = %@", j, optionD);
-			}
-		}
+		question = [[currentQuesOptMutArray objectAtIndex:i++]retain];
+		optionA = [[currentQuesOptMutArray objectAtIndex:i++] retain];
+		optionB = [[currentQuesOptMutArray objectAtIndex:i++] retain];
+		optionC = [[currentQuesOptMutArray objectAtIndex:i++] retain];
+		optionD = [[currentQuesOptMutArray objectAtIndex:i++] retain];
+		correctOption = [[currentQuesOptMutArray objectAtIndex:i] retain];
+
+		NSLog(@"currentOPtArray: %@", currentQuesOptMutArray);
 		quesBlock = [NSArray arrayWithObjects:
 					 question,
 					 optionA,
@@ -219,46 +210,6 @@ static UIFont *titleFont;
 	
 	// array of selected questions
 	quizQuestions = [[self generateRandomQuestionIndices: quesBlocks] retain];
-	
-	
-	
-	
-	
-	
-	
-	/*[self readQuestionFiles]; // We fill QA array.
-	//todo currentQuestionfiles is empty
-	NSLog(@"Curentquestionfiles is of count:%i", [currentQuesOptMutArray count]);
-	for (int i = 0; i < [currentQuesOptMutArray count]; i++) { // For each ITEM IN THE ARRAY
-		NSLog(@"reading in i:%i", i);
-		NSMutableArray * currentQ = [currentQuesOptMutArray objectAtIndex:i];
-		
-		//need to generate a random number for a question
-		int offset =  arc4random() %([currentQ count] / quesSize);
-		int index = 0;
-		
-		
-		//get the right index for the randomly generated question
-		NSLog(@"index: %i", index);
-		for(; index < offset; index+=quesSize){} 
-		NSLog(@"index: %i", index);
-		
-		NSMutableArray *tmp = [[NSMutableArray alloc]init];
-		
-		//populate the quiz with the new question
-		for(int k = 0; k < quesSize; k++){
-			NSLog(@"added to tmp : %@", [currentQ objectAtIndex:index]);
-			[tmp addObject: [currentQ objectAtIndex:index++]];
-		}
-		[quizQuestions addObject:tmp];
-	}
-	NSLog(@"loop has finished");*/
-	
-	//need to display the relevant questions
-	//need to wait for user input
-	//need to mark input
-	//need to show results
-	//allow repeats somehow at least for diagnostics
 }
 -(NSArray*)getQuestions{
 	NSLog(@"Getting questions. quizQuestions count = %i", [quizQuestions count]);
@@ -267,7 +218,11 @@ static UIFont *titleFont;
 	for (int i = 0; i < [quizQuestions count]; i++) {
 		NSLog(@"adding to getQuestions: %@ with size %i/%i",
 			  [[quizQuestions objectAtIndex:i] objectAtIndex:0], i, [returnArray count]);
+		
+		NSLog(@" %@ is at quizQuestions %i", [quizQuestions objectAtIndex:i], i);
 		[returnArray addObject: [[quizQuestions objectAtIndex: i] objectAtIndex:0]];
+		
+		NSLog(@"quizQuestions %@", quizQuestions);
 	}
 	return [NSArray arrayWithArray:returnArray];
 
@@ -348,6 +303,7 @@ static UIFont *titleFont;
 	//answersGiven = [NSArray arrayWithArray:titles];
 		NSLog(@"setting the titles");
 		titles = [[NSArray arrayWithArray: [self getQuestions]] retain];
+	//NSLog(@"titles [0]:%@ [1]:%@", [titles objectAtIndex: 0], [titles objectAtIndex: 1]);
 	NSLog(@"finished the titles");
 	   /*[[NSArray arrayWithObjects:
 				   @"Shakespeare's Sonnet 1: From Fairest Creatures We Desire Increase",
@@ -466,31 +422,44 @@ static UIFont *titleFont;
 
 -(void) doMark{
 	BaconAppDelegate * delgato = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
-	NSArray * answersToMark = [NSArray arrayWithArray:delgato.answersGiven];
-	NSArray * answers  = [NSArray arrayWithArray:[self getAnswers]];
+	NSArray * answersToMark = [NSArray arrayWithArray:delgato.answersGiven];//answers to mark
+	NSArray * answers  = [NSArray arrayWithArray:[self getAnswers]];//correct answers
+	NSLog(@"Answers: %@", answers);
 	int correct = 0;
+	int incorrect = 0;
 	int numOfQuestions = [[self getQuestions]count];
-	
+	NSLog(@"answersToMarkCount : %i", [answersToMark count]);
 	if ([answersToMark count]) {
-	for (int i = [answersToMark count]; i >= 0; i--) {
-		//answer is the unparsed answer
-		NSString * answer = [answers objectAtIndex:i];
+		for (int i = ([answersToMark count]-1); i >= 0; i--) {
+			//answer is the unparsed answer
+			NSString * answer = [answersToMark objectAtIndex:i];
 
-		NSArray * tmp = [answer componentsSeparatedByString:@"a"];
-		
-		NSString * befuddledQuestionIndex = [tmp objectAtIndex:0];
-		int questionIndex = [[befuddledQuestionIndex substringWithRange:NSMakeRange(1, ([befuddledQuestionIndex length] -1))]intValue];
-		NSNumber * answerGiven = [NSNumber numberWithInt:[[tmp objectAtIndex:1] intValue]];
-		
-		if([[answers objectAtIndex:questionIndex]intValue] == [answerGiven intValue]){
+			NSArray * tmp = [answer componentsSeparatedByString:@"a"];
 			
-			correct++;
+			NSString * befuddledQuestionIndex = [tmp objectAtIndex:0];
+			int questionIndex = [[befuddledQuestionIndex substringWithRange:NSMakeRange(1, ([befuddledQuestionIndex length] -1))]intValue];
+			NSNumber * answerGiven = [NSNumber numberWithInt:[[tmp objectAtIndex:1] intValue]];
+			NSLog(@"Jim");
+			NSString * answerCheck = [[answers objectAtIndex:questionIndex] stringByReplacingOccurrencesOfString:@"\n" withString:@""]; // Shii says: You typed it wrong :D withString: vs With:
+	//		NSRange * range = NSMakeRange(0, [answerCheck length] -2);
+			NSLog (@"answer: %i", [answerCheck intValue]);
+			NSLog(@"given: %i", [answerGiven intValue]);
+			if([answerCheck intValue] == [answerGiven intValue]){
+				
+				correct++;
+			}
+			else {
+				incorrect++;
+			}
+			if((correct + incorrect) == numOfQuestions)
+				break;
+
 		}
 	}
-	}
-		
+	[answersGiven release];	
+	answersGiven = [NSMutableArray new];
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Marked!" message:[NSString stringWithFormat:@" You got %i out of %i right!", correct, numOfQuestions]
-													   delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+													   delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
 		[alert show];
 		[alert release];
 }
@@ -501,9 +470,15 @@ static UIFont *titleFont;
 	[aTableView deselectRowAtIndexPath:indexPath animated:YES];
 	
 	if (indexPath.section == 0) {
+		AnswerSelectionController * viewController;
 		if (self.asc == nil) {
-			AnswerSelectionController *viewController = [[AnswerSelectionController alloc] initWithNibName:@"AnswerSelectionController" bundle:nil];
-		
+			viewController = [[[AnswerSelectionController alloc] initWithNibName:@"AnswerSelectionController" bundle:nil]retain];
+		}
+		else {
+			viewController = [self.asc retain];
+			assert(viewController != nil);
+		}
+
 			NSLog(@"Row: %i", indexPath.row);
 			[viewController setQuestion: [NSNumber numberWithInt:indexPath.row]];
 			NSLog(@"Using question: %i", [viewController.question intValue]);
@@ -511,11 +486,12 @@ static UIFont *titleFont;
 			[self setAsc: viewController];
 			//currentViewController = viewController;
 			// Cleanup resources
-			[viewController release];
-		}
+			
 		[[self navigationController] pushViewController:asc animated:YES];
+		[viewController release];
 	}
 	else {
+		NSLog(@"Section 2");
 		[self doMark];
 	}
 	
