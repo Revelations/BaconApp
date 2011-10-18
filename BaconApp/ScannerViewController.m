@@ -15,8 +15,8 @@
 
 @implementation ScannerViewController
 
-@synthesize resultText
-@synthesize resultImage // TODO: debate whther we should keep.
+@synthesize resultText;
+@synthesize resultImage; // TODO: debate whther we should keep.
 @synthesize interpreter, current;
 
 -(void)addToViewsSeen:(NSString *) file {
