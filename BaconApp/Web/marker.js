@@ -30,7 +30,7 @@ function initMarker()
 
 	var pinhead = svgObject.getElementById( 'pinhead' );
 	var pintext = svgObject.getElementById( 'pintext' );
-	pinhead.setAttribute( 'fill', 'url(#Shiny)' );
+	pinhead.setAttribute( 'fill', 'red' );
 	pintext.appendChild( document.createTextNode( 'You are here' ) );
 }
 

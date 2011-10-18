@@ -14,12 +14,12 @@
 
 @synthesize webView;
 
-// Done button clicked
--(void)dismissView:(id)sender {
-	
-	// Call the delegate to dismiss the modal view
-	[delegate didDismissModalView];
-}
+//// Done button clicked
+//-(void)dismissView:(id)sender {
+//	
+//	// Call the delegate to dismiss the modal view
+//	[delegate didDismissModalView];
+//}
 
 -(void) webViewLoadPage:(NSString *) inputString
 {
@@ -41,10 +41,6 @@
 	NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePath]];
 	
 	[self.webView loadRequest:request];
-	
-	// Draw the map and marker by evaluating the js function.
-	//[self.webView stringByEvaluatingJavaScriptFromString:@"addCSS();"];
-	
 }
 
 
@@ -54,22 +50,31 @@
 // If so, loads the js library into the webview and calls the map drawing function.
 -(void) webViewDidFinishLoad:(UIWebView *)webView
 {
-	NSLog(@"MapView web did finish load! loadingMapScreen: %d", loadingMapScreen);
+	NSLog(@"MapView web did finish load! loadingMapScreen: %i", loadingMapScreen);
 
 	// Make sure the page finished loading is a the map page.
 	if(loadingMapScreen)
 	{
+
 		//NSLog(@"Before JS is called, interpreter is %@ and has coordinates: %d, %d", interpreter, interpreter.x, interpreter.y);
 
 		BaconAppDelegate *appDelegate = (BaconAppDelegate *)[[UIApplication sharedApplication] delegate];
 		NSLog(@"Before JScript is called, appDelegate is %@ and has coordinates: %d, %d", appDelegate, appDelegate.x, appDelegate.y);
-				
 		// Build a string to call js function with a given x, y.
-		NSString * jScriptCall = [NSString stringWithFormat:@"drawMapAndLocation(%d, %d);", appDelegate.x, appDelegate.y];
+//		NSString * jScriptCall = [NSString stringWithFormat:@"moveMarkerTo(%d, %d);", appDelegate.x, appDelegate.y];
 		
-		// Draw the map and marker by evaluating the js function.
-		[self.webView stringByEvaluatingJavaScriptFromString:jScriptCall];
 		
+		if (appDelegate.x == 0 && appDelegate.y == 0) {
+			
+		}
+		else {
+			[self.webView stringByEvaluatingJavaScriptFromString:@"initMarker();"];
+			NSString * jScriptCall = [NSString stringWithFormat:@"moveMarkerTo(%d, %d);", appDelegate.x, appDelegate.y];
+	//		NSString * jScriptCall = [NSString stringWithFormat:@"drawMapAndLocation(%d, %d);", appDelegate.x, appDelegate.y];
+			
+			// Draw the map and marker by evaluating the js function.
+			[self.webView stringByEvaluatingJavaScriptFromString:jScriptCall];
+		}
 		// Finished load of map screen.
 		loadingMapScreen = false;
 	}
